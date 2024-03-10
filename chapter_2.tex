@@ -1,0 +1,19 @@
+\chapter{Literature review}
+\label{Ch:ch2}
+\thispagestyle{empty}
+
+Spiking Neural Networks (SNNs) are the third generation of neural networks that have gained attention for their lower power consumption due to their event-driven nature and sparse representation of data, which is based on real biological neurons \cite{Ch5_S0, Ch5_S0_1, Ch5_S0_2}. The SNNs work based on spikes. Since the spikes are not continuous, only a part of the network is active at a given time. Also, successful hardware implementation of SNNs on neuromorphic chips like TrueNorth \cite{Ch5_S1} and Loihi \cite{Ch5_S2} makes them good candidates for robotic applications.
+
+Studies have shown that the SNN can learn particular tasks autonomously to control robotic platforms. In \cite{Ch5_S3}, a Reward Modulated Spike-Timing-Dependent Plasticity (R-STDP) algorithm is used to control a mobile robot. Different States of the mobile robot (e.g., acceleration and deceleration) are defined as different frequencies for the input sensory layer. The SNN learns to navigate autonomously in the environment while avoiding obstacles.
+
+There are several successful implementations of SNNs in learning nonlinear dynamics. In \cite{Ch5_S4}, a chaotic reservoir of spiking neurons is trained to control a robotic arm adaptively. The network is able to follow the desired trajectory with few neurons. SNN's capability in controlling a robotic arm with three degrees of freedom is also studied in \cite{Ch5_S5}, where the SNN has 218 neurons. The results are compared with real behavioural and neural data. The results showed that the SNN can adapt the Jacobian matrix when dynamic properties are changed over time.
+
+In \cite{Ch5_S7}, an SNN is trained using the R-STDP algorithm and lateral inhibition mechanism to control a mobile robot in an environment with an obstacle. The lateral inhibition helps SNNs switch between target tracking and obstacle avoidance tasks during and after learning. The results showed that the SNNs have the potential to take control in complex scenarios. 
+
+
+
+
+
+In \cite{Ch5_ATD0}, a method based on the reinforcement learning algorithm is proposed to help an invader minimize its distance from a territory before being captured. In \cite{Ch5_ATD1}, an interceptor is used to defend a target from an attacking intruder. This type of differential game is addressed as Defending an Asset, which is solved using Linear Quadratic formulation. In \cite{Ch5_ATD2}, the problem is solved for multi-player cases but split into two simple two-player games.
+
+Multiple attackers-defenders problems with a stationary target are studied in \cite{Ch5_ATD3}. However, a simple single attacker-single defender case is solved because of the complexity of the numerical solution. Several studies have tried to propose optimal solutions for the ATD problem. A set of optimal solutions are proposed in \cite{Ch5_ATD5} considering reduced State space conditions. Using the geometric method, the attacker played an optimal strategy, capturing the target while maximizing its distance from the defender.

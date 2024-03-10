@@ -1,0 +1,81 @@
+\documentclass[oneside,letterpaper,12pt]{book}
+
+% Packages
+\usepackage[noadjust]{cite}
+\usepackage{amsfonts}
+\usepackage{textcomp}
+\usepackage{fancyhdr}
+\usepackage{authblk}
+\usepackage{diagbox}
+\usepackage{graphicx}
+\usepackage{tabularx}
+\usepackage{notoccite}
+\usepackage{setspace}
+\usepackage{booktabs}
+\usepackage{rotating}
+% \usepackage{algorithmic}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage{multirow}
+\usepackage{bigstrut}
+\usepackage{makecell}
+\usepackage{subfigure}
+\usepackage{lscape}
+\usepackage[shortlabels]{enumitem}
+\usepackage{amsmath}
+\usepackage{amssymb}
+
+\usepackage[top=1in, bottom=1in, left=1in, right=1in,includefoot=true]{geometry}
+\usepackage[pagebackref=false,colorlinks,linkcolor=blue,citecolor=blue]{hyperref}
+% \usepackage[ruled,vlined]{algorithm2e}
+
+\usepackage{lineno}
+\usepackage{array}
+\usepackage{comment}
+\newcolumntype{P}[1]{>{\centering\arraybackslash}p{#1}}
+\usepackage{blindtext}
+\modulolinenumbers[10]
+
+\usepackage{lipsum}
+\usepackage{wrapfig}
+\usepackage{xparse}
+\usepackage{bm}
+
+\usepackage{xcolor}
+\usepackage{glossaries}
+\newacronym{snn}{SNN}{Spiking Neural Network}
+\newacronym{fl}{FL}{Federated Learning}
+\newacronym{lif}{LIF}{Leaky Integrate-and-Fire}
+\newacronym{stdp}{R-STDP}{Reward-modulated Spike-Timing-Dependent Plasticity}
+\newacronym{RCSE}{R-CSE}{Reward-Modulated Competitive Synaptic Equilibrium}
+\newacronym{facl}{FACL}{Fuzzy Actor-Critic Learning}
+
+%Definitions
+\renewcommand{\baselinestretch}{1.5}
+\def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
+   T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
+
+%\doublespacing
+\DeclareMathOperator*{\argmin}{arg\,min}
+\DeclareMathOperator*{\argmax}{arg\,max}
+\providecommand{\keywords}[1]{\textbf{\textit{Keywords:}} #1}
+
+% Body
+
+\begin{document}
+\include{title_page}
+\include{Abstract}
+\tableofcontents
+\listoffigures
+\listoftables
+\include{chapter_1}
+\include{chapter_2}
+\include{chapter_3}
+\include{chapter_4}
+\include{chapter_5}
+\include{chapter_6}
+
+\bibliography{Ref}
+\bibliographystyle{ieeetr}
+
+\end{document}
