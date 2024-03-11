@@ -1229,30 +1229,27 @@ INPUT Main.aux
 INPUT ./title_page.aux
 INPUT title_page.aux
 INPUT title_page.aux
-INPUT ./Abstract.aux
-INPUT Abstract.aux
-INPUT Abstract.aux
-INPUT ./0 - Abstract.aux
-INPUT 0 - Abstract.aux
-INPUT 0 - Abstract.aux
-INPUT ./1 - Introduction.aux
-INPUT 1 - Introduction.aux
-INPUT 1 - Introduction.aux
-INPUT ./2 - Literature Review.aux
-INPUT 2 - Literature Review.aux
-INPUT 2 - Literature Review.aux
-INPUT ./3 - UAV control over 5G.aux
-INPUT 3 - UAV control over 5G.aux
-INPUT 3 - UAV control over 5G.aux
-INPUT ./4 - ATD with SNN.aux
-INPUT 4 - ATD with SNN.aux
-INPUT 4 - ATD with SNN.aux
-INPUT ./5 - FL with SNN.aux
-INPUT 5 - FL with SNN.aux
-INPUT 5 - FL with SNN.aux
-INPUT ./6 - Future Work.aux
-INPUT 6 - Future Work.aux
-INPUT 6 - Future Work.aux
+INPUT ./0_Abstract.aux
+INPUT 0_Abstract.aux
+INPUT 0_Abstract.aux
+INPUT ./1_Introduction.aux
+INPUT 1_Introduction.aux
+INPUT 1_Introduction.aux
+INPUT ./2_Literature_Review.aux
+INPUT 2_Literature_Review.aux
+INPUT 2_Literature_Review.aux
+INPUT ./3_UAV_control_over_5G.aux
+INPUT 3_UAV_control_over_5G.aux
+INPUT 3_UAV_control_over_5G.aux
+INPUT ./4_ATD_with_SNN.aux
+INPUT 4_ATD_with_SNN.aux
+INPUT 4_ATD_with_SNN.aux
+INPUT ./5_FL_with_SNN.aux
+INPUT 5_FL_with_SNN.aux
+INPUT 5_FL_with_SNN.aux
+INPUT ./6_Future_Work.aux
+INPUT 6_Future_Work.aux
+INPUT 6_Future_Work.aux
 OUTPUT Main.aux
 INPUT c:/texlive/2021/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 INPUT c:/texlive/2021/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
@@ -1337,7 +1334,16 @@ INPUT c:/texlive/2021/texmf-dist/fonts/tfm/public/cm/cmr12.tfm
 INPUT c:/texlive/2021/texmf-dist/fonts/tfm/public/cm/cmbx12.tfm
 INPUT c:/texlive/2021/texmf-dist/fonts/tfm/jknappen/ec/tcrm1200.tfm
 INPUT c:/texlive/2021/texmf-var/fonts/map/pdftex/updmap/pdftex.map
-OUTPUT Abstract.aux
+INPUT ./0_Abstract.tex
+INPUT ./0_Abstract.tex
+INPUT ./0_Abstract.tex
+OUTPUT 0_Abstract.aux
+INPUT ./0_Abstract.tex
+INPUT ./0_Abstract.tex
+INPUT ./0_Abstract.tex
+INPUT 0_Abstract.tex
+INPUT ./0_Abstract.tex
+INPUT 0_Abstract.tex
 INPUT c:/texlive/2021/texmf-dist/fonts/tfm/public/cm/cmr17.tfm
 INPUT c:/texlive/2021/texmf-dist/fonts/tfm/public/cm/cmbx12.tfm
 INPUT ./Main.toc
@@ -1387,48 +1393,38 @@ INPUT ./Main.lot
 INPUT Main.lot
 INPUT Main.lot
 OUTPUT Main.lot
-INPUT ./0 - Abstract.tex
-INPUT ./0 - Abstract.tex
-INPUT ./0 - Abstract.tex
-OUTPUT 0 - Abstract.aux
-INPUT ./0 - Abstract.tex
-INPUT ./0 - Abstract.tex
-INPUT ./0 - Abstract.tex
-INPUT 0 - Abstract.tex
-INPUT ./0 - Abstract.tex
-INPUT 0 - Abstract.tex
-INPUT ./1 - Introduction.tex
-INPUT ./1 - Introduction.tex
-INPUT ./1 - Introduction.tex
-OUTPUT 1 - Introduction.aux
-INPUT ./1 - Introduction.tex
-INPUT ./1 - Introduction.tex
-INPUT ./1 - Introduction.tex
-INPUT 1 - Introduction.tex
-INPUT ./1 - Introduction.tex
-INPUT 1 - Introduction.tex
+INPUT ./1_Introduction.tex
+INPUT ./1_Introduction.tex
+INPUT ./1_Introduction.tex
+OUTPUT 1_Introduction.aux
+INPUT ./1_Introduction.tex
+INPUT ./1_Introduction.tex
+INPUT ./1_Introduction.tex
+INPUT 1_Introduction.tex
+INPUT ./1_Introduction.tex
+INPUT 1_Introduction.tex
 INPUT c:/texlive/2021/texmf-dist/fonts/tfm/public/cm/cmr17.tfm
 INPUT c:/texlive/2021/texmf-dist/fonts/tfm/public/cm/cmbx12.tfm
-INPUT ./2 - Literature Review.tex
-INPUT ./2 - Literature Review.tex
-INPUT ./2 - Literature Review.tex
-OUTPUT 2 - Literature Review.aux
-INPUT ./2 - Literature Review.tex
-INPUT ./2 - Literature Review.tex
-INPUT ./2 - Literature Review.tex
-INPUT 2 - Literature Review.tex
-INPUT ./2 - Literature Review.tex
-INPUT 2 - Literature Review.tex
-INPUT ./3 - UAV control over 5G.tex
-INPUT ./3 - UAV control over 5G.tex
-INPUT ./3 - UAV control over 5G.tex
-OUTPUT 3 - UAV control over 5G.aux
-INPUT ./3 - UAV control over 5G.tex
-INPUT ./3 - UAV control over 5G.tex
-INPUT ./3 - UAV control over 5G.tex
-INPUT 3 - UAV control over 5G.tex
-INPUT ./3 - UAV control over 5G.tex
-INPUT 3 - UAV control over 5G.tex
+INPUT ./2_Literature_Review.tex
+INPUT ./2_Literature_Review.tex
+INPUT ./2_Literature_Review.tex
+OUTPUT 2_Literature_Review.aux
+INPUT ./2_Literature_Review.tex
+INPUT ./2_Literature_Review.tex
+INPUT ./2_Literature_Review.tex
+INPUT 2_Literature_Review.tex
+INPUT ./2_Literature_Review.tex
+INPUT 2_Literature_Review.tex
+INPUT ./3_UAV_control_over_5G.tex
+INPUT ./3_UAV_control_over_5G.tex
+INPUT ./3_UAV_control_over_5G.tex
+OUTPUT 3_UAV_control_over_5G.aux
+INPUT ./3_UAV_control_over_5G.tex
+INPUT ./3_UAV_control_over_5G.tex
+INPUT ./3_UAV_control_over_5G.tex
+INPUT 3_UAV_control_over_5G.tex
+INPUT ./3_UAV_control_over_5G.tex
+INPUT 3_UAV_control_over_5G.tex
 INPUT c:/texlive/2021/texmf-dist/fonts/tfm/public/cm/cmti12.tfm
 INPUT ./Figures/ControlFramework.pdf
 INPUT ./Figures/ControlFramework.pdf
@@ -1532,16 +1528,16 @@ INPUT ./Figures/UDelayChange.eps
 INPUT ./Figures/UDelayChange-eps-converted-to.pdf
 INPUT ./Figures/UDelayChange-eps-converted-to.pdf
 INPUT ./Figures/UDelayChange-eps-converted-to.pdf
-INPUT ./4 - ATD with SNN.tex
-INPUT ./4 - ATD with SNN.tex
-INPUT ./4 - ATD with SNN.tex
-OUTPUT 4 - ATD with SNN.aux
-INPUT ./4 - ATD with SNN.tex
-INPUT ./4 - ATD with SNN.tex
-INPUT ./4 - ATD with SNN.tex
-INPUT 4 - ATD with SNN.tex
-INPUT ./4 - ATD with SNN.tex
-INPUT 4 - ATD with SNN.tex
+INPUT ./4_ATD_with_SNN.tex
+INPUT ./4_ATD_with_SNN.tex
+INPUT ./4_ATD_with_SNN.tex
+OUTPUT 4_ATD_with_SNN.aux
+INPUT ./4_ATD_with_SNN.tex
+INPUT ./4_ATD_with_SNN.tex
+INPUT ./4_ATD_with_SNN.tex
+INPUT 4_ATD_with_SNN.tex
+INPUT ./4_ATD_with_SNN.tex
+INPUT 4_ATD_with_SNN.tex
 INPUT ./Figures/1.pdf
 INPUT ./Figures/1.pdf
 INPUT Figures/1.pdf
@@ -1598,16 +1594,16 @@ INPUT ./Figures/Noise effect.pdf
 INPUT Figures/Noise effect.pdf
 INPUT ./Figures/Noise effect.pdf
 INPUT ./Figures/Noise effect.pdf
-INPUT ./5 - FL with SNN.tex
-INPUT ./5 - FL with SNN.tex
-INPUT ./5 - FL with SNN.tex
-OUTPUT 5 - FL with SNN.aux
-INPUT ./5 - FL with SNN.tex
-INPUT ./5 - FL with SNN.tex
-INPUT ./5 - FL with SNN.tex
-INPUT 5 - FL with SNN.tex
-INPUT ./5 - FL with SNN.tex
-INPUT 5 - FL with SNN.tex
+INPUT ./5_FL_with_SNN.tex
+INPUT ./5_FL_with_SNN.tex
+INPUT ./5_FL_with_SNN.tex
+OUTPUT 5_FL_with_SNN.aux
+INPUT ./5_FL_with_SNN.tex
+INPUT ./5_FL_with_SNN.tex
+INPUT ./5_FL_with_SNN.tex
+INPUT 5_FL_with_SNN.tex
+INPUT ./5_FL_with_SNN.tex
+INPUT 5_FL_with_SNN.tex
 INPUT ./Figures/Consensus Flying - FL.pdf
 INPUT ./Figures/Consensus Flying - FL.pdf
 INPUT Figures/Consensus Flying - FL.pdf
@@ -1717,7 +1713,16 @@ INPUT c:/texlive/2021/texmf-dist/fonts/tfm/public/amsfonts/symbols/msbm10.tfm
 INPUT c:/texlive/2021/texmf-dist/fonts/tfm/public/cm/cmbx10.tfm
 INPUT c:/texlive/2021/texmf-dist/fonts/tfm/public/cm/cmmib10.tfm
 INPUT c:/texlive/2021/texmf-dist/fonts/tfm/public/cm/cmbsy10.tfm
-OUTPUT 6 - Future Work.aux
+INPUT ./6_Future_Work.tex
+INPUT ./6_Future_Work.tex
+INPUT ./6_Future_Work.tex
+OUTPUT 6_Future_Work.aux
+INPUT ./6_Future_Work.tex
+INPUT ./6_Future_Work.tex
+INPUT ./6_Future_Work.tex
+INPUT 6_Future_Work.tex
+INPUT ./6_Future_Work.tex
+INPUT 6_Future_Work.tex
 INPUT ./Main.bbl
 INPUT Main.bbl
 INPUT ./Main.bbl
@@ -1726,30 +1731,27 @@ INPUT Main.aux
 INPUT ./title_page.aux
 INPUT title_page.aux
 INPUT title_page.aux
-INPUT ./Abstract.aux
-INPUT Abstract.aux
-INPUT Abstract.aux
-INPUT ./0 - Abstract.aux
-INPUT 0 - Abstract.aux
-INPUT 0 - Abstract.aux
-INPUT ./1 - Introduction.aux
-INPUT 1 - Introduction.aux
-INPUT 1 - Introduction.aux
-INPUT ./2 - Literature Review.aux
-INPUT 2 - Literature Review.aux
-INPUT 2 - Literature Review.aux
-INPUT ./3 - UAV control over 5G.aux
-INPUT 3 - UAV control over 5G.aux
-INPUT 3 - UAV control over 5G.aux
-INPUT ./4 - ATD with SNN.aux
-INPUT 4 - ATD with SNN.aux
-INPUT 4 - ATD with SNN.aux
-INPUT ./5 - FL with SNN.aux
-INPUT 5 - FL with SNN.aux
-INPUT 5 - FL with SNN.aux
-INPUT ./6 - Future Work.aux
-INPUT 6 - Future Work.aux
-INPUT 6 - Future Work.aux
+INPUT ./0_Abstract.aux
+INPUT 0_Abstract.aux
+INPUT 0_Abstract.aux
+INPUT ./1_Introduction.aux
+INPUT 1_Introduction.aux
+INPUT 1_Introduction.aux
+INPUT ./2_Literature_Review.aux
+INPUT 2_Literature_Review.aux
+INPUT 2_Literature_Review.aux
+INPUT ./3_UAV_control_over_5G.aux
+INPUT 3_UAV_control_over_5G.aux
+INPUT 3_UAV_control_over_5G.aux
+INPUT ./4_ATD_with_SNN.aux
+INPUT 4_ATD_with_SNN.aux
+INPUT 4_ATD_with_SNN.aux
+INPUT ./5_FL_with_SNN.aux
+INPUT 5_FL_with_SNN.aux
+INPUT 5_FL_with_SNN.aux
+INPUT ./6_Future_Work.aux
+INPUT 6_Future_Work.aux
+INPUT 6_Future_Work.aux
 INPUT ./Main.out
 INPUT ./Main.out
 INPUT c:/texlive/2021/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc
