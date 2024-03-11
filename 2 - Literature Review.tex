@@ -1,0 +1,40 @@
+\chapter{Literature review}
+
+During the past years, researchers have focused on quadrotor-type UAVs because of their ability to hover, take off vertically, and land in places that conventional fixed-wing aircraft cannot. They can accomplish a wide range of long-distance missions at low costs \cite{Ch4_li2018uav}. Several linear and nonlinear control algorithms have been developed, and the most common approach is hierarchical control that involves an inner and outer loop \cite{Ch4_I6}.
+	
+In the linear PID controller, one can design the controller feedback gains based on the linear model to achieve desired performance \cite{Ch4_I3}\cite{Ch4_I4}. The Linear-Quadratic Regulator (LQR) has demonstrated acceptable results \cite{Ch4_I8}, but finding the required control parameters (weight matrices) is a challenging problem. 
+
+The H$_{\infty}$ approach is widely used \cite{Ch4_I9} for cases with unmodeled dynamics since it eliminates the errors in modelling. However, adjusting the controller parameters is a difficult task that makes the implementation complex to some degree in comparison with the PID and LQR \cite{Ch4_I10}.
+
+The quadrotor's control process is a rather complex task because of the nonlinearities and uncertainties (e.g., the moment of inertia of rotors and aerodynamic effects). Sliding Mode Control (SMC) can be used for the flight condition with time-varying disturbances \cite{Ch4_I13} since it quickly compensates for external disturbances and eliminates the effect of uncertainties in modelling \cite{Ch4_I14}. However, chattering and finite-time convergence are always a problem \cite{Ch4_I12}. 
+
+The backstepping control approach breaks the control law into parts. The control laws are derived using a suitable Lyapunov function \cite{Ch4_I16} to compensate for the problems that exist in the underactuated systems. Although an optimization process can be done to find the optimal gains, it would lead to a time-consuming task if it is done for every drone with different dynamic parameters \cite{Ch4_I17}.
+
+All the above-mentioned control algorithms have been developed, considering there is no time delay in the control loop. Drone control in Beyond-Visual-Line-Of-Sight (BVLOS) suffers from many problems caused by random network delays and packet losses \cite{Ch4_guldenring2020reliable}\cite{Ch4_hosseini2019uav}. Time delay in the feedback loop can make the control system unstable \cite{Ch4_I7}.
+
+    Control approaches based on the Lyapunov function usually incorporate the time delay into the candidate function \cite{Ch4_liu2019robust}. Another approach to compensate for the delay is the Smith predictor, which improves the quadrotors tracking performance by reducing the destabilizing effect of time delay \cite{Ch4_panuntun2020networked}. However, it does not provide any information about the current state of the plant for the remote control station.
+
+In \cite{Ch4_sanz2016predictor}, a predictor-based control approach is developed for quadrotor control. The delay was assumed to be constant, and the states of the system were predicted using a discrete-time predictor. A virtual quadrotor model worked in parallel with the actual setup was used to simulate the remote system \cite{Ch4_slawinski2017control}.
+
+Traditional techniques define a model for the time delay or consider it a constant value \cite{Ch4_sharma2021control} \cite{Ch4_armah2018adaptive}. Estimating time delay with Machine Learning (ML) algorithms requires high computation capability and sufficient training data, which is unavailable at the beginning of the quadrotor flight \cite{Ch4_farajiparvar2020brief} \cite{Ch4_yoo2017learning}. 
+
+Although previous studies have tried to compensate for time delay by predicting the drone's future states, in the case of 5G networks, the quadrotor's current states should be accessible for the base station to guarantee high communication bandwidth using better beamforming.
+
+
+
+
+Spiking Neural Networks (SNNs) are the third generation of neural networks that have gained attention for their lower power consumption due to their event-driven nature and sparse representation of data, which is based on real biological neurons \cite{Ch5_S0, Ch5_S0_1, Ch5_S0_2}. The SNNs work based on spikes. Since the spikes are not continuous, only a part of the network is active at a given time. Also, successful hardware implementation of SNNs on neuromorphic chips like TrueNorth \cite{Ch5_S1} and Loihi \cite{Ch5_S2} makes them good candidates for robotic applications.
+
+Studies have shown that the SNN can learn particular tasks autonomously to control robotic platforms. In \cite{Ch5_S3}, a Reward Modulated Spike-Timing-Dependent Plasticity (R-STDP) algorithm is used to control a mobile robot. Different States of the mobile robot (e.g., acceleration and deceleration) are defined as different frequencies for the input sensory layer. The SNN learns to navigate autonomously in the environment while avoiding obstacles.
+
+There are several successful implementations of SNNs in learning nonlinear dynamics. In \cite{Ch5_S4}, a chaotic reservoir of spiking neurons is trained to control a robotic arm adaptively. The network is able to follow the desired trajectory with few neurons. SNN's capability in controlling a robotic arm with three degrees of freedom is also studied in \cite{Ch5_S5}, where the SNN has 218 neurons. The results are compared with real behavioural and neural data. The results showed that the SNN can adapt the Jacobian matrix when dynamic properties are changed over time.
+
+In \cite{Ch5_S7}, an SNN is trained using the R-STDP algorithm and lateral inhibition mechanism to control a mobile robot in an environment with an obstacle. The lateral inhibition helps SNNs switch between target tracking and obstacle avoidance tasks during and after learning. The results showed that the SNNs have the potential to take control in complex scenarios. 
+
+
+
+
+
+In \cite{Ch5_ATD0}, a method based on the reinforcement learning algorithm is proposed to help an invader minimize its distance from a territory before being captured. In \cite{Ch5_ATD1}, an interceptor is used to defend a target from an attacking intruder. This type of differential game is addressed as Defending an Asset, which is solved using Linear Quadratic formulation. In \cite{Ch5_ATD2}, the problem is solved for multi-player cases but split into two simple two-player games.
+
+Multiple attackers-defenders problems with a stationary target are studied in \cite{Ch5_ATD3}. However, a simple single attacker-single defender case is solved because of the complexity of the numerical solution. Several studies have tried to propose optimal solutions for the ATD problem. A set of optimal solutions are proposed in \cite{Ch5_ATD5} considering reduced State space conditions. Using the geometric method, the attacker played an optimal strategy, capturing the target while maximizing its distance from the defender.

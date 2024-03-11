@@ -1,121 +1,8 @@
 \relax 
 \providecommand\hyper@newdestlabel[2]{}
-\@writefile{toc}{\contentsline {chapter}{\numberline {6}Enhancing Cooperative Multi-agent Reinforcement Learning through the Integration of R-STDP and Federated Learning}{51}{chapter.6}\protected@file@percent }
-\@writefile{lof}{\addvspace {10\p@ }}
-\@writefile{lot}{\addvspace {10\p@ }}
-\newlabel{Ch:ch6}{{6}{51}{Enhancing Cooperative Multi-agent Reinforcement Learning through the Integration of R-STDP and Federated Learning}{chapter.6}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {6.1}Preliminaries}{51}{section.6.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {6.1.1}Consensus Flying Problem}{51}{subsection.6.1.1}\protected@file@percent }
-\citation{NM1}
-\@writefile{lof}{\contentsline {figure}{\numberline {6.1}{\ignorespaces The central server (the leader) and the surrounding follower agents (white drones). The follower agents learn to fly in a formation to maintain the commanded distance. The Local models trained individually by follower agents are sent to the leader. The leader aggregates the models and sends back the global model for another round of training of the follower agents.}}{52}{figure.6.1}\protected@file@percent }
-\newlabel{fig.Consensus Flying}{{6.1}{52}{The central server (the leader) and the surrounding follower agents (white drones). The follower agents learn to fly in a formation to maintain the commanded distance. The Local models trained individually by follower agents are sent to the leader. The leader aggregates the models and sends back the global model for another round of training of the follower agents}{figure.6.1}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {6.1.2}Neuron Model}{52}{subsection.6.1.2}\protected@file@percent }
-\citation{NM2}
-\newlabel{Eq.NM.1}{{6.1}{53}{Neuron Model}{equation.6.1.1}{}}
-\newlabel{Eq.NM.2}{{6.2}{53}{Neuron Model}{equation.6.1.2}{}}
-\newlabel{Eq.NM.3}{{6.3}{53}{Neuron Model}{equation.6.1.3}{}}
-\newlabel{Eq.NM.4}{{6.4}{53}{Neuron Model}{equation.6.1.4}{}}
-\newlabel{Eq.NM.5}{{6.5}{54}{Neuron Model}{equation.6.1.5}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {6.2}Proposed Method}{54}{section.6.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {6.2.1}Network Structure}{54}{subsection.6.2.1}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {6.2}{\ignorespaces \gls {snn} structure with encoding and decoding layers. Each sub-layer consists of a fuzzy encoder and a Fuzzy-to-Spiking Converter, with the output layer receiving inputs from synaptic weights and a random action selector. During the training phase, the output layer receives input only from the random action selector, which then shifts to synaptic weight inputs after the training.}}{55}{figure.6.2}\protected@file@percent }
-\newlabel{fig.Network Structure}{{6.2}{55}{\gls {snn} structure with encoding and decoding layers. Each sub-layer consists of a fuzzy encoder and a Fuzzy-to-Spiking Converter, with the output layer receiving inputs from synaptic weights and a random action selector. During the training phase, the output layer receives input only from the random action selector, which then shifts to synaptic weight inputs after the training}{figure.6.2}{}}
-\citation{NS}
-\newlabel{Eq.NS.1}{{6.6}{56}{Network Structure}{equation.6.2.6}{}}
-\newlabel{Eq.NS.2}{{6.7}{56}{Network Structure}{equation.6.2.7}{}}
-\newlabel{Eq.NS.3}{{6.8}{56}{Network Structure}{equation.6.2.8}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {6.3}{\ignorespaces The fuzzy encoding principle for the input sub-layer.}}{57}{figure.6.3}\protected@file@percent }
-\newlabel{fig.Encoder}{{6.3}{57}{The fuzzy encoding principle for the input sub-layer}{figure.6.3}{}}
-\newlabel{Eq.NS.4}{{6.9}{57}{Network Structure}{equation.6.2.9}{}}
-\newlabel{Eq.NS.5}{{6.10}{57}{Network Structure}{equation.6.2.10}{}}
-\newlabel{Eq.NS.6}{{6.11}{58}{Network Structure}{equation.6.2.11}{}}
-\newlabel{Eq.NS.7}{{6.12}{58}{Network Structure}{equation.6.2.12}{}}
-\newlabel{Eq.NS.7.1}{{6.13}{58}{Network Structure}{equation.6.2.13}{}}
-\newlabel{Eq.NS.7.2}{{6.14}{58}{Network Structure}{equation.6.2.14}{}}
-\newlabel{Eq.NS.8}{{6.15}{58}{Network Structure}{equation.6.2.15}{}}
-\citation{STDP2}
-\citation{STDP1}
-\@writefile{toc}{\contentsline {subsection}{\numberline {6.2.2}Training algorithm}{59}{subsection.6.2.2}\protected@file@percent }
-\newlabel{Eq.TA.1}{{6.16}{59}{Training algorithm}{equation.6.2.16}{}}
-\newlabel{Eq.TA.2}{{6.17}{59}{Training algorithm}{equation.6.2.17}{}}
-\newlabel{Eq.TA.3}{{6.18}{59}{Training algorithm}{equation.6.2.18}{}}
-\newlabel{Eq.TA.4}{{6.19}{60}{Training algorithm}{equation.6.2.19}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {6.2.3}Weight Stabilization using Reward-Modulated Competitive Synaptic Equilibrium (R-CSE)}{61}{subsection.6.2.3}\protected@file@percent }
-\newlabel{Eq.WS.1}{{6.20}{61}{Weight Stabilization using Reward-Modulated Competitive Synaptic Equilibrium (R-CSE)}{equation.6.2.20}{}}
-\newlabel{Eq.WS.3}{{6.21}{63}{Weight Stabilization using Reward-Modulated Competitive Synaptic Equilibrium (R-CSE)}{equation.6.2.21}{}}
-\newlabel{Eq.WS.3.1}{{6.22}{63}{Weight Stabilization using Reward-Modulated Competitive Synaptic Equilibrium (R-CSE)}{equation.6.2.22}{}}
-\newlabel{Eq.WS.4}{{6.23}{63}{Weight Stabilization using Reward-Modulated Competitive Synaptic Equilibrium (R-CSE)}{equation.6.2.23}{}}
-\citation{AFL1}
-\citation{AFL2}
-\citation{AFL3}
-\@writefile{toc}{\contentsline {subsection}{\numberline {6.2.4}Federated Learning for Consensus Flying}{64}{subsection.6.2.4}\protected@file@percent }
-\newlabel{Eq.AFL.1}{{6.24}{65}{Federated Learning for Consensus Flying}{equation.6.2.24}{}}
-\newlabel{Eq.AFL.2}{{6.25}{65}{Federated Learning for Consensus Flying}{equation.6.2.25}{}}
-\newlabel{Eq.AFL.3}{{6.26}{65}{Federated Learning for Consensus Flying}{equation.6.2.26}{}}
-\newlabel{Eq.AFL.4}{{6.27}{66}{Federated Learning for Consensus Flying}{equation.6.2.27}{}}
-\newlabel{Eq.AFL.5}{{6.28}{66}{Federated Learning for Consensus Flying}{equation.6.2.28}{}}
-\newlabel{Eq.AFL.6}{{6.29}{66}{Federated Learning for Consensus Flying}{equation.6.2.29}{}}
-\@writefile{loa}{\contentsline {algorithm}{\numberline {3}{\ignorespaces High-Level Algorithm for the Proposed \gls {fl} Algorithm}}{67}{algorithm.3}\protected@file@percent }
-\newlabel{Algorithm.1}{{3}{67}{Federated Learning for Consensus Flying}{algorithm.3}{}}
-\citation{R1}
-\@writefile{toc}{\contentsline {section}{\numberline {6.3}Results and Discussion}{68}{section.6.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {6.3.1}Simulation without \gls {fl}}{68}{subsection.6.3.1}\protected@file@percent }
-\@writefile{lot}{\contentsline {table}{\numberline {6.1}{\ignorespaces Parameter values for \gls {lif} neuron model \cite  {R1}}}{69}{table.6.1}\protected@file@percent }
-\newlabel{table:Parameter values for the LIF neuron model}{{6.1}{69}{Parameter values for \gls {lif} neuron model \cite {R1}}{table.6.1}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {6.2}{\ignorespaces Simulation Parameters}}{70}{table.6.2}\protected@file@percent }
-\newlabel{table:simulation-parameters}{{6.2}{70}{Simulation Parameters}{table.6.2}{}}
-\citation{FACL1}
-\@writefile{lof}{\contentsline {figure}{\numberline {6.4}{\ignorespaces The measured distances during the test for evaluating the performance and detecting the collisions.}}{71}{figure.6.4}\protected@file@percent }
-\newlabel{fig:distances}{{6.4}{71}{The measured distances during the test for evaluating the performance and detecting the collisions}{figure.6.4}{}}
-\newlabel{eq:actor_output}{{6.30}{71}{Simulation without \gls {fl}}{equation.6.3.30}{}}
-\newlabel{eq:actor_strength}{{6.31}{72}{Simulation without \gls {fl}}{equation.6.3.31}{}}
-\newlabel{eq:value_function}{{6.32}{72}{Simulation without \gls {fl}}{equation.6.3.32}{}}
-\newlabel{eq:TD}{{6.33}{72}{Simulation without \gls {fl}}{equation.6.3.33}{}}
-\newlabel{eq:actor_update}{{6.34}{72}{Simulation without \gls {fl}}{equation.6.3.34}{}}
-\newlabel{eq:critic_update}{{6.35}{73}{Simulation without \gls {fl}}{equation.6.3.35}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {6.3}{\ignorespaces Simulation Parameters for the FACL Algorithm}}{73}{table.6.3}\protected@file@percent }
-\newlabel{tab:FACL}{{6.3}{73}{Simulation Parameters for the FACL Algorithm}{table.6.3}{}}
-\newlabel{Eq.R-1}{{6.36}{74}{Simulation without \gls {fl}}{equation.6.3.36}{}}
-\newlabel{Eq.R-2}{{6.37}{74}{Simulation without \gls {fl}}{equation.6.3.37}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {6.11}{\ignorespaces Agents' path after reward change (test phase)}}{75}{figure.6.11}\protected@file@percent }
-\newlabel{fig_3_6}{{6.11}{75}{Agents' path after reward change (test phase)}{figure.6.11}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {6.12}{\ignorespaces Distances after reward change (test phase)}}{75}{figure.6.12}\protected@file@percent }
-\newlabel{fig_3_7}{{6.12}{75}{Distances after reward change (test phase)}{figure.6.12}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {6.13}{\ignorespaces Synaptic Weights before Reward change}}{76}{figure.6.13}\protected@file@percent }
-\newlabel{fig_3_8}{{6.13}{76}{Synaptic Weights before Reward change}{figure.6.13}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {6.14}{\ignorespaces Synaptic Weights after Reward change}}{76}{figure.6.14}\protected@file@percent }
-\newlabel{fig_3_9}{{6.14}{76}{Synaptic Weights after Reward change}{figure.6.14}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {6.15}{\ignorespaces Synaptic weights increase after reward change}}{76}{figure.6.15}\protected@file@percent }
-\newlabel{fig_3_10}{{6.15}{76}{Synaptic weights increase after reward change}{figure.6.15}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {6.16}{\ignorespaces Synaptic weights decrease after reward change}}{76}{figure.6.16}\protected@file@percent }
-\newlabel{fig_3_11}{{6.16}{76}{Synaptic weights decrease after reward change}{figure.6.16}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {6.3.2}Simulation with \gls {fl} and \gls {RCSE}}{77}{subsection.6.3.2}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {6.17}{\ignorespaces Distances during the test phase before reward change in the proposed aggregation method.}}{78}{figure.6.17}\protected@file@percent }
-\newlabel{fig_3-7}{{6.17}{78}{Distances during the test phase before reward change in the proposed aggregation method}{figure.6.17}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {6.18}{\ignorespaces Distances during the test phase after reward change in the proposed aggregation method.}}{78}{figure.6.18}\protected@file@percent }
-\newlabel{fig_3-8}{{6.18}{78}{Distances during the test phase after reward change in the proposed aggregation method}{figure.6.18}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {6.19}{\ignorespaces Frobenius norm of the agents during the learning phase. The reward changes for the Leader after 600 s.}}{79}{figure.6.19}\protected@file@percent }
-\newlabel{fig:3-9}{{6.19}{79}{Frobenius norm of the agents during the learning phase. The reward changes for the Leader after 600 s}{figure.6.19}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {6.20}{\ignorespaces Communication times for agents and the Central Server (Leader). Red and blue dots show the times that agents and the Central Server have sent their model, respectively.}}{79}{figure.6.20}\protected@file@percent }
-\newlabel{fig:3-10}{{6.20}{79}{Communication times for agents and the Central Server (Leader). Red and blue dots show the times that agents and the Central Server have sent their model, respectively}{figure.6.20}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {6.4}{\ignorespaces Comparative Performance Analysis of the Proposed Aggregation Algorithm+\gls {RCSE}, \gls {RCSE}, and FACL}}{79}{table.6.4}\protected@file@percent }
-\newlabel{tab:Results analysis}{{6.4}{79}{Comparative Performance Analysis of the Proposed Aggregation Algorithm+\gls {RCSE}, \gls {RCSE}, and FACL}{table.6.4}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {6.4}Conclusion}{80}{section.6.4}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {6.5}{\ignorespaces Distances during the test phase (\gls {RCSE} method)}}{82}{figure.6.5}\protected@file@percent }
-\newlabel{fig_3_0}{{6.5}{82}{Distances during the test phase (\gls {RCSE} method)}{figure.6.5}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {6.6}{\ignorespaces Agents' trajectory during the test phase (\gls {RCSE} method)}}{82}{figure.6.6}\protected@file@percent }
-\newlabel{fig_3_1}{{6.6}{82}{Agents' trajectory during the test phase (\gls {RCSE} method)}{figure.6.6}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {6.7}{\ignorespaces Change in commanded distance during the test phase (\gls {RCSE} method)}}{82}{figure.6.7}\protected@file@percent }
-\newlabel{fig_3_2}{{6.7}{82}{Change in commanded distance during the test phase (\gls {RCSE} method)}{figure.6.7}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {6.8}{\ignorespaces Distances during the test phase (FACL method)}}{82}{figure.6.8}\protected@file@percent }
-\newlabel{fig_3_3}{{6.8}{82}{Distances during the test phase (FACL method)}{figure.6.8}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {6.9}{\ignorespaces Agents' trajectory during the test phase (FACL method)}}{82}{figure.6.9}\protected@file@percent }
-\newlabel{fig_3_4}{{6.9}{82}{Agents' trajectory during the test phase (FACL method)}{figure.6.9}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {6.10}{\ignorespaces Change in commanded distance during the test phase (FACL method)}}{82}{figure.6.10}\protected@file@percent }
-\newlabel{fig_3_5}{{6.10}{82}{Change in commanded distance during the test phase (FACL method)}{figure.6.10}{}}
 \@setckpt{chapter_6}{
-\setcounter{page}{83}
-\setcounter{equation}{37}
+\setcounter{page}{4}
+\setcounter{equation}{0}
 \setcounter{enumi}{0}
 \setcounter{enumii}{0}
 \setcounter{enumiii}{0}
@@ -123,21 +10,21 @@
 \setcounter{footnote}{0}
 \setcounter{mpfootnote}{0}
 \setcounter{part}{0}
-\setcounter{chapter}{6}
-\setcounter{section}{4}
+\setcounter{chapter}{0}
+\setcounter{section}{0}
 \setcounter{subsection}{0}
 \setcounter{subsubsection}{0}
 \setcounter{paragraph}{0}
 \setcounter{subparagraph}{0}
-\setcounter{figure}{20}
-\setcounter{table}{4}
+\setcounter{figure}{0}
+\setcounter{table}{0}
 \setcounter{Maxaffil}{2}
 \setcounter{authors}{0}
 \setcounter{affil}{0}
 \setcounter{r@tfl@t}{0}
 \setcounter{float@type}{8}
-\setcounter{algorithm}{3}
-\setcounter{ALG@line}{22}
+\setcounter{algorithm}{0}
+\setcounter{ALG@line}{0}
 \setcounter{ALG@rem}{0}
 \setcounter{ALG@nested}{0}
 \setcounter{ALG@Lnr}{2}
@@ -152,9 +39,9 @@
 \setcounter{parentequation}{0}
 \setcounter{Item}{0}
 \setcounter{Hfootnote}{0}
-\setcounter{bookmark@seq@number}{35}
+\setcounter{bookmark@seq@number}{0}
 \setcounter{linenumber}{1}
-\setcounter{LN@truepage}{90}
+\setcounter{LN@truepage}{4}
 \setcounter{blindtext}{1}
 \setcounter{Blindtext}{5}
 \setcounter{blind@countparstart}{0}
@@ -170,5 +57,5 @@
 \setcounter{su@anzahl}{0}
 \setcounter{LT@tables}{0}
 \setcounter{LT@chunks}{0}
-\setcounter{section@level}{1}
+\setcounter{section@level}{0}
 }
