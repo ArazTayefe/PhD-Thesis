@@ -1,10 +1,10 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2021/W32TeX) (preloaded format=pdflatex 2021.12.18)  11 MAR 2024 19:04
+This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2021/W32TeX) (preloaded format=pdflatex 2021.12.18)  11 MAR 2024 19:08
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
  %&-line parsing enabled.
-**e:/University/PhD/University/Thesis/Proposal/Proposal/Main.tex
-(e:/University/PhD/University/Thesis/Proposal/Proposal/Main.tex
+**"e:/University/PhD/University/Thesis/My Proposal/Main.tex"
+(e:/University/PhD/University/Thesis/My Proposal/Main.tex
 LaTeX2e <2021-11-15> patch level 1
 L3 programming layer <2021-11-22> (c:/texlive/2021/texmf-dist/tex/latex/base/book.cls
 Document Class: book 2021/10/04 v1.4n Standard LaTeX document class
@@ -1099,10 +1099,10 @@ LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <12> not available
 (Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 377.
  [26]
 Package epstopdf Info: Source file: <Figures/RMSEPerfect.eps>
-(epstopdf)                    date: 2024-03-11 19:03:23
-(epstopdf)                    size: 602587 bytes
+(epstopdf)                    date: 2024-03-07 21:36:51
+(epstopdf)                    size: 571141 bytes
 (epstopdf)             Output file: <Figures/RMSEPerfect-eps-converted-to.pdf>
-(epstopdf)                    date: 2024-03-11 19:03:23
+(epstopdf)                    date: 2024-03-07 21:37:21
 (epstopdf)                    size: 128138 bytes
 (epstopdf)             Command: <repstopdf --outfile=Figures/RMSEPerfect-eps-converted-to.pdf Figures/RMSEPerfect.eps>
 (epstopdf)             \includegraphics on input line 394.
@@ -1113,10 +1113,10 @@ File: Figures/RMSEPerfect-eps-converted-to.pdf Graphic file (type pdf)
 Package pdftex.def Info: Figures/RMSEPerfect-eps-converted-to.pdf  used on input line 394.
 (pdftex.def)             Requested size: 421.57396pt x 316.18047pt.
 Package epstopdf Info: Source file: <Figures/UPerfect.eps>
-(epstopdf)                    date: 2024-03-11 19:03:23
-(epstopdf)                    size: 1453512 bytes
+(epstopdf)                    date: 2024-03-07 21:36:50
+(epstopdf)                    size: 1372749 bytes
 (epstopdf)             Output file: <Figures/UPerfect-eps-converted-to.pdf>
-(epstopdf)                    date: 2024-03-11 19:03:23
+(epstopdf)                    date: 2024-03-07 21:37:23
 (epstopdf)                    size: 295585 bytes
 (epstopdf)             Command: <repstopdf --outfile=Figures/UPerfect-eps-converted-to.pdf Figures/UPerfect.eps>
 (epstopdf)             \includegraphics on input line 402.
@@ -1127,10 +1127,10 @@ File: Figures/UPerfect-eps-converted-to.pdf Graphic file (type pdf)
 Package pdftex.def Info: Figures/UPerfect-eps-converted-to.pdf  used on input line 402.
 (pdftex.def)             Requested size: 421.57396pt x 316.18047pt.
 Package epstopdf Info: Source file: <Figures/RMSENormalLow.eps>
-(epstopdf)                    date: 2024-03-11 19:03:23
-(epstopdf)                    size: 621580 bytes
+(epstopdf)                    date: 2024-03-07 21:36:51
+(epstopdf)                    size: 590134 bytes
 (epstopdf)             Output file: <Figures/RMSENormalLow-eps-converted-to.pdf>
-(epstopdf)                    date: 2024-03-11 19:03:23
+(epstopdf)                    date: 2024-03-07 21:37:25
 (epstopdf)                    size: 204311 bytes
 (epstopdf)             Command: <repstopdf --outfile=Figures/RMSENormalLow-eps-converted-to.pdf Figures/RMSENormalLow.eps>
 (epstopdf)             \includegraphics on input line 432.
@@ -1142,10 +1142,10 @@ Package pdftex.def Info: Figures/RMSENormalLow-eps-converted-to.pdf  used on inp
 (pdftex.def)             Requested size: 421.57396pt x 316.18047pt.
  [27] [28 <./Figures/RMSEPerfect-eps-converted-to.pdf>] [29 <./Figures/UPerfect-eps-converted-to.pdf>] [30 <./Figures/RMSENormalLow-eps-converted-to.pdf>]
 Package epstopdf Info: Source file: <Figures/UNormalLow.eps>
-(epstopdf)                    date: 2024-03-11 19:03:23
-(epstopdf)                    size: 1453201 bytes
+(epstopdf)                    date: 2024-03-07 21:36:50
+(epstopdf)                    size: 1372441 bytes
 (epstopdf)             Output file: <Figures/UNormalLow-eps-converted-to.pdf>
-(epstopdf)                    date: 2024-03-11 19:03:23
+(epstopdf)                    date: 2024-03-07 21:37:27
 (epstopdf)                    size: 326024 bytes
 (epstopdf)             Command: <repstopdf --outfile=Figures/UNormalLow-eps-converted-to.pdf Figures/UNormalLow.eps>
 (epstopdf)             \includegraphics on input line 440.
@@ -1156,10 +1156,10 @@ File: Figures/UNormalLow-eps-converted-to.pdf Graphic file (type pdf)
 Package pdftex.def Info: Figures/UNormalLow-eps-converted-to.pdf  used on input line 440.
 (pdftex.def)             Requested size: 421.57396pt x 316.18047pt.
 Package epstopdf Info: Source file: <Figures/RMSENormalHigh.eps>
-(epstopdf)                    date: 2024-03-11 19:03:23
-(epstopdf)                    size: 620908 bytes
+(epstopdf)                    date: 2024-03-07 21:36:51
+(epstopdf)                    size: 589469 bytes
 (epstopdf)             Output file: <Figures/RMSENormalHigh-eps-converted-to.pdf>
-(epstopdf)                    date: 2024-03-11 19:03:23
+(epstopdf)                    date: 2024-03-07 21:37:29
 (epstopdf)                    size: 209282 bytes
 (epstopdf)             Command: <repstopdf --outfile=Figures/RMSENormalHigh-eps-converted-to.pdf Figures/RMSENormalHigh.eps>
 (epstopdf)             \includegraphics on input line 451.
@@ -1170,10 +1170,10 @@ File: Figures/RMSENormalHigh-eps-converted-to.pdf Graphic file (type pdf)
 Package pdftex.def Info: Figures/RMSENormalHigh-eps-converted-to.pdf  used on input line 451.
 (pdftex.def)             Requested size: 421.57396pt x 316.18047pt.
 Package epstopdf Info: Source file: <Figures/UNormalHigh.eps>
-(epstopdf)                    date: 2024-03-11 19:03:23
-(epstopdf)                    size: 1453236 bytes
+(epstopdf)                    date: 2024-03-07 21:36:51
+(epstopdf)                    size: 1372476 bytes
 (epstopdf)             Output file: <Figures/UNormalHigh-eps-converted-to.pdf>
-(epstopdf)                    date: 2024-03-11 19:03:23
+(epstopdf)                    date: 2024-03-07 21:37:32
 (epstopdf)                    size: 318607 bytes
 (epstopdf)             Command: <repstopdf --outfile=Figures/UNormalHigh-eps-converted-to.pdf Figures/UNormalHigh.eps>
 (epstopdf)             \includegraphics on input line 459.
@@ -1185,10 +1185,10 @@ Package pdftex.def Info: Figures/UNormalHigh-eps-converted-to.pdf  used on input
 (pdftex.def)             Requested size: 421.57396pt x 316.18047pt.
  [31 <./Figures/UNormalLow-eps-converted-to.pdf>] [32 <./Figures/RMSENormalHigh-eps-converted-to.pdf>]
 Package epstopdf Info: Source file: <Figures/RMSEDlyChng.eps>
-(epstopdf)                    date: 2024-03-11 19:03:23
-(epstopdf)                    size: 616654 bytes
+(epstopdf)                    date: 2024-03-07 21:36:51
+(epstopdf)                    size: 585511 bytes
 (epstopdf)             Output file: <Figures/RMSEDlyChng-eps-converted-to.pdf>
-(epstopdf)                    date: 2024-03-11 19:03:23
+(epstopdf)                    date: 2024-03-07 21:37:34
 (epstopdf)                    size: 198522 bytes
 (epstopdf)             Command: <repstopdf --outfile=Figures/RMSEDlyChng-eps-converted-to.pdf Figures/RMSEDlyChng.eps>
 (epstopdf)             \includegraphics on input line 471.
@@ -1199,10 +1199,10 @@ File: Figures/RMSEDlyChng-eps-converted-to.pdf Graphic file (type pdf)
 Package pdftex.def Info: Figures/RMSEDlyChng-eps-converted-to.pdf  used on input line 471.
 (pdftex.def)             Requested size: 421.57396pt x 316.18047pt.
 Package epstopdf Info: Source file: <Figures/UDelayChange.eps>
-(epstopdf)                    date: 2024-03-11 19:03:23
-(epstopdf)                    size: 1503632 bytes
+(epstopdf)                    date: 2024-03-07 21:36:51
+(epstopdf)                    size: 1422866 bytes
 (epstopdf)             Output file: <Figures/UDelayChange-eps-converted-to.pdf>
-(epstopdf)                    date: 2024-03-11 19:03:23
+(epstopdf)                    date: 2024-03-07 21:37:36
 (epstopdf)                    size: 330047 bytes
 (epstopdf)             Command: <repstopdf --outfile=Figures/UDelayChange-eps-converted-to.pdf Figures/UDelayChange.eps>
 (epstopdf)             \includegraphics on input line 479.
@@ -1470,12 +1470,12 @@ Package rerunfilecheck Info: File `Main.out' has not changed.
  ) 
 Here is how much of TeX's memory you used:
  19776 strings out of 478353
- 325434 string characters out of 5852100
+ 325418 string characters out of 5852100
  771694 words of memory out of 5000000
  37059 multiletter control sequences out of 15000+600000
  417727 words of font info for 78 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 91i,13n,91p,1444b,459s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 91i,13n,91p,1440b,459s stack positions out of 5000i,500n,10000p,200000b,80000s
 pdfTeX warning (dest): name{glo:facl} has been referenced but does not exist, replaced by a fixed one
 
 pdfTeX warning (dest): name{glo:fl} has been referenced but does not exist, replaced by a fixed one

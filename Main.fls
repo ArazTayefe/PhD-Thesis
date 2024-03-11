@@ -1,8 +1,8 @@
-PWD e:/University/PhD/University/Thesis/Proposal/Proposal
+PWD e:/University/PhD/University/Thesis/My Proposal
 INPUT c:/texlive/2021/texmf.cnf
 INPUT c:/texlive/2021/texmf-dist/web2c/texmf.cnf
 INPUT c:/texlive/2021/texmf-var/web2c/pdftex/pdflatex.fmt
-INPUT e:/University/PhD/University/Thesis/Proposal/Proposal/Main.tex
+INPUT e:/University/PhD/University/Thesis/My Proposal/Main.tex
 OUTPUT Main.log
 INPUT c:/texlive/2021/texmf-dist/tex/latex/base/book.cls
 INPUT c:/texlive/2021/texmf-dist/tex/latex/base/book.cls
