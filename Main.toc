@@ -1,5 +1,5 @@
 \contentsline {chapter}{\numberline {1}Spiking Neural Networks: Models and Learning Algorithms}{viii}{chapter.1}%
-\contentsline {section}{\numberline {1.1}Neuron model}{viii}{section.1.1}%
+\contentsline {section}{\numberline {1.1}Neuron model --}{viii}{section.1.1}%
 \contentsline {chapter}{\numberline {2}Literature review}{xi}{chapter.2}%
 \contentsline {chapter}{\numberline {3}Comparison of Cellular Network Controllers for Quadrotors Experiencing Time Delay}{xv}{chapter.3}%
 \contentsline {section}{\numberline {3.1}Proposed method}{xv}{section.3.1}%
