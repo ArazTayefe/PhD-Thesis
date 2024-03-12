@@ -1223,6 +1223,7 @@ INPUT c:/texlive/2021/texmf-dist/tex/latex/glossaries/styles/glossary-tree.sty
 INPUT c:/texlive/2021/texmf-dist/tex/latex/glossaries/styles/glossary-tree.sty
 INPUT c:/texlive/2021/texmf-dist/tex/latex/glossaries/styles/glossary-tree.sty
 INPUT c:/texlive/2021/texmf-dist/tex/latex/glossaries/styles/glossary-tree.sty
+OUTPUT Main.glo
 INPUT ./Main.aux
 INPUT Main.aux
 INPUT Main.aux
@@ -1333,6 +1334,7 @@ INPUT title_page.tex
 INPUT c:/texlive/2021/texmf-dist/fonts/tfm/public/cm/cmr12.tfm
 INPUT c:/texlive/2021/texmf-dist/fonts/tfm/public/cm/cmbx12.tfm
 INPUT c:/texlive/2021/texmf-dist/fonts/tfm/jknappen/ec/tcrm1200.tfm
+OUTPUT Main.ist
 INPUT c:/texlive/2021/texmf-var/fonts/map/pdftex/updmap/pdftex.map
 INPUT ./0_Abstract.tex
 INPUT ./0_Abstract.tex

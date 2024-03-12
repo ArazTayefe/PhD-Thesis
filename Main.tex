@@ -49,7 +49,7 @@
 \newacronym{stdp}{R-STDP}{Reward-modulated Spike-Timing-Dependent Plasticity}
 \newacronym{RCSE}{R-CSE}{Reward-Modulated Competitive Synaptic Equilibrium}
 \newacronym{facl}{FACL}{Fuzzy Actor-Critic Learning}
-
+\makeglossaries 
 %Definitions
 \renewcommand{\baselinestretch}{1.5}
 \def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
@@ -63,17 +63,24 @@
 % Body
 
 \begin{document}
+
 \include{title_page}
 \include{0_Abstract}
+
+\pagenumbering{roman} % Ensure we're using Roman numerals
 \tableofcontents
 \listoffigures
 \listoftables
+
+\clearpage % Ensure there's no content spill-over
+\pagenumbering{arabic} % Switch to Arabic numerals for the main content
 \include{1_Introduction}
 \include{2_Literature_Review}
 \include{3_UAV_control_over_5G}
 \include{4_ATD_with_SNN}
 \include{5_FL_with_SNN}
 \include{6_Future_Work}
+
 
 \bibliography{Ref}
 \bibliographystyle{ieeetr}

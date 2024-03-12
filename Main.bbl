@@ -204,6 +204,189 @@ E.~Garcia, D.~W. Casbeer, and M.~Pachter, ``Optimal target capture strategies
   in the target-attacker-defender differential game,'' in {\em 2018 Annual
   American Control Conference (ACC)}, pp.~68--73, 2018.
 
+\bibitem{Int1}
+H.~Yang, K.-Y. Lam, L.~Xiao, Z.~Xiong, H.~Hu, D.~Niyato, and H.~Vincent~Poor,
+  ``Lead federated neuromorphic learning for wireless edge artificial
+  intelligence,'' {\em Nature communications}, vol.~13, no.~1, pp.~42--69,
+  2022.
+
+\bibitem{Int2}
+M.~Chen, H.~V. Poor, W.~Saad, and S.~Cui, ``Convergence time optimization for
+  federated learning over wireless networks,'' {\em IEEE Transactions on
+  Wireless Communications}, vol.~20, no.~4, pp.~2457--2471, 2020.
+
+\bibitem{Int3}
+Q.~Wu, X.~Chen, T.~Ouyang, Z.~Zhou, X.~Zhang, S.~Yang, and J.~Zhang, ``Hiflash:
+  Communication-efficient hierarchical federated learning with adaptive
+  staleness control and heterogeneity-aware client-edge association,'' {\em
+  IEEE Transactions on Parallel and Distributed Systems}, vol.~34, no.~5,
+  pp.~1560--1579, 2023.
+
+\bibitem{Int25}
+M.~Chen, H.~V. Poor, W.~Saad, and S.~Cui, ``Convergence time optimization for
+  federated learning over wireless networks,'' {\em IEEE Transactions on
+  Wireless Communications}, vol.~20, no.~4, pp.~2457--2471, 2020.
+
+\bibitem{Int28}
+Z.~Yuan, Z.~Wang, X.~Li, L.~Li, and L.~Zhang, ``Hierarchical trajectory
+  planning for narrow-space automated parking with deep reinforcement learning:
+  A federated learning scheme,'' {\em Sensors}, vol.~23, no.~8, 2023.
+
+\bibitem{Int29}
+H.~Yang, K.-Y. Lam, L.~Xiao, Z.~Xiong, H.~Hu, D.~Niyato, and H.~Vincent~Poor,
+  ``Lead federated neuromorphic learning for wireless edge artificial
+  intelligence,'' {\em Nature communications}, vol.~13, no.~1, 2022.
+
+\bibitem{Int30}
+R.~Gupta and T.~Alam, ``Survey on federated-learning approaches in distributed
+  environment,'' {\em Wireless personal communications}, vol.~125, no.~2,
+  pp.~1631--1652, 2022.
+
+\bibitem{Int5}
+M.-A. Lahmeri, M.~A. Kishk, and M.-S. Alouini, ``Artificial intelligence for
+  uav-enabled wireless networks: A survey,'' {\em IEEE Open Journal of the
+  Communications Society}, vol.~2, pp.~1015--1040, 2021.
+
+\bibitem{Int4}
+A.~Jarwan and M.~Ibnkahla, ``Edge-based federated deep reinforcement learning
+  for iot traffic management,'' {\em IEEE Internet of Things Journal}, vol.~10,
+  no.~5, pp.~3799--3813, 2022.
+
+\bibitem{Int27}
+A.~B. Mansour, G.~Carenini, A.~Duplessis, and D.~Naccache, ``Federated learning
+  aggregation: New robust algorithms with guarantees,'' in {\em 2022 21st IEEE
+  International Conference on Machine Learning and Applications (ICMLA)},
+  pp.~721--726, IEEE, 2022.
+
+\bibitem{Int32}
+S.~K. Lee, ``Distributed deformable configuration control for multi-robot
+  systems with low-cost platforms,'' {\em Swarm Intelligence}, vol.~16, no.~3,
+  pp.~169--209, 2022.
+
+\bibitem{Int33}
+M.~Zhao, J.~Xi, L.~Wang, K.~Xia, and Y.~Zheng, ``Edge-based adaptive secure
+  consensus for nonlinear multiagent systems with communication link attacks,''
+  {\em Neurocomputing}, 2023.
+
+\bibitem{Int34}
+M.~Yu, J.~Xia, J.-e. Feng, S.~Fu, and H.~Shen, ``Leader--follower output
+  consensus of multiagent systems over finite fields,'' {\em Neurocomputing},
+  vol.~550, 2023.
+
+\bibitem{Int35}
+Z.~Peng, Y.~Jiang, L.~Liu, and Y.~Shi, ``Path-guided model-free flocking
+  control of unmanned surface vehicles based on concurrent learning extended
+  state observers,'' {\em IEEE Transactions on Systems, Man, and Cybernetics:
+  Systems}, 2023.
+
+\bibitem{Int31}
+C.~Zheng and K.~Lee, ``Consensus decision-making in artificial swarms via
+  entropy-based local negotiation and preference updating,'' {\em Swarm
+  Intelligence}, pp.~1--21, 2023.
+
+\bibitem{Int36}
+Y.~Yang, W.~He, and S.~Li, ``Refined dynamic event-triggering cluster consensus
+  of multiagent systems with fixed/switching topology,'' {\em IEEE Transactions
+  on Cybernetics}, 2022.
+
+\bibitem{Int7}
+H.~Lu, J.~Liu, Y.~Luo, Y.~Hua, S.~Qiu, and Y.~Huang, ``An autonomous learning
+  mobile robot using biological reward modulate stdp,'' {\em Neurocomputing},
+  vol.~458, pp.~308--318, 2021.
+
+\bibitem{Int8}
+J.~Liu, H.~Lu, Y.~Luo, and S.~Yang, ``Spiking neural network-based multi-task
+  autonomous learning for mobile robots,'' {\em Engineering Applications of
+  Artificial Intelligence}, vol.~104, pp.~104--362, 2021.
+
+\bibitem{Int11}
+D.~Chu and H.~Le~Nguyen, ``Constraints on hebbian and stdp learned weights of a
+  spiking neuron,'' {\em Neural Networks}, vol.~135, pp.~192--200, 2021.
+
+\bibitem{Int12}
+D.~Antonov, K.~Sviatov, and S.~Sukhov, ``Continuous learning of spiking
+  networks trained with local rules,'' {\em Neural Networks}, vol.~155,
+  pp.~512--522, 2022.
+
+\bibitem{Int9}
+D.~Xing, J.~Li, T.~Zhang, and B.~Xu, ``A brain-inspired approach for
+  collision-free movement planning in the small operational space,'' {\em IEEE
+  Transactions on Neural Networks and Learning Systems}, vol.~33, no.~5,
+  pp.~2094--2105, 2022.
+
+\bibitem{Int10}
+J.~P{\'e}rez, J.~A. Cabrera, J.~J. Castillo, and J.~M. Velasco, ``Bio-inspired
+  spiking neural network for nonlinear systems control,'' {\em Neural
+  Networks}, vol.~104, pp.~15--25, 2018.
+
+\bibitem{Int16}
+G.~Liu, W.~Deng, X.~Xie, L.~Huang, and H.~Tang, ``Human-level control through
+  directly trained deep spiking $ q $-networks,'' {\em IEEE Transactions on
+  Cybernetics}, 2022.
+
+\bibitem{Int14}
+S.~A. Lobov, A.~N. Mikhaylov, M.~Shamshin, V.~A. Makarov, and V.~B. Kazantsev,
+  ``Spatial properties of stdp in a self-learning spiking neural network enable
+  controlling a mobile robot,'' {\em Frontiers in neuroscience}, vol.~14, 2020.
+
+\bibitem{Int15}
+C.~Teeter, R.~Iyer, V.~Menon, N.~Gouwens, D.~Feng, J.~Berg, A.~Szafer, N.~Cain,
+  H.~Zeng, M.~Hawrylycz, {\em et~al.}, ``Generalized leaky integrate-and-fire
+  models classify multiple neuron types,'' {\em Nature communications}, vol.~9,
+  2018.
+
+\bibitem{Int17}
+J.~Shen, Y.~Zhao, J.~K. Liu, and Y.~Wang, ``Hybridsnn: Combining bio-machine
+  strengths by boosting adaptive spiking neural networks,'' {\em IEEE
+  Transactions on Neural Networks and Learning Systems}, 2021.
+
+\bibitem{Int18}
+Z.~Bing, C.~Meschede, G.~Chen, A.~Knoll, and K.~Huang, ``Indirect and direct
+  training of spiking neural networks for end-to-end control of a lane-keeping
+  vehicle,'' {\em Neural Networks}, vol.~121, pp.~21--36, 2020.
+
+\bibitem{Int19}
+X.~Cheng, T.~Zhang, S.~Jia, and B.~Xu, ``Meta neurons improve spiking neural
+  networks for efficient spatio-temporal learning,'' {\em Neurocomputing},
+  vol.~531, pp.~217--225, 2023.
+
+\bibitem{Int20}
+P.~Bertens and S.-W. Lee, ``Network of evolvable neural units can learn
+  synaptic learning rules and spiking dynamics,'' {\em Nature Machine
+  Intelligence}, vol.~2, no.~12, pp.~791--799, 2020.
+
+\bibitem{Int21}
+M.~Bia{\l}as and J.~Ma{\'n}dziuk, ``Spike-timing-dependent plasticity with
+  activation-dependent scaling for receptive fields development,'' {\em IEEE
+  Transactions on Neural Networks and Learning Systems}, vol.~33, no.~10,
+  pp.~5215--5228, 2021.
+
+\bibitem{Int22}
+J.~L. Lobo, J.~Del~Ser, A.~Bifet, and N.~Kasabov, ``Spiking neural networks and
+  online learning: An overview and perspectives,'' {\em Neural Networks},
+  vol.~121, pp.~88--100, 2020.
+
+\bibitem{Int23}
+D.~Ha{\c{s}}egan, M.~Deible, C.~Earl, D.~D’Onofrio, H.~Hazan, H.~Anwar, and
+  S.~A. Neymotin, ``Training spiking neuronal networks to perform motor control
+  using reinforcement and evolutionary learning,'' {\em Frontiers in
+  Computational Neuroscience}, vol.~16, 2022.
+
+\bibitem{Int13}
+Y.~Venkatesha, Y.~Kim, L.~Tassiulas, and P.~Panda, ``Federated learning with
+  spiking neural networks,'' {\em IEEE Transactions on Signal Processing},
+  vol.~69, pp.~6183--6194, 2021.
+
+\bibitem{Int38}
+Y.~Wang, S.~Duan, and F.~Chen, ``Efficient asynchronous federated neuromorphic
+  learning of spiking neural networks,'' {\em Neurocomputing}, vol.~557, 2023.
+
+\bibitem{Int37}
+S.~A. Tumpa, S.~Singh, M.~F.~F. Khan, M.~T. Kandemir, V.~Narayanan, and C.~R.
+  Das, ``Federated learning with spiking neural networks in heterogeneous
+  systems,'' in {\em IEEE Computer Society Annual Symposium on VLSI (ISVLSI)},
+  pp.~1--6, IEEE, 2023.
+
 \bibitem{Ch4_DM}
 Y.~Li, J.~Yang, and K.~Zhang, ``Distributed finite-time cooperative control for
   quadrotor formation,'' {\em IEEE Access}, vol.~7, pp.~66753--66763, 2019.
@@ -273,15 +456,6 @@ J.~L. Lobo, I.~La{\~n}a, J.~Del~Ser, M.~N. Bilbao, and N.~Kasabov, ``Evolving
 A.~M. AbdelAty, M.~E. Fouda, and A.~M. Eltawil, ``On numerical approximations
   of fractional-order spiking neuron models,'' {\em Communications in Nonlinear
   Science and Numerical Simulation}, vol.~105, 2022.
-
-\bibitem{NM1}
-Y.-H. Liu and X.-J. Wang, ``Spike-frequency adaptation of a generalized leaky
-  integrate-and-fire model neuron,'' {\em Journal of computational
-  neuroscience}, vol.~10, pp.~25--45, 2001.
-
-\bibitem{NM2}
-L.~Long and F.~Guoliang, ``A review of biologically plausible neuron models for
-  spiking neural networks,'' {\em AIAA Infotech@ Aerospace}, 2010.
 
 \bibitem{NS}
 M.~Tayefe~Ramezanlou, H.~Schwartz, I.~Lambadaris, M.~Barbeau, and S.~H.~R.

@@ -1,8 +1,6 @@
 \chapter{Enhancing Cooperative Multi-agent Reinforcement Learning through the Integration of R-STDP and Federated Learning}
 
-\section{Preliminaries}
-
-\subsection{Consensus Flying Problem}
+\section{Consensus Flying Problem}
 
 The ``Consensus Flying Problem" deals with ensuring drones can work together in real-time to agree on their flight paths and positions. When many drones are close together, like in swarms, avoiding crashes is vital. Advanced algorithms and communication methods are needed so drones can exchange information and handle changing situations and unexpected obstacles.
 
@@ -17,48 +15,19 @@ As shown in Figure \ref{fig.Consensus Flying}, a swarm of agents (follower drone
 
 The follower agents are equipped with an \gls{snn}, and their learning algorithm incorporates \gls{stdp} and \gls{fl}. Each follower agent trains a local network (\(M_{loc}^{n}\)) using \gls{stdp} and sends its model to the leader as the central server. The leader aggregates models and sends back the global model (\(M^{Global}\)).
 
-\subsection{Neuron Model}
+This chapter employs the \gls{snn} model to train a group of swarm agents that follow a leader. Each agent has its own \gls{snn}, which is trained independently using the \gls{stdp} algorithm. Each agent receives position data from the agents nearby. The goal is for each agent to keep a commanded distance from the leader agent and the other agents in the group. The encoding and decoding processes for the input and output layers of the \gls{snn} are considered fuzzy encoding, and a novel method is introduced to stabilize the network dynamics considering the reward function. This work presents several key contributions:
 
-The \gls{lif} neuron model provides a simplified yet powerful representation of neuronal dynamics. Fundamentally, using basic electrical circuit elements, the \gls{lif} model captures the behavior of a neuron's membrane potential in response to incoming currents. Mathematically, the \gls{lif} model is characterized by a linear differential equation that describes the voltage response to a current input as follows~\cite{NM1},
-
-\begin{equation} \label{Eq.NM.1}
-\tau_m \frac{dV_m(t)}{dt} = V_m(t) + E_L + R_m I_e(t)
-\end{equation}
-
-\noindent where \(\tau_m\) is the membrane time-constant, \(V_m\) is the membrane potential, \(E_L\) is the reversal potential, \(R_m\) is the membrane resistance, and \(I_e(t)\) is the input current to the neuron. When the neuron's potential reaches the threshold potential (\(V_{threshold}\)), it spikes, and the potential immediately returns to the resting potential \((V_{rest}\)). 
-
-For scenarios with constant input current, the Inter-Spike Interval (\(t_{isi}\)) can be analytically determined by separating variables in the governing differential equation. This allows for the derivation of the \(t_{isi}\) as follows~\cite{NM2},
-
-\begin{equation} \label{Eq.NM.2}
-t_{isi} = \tau_{m}\ln\left(\frac{E_{l} + R_{m}I - V_{rest}}{E_{l} + R_{m}I - V_{threshold}}\right)
-\end{equation}
-
-It is imperative to note that this solution is dependent on an input current magnitude that induces a transition of the membrane potential from \( V_{rest} \) to \( V_{threshold} \). Through this analytical framework, the \gls{lif} model provides insights into the modulation of neuronal spiking dynamics based on constant input currents.
-
-The neuron does not fire when the input current is minimum and \(t_{isi}\) approaches infinity. This occurs when the input current is insufficient to drive the membrane potential to the threshold potential from its resting potential. By setting the \(t_{isi}\) to infinity, one obtains the condition:
-\begin{equation} \label{Eq.NM.3}
-E_{l} + R_{m}I - V_{threshold} = 0
-\end{equation}
-
-\noindent or
-
-\begin{equation} \label{Eq.NM.4}
-I^{min} = \frac{V_{threshold} - E_L}{R_m}
-\end{equation}
-
-\noindent where \( I^{min} \) is the minimum input current that makes the neuron reach the potential below the threshold voltage. Conversely, the lowest possible \(t_{isi}\) defines the maximum input current. For this discussion, we consider this \(t_{isi}\) to be one sample time \(\Delta t\). By considering \(\ln(1+z)\approx z\), one can derive the maximum input current that would drive the neuron to spike on every sample time as follows,
-
-\begin{equation} \label{Eq.NM.5}
-    I^{max} = \frac{\tau_{m}\left(V_{threshold} - V_{rest}\right)}{\Delta t R_{m}} + \frac{V_{threshold} - E_{L}}{R_{m}}
-\end{equation}
-
-These derived equations determine the range of operation for neurons and establish the boundaries for the maximum weights in the \gls{snn}. Specifically, positive synaptic weights indicate the limits of excitement that a neuron can generate. In this context, the minimum input current (or weight) represents the stimulating influence a neuron can exert without triggering an action potential. In contrast, the maximum input current signifies the most powerful stimulating influence possible. Conversely, considering weight values, these currents reflect the minimum and maximum inhibitory effects. In this case, the minimum and maximum input currents determine how much a neuron can inhibit other neurons from firing.
+\begin{itemize}
+  \item The chapter presents a comprehensive method for stabilizing and enhancing the learning process in \gls{snn}. This method focuses on controlling the unbounded growth of synaptic weights in SNNs, utilizing a strategy that dynamically adapts to changes in reward conditions and coefficients. It introduces an innovative decay rate adjustment based on the status of synaptic weights. This approach not only enhances the responsiveness to weight changes but also preserves the shape of the Gaussian function formed by fuzzy encoding.
+  
+  \item In terms of advancements in \gls{fl} with \gls{stdp}, the chapter addresses the \gls{fl} challenges in the \gls{stdp} framework. It introduces an event-triggered mechanism for model publishing and receiving within the network, which improves network usage by the agents. Additionally, the chapter implements a novel weighted aggregation method on the server. This method calculates weights based on the time of arrival of the models, effectively tackling the asynchronous issues in FL.
+\end{itemize}
 
 \section{Proposed Method}
 
 \subsection{Network Structure}
 
-This paper assumes that each agent detects only two neighboring agents in addition to the leader. The information obtained from other agents includes the line-of-sight angle and the distance. Each agent's neural network consists of three sub-layers in the input layer, as shown in Figure \ref{fig.Network Structure}. Two sub-layers correspond to the two neighboring follower agents (\(F_{1}\) and \(F_{2}\)), and the third is dedicated to the leader (\(L\)). Inputs for these sub-layers are encoded using the Gaussian Receptive Fields (GRF) that use fuzzy membership functions. The network utilizes the difference between the current distance and the commanded distance (\(r_{cmd}\)) to stimulate the input neurons. 
+This chapter assumes that each agent detects only two neighboring agents in addition to the leader. The information obtained from other agents includes the line-of-sight angle and the distance. Each agent's neural network consists of three sub-layers in the input layer, as shown in Figure \ref{fig.Network Structure}. Two sub-layers correspond to the two neighboring follower agents (\(F_{1}\) and \(F_{2}\)), and the third is dedicated to the leader (\(L\)). Inputs for these sub-layers are encoded using the Gaussian Receptive Fields (GRF) that use fuzzy membership functions. The network utilizes the difference between the current distance and the commanded distance (\(r_{cmd}\)) to stimulate the input neurons. 
 
 \begin{figure}
     \centering
@@ -176,7 +145,7 @@ One of the challenges in \gls{stdp} is the unbounded growth or decay of synaptic
 
 Controlling the excessive increase of synaptic weights in \gls{snn}s is important to maintain network stability and function. If not controlled, this growth can lead to saturation, affecting the network's ability to learn and adapt. When the network receives fuzzy sets of firing strengths as input, the synaptic weights grow in a pattern influenced by the Gaussian function's shape used for fuzzy encoding. Imposing a limit on synaptic weights disrupts this growth pattern over time, leading to all synaptic weights eventually maxing out. Weight normalization, while preventing excessive growth in one part of the network, can inhibit overall growth; when a synaptic connection reaches its maximum, its activation subsequently diminishes other weights. 
 
-Traditional methods like L1 regularization and weight decay employ a constant decay rate, which can slow the network's responsiveness to changes in rewards. Alternatively, the Bienenstock, Cooper, and Munro (BCM) method, a more advanced approach, dynamically adjusts both a threshold and a decay rate in response to input variations. However, this method does not provide a control mechanism for the fuzzy inputs. In this paper, we introduce a method called \gls{RCSE} to manage the unbounded growth of synaptic weights while maintaining the gradient in the synaptic weights matrix formed due to differences in firing strength from fuzzy membership functions while dynamically adjusting the network when the reward changes.
+Traditional methods like L1 regularization and weight decay employ a constant decay rate, which can slow the network's responsiveness to changes in rewards. Alternatively, the Bienenstock, Cooper, and Munro (BCM) method, a more advanced approach, dynamically adjusts both a threshold and a decay rate in response to input variations. However, this method does not provide a control mechanism for the fuzzy inputs. In this chapter, we introduce a method called \gls{RCSE} to manage the unbounded growth of synaptic weights while maintaining the gradient in the synaptic weights matrix formed due to differences in firing strength from fuzzy membership functions while dynamically adjusting the network when the reward changes.
 
 Let us define \(\boldsymbol{\alpha}\) as the learning rate matrix. We will also use \(\mathcal{S}\) to represent the set of neurons that fired at time \(t\) in one of the network sections. If we consider \(W_{max}^{\mathcal{S}}(t)\) as the maximum weight among the firing neurons in set \(\mathcal{S}\), then we can characterize the learning rate using a Sigmoid function. This function gradually transitions from 1 to 0 as the learning process advances, as explained below:
 
@@ -190,7 +159,7 @@ The network contains a variety of reward functions, each with its own maximum an
 
 A significant challenge in learning algorithms is their capacity to adapt to changes in rewards. Commonly, once the learning rate reduces to zero, weight adjustments stop. To address this, a variable decay rate is introduced to prevent weights in each network section from remaining at their peak values indefinitely. In our method, the decay rate is represented as a matrix, and it is calculated using the SoftPlus function, enabling it to adjust according to the current stage of learning. This method ensures that weight modifications continue to respond effectively to changes in the learning environment.
 
-This paper defines the decay rate as a function of the maximum synaptic weight among neurons in the set \(\mathcal{S}\). This approach is designed to address a critical aspect: when the maximum synaptic weight in \(\mathcal{S}\) reaches its peak (\(|W_{max}^{\mathcal{S}}(t)| = \Psi^{\mathcal{S}}\)), it is essential that the learning rate remains above zero. This condition is necessary to allow weight change and prevent the learning rate from stagnating at zero. Simultaneously, the learning rate must not exceed the maximum acceptable weight change, which is \(\mathcal{A} \times \mathcal{R}_{max}^{G}\). With these considerations, we propose that the decay rate should be set to \(\mathcal{A}/\lambda \times \mathcal{R}_{max}^{G}\) when \(|W_{max}^{\mathcal{S}}(t)| = \Psi^{\mathcal{S}}\) and increase to \(\lambda\mathcal{A} \times \mathcal{R}_{max}^{G}\) when \(|W_{max}^{\mathcal{S}}(t)| = 2 \Psi^{\mathcal{S}}\), where \(\lambda\) is a coefficient that controls the rate of decay when \(|W_{max}^{\mathcal{S}}(t)| > \Psi^{\mathcal{S}}\). By applying the mentioned condition and solving for the SoftPlus function, the decay rate function can be obtained as follows,
+This chapter defines the decay rate as a function of the maximum synaptic weight among neurons in the set \(\mathcal{S}\). This approach is designed to address a critical aspect: when the maximum synaptic weight in \(\mathcal{S}\) reaches its peak (\(|W_{max}^{\mathcal{S}}(t)| = \Psi^{\mathcal{S}}\)), it is essential that the learning rate remains above zero. This condition is necessary to allow weight change and prevent the learning rate from stagnating at zero. Simultaneously, the learning rate must not exceed the maximum acceptable weight change, which is \(\mathcal{A} \times \mathcal{R}_{max}^{G}\). With these considerations, we propose that the decay rate should be set to \(\mathcal{A}/\lambda \times \mathcal{R}_{max}^{G}\) when \(|W_{max}^{\mathcal{S}}(t)| = \Psi^{\mathcal{S}}\) and increase to \(\lambda\mathcal{A} \times \mathcal{R}_{max}^{G}\) when \(|W_{max}^{\mathcal{S}}(t)| = 2 \Psi^{\mathcal{S}}\), where \(\lambda\) is a coefficient that controls the rate of decay when \(|W_{max}^{\mathcal{S}}(t)| > \Psi^{\mathcal{S}}\). By applying the mentioned condition and solving for the SoftPlus function, the decay rate function can be obtained as follows,
 
 \begin{equation} \label{Eq.WS.3}
     \Theta^{\mathcal{S}} = \left( \frac{\mathcal{\eta}}{\mathcal{\beta}} \right) \log \left(1 + \exp \left[{\beta \left( |W_{max}^{\mathcal{S}}(t)| - \Psi^{\mathcal{S}} \right)} \right] \right)
@@ -332,7 +301,7 @@ $V_{th}$ & -50 mV & Threshold membrane potential \\
 
 The \gls{stdp} mechanism updated synaptic weights at 10 ms intervals. During these intervals, the learning algorithm adjusted the agent's states based on received data from other agents and the leader while simultaneously generating random outputs as part of an exploration strategy.
 
-\begin{table}[H]
+\begin{table}[h]
 \caption{Simulation Parameters}
 \label{table:simulation-parameters}
 \centering
@@ -384,7 +353,7 @@ To ensure a fair comparison between different learning methods, we have compared
     \Phi^l=\frac{\partial{u}}{\partial{\omega_l}}=\frac{\prod\limits_{i=1}^n \mu^{F^l_{i}(x_i)}}{\sum\limits_{l=1}^{L}(\prod\limits_{i=1}^n \mu^{F^l_{i}(x_i)})},
 \end{equation}
 
-\noindent where \(\mu^{F^l_{i}(x_i)}\) is the membership degree of the \(i\)th membership function for rule \(l\). The critic stores an approximation of the value function. In this paper, we show the critic's output at time \(t\) with \(\hat{V}_t\), which is as follows,
+\noindent where \(\mu^{F^l_{i}(x_i)}\) is the membership degree of the \(i\)th membership function for rule \(l\). The critic stores an approximation of the value function. In this chapter, we show the critic's output at time \(t\) with \(\hat{V}_t\), which is as follows,
 
 \begin{equation}
     \label{eq:value_function}
@@ -436,7 +405,7 @@ In \eqref{eq:actor_update} and \eqref{eq:critic_update}, \(\kappa\) and \(\rho\)
 
 Figure \ref{fig_3_0} shows the simulation results for the \gls{RCSE} method. According to the results, the agents rapidly aligned around the leader within 6.89 seconds, and the maximum distance was reduced from 7.632 meters to the target distance of 2 meters. The swarm completed the formation around the leader in approximately 8.94 seconds, avoiding collisions.
 
-\begin{figure}[!t]
+\begin{figure}[H]
     \centering
     \begin{minipage}{0.48\textwidth}
         \includegraphics[width=\linewidth]{Figures/Distances - BRC.pdf}
@@ -467,7 +436,7 @@ Figure \ref{fig_3_0} shows the simulation results for the \gls{RCSE} method. Acc
     \end{minipage}
 \end{figure}
 
-As mentioned in section 3, the input encoding uses the error between current and commanded distance. Therefore, one of the advantages of the encoding and learning method in this paper is that the learned policies are independent of the commanded distance. Since the \gls{snn} uses the distance error, the commanded distance can be changed after training. Figure \ref{fig_3_2} shows the response of the agents to change in commanded distance after training. According to this figure, when the commanded distance is changed at 30 seconds, the swarm immediately responds to this change in 2.98 seconds without disrupting the formation or any collision.
+As mentioned in section 3, the input encoding uses the error between current and commanded distance. Therefore, one of the advantages of the encoding and learning method in this chapter is that the learned policies are independent of the commanded distance. Since the \gls{snn} uses the distance error, the commanded distance can be changed after training. Figure \ref{fig_3_2} shows the response of the agents to change in commanded distance after training. According to this figure, when the commanded distance is changed at 30 seconds, the swarm immediately responds to this change in 2.98 seconds without disrupting the formation or any collision.
 
 Figure \ref{fig_3_3} shows the simulation results for the FACL algorithm. The training time was 1000 seconds, and the algorithm converged to the final solution in 667.26 seconds. According to the results, the agents achieved successful formation in approximately 15.85 seconds. Similarly, Figure \ref{fig_3_5} shows the simulation results for the FACL algorithm, where the commanded distance is initially set to 2 \(m\) and at \(t=30\), the commanded distance changes to 4 \(m\). The results show that it takes 4.35 seconds for the swarm to adapt to the new command. It is worth mentioning that in Figures \ref{fig_3_3} and \ref{fig_3_5}, the distances converge to the commanded distance but stay within a bias. Increasing the number of membership functions can reduce the bias, but it increases the training time of the \gls{facl} algorithm.
 
@@ -564,17 +533,16 @@ The norm of the synaptic weights can represent the changes in the synaptic weigh
 
 \begin{figure}[H]
     \centering
-    \begin{minipage}{0.48\textwidth}
-        \includegraphics[width=\linewidth]{Figures/Norm.pdf}
-        \caption{Frobenius norm of the agents during the learning phase. The reward changes for the Leader after 600 s.}
-        \label{fig:3-9}
-    \end{minipage}
-    \hfill
-    \begin{minipage}{0.50\textwidth}
-        \includegraphics[width=\linewidth]{Figures/Communication Log.pdf}
-        \caption{Communication times for agents and the Central Server (Leader). Red and blue dots show the times that agents and the Central Server have sent their model, respectively.}
-        \label{fig:3-10}
-    \end{minipage}
+    \includegraphics[scale=0.75]{Figures/Norm.pdf}
+    \caption{Frobenius norm of the agents during the learning phase. The reward changes for the Leader after 600 s.}
+    \label{fig:3-9}
+\end{figure}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale=0.75]{Figures/Communication Log.pdf}
+    \caption{Communication times for agents and the Central Server (Leader). Red and blue dots show the times that agents and the Central Server have sent their model, respectively.}
+    \label{fig:3-10}
 \end{figure}
 
 
@@ -604,7 +572,7 @@ Table \ref{tab:Results analysis} compares the proposed Federated Learning (FL) a
 
 \section{Conclusion}
 
-In this paper, we presented a comprehensive approach addressing the challenges of uncontrolled growth in synaptic weights and the limited responsiveness of \gls{stdp} to real-time changes within \gls{snn}s. Our proposed solution integrates the \gls{RCSE} method with a dynamic aggregation interval in \gls{fl}, significantly enhancing learning time and performance.
+In this chapter, we presented a comprehensive approach addressing the challenges of uncontrolled growth in synaptic weights and the limited responsiveness of \gls{stdp} to real-time changes within \gls{snn}s. Our proposed solution integrates the \gls{RCSE} method with a dynamic aggregation interval in \gls{fl}, significantly enhancing learning time and performance.
 The R-CSE method introduces a novel mechanism to manage the unbounded growth of synaptic weights by dynamically adjusting the decay rate through the SoftPlus function. This adjustment is sensitive to the learning stages and rewards changes, ensuring that synaptic weight adjustments remain responsive over time. By addressing the challenge of synaptic weight saturation, the \gls{RCSE} method facilitates a balanced approach to weight adjustment, preventing network saturation and promoting continuous learning adaptability.
 We introduce a novel approach that uses \gls{fl} in SNN and employs the Frobenius norm to adjust weighted aggregation in \gls{fl}. Additionally, we include weight decay proportional to the time elapsed since an agent's last model publication. This improves the efficiency and responsiveness of the learning process. 
 Our model's dynamic nature of the sample time adjusts based on the Euclidean norm. This metric measures the distance between the weight matrices of the agents and the server, determining reduced intervals for model publication. Our results show that the proposed aggregation method significantly accelerates agents' learning and performs better than non-federated learning and \gls{facl} cases.

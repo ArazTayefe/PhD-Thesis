@@ -1,46 +1,46 @@
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {3.1}{\ignorespaces Control framework for quadrotor control using cellular networks}}{xvii}{figure.3.1}%
-\contentsline {figure}{\numberline {3.2}{\ignorespaces Quadrotor's dynamic model}}{xviii}{figure.3.2}%
-\contentsline {figure}{\numberline {3.3}{\ignorespaces State estimation error with perfect delay estimator}}{xxviii}{figure.3.3}%
-\contentsline {figure}{\numberline {3.4}{\ignorespaces Control signals with perfect delay estimator}}{xxix}{figure.3.4}%
-\contentsline {figure}{\numberline {3.5}{\ignorespaces State and delay estimation error for $D=\left \lbrace 6, 7, 9, 10\right \rbrace $ $ms$}}{xxx}{figure.3.5}%
-\contentsline {figure}{\numberline {3.6}{\ignorespaces Control signals for $D=\left \lbrace 6, 7, 9, 10\right \rbrace $ $ms$}}{xxxi}{figure.3.6}%
-\contentsline {figure}{\numberline {3.7}{\ignorespaces State and delay estimation error for $D=\left \lbrace 1, 3, 13, 15\right \rbrace $ $ms$}}{xxxii}{figure.3.7}%
-\contentsline {figure}{\numberline {3.8}{\ignorespaces Control signals for $D=\left \lbrace 1, 3, 13, 15\right \rbrace $ $ms$}}{xxxiii}{figure.3.8}%
-\contentsline {figure}{\numberline {3.9}{\ignorespaces State and delay estimation error when delays and their distribution changed (Large variations in delay estimation shows the points where the delay values and the transition probabilities are changed)}}{xxxiv}{figure.3.9}%
-\contentsline {figure}{\numberline {3.10}{\ignorespaces Control signals when delays and delay distributions changed}}{xxxv}{figure.3.10}%
+\contentsline {figure}{\numberline {3.1}{\ignorespaces Control framework for quadrotor control using cellular networks}}{14}{figure.3.1}%
+\contentsline {figure}{\numberline {3.2}{\ignorespaces Quadrotor's dynamic model}}{15}{figure.3.2}%
+\contentsline {figure}{\numberline {3.3}{\ignorespaces State estimation error with perfect delay estimator}}{25}{figure.3.3}%
+\contentsline {figure}{\numberline {3.4}{\ignorespaces Control signals with perfect delay estimator}}{26}{figure.3.4}%
+\contentsline {figure}{\numberline {3.5}{\ignorespaces State and delay estimation error for $D=\left \lbrace 6, 7, 9, 10\right \rbrace $ $ms$}}{27}{figure.3.5}%
+\contentsline {figure}{\numberline {3.6}{\ignorespaces Control signals for $D=\left \lbrace 6, 7, 9, 10\right \rbrace $ $ms$}}{28}{figure.3.6}%
+\contentsline {figure}{\numberline {3.7}{\ignorespaces State and delay estimation error for $D=\left \lbrace 1, 3, 13, 15\right \rbrace $ $ms$}}{29}{figure.3.7}%
+\contentsline {figure}{\numberline {3.8}{\ignorespaces Control signals for $D=\left \lbrace 1, 3, 13, 15\right \rbrace $ $ms$}}{30}{figure.3.8}%
+\contentsline {figure}{\numberline {3.9}{\ignorespaces State and delay estimation error when delays and their distribution changed (Large variations in delay estimation shows the points where the delay values and the transition probabilities are changed)}}{31}{figure.3.9}%
+\contentsline {figure}{\numberline {3.10}{\ignorespaces Control signals when delays and delay distributions changed}}{32}{figure.3.10}%
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {4.1}{\ignorespaces Active target defense game with three agents (LOS angles are shown for both agents).}}{xl}{figure.4.1}%
-\contentsline {figure}{\numberline {4.2}{\ignorespaces Two SNNs simultaneously play and control the invader and defender. Each agent uses the LOS angle and relative velocities for training.}}{xl}{figure.4.2}%
-\contentsline {figure}{\numberline {4.3}{\ignorespaces Relative velocities and LOS angles used in the reward function}}{xliii}{figure.4.3}%
-\contentsline {figure}{\numberline {4.4}{\ignorespaces Network structure and encoding process for the input layer (Defender). Each neuron is associated with a membership function in GRF. The GRF encodes an input State ($S^t$) at each time step. There is both a training phase when ($\alpha = 0$) and an operating phase when ($\alpha = 1)$.}}{xlv}{figure.4.4}%
-\contentsline {figure}{\numberline {4.5}{\ignorespaces SNN's performance during training. Hollow circles show the initial positions.}}{xlix}{figure.4.5}%
-\contentsline {figure}{\numberline {4.6}{\ignorespaces Changes in synaptic weights during training. Only Maximum synaptic weights for both agents are shown.}}{l}{figure.4.6}%
-\contentsline {figure}{\numberline {4.7}{\ignorespaces An illustration of input current to SNN and synaptic current to the output neurons after training for a single connection.}}{lii}{figure.4.7}%
-\contentsline {figure}{\numberline {4.8}{\ignorespaces Reward, eligibility trace, and weight change during the simulation for $W^{3-3}$. The $C(t) R(t)$ changes the synaptic weight by considering activation strength and reward value.}}{lii}{figure.4.8}%
-\contentsline {figure}{\numberline {4.9}{\ignorespaces SNN's performance after training. The highlighted region shows the defender's dominant region. The purple dot is the optimal capture point.}}{liii}{figure.4.9}%
-\contentsline {figure}{\numberline {4.10}{\ignorespaces SNN's performance in noisy conditions. A white Gaussian noise with a variance of 0.01 is added to the measured inputs.}}{lv}{figure.4.10}%
+\contentsline {figure}{\numberline {4.1}{\ignorespaces Active target defense game with three agents (LOS angles are shown for both agents).}}{36}{figure.4.1}%
+\contentsline {figure}{\numberline {4.2}{\ignorespaces Two SNNs simultaneously play and control the invader and defender. Each agent uses the LOS angle and relative velocities for training.}}{36}{figure.4.2}%
+\contentsline {figure}{\numberline {4.3}{\ignorespaces Relative velocities and LOS angles used in the reward function}}{39}{figure.4.3}%
+\contentsline {figure}{\numberline {4.4}{\ignorespaces Network structure and encoding process for the input layer (Defender). Each neuron is associated with a membership function in GRF. The GRF encodes an input State ($S^t$) at each time step. There is both a training phase when ($\alpha = 0$) and an operating phase when ($\alpha = 1)$.}}{41}{figure.4.4}%
+\contentsline {figure}{\numberline {4.5}{\ignorespaces \gls {snn}'s performance during training. Hollow circles show the initial positions.}}{45}{figure.4.5}%
+\contentsline {figure}{\numberline {4.6}{\ignorespaces Changes in synaptic weights during training. Only Maximum synaptic weights for both agents are shown.}}{46}{figure.4.6}%
+\contentsline {figure}{\numberline {4.7}{\ignorespaces An illustration of input current to \gls {snn} and synaptic current to the output neurons after training for a single connection.}}{48}{figure.4.7}%
+\contentsline {figure}{\numberline {4.8}{\ignorespaces Reward, eligibility trace, and weight change during the simulation for $W^{3-3}$. The $C(t) R(t)$ changes the synaptic weight by considering activation strength and reward value.}}{48}{figure.4.8}%
+\contentsline {figure}{\numberline {4.9}{\ignorespaces \gls {snn}'s performance after training. The highlighted region shows the defender's dominant region. The purple dot is the optimal capture point.}}{49}{figure.4.9}%
+\contentsline {figure}{\numberline {4.10}{\ignorespaces \gls {snn}'s performance in noisy conditions. A white Gaussian noise with a variance of 0.01 is added to the measured inputs.}}{51}{figure.4.10}%
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {5.1}{\ignorespaces The central server (the leader) and the surrounding follower agents (white drones). The follower agents learn to fly in a formation to maintain the commanded distance. The Local models trained individually by follower agents are sent to the leader. The leader aggregates the models and sends back the global model for another round of training of the follower agents.}}{lviii}{figure.5.1}%
-\contentsline {figure}{\numberline {5.2}{\ignorespaces \gls {snn} structure with encoding and decoding layers. Each sub-layer consists of a fuzzy encoder and a Fuzzy-to-Spiking Converter, with the output layer receiving inputs from synaptic weights and a random action selector. During the training phase, the output layer receives input only from the random action selector, which then shifts to synaptic weight inputs after the training.}}{lxi}{figure.5.2}%
-\contentsline {figure}{\numberline {5.3}{\ignorespaces The fuzzy encoding principle for the input sub-layer.}}{lxiii}{figure.5.3}%
-\contentsline {figure}{\numberline {5.4}{\ignorespaces The measured distances during the test for evaluating the performance and detecting the collisions.}}{lxxvii}{figure.5.4}%
-\contentsline {figure}{\numberline {5.11}{\ignorespaces Agents' path after reward change (test phase)}}{lxxxi}{figure.5.11}%
-\contentsline {figure}{\numberline {5.12}{\ignorespaces Distances after reward change (test phase)}}{lxxxi}{figure.5.12}%
-\contentsline {figure}{\numberline {5.13}{\ignorespaces Synaptic Weights before Reward change}}{lxxxii}{figure.5.13}%
-\contentsline {figure}{\numberline {5.14}{\ignorespaces Synaptic Weights after Reward change}}{lxxxii}{figure.5.14}%
-\contentsline {figure}{\numberline {5.15}{\ignorespaces Synaptic weights increase after reward change}}{lxxxii}{figure.5.15}%
-\contentsline {figure}{\numberline {5.16}{\ignorespaces Synaptic weights decrease after reward change}}{lxxxii}{figure.5.16}%
-\contentsline {figure}{\numberline {5.17}{\ignorespaces Distances during the test phase before reward change in the proposed aggregation method.}}{lxxxiv}{figure.5.17}%
-\contentsline {figure}{\numberline {5.18}{\ignorespaces Distances during the test phase after reward change in the proposed aggregation method.}}{lxxxiv}{figure.5.18}%
-\contentsline {figure}{\numberline {5.19}{\ignorespaces Frobenius norm of the agents during the learning phase. The reward changes for the Leader after 600 s.}}{lxxxv}{figure.5.19}%
-\contentsline {figure}{\numberline {5.20}{\ignorespaces Communication times for agents and the Central Server (Leader). Red and blue dots show the times that agents and the Central Server have sent their model, respectively.}}{lxxxv}{figure.5.20}%
-\contentsline {figure}{\numberline {5.5}{\ignorespaces Distances during the test phase (\gls {RCSE} method)}}{lxxxviii}{figure.5.5}%
-\contentsline {figure}{\numberline {5.6}{\ignorespaces Agents' trajectory during the test phase (\gls {RCSE} method)}}{lxxxviii}{figure.5.6}%
-\contentsline {figure}{\numberline {5.7}{\ignorespaces Change in commanded distance during the test phase (\gls {RCSE} method)}}{lxxxviii}{figure.5.7}%
-\contentsline {figure}{\numberline {5.8}{\ignorespaces Distances during the test phase (FACL method)}}{lxxxviii}{figure.5.8}%
-\contentsline {figure}{\numberline {5.9}{\ignorespaces Agents' trajectory during the test phase (FACL method)}}{lxxxviii}{figure.5.9}%
-\contentsline {figure}{\numberline {5.10}{\ignorespaces Change in commanded distance during the test phase (FACL method)}}{lxxxviii}{figure.5.10}%
+\contentsline {figure}{\numberline {5.1}{\ignorespaces The central server (the leader) and the surrounding follower agents (white drones). The follower agents learn to fly in a formation to maintain the commanded distance. The Local models trained individually by follower agents are sent to the leader. The leader aggregates the models and sends back the global model for another round of training of the follower agents.}}{54}{figure.5.1}%
+\contentsline {figure}{\numberline {5.2}{\ignorespaces \gls {snn} structure with encoding and decoding layers. Each sub-layer consists of a fuzzy encoder and a Fuzzy-to-Spiking Converter, with the output layer receiving inputs from synaptic weights and a random action selector. During the training phase, the output layer receives input only from the random action selector, which then shifts to synaptic weight inputs after the training.}}{56}{figure.5.2}%
+\contentsline {figure}{\numberline {5.3}{\ignorespaces The fuzzy encoding principle for the input sub-layer.}}{58}{figure.5.3}%
+\contentsline {figure}{\numberline {5.4}{\ignorespaces The measured distances during the test for evaluating the performance and detecting the collisions.}}{71}{figure.5.4}%
+\contentsline {figure}{\numberline {5.5}{\ignorespaces Distances during the test phase (\gls {RCSE} method)}}{74}{figure.5.5}%
+\contentsline {figure}{\numberline {5.6}{\ignorespaces Agents' trajectory during the test phase (\gls {RCSE} method)}}{74}{figure.5.6}%
+\contentsline {figure}{\numberline {5.7}{\ignorespaces Change in commanded distance during the test phase (\gls {RCSE} method)}}{74}{figure.5.7}%
+\contentsline {figure}{\numberline {5.8}{\ignorespaces Distances during the test phase (FACL method)}}{74}{figure.5.8}%
+\contentsline {figure}{\numberline {5.9}{\ignorespaces Agents' trajectory during the test phase (FACL method)}}{74}{figure.5.9}%
+\contentsline {figure}{\numberline {5.10}{\ignorespaces Change in commanded distance during the test phase (FACL method)}}{74}{figure.5.10}%
+\contentsline {figure}{\numberline {5.11}{\ignorespaces Agents' path after reward change (test phase)}}{76}{figure.5.11}%
+\contentsline {figure}{\numberline {5.12}{\ignorespaces Distances after reward change (test phase)}}{76}{figure.5.12}%
+\contentsline {figure}{\numberline {5.13}{\ignorespaces Synaptic Weights before Reward change}}{77}{figure.5.13}%
+\contentsline {figure}{\numberline {5.14}{\ignorespaces Synaptic Weights after Reward change}}{77}{figure.5.14}%
+\contentsline {figure}{\numberline {5.15}{\ignorespaces Synaptic weights increase after reward change}}{78}{figure.5.15}%
+\contentsline {figure}{\numberline {5.16}{\ignorespaces Synaptic weights decrease after reward change}}{78}{figure.5.16}%
+\contentsline {figure}{\numberline {5.17}{\ignorespaces Distances during the test phase before reward change in the proposed aggregation method.}}{79}{figure.5.17}%
+\contentsline {figure}{\numberline {5.18}{\ignorespaces Distances during the test phase after reward change in the proposed aggregation method.}}{79}{figure.5.18}%
+\contentsline {figure}{\numberline {5.19}{\ignorespaces Frobenius norm of the agents during the learning phase. The reward changes for the Leader after 600 s.}}{80}{figure.5.19}%
+\contentsline {figure}{\numberline {5.20}{\ignorespaces Communication times for agents and the Central Server (Leader). Red and blue dots show the times that agents and the Central Server have sent their model, respectively.}}{81}{figure.5.20}%
 \addvspace {10\p@ }
