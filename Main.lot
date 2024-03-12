@@ -2,15 +2,15 @@
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {3.1}{\ignorespaces Gains used in PD and backstepping controllers}}{24}{}%
-\contentsline {table}{\numberline {3.2}{\ignorespaces Quadrotor specifications and state estimator constants}}{24}{}%
-\contentsline {table}{\numberline {3.3}{\ignorespaces True and estimated transition probabilities}}{27}{}%
+\contentsline {table}{\numberline {3.1}{\ignorespaces Gains used in PD and backstepping controllers}}{24}{table.3.1}%
+\contentsline {table}{\numberline {3.2}{\ignorespaces Quadrotor specifications and state estimator constants}}{24}{table.3.2}%
+\contentsline {table}{\numberline {3.3}{\ignorespaces True and estimated transition probabilities}}{27}{table.3.3}%
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {4.1}{\ignorespaces Parameter values for LIF neuron model \cite {Ch5_R1}}}{44}{}%
-\contentsline {table}{\numberline {4.2}{\ignorespaces Parameter values for \ac {stdp}}}{44}{}%
+\contentsline {table}{\numberline {4.1}{\ignorespaces Parameter values for LIF neuron model \cite {Ch5_R1}}}{45}{table.4.1}%
+\contentsline {table}{\numberline {4.2}{\ignorespaces Parameter values for \ac {stdp}}}{46}{table.4.2}%
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {5.2}{\ignorespaces Simulation Parameters}}{70}{}%
-\contentsline {table}{\numberline {5.1}{\ignorespaces Parameter values for \ac {lif} neuron model \cite {R1}}}{70}{}%
-\contentsline {table}{\numberline {5.3}{\ignorespaces Simulation Parameters for the FACL Algorithm}}{73}{}%
-\contentsline {table}{\numberline {5.4}{\ignorespaces Comparative Performance Analysis of the Proposed Aggregation Algorithm+\ac {RCSE}, \ac {RCSE}, and FACL}}{81}{}%
+\contentsline {table}{\numberline {5.2}{\ignorespaces Simulation Parameters}}{71}{table.5.2}%
+\contentsline {table}{\numberline {5.1}{\ignorespaces Parameter values for \ac {lif} neuron model \cite {R1}}}{71}{table.5.1}%
+\contentsline {table}{\numberline {5.3}{\ignorespaces Simulation Parameters for the FACL Algorithm}}{74}{table.5.3}%
+\contentsline {table}{\numberline {5.4}{\ignorespaces Comparative Performance Analysis of the Proposed Aggregation Algorithm+\ac {RCSE}, \ac {RCSE}, and FACL}}{82}{table.5.4}%
 \addvspace {10\p@ }

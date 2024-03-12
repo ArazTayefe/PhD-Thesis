@@ -2,7 +2,7 @@
 
 \section{Introduction}
 
-In this chapter, we perform a comparative analysis to examine how linear and nonlinear controllers impact quadrotor performance when operated via cellular or 5G networks. This simulation is part of the Ericsson 5G Lab's project in autonomous vehicle technology, encompassing both simulation and implementation of UAVs and UGVs navigating over a 5G network. The project is divided into two phases. The first phase focuses on studying the control mechanisms of autonomous vehicles, taking into account delay constraints. The second phase involves developing a practical testbed for evaluating the designed algorithms.
+In this chapter, we perform a comparative analysis to examine how linear and nonlinear controllers impact quadrotor performance when operated via cellular or 5G networks. This chapter is part of the Ericsson 5G Lab's project in autonomous vehicle technology, encompassing both simulation and implementation of UAVs and UGVs navigating over a 5G network. The project is divided into two phases. The first phase focuses on studying the control mechanisms of autonomous vehicles, taking into account delay constraints. The second phase involves developing a practical testbed for evaluating the designed algorithms.
 
 In this project, we consider a scenario where a single UAV (leader drone) is controlled over a 5G network by a user from a base station. This section outlines the challenges encountered and presents solution to address these challenges. Regarding the simulation aspect, we choose to run the controller at the Ground Control Station due to the following reasons:
 
@@ -479,3 +479,11 @@ Cellular networks are state-of-the-art communication tools for precise swarm con
 
 \section{Experimental setup}
 
+
+\section{Conclusion}
+	
+In this chapter, a comparative study was done to evaluate the performance of the linear PD and nonlinear backstepping controller in controlling the quadrotor through 5G or other cellular networks. Considering the channel behavior in producing the time delays, the delay estimator estimated the time delays using the Markov model. The estimated time delays were then used to estimate the quadrotor's correct position. The state estimator received the current control signal from the controller. It estimated the correct position using time delay estimation and the measured quadrotor position.
+
+The controllers' performance in three different scenarios was evaluated. Both controllers generated a smooth control signal when the delay was known. There were oscillations in the control signal when the delay was unknown, but the position of the quadrotor was estimated with a very low error. Results showed that increasing the change in delay negatively affects both controllers. Also, when delay values and their distributions changed, the oscillations in control signals increased.
+
+According to the results, there is not a significant difference in controllers' performance. However, large variations in time delay are a considerable problem in the backstepping controller.\\

@@ -1,3 +1,9 @@
 {
-    "scm.alwaysShowRepositories": true
+    "scm.alwaysShowRepositories": true,
+    "grammarly.selectors": [
+        {
+            "language": "latex",
+            "scheme": "file"
+        }
+    ]
 }

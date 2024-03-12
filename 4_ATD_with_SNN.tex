@@ -1,6 +1,8 @@
-\chapter{Modular Learning in SNNs for optimal Multi-Agent Decision-Making}
+\chapter{Modular Learning in SNNs for Optimal Multi-Agent Decision-Making}
  
-Artificial neural networks have grown in potential over the last decade. From Multi-Layer Perceptron (MLP), as the first generation, to Deep Neural Networks (DNN), as the second generation, they have been implemented in widespread applications to solve complex problems. However, as the networks become more complicated, they become more dependent on devices with high computational capabilities, like general-purpose Graphical Processing Units (GPUs).
+Moving from Chapter 3, where we looked at controlling one drone (the leader) using a 5G network, Chapter 4 takes us into \ac{snn}s and how they can be used to control drones (the followers). In Chapter 3, we carefully studied how well different types of controllers worked for quadrotor drones with cellular and 5G networks. This study showed us that the leader drone could be efficiently controlled remotely while satisfying control and communication constraints.
+
+Expanding on what we learned, this chapter looks at two main things: how well SNNs handle noise, which is important because drones operate in real-world conditions with lots of disturbances, and how they can handle complex scenarios like optimal decision-making. This detailed study shows us the potential of SNNs in managing complex behaviors of drones even when there are outside disturbances and their capability to separate the reward function for the neural network's different parts.
 
 The complex combination of neural structures in SNNs helps us implement complex learning systems. One good example of a complex situation is a differential game like the Active Target Defense (ATD) problem \cite{Ch5_ATD4}.
 
@@ -21,7 +23,7 @@ In this chapter, the problem is solved using reinforcement learning. It is consi
     \label{fig:my_label4}
 \end{figure}
 
-The \ac{stdp} algorithm is used to train two separate SNNs simultaneously that control the invader and defender. The target in this chapter moves in the environment, and the SNNs receive the LOS angles (e.g., the defender receives the LOS angle to both the invader and the target) and calculates the steering angle for the agent (Figure \ref{fig:my_label2}). In this figure, the $\phi_{I}^{T}$ represents the LOS angle to the target relative to the invader.
+The \ac{stdp} algorithm is used to train two separate SNNs simultaneously that control the invader and defender. The target in this chapter moves in the environment, and the SNNs receive the LOS angles (e.g., the defender receives the LOS angle to both the invader and the target) and calculate the steering angle for the agent (Figure \ref{fig:my_label2}). In this figure, the $\phi_{I}^{T}$ represents the LOS angle to the target relative to the invader.
 
 \begin{figure}
     \centering
@@ -40,7 +42,7 @@ In the \ac{snn}, the pre-synaptic neurons are input neurons, and post-synaptic n
     \dot C^{i-j} = -C^{i-j}/\tau_C + STDP^{i-j}(\tau)  \delta(t - t_{pre/post})
 \end{equation}
 
-\noindent where the $C^{i-j}$ is the eligibility trace for the synaptic connection between neurons $i$ and $j$, $\tau$ is the spike timing difference between the input and output spike times, $\tau_C$ is the time constant for the synaptic plasticity, $\delta$ is the Dirac function, $t_{pre/post}$ is the firing time of the pre or post-synaptic neuron, and $STDP(\tau)$ is a function of the firing time of the input and output neurons as follow,
+\noindent, where the $C^{i-j}$ is the eligibility trace for the synaptic connection between neurons $i$ and $j$, $\tau$, is the spike timing difference between the input and output spike times, $\tau_C$ is the time constant for the synaptic plasticity, $\delta$ is the Dirac function, $t_{pre/post}$ is the firing time of the pre or post-synaptic neuron, and $STDP(\tau)$ is a function of the firing time of the input and output neurons as follow,
 
 \begin{equation} \label{Eq.15}
     STDP^{i-j}(\tau) = \begin{cases}
@@ -68,7 +70,7 @@ The MSN normalizes the synaptic weights based on the cumulative input synaptic w
     \overrightarrow{W}^n(t) = \overrightarrow{W}^n(t-1) \left(\frac{{I}^{max}}{\Sigma_{\iota=1}^{N} W^\iota(t)}\right)
 \end{equation}
 
-\noindent where ${W}^n(t)$ is the vector consisting of synaptic weights that send input current to the $n^{th}$ output neuron, and $N$ is the total number of input synapses for each output neuron. Therefore, when \ac{stdp} increases a single synaptic weight, the MSN proportionally decreases the other synaptic weights for the $n^{th}$ neuron.
+\noindent where ${W}^n(t)$ is the vector consisting of synaptic weights that send input current to the $n^{th}$ output neuron, and $N$, is the total number of input synapses for each output neuron. Therefore, when \ac{stdp} increases a single synaptic weight, the MSN proportionally decreases the other synaptic weights for the $n^{th}$ neuron.
 
 The reward for the invader and defender is defined based on the projection of the velocities along the LOS direction. Figure \ref{fig:my_label5} shows the projected velocities for the invader and defender, where both agents measure the relative velocities from each other. It means that the invader receives a negative reward when it moves toward the defender and receives a positive reward when it moves toward the target. The defender receives a positive reward when it moves toward the target and invader. Since the velocities are constant, the reward value depends only on the headings that cause the change in relative velocities. Therefore, the LOS toward the other agents determines the reward value.
 
@@ -130,7 +132,7 @@ There are $q$ input neurons, and a membership function is assigned to each neuro
     \label{fig:my_label1}
 \end{figure}
 
- The acquired fuzzy membership values are converted to the spiking inputs for the neurons using Fuzzy to Spiking (F2S) conversion. If $FMV=0\;(t_{isi}=\infty)$, then the input to the desired neuron in the input layer is $I^{min}$, and if $FMV=1\;(t_{isi}=\Delta t, \Delta t$ is the sampling time), then the input is $I^{max}$. Therefore, the input current for the input neurons can be calculated using the following equation,
+ The acquired fuzzy membership values are converted to the spiking inputs for the neurons using fuzzy-to-spiking (F2S) conversion. If $FMV=0\;(t_{isi}=\infty)$, then the input to the desired neuron in the input layer is $I^{min}$, and if $FMV=1\;(t_{isi}=\Delta t, \Delta t$ is the sampling time), then the input is $I^{max}$. Therefore, the input current for the input neurons can be calculated using the following equation,
 
 \begin{equation*} \label{Eq.25}
     I_{\sigma} = \left(I^{max} - I^{min}\right)FMV_{\sigma} + I^{min}
@@ -194,7 +196,7 @@ There are $q$ input neurons, and a membership function is assigned to each neuro
         \end{algorithmic}
 \end{algorithm}
 
-The output of the \ac{snn} is the steering angle ($\theta_{s}$) for the agent. The output is calculated using the weighted average method. Each neuron in the output layer represents a specific steering angle. The number of spikes for each output neuron in $\tau_{s}$ millisecond represents how much it contributes to the output. The level of contribution  is considered 1 for an output neuron that fires at each step time, while it is considered 0 for the output neuron that has not fired. Levels of contributions are then multiplied by the angle that each output neuron represents. Finally, the summation of all the calculated terms is divided by the summation of all levels of contributions.
+The output of the \ac{snn} is the steering angle ($\theta_{s}$) for the agent. The output is calculated using the weighted average method. Each neuron in the output layer represents a specific steering angle. The number of spikes for each output neuron in $\tau_{s}$ millisecond represents how much it contributes to the output. The contribution level is considered 1 for an output neuron that fires at each step time, while it is considered 0 for the output neuron that has not fired. Levels of contributions are then multiplied by the angle that each output neuron represents. Finally, the summation of all the calculated terms is divided by the summation of all levels of contributions.
 
 The output consists of two terms. One term comes from the synaptic weights, and the other term is random noise for exploration. The output of the \ac{snn} can be shown as follows,
 
@@ -206,7 +208,7 @@ The output consists of two terms. One term comes from the synaptic weights, and 
 
 During training, the input State ($S^t$) is encoded into the network, and a random steering angle ($u_{rnd}$) is encoded as a random action using the F2S process into the output layer. These two encoding currents for the input and output layer make input and output neurons fire independently. The \ac{stdp} adapts the weights for the fired neurons. Since $\alpha$ is 0 during the training, the $I_{syn}$ does not affect the \ac{snn}'s output (Equation \ref{Eq.26}). 
 
-In the training process, the output neurons and input neurons are excited separately. The input neurons are fired based on the current State of the agent, whereas the steering angle of the agent is randomly assigned based on the random input to the output neurons, as shown in Figure \ref{fig:my_label9}. The training algorithm then evaluates the reward for that given random steering angle. If the reward is positive, then the weight associated with the input neurons to output neurons that fired for that State is strengthened, and if the reward is negative, then the weight for the input to output neurons in (\ref{Eq.15}) is weakened. Future research will include an inhibitory effect where the weights can become negative.
+In the training process, the output neurons and input neurons are excited separately. The input neurons are fired based on the agent's current state, whereas the agent's steering angle is randomly assigned based on the random input to the output neurons, as shown in Figure \ref{fig:my_label9}. The training algorithm then evaluates the reward for that given random steering angle. If the reward is positive, then the weight associated with the input neurons to output neurons that fired for that State is strengthened, and if the reward is negative, then the weight for the input to output neurons in (\ref{Eq.15}) is weakened. Future research will include an inhibitory effect where the weights can become negative.
 
 After training, the $\alpha$ changes to 1 and eliminates the effect of random output, and the \ac{snn}'s output is calculated based on the synaptic currents. Algorithm \ref{Algorithm4.1} shows the training process.
 
@@ -274,7 +276,7 @@ A numerical simulation is conducted to evaluate the \ac{snn}'s performance in so
     \label{fig:my_label11}
 \end{figure}
 
-After several simulations, the number of input neurons for invader and defender networks was set to 20. Both agents have 10 neurons in their output layer. The encoding resolution can be enhanced by increasing the number of neurons, although this results in a higher number of synaptic connections. To determine the optimal neuron number in the \ac{snn}, an optimization algorithm can be employed. Half of the input neurons for the invader are for the $\phi_{I}^{T}$, and the other half is for the $\phi_{I}^{D}$. Half of the defender's input neurons are for the $\phi_{D}^{T}$, and the other half is for the $\phi_{D}^{I}$. Since each network contains 20 input neurons, the input layer has 20 Gaussian membership functions.
+After several simulations, the number of input neurons for invader and defender networks was set to 20. Both agents have 10 neurons in their output layer. The encoding resolution can be enhanced by increasing the number of neurons, although this results in a higher number of synaptic connections. An optimization algorithm can be employed to determine the optimal neuron number in the \ac{snn}. Half of the input neurons for the invader are for the $\phi_{I}^{T}$, and the other half is for the $\phi_{I}^{D}$. Half of the defender's input neurons are for the $\phi_{D}^{T}$, and the other half is for the $\phi_{D}^{I}$. Since each network contains 20 input neurons, the input layer has 20 Gaussian membership functions.
 
 The output of the activation of each membership function is the input to a neuron associated with that specific membership function. There are 10 input neurons for the 10 membership functions related to each input. Furthermore, no more than 2 membership functions fire for any given input. Therefore, at most, only two neurons are excited and generate an impulse sequence for a given input.
 
