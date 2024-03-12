@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2021/W32TeX) (preloaded format=pdflatex 2021.12.18)  11 MAR 2024 21:56
+This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2021/W32TeX) (preloaded format=pdflatex 2021.12.18)  12 MAR 2024 11:38
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -823,7 +823,7 @@ Chapter 3.
 ]
 
 pdfTeX warning: pdflatex.exe (file ./Figures/ControlFramework.pdf): PDF inclusion: found PDF version <1.7>, but at most version <1.5> allowed
-<Figures/ControlFramework.pdf, id=644, 589.00049pt x 389.89665pt>
+<Figures/ControlFramework.pdf, id=649, 589.00049pt x 389.89665pt>
 File: Figures/ControlFramework.pdf Graphic file (type pdf)
 <use Figures/ControlFramework.pdf>
 Package pdftex.def Info: Figures/ControlFramework.pdf  used on input line 20.
@@ -831,7 +831,7 @@ Package pdftex.def Info: Figures/ControlFramework.pdf  used on input line 20.
 [14 <./Figures/ControlFramework.pdf>]
 
 pdfTeX warning: pdflatex.exe (file ./Figures/DroneModel.pdf): PDF inclusion: found PDF version <1.7>, but at most version <1.5> allowed
-<Figures/DroneModel.pdf, id=684, 284.62335pt x 185.0112pt>
+<Figures/DroneModel.pdf, id=689, 284.62335pt x 185.0112pt>
 File: Figures/DroneModel.pdf Graphic file (type pdf)
 <use Figures/DroneModel.pdf>
 Package pdftex.def Info: Figures/DroneModel.pdf  used on input line 32.
@@ -855,7 +855,7 @@ Package epstopdf Info: Source file: <Figures/RMSEPerfect.eps>
 (epstopdf)             Command: <repstopdf --outfile=Figures/RMSEPerfect-eps-converted-to.pdf Figures/RMSEPerfect.eps>
 (epstopdf)             \includegraphics on input line 385.
 Package epstopdf Info: Output file is already uptodate.
-<Figures/RMSEPerfect-eps-converted-to.pdf, id=817, 421.575pt x 316.18124pt>
+<Figures/RMSEPerfect-eps-converted-to.pdf, id=822, 421.575pt x 316.18124pt>
 File: Figures/RMSEPerfect-eps-converted-to.pdf Graphic file (type pdf)
 <use Figures/RMSEPerfect-eps-converted-to.pdf>
 Package pdftex.def Info: Figures/RMSEPerfect-eps-converted-to.pdf  used on input line 385.
@@ -869,7 +869,7 @@ Package epstopdf Info: Source file: <Figures/UPerfect.eps>
 (epstopdf)             Command: <repstopdf --outfile=Figures/UPerfect-eps-converted-to.pdf Figures/UPerfect.eps>
 (epstopdf)             \includegraphics on input line 393.
 Package epstopdf Info: Output file is already uptodate.
-<Figures/UPerfect-eps-converted-to.pdf, id=820, 421.575pt x 316.18124pt>
+<Figures/UPerfect-eps-converted-to.pdf, id=825, 421.575pt x 316.18124pt>
 File: Figures/UPerfect-eps-converted-to.pdf Graphic file (type pdf)
 <use Figures/UPerfect-eps-converted-to.pdf>
 Package pdftex.def Info: Figures/UPerfect-eps-converted-to.pdf  used on input line 393.
@@ -884,7 +884,7 @@ Package epstopdf Info: Source file: <Figures/RMSENormalLow.eps>
 (epstopdf)             Command: <repstopdf --outfile=Figures/RMSENormalLow-eps-converted-to.pdf Figures/RMSENormalLow.eps>
 (epstopdf)             \includegraphics on input line 422.
 Package epstopdf Info: Output file is already uptodate.
-<Figures/RMSENormalLow-eps-converted-to.pdf, id=843, 421.575pt x 316.18124pt>
+<Figures/RMSENormalLow-eps-converted-to.pdf, id=848, 421.575pt x 316.18124pt>
 File: Figures/RMSENormalLow-eps-converted-to.pdf Graphic file (type pdf)
 <use Figures/RMSENormalLow-eps-converted-to.pdf>
 Package pdftex.def Info: Figures/RMSENormalLow-eps-converted-to.pdf  used on input line 422.
@@ -899,7 +899,7 @@ Package epstopdf Info: Source file: <Figures/UNormalLow.eps>
 (epstopdf)             Command: <repstopdf --outfile=Figures/UNormalLow-eps-converted-to.pdf Figures/UNormalLow.eps>
 (epstopdf)             \includegraphics on input line 430.
 Package epstopdf Info: Output file is already uptodate.
-<Figures/UNormalLow-eps-converted-to.pdf, id=854, 421.575pt x 316.18124pt>
+<Figures/UNormalLow-eps-converted-to.pdf, id=859, 421.575pt x 316.18124pt>
 File: Figures/UNormalLow-eps-converted-to.pdf Graphic file (type pdf)
 <use Figures/UNormalLow-eps-converted-to.pdf>
 Package pdftex.def Info: Figures/UNormalLow-eps-converted-to.pdf  used on input line 430.
@@ -913,7 +913,7 @@ Package epstopdf Info: Source file: <Figures/RMSENormalHigh.eps>
 (epstopdf)             Command: <repstopdf --outfile=Figures/RMSENormalHigh-eps-converted-to.pdf Figures/RMSENormalHigh.eps>
 (epstopdf)             \includegraphics on input line 439.
 Package epstopdf Info: Output file is already uptodate.
-<Figures/RMSENormalHigh-eps-converted-to.pdf, id=857, 421.575pt x 316.18124pt>
+<Figures/RMSENormalHigh-eps-converted-to.pdf, id=862, 421.575pt x 316.18124pt>
 File: Figures/RMSENormalHigh-eps-converted-to.pdf Graphic file (type pdf)
 <use Figures/RMSENormalHigh-eps-converted-to.pdf>
 Package pdftex.def Info: Figures/RMSENormalHigh-eps-converted-to.pdf  used on input line 439.
@@ -928,7 +928,7 @@ Package epstopdf Info: Source file: <Figures/UNormalHigh.eps>
 (epstopdf)             Command: <repstopdf --outfile=Figures/UNormalHigh-eps-converted-to.pdf Figures/UNormalHigh.eps>
 (epstopdf)             \includegraphics on input line 447.
 Package epstopdf Info: Output file is already uptodate.
-<Figures/UNormalHigh-eps-converted-to.pdf, id=868, 421.575pt x 316.18124pt>
+<Figures/UNormalHigh-eps-converted-to.pdf, id=874, 421.575pt x 316.18124pt>
 File: Figures/UNormalHigh-eps-converted-to.pdf Graphic file (type pdf)
 <use Figures/UNormalHigh-eps-converted-to.pdf>
 Package pdftex.def Info: Figures/UNormalHigh-eps-converted-to.pdf  used on input line 447.
@@ -943,7 +943,7 @@ Package epstopdf Info: Source file: <Figures/RMSEDlyChng.eps>
 (epstopdf)             Command: <repstopdf --outfile=Figures/RMSEDlyChng-eps-converted-to.pdf Figures/RMSEDlyChng.eps>
 (epstopdf)             \includegraphics on input line 456.
 Package epstopdf Info: Output file is already uptodate.
-<Figures/RMSEDlyChng-eps-converted-to.pdf, id=880, 421.575pt x 316.18124pt>
+<Figures/RMSEDlyChng-eps-converted-to.pdf, id=885, 421.575pt x 316.18124pt>
 File: Figures/RMSEDlyChng-eps-converted-to.pdf Graphic file (type pdf)
 <use Figures/RMSEDlyChng-eps-converted-to.pdf>
 Package pdftex.def Info: Figures/RMSEDlyChng-eps-converted-to.pdf  used on input line 456.
@@ -958,7 +958,7 @@ Package epstopdf Info: Source file: <Figures/UDelayChange.eps>
 (epstopdf)             Command: <repstopdf --outfile=Figures/UDelayChange-eps-converted-to.pdf Figures/UDelayChange.eps>
 (epstopdf)             \includegraphics on input line 464.
 Package epstopdf Info: Output file is already uptodate.
-<Figures/UDelayChange-eps-converted-to.pdf, id=892, 421.575pt x 316.18124pt>
+<Figures/UDelayChange-eps-converted-to.pdf, id=897, 421.575pt x 316.18124pt>
 File: Figures/UDelayChange-eps-converted-to.pdf Graphic file (type pdf)
 <use Figures/UDelayChange-eps-converted-to.pdf>
 Package pdftex.def Info: Figures/UDelayChange-eps-converted-to.pdf  used on input line 464.
@@ -976,7 +976,7 @@ Chapter 4.
 ]
 
 pdfTeX warning: pdflatex.exe (file ./Figures/1.pdf): PDF inclusion: found PDF version <1.7>, but at most version <1.5> allowed
-<Figures/1.pdf, id=927, 322.25294pt x 238.4368pt>
+<Figures/1.pdf, id=932, 322.25294pt x 238.4368pt>
 File: Figures/1.pdf Graphic file (type pdf)
 <use Figures/1.pdf>
 Package pdftex.def Info: Figures/1.pdf  used on input line 19.
@@ -984,7 +984,7 @@ Package pdftex.def Info: Figures/1.pdf  used on input line 19.
 
 
 pdfTeX warning: pdflatex.exe (file ./Figures/2.pdf): PDF inclusion: found PDF version <1.7>, but at most version <1.5> allowed
-<Figures/2.pdf, id=930, 440.40634pt x 335.7915pt>
+<Figures/2.pdf, id=935, 440.40634pt x 335.7915pt>
 File: Figures/2.pdf Graphic file (type pdf)
 <use Figures/2.pdf>
 Package pdftex.def Info: Figures/2.pdf  used on input line 28.
@@ -995,7 +995,7 @@ pdfTeX warning: pdflatex.exe (file ./Figures/2.pdf): PDF inclusion: multiple pdf
 >] [37]
 
 pdfTeX warning: pdflatex.exe (file ./Figures/5.pdf): PDF inclusion: found PDF version <1.7>, but at most version <1.5> allowed
-<Figures/5.pdf, id=1010, 366.85556pt x 183.68323pt>
+<Figures/5.pdf, id=1015, 366.85556pt x 183.68323pt>
 File: Figures/5.pdf Graphic file (type pdf)
 <use Figures/5.pdf>
 Package pdftex.def Info: Figures/5.pdf  used on input line 77.
@@ -1003,7 +1003,7 @@ Package pdftex.def Info: Figures/5.pdf  used on input line 77.
 [38] [39 <./Figures/5.pdf>]
 
 pdfTeX warning: pdflatex.exe (file ./Figures/4.pdf): PDF inclusion: found PDF version <1.7>, but at most version <1.5> allowed
-<Figures/4.pdf, id=1044, 406.03694pt x 343.88475pt>
+<Figures/4.pdf, id=1049, 406.03694pt x 343.88475pt>
 File: Figures/4.pdf Graphic file (type pdf)
 <use Figures/4.pdf>
 Package pdftex.def Info: Figures/4.pdf  used on input line 128.
@@ -1011,12 +1011,12 @@ Package pdftex.def Info: Figures/4.pdf  used on input line 128.
 [40] [41 <./Figures/4.pdf>] [42] [43]
 
 pdfTeX warning: pdflatex.exe (file ./Figures/During training.pdf): PDF inclusion: found PDF version <1.7>, but at most version <1.5> allowed
-<Figures/During training.pdf, id=1153, 373.15411pt x 301.125pt>
+<Figures/During training.pdf, id=1158, 373.15411pt x 301.125pt>
 File: Figures/During training.pdf Graphic file (type pdf)
 <use Figures/During training.pdf>
 Package pdftex.def Info: Figures/During training.pdf  used on input line 265.
 (pdftex.def)             Requested size: 373.1532pt x 301.12425pt.
-<Figures/Synaptic weights.pdf, id=1155, 376.06497pt x 302.12875pt>
+<Figures/Synaptic weights.pdf, id=1160, 376.06497pt x 302.12875pt>
 File: Figures/Synaptic weights.pdf Graphic file (type pdf)
 <use Figures/Synaptic weights.pdf>
 Package pdftex.def Info: Figures/Synaptic weights.pdf  used on input line 272.
@@ -1024,7 +1024,7 @@ Package pdftex.def Info: Figures/Synaptic weights.pdf  used on input line 272.
 [44] [45 <./Figures/During training.pdf>] [46 <./Figures/Synaptic weights.pdf>]
 
 pdfTeX warning: pdflatex.exe (file ./Figures/C.pdf): PDF inclusion: found PDF version <1.7>, but at most version <1.5> allowed
-<Figures/C.pdf, id=1210, 530.0934pt x 228.16542pt>
+<Figures/C.pdf, id=1215, 530.0934pt x 228.16542pt>
 File: Figures/C.pdf Graphic file (type pdf)
 <use Figures/C.pdf>
 Package pdftex.def Info: Figures/C.pdf  used on input line 287.
@@ -1035,7 +1035,7 @@ Overfull \hbox (7.32463pt too wide) in paragraph at lines 287--288
  []
 
 [47]
-<Figures/R and C.pdf, id=1218, 399.31183pt x 291.0875pt>
+<Figures/R and C.pdf, id=1223, 399.31183pt x 291.0875pt>
 File: Figures/R and C.pdf Graphic file (type pdf)
 <use Figures/R and C.pdf>
 Package pdftex.def Info: Figures/R and C.pdf  used on input line 295.
@@ -1043,7 +1043,7 @@ Package pdftex.def Info: Figures/R and C.pdf  used on input line 295.
  [48 <./Figures/C.pdf> <./Figures/R and C.pdf>]
 
 pdfTeX warning: pdflatex.exe (file ./Figures/After learning.pdf): PDF inclusion: found PDF version <1.7>, but at most version <1.5> allowed
-<Figures/After learning.pdf, id=1296, 372.95335pt x 299.1175pt>
+<Figures/After learning.pdf, id=1301, 372.95335pt x 299.1175pt>
 File: Figures/After learning.pdf Graphic file (type pdf)
 <use Figures/After learning.pdf>
 Package pdftex.def Info: Figures/After learning.pdf  used on input line 307.
@@ -1051,7 +1051,7 @@ Package pdftex.def Info: Figures/After learning.pdf  used on input line 307.
 [49 <./Figures/After learning.pdf>]
 
 pdfTeX warning: pdflatex.exe (file ./Figures/Noise effect.pdf): PDF inclusion: found PDF version <1.7>, but at most version <1.5> allowed
-<Figures/Noise effect.pdf, id=1326, 373.02362pt x 297.8327pt>
+<Figures/Noise effect.pdf, id=1331, 373.02362pt x 297.8327pt>
 File: Figures/Noise effect.pdf Graphic file (type pdf)
 <use Figures/Noise effect.pdf>
 Package pdftex.def Info: Figures/Noise effect.pdf  used on input line 325.
@@ -1067,7 +1067,7 @@ Chapter 5.
 
 
 pdfTeX warning: pdflatex.exe (file ./Figures/Consensus Flying - FL.pdf): PDF inclusion: found PDF version <1.7>, but at most version <1.5> allowed
-<Figures/Consensus Flying - FL.pdf, id=1357, 813.2784pt x 480.79625pt>
+<Figures/Consensus Flying - FL.pdf, id=1362, 813.2784pt x 480.79625pt>
 File: Figures/Consensus Flying - FL.pdf Graphic file (type pdf)
 <use Figures/Consensus Flying - FL.pdf>
 Package pdftex.def Info: Figures/Consensus Flying - FL.pdf  used on input line 11.
@@ -1080,7 +1080,7 @@ Package pdftex.def Info: Figures/Consensus Flying - FL.pdf  used on input line 1
 ] [54 <./Figures/Consensus Flying - FL.pdf>]
 
 pdfTeX warning: pdflatex.exe (file ./Figures/Network Structure.pdf): PDF inclusion: found PDF version <1.7>, but at most version <1.5> allowed
-<Figures/Network Structure.pdf, id=1401, 440.87311pt x 431.75905pt>
+<Figures/Network Structure.pdf, id=1407, 440.87311pt x 431.75905pt>
 File: Figures/Network Structure.pdf Graphic file (type pdf)
 <use Figures/Network Structure.pdf>
 Package pdftex.def Info: Figures/Network Structure.pdf  used on input line 34.
@@ -1088,7 +1088,7 @@ Package pdftex.def Info: Figures/Network Structure.pdf  used on input line 34.
 [55] [56 <./Figures/Network Structure.pdf>]
 
 pdfTeX warning: pdflatex.exe (file ./Figures/Encoder.pdf): PDF inclusion: found PDF version <1.7>, but at most version <1.5> allowed
-<Figures/Encoder.pdf, id=1434, 215.24416pt x 329.43076pt>
+<Figures/Encoder.pdf, id=1439, 215.24416pt x 329.43076pt>
 File: Figures/Encoder.pdf Graphic file (type pdf)
 <use Figures/Encoder.pdf>
 Package pdftex.def Info: Figures/Encoder.pdf  used on input line 61.
@@ -1105,38 +1105,38 @@ Overfull \hbox (38.34016pt too wide) detected at line 236
 [67] [68] [69] [70]
 
 pdfTeX warning: pdflatex.exe (file ./Figures/Metrics.pdf): PDF inclusion: found PDF version <1.7>, but at most version <1.5> allowed
-<Figures/Metrics.pdf, id=1604, 265.89337pt x 191.21437pt>
+<Figures/Metrics.pdf, id=1609, 265.89337pt x 191.21437pt>
 File: Figures/Metrics.pdf Graphic file (type pdf)
 <use Figures/Metrics.pdf>
 Package pdftex.def Info: Figures/Metrics.pdf  used on input line 335.
 (pdftex.def)             Requested size: 234.8775pt x 168.90813pt.
 [71 <./Figures/Metrics.pdf>] [72]
-<Figures/Distances - BRC.pdf, id=1683, 363.87944pt x 293.29576pt>
+<Figures/Distances - BRC.pdf, id=1688, 363.87944pt x 293.29576pt>
 File: Figures/Distances - BRC.pdf Graphic file (type pdf)
 <use Figures/Distances - BRC.pdf>
 Package pdftex.def Info: Figures/Distances - BRC.pdf  used on input line 411.
 (pdftex.def)             Requested size: 225.4804pt x 181.74303pt.
-<Figures/Environment - BRC.pdf, id=1686, 363.2772pt x 294.8616pt>
+<Figures/Environment - BRC.pdf, id=1691, 363.2772pt x 294.8616pt>
 File: Figures/Environment - BRC.pdf Graphic file (type pdf)
 <use Figures/Environment - BRC.pdf>
 Package pdftex.def Info: Figures/Environment - BRC.pdf  used on input line 415.
 (pdftex.def)             Requested size: 225.4804pt x 183.01926pt.
-<Figures/Distances - R cmd Change.pdf, id=1689, 364.72258pt x 294.37979pt>
+<Figures/Distances - R cmd Change.pdf, id=1694, 364.72258pt x 294.37979pt>
 File: Figures/Distances - R cmd Change.pdf Graphic file (type pdf)
 <use Figures/Distances - R cmd Change.pdf>
 Package pdftex.def Info: Figures/Distances - R cmd Change.pdf  used on input line 419.
 (pdftex.def)             Requested size: 225.4804pt x 181.99251pt.
-<Figures/FACL - R_cmd Follow.pdf, id=1692, 367.25206pt x 294.50024pt>
+<Figures/FACL - R_cmd Follow.pdf, id=1697, 367.25206pt x 294.50024pt>
 File: Figures/FACL - R_cmd Follow.pdf Graphic file (type pdf)
 <use Figures/FACL - R_cmd Follow.pdf>
 Package pdftex.def Info: Figures/FACL - R_cmd Follow.pdf  used on input line 425.
 (pdftex.def)             Requested size: 225.4804pt x 180.81323pt.
-<Figures/FACL - Environment.pdf, id=1693, 364.9635pt x 293.41621pt>
+<Figures/FACL - Environment.pdf, id=1698, 364.9635pt x 293.41621pt>
 File: Figures/FACL - Environment.pdf Graphic file (type pdf)
 <use Figures/FACL - Environment.pdf>
 Package pdftex.def Info: Figures/FACL - Environment.pdf  used on input line 429.
 (pdftex.def)             Requested size: 225.4804pt x 181.28041pt.
-<Figures/FACL - R_cmd Changes.pdf, id=1694, 363.99991pt x 293.41621pt>
+<Figures/FACL - R_cmd Changes.pdf, id=1699, 363.99991pt x 293.41621pt>
 File: Figures/FACL - R_cmd Changes.pdf Graphic file (type pdf)
 <use Figures/FACL - R_cmd Changes.pdf>
 Package pdftex.def Info: Figures/FACL - R_cmd Changes.pdf  used on input line 433.
@@ -1145,7 +1145,7 @@ Package pdftex.def Info: Figures/FACL - R_cmd Changes.pdf  used on input line 43
 Overfull \vbox (117.82478pt too high) has occurred while \output is active []
 
  [74 <./Figures/Distances - BRC.pdf> <./Figures/Environment - BRC.pdf> <./Figures/Distances - R cmd Change.pdf> <./Figures/FACL - R_cmd Follow.pdf> <./Figures/FACL - Environment.pdf> <./Figures/FACL - R_cmd Changes.pdf>] [75]
-<Figures/Environment - ARC.pdf, id=1833, 363.99991pt x 292.9344pt>
+<Figures/Environment - ARC.pdf, id=1838, 363.99991pt x 292.9344pt>
 File: Figures/Environment - ARC.pdf Graphic file (type pdf)
 <use Figures/Environment - ARC.pdf>
 Package pdftex.def Info: Figures/Environment - ARC.pdf  used on input line 460.
@@ -1155,50 +1155,50 @@ Underfull \hbox (badness 1142) in paragraph at lines 461--461
 []\OT1/cmr/m/n/12 Figure 5.11: []Agents' path af-ter re-ward
  []
 
-<Figures/Distances - ARC.pdf, id=1834, 357.97742pt x 294.37979pt>
+<Figures/Distances - ARC.pdf, id=1839, 357.97742pt x 294.37979pt>
 File: Figures/Distances - ARC.pdf Graphic file (type pdf)
 <use Figures/Distances - ARC.pdf>
 Package pdftex.def Info: Figures/Distances - ARC.pdf  used on input line 466.
 (pdftex.def)             Requested size: 225.4804pt x 185.4243pt.
 [76 <./Figures/Environment - ARC.pdf> <./Figures/Distances - ARC.pdf>]
-<Figures/Synaptic Weights - BRC.pdf, id=1891, 366.89069pt x 274.626pt>
+<Figures/Synaptic Weights - BRC.pdf, id=1896, 366.89069pt x 274.626pt>
 File: Figures/Synaptic Weights - BRC.pdf Graphic file (type pdf)
 <use Figures/Synaptic Weights - BRC.pdf>
 Package pdftex.def Info: Figures/Synaptic Weights - BRC.pdf  used on input line 480.
 (pdftex.def)             Requested size: 225.4804pt x 168.78293pt.
-<Figures/Synaptic Weights - ARC.pdf, id=1892, 367.3725pt x 273.1806pt>
+<Figures/Synaptic Weights - ARC.pdf, id=1897, 367.3725pt x 273.1806pt>
 File: Figures/Synaptic Weights - ARC.pdf Graphic file (type pdf)
 <use Figures/Synaptic Weights - ARC.pdf>
 Package pdftex.def Info: Figures/Synaptic Weights - ARC.pdf  used on input line 486.
 (pdftex.def)             Requested size: 225.4804pt x 167.67368pt.
-<Figures/RLST - Weight Increase.pdf, id=1893, 370.74509pt x 293.898pt>
+<Figures/RLST - Weight Increase.pdf, id=1898, 370.74509pt x 293.898pt>
 File: Figures/RLST - Weight Increase.pdf Graphic file (type pdf)
 <use Figures/RLST - Weight Increase.pdf>
 Package pdftex.def Info: Figures/RLST - Weight Increase.pdf  used on input line 495.
 (pdftex.def)             Requested size: 225.4804pt x 178.74385pt.
-<Figures/RLST - Weight Decrease.pdf, id=1894, 371.2269pt x 292.45259pt>
+<Figures/RLST - Weight Decrease.pdf, id=1899, 371.2269pt x 292.45259pt>
 File: Figures/RLST - Weight Decrease.pdf Graphic file (type pdf)
 <use Figures/RLST - Weight Decrease.pdf>
 Package pdftex.def Info: Figures/RLST - Weight Decrease.pdf  used on input line 501.
 (pdftex.def)             Requested size: 225.4804pt x 177.63274pt.
  [77 <./Figures/Synaptic Weights - BRC.pdf> <./Figures/Synaptic Weights - ARC.pdf>] [78 <./Figures/RLST - Weight Increase.pdf> <./Figures/RLST - Weight Decrease.pdf>]
-<Figures/Distances - BRC - DAI.pdf, id=1960, 366.36874pt x 300.62312pt>
+<Figures/Distances - BRC - DAI.pdf, id=1965, 366.36874pt x 300.62312pt>
 File: Figures/Distances - BRC - DAI.pdf Graphic file (type pdf)
 <use Figures/Distances - BRC - DAI.pdf>
 Package pdftex.def Info: Figures/Distances - BRC - DAI.pdf  used on input line 520.
 (pdftex.def)             Requested size: 225.4804pt x 185.01743pt.
-<Figures/Distances - ARC - DAI.pdf, id=1961, 361.30984pt x 292.09125pt>
+<Figures/Distances - ARC - DAI.pdf, id=1966, 361.30984pt x 292.09125pt>
 File: Figures/Distances - ARC - DAI.pdf Graphic file (type pdf)
 <use Figures/Distances - ARC - DAI.pdf>
 Package pdftex.def Info: Figures/Distances - ARC - DAI.pdf  used on input line 526.
 (pdftex.def)             Requested size: 225.4804pt x 182.28915pt.
  [79 <./Figures/Distances - BRC - DAI.pdf> <./Figures/Distances - ARC - DAI.pdf>]
-<Figures/Norm.pdf, id=1999, 367.3725pt x 298.23419pt>
+<Figures/Norm.pdf, id=2004, 367.3725pt x 298.23419pt>
 File: Figures/Norm.pdf Graphic file (type pdf)
 <use Figures/Norm.pdf>
 Package pdftex.def Info: Figures/Norm.pdf  used on input line 536.
 (pdftex.def)             Requested size: 275.52869pt x 223.6751pt.
-<Figures/Communication Log.pdf, id=2000, 403.86884pt x 303.63437pt>
+<Figures/Communication Log.pdf, id=2005, 403.86884pt x 303.63437pt>
 File: Figures/Communication Log.pdf Graphic file (type pdf)
 <use Figures/Communication Log.pdf>
 Package pdftex.def Info: Figures/Communication Log.pdf  used on input line 543.
@@ -1237,13 +1237,13 @@ This document will not have a glossary.
 LaTeX Warning: There were undefined references.
 
 Package rerunfilecheck Info: File `Main.out' has not changed.
-(rerunfilecheck)             Checksum: C29C06E2C35AC70E77113910C5CEB87F;6613.
+(rerunfilecheck)             Checksum: 8A360263FC58B70754F9ED97DF1CA582;6994.
  ) 
 Here is how much of TeX's memory you used:
- 19836 strings out of 478353
- 325631 string characters out of 5852100
+ 19838 strings out of 478353
+ 325655 string characters out of 5852100
  771987 words of memory out of 5000000
- 37088 multiletter control sequences out of 15000+600000
+ 37089 multiletter control sequences out of 15000+600000
  417727 words of font info for 78 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  91i,13n,91p,1440b,551s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -1260,10 +1260,10 @@ pdfTeX warning (dest): name{glo:RCSE} has been referenced but does not exist, re
 pdfTeX warning (dest): name{glo:snn} has been referenced but does not exist, replaced by a fixed one
 
 {c:/texlive/2021/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc}<c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx8.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmex8.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmib10.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsl12.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb>
-Output written on Main.pdf (103 pages, 8744067 bytes).
+Output written on Main.pdf (103 pages, 8744418 bytes).
 PDF statistics:
- 2299 PDF objects out of 2487 (max. 8388607)
- 1955 compressed objects within 20 object streams
- 388 named destinations out of 1000 (max. 500000)
- 457 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 2304 PDF objects out of 2487 (max. 8388607)
+ 1960 compressed objects within 20 object streams
+ 389 named destinations out of 1000 (max. 500000)
+ 465 words of extra memory for PDF output out of 10000 (max. 10000000)
 
