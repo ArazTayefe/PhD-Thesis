@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2021/W32TeX) (preloaded format=pdflatex 2021.12.18)  12 MAR 2024 14:16
+This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2021/W32TeX) (preloaded format=pdflatex 2021.12.18)  12 MAR 2024 14:22
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -448,37 +448,44 @@ Loading module `pdfsupport' ...
 Loading module `patch' ...
 Loading module `definitions' ...
 Loading module `upgrade' ...
+) (./acronym.tex
+\g__acro_snn_int=\count343
+\g__acro_fl_int=\count344
+\g__acro_lif_int=\count345
+\g__acro_stdp_int=\count346
+\g__acro_RCSE_int=\count347
+\g__acro_facl_int=\count348
 )
-Package translations Info: No language package found. I am going to use `english' as default language. on input line 52.
- (./Main.aux)
+Package translations Info: No language package found. I am going to use `english' as default language. on input line 53.
+ (./Main.aux (./title_page.aux) (./0_Abstract.aux) (./1_Introduction.aux) (./2_Literature_Review.aux) (./3_UAV_control_over_5G.aux) (./4_ATD_with_SNN.aux) (./5_FL_with_SNN.aux) (./6_Future_Work.aux) (./Main.acr))
 \openout1 = `Main.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 52.
-LaTeX Font Info:    ... okay on input line 52.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 52.
-LaTeX Font Info:    ... okay on input line 52.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 52.
-LaTeX Font Info:    ... okay on input line 52.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 52.
-LaTeX Font Info:    ... okay on input line 52.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 52.
-LaTeX Font Info:    ... okay on input line 52.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 52.
-LaTeX Font Info:    ... okay on input line 52.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 52.
-LaTeX Font Info:    ... okay on input line 52.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 53.
+LaTeX Font Info:    ... okay on input line 53.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 53.
+LaTeX Font Info:    ... okay on input line 53.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 53.
+LaTeX Font Info:    ... okay on input line 53.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 53.
+LaTeX Font Info:    ... okay on input line 53.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 53.
+LaTeX Font Info:    ... okay on input line 53.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 53.
+LaTeX Font Info:    ... okay on input line 53.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 53.
+LaTeX Font Info:    ... okay on input line 53.
  (c:/texlive/2021/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count343
+\scratchcounter=\count349
 \scratchdimen=\dimen262
 \scratchbox=\box64
-\nofMPsegments=\count344
-\nofMParguments=\count345
+\nofMPsegments=\count350
+\nofMParguments=\count351
 \everyMPshowfont=\toks35
-\MPscratchCnt=\count346
+\MPscratchCnt=\count352
 \MPscratchDim=\dimen263
-\MPnumerator=\count347
-\makeMPintoPDFobject=\count348
+\MPnumerator=\count353
+\makeMPintoPDFobject=\count354
 \everyMPtoPDFconversion=\toks36
 ) (c:/texlive/2021/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.sty
 Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
@@ -534,7 +541,7 @@ LaTeX hooks Warning: Generic hook
 (c:/texlive/2021/texmf-dist/tex/latex/translations/translations-basic-dictionary-english.trsl
 File: translations-basic-dictionary-english.trsl (english translation file `translations-basic-dictionary')
 )
-Package translations Info: loading dictionary `translations-basic-dictionary' for `english'. on input line 52.
+Package translations Info: loading dictionary `translations-basic-dictionary' for `english'. on input line 53.
 \openout2 = `title_page.aux'.
 
  (./title_page.tex [1
@@ -549,252 +556,482 @@ Package translations Info: loading dictionary `translations-basic-dictionary' fo
 
 
 
-]
-No file Main.toc.
+] (./Main.toc
+LaTeX Font Info:    Trying to load font information for U+msa on input line 3.
+ (c:/texlive/2021/texmf-dist/tex/latex/amsfonts/umsa.fd
+File: umsa.fd 2013/01/14 v3.01 AMS symbols A
+)
+LaTeX Font Info:    Trying to load font information for U+msb on input line 3.
+ (c:/texlive/2021/texmf-dist/tex/latex/amsfonts/umsb.fd
+File: umsb.fd 2013/01/14 v3.01 AMS symbols B
+) [1
+
+
+
+])
 \tf@toc=\write5
 \openout5 = `Main.toc'.
 
-[1
+ [2] (./Main.lof [3
 
-
-
-]
-No file Main.lof.
+] [4])
 \tf@lof=\write6
 \openout6 = `Main.lof'.
 
-[2
+ [5] (./Main.lot
+Overfull \hbox (36.6787pt too wide) in paragraph at lines 15--15
+ [][] []\OT1/cmr/m/n/12 Comparative Per-for-mance Anal-y-sis of the Pro-posed Ag-gre-ga-tion Algorithm+Reward- 
+ []
 
-]
-No file Main.lot.
+)
 \tf@lot=\write7
 \openout7 = `Main.lot'.
 
-[3
+ [6
 
 ]
 \openout2 = `1_Introduction.aux'.
 
  (./1_Introduction.tex
 Chapter 1.
-
-LaTeX Warning: Citation `Ch5_NM1' on page 1 undefined on input line 7.
-
-LaTeX Font Info:    Trying to load font information for U+msa on input line 9.
-(c:/texlive/2021/texmf-dist/tex/latex/amsfonts/umsa.fd
-File: umsa.fd 2013/01/14 v3.01 AMS symbols A
-)
-LaTeX Font Info:    Trying to load font information for U+msb on input line 9.
- (c:/texlive/2021/texmf-dist/tex/latex/amsfonts/umsb.fd
-File: umsb.fd 2013/01/14 v3.01 AMS symbols B
-)
-
-LaTeX Warning: Citation `Ch5_NM2' on page 1 undefined on input line 15.
-
 [1
 
 
 
-]
-
-LaTeX Warning: Reference `Eq.1' on page 2 undefined on input line 21.
-
-
-LaTeX Warning: Reference `Eq.7' on page 2 undefined on input line 29.
-
-
-LaTeX Warning: Reference `Eq.7' on page 2 undefined on input line 43.
-
-
-LaTeX Warning: Reference `Eq.10' on page 2 undefined on input line 49.
-
-[2]
-
-LaTeX Warning: Reference `Eq.9' on page 3 undefined on input line 67.
-
-
-LaTeX Warning: Reference `Eq.13' on page 3 undefined on input line 67.
-
-) [3]
+] [2]) [3]
 \openout2 = `2_Literature_Review.aux'.
 
  (./2_Literature_Review.tex
 Chapter 2.
-
-LaTeX Warning: Citation `Ch4_li2018uav' on page 4 undefined on input line 3.
-
-
-LaTeX Warning: Citation `Ch4_I6' on page 4 undefined on input line 3.
-
-
-LaTeX Warning: Citation `Ch4_I3' on page 4 undefined on input line 5.
-
-
-LaTeX Warning: Citation `Ch4_I4' on page 4 undefined on input line 5.
-
-
-LaTeX Warning: Citation `Ch4_I8' on page 4 undefined on input line 5.
-
-
-LaTeX Warning: Citation `Ch4_I9' on page 4 undefined on input line 7.
-
-
-LaTeX Warning: Citation `Ch4_I10' on page 4 undefined on input line 7.
-
-
-LaTeX Warning: Citation `Ch4_I13' on page 4 undefined on input line 9.
-
-
-LaTeX Warning: Citation `Ch4_I14' on page 4 undefined on input line 9.
-
-
-LaTeX Warning: Citation `Ch4_I12' on page 4 undefined on input line 9.
-
-
-LaTeX Warning: Citation `Ch4_I16' on page 4 undefined on input line 11.
-
-
-LaTeX Warning: Citation `Ch4_I17' on page 4 undefined on input line 11.
-
 [4
 
 
 
 
+] [5] [6] [7] [8] [9] [10]) [11] [12]
+\openout2 = `3_UAV_control_over_5G.aux'.
+
+ (./3_UAV_control_over_5G.tex
+Chapter 3.
+[13
+
+
+
+
 ]
 
-LaTeX Warning: Citation `Ch4_guldenring2020reliable' on page 5 undefined on input line 13.
+pdfTeX warning: pdflatex.exe (file ./Figures/ControlFramework.pdf): PDF inclusion: found PDF version <1.7>, but at most version <1.5> allowed
+<Figures/ControlFramework.pdf, id=80, 589.00049pt x 389.89665pt>
+File: Figures/ControlFramework.pdf Graphic file (type pdf)
+<use Figures/ControlFramework.pdf>
+Package pdftex.def Info: Figures/ControlFramework.pdf  used on input line 20.
+(pdftex.def)             Requested size: 294.49951pt x 194.94785pt.
+[14 <./Figures/ControlFramework.pdf>]
+
+pdfTeX warning: pdflatex.exe (file ./Figures/DroneModel.pdf): PDF inclusion: found PDF version <1.7>, but at most version <1.5> allowed
+<Figures/DroneModel.pdf, id=118, 284.62335pt x 185.0112pt>
+File: Figures/DroneModel.pdf Graphic file (type pdf)
+<use Figures/DroneModel.pdf>
+Package pdftex.def Info: Figures/DroneModel.pdf  used on input line 32.
+(pdftex.def)             Requested size: 284.62265pt x 185.01074pt.
+[15 <./Figures/DroneModel.pdf>] [16] [17] [18] [19] [20] [21] [22] [23]
+LaTeX Font Info:    Trying to load font information for OMS+cmr on input line 369.
+ (c:/texlive/2021/texmf-dist/tex/latex/base/omscmr.fd
+File: omscmr.fd 2019/12/16 v2.5j Standard LaTeX font definitions
+)
+LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <12> not available
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 369.
+ [24]
+Package epstopdf Info: Source file: <Figures/RMSEPerfect.eps>
+(epstopdf)                    date: 2024-03-07 21:36:51
+(epstopdf)                    size: 571141 bytes
+(epstopdf)             Output file: <Figures/RMSEPerfect-eps-converted-to.pdf>
+(epstopdf)                    date: 2024-03-07 21:37:21
+(epstopdf)                    size: 128138 bytes
+(epstopdf)             Command: <repstopdf --outfile=Figures/RMSEPerfect-eps-converted-to.pdf Figures/RMSEPerfect.eps>
+(epstopdf)             \includegraphics on input line 384.
+Package epstopdf Info: Output file is already uptodate.
+<Figures/RMSEPerfect-eps-converted-to.pdf, id=181, 421.575pt x 316.18124pt>
+File: Figures/RMSEPerfect-eps-converted-to.pdf Graphic file (type pdf)
+<use Figures/RMSEPerfect-eps-converted-to.pdf>
+Package pdftex.def Info: Figures/RMSEPerfect-eps-converted-to.pdf  used on input line 384.
+(pdftex.def)             Requested size: 421.57396pt x 316.18047pt.
+ [25 <./Figures/RMSEPerfect-eps-converted-to.pdf>]
+Package epstopdf Info: Source file: <Figures/UPerfect.eps>
+(epstopdf)                    date: 2024-03-07 21:36:50
+(epstopdf)                    size: 1372749 bytes
+(epstopdf)             Output file: <Figures/UPerfect-eps-converted-to.pdf>
+(epstopdf)                    date: 2024-03-07 21:37:23
+(epstopdf)                    size: 295585 bytes
+(epstopdf)             Command: <repstopdf --outfile=Figures/UPerfect-eps-converted-to.pdf Figures/UPerfect.eps>
+(epstopdf)             \includegraphics on input line 392.
+Package epstopdf Info: Output file is already uptodate.
+<Figures/UPerfect-eps-converted-to.pdf, id=190, 421.575pt x 316.18124pt>
+File: Figures/UPerfect-eps-converted-to.pdf Graphic file (type pdf)
+<use Figures/UPerfect-eps-converted-to.pdf>
+Package pdftex.def Info: Figures/UPerfect-eps-converted-to.pdf  used on input line 392.
+(pdftex.def)             Requested size: 421.57396pt x 316.18047pt.
+ [26 <./Figures/UPerfect-eps-converted-to.pdf>]
+Package epstopdf Info: Source file: <Figures/RMSENormalLow.eps>
+(epstopdf)                    date: 2024-03-07 21:36:51
+(epstopdf)                    size: 590134 bytes
+(epstopdf)             Output file: <Figures/RMSENormalLow-eps-converted-to.pdf>
+(epstopdf)                    date: 2024-03-07 21:37:25
+(epstopdf)                    size: 204311 bytes
+(epstopdf)             Command: <repstopdf --outfile=Figures/RMSENormalLow-eps-converted-to.pdf Figures/RMSENormalLow.eps>
+(epstopdf)             \includegraphics on input line 420.
+Package epstopdf Info: Output file is already uptodate.
+<Figures/RMSENormalLow-eps-converted-to.pdf, id=199, 421.575pt x 316.18124pt>
+File: Figures/RMSENormalLow-eps-converted-to.pdf Graphic file (type pdf)
+<use Figures/RMSENormalLow-eps-converted-to.pdf>
+Package pdftex.def Info: Figures/RMSENormalLow-eps-converted-to.pdf  used on input line 420.
+(pdftex.def)             Requested size: 421.57396pt x 316.18047pt.
+Package epstopdf Info: Source file: <Figures/UNormalLow.eps>
+(epstopdf)                    date: 2024-03-07 21:36:50
+(epstopdf)                    size: 1372441 bytes
+(epstopdf)             Output file: <Figures/UNormalLow-eps-converted-to.pdf>
+(epstopdf)                    date: 2024-03-07 21:37:27
+(epstopdf)                    size: 326024 bytes
+(epstopdf)             Command: <repstopdf --outfile=Figures/UNormalLow-eps-converted-to.pdf Figures/UNormalLow.eps>
+(epstopdf)             \includegraphics on input line 426.
+Package epstopdf Info: Output file is already uptodate.
+<Figures/UNormalLow-eps-converted-to.pdf, id=200, 421.575pt x 316.18124pt>
+File: Figures/UNormalLow-eps-converted-to.pdf Graphic file (type pdf)
+<use Figures/UNormalLow-eps-converted-to.pdf>
+Package pdftex.def Info: Figures/UNormalLow-eps-converted-to.pdf  used on input line 426.
+(pdftex.def)             Requested size: 421.57396pt x 316.18047pt.
+ [27 <./Figures/RMSENormalLow-eps-converted-to.pdf>]
+Package epstopdf Info: Source file: <Figures/RMSENormalHigh.eps>
+(epstopdf)                    date: 2024-03-07 21:36:51
+(epstopdf)                    size: 589469 bytes
+(epstopdf)             Output file: <Figures/RMSENormalHigh-eps-converted-to.pdf>
+(epstopdf)                    date: 2024-03-07 21:37:29
+(epstopdf)                    size: 209282 bytes
+(epstopdf)             Command: <repstopdf --outfile=Figures/RMSENormalHigh-eps-converted-to.pdf Figures/RMSENormalHigh.eps>
+(epstopdf)             \includegraphics on input line 438.
+Package epstopdf Info: Output file is already uptodate.
+<Figures/RMSENormalHigh-eps-converted-to.pdf, id=209, 421.575pt x 316.18124pt>
+File: Figures/RMSENormalHigh-eps-converted-to.pdf Graphic file (type pdf)
+<use Figures/RMSENormalHigh-eps-converted-to.pdf>
+Package pdftex.def Info: Figures/RMSENormalHigh-eps-converted-to.pdf  used on input line 438.
+(pdftex.def)             Requested size: 421.57396pt x 316.18047pt.
+ [28 <./Figures/UNormalLow-eps-converted-to.pdf>]
+Package epstopdf Info: Source file: <Figures/UNormalHigh.eps>
+(epstopdf)                    date: 2024-03-07 21:36:51
+(epstopdf)                    size: 1372476 bytes
+(epstopdf)             Output file: <Figures/UNormalHigh-eps-converted-to.pdf>
+(epstopdf)                    date: 2024-03-07 21:37:32
+(epstopdf)                    size: 318607 bytes
+(epstopdf)             Command: <repstopdf --outfile=Figures/UNormalHigh-eps-converted-to.pdf Figures/UNormalHigh.eps>
+(epstopdf)             \includegraphics on input line 446.
+Package epstopdf Info: Output file is already uptodate.
+<Figures/UNormalHigh-eps-converted-to.pdf, id=218, 421.575pt x 316.18124pt>
+File: Figures/UNormalHigh-eps-converted-to.pdf Graphic file (type pdf)
+<use Figures/UNormalHigh-eps-converted-to.pdf>
+Package pdftex.def Info: Figures/UNormalHigh-eps-converted-to.pdf  used on input line 446.
+(pdftex.def)             Requested size: 421.57396pt x 316.18047pt.
+ [29 <./Figures/RMSENormalHigh-eps-converted-to.pdf>]
+Package epstopdf Info: Source file: <Figures/RMSEDlyChng.eps>
+(epstopdf)                    date: 2024-03-07 21:36:51
+(epstopdf)                    size: 585511 bytes
+(epstopdf)             Output file: <Figures/RMSEDlyChng-eps-converted-to.pdf>
+(epstopdf)                    date: 2024-03-07 21:37:34
+(epstopdf)                    size: 198522 bytes
+(epstopdf)             Command: <repstopdf --outfile=Figures/RMSEDlyChng-eps-converted-to.pdf Figures/RMSEDlyChng.eps>
+(epstopdf)             \includegraphics on input line 455.
+Package epstopdf Info: Output file is already uptodate.
+<Figures/RMSEDlyChng-eps-converted-to.pdf, id=228, 421.575pt x 316.18124pt>
+File: Figures/RMSEDlyChng-eps-converted-to.pdf Graphic file (type pdf)
+<use Figures/RMSEDlyChng-eps-converted-to.pdf>
+Package pdftex.def Info: Figures/RMSEDlyChng-eps-converted-to.pdf  used on input line 455.
+(pdftex.def)             Requested size: 421.57396pt x 316.18047pt.
+ [30 <./Figures/UNormalHigh-eps-converted-to.pdf>]
+Package epstopdf Info: Source file: <Figures/UDelayChange.eps>
+(epstopdf)                    date: 2024-03-07 21:36:51
+(epstopdf)                    size: 1422866 bytes
+(epstopdf)             Output file: <Figures/UDelayChange-eps-converted-to.pdf>
+(epstopdf)                    date: 2024-03-07 21:37:36
+(epstopdf)                    size: 330047 bytes
+(epstopdf)             Command: <repstopdf --outfile=Figures/UDelayChange-eps-converted-to.pdf Figures/UDelayChange.eps>
+(epstopdf)             \includegraphics on input line 463.
+Package epstopdf Info: Output file is already uptodate.
+<Figures/UDelayChange-eps-converted-to.pdf, id=237, 421.575pt x 316.18124pt>
+File: Figures/UDelayChange-eps-converted-to.pdf Graphic file (type pdf)
+<use Figures/UDelayChange-eps-converted-to.pdf>
+Package pdftex.def Info: Figures/UDelayChange-eps-converted-to.pdf  used on input line 463.
+(pdftex.def)             Requested size: 421.57396pt x 316.18047pt.
+ [31 <./Figures/RMSEDlyChng-eps-converted-to.pdf>] [32 <./Figures/UDelayChange-eps-converted-to.pdf>]) [33]
+\openout2 = `4_ATD_with_SNN.aux'.
+
+ (./4_ATD_with_SNN.tex
+Chapter 4.
+[34
 
 
-LaTeX Warning: Citation `Ch4_hosseini2019uav' on page 5 undefined on input line 13.
 
 
-LaTeX Warning: Citation `Ch4_I7' on page 5 undefined on input line 13.
+]
+
+pdfTeX warning: pdflatex.exe (file ./Figures/1.pdf): PDF inclusion: found PDF version <1.7>, but at most version <1.5> allowed
+<Figures/1.pdf, id=260, 322.25294pt x 238.4368pt>
+File: Figures/1.pdf Graphic file (type pdf)
+<use Figures/1.pdf>
+Package pdftex.def Info: Figures/1.pdf  used on input line 19.
+(pdftex.def)             Requested size: 241.6891pt x 178.82715pt.
 
 
-LaTeX Warning: Citation `Ch4_liu2019robust' on page 5 undefined on input line 15.
+pdfTeX warning: pdflatex.exe (file ./Figures/2.pdf): PDF inclusion: found PDF version <1.7>, but at most version <1.5> allowed
+<Figures/2.pdf, id=261, 440.40634pt x 335.7915pt>
+File: Figures/2.pdf Graphic file (type pdf)
+<use Figures/2.pdf>
+Package pdftex.def Info: Figures/2.pdf  used on input line 28.
+(pdftex.def)             Requested size: 286.26073pt x 218.26189pt.
+[35] [36 <./Figures/1.pdf> <./Figures/2.pdf
+
+pdfTeX warning: pdflatex.exe (file ./Figures/2.pdf): PDF inclusion: multiple pdfs with page group included in a single page
+>] [37]
+
+pdfTeX warning: pdflatex.exe (file ./Figures/5.pdf): PDF inclusion: found PDF version <1.7>, but at most version <1.5> allowed
+<Figures/5.pdf, id=318, 366.85556pt x 183.68323pt>
+File: Figures/5.pdf Graphic file (type pdf)
+<use Figures/5.pdf>
+Package pdftex.def Info: Figures/5.pdf  used on input line 77.
+(pdftex.def)             Requested size: 366.85466pt x 183.68277pt.
+[38] [39 <./Figures/5.pdf>]
+
+pdfTeX warning: pdflatex.exe (file ./Figures/4.pdf): PDF inclusion: found PDF version <1.7>, but at most version <1.5> allowed
+<Figures/4.pdf, id=339, 406.03694pt x 343.88475pt>
+File: Figures/4.pdf Graphic file (type pdf)
+<use Figures/4.pdf>
+Package pdftex.def Info: Figures/4.pdf  used on input line 128.
+(pdftex.def)             Requested size: 406.03593pt x 343.88391pt.
+[40] [41 <./Figures/4.pdf>] [42] [43]
+
+pdfTeX warning: pdflatex.exe (file ./Figures/During training.pdf): PDF inclusion: found PDF version <1.7>, but at most version <1.5> allowed
+<Figures/During training.pdf, id=420, 373.15411pt x 301.125pt>
+File: Figures/During training.pdf Graphic file (type pdf)
+<use Figures/During training.pdf>
+Package pdftex.def Info: Figures/During training.pdf  used on input line 265.
+(pdftex.def)             Requested size: 373.1532pt x 301.12425pt.
+<Figures/Synaptic weights.pdf, id=421, 376.06497pt x 302.12875pt>
+File: Figures/Synaptic weights.pdf Graphic file (type pdf)
+<use Figures/Synaptic weights.pdf>
+Package pdftex.def Info: Figures/Synaptic weights.pdf  used on input line 272.
+(pdftex.def)             Requested size: 376.06406pt x 302.128pt.
+[44] [45 <./Figures/During training.pdf>] [46 <./Figures/Synaptic weights.pdf>]
+
+pdfTeX warning: pdflatex.exe (file ./Figures/C.pdf): PDF inclusion: found PDF version <1.7>, but at most version <1.5> allowed
+<Figures/C.pdf, id=466, 530.0934pt x 228.16542pt>
+File: Figures/C.pdf Graphic file (type pdf)
+<use Figures/C.pdf>
+Package pdftex.def Info: Figures/C.pdf  used on input line 287.
+(pdftex.def)             Requested size: 477.07965pt x 205.34697pt.
+
+Overfull \hbox (7.32463pt too wide) in paragraph at lines 287--288
+ [][] 
+ []
+
+<Figures/R and C.pdf, id=467, 399.31183pt x 291.0875pt>
+File: Figures/R and C.pdf Graphic file (type pdf)
+<use Figures/R and C.pdf>
+Package pdftex.def Info: Figures/R and C.pdf  used on input line 295.
+(pdftex.def)             Requested size: 359.37732pt x 261.97632pt.
 
 
-LaTeX Warning: Citation `Ch4_panuntun2020networked' on page 5 undefined on input line 15.
+pdfTeX warning: pdflatex.exe (file ./Figures/After learning.pdf): PDF inclusion: found PDF version <1.7>, but at most version <1.5> allowed
+<Figures/After learning.pdf, id=468, 372.95335pt x 299.1175pt>
+File: Figures/After learning.pdf Graphic file (type pdf)
+<use Figures/After learning.pdf>
+Package pdftex.def Info: Figures/After learning.pdf  used on input line 307.
+(pdftex.def)             Requested size: 372.95244pt x 299.11676pt.
+[47] [48 <./Figures/C.pdf> <./Figures/R and C.pdf>] [49 <./Figures/After learning.pdf>]
+
+pdfTeX warning: pdflatex.exe (file ./Figures/Noise effect.pdf): PDF inclusion: found PDF version <1.7>, but at most version <1.5> allowed
+<Figures/Noise effect.pdf, id=565, 373.02362pt x 297.8327pt>
+File: Figures/Noise effect.pdf Graphic file (type pdf)
+<use Figures/Noise effect.pdf>
+Package pdftex.def Info: Figures/Noise effect.pdf  used on input line 325.
+(pdftex.def)             Requested size: 373.0227pt x 297.83195pt.
+[50] [51 <./Figures/Noise effect.pdf>]) [52]
+\openout2 = `5_FL_with_SNN.aux'.
+
+ (./5_FL_with_SNN.tex
+Chapter 5.
 
 
-LaTeX Warning: Citation `Ch4_sanz2016predictor' on page 5 undefined on input line 17.
+pdfTeX warning: pdflatex.exe (file ./Figures/Consensus Flying - FL.pdf): PDF inclusion: found PDF version <1.7>, but at most version <1.5> allowed
+<Figures/Consensus Flying - FL.pdf, id=584, 813.2784pt x 480.79625pt>
+File: Figures/Consensus Flying - FL.pdf Graphic file (type pdf)
+<use Figures/Consensus Flying - FL.pdf>
+Package pdftex.def Info: Figures/Consensus Flying - FL.pdf  used on input line 11.
+(pdftex.def)             Requested size: 352.31625pt x 208.28632pt.
+[53
 
 
-LaTeX Warning: Citation `Ch4_slawinski2017control' on page 5 undefined on input line 17.
 
 
-LaTeX Warning: Citation `Ch4_sharma2021control' on page 5 undefined on input line 19.
+] [54 <./Figures/Consensus Flying - FL.pdf>]
+
+pdfTeX warning: pdflatex.exe (file ./Figures/Network Structure.pdf): PDF inclusion: found PDF version <1.7>, but at most version <1.5> allowed
+<Figures/Network Structure.pdf, id=612, 440.87311pt x 431.75905pt>
+File: Figures/Network Structure.pdf Graphic file (type pdf)
+<use Figures/Network Structure.pdf>
+Package pdftex.def Info: Figures/Network Structure.pdf  used on input line 34.
+(pdftex.def)             Requested size: 330.654pt x 323.8185pt.
+[55] [56 <./Figures/Network Structure.pdf>]
+
+pdfTeX warning: pdflatex.exe (file ./Figures/Encoder.pdf): PDF inclusion: found PDF version <1.7>, but at most version <1.5> allowed
+<Figures/Encoder.pdf, id=638, 215.24416pt x 329.43076pt>
+File: Figures/Encoder.pdf Graphic file (type pdf)
+<use Figures/Encoder.pdf>
+Package pdftex.def Info: Figures/Encoder.pdf  used on input line 61.
+(pdftex.def)             Requested size: 161.43271pt x 247.07245pt.
+[57] [58 <./Figures/Encoder.pdf>] [59] [60] [61] [62] [63] [64] [65] [66]
+Overfull \hbox (38.34016pt too wide) detected at line 236
+[][]\OT1/cmr/m/n/12 (\OML/cmm/m/it/12 t\OT1/cmr/m/n/12 ) = (1 \OMS/cmsy/m/n/12 ^^@ \OML/cmm/m/it/12 ^^N\OT1/cmr/m/n/12 (\OML/cmm/m/it/12 t \OMS/cmsy/m/n/12 ^^@ \OML/cmm/m/it/12 T[]\OT1/cmr/m/n/12 )) [] + \OML/cmm/m/it/12 ^^N\OT1/cmr/m/n/12 (\OML/cmm/m/it/12 t \OMS/cmsy/m/n/12 ^^@ \OML/cmm/m/it/12 T[]\OT1/cmr/m/n/12 )\OML/cmm/m/it/12 I[] []
+ []
+
+[67] [68] [69] [70]
+
+pdfTeX warning: pdflatex.exe (file ./Figures/Metrics.pdf): PDF inclusion: found PDF version <1.7>, but at most version <1.5> allowed
+<Figures/Metrics.pdf, id=705, 265.89337pt x 191.21437pt>
+File: Figures/Metrics.pdf Graphic file (type pdf)
+<use Figures/Metrics.pdf>
+Package pdftex.def Info: Figures/Metrics.pdf  used on input line 335.
+(pdftex.def)             Requested size: 234.8775pt x 168.90813pt.
+[71 <./Figures/Metrics.pdf>] [72]
+<Figures/Distances - BRC.pdf, id=761, 363.87944pt x 293.29576pt>
+File: Figures/Distances - BRC.pdf Graphic file (type pdf)
+<use Figures/Distances - BRC.pdf>
+Package pdftex.def Info: Figures/Distances - BRC.pdf  used on input line 411.
+(pdftex.def)             Requested size: 225.4804pt x 181.74303pt.
+<Figures/Environment - BRC.pdf, id=762, 363.2772pt x 294.8616pt>
+File: Figures/Environment - BRC.pdf Graphic file (type pdf)
+<use Figures/Environment - BRC.pdf>
+Package pdftex.def Info: Figures/Environment - BRC.pdf  used on input line 415.
+(pdftex.def)             Requested size: 225.4804pt x 183.01926pt.
+<Figures/Distances - R cmd Change.pdf, id=763, 364.72258pt x 294.37979pt>
+File: Figures/Distances - R cmd Change.pdf Graphic file (type pdf)
+<use Figures/Distances - R cmd Change.pdf>
+Package pdftex.def Info: Figures/Distances - R cmd Change.pdf  used on input line 419.
+(pdftex.def)             Requested size: 225.4804pt x 181.99251pt.
+<Figures/FACL - R_cmd Follow.pdf, id=764, 367.25206pt x 294.50024pt>
+File: Figures/FACL - R_cmd Follow.pdf Graphic file (type pdf)
+<use Figures/FACL - R_cmd Follow.pdf>
+Package pdftex.def Info: Figures/FACL - R_cmd Follow.pdf  used on input line 425.
+(pdftex.def)             Requested size: 225.4804pt x 180.81323pt.
+<Figures/FACL - Environment.pdf, id=765, 364.9635pt x 293.41621pt>
+File: Figures/FACL - Environment.pdf Graphic file (type pdf)
+<use Figures/FACL - Environment.pdf>
+Package pdftex.def Info: Figures/FACL - Environment.pdf  used on input line 429.
+(pdftex.def)             Requested size: 225.4804pt x 181.28041pt.
+<Figures/FACL - R_cmd Changes.pdf, id=766, 363.99991pt x 293.41621pt>
+File: Figures/FACL - R_cmd Changes.pdf Graphic file (type pdf)
+<use Figures/FACL - R_cmd Changes.pdf>
+Package pdftex.def Info: Figures/FACL - R_cmd Changes.pdf  used on input line 433.
+(pdftex.def)             Requested size: 225.4804pt x 181.76395pt.
+ [73]
+Overfull \vbox (117.82478pt too high) has occurred while \output is active []
+
+ [74 <./Figures/Distances - BRC.pdf> <./Figures/Environment - BRC.pdf> <./Figures/Distances - R cmd Change.pdf> <./Figures/FACL - R_cmd Follow.pdf> <./Figures/FACL - Environment.pdf> <./Figures/FACL - R_cmd Changes.pdf>] [75]
+<Figures/Environment - ARC.pdf, id=889, 363.99991pt x 292.9344pt>
+File: Figures/Environment - ARC.pdf Graphic file (type pdf)
+<use Figures/Environment - ARC.pdf>
+Package pdftex.def Info: Figures/Environment - ARC.pdf  used on input line 460.
+(pdftex.def)             Requested size: 225.4804pt x 181.46547pt.
+
+Underfull \hbox (badness 1142) in paragraph at lines 461--461
+[]\OT1/cmr/m/n/12 Figure 5.11: Agents' path af-ter re-ward
+ []
+
+<Figures/Distances - ARC.pdf, id=890, 357.97742pt x 294.37979pt>
+File: Figures/Distances - ARC.pdf Graphic file (type pdf)
+<use Figures/Distances - ARC.pdf>
+Package pdftex.def Info: Figures/Distances - ARC.pdf  used on input line 466.
+(pdftex.def)             Requested size: 225.4804pt x 185.4243pt.
+[76 <./Figures/Environment - ARC.pdf> <./Figures/Distances - ARC.pdf>]
+<Figures/Synaptic Weights - BRC.pdf, id=939, 366.89069pt x 274.626pt>
+File: Figures/Synaptic Weights - BRC.pdf Graphic file (type pdf)
+<use Figures/Synaptic Weights - BRC.pdf>
+Package pdftex.def Info: Figures/Synaptic Weights - BRC.pdf  used on input line 480.
+(pdftex.def)             Requested size: 225.4804pt x 168.78293pt.
+<Figures/Synaptic Weights - ARC.pdf, id=940, 367.3725pt x 273.1806pt>
+File: Figures/Synaptic Weights - ARC.pdf Graphic file (type pdf)
+<use Figures/Synaptic Weights - ARC.pdf>
+Package pdftex.def Info: Figures/Synaptic Weights - ARC.pdf  used on input line 486.
+(pdftex.def)             Requested size: 225.4804pt x 167.67368pt.
+<Figures/RLST - Weight Increase.pdf, id=941, 370.74509pt x 293.898pt>
+File: Figures/RLST - Weight Increase.pdf Graphic file (type pdf)
+<use Figures/RLST - Weight Increase.pdf>
+Package pdftex.def Info: Figures/RLST - Weight Increase.pdf  used on input line 495.
+(pdftex.def)             Requested size: 225.4804pt x 178.74385pt.
+<Figures/RLST - Weight Decrease.pdf, id=942, 371.2269pt x 292.45259pt>
+File: Figures/RLST - Weight Decrease.pdf Graphic file (type pdf)
+<use Figures/RLST - Weight Decrease.pdf>
+Package pdftex.def Info: Figures/RLST - Weight Decrease.pdf  used on input line 501.
+(pdftex.def)             Requested size: 225.4804pt x 177.63274pt.
+ [77 <./Figures/Synaptic Weights - BRC.pdf> <./Figures/Synaptic Weights - ARC.pdf>] [78 <./Figures/RLST - Weight Increase.pdf> <./Figures/RLST - Weight Decrease.pdf>]
+<Figures/Distances - BRC - DAI.pdf, id=1001, 366.36874pt x 300.62312pt>
+File: Figures/Distances - BRC - DAI.pdf Graphic file (type pdf)
+<use Figures/Distances - BRC - DAI.pdf>
+Package pdftex.def Info: Figures/Distances - BRC - DAI.pdf  used on input line 520.
+(pdftex.def)             Requested size: 225.4804pt x 185.01743pt.
+<Figures/Distances - ARC - DAI.pdf, id=1002, 361.30984pt x 292.09125pt>
+File: Figures/Distances - ARC - DAI.pdf Graphic file (type pdf)
+<use Figures/Distances - ARC - DAI.pdf>
+Package pdftex.def Info: Figures/Distances - ARC - DAI.pdf  used on input line 526.
+(pdftex.def)             Requested size: 225.4804pt x 182.28915pt.
+ [79 <./Figures/Distances - BRC - DAI.pdf> <./Figures/Distances - ARC - DAI.pdf>]
+<Figures/Norm.pdf, id=1038, 367.3725pt x 298.23419pt>
+File: Figures/Norm.pdf Graphic file (type pdf)
+<use Figures/Norm.pdf>
+Package pdftex.def Info: Figures/Norm.pdf  used on input line 536.
+(pdftex.def)             Requested size: 275.52869pt x 223.6751pt.
+<Figures/Communication Log.pdf, id=1039, 403.86884pt x 303.63437pt>
+File: Figures/Communication Log.pdf Graphic file (type pdf)
+<use Figures/Communication Log.pdf>
+Package pdftex.def Info: Figures/Communication Log.pdf  used on input line 543.
+(pdftex.def)             Requested size: 302.90088pt x 227.7252pt.
+
+Underfull \hbox (badness 1642) in paragraph at lines 554--554
+[]\OT1/cmr/m/n/12 Table 5.4: Com-par-a-tive Per-for-mance Anal-y-sis of the Pro-posed Ag-gre-ga-tion Al-go-
+ []
+
+[80 <./Figures/Norm.pdf>]) [81 <./Figures/Communication Log.pdf>] [82]
+\openout2 = `6_Future_Work.aux'.
+
+ (./6_Future_Work.tex
+Chapter 6.
+) [83
 
 
-LaTeX Warning: Citation `Ch4_armah2018adaptive' on page 5 undefined on input line 19.
 
 
-LaTeX Warning: Citation `Ch4_farajiparvar2020brief' on page 5 undefined on input line 19.
+] (./Main.bbl [84
 
 
-LaTeX Warning: Citation `Ch4_yoo2017learning' on page 5 undefined on input line 19.
 
+] [85
 
-LaTeX Warning: Citation `Ch5_S0' on page 5 undefined on input line 26.
+] [86] [87] [88] [89] [90] [91]
+Underfull \hbox (badness 1005) in paragraph at lines 359--363
+[]\OT1/cmr/m/n/12 M. Bia las and J. Ma^^Sndziuk, ``Spike-timing-dependent plas-tic-ity with activation-
+ []
 
-
-LaTeX Warning: Citation `Ch5_S0_1' on page 5 undefined on input line 26.
-
-
-LaTeX Warning: Citation `Ch5_S0_2' on page 5 undefined on input line 26.
-
-
-LaTeX Warning: Citation `Ch5_S1' on page 5 undefined on input line 26.
-
-
-LaTeX Warning: Citation `Ch5_S2' on page 5 undefined on input line 26.
-
-[5]
-
-LaTeX Warning: Citation `Ch5_S3' on page 6 undefined on input line 28.
-
-
-LaTeX Warning: Citation `Ch5_S4' on page 6 undefined on input line 30.
-
-
-LaTeX Warning: Citation `Ch5_S5' on page 6 undefined on input line 30.
-
-
-LaTeX Warning: Citation `Ch5_S7' on page 6 undefined on input line 32.
-
-
-LaTeX Warning: Citation `Ch5_ATD0' on page 6 undefined on input line 38.
-
-
-LaTeX Warning: Citation `Ch5_ATD1' on page 6 undefined on input line 38.
-
-
-LaTeX Warning: Citation `Ch5_ATD2' on page 6 undefined on input line 38.
-
-
-LaTeX Warning: Citation `Ch5_ATD3' on page 6 undefined on input line 40.
-
-
-LaTeX Warning: Citation `Ch5_ATD5' on page 6 undefined on input line 40.
-
-[6]
-
-./2_Literature_Review.tex:46: Package acro Error: You've requested acronym `fl' on line 46 but you
-(acro)                apparently haven't defined it, yet!
-(acro)                Maybe you've misspelled `fl'?
-
-Type <return> to continue.
- ...                                              
-                                                  
-l.46 \ac{fl} 
-             is an emerging paradigm in machine learning that allows for dec...
-
-LaTeX does not know anything more about this error, sorry.
-
-Try typing <return> to proceed.
-If that doesn't work, type X <return> to quit.
-
-
-./2_Literature_Review.tex:46: Missing number, treated as zero.
-<to be read again> 
-                   >
-l.46 \ac{fl} 
-             is an emerging paradigm in machine learning that allows for dec...
-A number should have been here; I inserted `0'.
-(If you can't figure out why I needed to see a number,
-look up `weird error' in the index to The TeXbook.)
-
-./2_Literature_Review.tex:46: You can't use `\relax' after \advance.
-<argument> \g__acro_fl_int 
-                           
-l.46 \ac{fl} 
-             is an emerging paradigm in machine learning that allows for dec...
-I'm forgetting what you said and not changing anything.
-
-./2_Literature_Review.tex:46: Missing $ inserted.
-<inserted text> 
-                $
-l.46 \ac{fl} 
-             is an emerging paradigm in machine learning that allows for dec...
-I've inserted a begin-math/end-math symbol since I think
-you left one out. Proceed, with fingers crossed.
-
-./2_Literature_Review.tex:46: TeX capacity exceeded, sorry [input stack size=5000].
-\g__acro_fl_pages_seq ->\g__acro_fl_pages_seq 
-                                              \__seq_item:n {11@1@7}
-l.46 \ac{fl} 
-             is an emerging paradigm in machine learning that allows for dec...
-If you really absolutely need more capacity,
-you can ask a wizard to enlarge me.
-
- 
+[92] [93] [94] [95]) [96] (./Main.aux (./title_page.aux) (./0_Abstract.aux) (./1_Introduction.aux) (./2_Literature_Review.aux) (./3_UAV_control_over_5G.aux) (./4_ATD_with_SNN.aux) (./5_FL_with_SNN.aux) (./6_Future_Work.aux) (./Main.acr)) ) 
 Here is how much of TeX's memory you used:
- 11785 strings out of 478353
- 234619 string characters out of 5852100
- 616394 words of memory out of 5000000
- 29713 multiletter control sequences out of 15000+600000
- 413651 words of font info for 63 fonts, out of 8000000 for 9000
+ 13075 strings out of 478353
+ 275672 string characters out of 5852100
+ 652243 words of memory out of 5000000
+ 30889 multiletter control sequences out of 15000+600000
+ 419930 words of font info for 85 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 5000i,6n,77p,799b,194s stack positions out of 5000i,500n,10000p,200000b,80000s
-./2_Literature_Review.tex:46:  ==> Fatal error occurred, no output PDF file produced!
+ 69i,13n,77p,1440b,360s stack positions out of 5000i,500n,10000p,200000b,80000s
+{c:/texlive/2021/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc}<c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx8.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmex8.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmib10.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsl12.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb>
+Output written on Main.pdf (104 pages, 8706953 bytes).
+PDF statistics:
+ 1218 PDF objects out of 1440 (max. 8388607)
+ 893 compressed objects within 9 object streams
+ 0 named destinations out of 1000 (max. 500000)
+ 201 words of extra memory for PDF output out of 10000 (max. 10000000)
+
