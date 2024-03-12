@@ -11,9 +11,9 @@
 \contentsline {section}{\numberline {3.5}State Estimator}{20}{section.3.5}%
 \contentsline {section}{\numberline {3.6}Delay Estimator}{22}{section.3.6}%
 \contentsline {section}{\numberline {3.7}Results}{23}{section.3.7}%
-\contentsline {paragraph}{Exact knowledge of delay}{25}{section*.5}%
-\contentsline {paragraph}{Delay estimation based on the Markov model}{26}{section*.6}%
-\contentsline {paragraph}{Change in delay values and distributions}{30}{section*.7}%
+\contentsline {paragraph}{Exact knowledge of delay}{25}{section*.6}%
+\contentsline {paragraph}{Delay estimation based on the Markov model}{26}{section*.7}%
+\contentsline {paragraph}{Change in delay values and distributions}{30}{section*.8}%
 \contentsline {section}{\numberline {3.8}Experimental setup}{33}{section.3.8}%
 \contentsline {section}{\numberline {3.9}Conclusion}{33}{section.3.9}%
 \contentsline {chapter}{\numberline {4}Modular Learning in SNNs for Optimal Multi-Agent Decision-Making}{35}{chapter.4}%
