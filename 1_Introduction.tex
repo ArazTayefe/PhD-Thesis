@@ -1,8 +1,12 @@
-\chapter{Spiking Neural Networks: Models and Learning Algorithms}
+\chapter{Introduction}
 
 \section{Multi-agent cooperation over cellular network}
 
-\section{Neuron model}
+
+\section{Spiking Neural Networks: Models and Learning Algorithms}
+
+
+\subsection{Neuron model}
 
 The neuron model in this paper is the Leaky Integrate-and-Fire (LIF). The LIF model is a biological model that can be represented as a circuit with a resistor and capacitor and represents a first-order dynamic system \cite{Ch5_NM1},
 
@@ -65,3 +69,24 @@ The maximum value for the input current makes the neuron fire at each sample tim
 \end{equation}
 
 In this section, we obtained the minimum and maximum values for input current using (\ref{Eq.9}) and (\ref{Eq.13}). These equations are used in the learning and encoding processes of the SNN.
+
+
+\subsection{Training Algorithms}
+
+The \ac{stdp} algorithm is a learning technique inspired by biological processes in the brain, which is believed to be fundamental to certain learning processes \cite{STDP2}. The algorithm's core principle is that when a pre-synaptic neuron activates just before its post-synaptic counterpart, the synapse's strength connecting them should increase, and vice versa if the post-synaptic neuron fires first.
+
+Within the \ac{snn} framework, pre-synaptic neurons are the input neurons, and post-synaptic neurons function as the output neurons. The function \(STDP(\tau)\) can be defined as the firing timelines of both input and output neurons \cite{STDP1} as,
+
+\begin{equation} \label{Eq.TA.1}
+STDP_{kl}(\tau) = \mathcal{A} \exp\left(-\frac{\tau}{\tau_{s}}\right) \text{for \(\tau \geq 0\)}
+\end{equation}
+
+\noindent where \(\mathcal{A}\) stands as the exponential function's amplitude, and \(\tau\) is the difference between the firing time of the input neuron \((k)\) and output neuron \((l)\). Meanwhile, \(\tau_{s}\) acts as the time constant, setting the decay rate for the \(\ac{stdp}\) function. Should \(\tau_{s}\) approach infinity, the exponential function converges to 1, neutralizing time's effect on the \(\ac{stdp}\) function.
+
+The adjustment of synaptic weights follows the given equation:
+
+\begin{equation} \label{Eq.TA.2}
+\dot{W}_{kl}(t) = STDP_{kl}(\tau)\mathcal{R}(t)
+\end{equation}
+
+\noindent where \(\dot{W}_{kl}(t)\) denotes the rate of change of the synaptic weight that connects neurons \(k\) and \(l\). This weight determines the input that the post-synaptic neuron receives upon the spiking of its pre-synaptic neuron, which is quantified as \(I(t)\).

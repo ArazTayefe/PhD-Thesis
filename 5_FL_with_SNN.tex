@@ -1,14 +1,14 @@
-\chapter{Enhancing Cooperative Multi-agent Reinforcement Learning through the Integration of R-STDP and Federated Learning}
+\chapter{Integration of R-STDP and Federated Learning}
 
 \section{Consensus Flying Problem}
 
-The ``Consensus Flying Problem" deals with ensuring drones can work together in real-time to agree on their flight paths and positions. When many drones are close together, like in swarms, avoiding crashes is vital. Advanced algorithms and communication methods are needed so drones can exchange information and handle changing situations and unexpected obstacles.
+This chapter studies the cooperation between follower drones to follow the leader drone by integrating \ac{stdp} and \ac{fl}. The cooperation problem is formation flying or ``Consensus Flying". The consensus flying problem deals with ensuring drones can work together in real-time to agree on their flight paths and positions. When many drones are close together, like in swarms, avoiding crashes is vital. Advanced algorithms and communication methods are needed so drones can exchange information and handle changing situations and unexpected obstacles.
 
 As shown in Figure \ref{fig.Consensus Flying}, a swarm of agents (follower drones) flies around a leader. The leader is controlled from a remote base station, and the swarm agents should learn to fly safely with the leader. The leader sends its position to all agents, and each agent only sees two neighboring agents. The swarm aims to learn how to keep a commanded distance from each other and the leader. The commanded distance is provided from the leader. Each agent uses the onboard sensors to find the distance and line of sight from neighboring agents.
 
-\begin{figure}
+\begin{figure}[H]
     \centering
-    \includegraphics[width=0.75\textwidth]{Figures/Consensus Flying - FL.pdf}
+    \includegraphics[width=0.85\textwidth]{Figures/Consensus Flying - FL.pdf}
     \caption{The central server (the leader) and the surrounding follower agents (white drones). The follower agents learn to fly in a formation to maintain the commanded distance. The Local models trained individually by follower agents are sent to the leader. The leader aggregates the models and sends back the global model for another round of training of the follower agents.}
     \label{fig.Consensus Flying}
 \end{figure}
@@ -29,9 +29,9 @@ This chapter employs the \ac{snn} model to train a group of swarm agents that fo
 
 This chapter assumes that each agent detects only two neighboring agents in addition to the leader. The information obtained from other agents includes the line-of-sight angle and the distance. Each agent's neural network consists of three sub-layers in the input layer, as shown in Figure \ref{fig.Network Structure}. Two sub-layers correspond to the two neighboring follower agents (\(F_{1}\) and \(F_{2}\)), and the third is dedicated to the leader (\(L\)). Inputs for these sub-layers are encoded using the Gaussian Receptive Fields (GRF) that use fuzzy membership functions. The network utilizes the difference between the current distance and the commanded distance (\(r_{cmd}\)) to stimulate the input neurons. 
 
-\begin{figure}
+\begin{figure}[H]
     \centering
-    \includegraphics[scale=0.75]{Figures/Network Structure.pdf}
+    \includegraphics[scale=0.85]{Figures/Network Structure.pdf}
     \caption{\ac{snn} structure with encoding and decoding layers. Each sub-layer consists of a fuzzy encoder and a Fuzzy-to-Spiking Converter, with the output layer receiving inputs from synaptic weights and a random action selector. During the training phase, the output layer receives input only from the random action selector, which then shifts to synaptic weight inputs after the training.}
     \label{fig.Network Structure}
 \end{figure}
@@ -56,9 +56,9 @@ Every input sub-layer is split into two parts. The first part deals with distanc
 
 The encoding process is shown in Figure \ref{fig.Encoder}. The Fuzzy to Spiking (F2S) block uses \eqref{Eq.NS.3} to calculate the inputs for the associated sub-layer.
 
-\begin{figure}
+\begin{figure}[!h]
     \centering
-    \includegraphics[scale=0.75]{Figures/Encoder.pdf}
+    \includegraphics[scale=0.85]{Figures/Encoder.pdf}
     \caption{The fuzzy encoding principle for the input sub-layer.}
     \label{fig.Encoder}
 \end{figure}
@@ -109,23 +109,7 @@ One of the challenges in robotic applications is ensuring smooth transitions in 
 
 \subsection{Training algorithm}
 
-The \ac{stdp} algorithm is a learning technique inspired by biological processes in the brain, which is believed to be fundamental to certain learning processes \cite{STDP2}. The algorithm's core principle is that when a pre-synaptic neuron activates just before its post-synaptic counterpart, the synapse's strength connecting them should increase, and vice versa if the post-synaptic neuron fires first.
-
-Within the \ac{snn} framework, pre-synaptic neurons are the input neurons, and post-synaptic neurons function as the output neurons. The function \(STDP(\tau)\) can be defined as the firing timelines of both input and output neurons \cite{STDP1} as,
-
-\begin{equation} \label{Eq.TA.1}
-STDP_{kl}(\tau) = \mathcal{A} \exp\left(-\frac{\tau}{\tau_{s}}\right) \text{for \(\tau \geq 0\)}
-\end{equation}
-
-\noindent where \(\mathcal{A}\) stands as the exponential function's amplitude, and \(\tau\) is the difference between the firing time of the input neuron \((k)\) and output neuron \((l)\). Meanwhile, \(\tau_{s}\) acts as the time constant, setting the decay rate for the \(\ac{stdp}\) function. Should \(\tau_{s}\) approach infinity, the exponential function converges to 1, neutralizing time's effect on the \(\ac{stdp}\) function.
-
-The adjustment of synaptic weights follows the given equation:
-
-\begin{equation} \label{Eq.TA.2}
-\dot{W}_{kl}(t) = STDP_{kl}(\tau)\mathcal{R}(t)
-\end{equation}
-
-\noindent where \(\dot{W}_{kl}(t)\) denotes the rate of change of the synaptic weight that connects neurons \(k\) and \(l\). This weight determines the input that the post-synaptic neuron receives upon the spiking of its pre-synaptic neuron, which is quantified as \(I(t)\). The term \(\mathcal{R}(t)\) represents the reward that is received at time \(t\).
+The \ac{stdp} algorithm without considering \(C\) parameter is used for training. The reward \(\mathcal{R}(t)\) at time \(t\) is defined as,
 
 \begin{equation} \label{Eq.TA.3}
     \mathcal{R}_{Fi}^{Fj}(t) = \mathcal{C}_{Fi}^{Fj}\left[r_{Fi}^{Fj}(t-1)-r_{Fi}^{Fj}(t)\right] tanh{(r_{Fi}^{Fj}(t)-r_{cmd}^{Fi})}
@@ -411,25 +395,28 @@ Figure \ref{fig_3_0} shows the simulation results for the \ac{RCSE} method. Acco
         \includegraphics[width=\linewidth]{Figures/Distances - BRC.pdf}
         \caption{Distances during the test phase (\ac{RCSE} method)}
         \label{fig_3_0}
-        \vspace{15pt}
         \includegraphics[width=\linewidth]{Figures/Environment - BRC.pdf}
         \caption{Agents' trajectory during the test phase (\ac{RCSE} method)}
         \label{fig_3_1}
-        \vspace{5pt}
-        \includegraphics[width=\linewidth]{Figures/Distances - R cmd Change.pdf}
-        \caption{Change in commanded distance during the test phase (\ac{RCSE} method)}
-        \label{fig_3_2}
     \end{minipage}
     \hfill
     \begin{minipage}{0.48\textwidth}
         \includegraphics[width=\linewidth]{Figures/FACL - R_cmd Follow.pdf}
         \caption{Distances during the test phase (FACL method)}
         \label{fig_3_3}
-        \vspace{15pt}
         \includegraphics[width=\linewidth]{Figures/FACL - Environment.pdf}
         \caption{Agents' trajectory during the test phase (FACL method)}
         \label{fig_3_4}
-        \vspace{5pt}
+    \end{minipage}
+\end{figure}
+
+\begin{figure}[H]
+    \begin{minipage}{0.48\textwidth}
+        \includegraphics[width=\linewidth]{Figures/Distances - R cmd Change.pdf}
+        \caption{Change in commanded distance during the test phase (\ac{RCSE} method)}
+        \label{fig_3_2}
+    \end{minipage}
+    \begin{minipage}{0.48\textwidth}
         \includegraphics[width=\linewidth]{Figures/FACL - R_cmd Changes.pdf}
         \caption{Change in commanded distance during the test phase (FACL method)}
         \label{fig_3_5}
@@ -474,7 +461,7 @@ In order to better understand the effect of reward change on \ac{snn}, the synap
 
 Considering the numerical values presented in Table \ref{table:simulation-parameters} along with the reward coefficients \(\mathcal{C}_{Fi}^{Fj} = 0.02\) and \(\mathcal{C}_{L}^{Fj} = 0.07\), and \(r_{Fi}^{Fj} = 1\;m/s\) and \(r_{Fi}^{L} = 0.1\;m/s\), the maximum rewards at each weight update interval (\(\Delta T\)) for \(\mathcal{R}_{Fi}^{Fj}\) and \(\mathcal{R}_{Fi}^{L}\) are calculated as \(4\times 10^{-4}\) and \(7.7\times 10^{-4}\), respectively. Consequently, \(\mathcal{R}_{max}^{G} = \max(\mathcal{R}_{Fi}^{Fj},\mathcal{R}_{Fi}^{L}) = 7.7\times 10^{-4}\). The \(\Psi^{S}\) for the follower section in the network is \(\left[\frac{4\times10^{-4}}{7\times10^{-4}}\right]15.5=8.0519\), and for the leader section, it is \(\left[\frac{7\times10^{-4}}{7\times10^{-4}}\right]15.5=15.5\). The \(\eta\) and \(\beta\) for the follower section within the network are \(\frac{\mathcal{A}\mathcal{R}_{max}^{G} \ln{(2^{\lambda^2}-1)}}{\lambda\Psi^{\mathcal{S}} \log{(2)}} = 0.0011\) and \(\beta = \frac{\ln{(2^{\lambda^2}-1)}}{\Psi^{\mathcal{S}}} = 2.152\), respectively. For the leader section, these values are \(\frac{\mathcal{A}\mathcal{R}_{max}^{G} \ln{(2^{\lambda^2}-1)}}{\lambda\Psi^{\mathcal{S}} \log{(2)}} = 5.719\times 10^{-4}\) and \(\beta = \frac{\ln{(2^{\lambda^2}-1)}}{\Psi^{\mathcal{S}}} = 1.118\), respectively.
 
-\begin{figure}[H]
+\begin{figure}
     \centering
     \begin{minipage}{0.48\textwidth}
         \includegraphics[width=\linewidth]{Figures/Synaptic Weights - BRC.pdf}
@@ -489,7 +476,7 @@ Considering the numerical values presented in Table \ref{table:simulation-parame
     \end{minipage}
 \end{figure}
 
-\begin{figure}[H]
+\begin{figure}
     \centering
     \begin{minipage}{0.48\textwidth}
         \includegraphics[width=\linewidth]{Figures/RLST - Weight Increase.pdf}

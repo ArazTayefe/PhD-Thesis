@@ -9,6 +9,17 @@ Y.-H. Liu and X.-J. Wang, ``Spike-frequency adaptation of a generalized leaky
 L.~Long and G.~Fang, ``A review of biologically plausible neuron models for
   spiking neural networks,'' {\em AIAA Infotech@ Aerospace 2010}, 2010.
 
+\bibitem{STDP2}
+K.~Kasaura, S.~Miura, T.~Kozuno, R.~Yonetani, K.~Hoshino, and Y.~Hosoe,
+  ``Benchmarking actor-critic deep reinforcement learning algorithms for
+  robotics control with action constraints,'' {\em IEEE Robotics and Automation
+  Letters}, 2023.
+
+\bibitem{STDP1}
+J.~EE{\ss}erer, N.~Bach, C.~Jestel, O.~Urbann, and S.~Kerner, ``Guided
+  reinforcement learning: A review and evaluation for efficient and effective
+  real-world robotics,'' {\em IEEE Robotics \& Automation Magazine}, 2022.
+
 \bibitem{Ch4_li2018uav}
 B.~Li, Z.~Fei, and Y.~Zhang, ``{UAV} communications for {5G} and beyond: Recent
   advances and future trends,'' {\em IEEE Internet of Things Journal}, vol.~6,
@@ -462,17 +473,6 @@ M.~Tayefe~Ramezanlou, H.~Schwartz, I.~Lambadaris, M.~Barbeau, and S.~H.~R.
   Naqvi, ``Learning a policy for pursuit-evasion games using spiking neural
   networks and the stdp algorithm,'' in {\em IEEE International Conference on
   Systems, Man, and Cybernetics (SMC)}, pp.~1918--1925, 2023.
-
-\bibitem{STDP2}
-K.~Kasaura, S.~Miura, T.~Kozuno, R.~Yonetani, K.~Hoshino, and Y.~Hosoe,
-  ``Benchmarking actor-critic deep reinforcement learning algorithms for
-  robotics control with action constraints,'' {\em IEEE Robotics and Automation
-  Letters}, 2023.
-
-\bibitem{STDP1}
-J.~EE{\ss}erer, N.~Bach, C.~Jestel, O.~Urbann, and S.~Kerner, ``Guided
-  reinforcement learning: A review and evaluation for efficient and effective
-  real-world robotics,'' {\em IEEE Robotics \& Automation Magazine}, 2022.
 
 \bibitem{AFL1}
 P.~Qi, D.~Chiaro, A.~Guzzo, M.~Ianni, G.~Fortino, and F.~Piccialli, ``Model

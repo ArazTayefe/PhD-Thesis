@@ -1,10 +1,12 @@
 \chapter{Modular Learning in SNNs for Optimal Multi-Agent Decision-Making}
- 
-Moving from Chapter 3, where we looked at controlling one drone (the leader) using a 5G network, Chapter 4 takes us into \ac{snn}s and how they can be used to control drones (the followers). In Chapter 3, we carefully studied how well different types of controllers worked for quadrotor drones with cellular and 5G networks. This study showed us that the leader drone could be efficiently controlled remotely while satisfying control and communication constraints.
 
-Expanding on what we learned, this chapter looks at two main things: how well SNNs handle noise, which is important because drones operate in real-world conditions with lots of disturbances, and how they can handle complex scenarios like optimal decision-making. This detailed study shows us the potential of SNNs in managing complex behaviors of drones even when there are outside disturbances and their capability to separate the reward function for the neural network's different parts.
+\section{Introduction}
 
-The complex combination of neural structures in SNNs helps us implement complex learning systems. One good example of a complex situation is a differential game like the Active Target Defense (ATD) problem \cite{Ch5_ATD4}.
+Moving from Chapter 3, where we looked at controlling one drone (the leader) using a 5G network, Chapter 4 takes us into \ac{snn}s and how they can be used to control drones (the followers). In Chapter 3, we carefully studied how well different types of controllers worked for quadrotors with cellular and 5G networks. This study showed us that the leader drone could be efficiently controlled remotely while satisfying control and communication constraints.
+
+Expanding on what we learned, this chapter looks at two main things: how well \ac{snn}s handle noise, which is important because drones operate in real-world conditions with lots of disturbances, and how they can handle complex scenarios like optimal decision-making. This detailed study shows us the potential of \ac{snn}s in managing drones' complex behaviors even when there are outside disturbances and their capability to separate the reward function for the neural network's different parts.
+
+The neural structure in \ac{snn}s helps us implement complex learning systems. One good example of a complex situation is a differential game like the Active Target Defense (ATD) problem \cite{Ch5_ATD4}.
 
 In the ATD, a defender tries to protect a target, while a superior invader with higher velocity than the defender and target tries to reach the target and escape the defender at the same time. In defense strategy, they aid in analyzing movements and determining optimal strategies for aircraft. Law enforcement benefits from these games by minimizing escape possibilities. They are a fundamental component of game theory, providing insights into strategic decision-making across disciplines like economics and biology. Additionally, these games find applications in Cybersecurity for modeling attacker-defender interactions. \cite{Ch5_ATD4-5}.
 
@@ -14,7 +16,7 @@ There are three distinct outcomes to the ATD, characterized by two or three term
 
 The ATD problem has various solving methods, such as Apollonius Circle and Cartesian Ovals (CO). This chapter opts for the CO method over the Apollonius Circle because it considers the capture radius and effectiveness against superior invaders \cite{Ch5_ATD6}. The optimal capture point is considered the minimum distance between the target’s position and reachable region if the target is inside the defender’s dominant region. The defender’s dominant region is a region where the defender can reach the target without letting the invader capture the target.
 
-In this chapter, the problem is solved using reinforcement learning. It is considered that each agent knows the relative velocity of other agents. Figure \ref{fig:my_label4} shows LOS angles used as the input for the SNNs \cite{Ch5_ATD7}.
+In this chapter, the problem is solved using reinforcement learning. It is considered that each agent knows the relative velocity of other agents. Figure \ref{fig:my_label4} shows LOS angles used as the input for the \ac{snn}s \cite{Ch5_ATD7}.
 
 \begin{figure}
     \centering
@@ -23,12 +25,12 @@ In this chapter, the problem is solved using reinforcement learning. It is consi
     \label{fig:my_label4}
 \end{figure}
 
-The \ac{stdp} algorithm is used to train two separate SNNs simultaneously that control the invader and defender. The target in this chapter moves in the environment, and the SNNs receive the LOS angles (e.g., the defender receives the LOS angle to both the invader and the target) and calculate the steering angle for the agent (Figure \ref{fig:my_label2}). In this figure, the $\phi_{I}^{T}$ represents the LOS angle to the target relative to the invader.
+The \ac{stdp} algorithm is used to train two separate \ac{snn}s simultaneously that control the invader and defender. The target in this chapter moves in the environment, and the \ac{snn}s receive the LOS angles (e.g., the defender receives the LOS angle to both the invader and the target) and calculate the steering angle for the agent (Figure \ref{fig:my_label2}). In this figure, the $\phi_{I}^{T}$ represents the LOS angle to the target relative to the invader.
 
 \begin{figure}
     \centering
     \includegraphics[scale=0.65]{Figures/2.pdf}
-    \caption{Two SNNs simultaneously play and control the invader and defender. Each agent uses the LOS angle and relative velocities for training.}
+    \caption{Two \ac{snn}s simultaneously play and control the invader and defender. Each agent uses the LOS angle and relative velocities for training.}
     \label{fig:my_label2}
 \end{figure}
 
@@ -121,14 +123,14 @@ The change in synaptic weights for the invader regarding the target and defender
 
 \section{Network structure and encoding method}
 
-Figure \ref{fig:my_label1} shows the defender's network structure and encoding process. The invader has the same network with different inputs. The network receives the LOS angles and converts the inputs to Fuzzy Membership Values (FMV) using Gaussian Receptive Fields (GRF) \cite{Ch5_SNNModel1}. Since the fuzzy membership values are used just for encoding data into the \ac{snn}, the type of the membership function does not affect the computation complexity.
+Figure \ref{fig:my_label1} shows the defender's network structure and encoding process. The invader has the same network with different inputs. The network receives the LOS angles and converts the inputs to Fuzzy Membership Values (FMV) using \ac{grf} \cite{Ch5_SNNModel1}. Since the fuzzy membership values are used just for encoding data into the \ac{snn}, the type of the membership function does not affect the computation complexity.
 
 There are $q$ input neurons, and a membership function is assigned to each neuron. Therefore, there are $q$ membership functions. The acquired fuzzy membership values are real numbers between 0 and 1 and should be converted to the input currents. This can be done using a linear function and the minimum and maximum inputs.
 
 \begin{figure}
     \centering
     \includegraphics{Figures/4.pdf}
-    \caption{Network structure and encoding process for the input layer (Defender). Each neuron is associated with a membership function in GRF. The GRF encodes an input State ($S^t$) at each time step. There is both a training phase when ($\alpha  = 0$) and an operating phase when ($\alpha = 1)$.}
+    \caption{Network structure and encoding process for the input layer (Defender). Each neuron is associated with a membership function in \ac{grf}. The \ac{grf} encodes an input State ($S^t$) at each time step. There is both a training phase when ($\alpha  = 0$) and an operating phase when ($\alpha = 1)$.}
     \label{fig:my_label1}
 \end{figure}
 
@@ -145,7 +147,7 @@ There are $q$ input neurons, and a membership function is assigned to each neuro
 \end{equation}
 
 
-\noindent where $\sigma$ is the index of each neuron in the input layer and its corresponding fuzzy membership value in GRF.
+\noindent where $\sigma$ is the index of each neuron in the input layer and its corresponding fuzzy membership value in \ac{grf}.
 
 \begin{algorithm}
         \caption{Weight training algorithm}
@@ -183,7 +185,7 @@ There are $q$ input neurons, and a membership function is assigned to each neuro
         \vspace{5pt}
         \State{Find fired neurons in input and output layer}
         \State{Calculate the $\mbox{\boldmath$\tau$}$ matrix that shows the difference in firing time between the fired input neurons and fired output neurons (Figure \ref{fig:my_label1})}
-        \State{Calculate $\mathbf{STDP}$ for all connection using (\ref{Eq.15})}
+        \State{Calculate $\mathbf{R-STDP}$ for all connection using (\ref{Eq.15})}
         \State{Calculate $\mathbf{C}$ matrix using (\ref{Eq.14}) for all the connections}
         \State{Calculate $\mathbf{W}$ matrix using (\ref{Eq.16}) for all the connections considering reward from (\ref{Eq.18}) to (\ref{Eq.21})}
         \For{i = 1 to $\kappa$}
@@ -333,6 +335,6 @@ The results of the simulation reveal that the CO method is highly affected by th
 
 \section{Conclusion}
 
-This study focuses on addressing the ATD problem within a dynamic environment involving two agents, where the target is in motion. The approach involves training two Spiking Neural Networks (SNNs) simultaneously to engage in a competitive game. During the game, the target transitions from the invader's dominant region to the defender's dominant region. This shift in the target's location within the defender's dominant region satisfies the necessary conditions for determining the reachable regions for both the invader and defender.
+This study focused on addressing the ATD problem within a dynamic environment involving two agents, where the target is in motion. The approach involved training two \ac{snn} simultaneously to engage in a competitive game. During the game, the target transitions from the invader's dominant region to the defender's dominant region. This shift in the target's location within the defender's dominant region satisfied the necessary conditions for determining the reachable regions for both the invader and defender.
 
 To evaluate the effectiveness of the \ac{snn}'s solution, a comparison was made with an analytical solution designed for centralized problems. The results demonstrated that the \ac{snn} method was capable of identifying the optimal solution for decentralized problems, even under the presence of noise. This result holds significant practical implications, particularly in scenarios where establishing a global coordinate system for all agents proves to be challenging. The obtained solution provided by the \ac{snn} approach offers a valuable alternative in such cases, showcasing its potential in real-world applications.
