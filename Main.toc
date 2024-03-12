@@ -3,10 +3,10 @@
 \contentsline {section}{\numberline {1.1}Multi-agent cooperation over cellular network}{1}{section.1.1}%
 \contentsline {section}{\numberline {1.2}Neuron model}{1}{section.1.2}%
 \contentsline {chapter}{\numberline {2}Literature review}{4}{chapter.2}%
-\contentsline {chapter}{\numberline {3}Control and navigation of the leader drone over 5G network}{13}{chapter.3}%
+\contentsline {chapter}{\numberline {3}Control and Navigation of the Leader Drone Over 5G Network}{13}{chapter.3}%
 \contentsline {section}{\numberline {3.1}Introduction}{13}{section.3.1}%
 \contentsline {section}{\numberline {3.2}Quadrotor dynamic model}{15}{section.3.2}%
-\contentsline {section}{\numberline {3.3}Linear PD Controller}{16}{section.3.3}%
+\contentsline {section}{\numberline {3.3}Linear PD Controller}{17}{section.3.3}%
 \contentsline {section}{\numberline {3.4}Backstepping Controller}{18}{section.3.4}%
 \contentsline {section}{\numberline {3.5}State Estimator}{20}{section.3.5}%
 \contentsline {section}{\numberline {3.6}Delay Estimator}{22}{section.3.6}%

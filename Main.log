@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2021/W32TeX) (preloaded format=pdflatex 2021.12.18)  12 MAR 2024 16:13
+This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2021/W32TeX) (preloaded format=pdflatex 2021.12.18)  12 MAR 2024 16:43
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -548,6 +548,7 @@ Loading module `upgrade' ...
 \g__acro_stdp_int=\count356
 \g__acro_RCSE_int=\count357
 \g__acro_facl_int=\count358
+\g__acro_uav_int=\count359
 ) (c:/texlive/2021/texmf-dist/tex/latex/sectsty/sectsty.sty
 Package: sectsty 2002/02/25 v2.0.2 Commands to change all sectional heading styles
 
@@ -600,16 +601,16 @@ LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 57.
 LaTeX Font Info:    ... okay on input line 57.
  (c:/texlive/2021/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count359
+\scratchcounter=\count360
 \scratchdimen=\dimen266
 \scratchbox=\box64
-\nofMPsegments=\count360
-\nofMParguments=\count361
+\nofMPsegments=\count361
+\nofMParguments=\count362
 \everyMPshowfont=\toks35
-\MPscratchCnt=\count362
+\MPscratchCnt=\count363
 \MPscratchDim=\dimen267
-\MPnumerator=\count363
-\makeMPintoPDFobject=\count364
+\MPnumerator=\count364
+\makeMPintoPDFobject=\count365
 \everyMPtoPDFconversion=\toks36
 ) (c:/texlive/2021/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.sty
 Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
@@ -625,7 +626,7 @@ Package: refcount 2019/12/15 v3.6 Data extraction from label references (HO)
 ) (c:/texlive/2021/texmf-dist/tex/generic/gettitlestring/gettitlestring.sty
 Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
 )
-\c@section@level=\count365
+\c@section@level=\count366
 )
 LaTeX Info: Redefining \ref on input line 57.
 LaTeX Info: Redefining \pageref on input line 57.
@@ -777,8 +778,8 @@ Package pdftex.def Info: Figures/ControlFramework.pdf  used on input line 20.
 [14pdfTeX warning (ext4): destination with the same identifier (name{figure.3.1}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.30 
-      <./Figures/ControlFramework.pdf>]
+l.27 \section
+             {Quadrotor dynamic model} <./Figures/ControlFramework.pdf>]
 
 pdfTeX warning: pdflatex.exe (file ./Figures/DroneModel.pdf): PDF inclusion: found PDF version <1.7>, but at most version <1.5> allowed
 <Figures/DroneModel.pdf, id=622, 284.62335pt x 185.0112pt>
@@ -789,8 +790,8 @@ Package pdftex.def Info: Figures/DroneModel.pdf  used on input line 32.
 [15pdfTeX warning (ext4): destination with the same identifier (name{figure.3.2}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.56 T
-      he transitional motion in the inertial frame is given by, <./Figures/DroneModel.pdf>] [16] [17] [18] [19] [20] [21]
+l.52 \end{equation}
+                    <./Figures/DroneModel.pdf>] [16] [17] [18] [19] [20] [21]
 Package hyperref Info: bookmark level for unknown algorithm defaults to 0 on input line 303.
  [22] [23]
 LaTeX Font Info:    Trying to load font information for OMS+cmr on input line 369.
@@ -1379,18 +1380,18 @@ Underfull \hbox (badness 1005) in paragraph at lines 359--363
 
 [92] [93] [94] [95]) [96] (./Main.aux (./title_page.aux) (./0_Abstract.aux) (./1_Introduction.aux) (./2_Literature_Review.aux) (./3_UAV_control_over_5G.aux) (./4_ATD_with_SNN.aux) (./5_FL_with_SNN.aux) (./6_Future_Work.aux) (./Main.acr))
 Package rerunfilecheck Info: File `Main.out' has not changed.
-(rerunfilecheck)             Checksum: EEE22AFAF9BF3A232D200E15DA240D0D;6911.
+(rerunfilecheck)             Checksum: 8E07C719A67CCB5025DA2C8F22B25CA7;6911.
  ) 
 Here is how much of TeX's memory you used:
- 20172 strings out of 478353
- 385279 string characters out of 5852100
- 771457 words of memory out of 5000000
- 37500 multiletter control sequences out of 15000+600000
- 419931 words of font info for 85 fonts, out of 8000000 for 9000
+ 20266 strings out of 478353
+ 389080 string characters out of 5852100
+ 773530 words of memory out of 5000000
+ 37594 multiletter control sequences out of 15000+600000
+ 420232 words of font info for 86 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  68i,13n,77p,1440b,533s stack positions out of 5000i,500n,10000p,200000b,80000s
 {c:/texlive/2021/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc}<c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx8.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmex8.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmib10.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsl12.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb>
-Output written on Main.pdf (105 pages, 8737007 bytes).
+Output written on Main.pdf (105 pages, 8737168 bytes).
 PDF statistics:
  2114 PDF objects out of 2487 (max. 8388607)
  1779 compressed objects within 18 object streams
