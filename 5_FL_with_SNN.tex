@@ -6,21 +6,21 @@ The ``Consensus Flying Problem" deals with ensuring drones can work together in 
 
 As shown in Figure \ref{fig.Consensus Flying}, a swarm of agents (follower drones) flies around a leader. The leader is controlled from a remote base station, and the swarm agents should learn to fly safely with the leader. The leader sends its position to all agents, and each agent only sees two neighboring agents. The swarm aims to learn how to keep a commanded distance from each other and the leader. The commanded distance is provided from the leader. Each agent uses the onboard sensors to find the distance and line of sight from neighboring agents.
 
-\begin{figure}[H]
+\begin{figure}
     \centering
     \includegraphics[width=0.75\textwidth]{Figures/Consensus Flying - FL.pdf}
     \caption{The central server (the leader) and the surrounding follower agents (white drones). The follower agents learn to fly in a formation to maintain the commanded distance. The Local models trained individually by follower agents are sent to the leader. The leader aggregates the models and sends back the global model for another round of training of the follower agents.}
     \label{fig.Consensus Flying}
 \end{figure}
 
-The follower agents are equipped with an \gls{snn}, and their learning algorithm incorporates \gls{stdp} and \gls{fl}. Each follower agent trains a local network (\(M_{loc}^{n}\)) using \gls{stdp} and sends its model to the leader as the central server. The leader aggregates models and sends back the global model (\(M^{Global}\)).
+The follower agents are equipped with an \ac{snn}, and their learning algorithm incorporates \ac{stdp} and \ac{fl}. Each follower agent trains a local network (\(M_{loc}^{n}\)) using \ac{stdp} and sends its model to the leader as the central server. The leader aggregates models and sends back the global model (\(M^{Global}\)).
 
-This chapter employs the \gls{snn} model to train a group of swarm agents that follow a leader. Each agent has its own \gls{snn}, which is trained independently using the \gls{stdp} algorithm. Each agent receives position data from the agents nearby. The goal is for each agent to keep a commanded distance from the leader agent and the other agents in the group. The encoding and decoding processes for the input and output layers of the \gls{snn} are considered fuzzy encoding, and a novel method is introduced to stabilize the network dynamics considering the reward function. This work presents several key contributions:
+This chapter employs the \ac{snn} model to train a group of swarm agents that follow a leader. Each agent has its own \ac{snn}, which is trained independently using the \ac{stdp} algorithm. Each agent receives position data from the agents nearby. The goal is for each agent to keep a commanded distance from the leader agent and the other agents in the group. The encoding and decoding processes for the input and output layers of the \ac{snn} are considered fuzzy encoding, and a novel method is introduced to stabilize the network dynamics considering the reward function. This work presents several key contributions:
 
 \begin{itemize}
-  \item The chapter presents a comprehensive method for stabilizing and enhancing the learning process in \gls{snn}. This method focuses on controlling the unbounded growth of synaptic weights in SNNs, utilizing a strategy that dynamically adapts to changes in reward conditions and coefficients. It introduces an innovative decay rate adjustment based on the status of synaptic weights. This approach not only enhances the responsiveness to weight changes but also preserves the shape of the Gaussian function formed by fuzzy encoding.
+  \item The chapter presents a comprehensive method for stabilizing and enhancing the learning process in \ac{snn}. This method focuses on controlling the unbounded growth of synaptic weights in SNNs, utilizing a strategy that dynamically adapts to changes in reward conditions and coefficients. It introduces an innovative decay rate adjustment based on the status of synaptic weights. This approach not only enhances the responsiveness to weight changes but also preserves the shape of the Gaussian function formed by fuzzy encoding.
   
-  \item In terms of advancements in \gls{fl} with \gls{stdp}, the chapter addresses the \gls{fl} challenges in the \gls{stdp} framework. It introduces an event-triggered mechanism for model publishing and receiving within the network, which improves network usage by the agents. Additionally, the chapter implements a novel weighted aggregation method on the server. This method calculates weights based on the time of arrival of the models, effectively tackling the asynchronous issues in FL.
+  \item In terms of advancements in \ac{fl} with \ac{stdp}, the chapter addresses the \ac{fl} challenges in the \ac{stdp} framework. It introduces an event-triggered mechanism for model publishing and receiving within the network, which improves network usage by the agents. Additionally, the chapter implements a novel weighted aggregation method on the server. This method calculates weights based on the time of arrival of the models, effectively tackling the asynchronous issues in FL.
 \end{itemize}
 
 \section{Proposed Method}
@@ -32,7 +32,7 @@ This chapter assumes that each agent detects only two neighboring agents in addi
 \begin{figure}
     \centering
     \includegraphics[scale=0.75]{Figures/Network Structure.pdf}
-    \caption{\gls{snn} structure with encoding and decoding layers. Each sub-layer consists of a fuzzy encoder and a Fuzzy-to-Spiking Converter, with the output layer receiving inputs from synaptic weights and a random action selector. During the training phase, the output layer receives input only from the random action selector, which then shifts to synaptic weight inputs after the training.}
+    \caption{\ac{snn} structure with encoding and decoding layers. Each sub-layer consists of a fuzzy encoder and a Fuzzy-to-Spiking Converter, with the output layer receiving inputs from synaptic weights and a random action selector. During the training phase, the output layer receives input only from the random action selector, which then shifts to synaptic weight inputs after the training.}
     \label{fig.Network Structure}
 \end{figure}
 
@@ -56,7 +56,7 @@ Every input sub-layer is split into two parts. The first part deals with distanc
 
 The encoding process is shown in Figure \ref{fig.Encoder}. The Fuzzy to Spiking (F2S) block uses \eqref{Eq.NS.3} to calculate the inputs for the associated sub-layer.
 
-\begin{figure}[H]
+\begin{figure}
     \centering
     \includegraphics[scale=0.75]{Figures/Encoder.pdf}
     \caption{The fuzzy encoding principle for the input sub-layer.}
@@ -109,15 +109,15 @@ One of the challenges in robotic applications is ensuring smooth transitions in 
 
 \subsection{Training algorithm}
 
-The \gls{stdp} algorithm is a learning technique inspired by biological processes in the brain, which is believed to be fundamental to certain learning processes \cite{STDP2}. The algorithm's core principle is that when a pre-synaptic neuron activates just before its post-synaptic counterpart, the synapse's strength connecting them should increase, and vice versa if the post-synaptic neuron fires first.
+The \ac{stdp} algorithm is a learning technique inspired by biological processes in the brain, which is believed to be fundamental to certain learning processes \cite{STDP2}. The algorithm's core principle is that when a pre-synaptic neuron activates just before its post-synaptic counterpart, the synapse's strength connecting them should increase, and vice versa if the post-synaptic neuron fires first.
 
-Within the \gls{snn} framework, pre-synaptic neurons are the input neurons, and post-synaptic neurons function as the output neurons. The function \(STDP(\tau)\) can be defined as the firing timelines of both input and output neurons \cite{STDP1} as,
+Within the \ac{snn} framework, pre-synaptic neurons are the input neurons, and post-synaptic neurons function as the output neurons. The function \(STDP(\tau)\) can be defined as the firing timelines of both input and output neurons \cite{STDP1} as,
 
 \begin{equation} \label{Eq.TA.1}
 STDP_{kl}(\tau) = \mathcal{A} \exp\left(-\frac{\tau}{\tau_{s}}\right) \text{for \(\tau \geq 0\)}
 \end{equation}
 
-\noindent where \(\mathcal{A}\) stands as the exponential function's amplitude, and \(\tau\) is the difference between the firing time of the input neuron \((k)\) and output neuron \((l)\). Meanwhile, \(\tau_{s}\) acts as the time constant, setting the decay rate for the \(\gls{stdp}\) function. Should \(\tau_{s}\) approach infinity, the exponential function converges to 1, neutralizing time's effect on the \(\gls{stdp}\) function.
+\noindent where \(\mathcal{A}\) stands as the exponential function's amplitude, and \(\tau\) is the difference between the firing time of the input neuron \((k)\) and output neuron \((l)\). Meanwhile, \(\tau_{s}\) acts as the time constant, setting the decay rate for the \(\ac{stdp}\) function. Should \(\tau_{s}\) approach infinity, the exponential function converges to 1, neutralizing time's effect on the \(\ac{stdp}\) function.
 
 The adjustment of synaptic weights follows the given equation:
 
@@ -139,13 +139,13 @@ The adjustment of synaptic weights follows the given equation:
 
 If an agent finds itself farther away from the commanded distance than a neighboring agent or the leader, it will be rewarded positively for decreasing its distance. Conversely, moving closer results in a negative reward if the agent is within the commanded distance from a neighboring agent or the leader. This system is designed to encourage the maintenance of a commanded distance: being too far away from the commanded distance invites a penalty. At the same time, positive reinforcement is given for closing the gap between the current distance and the commanded distance.
 
-One of the challenges in \gls{stdp} is the unbounded growth or decay of synaptic weights, which can impede stable and effective learning in neural networks. The following section introduces a novel method focused on learning rate and weight stabilization to address this challenge and enhance the algorithm's applicability. This proposed method, designed to regulate synaptic weight changes, ensures a balanced and controlled learning process. It innovatively incorporates an Adaptive Decay Rate technique designed to maintain stability in synaptic weight adjustments, thereby significantly improving the performance and reliability of \gls{stdp} in \gls{snn}s.
+One of the challenges in \ac{stdp} is the unbounded growth or decay of synaptic weights, which can impede stable and effective learning in neural networks. The following section introduces a novel method focused on learning rate and weight stabilization to address this challenge and enhance the algorithm's applicability. This proposed method, designed to regulate synaptic weight changes, ensures a balanced and controlled learning process. It innovatively incorporates an Adaptive Decay Rate technique designed to maintain stability in synaptic weight adjustments, thereby significantly improving the performance and reliability of \ac{stdp} in \ac{snn}s.
 
 \subsection{Weight Stabilization using Reward-Modulated Competitive Synaptic Equilibrium (R-CSE)}
 
-Controlling the excessive increase of synaptic weights in \gls{snn}s is important to maintain network stability and function. If not controlled, this growth can lead to saturation, affecting the network's ability to learn and adapt. When the network receives fuzzy sets of firing strengths as input, the synaptic weights grow in a pattern influenced by the Gaussian function's shape used for fuzzy encoding. Imposing a limit on synaptic weights disrupts this growth pattern over time, leading to all synaptic weights eventually maxing out. Weight normalization, while preventing excessive growth in one part of the network, can inhibit overall growth; when a synaptic connection reaches its maximum, its activation subsequently diminishes other weights. 
+Controlling the excessive increase of synaptic weights in \ac{snn}s is important to maintain network stability and function. If not controlled, this growth can lead to saturation, affecting the network's ability to learn and adapt. When the network receives fuzzy sets of firing strengths as input, the synaptic weights grow in a pattern influenced by the Gaussian function's shape used for fuzzy encoding. Imposing a limit on synaptic weights disrupts this growth pattern over time, leading to all synaptic weights eventually maxing out. Weight normalization, while preventing excessive growth in one part of the network, can inhibit overall growth; when a synaptic connection reaches its maximum, its activation subsequently diminishes other weights. 
 
-Traditional methods like L1 regularization and weight decay employ a constant decay rate, which can slow the network's responsiveness to changes in rewards. Alternatively, the Bienenstock, Cooper, and Munro (BCM) method, a more advanced approach, dynamically adjusts both a threshold and a decay rate in response to input variations. However, this method does not provide a control mechanism for the fuzzy inputs. In this chapter, we introduce a method called \gls{RCSE} to manage the unbounded growth of synaptic weights while maintaining the gradient in the synaptic weights matrix formed due to differences in firing strength from fuzzy membership functions while dynamically adjusting the network when the reward changes.
+Traditional methods like L1 regularization and weight decay employ a constant decay rate, which can slow the network's responsiveness to changes in rewards. Alternatively, the Bienenstock, Cooper, and Munro (BCM) method, a more advanced approach, dynamically adjusts both a threshold and a decay rate in response to input variations. However, this method does not provide a control mechanism for the fuzzy inputs. In this chapter, we introduce a method called \ac{RCSE} to manage the unbounded growth of synaptic weights while maintaining the gradient in the synaptic weights matrix formed due to differences in firing strength from fuzzy membership functions while dynamically adjusting the network when the reward changes.
 
 Let us define \(\boldsymbol{\alpha}\) as the learning rate matrix. We will also use \(\mathcal{S}\) to represent the set of neurons that fired at time \(t\) in one of the network sections. If we consider \(W_{max}^{\mathcal{S}}(t)\) as the maximum weight among the firing neurons in set \(\mathcal{S}\), then we can characterize the learning rate using a Sigmoid function. This function gradually transitions from 1 to 0 as the learning process advances, as explained below:
 
@@ -171,7 +171,7 @@ This chapter defines the decay rate as a function of the maximum synaptic weight
     \Theta^{\mathcal{S}} = \left( \frac{\mathcal{A}\mathcal{R}_{max}^{G}}{\lambda\log{(2)}} \right) \log \left(1 + \exp\left[{\left(\frac{\ln{(2^{\lambda^2}-1)}}{\Psi^{\mathcal{S}}} \right) \left( |W_{max}^{\mathcal{S}}(t)| - \Psi^{\mathcal{S}} \right)} \right] \right)
 \end{equation}
 
-The choice of setting the decay rate to \(\lambda\mathcal{A} \times \mathcal{R}_{max}^{G}\) when \(|W_{max}^{\mathcal{S}}(t)| = 2 \Psi^{\mathcal{S}}\) is based on the feature of reward coefficients. Specifically, when the reward coefficient increases, leading to \(|W_{max}^{\mathcal{S}}(t)| < \Psi^{\mathcal{S}}\), the \(|W_{max}^{\mathcal{S}}(t)|\) is allowed to increase. Conversely, a decrease in the reward coefficient, resulting in \(|W_{max}^{\mathcal{S}}(t)| > \Psi^{\mathcal{S}}\), necessitates a higher decay rate to reduce the maximum synaptic weight back to \(\Psi^{\mathcal{S}}\). Incorporating the \gls{RCSE} method into \eqref{Eq.TA.2}, the enhanced version of the \gls{stdp} method is expressed as follows,
+The choice of setting the decay rate to \(\lambda\mathcal{A} \times \mathcal{R}_{max}^{G}\) when \(|W_{max}^{\mathcal{S}}(t)| = 2 \Psi^{\mathcal{S}}\) is based on the feature of reward coefficients. Specifically, when the reward coefficient increases, leading to \(|W_{max}^{\mathcal{S}}(t)| < \Psi^{\mathcal{S}}\), the \(|W_{max}^{\mathcal{S}}(t)|\) is allowed to increase. Conversely, a decrease in the reward coefficient, resulting in \(|W_{max}^{\mathcal{S}}(t)| > \Psi^{\mathcal{S}}\), necessitates a higher decay rate to reduce the maximum synaptic weight back to \(\Psi^{\mathcal{S}}\). Incorporating the \ac{RCSE} method into \eqref{Eq.TA.2}, the enhanced version of the \ac{stdp} method is expressed as follows,
 
 \begin{equation} \label{Eq.WS.4}
     \dot{\bm{W}}(t) = \bm{\alpha} \odot \textbf{STDP}(\tau) \odot \mathcal{R}(t) - \bm{\Theta}_{ij} \odot \text{sgn}(\bm{W})
@@ -181,17 +181,17 @@ The choice of setting the decay rate to \(\lambda\mathcal{A} \times \mathcal{R}_
 
 When \(|W_{max}^{\mathcal{S}}(t)| < \Psi^{\mathcal{S}} \), the reward adjusts the synaptic weights, and there is no weight decay to decrease the learning time. When \(|W_{max}^{\mathcal{S}}(t)| > \Psi^{\mathcal{S}} \), the decay rate changes the synaptic weights and brings the maximum weight to the reward zone, where \(|W_{max}^{\mathcal{S}}(t)| < \Psi^{\mathcal{S}} \) and the networks responds to reward change. 
 
-The \gls{RCSE} method addresses the challenge of unbounded growth in synaptic weights within \gls{snn}s. By integrating a dynamic decay rate governed by the SoftPlus function, \gls{RCSE} ensures that synaptic weight adjustments remain responsive to learning stages and reward changes. This method not only preserves the growth pattern induced by fuzzy input firing strengths but also provides a balanced approach to weight adjustment, preventing saturation and facilitating continual learning adaptability. Moving forward, we will explore the integration of \gls{fl} in the learning process.
+The \ac{RCSE} method addresses the challenge of unbounded growth in synaptic weights within \ac{snn}s. By integrating a dynamic decay rate governed by the SoftPlus function, \ac{RCSE} ensures that synaptic weight adjustments remain responsive to learning stages and reward changes. This method not only preserves the growth pattern induced by fuzzy input firing strengths but also provides a balanced approach to weight adjustment, preventing saturation and facilitating continual learning adaptability. Moving forward, we will explore the integration of \ac{fl} in the learning process.
 
 \subsection{Federated Learning for Consensus Flying}
 
-In \gls{fl}, a key challenge is centralizing various models on one server. This process must effectively combine these models to create a unified global model without compromising the specific adjustments made to each model. A critical strategy involves choosing models that contain substantial information. Another significant aspect is determining the frequency of model aggregation. Shorter intervals between aggregations can enhance learning efficiency but may strain network resources, particularly as the number of participating agents and devices grows. Conversely, longer intervals might slow down the learning process due to delayed updates of the global model. This section proposes an aggregation method for \gls{snn}. Our focus is on reducing network usage and energy consumption.
+In \ac{fl}, a key challenge is centralizing various models on one server. This process must effectively combine these models to create a unified global model without compromising the specific adjustments made to each model. A critical strategy involves choosing models that contain substantial information. Another significant aspect is determining the frequency of model aggregation. Shorter intervals between aggregations can enhance learning efficiency but may strain network resources, particularly as the number of participating agents and devices grows. Conversely, longer intervals might slow down the learning process due to delayed updates of the global model. This section proposes an aggregation method for \ac{snn}. Our focus is on reducing network usage and energy consumption.
 
-Asynchronous \gls{fl} (AFL) has emerged as a significant advancement in federated systems, particularly in response to the challenges posed by device heterogeneity. This approach allows clients to upload their local model updates at different times rather than synchronously \cite{AFL1}. Such a method is particularly beneficial in reducing the negative impacts of device heterogeneity, which can include varying computational capacities and network connectivity among devices. In traditional \gls{fl} setups, delays caused by poor network signals or unexpected client crashes can significantly prolong the time the server takes to receive updates from all clients. By adopting asynchronous aggregation, the server processes and aggregates models as they are received without synchronizing with all clients. This strategy accelerates the training process, making \gls{fl} more efficient and adaptable to diverse client conditions.
+Asynchronous \ac{fl} (AFL) has emerged as a significant advancement in federated systems, particularly in response to the challenges posed by device heterogeneity. This approach allows clients to upload their local model updates at different times rather than synchronously \cite{AFL1}. Such a method is particularly beneficial in reducing the negative impacts of device heterogeneity, which can include varying computational capacities and network connectivity among devices. In traditional \ac{fl} setups, delays caused by poor network signals or unexpected client crashes can significantly prolong the time the server takes to receive updates from all clients. By adopting asynchronous aggregation, the server processes and aggregates models as they are received without synchronizing with all clients. This strategy accelerates the training process, making \ac{fl} more efficient and adaptable to diverse client conditions.
 
-Our proposed \gls{fl} model aggregation algorithm aims to establish an efficient and dynamic system for global and local model publishing. This system relies on the similarity between consecutive global and local models and publishes updates only when significant changes are detected, thus avoiding redundant updates and improving overall efficiency. Unlike the uniform model updates in FedAvg \cite{AFL2}, our approach allows individual agents to evaluate and send their local models based on a similarity threshold with the global model, thereby enabling a potentially more effective update process. Our aggregation strategy emphasizes similarity metrics for model updates, which is not commonly emphasized in methods like FedNova \cite{AFL3}, adding a layer of context sensitivity to our approach.
+Our proposed \ac{fl} model aggregation algorithm aims to establish an efficient and dynamic system for global and local model publishing. This system relies on the similarity between consecutive global and local models and publishes updates only when significant changes are detected, thus avoiding redundant updates and improving overall efficiency. Unlike the uniform model updates in FedAvg \cite{AFL2}, our approach allows individual agents to evaluate and send their local models based on a similarity threshold with the global model, thereby enabling a potentially more effective update process. Our aggregation strategy emphasizes similarity metrics for model updates, which is not commonly emphasized in methods like FedNova \cite{AFL3}, adding a layer of context sensitivity to our approach.
 
-In our approach, considering the difference in agents' neural network parameters and maximum and minimum synaptic weights, the weights are normalized to align them on a uniform scale ranging from -1 to 1. This normalization process makes the neural model values comparable across the network. Based on the maximum and minimum synaptic weights outlined in \eqref{Eq.NM.5}, and taking into account the highest excitation (\(I^{max}\)) and inhibition (\(-I^{max}\)), the normalization of synaptic weights is performed as follows:
+In our approach, considering the difference in agents' neural network parameters and maximum and minimum synaptic weights, the weights are normalized to align them on a uniform scale ranging from -1 to 1. This normalization process makes the neural model values comparable across the network. Based on the maximum and minimum synaptic weights and taking into account the highest excitation (\(I^{max}\)) and inhibition (\(-I^{max}\)), the normalization of synaptic weights is performed as follows:
 
 \begin{equation} \label{Eq.AFL.1}
     \bm{\overline{W}}_{k}(t) = \frac{1}{I_{k}^{max}}[\bm{W}_{k}(t)]
@@ -205,7 +205,7 @@ The global model on the server (Leader) is then computed using a weighted averag
 \bm{\overline{W}}_{G}(t) = \frac{\sum_{k=1}^{N} \omega_{k} . \bm{\overline{W}}_{k}(t)}{\sum_{k=1}^{N} \omega_{k}}
 \end{equation}
 
-\noindent where \(\bm{\overline{W}}_{G}(t)\) is the global normalized model on the central server, \(N\) is the number of agents, and \(\omega_{k}\) is the aggregation weight for each \gls{snn} model, defined as,
+\noindent where \(\bm{\overline{W}}_{G}(t)\) is the global normalized model on the central server, \(N\) is the number of agents, and \(\omega_{k}\) is the aggregation weight for each \ac{snn} model, defined as,
 
 \begin{equation} \label{Eq.AFL.3}
 \omega_{k} = \frac{1}{\sqrt{mn}} \|\bm{\overline{W}}_{k}(t)\|_F \exp\left(-\frac{t-T_{k}}{\tau_{cs}}\right)\;\;\;\; (t \geq T_{k})
@@ -229,7 +229,7 @@ The central server follows a similar procedure as the agents, evaluating the dis
 \mathcal{D}_{G}(\bm{\overline{W}}_{G}(t), \bm{\overline{W}}_{G}(T_{cs})) = \frac{1}{2 \sqrt{mn}}\sqrt{\sum_{i=1}^{m}\sum_{j=1}^{n} (a_{ij} - b_{ij})^2}\;\;\;\; (t \geq T_{cs})
 \end{equation}
 
-Incorporating the proposed \gls{fl} method with the \gls{RCSE} algorithm, the modified \gls{stdp} equation can be represented as follows,
+Incorporating the proposed \ac{fl} method with the \ac{RCSE} algorithm, the modified \ac{stdp} equation can be represented as follows,
 
 \begin{equation} \label{Eq.AFL.6}
     \dot{\bm{W}}_{k}(t) = (1-\delta(t-T_{cs})) \left[ \bm{\alpha} \odot \textbf{STDP}(\tau) \odot \mathcal{R}(t) - \bm{\Theta} \odot \text{sgn}(\bm{W}_{k}(t)) \right] + \delta(t-T_{cs})I_{k}^{max}\left(\bm{\overline{W}}_{G}(t) - \bm{\overline{W}}_{k}(t)\right)
@@ -238,7 +238,7 @@ Incorporating the proposed \gls{fl} method with the \gls{RCSE} algorithm, the mo
 \noindent where \(\delta\) is the Dirac delta function. Algorithm~\ref{Algorithm.1} shows the step-by-step implementation process of the proposed method.
 
 \begin{algorithm} [H]
-\caption{High-Level Algorithm for the Proposed \gls{fl} Algorithm}
+\caption{High-Level Algorithm for the Proposed \ac{fl} Algorithm}
 \label{Algorithm.1}
 \begin{algorithmic}[1]
 \Require Initialization of Central Server and Agents
@@ -275,14 +275,14 @@ The proposed algorithm allows agents to communicate less often and save energy. 
 
 \section{Results and Discussion}
 
-In this section, we conducted a numerical simulation to validate the performance of the proposed method. The simulation involves a group of five agents flying around a leader who is moving in a circular path. Initially, a scenario without implementing \gls{fl} was conducted to evaluate the performance of the \gls{snn} in achieving coordinated flight. During this phase, the effect of the change in reward was simulated to examine the \gls{RCSE} method. The results from this phase were then compared to those obtained using a \gls{facl} algorithm. In the second part of the simulation, the proposed \gls{fl} aggregation algorithm is used, where the leader agent acts as a central server. Finally, the algorithm was tested both before and after changing the rewards.
+In this section, we conducted a numerical simulation to validate the performance of the proposed method. The simulation involves a group of five agents flying around a leader who is moving in a circular path. Initially, a scenario without implementing \ac{fl} was conducted to evaluate the performance of the \ac{snn} in achieving coordinated flight. During this phase, the effect of the change in reward was simulated to examine the \ac{RCSE} method. The results from this phase were then compared to those obtained using a \ac{facl} algorithm. In the second part of the simulation, the proposed \ac{fl} aggregation algorithm is used, where the leader agent acts as a central server. Finally, the algorithm was tested both before and after changing the rewards.
 
 \subsection{Simulation without FL}
 
-In this simulation, we modeled five agents, each equipped with its own \gls{snn} model, capable of reaching a maximum speed of 1 \(m/s\). The architecture of each agent's neural network included 72 input neurons. Since each agent was designed to detect three distinct objects within its environment, the input layer was organized into sub-layers, with 24 neurons dedicated to each object. The network's output layer comprised 4 neurons, divided equally to represent \(\Delta x\) and \(\Delta y\) movements. The \gls{snn} model in the simulation is a fully connected network, and the parameters of the \gls{lif} neuron are also represented in Table \ref{table:Parameter values for the LIF neuron model}.
+In this simulation, we modeled five agents, each equipped with its own \ac{snn} model, capable of reaching a maximum speed of 1 \(m/s\). The architecture of each agent's neural network included 72 input neurons. Since each agent was designed to detect three distinct objects within its environment, the input layer was organized into sub-layers, with 24 neurons dedicated to each object. The network's output layer comprised 4 neurons, divided equally to represent \(\Delta x\) and \(\Delta y\) movements. The \ac{snn} model in the simulation is a fully connected network, and the parameters of the \ac{lif} neuron are also represented in Table \ref{table:Parameter values for the LIF neuron model}.
 
 \begin{table}[H]
-\caption{Parameter values for \gls{lif} neuron model \cite{R1}}
+\caption{Parameter values for \ac{lif} neuron model \cite{R1}}
 \label{table:Parameter values for the LIF neuron model}
 \centering
 \begin{tabular}{l l l}
@@ -299,9 +299,9 @@ $V_{th}$ & -50 mV & Threshold membrane potential \\
 \end{tabular}
 \end{table}
 
-The \gls{stdp} mechanism updated synaptic weights at 10 ms intervals. During these intervals, the learning algorithm adjusted the agent's states based on received data from other agents and the leader while simultaneously generating random outputs as part of an exploration strategy.
+The \ac{stdp} mechanism updated synaptic weights at 10 ms intervals. During these intervals, the learning algorithm adjusted the agent's states based on received data from other agents and the leader while simultaneously generating random outputs as part of an exploration strategy.
 
-\begin{table}[h]
+\begin{table}
 \caption{Simulation Parameters}
 \label{table:simulation-parameters}
 \centering
@@ -312,8 +312,8 @@ The \gls{stdp} mechanism updated synaptic weights at 10 ms intervals. During the
 \textbf{Parameter} & \textbf{Value} & \textbf{Description} \\ 
 \hline
 \(\Delta T\) & 10 ms & Weight and state update sample time \\
-\(\tau_{s}\) & 2 ms & Time constant for \gls{stdp} \\
-\(\mathcal{A}\) & 1 & Amplitude in \gls{stdp} function \\
+\(\tau_{s}\) & 2 ms & Time constant for \ac{stdp} \\
+\(\mathcal{A}\) & 1 & Amplitude in \ac{stdp} function \\
 \(\lambda\) & 5 & Decay rate coefficient\\
 \(\Delta x\) and \(\Delta y\) & 0.01 m & Max step per \(\Delta T\) \\
 \(\sigma\) & 0.5 & Gaussian function's std. deviation \\
@@ -339,7 +339,7 @@ In order to monitor the swarm performance, the minimum and maximum distances of 
 
 The simulation included two phases. During the initial phase, the objective was for the agents to learn to maintain the commanded distance from each other and the leader. This phase took 600 seconds for training, and the reward coefficient among followers \((\mathcal{C}_{Fi}^{Fj})\) was set at 0.02, while the coefficient between followers and the leader \((\mathcal{C}_{Fi}^{L})\) was set at 0.07. These parameters were derived from a series of numerical simulations. A higher value of \(\mathcal{C}_{Fi}^{L}\) signifies an increased emphasis on the leader's role in the learning process. 
 
-To ensure a fair comparison between different learning methods, we have compared our proposed approach with the \gls{facl} algorithm \cite{FACL1}. We opted for a fuzzy controller as it provides an explanation for how the \gls{snn} works. The FACL algorithm consists of two components, an actor and a critic. The actor is a fuzzy controller whose output serves as the control signal. The critic is a fuzzy inference system that stores the state value and represents the value function. The actor's output, which is the control signal, is computed as follows:
+To ensure a fair comparison between different learning methods, we have compared our proposed approach with the \ac{facl} algorithm \cite{FACL1}. We opted for a fuzzy controller as it provides an explanation for how the \ac{snn} works. The FACL algorithm consists of two components, an actor and a critic. The actor is a fuzzy controller whose output serves as the control signal. The critic is a fuzzy inference system that stores the state value and represents the value function. The actor's output, which is the control signal, is computed as follows:
 
 \begin{equation}
     \label{eq:actor_output}
@@ -359,7 +359,7 @@ To ensure a fair comparison between different learning methods, we have compared
     \label{eq:value_function}
     \hat{V}_t=\sum\limits_{l=1}^{L} \Phi^l \zeta^l_{t},
 \end{equation}
-\noindent where \(\zeta^l_{t}\) is the output parameter of rule \(l\) at time \(t\). Finding the proper values for \(\omega^l\) and \(\zeta^l\) concerning a reward is the training purpose in the \gls{facl} algorithm.
+\noindent where \(\zeta^l_{t}\) is the output parameter of rule \(l\) at time \(t\). Finding the proper values for \(\omega^l\) and \(\zeta^l\) concerning a reward is the training purpose in the \ac{facl} algorithm.
 
 To train the followers, five initial sets of \(\omega^l\)s and \(\zeta^l\) are created and set to zero. Each follower generates an action with \eqref{eq:actor_output}. The value of \(u_t\) is perturbed via a Gaussian noise with a mean of 0 and variance of \(\varsigma\) (\(u_t'=u_t+n(0,\varsigma)\)). The agents take action \(u_t'\) and move to a new state. The reward function returns a signal corresponding to the quality of the actions. In this section, we implemented the reward functions in \eqref{Eq.TA.3} and \eqref{Eq.TA.4}, where the weighting coefficients are set to 1. The temporal difference \(\Delta\) is calculated for each agent as follows,
 
@@ -382,7 +382,7 @@ The critic is updated as follows,
     \zeta^l_{t+1}\longleftarrow \zeta^l_{t} + \kappa \Delta \Phi^l . 
 \end{equation}
 
-In \eqref{eq:actor_update} and \eqref{eq:critic_update}, \(\kappa\) and \(\rho\) are the critic's and actor's learning rates. Table \ref{tab:FACL} shows the parameters used for the \gls{facl} algorithm. It should be mentioned that seven membership functions are used for each input, and thus, the total number of rules is \(7\times7\times7\times7\times7\times7=117,649\).
+In \eqref{eq:actor_update} and \eqref{eq:critic_update}, \(\kappa\) and \(\rho\) are the critic's and actor's learning rates. Table \ref{tab:FACL} shows the parameters used for the \ac{facl} algorithm. It should be mentioned that seven membership functions are used for each input, and thus, the total number of rules is \(7\times7\times7\times7\times7\times7=117,649\).
 
 \begin{table}[H]
 \caption{Simulation Parameters for the FACL Algorithm}
@@ -403,21 +403,21 @@ In \eqref{eq:actor_update} and \eqref{eq:critic_update}, \(\kappa\) and \(\rho\)
 \endgroup
 \end{table}
 
-Figure \ref{fig_3_0} shows the simulation results for the \gls{RCSE} method. According to the results, the agents rapidly aligned around the leader within 6.89 seconds, and the maximum distance was reduced from 7.632 meters to the target distance of 2 meters. The swarm completed the formation around the leader in approximately 8.94 seconds, avoiding collisions.
+Figure \ref{fig_3_0} shows the simulation results for the \ac{RCSE} method. According to the results, the agents rapidly aligned around the leader within 6.89 seconds, and the maximum distance was reduced from 7.632 meters to the target distance of 2 meters. The swarm completed the formation around the leader in approximately 8.94 seconds, avoiding collisions.
 
 \begin{figure}[H]
     \centering
     \begin{minipage}{0.48\textwidth}
         \includegraphics[width=\linewidth]{Figures/Distances - BRC.pdf}
-        \caption{Distances during the test phase (\gls{RCSE} method)}
+        \caption{Distances during the test phase (\ac{RCSE} method)}
         \label{fig_3_0}
         \vspace{15pt}
         \includegraphics[width=\linewidth]{Figures/Environment - BRC.pdf}
-        \caption{Agents' trajectory during the test phase (\gls{RCSE} method)}
+        \caption{Agents' trajectory during the test phase (\ac{RCSE} method)}
         \label{fig_3_1}
         \vspace{5pt}
         \includegraphics[width=\linewidth]{Figures/Distances - R cmd Change.pdf}
-        \caption{Change in commanded distance during the test phase (\gls{RCSE} method)}
+        \caption{Change in commanded distance during the test phase (\ac{RCSE} method)}
         \label{fig_3_2}
     \end{minipage}
     \hfill
@@ -436,9 +436,9 @@ Figure \ref{fig_3_0} shows the simulation results for the \gls{RCSE} method. Acc
     \end{minipage}
 \end{figure}
 
-As mentioned in section 3, the input encoding uses the error between current and commanded distance. Therefore, one of the advantages of the encoding and learning method in this chapter is that the learned policies are independent of the commanded distance. Since the \gls{snn} uses the distance error, the commanded distance can be changed after training. Figure \ref{fig_3_2} shows the response of the agents to change in commanded distance after training. According to this figure, when the commanded distance is changed at 30 seconds, the swarm immediately responds to this change in 2.98 seconds without disrupting the formation or any collision.
+As mentioned in section 3, the input encoding uses the error between current and commanded distance. Therefore, one of the advantages of the encoding and learning method in this chapter is that the learned policies are independent of the commanded distance. Since the \ac{snn} uses the distance error, the commanded distance can be changed after training. Figure \ref{fig_3_2} shows the response of the agents to change in commanded distance after training. According to this figure, when the commanded distance is changed at 30 seconds, the swarm immediately responds to this change in 2.98 seconds without disrupting the formation or any collision.
 
-Figure \ref{fig_3_3} shows the simulation results for the FACL algorithm. The training time was 1000 seconds, and the algorithm converged to the final solution in 667.26 seconds. According to the results, the agents achieved successful formation in approximately 15.85 seconds. Similarly, Figure \ref{fig_3_5} shows the simulation results for the FACL algorithm, where the commanded distance is initially set to 2 \(m\) and at \(t=30\), the commanded distance changes to 4 \(m\). The results show that it takes 4.35 seconds for the swarm to adapt to the new command. It is worth mentioning that in Figures \ref{fig_3_3} and \ref{fig_3_5}, the distances converge to the commanded distance but stay within a bias. Increasing the number of membership functions can reduce the bias, but it increases the training time of the \gls{facl} algorithm.
+Figure \ref{fig_3_3} shows the simulation results for the FACL algorithm. The training time was 1000 seconds, and the algorithm converged to the final solution in 667.26 seconds. According to the results, the agents achieved successful formation in approximately 15.85 seconds. Similarly, Figure \ref{fig_3_5} shows the simulation results for the FACL algorithm, where the commanded distance is initially set to 2 \(m\) and at \(t=30\), the commanded distance changes to 4 \(m\). The results show that it takes 4.35 seconds for the swarm to adapt to the new command. It is worth mentioning that in Figures \ref{fig_3_3} and \ref{fig_3_5}, the distances converge to the commanded distance but stay within a bias. Increasing the number of membership functions can reduce the bias, but it increases the training time of the \ac{facl} algorithm.
 
 After 600 seconds, the leader is changed into an obstacle, and its reward coefficient \(\mathcal{C}_{F}^{L}\) is changed to 0.0175. The reward sign function, \(\tanh\) in \eqref{Eq.TA.4}, is also changed to -1, so the reward function for the leader is changed as follows,
 
@@ -470,7 +470,7 @@ The simulation proceeded for an additional 1200 seconds, during which the synapt
 \end{figure}
 
 
-In order to better understand the effect of reward change on \gls{snn}, the synaptic weights matrix before and after reward change has been illustrated in Figures \ref{fig_3_8} and \ref{fig_3_9}, the vertical axis shows the output neurons. The first output neuron is for negative displacement in the x-direction, while the second output neuron is dedicated to positive displacement in the x-direction. Similarly, the third output neuron corresponds to negative displacement in the y-direction and the fourth output neuron to positive displacement in the y-direction. The horizontal axis shows the input neurons. The neuron IDs from 1 to 24 are for the first sub-layer dedicated to the neighboring follower. The network has two sub-layers for the neighboring follower agents, but only one is shown since they are similar in the case of synaptic weight values. The neuron numbers from 25 to 48 are for the sub-layer dedicated to the leader. The \gls{RCSE} method aims to maintain the synaptic weight matrix gradient while adapting to changes in the reward signal. 
+In order to better understand the effect of reward change on \ac{snn}, the synaptic weights matrix before and after reward change has been illustrated in Figures \ref{fig_3_8} and \ref{fig_3_9}, the vertical axis shows the output neurons. The first output neuron is for negative displacement in the x-direction, while the second output neuron is dedicated to positive displacement in the x-direction. Similarly, the third output neuron corresponds to negative displacement in the y-direction and the fourth output neuron to positive displacement in the y-direction. The horizontal axis shows the input neurons. The neuron IDs from 1 to 24 are for the first sub-layer dedicated to the neighboring follower. The network has two sub-layers for the neighboring follower agents, but only one is shown since they are similar in the case of synaptic weight values. The neuron numbers from 25 to 48 are for the sub-layer dedicated to the leader. The \ac{RCSE} method aims to maintain the synaptic weight matrix gradient while adapting to changes in the reward signal. 
 
 Considering the numerical values presented in Table \ref{table:simulation-parameters} along with the reward coefficients \(\mathcal{C}_{Fi}^{Fj} = 0.02\) and \(\mathcal{C}_{L}^{Fj} = 0.07\), and \(r_{Fi}^{Fj} = 1\;m/s\) and \(r_{Fi}^{L} = 0.1\;m/s\), the maximum rewards at each weight update interval (\(\Delta T\)) for \(\mathcal{R}_{Fi}^{Fj}\) and \(\mathcal{R}_{Fi}^{L}\) are calculated as \(4\times 10^{-4}\) and \(7.7\times 10^{-4}\), respectively. Consequently, \(\mathcal{R}_{max}^{G} = \max(\mathcal{R}_{Fi}^{Fj},\mathcal{R}_{Fi}^{L}) = 7.7\times 10^{-4}\). The \(\Psi^{S}\) for the follower section in the network is \(\left[\frac{4\times10^{-4}}{7\times10^{-4}}\right]15.5=8.0519\), and for the leader section, it is \(\left[\frac{7\times10^{-4}}{7\times10^{-4}}\right]15.5=15.5\). The \(\eta\) and \(\beta\) for the follower section within the network are \(\frac{\mathcal{A}\mathcal{R}_{max}^{G} \ln{(2^{\lambda^2}-1)}}{\lambda\Psi^{\mathcal{S}} \log{(2)}} = 0.0011\) and \(\beta = \frac{\ln{(2^{\lambda^2}-1)}}{\Psi^{\mathcal{S}}} = 2.152\), respectively. For the leader section, these values are \(\frac{\mathcal{A}\mathcal{R}_{max}^{G} \ln{(2^{\lambda^2}-1)}}{\lambda\Psi^{\mathcal{S}} \log{(2)}} = 5.719\times 10^{-4}\) and \(\beta = \frac{\ln{(2^{\lambda^2}-1)}}{\Psi^{\mathcal{S}}} = 1.118\), respectively.
 
@@ -506,7 +506,7 @@ Considering the numerical values presented in Table \ref{table:simulation-parame
 
 According to Figure \ref{fig_3_8}, we can see a gradient formed because of the fuzzy nature of the input. Since the reward coefficients for followers and leaders are different, there is a difference in the maximum allowed synaptic weight for them. The proposed method for controlling the unbounded growth of synaptic weights has successfully stabilized the network while maintaining the fuzzy patterns of the synaptic connections.
 
-Figure \ref{fig_3_9} shows the synaptic weights after the reward change. In this case, since the reward coefficients are changed, the \(\eta\) and \(\beta\) values are changed for the represented sub-layers, and the proposed method has helped the \gls{stdp} algorithm to adjust the weights based on the new situation in the environment.
+Figure \ref{fig_3_9} shows the synaptic weights after the reward change. In this case, since the reward coefficients are changed, the \(\eta\) and \(\beta\) values are changed for the represented sub-layers, and the proposed method has helped the \ac{stdp} algorithm to adjust the weights based on the new situation in the environment.
 
 \subsection{Simulation with FL and R-CSE}
 
@@ -538,7 +538,7 @@ The norm of the synaptic weights can represent the changes in the synaptic weigh
     \label{fig:3-9}
 \end{figure}
 
-\begin{figure}[h]
+\begin{figure}
     \centering
     \includegraphics[scale=0.75]{Figures/Communication Log.pdf}
     \caption{Communication times for agents and the Central Server (Leader). Red and blue dots show the times that agents and the Central Server have sent their model, respectively.}
@@ -551,12 +551,12 @@ Therefore, the aggregation frequency is very high initially, and it reduces afte
 \begin{table}[H]
     \centering
     \small
-    \caption{Comparative Performance Analysis of the Proposed Aggregation Algorithm+\gls{RCSE}, \gls{RCSE}, and FACL}
+    \caption{Comparative Performance Analysis of the Proposed Aggregation Algorithm+\ac{RCSE}, \ac{RCSE}, and FACL}
     \begingroup
     \renewcommand{\arraystretch}{1.5}
     \begin{tabular}{lccc}
     \hline
-                                & \textbf{FL+\gls{RCSE}} & \textbf{\gls{RCSE}} & \textbf{FACL} \\
+                                & \textbf{FL+\ac{RCSE}} & \textbf{\ac{RCSE}} & \textbf{FACL} \\
     \hline
     \textbf{Learning Time - Training Phase (s)}                & 261.92               & 554.71      & 667.26                   \\
     \textbf{Max Error After Convergence - Test Phase (\%)} & 0.71             & 1.95     & 9.85                 \\
@@ -568,13 +568,13 @@ Therefore, the aggregation frequency is very high initially, and it reduces afte
 \end{table}
 
 
-Table \ref{tab:Results analysis} compares the proposed Federated Learning (FL) algorithm with the non-FL approach and FACL algorithm. The comparison focuses on three critical metrics: learning time, maximum error after convergence, and convergence time. The proposed \gls{fl} algorithm demonstrates significant improvements in terms of efficiency and accuracy, as evidenced by its considerably shorter learning and convergence times and a notable reduction in error after convergence.
+Table \ref{tab:Results analysis} compares the proposed Federated Learning (FL) algorithm with the non-FL approach and FACL algorithm. The comparison focuses on three critical metrics: learning time, maximum error after convergence, and convergence time. The proposed \ac{fl} algorithm demonstrates significant improvements in terms of efficiency and accuracy, as evidenced by its considerably shorter learning and convergence times and a notable reduction in error after convergence.
 
 \section{Conclusion}
 
-In this chapter, we presented a comprehensive approach addressing the challenges of uncontrolled growth in synaptic weights and the limited responsiveness of \gls{stdp} to real-time changes within \gls{snn}s. Our proposed solution integrates the \gls{RCSE} method with a dynamic aggregation interval in \gls{fl}, significantly enhancing learning time and performance.
-The R-CSE method introduces a novel mechanism to manage the unbounded growth of synaptic weights by dynamically adjusting the decay rate through the SoftPlus function. This adjustment is sensitive to the learning stages and rewards changes, ensuring that synaptic weight adjustments remain responsive over time. By addressing the challenge of synaptic weight saturation, the \gls{RCSE} method facilitates a balanced approach to weight adjustment, preventing network saturation and promoting continuous learning adaptability.
-We introduce a novel approach that uses \gls{fl} in SNN and employs the Frobenius norm to adjust weighted aggregation in \gls{fl}. Additionally, we include weight decay proportional to the time elapsed since an agent's last model publication. This improves the efficiency and responsiveness of the learning process. 
-Our model's dynamic nature of the sample time adjusts based on the Euclidean norm. This metric measures the distance between the weight matrices of the agents and the server, determining reduced intervals for model publication. Our results show that the proposed aggregation method significantly accelerates agents' learning and performs better than non-federated learning and \gls{facl} cases.
+In this chapter, we presented a comprehensive approach addressing the challenges of uncontrolled growth in synaptic weights and the limited responsiveness of \ac{stdp} to real-time changes within \ac{snn}s. Our proposed solution integrates the \ac{RCSE} method with a dynamic aggregation interval in \ac{fl}, significantly enhancing learning time and performance.
+The R-CSE method introduces a novel mechanism to manage the unbounded growth of synaptic weights by dynamically adjusting the decay rate through the SoftPlus function. This adjustment is sensitive to the learning stages and rewards changes, ensuring that synaptic weight adjustments remain responsive over time. By addressing the challenge of synaptic weight saturation, the \ac{RCSE} method facilitates a balanced approach to weight adjustment, preventing network saturation and promoting continuous learning adaptability.
+We introduce a novel approach that uses \ac{fl} in SNN and employs the Frobenius norm to adjust weighted aggregation in \ac{fl}. Additionally, we include weight decay proportional to the time elapsed since an agent's last model publication. This improves the efficiency and responsiveness of the learning process. 
+Our model's dynamic nature of the sample time adjusts based on the Euclidean norm. This metric measures the distance between the weight matrices of the agents and the server, determining reduced intervals for model publication. Our results show that the proposed aggregation method significantly accelerates agents' learning and performs better than non-federated learning and \ac{facl} cases.
 Moreover, the dynamic aggregation interval effectively reduces communication overhead between the agents and the central server, particularly after model convergence. This reduction is critical in scenarios where communication bandwidth is limited or costly. 
-Our findings suggest that integrating \gls{stdp} with federated learning, supported by our dynamic aggregation approach, provides a robust framework for advancing multi-agent reinforcement learning systems.
+Our findings suggest that integrating \ac{stdp} with federated learning, supported by our dynamic aggregation approach, provides a robust framework for advancing multi-agent reinforcement learning systems.

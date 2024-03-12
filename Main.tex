@@ -24,32 +24,19 @@
 \usepackage[shortlabels]{enumitem}
 \usepackage{amsmath}
 \usepackage{amssymb}
-
 \usepackage[top=1in, bottom=1in, left=1in, right=1in,includefoot=true]{geometry}
-\usepackage[pagebackref=false,colorlinks,linkcolor=blue,citecolor=blue]{hyperref}
-% \usepackage[ruled,vlined]{algorithm2e}
-
 \usepackage{lineno}
 \usepackage{array}
 \usepackage{comment}
 \newcolumntype{P}[1]{>{\centering\arraybackslash}p{#1}}
 \usepackage{blindtext}
 \modulolinenumbers[10]
-
 \usepackage{lipsum}
 \usepackage{wrapfig}
 \usepackage{xparse}
 \usepackage{bm}
-
 \usepackage{xcolor}
-\usepackage{glossaries}
-\newacronym{snn}{SNN}{Spiking Neural Network}
-\newacronym{fl}{FL}{Federated Learning}
-\newacronym{lif}{LIF}{Leaky Integrate-and-Fire}
-\newacronym{stdp}{R-STDP}{Reward-modulated Spike-Timing-Dependent Plasticity}
-\newacronym{RCSE}{R-CSE}{Reward-Modulated Competitive Synaptic Equilibrium}
-\newacronym{facl}{FACL}{Fuzzy Actor-Critic Learning}
-\makeglossaries 
+\usepackage{acro}
 %Definitions
 \renewcommand{\baselinestretch}{1.5}
 \def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
@@ -80,7 +67,7 @@
 \include{4_ATD_with_SNN}
 \include{5_FL_with_SNN}
 \include{6_Future_Work}
-
+\printacronyms
 
 \bibliography{Ref}
 \bibliographystyle{ieeetr}
