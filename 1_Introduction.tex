@@ -1,14 +1,14 @@
 \chapter{Introduction}
 
-\section{Multi-agent cooperation over cellular network}
-
-
 \section{Spiking Neural Networks: Models and Learning Algorithms}
-
 
 \subsection{Neuron model}
 
-The neuron model in this paper is the Leaky Integrate-and-Fire (LIF). The LIF model is a biological model that can be represented as a circuit with a resistor and capacitor and represents a first-order dynamic system \cite{Ch5_NM1},
+In the study of computational neuroscience and the development of neural networks, particularly \ac{snn}, various neuron models have been proposed to simulate the electrical activity of neurons. These models range from simple to complex, aiming to capture the essential features of neuronal dynamics. This section provides an overview of several key neuron models, including their equations and characteristics.
+
+
+\subsubsection{Leaky-Integrate and Fire (LIF) model}
+The LIF model is a biological model that can be represented as a circuit with a resistor and capacitor and represents a first-order dynamic system \cite{Ch5_NM1},
 
 \begin{equation} \label{Eq.1}
     R_{m}C_{m}\frac{dV_m\left(t\right)}{dt} = E_{l} - V_m\left(t\right) + R_{m}I\left(t\right)
@@ -70,6 +70,41 @@ The maximum value for the input current makes the neuron fire at each sample tim
 
 In this section, we obtained the minimum and maximum values for input current using (\ref{Eq.9}) and (\ref{Eq.13}). These equations are used in the learning and encoding processes of the SNN.
 
+\subsubsection{Hodgkin-Huxley Model}
+
+The Hodgkin-Huxley model offers a detailed description of the ionic mechanisms underlying the initiation and propagation of action potentials in neurons:
+
+\begin{align}
+C_m \frac{dV}{dt} &= I_{ext} - \bar{g}_{K}n^4(V-V_{K}) - \bar{g}_{Na}m^3h(V-V_{Na}) - \bar{g}_{L}(V-V_{L}) \\
+\frac{dn}{dt} &= \alpha_n(V)(1-n) - \beta_n(V)n \\
+\frac{dm}{dt} &= \alpha_m(V)(1-m) - \beta_m(V)m \\
+\frac{dh}{dt} &= \alpha_h(V)(1-h) - \beta_h(V)h
+\end{align}
+
+where $C_m$ is the membrane capacitance, $V$ is the membrane potential, $I_{ext}$ is the external current, $\bar{g}_i$ and $V_i$ are the maximum conductances and reversal potentials for the $K^+$, $Na^+$, and leak ($L$) currents, and $n$, $m$, and $h$ are gating variables. The variables \(n\), \(m\), and \(h\) are dimensionless and vary between 0 and 1, representing the proportion of ion channels in a particular state. The dynamics of these gating variables are critical for the model's ability to replicate the complex temporal patterns of neuronal action potentials.
+
+\subsubsection{FitzHugh-Nagumo Model}
+
+The FitzHugh-Nagumo model simplifies the Hodgkin-Huxley model into a two-variable system to capture the essential features of excitability:
+
+\begin{align}
+\frac{dV}{dt} &= V - \frac{V^3}{3} - W + I_{ext} \\
+\frac{dW}{dt} &= 0.08(V + 0.7 - 0.8W)
+\end{align}
+
+where $V$ represents the membrane potential, $W$ is a recovery variable, and $I_{ext}$ is the external current.
+
+\subsubsection{Izhikevich Model}
+
+The Izhikevich model combines the biological plausibility of the Hodgkin-Huxley model with the computational efficiency of integrate-and-fire models:
+
+\begin{align}
+\frac{dv}{dt} &= 0.04v^2 + 5v + 140 - u + I \\
+\frac{du}{dt} &= a(bv - u)
+\end{align}
+
+when $v \geq 30$ mV, then $v \leftarrow c$ and $u \leftarrow u + d$. Here, $v$ and $u$ represent the membrane potential and membrane recovery variable, respectively, and $a$, $b$, $c$, and $d$ are parameters of the model, with $I$ representing the current.
+
 
 \subsection{Training Algorithms}
 
@@ -90,3 +125,6 @@ The adjustment of synaptic weights follows the given equation:
 \end{equation}
 
 \noindent where \(\dot{W}_{kl}(t)\) denotes the rate of change of the synaptic weight that connects neurons \(k\) and \(l\). This weight determines the input that the post-synaptic neuron receives upon the spiking of its pre-synaptic neuron, which is quantified as \(I(t)\).
+
+\section{Federated Learning for SNNs: Consensus Flying Scenario}
+

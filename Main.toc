@@ -1,41 +1,45 @@
 \acswitchoff 
 \contentsline {chapter}{\numberline {1}Introduction}{1}{chapter.1}%
-\contentsline {section}{\numberline {1.1}Multi-agent cooperation over cellular network}{1}{section.1.1}%
-\contentsline {section}{\numberline {1.2}Spiking Neural Networks: Models and Learning Algorithms}{1}{section.1.2}%
-\contentsline {subsection}{\numberline {1.2.1}Neuron model}{1}{subsection.1.2.1}%
-\contentsline {subsection}{\numberline {1.2.2}Training Algorithms}{3}{subsection.1.2.2}%
-\contentsline {chapter}{\numberline {2}Literature review}{5}{chapter.2}%
-\contentsline {chapter}{\numberline {3}Control and Navigation of the Leader Drone Over 5G Network}{14}{chapter.3}%
-\contentsline {section}{\numberline {3.1}Introduction}{14}{section.3.1}%
-\contentsline {section}{\numberline {3.2}Quadrotor dynamic model}{16}{section.3.2}%
-\contentsline {section}{\numberline {3.3}Linear PD Controller}{18}{section.3.3}%
-\contentsline {section}{\numberline {3.4}Backstepping Controller}{19}{section.3.4}%
-\contentsline {section}{\numberline {3.5}State Estimator}{21}{section.3.5}%
-\contentsline {section}{\numberline {3.6}Delay Estimator}{23}{section.3.6}%
-\contentsline {section}{\numberline {3.7}Results}{24}{section.3.7}%
-\contentsline {paragraph}{Exact knowledge of delay}{26}{section*.6}%
-\contentsline {paragraph}{Delay estimation based on the Markov model}{27}{section*.7}%
-\contentsline {paragraph}{Change in delay values and distributions}{31}{section*.8}%
-\contentsline {section}{\numberline {3.8}Experimental setup}{34}{section.3.8}%
-\contentsline {section}{\numberline {3.9}Conclusion}{34}{section.3.9}%
-\contentsline {chapter}{\numberline {4}Modular Learning in SNNs for Optimal Multi-Agent Decision-Making}{36}{chapter.4}%
-\contentsline {section}{\numberline {4.1}Introduction}{36}{section.4.1}%
-\contentsline {section}{\numberline {4.2}The ATD problem and SNN-based solution}{37}{section.4.2}%
-\contentsline {section}{\numberline {4.3}Learning using R-STDP}{38}{section.4.3}%
-\contentsline {section}{\numberline {4.4}Network structure and encoding method}{42}{section.4.4}%
-\contentsline {section}{\numberline {4.5}Results}{46}{section.4.5}%
-\contentsline {subsection}{\numberline {4.5.1}Simulation without noise}{49}{subsection.4.5.1}%
-\contentsline {subsection}{\numberline {4.5.2}Simulation with noise}{52}{subsection.4.5.2}%
-\contentsline {section}{\numberline {4.6}Conclusion}{54}{section.4.6}%
-\contentsline {chapter}{\numberline {5}Integration of R-STDP and Federated Learning}{55}{chapter.5}%
-\contentsline {section}{\numberline {5.1}Consensus Flying Problem}{55}{section.5.1}%
-\contentsline {section}{\numberline {5.2}Proposed Method}{57}{section.5.2}%
-\contentsline {subsection}{\numberline {5.2.1}Network Structure}{57}{subsection.5.2.1}%
-\contentsline {subsection}{\numberline {5.2.2}Training algorithm}{61}{subsection.5.2.2}%
-\contentsline {subsection}{\numberline {5.2.3}Weight Stabilization using Reward-Modulated Competitive Synaptic Equilibrium (R-CSE)}{63}{subsection.5.2.3}%
-\contentsline {subsection}{\numberline {5.2.4}Federated Learning for Consensus Flying}{66}{subsection.5.2.4}%
-\contentsline {section}{\numberline {5.3}Results and Discussion}{70}{section.5.3}%
-\contentsline {subsection}{\numberline {5.3.1}Simulation without FL}{70}{subsection.5.3.1}%
-\contentsline {subsection}{\numberline {5.3.2}Simulation with FL and R-CSE}{80}{subsection.5.3.2}%
-\contentsline {section}{\numberline {5.4}Conclusion}{83}{section.5.4}%
-\contentsline {chapter}{\numberline {6}Proposed Method}{85}{chapter.6}%
+\contentsline {section}{\numberline {1.1}Spiking Neural Networks: Models and Learning Algorithms}{1}{section.1.1}%
+\contentsline {subsection}{\numberline {1.1.1}Neuron model}{1}{subsection.1.1.1}%
+\contentsline {subsubsection}{Leaky-Integrate and Fire (LIF) model}{1}{section*.6}%
+\contentsline {subsubsection}{Hodgkin-Huxley Model}{3}{section*.7}%
+\contentsline {subsubsection}{FitzHugh-Nagumo Model}{4}{section*.8}%
+\contentsline {subsubsection}{Izhikevich Model}{4}{section*.9}%
+\contentsline {subsection}{\numberline {1.1.2}Training Algorithms}{5}{subsection.1.1.2}%
+\contentsline {section}{\numberline {1.2}Federated Learning for SNNs: Consensus Flying Scenario}{5}{section.1.2}%
+\contentsline {chapter}{\numberline {2}Literature review}{6}{chapter.2}%
+\contentsline {chapter}{\numberline {3}Control and Navigation of the Leader Drone Over 5G Network}{15}{chapter.3}%
+\contentsline {section}{\numberline {3.1}Introduction}{15}{section.3.1}%
+\contentsline {section}{\numberline {3.2}Quadrotor dynamic model}{17}{section.3.2}%
+\contentsline {section}{\numberline {3.3}Linear PD Controller}{19}{section.3.3}%
+\contentsline {section}{\numberline {3.4}Backstepping Controller}{20}{section.3.4}%
+\contentsline {section}{\numberline {3.5}State Estimator}{22}{section.3.5}%
+\contentsline {section}{\numberline {3.6}Delay Estimator}{24}{section.3.6}%
+\contentsline {section}{\numberline {3.7}Results}{25}{section.3.7}%
+\contentsline {paragraph}{Exact knowledge of delay}{27}{section*.10}%
+\contentsline {paragraph}{Delay estimation based on the Markov model}{28}{section*.11}%
+\contentsline {paragraph}{Change in delay values and distributions}{32}{section*.12}%
+\contentsline {section}{\numberline {3.8}Experimental setup}{35}{section.3.8}%
+\contentsline {section}{\numberline {3.9}Conclusion}{35}{section.3.9}%
+\contentsline {chapter}{\numberline {4}Modular Learning in SNNs for Optimal Multi-Agent Decision-Making}{37}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Introduction}{37}{section.4.1}%
+\contentsline {section}{\numberline {4.2}The ATD problem and SNN-based solution}{38}{section.4.2}%
+\contentsline {section}{\numberline {4.3}Learning using R-STDP}{39}{section.4.3}%
+\contentsline {section}{\numberline {4.4}Network structure and encoding method}{43}{section.4.4}%
+\contentsline {section}{\numberline {4.5}Results}{47}{section.4.5}%
+\contentsline {subsection}{\numberline {4.5.1}Simulation without noise}{50}{subsection.4.5.1}%
+\contentsline {subsection}{\numberline {4.5.2}Simulation with noise}{53}{subsection.4.5.2}%
+\contentsline {section}{\numberline {4.6}Conclusion}{55}{section.4.6}%
+\contentsline {chapter}{\numberline {5}Integration of R-STDP and Federated Learning}{56}{chapter.5}%
+\contentsline {section}{\numberline {5.1}Consensus Flying Problem}{56}{section.5.1}%
+\contentsline {section}{\numberline {5.2}Proposed Method}{58}{section.5.2}%
+\contentsline {subsection}{\numberline {5.2.1}Network Structure}{58}{subsection.5.2.1}%
+\contentsline {subsection}{\numberline {5.2.2}Training algorithm}{62}{subsection.5.2.2}%
+\contentsline {subsection}{\numberline {5.2.3}Weight Stabilization using Reward-Modulated Competitive Synaptic Equilibrium (R-CSE)}{64}{subsection.5.2.3}%
+\contentsline {subsection}{\numberline {5.2.4}Federated Learning for Consensus Flying}{67}{subsection.5.2.4}%
+\contentsline {section}{\numberline {5.3}Results and Discussion}{71}{section.5.3}%
+\contentsline {subsection}{\numberline {5.3.1}Simulation without FL}{71}{subsection.5.3.1}%
+\contentsline {subsection}{\numberline {5.3.2}Simulation with FL and R-CSE}{81}{subsection.5.3.2}%
+\contentsline {section}{\numberline {5.4}Conclusion}{84}{section.5.4}%
+\contentsline {chapter}{\numberline {6}Proposed Method}{86}{chapter.6}%
