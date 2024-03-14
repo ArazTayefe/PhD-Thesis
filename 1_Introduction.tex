@@ -108,6 +108,8 @@ when $v \geq 30$ mV, then $v \leftarrow c$ and $u \leftarrow u + d$. Here, $v$ a
 
 \subsection{Training Algorithms}
 
+\subsubsection{Reward-modulated Spike-Timing-Dependent Plasticity (R-STDP)}
+
 The \ac{stdp} algorithm is a learning technique inspired by biological processes in the brain, which is believed to be fundamental to certain learning processes \cite{STDP2}. The algorithm's core principle is that when a pre-synaptic neuron activates just before its post-synaptic counterpart, the synapse's strength connecting them should increase, and vice versa if the post-synaptic neuron fires first.
 
 Within the \ac{snn} framework, pre-synaptic neurons are the input neurons, and post-synaptic neurons function as the output neurons. The function \(STDP(\tau)\) can be defined as the firing timelines of both input and output neurons \cite{STDP1} as,
@@ -125,6 +127,61 @@ The adjustment of synaptic weights follows the given equation:
 \end{equation}
 
 \noindent where \(\dot{W}_{kl}(t)\) denotes the rate of change of the synaptic weight that connects neurons \(k\) and \(l\). This weight determines the input that the post-synaptic neuron receives upon the spiking of its pre-synaptic neuron, which is quantified as \(I(t)\).
+
+\subsubsection{Temporal Difference Learning (TD-Learning)}
+
+TD-Learning for SNNs employs the concept of temporal difference errors to adjust synaptic weights, facilitating the learning of predictions about future rewards:
+
+\begin{equation}
+\Delta W_{kl} = \alpha \cdot (r + \gamma \cdot V(s') - V(s)) \cdot STDP_{kl}(\tau)
+\end{equation}
+
+Here, \(\alpha\) is the learning rate, \(r\) represents the immediate reward, and \(\gamma\) is the discount factor for future rewards. \(V(s)\) and \(V(s')\) denote the values of the current and subsequent states, respectively.
+
+\subsubsection{Deep Q-Learning for Spiking Neural Networks (DQSNN)}
+
+DQSNN integrates the principles of Deep Q-Learning with the dynamics of SNNs, allowing for the application of deep RL strategies:
+
+\begin{equation}
+\Delta W = \alpha \cdot (r + \gamma \cdot \max_{a'}Q(s',a';\theta') - Q(s,a;\theta)) \cdot \nabla_{\theta}Q(s,a;\theta)
+\end{equation}
+
+This equation updates synaptic weights \(\Delta W\) by optimizing the Q-value function \(Q(s,a;\theta)\) with respect to the network parameters \(\theta\), guided by the prediction error between expected and obtained rewards.
+
+\subsubsection{Policy Gradient Methods for SNNs}
+
+Policy Gradient Methods directly optimize the policy function \(\pi(a|s;\theta)\), encouraging actions that lead to higher rewards:
+
+\begin{equation}
+\Delta \theta = \alpha \cdot \mathbb{E}[\nabla_{\theta} \log \pi(a|s;\theta) \cdot R]
+\end{equation}
+
+where \(R\) is the reward associated with taking action \(a\) in state \(s\), and \(\mathbb{E}[]\) denotes the expectation over the distribution of actions.
+
+\subsubsection{Spiking Actor-Critic (SAC)}
+
+SAC employs an actor-critic architecture, with both components modeled as SNNs. The actor updates its policy based on the critic's value function estimates:
+
+\begin{align}
+\Delta \theta_{actor} &= \alpha \cdot \nabla_{\theta} \log \pi(a|s;\theta) \cdot A(s,a) \\
+\Delta \theta_{critic} &= \beta \cdot (r + \gamma \cdot V(s') - V(s)) \cdot \nabla_{\theta}V(s)
+\end{align}
+
+where \(A(s,a)\) is the advantage function, indicating the benefit of taking action \(a\) in state \(s\), and \(\beta\) is the learning rate for the critic.
+
+\subsubsection{Spiking Proximal Policy Optimization (SPPO)}
+
+SPPO adapts the Proximal Policy Optimization algorithm for SNNs, optimizing a clipped surrogate objective to improve learning stability:
+
+\begin{equation}
+L(\theta) = \mathbb{E}\left[\min\left(r_t(\theta) \cdot A_t, \text{clip}(r_t(\theta), 1-\epsilon, 1+\epsilon) \cdot A_t\right)\right]
+\end{equation}
+
+where \(r_t(\theta)\) is the probability ratio of the current and old policies, and \(\epsilon\) is a hyperparameter defining the clipping range.
+
+\subsection{Discussion}
+
+The development of RL-based algorithms for SNNs represents a significant advancement in leveraging the computational properties of spiking neurons for learning complex behaviors. By incorporating reward signals, prediction errors, and policy optimization strategies, these algorithms enable SNNs to adaptively refine their synaptic connections, fostering the emergence of intelligent decision-making capabilities. The continuous evolution of these algorithms promises to further unlock the potential of SNNs in a wide array of applications, from autonomous systems to advanced cognitive modeling.
 
 \section{Federated Learning for SNNs: Consensus Flying Scenario}
 
