@@ -398,37 +398,6 @@ S.~A. Tumpa, S.~Singh, M.~F.~F. Khan, M.~T. Kandemir, V.~Narayanan, and C.~R.
   systems,'' in {\em IEEE Computer Society Annual Symposium on VLSI (ISVLSI)},
   pp.~1--6, IEEE, 2023.
 
-\bibitem{Ch4_DM}
-Y.~Li, J.~Yang, and K.~Zhang, ``Distributed finite-time cooperative control for
-  quadrotor formation,'' {\em IEEE Access}, vol.~7, pp.~66753--66763, 2019.
-
-\bibitem{Ch4_PD1}
-Y.~Oda and M.~Kumon, ``Autonomous flight control of quadrotor helicopter by
-  simple adaptive control with inner loop {PD} controller,'' {\em Journal of
-  Robotics and Mechatronics}, vol.~30, no.~3, pp.~380--389, 2018.
-
-\bibitem{Ch4_PD2}
-A.~Al-Mahbashi, H.~Schwartz, and I.~Lambadaris, ``Machine learning approach for
-  multiple coordinated aerial drones pursuit-evasion games,'' in {\em 2020 IEEE
-  International Conference on Systems, Man, and Cybernetics (SMC)},
-  pp.~642--647, 2020.
-
-\bibitem{Ch4_BS1}
-S.~Bouabdallah and R.~Siegwart, ``Backstepping and sliding-mode techniques
-  applied to an indoor micro quadrotor,'' in {\em Proceedings of the 2005 IEEE
-  international conference on robotics and automation}, pp.~2247--2252, 2005.
-
-\bibitem{Ch4_BS2}
-M.~Huang, B.~Xian, C.~Diao, K.~Yang, and Y.~Feng, ``Adaptive tracking control
-  of underactuated quadrotor unmanned aerial vehicles via backstepping,'' in
-  {\em Proceedings of the 2010 American Control Conference}, pp.~2076--2081,
-  2010.
-
-\bibitem{Ch4_ge2013modeling}
-Y.~Ge, Q.~Chen, M.~Jiang, and Y.~Huang, ``Modeling of random delays in
-  networked control systems,'' {\em Journal of Control Science and
-  Engineering}, vol.~2013, 2013.
-
 \bibitem{Ch5_ATD4}
 M.~Pachter, E.~Garcia, and D.~W. Casbeer, ``Differential game of guarding a
   target,'' {\em Journal of Guidance, Control, and Dynamics}, vol.~40,

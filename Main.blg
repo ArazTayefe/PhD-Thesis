@@ -5,50 +5,49 @@ A level-1 auxiliary file: title_page.aux
 A level-1 auxiliary file: 0_Abstract.aux
 A level-1 auxiliary file: 1_Introduction.aux
 A level-1 auxiliary file: 2_Literature_Review.aux
-A level-1 auxiliary file: 3_UAV_control_over_5G.aux
-A level-1 auxiliary file: 4_ATD_with_SNN.aux
-A level-1 auxiliary file: 5_FL_with_SNN.aux
-A level-1 auxiliary file: 6_Future_Work.aux
+A level-1 auxiliary file: 3_ATD_with_SNN.aux
+A level-1 auxiliary file: 4_FL_with_SNN.aux
+A level-1 auxiliary file: 5_Future_Work.aux
 The style file: ieeetr.bst
 Database file #1: Ref.bib
-You've used 96 entries,
+You've used 90 entries,
             1876 wiz_defined-function locations,
-            1086 strings with 22843 characters,
-and the built_in function-call counts, 29960 in all, are:
-= -- 2953
-> -- 1304
+            1045 strings with 21550 characters,
+and the built_in function-call counts, 27866 in all, are:
+= -- 2737
+> -- 1235
 < -- 0
-+ -- 468
-- -- 372
-* -- 2222
-:= -- 4186
-add.period$ -- 96
-call.type$ -- 96
-change.case$ -- 96
++ -- 443
+- -- 353
+* -- 2081
+:= -- 3919
+add.period$ -- 90
+call.type$ -- 90
+change.case$ -- 90
 chr.to.int$ -- 0
-cite$ -- 96
-duplicate$ -- 1518
-empty$ -- 2704
-format.name$ -- 372
-if$ -- 7239
+cite$ -- 90
+duplicate$ -- 1404
+empty$ -- 2504
+format.name$ -- 353
+if$ -- 6720
 int.to.chr$ -- 0
-int.to.str$ -- 96
-missing$ -- 96
-newline$ -- 291
-num.names$ -- 96
-pop$ -- 299
+int.to.str$ -- 90
+missing$ -- 90
+newline$ -- 273
+num.names$ -- 90
+pop$ -- 272
 preamble$ -- 1
 purify$ -- 0
 quote$ -- 0
-skip$ -- 1072
+skip$ -- 984
 stack$ -- 0
-substring$ -- 2274
-swap$ -- 672
+substring$ -- 2082
+swap$ -- 618
 text.length$ -- 0
 text.prefix$ -- 0
 top$ -- 0
 type$ -- 0
 warning$ -- 0
-while$ -- 302
-width$ -- 98
-write$ -- 941
+while$ -- 281
+width$ -- 92
+write$ -- 884
