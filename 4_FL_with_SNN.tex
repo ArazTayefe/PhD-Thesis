@@ -261,7 +261,7 @@ The proposed algorithm allows agents to communicate less often and save energy. 
 
 In this section, we conducted a numerical simulation to validate the performance of the proposed method. The simulation involves a group of five agents flying around a leader who is moving in a circular path. Initially, a scenario without implementing \ac{fl} was conducted to evaluate the performance of the \ac{snn} in achieving coordinated flight. During this phase, the effect of the change in reward was simulated to examine the \ac{RCSE} method. The results from this phase were then compared to those obtained using a \ac{facl} algorithm. In the second part of the simulation, the proposed \ac{fl} aggregation algorithm is used, where the leader agent acts as a central server. Finally, the algorithm was tested both before and after changing the rewards.
 
-\subsection{Simulation without FL}
+\subsection{Simulation without \ac{fl}}
 
 In this simulation, we modeled five agents, each equipped with its own \ac{snn} model, capable of reaching a maximum speed of 1 \(m/s\). The architecture of each agent's neural network included 72 input neurons. Since each agent was designed to detect three distinct objects within its environment, the input layer was organized into sub-layers, with 24 neurons dedicated to each object. The network's output layer comprised 4 neurons, divided equally to represent \(\Delta x\) and \(\Delta y\) movements. The \ac{snn} model in the simulation is a fully connected network, and the parameters of the \ac{lif} neuron are also represented in Table \ref{table:Parameter values for the LIF neuron model}.
 
@@ -285,7 +285,7 @@ $V_{th}$ & -50 mV & Threshold membrane potential \\
 
 The \ac{stdp} mechanism updated synaptic weights at 10 ms intervals. During these intervals, the learning algorithm adjusted the agent's states based on received data from other agents and the leader while simultaneously generating random outputs as part of an exploration strategy.
 
-\begin{table}
+\begin{table}[H]
 \caption{Simulation Parameters}
 \label{table:simulation-parameters}
 \centering
@@ -310,7 +310,7 @@ The \ac{stdp} mechanism updated synaptic weights at 10 ms intervals. During thes
 \endgroup
 \end{table}
 
-Table \ref{table:simulation-parameters} shows the simulation parameters. The simulation was done in a 10 m by 10 m area, and the leader followed a circular path centered in (5,5) with a 2.5 m radius and a 0.1 m/s speed.
+Table \ref{table:simulation-parameters} shows the simulation parameters. The simulation was done in a 10 m by 10 m area, and the leader followed a circular path centered at (5,5) with a 2.5 m radius and a 0.1 m/s speed.
 
 In order to monitor the swarm performance, the minimum and maximum distances of each agent from other agents and the minimum and maximum distances of the swarm from the leader were measured. Figure \ref{fig:distances} shows the definition of the distances.
 
@@ -337,7 +337,7 @@ To ensure a fair comparison between different learning methods, we have compared
     \Phi^l=\frac{\partial{u}}{\partial{\omega_l}}=\frac{\prod\limits_{i=1}^n \mu^{F^l_{i}(x_i)}}{\sum\limits_{l=1}^{L}(\prod\limits_{i=1}^n \mu^{F^l_{i}(x_i)})},
 \end{equation}
 
-\noindent where \(\mu^{F^l_{i}(x_i)}\) is the membership degree of the \(i\)th membership function for rule \(l\). The critic stores an approximation of the value function. In this chapter, we show the critic's output at time \(t\) with \(\hat{V}_t\), which is as follows,
+\noindent where \(\mu^{F^l_{i}(x_i)}\) is the membership degree of the \(i\)th membership function for rule \(l\). The critic stores an approximation of the value function. In this paper, we show the critic's output at time \(t\) with \(\hat{V}_t\), which is as follows,
 
 \begin{equation}
     \label{eq:value_function}
@@ -395,35 +395,32 @@ Figure \ref{fig_3_0} shows the simulation results for the \ac{RCSE} method. Acco
         \includegraphics[width=\linewidth]{Figures/Distances - BRC.pdf}
         \caption{Distances during the test phase (\ac{RCSE} method)}
         \label{fig_3_0}
+        \vspace{15pt}
         \includegraphics[width=\linewidth]{Figures/Environment - BRC.pdf}
         \caption{Agents' trajectory during the test phase (\ac{RCSE} method)}
         \label{fig_3_1}
+        \vspace{5pt}
+        \includegraphics[width=\linewidth]{Figures/Distances - R cmd Change.pdf}
+        \caption{Change in commanded distance during the test phase (\ac{RCSE} method)}
+        \label{fig_3_2}
     \end{minipage}
     \hfill
     \begin{minipage}{0.48\textwidth}
         \includegraphics[width=\linewidth]{Figures/FACL - R_cmd Follow.pdf}
         \caption{Distances during the test phase (FACL method)}
         \label{fig_3_3}
+        \vspace{15pt}
         \includegraphics[width=\linewidth]{Figures/FACL - Environment.pdf}
         \caption{Agents' trajectory during the test phase (FACL method)}
         \label{fig_3_4}
-    \end{minipage}
-\end{figure}
-
-\begin{figure}[H]
-    \begin{minipage}{0.48\textwidth}
-        \includegraphics[width=\linewidth]{Figures/Distances - R cmd Change.pdf}
-        \caption{Change in commanded distance during the test phase (\ac{RCSE} method)}
-        \label{fig_3_2}
-    \end{minipage}
-    \begin{minipage}{0.48\textwidth}
+        \vspace{5pt}
         \includegraphics[width=\linewidth]{Figures/FACL - R_cmd Changes.pdf}
         \caption{Change in commanded distance during the test phase (FACL method)}
         \label{fig_3_5}
     \end{minipage}
 \end{figure}
 
-As mentioned in section 3, the input encoding uses the error between current and commanded distance. Therefore, one of the advantages of the encoding and learning method in this chapter is that the learned policies are independent of the commanded distance. Since the \ac{snn} uses the distance error, the commanded distance can be changed after training. Figure \ref{fig_3_2} shows the response of the agents to change in commanded distance after training. According to this figure, when the commanded distance is changed at 30 seconds, the swarm immediately responds to this change in 2.98 seconds without disrupting the formation or any collision.
+As mentioned in section 3, the input encoding uses the error between current and commanded distance. Therefore, one of the advantages of the encoding and learning method in this paper is that the learned policies are independent of the commanded distance. Since the \ac{snn} uses the distance error, the commanded distance can be changed after training. Figure \ref{fig_3_2} shows the response of the agents to change in commanded distance after training. According to this figure, when the commanded distance is changed at 30 seconds, the swarm immediately responds to this change in 2.98 seconds without disrupting the formation or any collision.
 
 Figure \ref{fig_3_3} shows the simulation results for the FACL algorithm. The training time was 1000 seconds, and the algorithm converged to the final solution in 667.26 seconds. According to the results, the agents achieved successful formation in approximately 15.85 seconds. Similarly, Figure \ref{fig_3_5} shows the simulation results for the FACL algorithm, where the commanded distance is initially set to 2 \(m\) and at \(t=30\), the commanded distance changes to 4 \(m\). The results show that it takes 4.35 seconds for the swarm to adapt to the new command. It is worth mentioning that in Figures \ref{fig_3_3} and \ref{fig_3_5}, the distances converge to the commanded distance but stay within a bias. Increasing the number of membership functions can reduce the bias, but it increases the training time of the \ac{facl} algorithm.
 
@@ -439,7 +436,7 @@ When the leader is transformed into an obstacle, the encoding equation for the i
     \mu_{I}(\phi_{i}) = \exp{\left(-\frac{(\phi_{i}-\zeta)^2}{2\sigma^2}\right)}
 \end{equation}
 
-The simulation proceeded for an additional 1200 seconds, during which the synaptic weights were adjusted in accordance with the updated reward function. The results of the reward change are shown in Figure \ref{fig_3_6}, which indicates that the agents quickly reduced their initial distance to the commanded distance. Simultaneously, the minimum distance from the obstacle, which was the leader, increased over time, indicating that the agents adapted their behavior to maintain a greater distance from the obstacle. Figure \ref{fig_3_7} shows the trajectory of each agent after the reward change.
+The simulation proceeded for an additional 1200 seconds, during which the synaptic weights were adjusted in accordance with the new reward function given by \eqref{Eq.R-1}. The results of the reward change are shown in Figure \ref{fig_3_6}, which indicates that the agents quickly reduced their initial distance to the commanded distance. Simultaneously, the minimum distance from the obstacle, which was the leader, increased over time, indicating that the agents adapted their behavior to maintain a greater distance from the obstacle. Figure \ref{fig_3_7} shows the trajectory of each agent after the reward change.
 
 \begin{figure}[H]
     \centering
@@ -457,11 +454,11 @@ The simulation proceeded for an additional 1200 seconds, during which the synapt
 \end{figure}
 
 
-In order to better understand the effect of reward change on \ac{snn}, the synaptic weights matrix before and after reward change has been illustrated in Figures \ref{fig_3_8} and \ref{fig_3_9}, the vertical axis shows the output neurons. The first output neuron is for negative displacement in the x-direction, while the second output neuron is dedicated to positive displacement in the x-direction. Similarly, the third output neuron corresponds to negative displacement in the y-direction and the fourth output neuron to positive displacement in the y-direction. The horizontal axis shows the input neurons. The neuron IDs from 1 to 24 are for the first sub-layer dedicated to the neighboring follower. The network has two sub-layers for the neighboring follower agents, but only one is shown since they are similar in the case of synaptic weight values. The neuron numbers from 25 to 48 are for the sub-layer dedicated to the leader. The \ac{RCSE} method aims to maintain the synaptic weight matrix gradient while adapting to changes in the reward signal. 
+In order to better understand the effect of reward change on the \ac{snn}, the synaptic weights matrix before and after reward change has been illustrated in Figures \ref{fig_3_8} and \ref{fig_3_9}, the vertical axis shows the output neurons. The first output neuron is for negative displacement in the x-direction, while the second output neuron is dedicated to positive displacement in the x-direction. Similarly, the third output neuron corresponds to negative displacement in the y-direction, and the fourth output neuron to positive displacement in the y-direction. The horizontal axis shows the input neurons. The neuron IDs from 1 to 24 are for the first sub-layer dedicated to the neighboring follower. The network has two sub-layers for the neighboring follower agents, but only one is shown since they are similar in the case of synaptic weight values. The neuron numbers from 25 to 48 are for the sub-layer dedicated to the leader. The \ac{RCSE} method aims to maintain the synaptic weight matrix gradient while adapting to changes in the reward signal. 
 
 Considering the numerical values presented in Table \ref{table:simulation-parameters} along with the reward coefficients \(\mathcal{C}_{Fi}^{Fj} = 0.02\) and \(\mathcal{C}_{L}^{Fj} = 0.07\), and \(r_{Fi}^{Fj} = 1\;m/s\) and \(r_{Fi}^{L} = 0.1\;m/s\), the maximum rewards at each weight update interval (\(\Delta T\)) for \(\mathcal{R}_{Fi}^{Fj}\) and \(\mathcal{R}_{Fi}^{L}\) are calculated as \(4\times 10^{-4}\) and \(7.7\times 10^{-4}\), respectively. Consequently, \(\mathcal{R}_{max}^{G} = \max(\mathcal{R}_{Fi}^{Fj},\mathcal{R}_{Fi}^{L}) = 7.7\times 10^{-4}\). The \(\Psi^{S}\) for the follower section in the network is \(\left[\frac{4\times10^{-4}}{7\times10^{-4}}\right]15.5=8.0519\), and for the leader section, it is \(\left[\frac{7\times10^{-4}}{7\times10^{-4}}\right]15.5=15.5\). The \(\eta\) and \(\beta\) for the follower section within the network are \(\frac{\mathcal{A}\mathcal{R}_{max}^{G} \ln{(2^{\lambda^2}-1)}}{\lambda\Psi^{\mathcal{S}} \log{(2)}} = 0.0011\) and \(\beta = \frac{\ln{(2^{\lambda^2}-1)}}{\Psi^{\mathcal{S}}} = 2.152\), respectively. For the leader section, these values are \(\frac{\mathcal{A}\mathcal{R}_{max}^{G} \ln{(2^{\lambda^2}-1)}}{\lambda\Psi^{\mathcal{S}} \log{(2)}} = 5.719\times 10^{-4}\) and \(\beta = \frac{\ln{(2^{\lambda^2}-1)}}{\Psi^{\mathcal{S}}} = 1.118\), respectively.
 
-\begin{figure}
+\begin{figure}[H]
     \centering
     \begin{minipage}{0.48\textwidth}
         \includegraphics[width=\linewidth]{Figures/Synaptic Weights - BRC.pdf}
@@ -476,7 +473,7 @@ Considering the numerical values presented in Table \ref{table:simulation-parame
     \end{minipage}
 \end{figure}
 
-\begin{figure}
+\begin{figure}[H]
     \centering
     \begin{minipage}{0.48\textwidth}
         \includegraphics[width=\linewidth]{Figures/RLST - Weight Increase.pdf}
@@ -491,11 +488,11 @@ Considering the numerical values presented in Table \ref{table:simulation-parame
     \end{minipage}
 \end{figure}
 
-According to Figure \ref{fig_3_8}, we can see a gradient formed because of the fuzzy nature of the input. Since the reward coefficients for followers and leaders are different, there is a difference in the maximum allowed synaptic weight for them. The proposed method for controlling the unbounded growth of synaptic weights has successfully stabilized the network while maintaining the fuzzy patterns of the synaptic connections.
+According to Figure \ref{fig_3_8}, we can see a gradual change in weights because of the fuzzy nature of the input. Since the reward coefficients for followers and leaders are different, there is a difference in the maximum allowed synaptic weight for them. The proposed method for controlling the unbounded growth of synaptic weights has successfully stabilized the network while maintaining the fuzzy patterns of the synaptic connections.
 
 Figure \ref{fig_3_9} shows the synaptic weights after the reward change. In this case, since the reward coefficients are changed, the \(\eta\) and \(\beta\) values are changed for the represented sub-layers, and the proposed method has helped the \ac{stdp} algorithm to adjust the weights based on the new situation in the environment.
 
-\subsection{Simulation with FL and R-CSE}
+\subsection{Simulation with \ac{fl} and \ac{RCSE}}
 
 In this section, the proposed aggregation algorithm is tested. In this case, the agents only send their models when the Euclidean distance between the current and previously published model or the latest global model reaches a threshold. In the first phase, the simulation was done in 600 seconds, and the agents learned to follow the leader. The threshold for publishing the agents' and server models was 0.0005 and 0.00051, respectively. The reason for choosing the server's threshold a little bit higher than the agents' is that as soon as the first agent sends its model to the server, the Euclidean distance between the current and previously published model by the server reaches 0.0005, and the server distributes the model immediately. Therefore, the serve's threshold is set higher than the agents' threshold so that it waits for the other agents to send their models.
 
@@ -516,20 +513,21 @@ Figure \ref{fig_3-7} shows the distances between agents and the leader before th
     \end{minipage}
 \end{figure}
 
-The norm of the synaptic weights can represent the changes in the synaptic weights due to the change in the environment during the training process, which can be used as an index to adjust the learning process in SNNs. The proposed aggregation method helps SNN models converge into a single model. Agents communicate with the Central Server (leader) during the training process, and Figure \ref{fig:3-10} shows the communication times. The aggregation sample time is small at the beginning of the training and increases as the SNN models converge to the final solution. The rate of change of the Frobenius norm determines the principle of the aggregation process, which results in small intervals of aggregation when the change rate is high, and larger intervals when it reduces.
+The norm of the synaptic weights can represent the changes in the synaptic weights due to the change in the environment during the training process, which can be used as an index to adjust the learning process in SNNs. The proposed aggregation method helps SNN models converge into a single model. Agents communicate with the Central Server (leader) during the training process, and Figure \ref{fig:3-10} shows the communication times. The aggregation step time is small at the beginning of the training and increases as the SNN models converge to the final solution. The rate of change of norm of the synaptic weights determines the principle of the aggregation process, which results in small intervals of aggregation when the change rate is high, and larger intervals when it reduces.
 
 \begin{figure}[H]
     \centering
-    \includegraphics[scale=0.75]{Figures/Norm.pdf}
-    \caption{Frobenius norm of the agents during the learning phase. The reward changes for the Leader after 600 s.}
-    \label{fig:3-9}
-\end{figure}
-
-\begin{figure}
-    \centering
-    \includegraphics[scale=0.75]{Figures/Communication Log.pdf}
-    \caption{Communication times for agents and the Central Server (Leader). Red and blue dots show the times that agents and the Central Server have sent their model, respectively.}
-    \label{fig:3-10}
+    \begin{minipage}{0.48\textwidth}
+        \includegraphics[width=\linewidth]{Figures/Norm.pdf}
+        \caption{Frobenius norm of the agents during the learning phase. The reward changes for the Leader after 600 s.}
+        \label{fig:3-9}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.50\textwidth}
+        \includegraphics[width=\linewidth]{Figures/Communication Log.pdf}
+        \caption{Communication times for agents and the Central Server (Leader). Red and blue dots show the times that agents and the Central Server have sent their model, respectively.}
+        \label{fig:3-10}
+    \end{minipage}
 \end{figure}
 
 
@@ -559,9 +557,9 @@ Table \ref{tab:Results analysis} compares the proposed Federated Learning (FL) a
 
 \section{Conclusion}
 
-In this chapter, we presented a comprehensive approach addressing the challenges of uncontrolled growth in synaptic weights and the limited responsiveness of \ac{stdp} to real-time changes within \ac{snn}s. Our proposed solution integrates the \ac{RCSE} method with a dynamic aggregation interval in \ac{fl}, significantly enhancing learning time and performance.
+In this paper, we presented a comprehensive approach addressing the challenges of uncontrolled growth in synaptic weights and the limited responsiveness of \ac{stdp} to real-time changes within \ac{snn}s. Our proposed solution integrates the \ac{RCSE} method with a dynamic aggregation interval in \ac{fl}, significantly reducing learning time and improving performance.
 The R-CSE method introduces a novel mechanism to manage the unbounded growth of synaptic weights by dynamically adjusting the decay rate through the SoftPlus function. This adjustment is sensitive to the learning stages and rewards changes, ensuring that synaptic weight adjustments remain responsive over time. By addressing the challenge of synaptic weight saturation, the \ac{RCSE} method facilitates a balanced approach to weight adjustment, preventing network saturation and promoting continuous learning adaptability.
 We introduce a novel approach that uses \ac{fl} in SNN and employs the Frobenius norm to adjust weighted aggregation in \ac{fl}. Additionally, we include weight decay proportional to the time elapsed since an agent's last model publication. This improves the efficiency and responsiveness of the learning process. 
-Our model's dynamic nature of the sample time adjusts based on the Euclidean norm. This metric measures the distance between the weight matrices of the agents and the server, determining reduced intervals for model publication. Our results show that the proposed aggregation method significantly accelerates agents' learning and performs better than non-federated learning and \ac{facl} cases.
+Our model's dynamic nature of the model aggregation time adjusts based on the Euclidean norm. This metric measures the distance between the weight matrices of the agents and the server, determining reduced intervals for model publication. Our results show that the proposed aggregation method significantly accelerates agents' learning and performs better than non-federated learning and \ac{facl} cases.
 Moreover, the dynamic aggregation interval effectively reduces communication overhead between the agents and the central server, particularly after model convergence. This reduction is critical in scenarios where communication bandwidth is limited or costly. 
 Our findings suggest that integrating \ac{stdp} with federated learning, supported by our dynamic aggregation approach, provides a robust framework for advancing multi-agent reinforcement learning systems.

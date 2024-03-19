@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2021/W32TeX) (preloaded format=pdflatex 2021.12.18)  18 MAR 2024 19:14
+This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2021/W32TeX) (preloaded format=pdflatex 2021.12.18)  18 MAR 2024 20:33
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -717,7 +717,12 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 
 
 
-])
+]
+Overfull \hbox (3.91243pt too wide) in paragraph at lines 37--37
+ [][] [][]\OT1/cmr/m/n/12 Simulation with Fed-er-ated Learn-ing (FL) and Reward-Modulated Com- 
+ []
+
+)
 \tf@toc=\write6
 \openout6 = `Main.toc'.
 
@@ -772,7 +777,7 @@ Chapter 3.
 ]
 
 pdfTeX warning: pdflatex.exe (file ./Figures/1.pdf): PDF inclusion: found PDF version <1.7>, but at most version <1.5> allowed
-<Figures/1.pdf, id=584, 322.25294pt x 238.4368pt>
+<Figures/1.pdf, id=585, 322.25294pt x 238.4368pt>
 File: Figures/1.pdf Graphic file (type pdf)
 <use Figures/1.pdf>
 Package pdftex.def Info: Figures/1.pdf  used on input line 23.
@@ -780,7 +785,7 @@ Package pdftex.def Info: Figures/1.pdf  used on input line 23.
 [19]
 
 pdfTeX warning: pdflatex.exe (file ./Figures/2.pdf): PDF inclusion: found PDF version <1.7>, but at most version <1.5> allowed
-<Figures/2.pdf, id=594, 440.40634pt x 335.7915pt>
+<Figures/2.pdf, id=595, 440.40634pt x 335.7915pt>
 File: Figures/2.pdf Graphic file (type pdf)
 <use Figures/2.pdf>
 Package pdftex.def Info: Figures/2.pdf  used on input line 32.
@@ -796,7 +801,7 @@ l.68
       <./Figures/2.pdf>]
 
 pdfTeX warning: pdflatex.exe (file ./Figures/5.pdf): PDF inclusion: found PDF version <1.7>, but at most version <1.5> allowed
-<Figures/5.pdf, id=662, 366.85556pt x 183.68323pt>
+<Figures/5.pdf, id=663, 366.85556pt x 183.68323pt>
 File: Figures/5.pdf Graphic file (type pdf)
 <use Figures/5.pdf>
 Package pdftex.def Info: Figures/5.pdf  used on input line 81.
@@ -808,7 +813,7 @@ l.123
        <./Figures/5.pdf>]
 
 pdfTeX warning: pdflatex.exe (file ./Figures/4.pdf): PDF inclusion: found PDF version <1.7>, but at most version <1.5> allowed
-<Figures/4.pdf, id=696, 406.03694pt x 343.88475pt>
+<Figures/4.pdf, id=697, 406.03694pt x 343.88475pt>
 File: Figures/4.pdf Graphic file (type pdf)
 <use Figures/4.pdf>
 Package pdftex.def Info: Figures/4.pdf  used on input line 132.
@@ -821,12 +826,12 @@ l.199 \end{algorithm}
                       <./Figures/4.pdf>] [26] [27]
 
 pdfTeX warning: pdflatex.exe (file ./Figures/During training.pdf): PDF inclusion: found PDF version <1.7>, but at most version <1.5> allowed
-<Figures/During training.pdf, id=798, 373.15411pt x 301.125pt>
+<Figures/During training.pdf, id=799, 373.15411pt x 301.125pt>
 File: Figures/During training.pdf Graphic file (type pdf)
 <use Figures/During training.pdf>
 Package pdftex.def Info: Figures/During training.pdf  used on input line 269.
 (pdftex.def)             Requested size: 373.1532pt x 301.12425pt.
-<Figures/Synaptic weights.pdf, id=799, 376.06497pt x 302.12875pt>
+<Figures/Synaptic weights.pdf, id=800, 376.06497pt x 302.12875pt>
 File: Figures/Synaptic weights.pdf Graphic file (type pdf)
 <use Figures/Synaptic weights.pdf>
 Package pdftex.def Info: Figures/Synaptic weights.pdf  used on input line 276.
@@ -850,7 +855,7 @@ l.283 T
        he output of the activation of each membership function is the input ... <./Figures/Synaptic weights.pdf>]
 
 pdfTeX warning: pdflatex.exe (file ./Figures/C.pdf): PDF inclusion: found PDF version <1.7>, but at most version <1.5> allowed
-<Figures/C.pdf, id=850, 530.0934pt x 228.16542pt>
+<Figures/C.pdf, id=851, 530.0934pt x 228.16542pt>
 File: Figures/C.pdf Graphic file (type pdf)
 <use Figures/C.pdf>
 Package pdftex.def Info: Figures/C.pdf  used on input line 291.
@@ -860,7 +865,7 @@ Overfull \hbox (7.32463pt too wide) in paragraph at lines 291--292
  [][] 
  []
 
-<Figures/R and C.pdf, id=851, 399.31183pt x 291.0875pt>
+<Figures/R and C.pdf, id=852, 399.31183pt x 291.0875pt>
 File: Figures/R and C.pdf Graphic file (type pdf)
 <use Figures/R and C.pdf>
 Package pdftex.def Info: Figures/R and C.pdf  used on input line 299.
@@ -868,7 +873,7 @@ Package pdftex.def Info: Figures/R and C.pdf  used on input line 299.
 
 
 pdfTeX warning: pdflatex.exe (file ./Figures/After learning.pdf): PDF inclusion: found PDF version <1.7>, but at most version <1.5> allowed
-<Figures/After learning.pdf, id=853, 372.95335pt x 299.1175pt>
+<Figures/After learning.pdf, id=854, 372.95335pt x 299.1175pt>
 File: Figures/After learning.pdf Graphic file (type pdf)
 <use Figures/After learning.pdf>
 Package pdftex.def Info: Figures/After learning.pdf  used on input line 311.
@@ -888,7 +893,7 @@ l.317
        <./Figures/After learning.pdf>]
 
 pdfTeX warning: pdflatex.exe (file ./Figures/Noise effect.pdf): PDF inclusion: found PDF version <1.7>, but at most version <1.5> allowed
-<Figures/Noise effect.pdf, id=957, 373.02362pt x 297.8327pt>
+<Figures/Noise effect.pdf, id=958, 373.02362pt x 297.8327pt>
 File: Figures/Noise effect.pdf Graphic file (type pdf)
 <use Figures/Noise effect.pdf>
 Package pdftex.def Info: Figures/Noise effect.pdf  used on input line 329.
@@ -905,7 +910,7 @@ Chapter 4.
 
 
 pdfTeX warning: pdflatex.exe (file ./Figures/Consensus Flying - FL.pdf): PDF inclusion: found PDF version <1.7>, but at most version <1.5> allowed
-<Figures/Consensus Flying - FL.pdf, id=981, 813.2784pt x 480.79625pt>
+<Figures/Consensus Flying - FL.pdf, id=982, 813.2784pt x 480.79625pt>
 File: Figures/Consensus Flying - FL.pdf Graphic file (type pdf)
 <use Figures/Consensus Flying - FL.pdf>
 Package pdftex.def Info: Figures/Consensus Flying - FL.pdf  used on input line 11.
@@ -922,7 +927,7 @@ l.22
       <./Figures/Consensus Flying - FL.pdf>]
 
 pdfTeX warning: pdflatex.exe (file ./Figures/Network Structure.pdf): PDF inclusion: found PDF version <1.7>, but at most version <1.5> allowed
-<Figures/Network Structure.pdf, id=1011, 440.87311pt x 431.75905pt>
+<Figures/Network Structure.pdf, id=1012, 440.87311pt x 431.75905pt>
 File: Figures/Network Structure.pdf Graphic file (type pdf)
 <use Figures/Network Structure.pdf>
 Package pdftex.def Info: Figures/Network Structure.pdf  used on input line 34.
@@ -934,7 +939,7 @@ l.40
       <./Figures/Network Structure.pdf>]
 
 pdfTeX warning: pdflatex.exe (file ./Figures/Encoder.pdf): PDF inclusion: found PDF version <1.7>, but at most version <1.5> allowed
-<Figures/Encoder.pdf, id=1043, 215.24416pt x 329.43076pt>
+<Figures/Encoder.pdf, id=1044, 215.24416pt x 329.43076pt>
 File: Figures/Encoder.pdf Graphic file (type pdf)
 <use Figures/Encoder.pdf>
 Package pdftex.def Info: Figures/Encoder.pdf  used on input line 61.
@@ -951,192 +956,193 @@ Overfull \hbox (38.34016pt too wide) detected at line 220
 [][][]\OT1/cmr/m/n/12 (\OML/cmm/m/it/12 t\OT1/cmr/m/n/12 ) = (1 \OMS/cmsy/m/n/12 ^^@ \OML/cmm/m/it/12 ^^N\OT1/cmr/m/n/12 (\OML/cmm/m/it/12 t \OMS/cmsy/m/n/12 ^^@ \OML/cmm/m/it/12 T[]\OT1/cmr/m/n/12 )) [] + \OML/cmm/m/it/12 ^^N\OT1/cmr/m/n/12 (\OML/cmm/m/it/12 t \OMS/cmsy/m/n/12 ^^@ \OML/cmm/m/it/12 T[]\OT1/cmr/m/n/12 )\OML/cmm/m/it/12 I[] []
  []
 
-[50] [51] [52] [53pdfTeX warning (ext4): destination with the same identifier (name{table.4.2}) has been already used, duplicate ignored
+[50] [51] [52] [53pdfTeX warning (ext4): destination with the same identifier (name{table.4.1}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.316 
-      pdfTeX warning (ext4): destination with the same identifier (name{table.4.1}) has been already used, duplicate ignored
-<argument> ...shipout:D \box_use:N \l_shipout_box 
-                                                  \__shipout_drop_firstpage_...
-l.316 
+l.312 
       ]
 
 pdfTeX warning: pdflatex.exe (file ./Figures/Metrics.pdf): PDF inclusion: found PDF version <1.7>, but at most version <1.5> allowed
-<Figures/Metrics.pdf, id=1163, 265.89337pt x 191.21437pt>
+<Figures/Metrics.pdf, id=1164, 265.89337pt x 191.21437pt>
 File: Figures/Metrics.pdf Graphic file (type pdf)
 <use Figures/Metrics.pdf>
 Package pdftex.def Info: Figures/Metrics.pdf  used on input line 319.
 (pdftex.def)             Requested size: 234.8775pt x 168.90813pt.
-[54pdfTeX warning (ext4): destination with the same identifier (name{figure.4.4}) has been already used, duplicate ignored
+[54pdfTeX warning (ext4): destination with the same identifier (name{table.4.2}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.331 \end{equation}
-                     <./Figures/Metrics.pdf>] [55]
-<Figures/Distances - BRC.pdf, id=1235, 363.87944pt x 293.29576pt>
+l.323 
+      ] [55pdfTeX warning (ext4): destination with the same identifier (name{figure.4.4}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.335 \begin{equation}
+                       <./Figures/Metrics.pdf>] [56]
+<Figures/Distances - BRC.pdf, id=1241, 363.87944pt x 293.29576pt>
 File: Figures/Distances - BRC.pdf Graphic file (type pdf)
 <use Figures/Distances - BRC.pdf>
 Package pdftex.def Info: Figures/Distances - BRC.pdf  used on input line 395.
 (pdftex.def)             Requested size: 225.4804pt x 181.74303pt.
-<Figures/Environment - BRC.pdf, id=1236, 363.2772pt x 294.8616pt>
+<Figures/Environment - BRC.pdf, id=1242, 363.2772pt x 294.8616pt>
 File: Figures/Environment - BRC.pdf Graphic file (type pdf)
 <use Figures/Environment - BRC.pdf>
-Package pdftex.def Info: Figures/Environment - BRC.pdf  used on input line 398.
+Package pdftex.def Info: Figures/Environment - BRC.pdf  used on input line 399.
 (pdftex.def)             Requested size: 225.4804pt x 183.01926pt.
-<Figures/FACL - R_cmd Follow.pdf, id=1237, 367.25206pt x 294.50024pt>
-File: Figures/FACL - R_cmd Follow.pdf Graphic file (type pdf)
-<use Figures/FACL - R_cmd Follow.pdf>
-Package pdftex.def Info: Figures/FACL - R_cmd Follow.pdf  used on input line 404.
-(pdftex.def)             Requested size: 225.4804pt x 180.81323pt.
-<Figures/FACL - Environment.pdf, id=1238, 364.9635pt x 293.41621pt>
-File: Figures/FACL - Environment.pdf Graphic file (type pdf)
-<use Figures/FACL - Environment.pdf>
-Package pdftex.def Info: Figures/FACL - Environment.pdf  used on input line 407.
-(pdftex.def)             Requested size: 225.4804pt x 181.28041pt.
- [56pdfTeX warning (ext4): destination with the same identifier (name{table.4.3}) has been already used, duplicate ignored
-<argument> ...shipout:D \box_use:N \l_shipout_box 
-                                                  \__shipout_drop_firstpage_...
-l.412 
-      ]
-<Figures/Distances - R cmd Change.pdf, id=1245, 364.72258pt x 294.37979pt>
+<Figures/Distances - R cmd Change.pdf, id=1243, 364.72258pt x 294.37979pt>
 File: Figures/Distances - R cmd Change.pdf Graphic file (type pdf)
 <use Figures/Distances - R cmd Change.pdf>
-Package pdftex.def Info: Figures/Distances - R cmd Change.pdf  used on input line 415.
+Package pdftex.def Info: Figures/Distances - R cmd Change.pdf  used on input line 403.
 (pdftex.def)             Requested size: 225.4804pt x 181.99251pt.
+<Figures/FACL - R_cmd Follow.pdf, id=1244, 367.25206pt x 294.50024pt>
+File: Figures/FACL - R_cmd Follow.pdf Graphic file (type pdf)
+<use Figures/FACL - R_cmd Follow.pdf>
+Package pdftex.def Info: Figures/FACL - R_cmd Follow.pdf  used on input line 409.
+(pdftex.def)             Requested size: 225.4804pt x 180.81323pt.
+<Figures/FACL - Environment.pdf, id=1245, 364.9635pt x 293.41621pt>
+File: Figures/FACL - Environment.pdf Graphic file (type pdf)
+<use Figures/FACL - Environment.pdf>
+Package pdftex.def Info: Figures/FACL - Environment.pdf  used on input line 413.
+(pdftex.def)             Requested size: 225.4804pt x 181.28041pt.
 <Figures/FACL - R_cmd Changes.pdf, id=1246, 363.99991pt x 293.41621pt>
 File: Figures/FACL - R_cmd Changes.pdf Graphic file (type pdf)
 <use Figures/FACL - R_cmd Changes.pdf>
-Package pdftex.def Info: Figures/FACL - R_cmd Changes.pdf  used on input line 420.
+Package pdftex.def Info: Figures/FACL - R_cmd Changes.pdf  used on input line 417.
 (pdftex.def)             Requested size: 225.4804pt x 181.76395pt.
- [57pdfTeX warning (ext4): destination with the same identifier (name{figure.4.5}) has been already used, duplicate ignored
+ [57pdfTeX warning (ext4): destination with the same identifier (name{table.4.3}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.425 
+l.422 
+      ]
+Overfull \vbox (183.07478pt too high) has occurred while \output is active []
+
+ [58pdfTeX warning (ext4): destination with the same identifier (name{figure.4.5}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.422 
       pdfTeX warning (ext4): destination with the same identifier (name{figure.4.6}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.425 
+l.422 
       pdfTeX warning (ext4): destination with the same identifier (name{figure.4.7}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.425 
+l.422 
       pdfTeX warning (ext4): destination with the same identifier (name{figure.4.8}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.425 
-       <./Figures/Distances - BRC.pdf> <./Figures/Environment - BRC.pdf> <./Figures/FACL - R_cmd Follow.pdf> <./Figures/FACL - Environment.pdf>] [58pdfTeX warning (ext4): destination with the same identifier (name{figure.4.9}) has been already used, duplicate ignored
+l.422 
+      pdfTeX warning (ext4): destination with the same identifier (name{figure.4.9}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.430 A
-       fter 600 seconds, the leader is changed into an obstacle, and its rew...pdfTeX warning (ext4): destination with the same identifier (name{figure.4.10}) has been already used, duplicate ignored
+l.422 
+      pdfTeX warning (ext4): destination with the same identifier (name{figure.4.10}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.430 A
-       fter 600 seconds, the leader is changed into an obstacle, and its rew... <./Figures/Distances - R cmd Change.pdf> <./Figures/FACL - R_cmd Changes.pdf>]
-<Figures/Environment - ARC.pdf, id=1378, 363.99991pt x 292.9344pt>
+l.422 
+       <./Figures/Distances - BRC.pdf> <./Figures/Environment - BRC.pdf> <./Figures/Distances - R cmd Change.pdf> <./Figures/FACL - R_cmd Follow.pdf> <./Figures/FACL - Environment.pdf> <./Figures/FACL - R_cmd Changes.pdf>] [59]
+<Figures/Environment - ARC.pdf, id=1385, 363.99991pt x 292.9344pt>
 File: Figures/Environment - ARC.pdf Graphic file (type pdf)
 <use Figures/Environment - ARC.pdf>
-Package pdftex.def Info: Figures/Environment - ARC.pdf  used on input line 447.
+Package pdftex.def Info: Figures/Environment - ARC.pdf  used on input line 444.
 (pdftex.def)             Requested size: 225.4804pt x 181.46547pt.
 
-Underfull \hbox (badness 1142) in paragraph at lines 448--448
+Underfull \hbox (badness 1142) in paragraph at lines 445--445
 []\OT1/cmr/m/n/12 Figure 4.11: []Agents' path af-ter re-ward
  []
 
-<Figures/Distances - ARC.pdf, id=1379, 357.97742pt x 294.37979pt>
+<Figures/Distances - ARC.pdf, id=1386, 357.97742pt x 294.37979pt>
 File: Figures/Distances - ARC.pdf Graphic file (type pdf)
 <use Figures/Distances - ARC.pdf>
-Package pdftex.def Info: Figures/Distances - ARC.pdf  used on input line 453.
+Package pdftex.def Info: Figures/Distances - ARC.pdf  used on input line 450.
 (pdftex.def)             Requested size: 225.4804pt x 185.4243pt.
-[59] [60pdfTeX warning (ext4): destination with the same identifier (name{figure.4.11}) has been already used, duplicate ignored
+[60pdfTeX warning (ext4): destination with the same identifier (name{figure.4.11}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.463 
+l.458 
       pdfTeX warning (ext4): destination with the same identifier (name{figure.4.12}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.463 
+l.458 
        <./Figures/Environment - ARC.pdf> <./Figures/Distances - ARC.pdf>]
-<Figures/Synaptic Weights - BRC.pdf, id=1438, 366.89069pt x 274.626pt>
+<Figures/Synaptic Weights - BRC.pdf, id=1440, 366.89069pt x 274.626pt>
 File: Figures/Synaptic Weights - BRC.pdf Graphic file (type pdf)
 <use Figures/Synaptic Weights - BRC.pdf>
-Package pdftex.def Info: Figures/Synaptic Weights - BRC.pdf  used on input line 467.
+Package pdftex.def Info: Figures/Synaptic Weights - BRC.pdf  used on input line 464.
 (pdftex.def)             Requested size: 225.4804pt x 168.78293pt.
-<Figures/Synaptic Weights - ARC.pdf, id=1439, 367.3725pt x 273.1806pt>
+<Figures/Synaptic Weights - ARC.pdf, id=1441, 367.3725pt x 273.1806pt>
 File: Figures/Synaptic Weights - ARC.pdf Graphic file (type pdf)
 <use Figures/Synaptic Weights - ARC.pdf>
-Package pdftex.def Info: Figures/Synaptic Weights - ARC.pdf  used on input line 473.
+Package pdftex.def Info: Figures/Synaptic Weights - ARC.pdf  used on input line 470.
 (pdftex.def)             Requested size: 225.4804pt x 167.67368pt.
-<Figures/RLST - Weight Increase.pdf, id=1440, 370.74509pt x 293.898pt>
+<Figures/RLST - Weight Increase.pdf, id=1442, 370.74509pt x 293.898pt>
 File: Figures/RLST - Weight Increase.pdf Graphic file (type pdf)
 <use Figures/RLST - Weight Increase.pdf>
-Package pdftex.def Info: Figures/RLST - Weight Increase.pdf  used on input line 482.
+Package pdftex.def Info: Figures/RLST - Weight Increase.pdf  used on input line 479.
 (pdftex.def)             Requested size: 225.4804pt x 178.74385pt.
-<Figures/RLST - Weight Decrease.pdf, id=1441, 371.2269pt x 292.45259pt>
+<Figures/RLST - Weight Decrease.pdf, id=1443, 371.2269pt x 292.45259pt>
 File: Figures/RLST - Weight Decrease.pdf Graphic file (type pdf)
 <use Figures/RLST - Weight Decrease.pdf>
-Package pdftex.def Info: Figures/RLST - Weight Decrease.pdf  used on input line 488.
+Package pdftex.def Info: Figures/RLST - Weight Decrease.pdf  used on input line 485.
 (pdftex.def)             Requested size: 225.4804pt x 177.63274pt.
  [61pdfTeX warning (ext4): destination with the same identifier (name{figure.4.13}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.501 
+l.490 
       pdfTeX warning (ext4): destination with the same identifier (name{figure.4.14}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.501 
-       <./Figures/Synaptic Weights - BRC.pdf> <./Figures/Synaptic Weights - ARC.pdf>]
-<Figures/Distances - BRC - DAI.pdf, id=1458, 366.36874pt x 300.62312pt>
-File: Figures/Distances - BRC - DAI.pdf Graphic file (type pdf)
-<use Figures/Distances - BRC - DAI.pdf>
-Package pdftex.def Info: Figures/Distances - BRC - DAI.pdf  used on input line 507.
-(pdftex.def)             Requested size: 225.4804pt x 185.01743pt.
-<Figures/Distances - ARC - DAI.pdf, id=1459, 361.30984pt x 292.09125pt>
-File: Figures/Distances - ARC - DAI.pdf Graphic file (type pdf)
-<use Figures/Distances - ARC - DAI.pdf>
-Package pdftex.def Info: Figures/Distances - ARC - DAI.pdf  used on input line 513.
-(pdftex.def)             Requested size: 225.4804pt x 182.28915pt.
- [62pdfTeX warning (ext4): destination with the same identifier (name{figure.4.15}) has been already used, duplicate ignored
+l.490 
+       <./Figures/Synaptic Weights - BRC.pdf> <./Figures/Synaptic Weights - ARC.pdf>] [62pdfTeX warning (ext4): destination with the same identifier (name{figure.4.15}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.518 
+l.498 
       pdfTeX warning (ext4): destination with the same identifier (name{figure.4.16}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.518 
+l.498 
        <./Figures/RLST - Weight Increase.pdf> <./Figures/RLST - Weight Decrease.pdf>]
-<Figures/Norm.pdf, id=1508, 367.3725pt x 298.23419pt>
-File: Figures/Norm.pdf Graphic file (type pdf)
-<use Figures/Norm.pdf>
-Package pdftex.def Info: Figures/Norm.pdf  used on input line 523.
-(pdftex.def)             Requested size: 275.52869pt x 223.6751pt.
+<Figures/Distances - BRC - DAI.pdf, id=1507, 366.36874pt x 300.62312pt>
+File: Figures/Distances - BRC - DAI.pdf Graphic file (type pdf)
+<use Figures/Distances - BRC - DAI.pdf>
+Package pdftex.def Info: Figures/Distances - BRC - DAI.pdf  used on input line 504.
+(pdftex.def)             Requested size: 225.4804pt x 185.01743pt.
+<Figures/Distances - ARC - DAI.pdf, id=1508, 361.30984pt x 292.09125pt>
+File: Figures/Distances - ARC - DAI.pdf Graphic file (type pdf)
+<use Figures/Distances - ARC - DAI.pdf>
+Package pdftex.def Info: Figures/Distances - ARC - DAI.pdf  used on input line 510.
+(pdftex.def)             Requested size: 225.4804pt x 182.28915pt.
  [63pdfTeX warning (ext4): destination with the same identifier (name{figure.4.17}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.527 
+l.517 
       pdfTeX warning (ext4): destination with the same identifier (name{figure.4.18}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.527 
+l.517 
        <./Figures/Distances - BRC - DAI.pdf> <./Figures/Distances - ARC - DAI.pdf>]
-<Figures/Communication Log.pdf, id=1545, 403.86884pt x 303.63437pt>
+<Figures/Norm.pdf, id=1546, 367.3725pt x 298.23419pt>
+File: Figures/Norm.pdf Graphic file (type pdf)
+<use Figures/Norm.pdf>
+Package pdftex.def Info: Figures/Norm.pdf  used on input line 521.
+(pdftex.def)             Requested size: 225.4804pt x 183.05115pt.
+<Figures/Communication Log.pdf, id=1547, 403.86884pt x 303.63437pt>
 File: Figures/Communication Log.pdf Graphic file (type pdf)
 <use Figures/Communication Log.pdf>
-Package pdftex.def Info: Figures/Communication Log.pdf  used on input line 530.
-(pdftex.def)             Requested size: 302.90088pt x 227.7252pt.
- [64pdfTeX warning (ext4): destination with the same identifier (name{figure.4.20}) has been already used, duplicate ignored
-<argument> ...shipout:D \box_use:N \l_shipout_box 
-                                                  \__shipout_drop_firstpage_...
-l.537 
-      pdfTeX warning (ext4): destination with the same identifier (name{figure.4.19}) has been already used, duplicate ignored
-<argument> ...shipout:D \box_use:N \l_shipout_box 
-                                                  \__shipout_drop_firstpage_...
-l.537 
-       <./Figures/Communication Log.pdf> <./Figures/Norm.pdf>]
-Underfull \hbox (badness 1642) in paragraph at lines 541--541
+Package pdftex.def Info: Figures/Communication Log.pdf  used on input line 527.
+(pdftex.def)             Requested size: 234.8775pt x 176.58525pt.
+
+Underfull \hbox (badness 1642) in paragraph at lines 539--539
 []\OT1/cmr/m/n/12 Table 4.4: []Comparative Per-for-mance Anal-y-sis of the Pro-posed Ag-gre-ga-tion Al-go-
  []
 
-) [65pdfTeX warning (ext4): destination with the same identifier (name{table.4.4}) has been already used, duplicate ignored
+[64pdfTeX warning (ext4): destination with the same identifier (name{figure.4.19}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.554 
+      pdfTeX warning (ext4): destination with the same identifier (name{figure.4.20}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.554 
+       <./Figures/Norm.pdf> <./Figures/Communication Log.pdf>]) [65pdfTeX warning (ext4): destination with the same identifier (name{table.4.4}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
 l.74 \include{4_FL_with_SNN}
@@ -1161,21 +1167,21 @@ Underfull \hbox (badness 1005) in paragraph at lines 370--374
 
 [76] [77]) [78] (./Main.aux (./title_page.aux) (./0_Abstract.aux) (./1_Introduction.aux) (./2_Literature_Review.aux) (./3_ATD_with_SNN.aux) (./4_FL_with_SNN.aux) (./5_Future_Work.aux) (./Main.acr))
 Package rerunfilecheck Info: File `Main.out' has not changed.
-(rerunfilecheck)             Checksum: FE413A127F7A8E8CBD29B6115146009F;5510.
+(rerunfilecheck)             Checksum: 94370A432BAF6427CBDF71202502F4CB;5505.
  ) 
 Here is how much of TeX's memory you used:
- 20204 strings out of 478353
- 391167 string characters out of 5852100
- 773636 words of memory out of 5000000
- 37614 multiletter control sequences out of 15000+600000
+ 20200 strings out of 478353
+ 391041 string characters out of 5852100
+ 773692 words of memory out of 5000000
+ 37610 multiletter control sequences out of 15000+600000
  420816 words of font info for 88 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  68i,13n,77p,1440b,529s stack positions out of 5000i,500n,10000p,200000b,80000s
 {c:/texlive/2021/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc}<c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx8.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmib10.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsl12.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb>
-Output written on Main.pdf (87 pages, 6529357 bytes).
+Output written on Main.pdf (87 pages, 6529443 bytes).
 PDF statistics:
- 1813 PDF objects out of 2073 (max. 8388607)
- 1536 compressed objects within 16 object streams
+ 1815 PDF objects out of 2073 (max. 8388607)
+ 1538 compressed objects within 16 object streams
  326 named destinations out of 1000 (max. 500000)
  375 words of extra memory for PDF output out of 10000 (max. 10000000)
 
