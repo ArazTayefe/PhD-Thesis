@@ -105,7 +105,6 @@ The Izhikevich model combines the biological plausibility of the Hodgkin-Huxley 
 
 when $v \geq 30$ mV, then $v \leftarrow c$ and $u \leftarrow u + d$. Here, $v$ and $u$ represent the membrane potential and membrane recovery variable, respectively, and $a$, $b$, $c$, and $d$ are parameters of the model, with $I$ representing the current.
 
-
 \subsection{Training Algorithms}
 
 \subsubsection{Reward-modulated Spike-Timing-Dependent Plasticity (R-STDP)}
@@ -133,7 +132,7 @@ The adjustment of synaptic weights follows the given equation:
 TD-Learning for SNNs employs the concept of temporal difference errors to adjust synaptic weights, facilitating the learning of predictions about future rewards:
 
 \begin{equation}
-\Delta W_{kl} = \alpha \cdot (r + \gamma \cdot V(s') - V(s)) \cdot STDP_{kl}(\tau)
+\Delta W_{kl} = \alpha \cdot (\mathcal{R}(t) + \gamma \cdot V(s') - V(s)) \cdot STDP_{kl}(\tau)
 \end{equation}
 
 Here, \(\alpha\) is the learning rate, \(r\) represents the immediate reward, and \(\gamma\) is the discount factor for future rewards. \(V(s)\) and \(V(s')\) denote the values of the current and subsequent states, respectively.

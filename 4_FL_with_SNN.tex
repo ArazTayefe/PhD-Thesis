@@ -165,7 +165,75 @@ The choice of setting the decay rate to \(\lambda\mathcal{A} \times \mathcal{R}_
 
 When \(|W_{max}^{\mathcal{S}}(t)| < \Psi^{\mathcal{S}} \), the reward adjusts the synaptic weights, and there is no weight decay to decrease the learning time. When \(|W_{max}^{\mathcal{S}}(t)| > \Psi^{\mathcal{S}} \), the decay rate changes the synaptic weights and brings the maximum weight to the reward zone, where \(|W_{max}^{\mathcal{S}}(t)| < \Psi^{\mathcal{S}} \) and the networks responds to reward change. 
 
-The \ac{RCSE} method addresses the challenge of unbounded growth in synaptic weights within \ac{snn}s. By integrating a dynamic decay rate governed by the SoftPlus function, \ac{RCSE} ensures that synaptic weight adjustments remain responsive to learning stages and reward changes. This method not only preserves the growth pattern induced by fuzzy input firing strengths but also provides a balanced approach to weight adjustment, preventing saturation and facilitating continual learning adaptability. Moving forward, we will explore the integration of \ac{fl} in the learning process.
+\subsection*{Proof of stability of the \ac{RCSE} method} 
+
+\textit{\textbf{Lemma}: The equilibrium point \(W_{max}^{\mathcal{S}}(t) = \Psi^{\mathcal{S}}\) of the \ac{RCSE} method is asymptotically stable, as the derivative of the Lyapunov function is non-positive.}
+
+
+We consider the dynamical system given by the equation of synaptic weights for \(W^{\mathcal{S}}(t) \geq 0\) as,
+
+\begin{equation} \label{Eq.WS.5}
+\begin{split}
+    \dot{W}^{\mathcal{S}}(t) = & \frac{1}{1 + \exp{\left[\frac{1}{\epsilon}\left( W_{max}^{\mathcal{S}}(t) - \Psi^{\mathcal{S}} \right)\right]}}  STDP(\tau)  \mathcal{R}(t) \\
+    & - \left( \frac{\mathcal{A}\mathcal{R}_{max}^{G}}{\lambda\log{(2)}} \right) \log \left(1 + \exp\left[{\left(\frac{\ln{(2^{\lambda^2}-1)}}{\Psi^{\mathcal{S}}} \right) \left( W_{max}^{\mathcal{S}}(t) - \Psi^{\mathcal{S}} \right)} \right] \right),
+\end{split}
+\end{equation}
+
+To assess the stability of this system around the equilibrium point $W_{max}^{\mathcal{S}}(t) = \Psi^{\mathcal{S}}$, we introduce a Lyapunov function candidate \(V(z)\), where \(z=W_{max}^{\mathcal{S}}(t) - \Psi^{\mathcal{S}}\). A common choice for such analyses is a quadratic function of the deviation from the equilibrium:
+
+\begin{equation}
+    V(z) = \frac{1}{2}z^2.
+\end{equation}
+
+This function is positive definite and has a minimum at the equilibrium point, satisfying the essential criteria for a Lyapunov function. The derivative of $V(z)$ with respect to time, $\dot{V}(z)$, is then calculated to determine the rate of change of the Lyapunov function along the trajectories of the system:
+
+\begin{equation}
+    \dot{V}(z) = z \dot{z}
+\end{equation}
+
+Considering the maximum value of \(STDP(\tau)  \mathcal{R}(t)\) as \(\mathcal{A}\mathcal{R}_{max}^{G}\), and substituting \(\dot{W}^{\mathcal{S}}(t)\) from Eq. \ref{Eq.WS.5} into the above expression, we have,
+
+\begin{equation} \label{Eq.WS.6}
+\begin{split}
+    \dot{V}(z) = z \times \left[ \frac{1}{1 + \exp{\left[\frac{1}{\epsilon}\left( z \right)\right]}} \mathcal{A}\mathcal{R}_{max}^{G} - \left( \frac{\mathcal{A}\mathcal{R}_{max}^{G}}{\lambda\log{(2)}} \right) \log \left(1 + \exp\left[{\left(\frac{\ln{(2^{\lambda^2}-1)}}{\Psi^{\mathcal{S}}} \right) \left( z \right)} \right] \right) \right]
+\end{split}
+\end{equation}
+
+A negative $\dot{V}(z)$ for all $W^{\mathcal{S}}(t) \neq \Psi^{\mathcal{S}}$ indicates that the system's energy decreases over time, leading to the conclusion that the equilibrium point is asymptotically stable. Conversely, a positive $\dot{V}(z)$ in any region would suggest the presence of instability or regions of attraction that do not encompass the entire state space.
+
+In the analysis of the system's stability, we focus on the behavior of the derivative of the Lyapunov function, $\dot{V}(z)$, across different regions of $z$. We decompose the dynamics of $\dot{z}$ into its constituent components to systematically analyze the stability conditions. we assess the relative magnitudes of the two main components influencing $\dot{V}(z)$:
+
+\begin{enumerate}
+    \item The first term, represented as $\frac{1}{1 + \exp{\left[\frac{1}{\epsilon}z\right]}} \mathcal{A}\mathcal{R}_{max}^{G}$, denotes the effect of learning rate and is inherently positive.
+    
+    \item The second term, $\left( \frac{\mathcal{A}\mathcal{R}_{max}^{G}}{\lambda\log{(2)}} \right) \log \left(1 + \exp\left[{\left(\frac{\ln{(2^{\lambda^2}-1)}}{\Psi^{\mathcal{S}}} \right) z} \right] \right)$, captures the dynamic decay rate of synaptic weights, which is governed by the SoftPlus function.
+\end{enumerate}
+
+\textbf{Analysis for $z < 0$}:
+
+For $z < 0$, we observe that the second term is zero. This implies that the contribution of this term to $\dot{V(z)}$ is negligible in this region. Moreover, the first term remains positive throughout, and given that it is multiplied by $z$ (which is negative in this region), the overall contribution to $\dot{V}(z)$ is negative. Consequently, $\dot{V}(z)$ is negative for $z < 0$, indicating that any perturbations from the equilibrium in this region will decrease over time, thereby contributing to the system's stability.
+
+\textbf{Analysis for $z > 0$:}
+
+For this region, the magnitude of the second term significantly exceeds that of the first term. This predominance is critical as it is associated with a negative sign in the $\dot{V}(z)$ equation. Therefore, the negative contribution of this component ensures that $\dot{V}(z)$ remains negative throughout this region. It indicates that any deviation from the equilibrium state results in the system's energy decreasing over time, leading to the conclusion that the equilibrium point $W_{max}^{\mathcal{S}}(t) = \Psi^{\mathcal{S}}$ is asymptotically stable for $z > 0$. 
+
+\begin{figure}[h]
+    \centering
+    \begin{minipage}{0.48\textwidth}
+        \includegraphics[width=\linewidth]{Figures/W(t).pdf}
+        \caption{Synaptic weight change for \(\lambda=5\), \(\Psi^{\mathcal{S}}=15.5\), and \(\mathcal{A}\mathcal{R}_{max}^{G}=0.5\)}
+        \label{fig_3_3_1}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.48\textwidth}
+        \includegraphics[width=\linewidth]{Figures/dot{W}(t).pdf}
+        \caption{Derivation of Synaptic weight for \(\lambda=5\), \(\Psi^{\mathcal{S}}=15.5\), and \(\mathcal{A}\mathcal{R}_{max}^{G}=0.5\)}
+        \label{fig_3_3_2}
+    \end{minipage}
+\end{figure}
+
+Figures \ref{fig_3_3_1} and \ref{fig_3_3_2} demonstrate the performance of the \ac{RCSE} when it regulates the synaptic weights to prevent unbounded growth. The red dotted line represents the value of \(\Psi^{\mathcal{S}}\), which is derived from the maximum reward value of the corresponding network section. As shown in Figure \ref{fig_3_3_1}, the synaptic weight oscillates around \(\Psi^{\mathcal{S}}\), and when it drops below \(\Psi^{\mathcal{S}}\), the learning rate is set to 1. This allows any changes in the reward function to be applied to the synapse.
+
 
 \subsection{Federated Learning for Consensus Flying}
 
