@@ -105,82 +105,369 @@ The Izhikevich model combines the biological plausibility of the Hodgkin-Huxley 
 
 when $v \geq 30$ mV, then $v \leftarrow c$ and $u \leftarrow u + d$. Here, $v$ and $u$ represent the membrane potential and membrane recovery variable, respectively, and $a$, $b$, $c$, and $d$ are parameters of the model, with $I$ representing the current.
 
-\subsection{Training Algorithms}
 
-\subsubsection{Reward-modulated Spike-Timing-Dependent Plasticity (R-STDP)}
+\subsection{Learning Approaches in SNNs}
 
-The \ac{stdp} algorithm is a learning technique inspired by biological processes in the brain, which is believed to be fundamental to certain learning processes \cite{STDP2}. The algorithm's core principle is that when a pre-synaptic neuron activates just before its post-synaptic counterpart, the synapse's strength connecting them should increase, and vice versa if the post-synaptic neuron fires first.
+\subsection*{Hebbian Learning}
 
-Within the \ac{snn} framework, pre-synaptic neurons are the input neurons, and post-synaptic neurons function as the output neurons. The function \(STDP(\tau)\) can be defined as the firing timelines of both input and output neurons \cite{STDP1} as,
+Before we turn to spike-based learning rules, we first review the basic concepts of rate-based learning. Firing rate models have been used extensively in the field of artificial neural networks.
 
-\begin{equation} \label{Eq.TA.1}
-STDP_{kl}(\tau) = \mathcal{A} \exp\left(-\frac{\tau}{\tau_{s}}\right) \text{for \(\tau \geq 0\)}
-\end{equation}
-
-\noindent where \(\mathcal{A}\) stands as the exponential function's amplitude, and \(\tau\) is the difference between the firing time of the input neuron \((k)\) and output neuron \((l)\). Meanwhile, \(\tau_{s}\) acts as the time constant, setting the decay rate for the \(\ac{stdp}\) function. Should \(\tau_{s}\) approach infinity, the exponential function converges to 1, neutralizing time's effect on the \(\ac{stdp}\) function.
-
-The adjustment of synaptic weights follows the given equation:
-
-\begin{equation} \label{Eq.TA.2}
-\dot{W}_{kl}(t) = STDP_{kl}(\tau)\mathcal{R}(t)
-\end{equation}
-
-\noindent where \(\dot{W}_{kl}(t)\) denotes the rate of change of the synaptic weight that connects neurons \(k\) and \(l\). This weight determines the input that the post-synaptic neuron receives upon the spiking of its pre-synaptic neuron, which is quantified as \(I(t)\).
-
-\subsubsection{Temporal Difference Learning (TD-Learning)}
-
-TD-Learning for SNNs employs the concept of temporal difference errors to adjust synaptic weights, facilitating the learning of predictions about future rewards:
+Consider a single synapse with efficacy \(w_{ij}\) that transmits signals from a presynaptic neuron \(j\) to a postsynaptic neuron \(i\), where the activity of the presynaptic neuron is denoted by \(\nu_j\) and that of the postsynaptic neuron by \(\nu_i\). The change in synaptic efficacy can be described by the differential equation:
 
 \begin{equation}
-\Delta W_{kl} = \alpha \cdot (\mathcal{R}(t) + \gamma \cdot V(s') - V(s)) \cdot STDP_{kl}(\tau)
+    \frac{d}{dt} w_{ij} = F(w_{ij}; \nu_i\nu_j),
 \end{equation}
 
-Here, \(\alpha\) is the learning rate, \(r\) represents the immediate reward, and \(\gamma\) is the discount factor for future rewards. \(V(s)\) and \(V(s')\) denote the values of the current and subsequent states, respectively.
+where \(F\) is a function representing the change rate of synaptic coupling strength, reflecting the principle of locality in Hebbian plasticity. This function is dependent on the pre- and postsynaptic firing rates and the current synaptic efficacy.
 
-\subsubsection{Deep Q-Learning for Spiking Neural Networks (DQSNN)}
-
-DQSNN integrates the principles of Deep Q-Learning with the dynamics of SNNs, allowing for the application of deep RL strategies:
+There are two aspects of Hebb’s postulate that are particularly important: locality and joint activity. Hebb's postulate emphasizes the necessity of simultaneous pre- and postsynaptic activity for synaptic modification. This can be mathematically expressed in a Taylor series expansion around \(\nu_i = \nu_j = 0\):
 
 \begin{equation}
-\Delta W = \alpha \cdot (r + \gamma \cdot \max_{a'}Q(s',a';\theta') - Q(s,a;\theta)) \cdot \nabla_{\theta}Q(s,a;\theta)
+    \frac{d}{dt} w_{ij} = c_0(w_{ij}) + c_{\text{pre}}^1(w_{ij})\nu_j + c_{\text{post}}^1(w_{ij})\nu_i + c_{\text{pre}}^2(w_{ij})\nu_j^2 + c_{\text{post}}^2(w_{ij})\nu_i^2 + c_{\text{corr}}^{11}(w_{ij})\nu_i\nu_j + O(\nu^3).
 \end{equation}
 
-This equation updates synaptic weights \(\Delta W\) by optimizing the Q-value function \(Q(s,a;\theta)\) with respect to the network parameters \(\theta\), guided by the prediction error between expected and obtained rewards.
-
-\subsubsection{Policy Gradient Methods for SNNs}
-
-Policy Gradient Methods directly optimize the policy function \(\pi(a|s;\theta)\), encouraging actions that lead to higher rewards:
+The synaptic change is governed by local variables, such as the synaptic efficacy and the pre- and postsynaptic firing rates, without dependency on the activity of other neurons. Simplifying the Taylor expansion to include only the bilinear term for joint activity leads to:
 
 \begin{equation}
-\Delta \theta = \alpha \cdot \mathbb{E}[\nabla_{\theta} \log \pi(a|s;\theta) \cdot R]
+    \frac{d}{dt} w_{ij} = c_{\text{corr}}^{11} \nu_i \nu_j,
 \end{equation}
 
-where \(R\) is the reward associated with taking action \(a\) in state \(s\), and \(\mathbb{E}[]\) denotes the expectation over the distribution of actions.
+indicating that synaptic strength increases with simultaneous firing of pre- and postsynaptic neurons.
 
-\subsubsection{Spiking Actor-Critic (SAC)}
+To prevent unlimited growth of synaptic weights, models introduce a dependency of the coefficient \(c_{\text{corr}}^{11}\) on the current weight value, enabling a saturation effect. Two common approaches are:
+    \begin{itemize}
+        \item \textbf{Hard Bound}: \(c_{\text{corr}}^{11}\) remains constant until a maximum weight \(w_{\text{max}}\) is reached, after which it becomes zero.
+        \item \textbf{Soft Bound}: \(c_{\text{corr}}^{11}(w_{ij}) = \gamma_2 (w_{\text{max}} - w_{ij})^\beta\), allowing for gradual slowing of weight growth as it approaches \(w_{\text{max}}\).
+    \end{itemize}
 
-SAC employs an actor-critic architecture, with both components modeled as SNNs. The actor updates its policy based on the critic's value function estimates:
-
-\begin{align}
-\Delta \theta_{actor} &= \alpha \cdot \nabla_{\theta} \log \pi(a|s;\theta) \cdot A(s,a) \\
-\Delta \theta_{critic} &= \beta \cdot (r + \gamma \cdot V(s') - V(s)) \cdot \nabla_{\theta}V(s)
-\end{align}
-
-where \(A(s,a)\) is the advantage function, indicating the benefit of taking action \(a\) in state \(s\), and \(\beta\) is the learning rate for the critic.
-
-\subsubsection{Spiking Proximal Policy Optimization (SPPO)}
-
-SPPO adapts the Proximal Policy Optimization algorithm for SNNs, optimizing a clipped surrogate objective to improve learning stability:
+Real systems require mechanisms for decreasing synaptic weights as well. This can be represented by:
 
 \begin{equation}
-L(\theta) = \mathbb{E}\left[\min\left(r_t(\theta) \cdot A_t, \text{clip}(r_t(\theta), 1-\epsilon, 1+\epsilon) \cdot A_t\right)\right]
+    \frac{d}{dt} w_{ij} = \gamma_2 (1-w_{ij})\nu_i \nu_j - \gamma_0 w_{ij},
 \end{equation}
 
-where \(r_t(\theta)\) is the probability ratio of the current and old policies, and \(\epsilon\) is a hyperparameter defining the clipping range.
+where \(\gamma_0\) represents a decay term, leading to spontaneous weakening of synapses in the absence of stimulation.
 
-\subsection{Discussion}
+Building upon the foundational principles introduced in the initial formulation of Hebb's rule, this section delves into famous models and refinements that offer a richer understanding of synaptic plasticity. These elaborations include the Covariance Rule, Oja's Rule, and the Bienenstock-Cooper-Munro (BCM) Rule, each providing unique insights into the dynamics of learning and memory in neural circuits.
 
-The development of RL-based algorithms for SNNs represents a significant advancement in leveraging the computational properties of spiking neurons for learning complex behaviors. By incorporating reward signals, prediction errors, and policy optimization strategies, these algorithms enable SNNs to adaptively refine their synaptic connections, fostering the emergence of intelligent decision-making capabilities. The continuous evolution of these algorithms promises to further unlock the potential of SNNs in a wide array of applications, from autonomous systems to advanced cognitive modeling.
+\textbf{Covariance Rule}
+
+The Covariance Rule, proposed by Sejnowski in 1977, introduces a nuanced perspective on synaptic modification, emphasizing the importance of the correlation between fluctuations in pre- and postsynaptic activity rates from their mean values. Mathematically, it can be expressed as:
+
+\begin{equation}
+    \frac{d}{dt} w_{ij} = \gamma (\nu_i - \overline{\nu_i}) (\nu_j - \overline{\nu_j}),
+\end{equation}
+
+where \(\overline{\nu_i}\) and \(\overline{\nu_j}\) represent the running averages of the postsynaptic and presynaptic neuron firing rates, respectively. This rule suggests that synaptic strength is adjusted based on the covariance of firing rates, promoting a more dynamic and responsive mechanism for synaptic plasticity that accounts for temporal variations in neural activity.
+
+\textbf{Oja's Rule}
+
+Oja's rule, introduced by Oja in 1982, offers a self-organizing and normalization mechanism for synaptic weights, ensuring stability in the learning process. The rule is given by:
+
+\begin{equation}
+    \frac{d}{dt} w_{ij} = \gamma (\nu_i \nu_j - w_{ij} \nu_i^2),
+\end{equation}
+
+This formulation inherently limits the growth of synaptic weights, ensuring that the sum of the squares of the weights converges to unity. This normalization aspect introduces competition among synapses converging on the same postsynaptic neuron, balancing potentiation with necessary synaptic weakening for others, thereby maintaining overall network stability.
+
+\textbf{Bienenstock-Cooper-Munro (BCM) Rule}
+
+The BCM rule, developed by Bienenstock, Cooper, and Munro in 1982, introduces a mechanism where synaptic modification thresholds evolve based on the neuron's activity history. The rule can be described as:
+
+\begin{equation}
+    \frac{d}{dt} w_{ij} = \eta \nu_i (\nu_i - \nu_\theta) \nu_j,
+\end{equation}
+
+where \(\nu_\theta\) is a dynamic threshold that adjusts based on the average postsynaptic activity. This adaptive threshold introduces a form of synaptic plasticity that is both potentiation and depression capable, contingent upon the postsynaptic activity level relative to \(\nu_\theta\). The BCM rule encapsulates the concept of metaplasticity, reflecting the plasticity of synaptic plasticity mechanisms themselves, and has been instrumental in explaining developmental changes in synaptic connectivity and function.
+
+Building on the framework of Hebbian learning, the concept of Rarely Correlating Hebbian Plasticity (RCHP) introduces a nuanced approach to synaptic adjustments, focusing on the selective reinforcement of synaptic connections based on rare but significant correlations in pre- and post-synaptic activities. This method aims to refine the criteria for synaptic modification, emphasizing the importance of meaningful neural correlations over frequent but potentially inconsequential ones.
+
+\textbf{Rarely Correlating Hebbian Plasticity (RCHP)}
+
+RCHP proposes a model where synaptic changes are driven not merely by the simultaneous activation of connected neurons but by the infrequent yet pivotal coincidences in their activity. This model addresses the potential issue of over-strengthening synaptic connections due to common but unimportant activity patterns, focusing instead on enhancing those connections that contribute to significant neural events.
+
+The RCHP rule is defined by an update mechanism that adjusts synaptic weights based on a thresholded measure of pre- and post-synaptic activity correlations. The rule can be formally expressed as follows:
+
+\begin{equation}
+    \Delta w_{ji} = 
+        \begin{cases}
+        +0.5 & \text{if } y_j(t - \Delta t) y_i(t) > \theta^+,\\
+        -1 & \text{if } y_j(t - \Delta t) y_i(t) < \theta^-,\\
+        +0 & \text{otherwise},
+        \end{cases}
+\end{equation}
+
+where \(\Delta w_{ji}\) denotes the change in synaptic weight between the pre-synaptic neuron \(j\) and the post-synaptic neuron \(i\), \(y_j(t - \Delta t)\) represents the activity of the pre-synaptic neuron at a time \(\Delta t\) before the current time \(t\), and \(y_i(t)\) is the current activity of the post-synaptic neuron. The parameters \(\theta^+\) and \(\theta^-\) set the thresholds for potentiation and depression, respectively, aiming to identify rare yet meaningful correlations that surpass these thresholds.
+
+The RCHP rule introduces a dynamic approach to synaptic plasticity, where the focus shifts from frequent activity correlations to those rare instances of significant synchrony between neurons. By setting specific thresholds for activity correlations, RCHP ensures that only those synaptic connections that facilitate important neural events are strengthened, while others are either weakened or left unchanged. This selective reinforcement mechanism aids in the fine-tuning of neural circuits, optimizing them for critical functions and responses.
+
+At the heart of modern RL formulations within SNNs is the adaptation of neo-Hebbian learning rules, which introduce the concept of a reward or value as a third critical factor modulating the synaptic strength between pre- and post-synaptic neurons. This modulation is achieved through various scaling or gating mechanisms in response to global reward signals, predominantly mediated by the neuromodulator dopamine.
+
+\subsection*{Neo-Hebbian Learning and Modulation Mechanisms}
+
+In the exploration of hedonistic synaptic models within the domain of neo-Hebbian reinforcement learning, a significant advancement is noted in the conceptualization of synapses as stochastic processes, influenced by a global reward signal. This model employs the integration of spiking integrate-and-fire (IF) neurons, translating synaptic efficacy into a probabilistic framework. Herein, the learning dynamic is intricately linked to the global reward signal and the probabilistic occurrence of a pre-synaptic action potential influencing the post-synaptic neuron. This relationship is mathematically encapsulated in a logistic sigmoid function regarding the synaptic connection's learned weight and the pre-synaptic neuron's calcium concentration:
+
+\begin{equation}
+p_{ji} = \frac{1}{1 + e^{-(w_{ji} + c_{j})}}
+\end{equation}
+
+where $p_{ji}$ denotes the probability of a pre-synaptic action potential from neuron $j$ successfully triggering neurotransmitter release to the post-synaptic neuron $i$, $w_{ji}$ represents the synaptic weight from neuron $j$ to $i$, and $c_{j}$ encapsulates the calcium concentration dynamics within the pre-synaptic neuron $j$.
+
+The modulation of the synaptic weight component's plasticity, under this framework, is governed by the dopaminergic global reward signal ($R(t)$) and an eligibility trace ($\lambda_{ji}(t)$), which decays over time. This decay is represented as:
+
+\begin{equation}
+\frac{dw_{ji}}{dt} = \eta R(t) \lambda_{ji}(t)
+\end{equation}
+
+and
+
+\begin{equation}
+\Delta \lambda_{ji} = 
+\begin{cases} 
+  (1 - p_{ji}) & \text{if spike neurotransmitter release succeeds} \\
+  -p_{ji} & \text{if release fails}
+\end{cases}
+\end{equation}
+
+The eligibility trace's dynamics, akin to the eligibility trace mechanism in Temporal-Difference (TD) learning, incorporate an increase upon recent activity relevant to successful neurotransmission, decaying with temporal distance. This elegantly introduces a biologically plausible learning mechanism where recent and successfully propagated synaptic activities, in conjunction to a positive reward signal, culminate in Long-Term Potentiation (LTP) at the synaptic junction. Conversely, synaptic activities followed by a negative reward precipitate Long-Term Depression (LTD). Moreover, unsuccessful firing activities preceding a positive reward result in LTD, whereas the same failures preceding negative rewards induce LTP. This intricate balance between synaptic efficacy modulation, through the hedonistic synaptic model, underscores the fundamental tenets of neo-Hebbian reinforcement learning, presenting a robust framework for understanding the nuanced interplay between synaptic plasticity and global reward signaling in the learning process.
+
+
+\textbf{Distal rewards and credit assignment} 
+
+This model introduces a nuanced approach to synaptic modification through the interaction of \ac{stdp} with a modulatory signal reflective of dopaminergic activity, embodying the essence of temporal difference (TD) learning within the realm of spiking neurons.
+
+Central to this framework is the eligibility trace mechanism, elegantly adapted from its conventional application in TD learning to facilitate synaptic credit assignment over varying temporal extents. This adaptation allows for the dynamic modulation of synaptic strengths based on the timing and sequence of pre- and post-synaptic spikes, in conjunction with the temporal dynamics of received rewards. The eligibility trace is mathematically represented as follows:
+
+\begin{equation}
+    \frac{d\lambda_{ji}}{dt} = -\frac{\lambda_{ji}}{\tau_{\lambda}} + \text{STDP}(t_{\text{post}} - t_{\text{pre}})\delta(t - t^{(f)})
+\end{equation}
+
+Here, $\lambda_{ji}(t)$ denotes the eligibility trace for the synapse between pre-synaptic neuron $j$ and post-synaptic neuron $i$, evolving over time with a decay governed by $\tau_{\lambda}$, and modulated by the STDP rule applied to the timing difference between pre- and post-synaptic spikes $(t_{\text{post}} - t_{\text{pre}})$. The Dirac delta function, $\delta(t - t^{(f)})$, signifies the occurrence of a spike, serving as a pivotal factor in the temporal credit assignment process.
+
+Synaptic weight updates are then guided by the interaction between the eligibility trace and the temporally decaying reward signal, $R(t)$, as captured in the following equation:
+
+\begin{equation}
+    \frac{dw_{ji}}{dt} = \lambda_{ji}(t) \cdot R(t)
+\end{equation}
+
+where $dw_{ji}/dt$ symbolizes the rate of change in synaptic weight, contingent upon the compounded influence of the eligibility trace and the reward signal, thereby embodying a direct manifestation of reward-based learning within the synaptic framework.
+
+The Hypothesis Testing Plasticity (HTP) focuses on the nuanced evolution of synaptic strengths through the interaction with both short-term and long-term components of synaptic weights. The HTP model delineates the dynamics of synaptic strength through a dual-component approach. This approach segregates synaptic weight into short-term and long-term components, facilitating the exploration of synaptic plasticity under varying reward conditions. In the following, the mathematical representation of this model, including the dynamics of short-term synaptic changes and the conditions for long-term consolidation is discussed.
+
+Short-term synaptic weight changes are governed by,
+
+\begin{equation}
+\Delta w_{ji}^{st}(t) = -\frac{w_{ji}^{st}(t)}{\tau_{st}} + M(t) \cdot \text{RCHP}_{ji}(t)
+\end{equation}
+
+where $M(t)$, representing the dynamic concentration of dopamine, evolves as:
+
+\begin{equation}
+\Delta M(t) = -\frac{M(t)}{\tau_{M}} + \alpha R(t) - b
+\end{equation}
+
+Long-term synaptic changes are then formulated as:
+
+\begin{equation}
+\Delta w_{ji}^{lt}(t) = \beta \mathcal{H}(w_{ji}^{st}(t) - \Phi)
+\end{equation}
+
+where $\mathcal{H}$ denotes the Heaviside step function, introducing a binary condition for the consolidation of synaptic changes based on the magnitude of short-term synaptic efficacy relative to the threshold $\Phi$, and $\beta$ represents the consolidation rate.
+
+This framework integrates the dynamics of synaptic plasticity with mechanisms of reward-based learning, offering a comprehensive model for understanding the biological and computational foundations of learning and memory.
+
+\subsection*{Deep Spiking Q-Networks (DSQNs)}
+
+The training framework of Deep Spiking Q-Networks (DSQNs) marries the principles of reinforcement learning with the dynamics inherent to spiking neural networks (SNNs). This groundbreaking methodology utilizes the membrane voltage of non-spiking neurons as a novel representation of the Q-value, enabling the direct learning from high-dimensional sensory inputs in an end-to-end reinforcement learning setup. This section explicates the DSQN training algorithm, highlighting the derivation of the learning rule through a detailed exposition of the essential equations that govern the training process.
+
+The essence of the DSQN training strategy lies in the optimization of network weights, \(\theta\), to reduce the gap between the predicted and the target Q-values, as derived from the Bellman equation. This optimization hinges on the gradient of the loss function with respect to the weights, \(\nabla_{\theta} L(\theta)\), computed via a method specially tailored for the spike-based architecture of DSQNs.
+
+Each layer in the network, denoted by \(i\), receives input \(I_{t}^{i}\) and produces output \(S_{t}^{i}\) at any given timestep \(t\), with \(X_{t}^{i} = \theta^{i} I_{t}^{i}\) representing the external input to the neuron's model. The derivative of the neuron's spike function, \(\Theta'(x)\), is approached through a surrogate gradient method, \(\Theta^{\prime}(x)=\sigma^{\prime}(x)\), facilitating the application of backpropagation in the context of spiking networks.
+
+1. \textit{Determining the Q-value Representation}: The algorithm utilizes the maximum membrane voltage over the simulation time as the Q-value representation. This choice is formalized as:
+
+\begin{equation}
+    t^{\prime}=\underset{1 \leq t \leq T}{\arg \max } V_{t}^{l}
+\end{equation}
+
+2. \textit{Gradient of Membrane Potential for the Output Layer}: For the last layer \(l\), the gradient of the membrane potential \(V_{t}^{l}\) with respect to \(\theta^{l}\) is pivotal, depicted as:
+
+\begin{equation}
+    \frac{\delta V_{t}^{l}}{\delta \theta^{l}}=\left\{\begin{array}{ll}
+        \frac{\delta V_{t}^{l}}{\delta V_{t-1}^{l}} \frac{\delta V_{t-1}^{l}}{\delta \theta^{l}}+\frac{\delta V_{t}^{l}}{\delta X_{t}^{l}} \frac{\delta X_{t}^{l}}{\delta \theta^{l}} & \text { if } t>1 \\
+        \frac{\delta V_{t}^{l}}{\delta X_{t}^{l}} \frac{\delta X_{t}^{l}}{\delta \theta^{l}} & \text { if } t=1
+        \end{array}\right.
+\end{equation}
+
+3. \textit{Recursive Gradient Calculation for Internal Layers}: Internal layers undergo a recursive computation of gradients to integrate spiking temporal dynamics, leading to:
+
+\begin{equation}
+    \frac{\delta Q}{\delta H_{t}^{i}}=\left\{\begin{array}{cl}
+        \frac{\delta Q}{\delta H_{t+1}^{i}} \frac{\delta H_{t+1}^{i}}{\delta H_{t}^{i}}+\frac{\delta V_{t^{\prime}}^{l}}{\delta S_{t}^{l-1}} \frac{\delta S_{t}^{l-1}}{\delta H_{t}^{i}} & \text { if } t<t^{\prime} \\
+        \frac{\delta V_{t}^{l}}{\delta S_{t}^{l-1}} \frac{\delta S_{t}^{l-1}}{\delta H_{t}^{i}} & \text { if } t=t^{\prime} \\
+        0 & \text { if } t>t^{\prime}
+        \end{array}\right.
+\end{equation}
+
+\begin{equation}
+    \frac{\delta H_{t+1}^{i}}{\delta H_{t}^{i}}=\frac{\delta H_{t+1}^{i}}{\delta V_{t}^{i}} \frac{\delta V_{t}^{i}}{\delta H_{t}^{i}}=\left(1-\frac{1}{\tau}\right) \frac{\delta V_{t}^{i}}{\delta H_{t}^{i}}
+\end{equation}
+
+\begin{equation}
+    \frac{\delta V_{t^{\prime}}^{l}}{\delta S_{t}^{l-1}}=\frac{\delta V_{t^{\prime}}^{l}}{\delta V_{t}^{l}} \frac{\delta V_{t}^{l}}{\delta X_{t}^{l}} \frac{\delta X_{t}^{l}}{\delta S_{t}^{l-1}}=\left(1-\frac{1}{\tau}\right)^{t^{\prime}-t} \frac{\theta^{l}}{\tau}
+\end{equation}
+
+4. \textit{Synaptic Weight Updates}: The update of synaptic weights follows the derived gradients, ensuring the learning process is guided by the variance between predicted and target Q-values:
+
+\begin{equation}
+    \frac{\delta Q}{\delta \theta^{i}}=\left\{\begin{array}{ll}
+        \sum_{t=1}^{T} \frac{\delta Q}{\delta H_{t}^{i}} \frac{\delta H_{t}^{i}}{\delta \theta^{i}} & i<l  \\
+        \frac{\delta V_{t^{\prime}}}{\delta \theta^{i}} & i=l
+        \end{array}\right.
+\end{equation}
+
+These equations collectively outline the DSQN learning mechanism, converting spike-train outputs into continuous Q-values through non-spiking neuron dynamics, demonstrating the efficiency and robustness of spike-based reinforcement learning in energy-efficient neuromorphic computing systems.
+
+
+
+% The fundamental equation governing neo-Hebbian learning in SNNs is given by:
+% \begin{equation}
+%     \frac{dw_{ji}}{dt} = \eta R(t) \lambda_{ji}(t)
+% \end{equation}
+% where \(dw_{ji}/dt\) represents the rate of change of synaptic weight, \(R(t)\) is the global dopaminergic reward signal, \(\lambda_{ji}(t)\) denotes an eligibility trace decaying over time, and \(\eta\) serves as a learning rate scaling the weight updates.
+
+% The eligibility trace \(\Delta \lambda_{ji}\) updates during pre-synaptic spiking according to:
+% \begin{equation}
+%     \Delta \lambda_{ji} = \begin{cases} 
+%     (1 - p_{ji}) & \text{if spike neurotransmitter release succeeds} \\
+%     -p_{ji} & \text{if release fails}
+%     \end{cases}
+% \end{equation}
+% where \(p_{ji}\) represents the probability of neurotransmitter release upon a pre-synaptic spike.
+
+% \textbf{Dopaminergic Reward and Credit Assignment}
+
+% The incorporation of dopaminergic reward into SNNs enables the modulation of Spike-Timing-Dependent Plasticity (STDP), addressing the credit assignment problem in distal rewards through:
+% \begin{equation}
+%     \frac{d\lambda_{ji}}{dt} = -\frac{\lambda_{ji}}{\tau_{\lambda}} + STDP(t_{post} - t_{pre})\delta(t - t^{(f)})
+% \end{equation}
+% \begin{equation}
+%     \frac{dw_{ji}}{dt} = \lambda_{ji}(t) \cdot R(t)
+% \end{equation}
+
+% \textbf{Exploration through Acetylcholine and R-STDP}
+
+% The exploration aspect in SNN-based RL is intricately tied to the modulation of R-STDP through acetylcholine, acting as a counterbalance to dopamine's influence. The alternation between dopamine and acetylcholine effects is captured in:
+% \begin{equation}
+%     \Delta w_{ji} = \eta_A \sum STDP(t_{post} - t_{pre}) \cdot \lambda_{ji}
+% \end{equation}
+% \begin{equation}
+%     \Delta A = \begin{cases}
+%     -1 & \text{for DA- ACh+} \\
+%     1 & \text{for DA+ ACh+ or ACh-}
+%     \end{cases}
+% \end{equation}
+
+% where \(\eta_A\) represents the learning rate modulated by acetylcholine, indicating the dynamic balance between neuromodulators in guiding learning processes within SNNs
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+% \subsection{Training Algorithms}
+
+% \subsubsection{Reward-modulated Spike-Timing-Dependent Plasticity (R-STDP)}
+
+% The \ac{stdp} algorithm is a learning technique inspired by biological processes in the brain, which is believed to be fundamental to certain learning processes \cite{STDP2}. The algorithm's core principle is that when a pre-synaptic neuron activates just before its post-synaptic counterpart, the synapse's strength connecting them should increase, and vice versa if the post-synaptic neuron fires first.
+
+% Within the \ac{snn} framework, pre-synaptic neurons are the input neurons, and post-synaptic neurons function as the output neurons. The function \(STDP(\tau)\) can be defined as the firing timelines of both input and output neurons \cite{STDP1} as,
+
+% \begin{equation} \label{Eq.TA.1}
+% STDP_{kl}(\tau) = \mathcal{A} \exp\left(-\frac{\tau}{\tau_{s}}\right) \text{for \(\tau \geq 0\)}
+% \end{equation}
+
+% \noindent where \(\mathcal{A}\) stands as the exponential function's amplitude, and \(\tau\) is the difference between the firing time of the input neuron \((k)\) and output neuron \((l)\). Meanwhile, \(\tau_{s}\) acts as the time constant, setting the decay rate for the \(\ac{stdp}\) function. Should \(\tau_{s}\) approach infinity, the exponential function converges to 1, neutralizing time's effect on the \(\ac{stdp}\) function.
+
+% The adjustment of synaptic weights follows the given equation:
+
+% \begin{equation} \label{Eq.TA.2}
+% \dot{W}_{kl}(t) = STDP_{kl}(\tau)\mathcal{R}(t)
+% \end{equation}
+
+% \noindent where \(\dot{W}_{kl}(t)\) denotes the rate of change of the synaptic weight that connects neurons \(k\) and \(l\). This weight determines the input that the post-synaptic neuron receives upon the spiking of its pre-synaptic neuron, which is quantified as \(I(t)\).
+
+% \subsubsection{Temporal Difference Learning (TD-Learning)}
+
+% TD-Learning for SNNs employs the concept of temporal difference errors to adjust synaptic weights, facilitating the learning of predictions about future rewards:
+
+% \begin{equation}
+% \Delta W_{kl} = \alpha \cdot (\mathcal{R}(t) + \gamma \cdot V(s') - V(s)) \cdot STDP_{kl}(\tau)
+% \end{equation}
+
+% Here, \(\alpha\) is the learning rate, \(r\) represents the immediate reward, and \(\gamma\) is the discount factor for future rewards. \(V(s)\) and \(V(s')\) denote the values of the current and subsequent states, respectively.
+
+% \subsubsection{Deep Q-Learning for Spiking Neural Networks (DQSNN)}
+
+% DQSNN integrates the principles of Deep Q-Learning with the dynamics of SNNs, allowing for the application of deep RL strategies:
+
+% \begin{equation}
+% \Delta W = \alpha \cdot (r + \gamma \cdot \max_{a'}Q(s',a';\theta') - Q(s,a;\theta)) \cdot \nabla_{\theta}Q(s,a;\theta)
+% \end{equation}
+
+% This equation updates synaptic weights \(\Delta W\) by optimizing the Q-value function \(Q(s,a;\theta)\) with respect to the network parameters \(\theta\), guided by the prediction error between expected and obtained rewards.
+
+% \subsubsection{Policy Gradient Methods for SNNs}
+
+% Policy Gradient Methods directly optimize the policy function \(\pi(a|s;\theta)\), encouraging actions that lead to higher rewards:
+
+% \begin{equation}
+% \Delta \theta = \alpha \cdot \mathbb{E}[\nabla_{\theta} \log \pi(a|s;\theta) \cdot R]
+% \end{equation}
+
+% where \(R\) is the reward associated with taking action \(a\) in state \(s\), and \(\mathbb{E}[]\) denotes the expectation over the distribution of actions.
+
+% \subsubsection{Spiking Actor-Critic (SAC)}
+
+% SAC employs an actor-critic architecture, with both components modeled as SNNs. The actor updates its policy based on the critic's value function estimates:
+
+% \begin{align}
+% \Delta \theta_{actor} &= \alpha \cdot \nabla_{\theta} \log \pi(a|s;\theta) \cdot A(s,a) \\
+% \Delta \theta_{critic} &= \beta \cdot (r + \gamma \cdot V(s') - V(s)) \cdot \nabla_{\theta}V(s)
+% \end{align}
+
+% where \(A(s,a)\) is the advantage function, indicating the benefit of taking action \(a\) in state \(s\), and \(\beta\) is the learning rate for the critic.
+
+% \subsubsection{Spiking Proximal Policy Optimization (SPPO)}
+
+% SPPO adapts the Proximal Policy Optimization algorithm for SNNs, optimizing a clipped surrogate objective to improve learning stability:
+
+% \begin{equation}
+% L(\theta) = \mathbb{E}\left[\min\left(r_t(\theta) \cdot A_t, \text{clip}(r_t(\theta), 1-\epsilon, 1+\epsilon) \cdot A_t\right)\right]
+% \end{equation}
+
+% where \(r_t(\theta)\) is the probability ratio of the current and old policies, and \(\epsilon\) is a hyperparameter defining the clipping range.
+
+% \subsection{Discussion}
+
+% The development of RL-based algorithms for SNNs represents a significant advancement in leveraging the computational properties of spiking neurons for learning complex behaviors. By incorporating reward signals, prediction errors, and policy optimization strategies, these algorithms enable SNNs to adaptively refine their synaptic connections, fostering the emergence of intelligent decision-making capabilities. The continuous evolution of these algorithms promises to further unlock the potential of SNNs in a wide array of applications, from autonomous systems to advanced cognitive modeling.
 
 \section{Federated Learning for SNNs: Consensus Flying Scenario}
 
