@@ -10,44 +10,44 @@ A level-1 auxiliary file: 4_FL_with_SNN.aux
 A level-1 auxiliary file: 5_Future_Work.aux
 The style file: ieeetr.bst
 Database file #1: Ref.bib
-You've used 88 entries,
+You've used 65 entries,
             1876 wiz_defined-function locations,
-            1035 strings with 21041 characters,
-and the built_in function-call counts, 27477 in all, are:
-= -- 2713
-> -- 1198
+            885 strings with 16059 characters,
+and the built_in function-call counts, 19819 in all, are:
+= -- 1923
+> -- 918
 < -- 0
-+ -- 430
-- -- 342
-* -- 2047
-:= -- 3848
-add.period$ -- 88
-call.type$ -- 88
-change.case$ -- 88
++ -- 329
+- -- 264
+* -- 1484
+:= -- 2823
+add.period$ -- 65
+call.type$ -- 65
+change.case$ -- 65
 chr.to.int$ -- 0
-cite$ -- 88
-duplicate$ -- 1386
-empty$ -- 2470
-format.name$ -- 342
-if$ -- 6636
+cite$ -- 65
+duplicate$ -- 993
+empty$ -- 1768
+format.name$ -- 264
+if$ -- 4758
 int.to.chr$ -- 0
-int.to.str$ -- 88
-missing$ -- 88
-newline$ -- 267
-num.names$ -- 88
-pop$ -- 264
+int.to.str$ -- 65
+missing$ -- 65
+newline$ -- 198
+num.names$ -- 65
+pop$ -- 196
 preamble$ -- 1
 purify$ -- 0
 quote$ -- 0
-skip$ -- 982
+skip$ -- 681
 stack$ -- 0
-substring$ -- 2082
-swap$ -- 616
+substring$ -- 1437
+swap$ -- 431
 text.length$ -- 0
 text.prefix$ -- 0
 top$ -- 0
 type$ -- 0
 warning$ -- 0
-while$ -- 279
-width$ -- 90
-write$ -- 868
+while$ -- 198
+width$ -- 67
+write$ -- 631
