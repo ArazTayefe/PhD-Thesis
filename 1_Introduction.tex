@@ -1,10 +1,34 @@
 \chapter{Introduction}
 
-\section{Problem Definition}
+\section{Problem Definition: Federated Learning with SNN}
 
-Why Edge computing is important and how SNN and FL can help to this problem.
+\ac{fl} is a groundbreaking approach to machine learning that allows models to be trained directly on edge devices, such as smartphones and IoT devices, without the need to centralize data. This method addresses significant concerns regarding data privacy and security by keeping sensitive information local to the device it originates from, thus preventing data leakage and enhancing user privacy. \ac{fl} represents a shift towards decentralized, privacy-preserving machine learning models in our increasingly connected digital age, making it a critical area of research for advancing machine learning technologies that are both accessible and secure \cite{Ch_1_R1}.
 
-Paper: Federated Learning with Spiking Neural Networks
+\begin{figure}[H]
+    \centering 
+    \includegraphics{Figures/Schematic of Federated Learning.pdf}
+    \caption{Schematic diagram to illustrate distributed learning and federated learning \cite{Ch_1_R1}.}
+    \label{Sch_FL}
+\end{figure}
+
+Figure \ref{Sch_FL} shows a diagram of distributed learning and \ac{fl}. In conventional learning the data is collected from the clients and the model is trained in an offline manner. In Distributed Learning the dataset is collected at a single data store and then it is distributed across multiple worker nodes for training. In \ac{fl}, the training is performed at the client, and model gradients are communicated to the base station which aggregates the gradients and updates the global model, and broadcasts it back to all the clients. Each of these processes is iterative and models at the clients are periodically updated.
+
+\ac{snn}s bring a new dimension to the capabilities of \ac{fl}. Inspired by the biological processes of the human brain, \ac{snn}s operate on an event-driven basis, processing information only in response to stimuli. This method of operation significantly reduces the power consumption of these networks, making them particularly suited for deployment across distributed, battery-operated devices. The integration of \ac{snn}s with \ac{fl} leverages these unique advantages, combining energy efficiency with the privacy-preserving features of federated learning to address the challenges faced by traditional artificial neural network models in federated settings \cite{Ch_1_R2, Ch_1_R3}.
+
+The energy-efficient nature of \ac{snn}s aligns perfectly with the objectives of \ac{fl}, where models are trained across a network of distributed devices without centralized data collection. Unlike conventional artificial neural networks that require continuous data flow and computation, \ac{snn}s' event-driven operation allows for significant reductions in energy consumption, which is critical for battery-operated devices participating in \ac{fl}. This characteristic of \ac{snn}s supports the development of low-power, distributed learning solutions, enabling more devices to participate in \ac{fl} without compromising on power efficiency \cite{Ch_1_R4}.
+
+Furthermore, the integration of \ac{snn}s in \ac{fl} scenarios can also help overcome limitations associated with bandwidth-constrained environments. The sparse nature of data representation and communication in \ac{snn}s means that less information needs to be exchanged between devices and the central server during the training process. This efficiency is crucial in \ac{fl} environments, where network bandwidth and connectivity can significantly impact the feasibility and performance of distributed learning systems \cite{Ch_1_R5}.
+
+Another critical advantage of \ac{snn}s in the context of \ac{fl} is their compatibility with neuromorphic hardware. Neuromorphic chips, designed to replicate the neural structures of the human brain, provide an ideal platform for deploying \ac{snn}s. This synergy between neuromorphic computing and \ac{snn}s paves the way for the development of highly efficient, scalable, and adaptive \ac{fl} systems capable of leveraging the full potential of edge computing \cite{Ch_1_R6}.
+
+Despite these advantages, the integration of \ac{snn}s with \ac{fl} presents several challenges. The primary hurdle is the complexity of training \ac{snn}s in a distributed manner. The dynamic and temporal nature of \ac{snn}s introduces new challenges in developing effective \ac{fl} protocols that can accommodate the unique online learning rules of \ac{snn}s. Proper scheduling of communication rounds within the local \ac{snn} time steps is essential for successful collaborative training \cite{Ch_1_R7}.
+
+Moreover, managing the performance trade-offs associated with the frequency of communication rounds in \ac{fl} is another significant challenge. Experiments have shown the impact of the number of time-steps between local updates and the frequency of model aggregation on the training performance of \ac{snn}s. Finding an optimal balance to maximize model performance while minimizing communication overhead is crucial for the efficient deployment of \ac{fl} systems powered by \ac{snn}s \cite{Ch_1_R8}.
+
+Additionally, communication constraints and the non-stationarity of data distribution pose significant challenges. The need for model update quantization to reduce communication costs and the changing nature of data over time require innovative solutions to maintain the accuracy and reliability of \ac{fl} systems employing \ac{snn}s \cite{Ch_1_R9}.
+
+Despite these challenges, the potential benefits of integrating \ac{snn}s with \ac{fl} justify continued research and development in this area. The combination of energy efficiency, privacy preservation, and compatibility with neuromorphic hardware, along with the distributed and collaborative nature of \ac{fl}, represents a compelling approach to deploying machine learning models in real-world applications \cite{Ch_1_R10}.
+
 
 \section{Spiking Neural Networks: Models and Learning Algorithms}
 
@@ -74,7 +98,7 @@ The maximum value for the input current makes the neuron fire at each sample tim
     I^{max} = \frac{\tau_{m}\left(V_{th} - V_{res}\right)}{\Delta t R_{m}} + \frac{V_{th} - E_{l}}{R_{m}}
 \end{equation}
 
-In this section, we obtained the minimum and maximum values for input current using (\ref{Eq.9}) and (\ref{Eq.13}). These equations are used in the learning and encoding processes of the SNN.
+In this section, we obtained the minimum and maximum values for input current using (\ref{Eq.9}) and (\ref{Eq.13}). These equations are used in the learning and encoding processes of the \ac{snn}.
 
 \subsubsection{Hodgkin-Huxley Model}
 
@@ -112,7 +136,7 @@ The Izhikevich model combines the biological plausibility of the Hodgkin-Huxley 
 when $v \geq 30$ mV, then $v \leftarrow c$ and $u \leftarrow u + d$. Here, $v$ and $u$ represent the membrane potential and membrane recovery variable, respectively, and $a$, $b$, $c$, and $d$ are parameters of the model, with $I$ representing the current.
 
 
-\subsection{Learning Approaches in SNNs}
+\subsection{Learning Approaches in \ac{snn}s}
 
 \subsection*{Hebbian Learning}
 
@@ -207,7 +231,7 @@ where \(\Delta w_{ji}\) denotes the change in synaptic weight between the pre-sy
 
 The RCHP rule introduces a dynamic approach to synaptic plasticity, where the focus shifts from frequent activity correlations to those rare instances of significant synchrony between neurons. By setting specific thresholds for activity correlations, RCHP ensures that only those synaptic connections that facilitate important neural events are strengthened, while others are either weakened or left unchanged. This selective reinforcement mechanism aids in the fine-tuning of neural circuits, optimizing them for critical functions and responses.
 
-At the heart of modern RL formulations within SNNs is the adaptation of neo-Hebbian learning rules, which introduce the concept of a reward or value as a third critical factor modulating the synaptic strength between pre- and post-synaptic neurons. This modulation is achieved through various scaling or gating mechanisms in response to global reward signals, predominantly mediated by the neuromodulator dopamine.
+At the heart of modern RL formulations within \ac{snn}s is the adaptation of neo-Hebbian learning rules, which introduce the concept of a reward or value as a third critical factor modulating the synaptic strength between pre- and post-synaptic neurons. This modulation is achieved through various scaling or gating mechanisms in response to global reward signals, predominantly mediated by the neuromodulator dopamine.
 
 \subsection*{Neo-Hebbian Learning and Modulation Mechanisms}
 
@@ -286,7 +310,7 @@ This framework integrates the dynamics of synaptic plasticity with mechanisms of
 
 \subsection*{Deep Spiking Q-Networks (DSQNs)}
 
-The training framework of Deep Spiking Q-Networks (DSQNs) marries the principles of reinforcement learning with the dynamics inherent to spiking neural networks (SNNs). This groundbreaking methodology utilizes the membrane voltage of non-spiking neurons as a novel representation of the Q-value, enabling the direct learning from high-dimensional sensory inputs in an end-to-end reinforcement learning setup. This section explicates the DSQN training algorithm, highlighting the derivation of the learning rule through a detailed exposition of the essential equations that govern the training process.
+The training framework of Deep Spiking Q-Networks (DSQNs) marries the principles of reinforcement learning with the dynamics inherent to spiking neural networks (\ac{snn}s). This groundbreaking methodology utilizes the membrane voltage of non-spiking neurons as a novel representation of the Q-value, enabling the direct learning from high-dimensional sensory inputs in an end-to-end reinforcement learning setup. This section explicates the DSQN training algorithm, highlighting the derivation of the learning rule through a detailed exposition of the essential equations that govern the training process.
 
 The essence of the DSQN training strategy lies in the optimization of network weights, \(\theta\), to reduce the gap between the predicted and the target Q-values, as derived from the Bellman equation. This optimization hinges on the gradient of the loss function with respect to the weights, \(\nabla_{\theta} L(\theta)\), computed via a method specially tailored for the spike-based architecture of DSQNs.
 
@@ -340,11 +364,11 @@ These equations collectively outline the DSQN learning mechanism, converting spi
 \section{Federated Learning}
 
 
-Federated Learning (FL) emerges as a paradigm enabling multiple clients to collaboratively train a machine learning model without directly sharing their data. A cornerstone of FL is the aggregation method, which synthesizes model updates from clients to improve a global model. The efficiency, robustness, and overall performance of FL significantly hinge on the choice of aggregation technique. This section delves into the main aggregation algorithms in FL, highlighting their operational principles and underlying equations.
+A cornerstone of \ac{fl} is the aggregation method, which synthesizes model updates from clients to improve a global model. The efficiency, robustness, and overall performance of \ac{fl} significantly hinge on the choice of aggregation technique. This section delves into the main aggregation algorithms in \ac{fl}, highlighting their operational principles and underlying equations.
 
 \subsection*{FedAvg}
 
-FedAvg, or Federated Averaging, is the seminal aggregation method in FL, introduced by McMahan et al. It operates by averaging the weights of models updated locally by clients. The global model update in FedAvg is mathematically represented as:
+FedAvg, or Federated Averaging, is the seminal aggregation method in \ac{fl}, introduced by McMahan et al. It operates by averaging the weights of models updated locally by clients. The global model update in FedAvg is mathematically represented as:
 
 \begin{equation}
     w_{\text{glob}}^{t+1} = \sum_{k=1}^{K} \frac{n_k}{n} w_k^{t+1}
@@ -388,7 +412,7 @@ where $G_k^t$ is the stack of gradients received from client $k$ at round $t$, $
 
 \subsection*{MOON}
 
-MOON, or Model-contrastive Federated Learning, minimizes the contrastive loss between the local and global models to preserve model consistency across clients. The contrastive loss is given by:
+MOON, or Model-contrastive \ac{fl}, minimizes the contrastive loss between the local and global models to preserve model consistency across clients. The contrastive loss is given by:
 
 \begin{equation}
     l_{\text{con}} = -\log \frac{\exp(\text{sim}(w_k^t, w_{\text{glob}}^t) / \tau)}{\exp(\text{sim}(w_k^t, w_{\text{glob}}^t) / \tau) + \exp(\text{sim}(w_k^t, w_k^{\text{prev}}) / \tau)}
@@ -396,10 +420,10 @@ MOON, or Model-contrastive Federated Learning, minimizes the contrastive loss be
 
 where $\text{sim}(\cdot)$ denotes the cosine similarity between models, and $\tau$ is a temperature parameter moderating the contrastive loss.
 
-These aggregation methods embody the evolution of FL towards accommodating diverse client conditions and data distributions. Each method introduces unique adjustments to the aggregation process, aiming to enhance convergence, reduce communication overhead, or improve robustness against non-IID data and adversarial clients. The selection of an appropriate aggregation technique is pivotal for the success of FL applications, necessitating a careful consideration of the specific challenges and requirements of the deployment context.
+These aggregation methods embody the evolution of \ac{fl} towards accommodating diverse client conditions and data distributions. Each method introduces unique adjustments to the aggregation process, aiming to enhance convergence, reduce communication overhead, or improve robustness against non-IID data and adversarial clients. The selection of an appropriate aggregation technique is pivotal for the success of \ac{fl} applications, necessitating a careful consideration of the specific challenges and requirements of the deployment context.
 
 \begin{table}[H]
-\caption{Comparison of Federated Learning Methodologies}
+\caption{Comparison of \ac{fl} Methodologies}
 \label{tab:comparison}
 \footnotesize % Further reduce font size if necessary
 \renewcommand{\arraystretch}{2} % Increase cell height for better vertical alignment
@@ -446,12 +470,12 @@ These aggregation methods embody the evolution of FL towards accommodating diver
     
 
 
-When delving into the intricacies of Federated Learning and various aggregation techniques, a set of evaluation metrics comes into play. These insightful metrics measure the effectiveness and efficiency of algorithms and their robustness. Some of the commonly utilized metrics include:
+When delving into the intricacies of \ac{fl} and various aggregation techniques, a set of evaluation metrics comes into play. These insightful metrics measure the effectiveness and efficiency of algorithms and their robustness. Some of the commonly utilized metrics include:
 
 Accuracy: A measure of the model's predictive precision, calculated as the percentage of correctly predicted labels within the test dataset.
 Loss Function: An indicator of the disparity between the predicted labels and the actual ones. Frequently used loss functions comprise mean squared error (MSE), cross-entropy loss, and hinge loss.
 Convergence Rate: An estimation of the model's speed in attaining an optimal solution. It is typically gauged by the number of training iterations needed to achieve a certain level of accuracy or loss.
-Communication Overhead: In Federated Learning, data exchange between local devices and the central server is key. This metric quantifies the volume of data shared during the training process.
-Privacy Preservation: A key feature of Federated Learning is data privacy. By assessing the leakage of sensitive information during the training process, the effectiveness of privacy preservation can be evaluated.
+Communication Overhead: In \ac{fl}, data exchange between local devices and the central server is key. This metric quantifies the volume of data shared during the training process.
+Privacy Preservation: A key feature of \ac{fl} is data privacy. By assessing the leakage of sensitive information during the training process, the effectiveness of privacy preservation can be evaluated.
 
-These evaluation metrics offer a broad understanding of the performance of aggregation methodologies in Federated Learning. Utilizing these metrics, researchers can critically compare and analyze the effectiveness of different algorithms, leading to informed decisions about their implementation.
+These evaluation metrics offer a broad understanding of the performance of aggregation methodologies in \ac{fl}. Utilizing these metrics, researchers can critically compare and analyze the effectiveness of different algorithms, leading to informed decisions about their implementation.
