@@ -284,6 +284,12 @@ S.~F. Chevtchenko and T.~B. Ludermir, ``Combining stdp and binary networks for
   reinforcement learning from images and sparse rewards,'' {\em Neural
   Networks}, vol.~144, pp.~496--506, 2021.
 
+\bibitem{Ch2_R29}
+S.~Gupta, G.~Singal, D.~Garg, and S.~Jagannathan, ``Qc-sane: Robust control in
+  drl using quantile critic with spiking actor and normalized ensemble,'' {\em
+  IEEE Transactions on Neural Networks and Learning Systems}, vol.~34, no.~9,
+  pp.~6656--6662, 2021.
+
 \bibitem{Ch5_ATD4}
 M.~Pachter, E.~Garcia, and D.~W. Casbeer, ``Differential game of guarding a
   target,'' {\em Journal of Guidance, Control, and Dynamics}, vol.~40,

@@ -964,6 +964,33 @@ INPUT c:/texlive/2021/texmf-dist/tex/latex/ragged2e/ragged2e.sty
 INPUT c:/texlive/2021/texmf-dist/tex/latex/ragged2e/ragged2e.sty
 INPUT c:/texlive/2021/texmf-dist/tex/latex/ragged2e/ragged2e.sty
 INPUT c:/texlive/2021/texmf-dist/tex/latex/ragged2e/ragged2e.sty
+INPUT ./Main.aux
+INPUT Main.aux
+INPUT Main.aux
+INPUT ./title_page.aux
+INPUT title_page.aux
+INPUT title_page.aux
+INPUT ./0_Abstract.aux
+INPUT 0_Abstract.aux
+INPUT 0_Abstract.aux
+INPUT ./1_Introduction.aux
+INPUT 1_Introduction.aux
+INPUT 1_Introduction.aux
+INPUT ./2_Literature_Review.aux
+INPUT 2_Literature_Review.aux
+INPUT 2_Literature_Review.aux
+INPUT ./3_ATD_with_SNN.aux
+INPUT 3_ATD_with_SNN.aux
+INPUT 3_ATD_with_SNN.aux
+INPUT ./4_FL_with_SNN.aux
+INPUT 4_FL_with_SNN.aux
+INPUT 4_FL_with_SNN.aux
+INPUT ./5_Future_Work.aux
+INPUT 5_Future_Work.aux
+INPUT 5_Future_Work.aux
+INPUT ./Main.acr
+INPUT ./Main.acr
+INPUT Main.acr
 OUTPUT Main.aux
 INPUT c:/texlive/2021/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 INPUT c:/texlive/2021/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
@@ -1021,8 +1048,18 @@ INPUT c:/texlive/2021/texmf-dist/tex/generic/gettitlestring/gettitlestring.sty
 INPUT c:/texlive/2021/texmf-dist/tex/generic/gettitlestring/gettitlestring.sty
 INPUT c:/texlive/2021/texmf-dist/tex/latex/kvoptions/kvoptions.sty
 INPUT c:/texlive/2021/texmf-dist/tex/generic/ltxcmds/ltxcmds.sty
-OUTPUT Main.out
+INPUT ./Main.out
+INPUT Main.out
+INPUT ./Main.out
+INPUT Main.out
+INPUT ./Main.out
+INPUT Main.out
+INPUT ./Main.out
+INPUT Main.out
 OUTPUT Main.pdf
+INPUT ./Main.out
+INPUT ./Main.out
+OUTPUT Main.out
 INPUT ./Main.acr
 INPUT ./Main.acr
 OUTPUT Main.acr
@@ -1066,27 +1103,9 @@ INPUT ./0_Abstract.tex
 INPUT 0_Abstract.tex
 INPUT c:/texlive/2021/texmf-dist/fonts/tfm/public/cm/cmr17.tfm
 INPUT c:/texlive/2021/texmf-dist/fonts/tfm/public/cm/cmbx12.tfm
-OUTPUT Main.toc
-OUTPUT Main.lof
-OUTPUT Main.lot
-INPUT c:/texlive/2021/texmf-dist/fonts/tfm/public/cm/cmbx12.tfm
-INPUT ./1_Introduction.tex
-INPUT ./1_Introduction.tex
-INPUT ./1_Introduction.tex
-OUTPUT 1_Introduction.aux
-INPUT ./1_Introduction.tex
-INPUT ./1_Introduction.tex
-INPUT ./1_Introduction.tex
-INPUT 1_Introduction.tex
-INPUT ./1_Introduction.tex
-INPUT 1_Introduction.tex
-INPUT ./Figures/Schematic of Federated Learning.pdf
-INPUT ./Figures/Schematic of Federated Learning.pdf
-INPUT Figures/Schematic of Federated Learning.pdf
-INPUT ./Figures/Schematic of Federated Learning.pdf
-INPUT ./Figures/Schematic of Federated Learning.pdf
-INPUT c:/texlive/2021/texmf-dist/fonts/tfm/public/cm/cmsl12.tfm
-INPUT c:/texlive/2021/texmf-dist/fonts/tfm/public/cm/cmr17.tfm
+INPUT ./Main.toc
+INPUT Main.toc
+INPUT Main.toc
 INPUT c:/texlive/2021/texmf-dist/fonts/tfm/public/cm/cmbx12.tfm
 INPUT c:/texlive/2021/texmf-dist/fonts/tfm/public/cm/cmr8.tfm
 INPUT c:/texlive/2021/texmf-dist/fonts/tfm/public/cm/cmr6.tfm
@@ -1121,6 +1140,33 @@ INPUT c:/texlive/2021/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmmib6.tfm
 INPUT c:/texlive/2021/texmf-dist/fonts/tfm/public/cm/cmbsy10.tfm
 INPUT c:/texlive/2021/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmbsy8.tfm
 INPUT c:/texlive/2021/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmbsy6.tfm
+OUTPUT Main.toc
+INPUT c:/texlive/2021/texmf-dist/fonts/tfm/public/cm/cmsl12.tfm
+INPUT ./Main.lof
+INPUT Main.lof
+INPUT Main.lof
+OUTPUT Main.lof
+INPUT ./Main.lot
+INPUT Main.lot
+INPUT Main.lot
+OUTPUT Main.lot
+INPUT ./1_Introduction.tex
+INPUT ./1_Introduction.tex
+INPUT ./1_Introduction.tex
+OUTPUT 1_Introduction.aux
+INPUT ./1_Introduction.tex
+INPUT ./1_Introduction.tex
+INPUT ./1_Introduction.tex
+INPUT 1_Introduction.tex
+INPUT ./1_Introduction.tex
+INPUT 1_Introduction.tex
+INPUT ./Figures/Schematic of Federated Learning.pdf
+INPUT ./Figures/Schematic of Federated Learning.pdf
+INPUT Figures/Schematic of Federated Learning.pdf
+INPUT ./Figures/Schematic of Federated Learning.pdf
+INPUT ./Figures/Schematic of Federated Learning.pdf
+INPUT c:/texlive/2021/texmf-dist/fonts/tfm/public/cm/cmr17.tfm
+INPUT c:/texlive/2021/texmf-dist/fonts/tfm/public/cm/cmbx12.tfm
 INPUT ./2_Literature_Review.tex
 INPUT ./2_Literature_Review.tex
 INPUT ./2_Literature_Review.tex
