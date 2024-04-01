@@ -29,7 +29,7 @@ This chapter employs the \ac{snn} model to train a group of swarm agents that fo
 
 This chapter assumes that each agent detects only two neighboring agents in addition to the leader. The information obtained from other agents includes the line-of-sight angle and the distance. Each agent's neural network consists of three sub-layers in the input layer, as shown in Figure \ref{fig.Network Structure}. Two sub-layers correspond to the two neighboring follower agents (\(F_{1}\) and \(F_{2}\)), and the third is dedicated to the leader (\(L\)). Inputs for these sub-layers are encoded using the Gaussian Receptive Fields (GRF) that use fuzzy membership functions. The network uses the difference between current and commanded distances within the swarm (\(r_{cmd}\)) and between followers and the leader (\(R_{cmd}\)) to stimulate input neurons.
 
-\begin{figure}
+\begin{figure}[h]
     \centering
     \includegraphics[scale=0.75]{Figures/Network Structure.pdf}
     \caption{\ac{snn} structure with encoding and decoding layers. Each sub-layer consists of a fuzzy encoder and a Fuzzy-to-Spiking Converter, with the output layer receiving inputs from synaptic weights and a random action selector. During the training phase, the output layer receives input only from the random action selector, which then shifts to synaptic weight inputs after the training.}
@@ -58,9 +58,16 @@ The encoding process is shown in Figure \ref{fig.Encoder}. The Fuzzy to Spiking 
 
 \begin{figure}[!h]
     \centering
-    \includegraphics[scale=0.85]{Figures/Encoder.pdf}
-    \caption{The fuzzy encoding principle for the input sub-layer.}
-    \label{fig.Encoder}
+    \begin{minipage}{0.45\textwidth}
+        \includegraphics[scale=0.75]{Figures/Encoder.pdf}
+        \caption{The fuzzy encoding principle for the input sub-layer.}
+        \label{fig.Encoder}
+    \end{minipage}
+    \begin{minipage}{0.45\textwidth}
+        \includegraphics[scale=0.75]{Figures/SNN input-output.pdf}
+        \caption{Input and output of the SNN}
+        \label{fig.SNN-input-output}
+    \end{minipage}
 \end{figure}
 
 The output layer has two sub-layers, and each sub-layer has two neurons. The first sub-layer determines the \(\Delta x\), and the second one determines \(\Delta y\). The first neuron of the sub-layers is for negative values, and the second one is for positive values. Each neuron is associated with the output sign, and the magnitude of the \(\Delta x\) and \(\Delta y\) is encoded into the output sub-layers based on the minimum and maximum synaptic weights. Equation \eqref{Eq.NS.3} is used to encode the magnitude of the random action into the output sub-layers. The only difference is that a function called (\(\mu_{O}\)) is used to normalize the maximum step between 0 and 1 as follows,
@@ -289,7 +296,7 @@ Incorporating the proposed \ac{fl} method with the \ac{RCSE} algorithm, the modi
 
 \noindent where \(\delta\) is the Dirac delta function. Algorithm~\ref{Algorithm.1} shows the step-by-step implementation process of the proposed method.
 
-\begin{algorithm} [H]
+\begin{algorithm} [!h]
 \caption{High-Level Algorithm for the Proposed \ac{fl} Algorithm}
 \label{Algorithm.1}
 \begin{algorithmic}[1]
@@ -358,7 +365,7 @@ The \ac{stdp} mechanism updated synaptic weights at 10 ms intervals. During thes
 \label{table:simulation-parameters}
 \centering
 \begingroup
-\renewcommand{\arraystretch}{1.5}
+\renewcommand{\arraystretch}{1}
 \begin{tabular}{l l l}
 \hline
 \textbf{Parameter} & \textbf{Value} & \textbf{Description} \\ 
@@ -463,11 +470,11 @@ Figure \ref{fig_3_0} shows the simulation results for the \ac{RCSE} method. Acco
         \includegraphics[width=\linewidth]{Figures/Distances - BRC.pdf}
         \caption{Distances during the test phase (\ac{RCSE} method)}
         \label{fig_3_0}
-        \vspace{15pt}
+        % \vspace{15pt}
         \includegraphics[width=\linewidth]{Figures/Environment - BRC.pdf}
         \caption{Agents' trajectory during the test phase (\ac{RCSE} method)}
         \label{fig_3_1}
-        \vspace{5pt}
+        % \vspace{5pt}
         \includegraphics[width=\linewidth]{Figures/Distances - R cmd Change.pdf}
         \caption{Change in commanded distance during the test phase (\ac{RCSE} method)}
         \label{fig_3_2}
@@ -477,11 +484,11 @@ Figure \ref{fig_3_0} shows the simulation results for the \ac{RCSE} method. Acco
         \includegraphics[width=\linewidth]{Figures/FACL - R_cmd Follow.pdf}
         \caption{Distances during the test phase (FACL method)}
         \label{fig_3_3}
-        \vspace{15pt}
+        % \vspace{15pt}
         \includegraphics[width=\linewidth]{Figures/FACL - Environment.pdf}
         \caption{Agents' trajectory during the test phase (FACL method)}
         \label{fig_3_4}
-        \vspace{5pt}
+        % \vspace{5pt}
         \includegraphics[width=\linewidth]{Figures/FACL - R_cmd Changes.pdf}
         \caption{Change in commanded distance during the test phase (FACL method)}
         \label{fig_3_5}

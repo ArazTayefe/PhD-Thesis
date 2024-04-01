@@ -17,18 +17,18 @@
 \contentsline {section}{\numberline {3.3}Learning using R-STDP}{30}{section.3.3}%
 \contentsline {section}{\numberline {3.4}Network structure and encoding method}{34}{section.3.4}%
 \contentsline {section}{\numberline {3.5}Results}{38}{section.3.5}%
-\contentsline {subsection}{\numberline {3.5.1}Simulation without noise}{41}{subsection.3.5.1}%
-\contentsline {subsection}{\numberline {3.5.2}Simulation with noise}{44}{subsection.3.5.2}%
-\contentsline {section}{\numberline {3.6}Conclusion}{46}{section.3.6}%
-\contentsline {chapter}{\numberline {4}Integration of R-STDP and Federated Learning}{47}{chapter.4}%
-\contentsline {section}{\numberline {4.1}Consensus Flying Problem}{47}{section.4.1}%
-\contentsline {section}{\numberline {4.2}Proposed Method}{49}{section.4.2}%
-\contentsline {subsection}{\numberline {4.2.1}Network Structure}{49}{subsection.4.2.1}%
-\contentsline {subsection}{\numberline {4.2.2}Training algorithm}{54}{subsection.4.2.2}%
-\contentsline {subsection}{\numberline {4.2.3}Weight Stabilization using Reward-Modulated Competitive Synaptic Equilibrium (R-CSE)}{55}{subsection.4.2.3}%
-\contentsline {subsection}{\numberline {4.2.4}Federated Learning for Consensus Flying}{60}{subsection.4.2.4}%
-\contentsline {section}{\numberline {4.3}Results and Discussion}{65}{section.4.3}%
-\contentsline {subsection}{\numberline {4.3.1}Simulation without \ac {fl}}{65}{subsection.4.3.1}%
-\contentsline {subsection}{\numberline {4.3.2}Simulation with \ac {fl} and \ac {RCSE}}{75}{subsection.4.3.2}%
-\contentsline {section}{\numberline {4.4}Conclusion}{78}{section.4.4}%
-\contentsline {chapter}{\numberline {5}Proposed Method}{80}{chapter.5}%
+\contentsline {subsection}{\numberline {3.5.1}Simulation without noise}{42}{subsection.3.5.1}%
+\contentsline {subsection}{\numberline {3.5.2}Simulation with noise}{43}{subsection.3.5.2}%
+\contentsline {section}{\numberline {3.6}Conclusion}{43}{section.3.6}%
+\contentsline {chapter}{\numberline {4}Integration of R-STDP and Federated Learning}{45}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Consensus Flying Problem}{45}{section.4.1}%
+\contentsline {section}{\numberline {4.2}Proposed Method}{47}{section.4.2}%
+\contentsline {subsection}{\numberline {4.2.1}Network Structure}{47}{subsection.4.2.1}%
+\contentsline {subsection}{\numberline {4.2.2}Training algorithm}{51}{subsection.4.2.2}%
+\contentsline {subsection}{\numberline {4.2.3}Weight Stabilization using Reward-Modulated Competitive Synaptic Equilibrium (R-CSE)}{52}{subsection.4.2.3}%
+\contentsline {subsection}{\numberline {4.2.4}Federated Learning for Consensus Flying}{58}{subsection.4.2.4}%
+\contentsline {section}{\numberline {4.3}Results and Discussion}{62}{section.4.3}%
+\contentsline {subsection}{\numberline {4.3.1}Simulation without \ac {fl}}{62}{subsection.4.3.1}%
+\contentsline {subsection}{\numberline {4.3.2}Simulation with \ac {fl} and \ac {RCSE}}{71}{subsection.4.3.2}%
+\contentsline {section}{\numberline {4.4}Conclusion}{74}{section.4.4}%
+\contentsline {chapter}{\numberline {5}Proposed Method}{76}{chapter.5}%

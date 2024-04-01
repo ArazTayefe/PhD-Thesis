@@ -1269,6 +1269,11 @@ INPUT ./Figures/Encoder.pdf
 INPUT Figures/Encoder.pdf
 INPUT ./Figures/Encoder.pdf
 INPUT ./Figures/Encoder.pdf
+INPUT ./Figures/SNN input-output.pdf
+INPUT ./Figures/SNN input-output.pdf
+INPUT Figures/SNN input-output.pdf
+INPUT ./Figures/SNN input-output.pdf
+INPUT ./Figures/SNN input-output.pdf
 INPUT c:/texlive/2021/texmf-dist/fonts/tfm/public/cm/cmbxti10.tfm
 INPUT ./Figures/W(t).pdf
 INPUT ./Figures/W(t).pdf

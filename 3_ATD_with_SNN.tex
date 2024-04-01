@@ -127,7 +127,7 @@ Figure \ref{fig:my_label1} shows the defender's network structure and encoding p
 
 There are $q$ input neurons, and a membership function is assigned to each neuron. Therefore, there are $q$ membership functions. The acquired fuzzy membership values are real numbers between 0 and 1 and should be converted to the input currents. This can be done using a linear function and the minimum and maximum inputs.
 
-\begin{figure}
+\begin{figure}[h]
     \centering
     \includegraphics{Figures/4.pdf}
     \caption{Network structure and encoding process for the input layer (Defender). Each neuron is associated with a membership function in \ac{grf}. The \ac{grf} encodes an input State ($S^t$) at each time step. There is both a training phase when ($\alpha  = 0$) and an operating phase when ($\alpha = 1)$.}
@@ -264,14 +264,14 @@ A numerical simulation is conducted to evaluate the \ac{snn}'s performance in so
 \end{center}
 \end{table}
 
-\begin{figure}
+\begin{figure}[h]
     \centering
     \includegraphics{Figures/During training.pdf}
     \caption{\ac{snn}'s performance during training. Hollow circles show the initial positions.}
     \label{fig:my_label6}
 \end{figure}
 
-\begin{figure}
+\begin{figure}[h]
     \centering
     \includegraphics{Figures/Synaptic weights.pdf}
     \caption{Changes in synaptic weights during training. Only Maximum synaptic weights for both agents are shown.}
@@ -324,7 +324,7 @@ Figure \ref{fig:my_label11} shows the changes in synaptic weights. Only the syna
 
 In Figure \ref{fig:my_label12}, we observe the performance of two methods, namely the \ac{snn} and the Cartesian Oval (CO) method, in the presence of noise. The noise in this experiment is introduced as white Gaussian noise, characterized by a mean of zero and a variance of 0.01. Both \ac{snn} and CO receive position data that has been corrupted by this noise. 
 
-\begin{figure}
+\begin{figure}[h]
     \centering
     \includegraphics{Figures/Noise effect.pdf}
     \caption{\ac{snn}'s performance in noisy conditions. A white Gaussian noise with a variance of 0.01 is added to the measured inputs.}
