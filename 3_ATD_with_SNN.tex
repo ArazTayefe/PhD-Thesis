@@ -38,7 +38,7 @@ The \ac{stdp} algorithm is used to train two separate \ac{snn}s simultaneously t
 
 \ac{stdp} is a biological learning algorithm that is believed to underlie certain learning mechanisms in the brain \cite{Ch5_STDP2}. The \ac{stdp} algorithm is based on the idea that if a pre-synaptic neuron fires just before a post-synaptic neuron, the strength of the synapse between the two neurons should be increased. Conversely, if the post-synaptic neuron fires just before the pre-synaptic neuron, the strength of the synapse should be decreased.
 
-In the \ac{snn}, the pre-synaptic neurons are input neurons, and post-synaptic neurons are output neurons. The synaptic plasticity is referred to as an eligibility trace ($C$), which is calculated based on the following equation \cite{Ch5_STDP1},
+In the \ac{snn}, the pre-synaptic neurons are input neurons, and post-synaptic neurons are output neurons. The synaptic plasticity is referred to as an eligibility trace ($C$), which is calculated based on the following equation \cite{Ch_1_R22},
 
 \begin{equation} \label{Eq.14}
     \dot C^{i-j} = -C^{i-j}/\tau_C + STDP^{i-j}(\tau)  \delta(t - t_{pre/post})

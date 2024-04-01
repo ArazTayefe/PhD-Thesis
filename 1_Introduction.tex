@@ -1,19 +1,17 @@
 \chapter{Introduction}
 
-\section{Problem Definition: Federated Learning with SNN}
-
-\ac{fl} is a groundbreaking approach to machine learning that allows models to be trained directly on edge devices, such as smartphones and IoT devices, without the need to centralize data. This method addresses significant concerns regarding data privacy and security by keeping sensitive information local to the device it originates from, thus preventing data leakage and enhancing user privacy. \ac{fl} represents a shift towards decentralized, privacy-preserving machine learning models in our increasingly connected digital age, making it a critical area of research for advancing machine learning technologies that are both accessible and secure \cite{Ch_1_R1}.
+\ac{fl} is a groundbreaking approach to machine learning that allows models to be trained directly on edge devices, such as smartphones and IoT devices, without the need to centralize data. This method addresses significant concerns regarding data privacy and security by keeping sensitive information local to the device it originates from, thus preventing data leakage and enhancing user privacy. \ac{fl} represents a shift towards decentralized, privacy-preserving machine learning models in our increasingly connected digital age, making it a critical area of research for advancing machine learning technologies that are both accessible and secure.
 
 \begin{figure}[H]
     \centering 
     \includegraphics{Figures/Schematic of Federated Learning.pdf}
-    \caption{Schematic diagram to illustrate distributed learning and federated learning \cite{Ch_1_R1}.}
+    \caption{Schematic diagram to illustrate distributed learning and \ac{fl} \cite{Ch_1_R1}.}
     \label{Sch_FL}
 \end{figure}
 
 Figure \ref{Sch_FL} shows a diagram of distributed learning and \ac{fl}. In conventional learning the data is collected from the clients and the model is trained in an offline manner. In Distributed Learning the dataset is collected at a single data store and then it is distributed across multiple worker nodes for training. In \ac{fl}, the training is performed at the client, and model gradients are communicated to the base station which aggregates the gradients and updates the global model, and broadcasts it back to all the clients. Each of these processes is iterative and models at the clients are periodically updated.
 
-\ac{snn}s bring a new dimension to the capabilities of \ac{fl}. Inspired by the biological processes of the human brain, \ac{snn}s operate on an event-driven basis, processing information only in response to stimuli. This method of operation significantly reduces the power consumption of these networks, making them particularly suited for deployment across distributed, battery-operated devices. The integration of \ac{snn}s with \ac{fl} leverages these unique advantages, combining energy efficiency with the privacy-preserving features of federated learning to address the challenges faced by traditional artificial neural network models in federated settings \cite{Ch_1_R2, Ch_1_R3}.
+\ac{snn}s bring a new dimension to the capabilities of \ac{fl}. Inspired by the biological processes of the human brain, \ac{snn}s operate on an event-driven basis, processing information only in response to stimuli. This method of operation significantly reduces the power consumption of these networks, making them particularly suited for deployment across distributed, battery-operated devices. The integration of \ac{snn}s with \ac{fl} leverages these unique advantages, combining energy efficiency with the privacy-preserving features of \ac{fl} to address the challenges faced by traditional artificial neural network models in federated settings \cite{Ch_1_R2, Ch_1_R3}.
 
 The energy-efficient nature of \ac{snn}s aligns perfectly with the objectives of \ac{fl}, where models are trained across a network of distributed devices without centralized data collection. Unlike conventional artificial neural networks that require continuous data flow and computation, \ac{snn}s' event-driven operation allows for significant reductions in energy consumption, which is critical for battery-operated devices participating in \ac{fl}. This characteristic of \ac{snn}s supports the development of low-power, distributed learning solutions, enabling more devices to participate in \ac{fl} without compromising on power efficiency \cite{Ch_1_R4}.
 
@@ -21,11 +19,11 @@ Furthermore, the integration of \ac{snn}s in \ac{fl} scenarios can also help ove
 
 Another critical advantage of \ac{snn}s in the context of \ac{fl} is their compatibility with neuromorphic hardware. Neuromorphic chips, designed to replicate the neural structures of the human brain, provide an ideal platform for deploying \ac{snn}s. This synergy between neuromorphic computing and \ac{snn}s paves the way for the development of highly efficient, scalable, and adaptive \ac{fl} systems capable of leveraging the full potential of edge computing \cite{Ch_1_R6}.
 
-Despite these advantages, the integration of \ac{snn}s with \ac{fl} presents several challenges. The primary hurdle is the complexity of training \ac{snn}s in a distributed manner. The dynamic and temporal nature of \ac{snn}s introduces new challenges in developing effective \ac{fl} protocols that can accommodate the unique online learning rules of \ac{snn}s. Proper scheduling of communication rounds within the local \ac{snn} time steps is essential for successful collaborative training \cite{Ch_1_R7}.
+Despite these advantages, the integration of \ac{snn}s with \ac{fl} presents several challenges. The primary hurdle is the complexity of training \ac{snn}s in complex problems. The dynamic and temporal nature of \ac{snn}s introduces new challenges in developing effective \ac{fl} protocols that can accommodate the unique online learning rules of \ac{snn}s. Proper scheduling of communication rounds within the local \ac{snn} time steps is essential for successful collaborative training \cite{Ch_1_R7}.
 
 Moreover, managing the performance trade-offs associated with the frequency of communication rounds in \ac{fl} is another significant challenge. Experiments have shown the impact of the number of time-steps between local updates and the frequency of model aggregation on the training performance of \ac{snn}s. Finding an optimal balance to maximize model performance while minimizing communication overhead is crucial for the efficient deployment of \ac{fl} systems powered by \ac{snn}s \cite{Ch_1_R8}.
 
-Additionally, communication constraints and the non-stationarity of data distribution pose significant challenges. The need for model update quantization to reduce communication costs and the changing nature of data over time require innovative solutions to maintain the accuracy and reliability of \ac{fl} systems employing \ac{snn}s \cite{Ch_1_R9}.
+Additionally, communication constraints and the non-stationarity of data distribution pose significant challenges. The need for model update quantization to reduce communication costs and the changing nature of data over time (e.g., reward function in RL) require innovative solutions to maintain the accuracy and reliability of \ac{fl} systems employing \ac{snn}s \cite{Ch_1_R9}.
 
 Despite these challenges, the potential benefits of integrating \ac{snn}s with \ac{fl} justify continued research and development in this area. The combination of energy efficiency, privacy preservation, and compatibility with neuromorphic hardware, along with the distributed and collaborative nature of \ac{fl}, represents a compelling approach to deploying machine learning models in real-world applications \cite{Ch_1_R10}.
 
@@ -38,7 +36,7 @@ In the study of computational neuroscience and the development of neural network
 
 
 \subsubsection{Leaky-Integrate and Fire (LIF) model}
-The LIF model is a biological model that can be represented as a circuit with a resistor and capacitor and represents a first-order dynamic system \cite{Ch5_NM1},
+The LIF model is a biological model that can be represented as a circuit with a resistor and capacitor and represents a first-order dynamic system \cite{Ch_1_R13},
 
 \begin{equation} \label{Eq.1}
     R_{m}C_{m}\frac{dV_m\left(t\right)}{dt} = E_{l} - V_m\left(t\right) + R_{m}I\left(t\right)
@@ -46,7 +44,7 @@ The LIF model is a biological model that can be represented as a circuit with a 
 
 \noindent where $V_{m}(t)$ is the neuron's membrane potential, $R_{m}$ is the membrane resistance, $C_{m}$ is the membrane capacitance, $E_{l}$ is the resting potential, and $I(t)$ is the input current. The neuron spikes when its potential reaches the threshold potential ($V_{th}$). The potential of the neuron immediately reaches the reset potential ($V_{res}$) after it spikes.
 
-The spike rate is a parameter that determines how fast the neuron spikes \cite{Ch5_NM2}.
+The spike rate is a parameter that determines how fast the neuron spikes \cite{Ch_1_R11}.
 
 \begin{equation} \label{Eq.4}
     r_{[Hz]} = \frac{1}{t_{isi}\enspace [s]}
@@ -102,7 +100,7 @@ In this section, we obtained the minimum and maximum values for input current us
 
 \subsubsection{Hodgkin-Huxley Model}
 
-The Hodgkin-Huxley model offers a detailed description of the ionic mechanisms underlying the initiation and propagation of action potentials in neurons:
+The Hodgkin-Huxley model offers a detailed description of the ionic mechanisms underlying the initiation and propagation of action potentials in neurons~\cite{Ch_1_R12}:
 
 \begin{align}
 C_m \frac{dV}{dt} &= I_{ext} - \bar{g}_{K}n^4(V-V_{K}) - \bar{g}_{Na}m^3h(V-V_{Na}) - \bar{g}_{L}(V-V_{L}) \\
@@ -111,22 +109,26 @@ C_m \frac{dV}{dt} &= I_{ext} - \bar{g}_{K}n^4(V-V_{K}) - \bar{g}_{Na}m^3h(V-V_{N
 \frac{dh}{dt} &= \alpha_h(V)(1-h) - \beta_h(V)h
 \end{align}
 
-where $C_m$ is the membrane capacitance, $V$ is the membrane potential, $I_{ext}$ is the external current, $\bar{g}_i$ and $V_i$ are the maximum conductances and reversal potentials for the $K^+$, $Na^+$, and leak ($L$) currents, and $n$, $m$, and $h$ are gating variables. The variables \(n\), \(m\), and \(h\) are dimensionless and vary between 0 and 1, representing the proportion of ion channels in a particular state. The dynamics of these gating variables are critical for the model's ability to replicate the complex temporal patterns of neuronal action potentials.
+\noindent where $C_m$ is the membrane capacitance, $V$ is the membrane potential, $I_{ext}$ is the external current, $\bar{g}_i$ and $V_i$ are the maximum conductances and reversal potentials for the $K^+$, $Na^+$, and leak ($L$) currents, and $n$, $m$, and $h$ are gating variables. 
+
+The variables \(n\), \(m\), and \(h\) are dimensionless and vary between 0 and 1, representing the proportion of ion channels in a particular state. The dynamics of these gating variables are critical for the model's ability to replicate the complex temporal patterns of neuronal action potentials. The rates \(\alpha_{n,m,h}\) and \(\beta_{n,m,h}\) represent the voltage-dependent transition rates for the gating variables, where \(\alpha\) corresponds to the rate of transition from a closed to an open state, and \(\beta\) represents the rate of transition from an open to a closed state. These rates are essential for modeling how the gating variables respond to changes in membrane potential, thereby influencing the ion flow across the membrane and the generation of action potentials.
+
 
 \subsubsection{FitzHugh-Nagumo Model}
 
-The FitzHugh-Nagumo model simplifies the Hodgkin-Huxley model into a two-variable system to capture the essential features of excitability:
+The FitzHugh-Nagumo model simplifies the Hodgkin-Huxley model into a two-variable system to capture the essential features of excitability~\cite{Ch_1_R14}:
 
 \begin{align}
-\frac{dV}{dt} &= V - \frac{V^3}{3} - W + I_{ext} \\
-\frac{dW}{dt} &= 0.08(V + 0.7 - 0.8W)
+\frac{dV}{dt} &= V - \frac{V^3}{3} - U + I_{ext} \\
+\frac{dU}{dt} &= \frac{1}{\tau}(V + a - bU)
 \end{align}
 
-where $V$ represents the membrane potential, $W$ is a recovery variable, and $I_{ext}$ is the external current.
+\noindent where $V$ represents the membrane potential, $U$ is a recovery variable, and $I_{ext}$ is the external current. The parameter \(a\) represents a threshold value influencing the activation of \(V\), \(b\) controls the recovery variable's influence on the system, and \(\tau\) is the time constant for the recovery variable \(U\), determining its rate of adjustment in response to changes in \(V\).
+
 
 \subsubsection{Izhikevich Model}
 
-The Izhikevich model combines the biological plausibility of the Hodgkin-Huxley model with the computational efficiency of integrate-and-fire models:
+The Izhikevich model combines the biological plausibility of the Hodgkin-Huxley model with the computational efficiency of \ac{lif} models~\cite{Ch_1_R15}:
 
 \begin{align}
 \frac{dv}{dt} &= 0.04v^2 + 5v + 140 - u + I \\
@@ -136,13 +138,13 @@ The Izhikevich model combines the biological plausibility of the Hodgkin-Huxley 
 when $v \geq 30$ mV, then $v \leftarrow c$ and $u \leftarrow u + d$. Here, $v$ and $u$ represent the membrane potential and membrane recovery variable, respectively, and $a$, $b$, $c$, and $d$ are parameters of the model, with $I$ representing the current.
 
 
-\subsection{Learning Approaches in \ac{snn}s}
+\subsection{Learning Approaches in SNNs}
 
 \subsection*{Hebbian Learning}
 
-Before we turn to spike-based learning rules, we first review the basic concepts of rate-based learning. Firing rate models have been used extensively in the field of artificial neural networks.
+Before we turn to spike-based learning rules, we first review the basic concepts of rate-based learning. Firing rate models have been used extensively in the field of \ac{snn}s.
 
-Consider a single synapse with efficacy \(w_{ij}\) that transmits signals from a presynaptic neuron \(j\) to a postsynaptic neuron \(i\), where the activity of the presynaptic neuron is denoted by \(\nu_j\) and that of the postsynaptic neuron by \(\nu_i\). The change in synaptic efficacy can be described by the differential equation:
+Consider a single synapse with efficacy \(w_{ij}\) that transmits signals from a presynaptic neuron \(j\) to a postsynaptic neuron \(i\), where the activity of the presynaptic neuron is denoted by \(\nu_j\) and that of the postsynaptic neuron by \(\nu_i\). The change in synaptic efficacy can be described by the differential equation~\cite{Ch_1_R16}:
 
 \begin{equation}
     \frac{d}{dt} w_{ij} = F(w_{ij}; \nu_i\nu_j),
@@ -150,11 +152,14 @@ Consider a single synapse with efficacy \(w_{ij}\) that transmits signals from a
 
 where \(F\) is a function representing the change rate of synaptic coupling strength, reflecting the principle of locality in Hebbian plasticity. This function is dependent on the pre- and postsynaptic firing rates and the current synaptic efficacy.
 
-There are two aspects of Hebb’s postulate that are particularly important: locality and joint activity. Hebb's postulate emphasizes the necessity of simultaneous pre- and postsynaptic activity for synaptic modification. This can be mathematically expressed in a Taylor series expansion around \(\nu_i = \nu_j = 0\):
+There are two aspects of Hebb’s postulate that are particularly important: locality and joint activity. Hebb's postulate emphasizes the necessity of simultaneous pre- and postsynaptic activity for synaptic modification. This can be mathematically expressed in a Taylor series expansion around \(\nu_i = \nu_j = 0\)~\cite{Ch_1_R16}:
 
 \begin{equation}
     \frac{d}{dt} w_{ij} = c_0(w_{ij}) + c_{\text{pre}}^1(w_{ij})\nu_j + c_{\text{post}}^1(w_{ij})\nu_i + c_{\text{pre}}^2(w_{ij})\nu_j^2 + c_{\text{post}}^2(w_{ij})\nu_i^2 + c_{\text{corr}}^{11}(w_{ij})\nu_i\nu_j + O(\nu^3).
 \end{equation}
+
+\noindent where \(c_0(w_{ij})\) accounts for the baseline rate of change of the synaptic weight, independent of neuronal activity, and \(c_{\text{pre}}^1(w_{ij})\) and \(c_{\text{post}}^1(w_{ij})\) modulate the synaptic weight change linearly with the activity of the presynaptic and postsynaptic neurons, respectively. The \(c_{\text{pre}}^2(w_{ij})\) and \(c_{\text{post}}^2(w_{ij})\) reflect the quadratic terms, indicating the rate of weight change with the square of the activity levels of the presynaptic and postsynaptic neurons, respectively, suggesting nonlinear effects. The \(c_{\text{corr}}^{11}(w_{ij})\) represents the interaction term between the presynaptic and postsynaptic activities, emphasizing the Hebbian principle that the synaptic modification is strongest when both neurons are simultaneously active. The \(O(\nu^3)\) indicates that this expansion includes up to the second order of neuronal activities and that higher-order terms are omitted for simplicity.
+
 
 The synaptic change is governed by local variables, such as the synaptic efficacy and the pre- and postsynaptic firing rates, without dependency on the activity of other neurons. Simplifying the Taylor expansion to include only the bilinear term for joint activity leads to:
 
@@ -164,25 +169,26 @@ The synaptic change is governed by local variables, such as the synaptic efficac
 
 indicating that synaptic strength increases with simultaneous firing of pre- and postsynaptic neurons.
 
-To prevent unlimited growth of synaptic weights, models introduce a dependency of the coefficient \(c_{\text{corr}}^{11}\) on the current weight value, enabling a saturation effect. Two common approaches are:
+To prevent unlimited growth of synaptic weights, models introduce a dependency of the coefficient \(c_{\text{corr}}^{11}\) on the current weight value, enabling a saturation effect. Two common approaches are~\cite{Ch_1_R25}:
+
     \begin{itemize}
         \item \textbf{Hard Bound}: \(c_{\text{corr}}^{11}\) remains constant until a maximum weight \(w_{\text{max}}\) is reached, after which it becomes zero.
-        \item \textbf{Soft Bound}: \(c_{\text{corr}}^{11}(w_{ij}) = \gamma_2 (w_{\text{max}} - w_{ij})^\beta\), allowing for gradual slowing of weight growth as it approaches \(w_{\text{max}}\).
+        \item \textbf{Soft Bound}: \(c_{\text{corr}}^{11}(w_{ij}) = \gamma (w_{\text{max}} - w_{ij})^\beta\), allowing for gradual slowing of weight growth as it approaches \(w_{\text{max}}\).
     \end{itemize}
 
-Real systems require mechanisms for decreasing synaptic weights as well. This can be represented by:
+Real systems require mechanisms for decreasing synaptic weights as well. This can be represented by~\cite{Ch_1_R17}:
 
 \begin{equation}
-    \frac{d}{dt} w_{ij} = \gamma_2 (1-w_{ij})\nu_i \nu_j - \gamma_0 w_{ij},
+    \frac{d}{dt} w_{ij} = \gamma (1-w_{ij})\nu_i \nu_j - \gamma_0 w_{ij},
 \end{equation}
 
 where \(\gamma_0\) represents a decay term, leading to spontaneous weakening of synapses in the absence of stimulation.
 
-Building upon the foundational principles introduced in the initial formulation of Hebb's rule, this section delves into famous models and refinements that offer a richer understanding of synaptic plasticity. These elaborations include the Covariance Rule, Oja's Rule, and the Bienenstock-Cooper-Munro (BCM) Rule, each providing unique insights into the dynamics of learning and memory in neural circuits.
+Building upon the foundational principles introduced in the initial formulation of Hebb's rule, this section delves into famous models and refinements that offer a richer understanding of synaptic plasticity. These elaborations include the Covariance Rule, Oja's Rule, and the Bienenstock-Cooper-Munro (BCM) Rule, each providing unique insights into the dynamics of learning and memory in \ac{snn}s.
 
 \textbf{Covariance Rule}
 
-The Covariance Rule, proposed by Sejnowski in 1977, introduces a nuanced perspective on synaptic modification, emphasizing the importance of the correlation between fluctuations in pre- and postsynaptic activity rates from their mean values. Mathematically, it can be expressed as:
+The Covariance Rule introduces a nuanced perspective on synaptic modification, emphasizing the importance of the correlation between fluctuations in pre- and postsynaptic activity rates from their mean values. Mathematically, it can be expressed as:
 
 \begin{equation}
     \frac{d}{dt} w_{ij} = \gamma (\nu_i - \overline{\nu_i}) (\nu_j - \overline{\nu_j}),
@@ -192,7 +198,7 @@ where \(\overline{\nu_i}\) and \(\overline{\nu_j}\) represent the running averag
 
 \textbf{Oja's Rule}
 
-Oja's rule, introduced by Oja in 1982, offers a self-organizing and normalization mechanism for synaptic weights, ensuring stability in the learning process. The rule is given by:
+This approach offers a self-organizing and normalization mechanism for synaptic weights, ensuring stability in the learning process. The rule is given by~\cite{Ch_1_R19}:
 
 \begin{equation}
     \frac{d}{dt} w_{ij} = \gamma (\nu_i \nu_j - w_{ij} \nu_i^2),
@@ -202,21 +208,19 @@ This formulation inherently limits the growth of synaptic weights, ensuring that
 
 \textbf{Bienenstock-Cooper-Munro (BCM) Rule}
 
-The BCM rule, developed by Bienenstock, Cooper, and Munro in 1982, introduces a mechanism where synaptic modification thresholds evolve based on the neuron's activity history. The rule can be described as:
+The BCM rule introduces a mechanism where synaptic modification thresholds evolve based on the neuron's activity history. The rule can be described as:
 
 \begin{equation}
     \frac{d}{dt} w_{ij} = \eta \nu_i (\nu_i - \nu_\theta) \nu_j,
 \end{equation}
 
-where \(\nu_\theta\) is a dynamic threshold that adjusts based on the average postsynaptic activity. This adaptive threshold introduces a form of synaptic plasticity that is both potentiation and depression capable, contingent upon the postsynaptic activity level relative to \(\nu_\theta\). The BCM rule encapsulates the concept of metaplasticity, reflecting the plasticity of synaptic plasticity mechanisms themselves, and has been instrumental in explaining developmental changes in synaptic connectivity and function.
-
-Building on the framework of Hebbian learning, the concept of Rarely Correlating Hebbian Plasticity (RCHP) introduces a nuanced approach to synaptic adjustments, focusing on the selective reinforcement of synaptic connections based on rare but significant correlations in pre- and post-synaptic activities. This method aims to refine the criteria for synaptic modification, emphasizing the importance of meaningful neural correlations over frequent but potentially inconsequential ones.
+\noindent where \(\nu_\theta\) is a dynamic threshold that adjusts based on the average postsynaptic activity. This adaptive threshold introduces a form of synaptic plasticity that is both potentiation and depression capable, contingent upon the postsynaptic activity level relative to \(\nu_\theta\). 
 
 \textbf{Rarely Correlating Hebbian Plasticity (RCHP)}
 
 RCHP proposes a model where synaptic changes are driven not merely by the simultaneous activation of connected neurons but by the infrequent yet pivotal coincidences in their activity. This model addresses the potential issue of over-strengthening synaptic connections due to common but unimportant activity patterns, focusing instead on enhancing those connections that contribute to significant neural events.
 
-The RCHP rule is defined by an update mechanism that adjusts synaptic weights based on a thresholded measure of pre- and post-synaptic activity correlations. The rule can be formally expressed as follows:
+The RCHP rule is defined by an update mechanism that adjusts synaptic weights based on a thresholded measure of pre- and post-synaptic activity correlations. The rule can be formally expressed as follows~\cite{Ch_1_R20}:
 
 \begin{equation}
     \Delta w_{ji} = 
@@ -235,56 +239,32 @@ At the heart of modern RL formulations within \ac{snn}s is the adaptation of neo
 
 \subsection*{Neo-Hebbian Learning and Modulation Mechanisms}
 
-In the exploration of hedonistic synaptic models within the domain of neo-Hebbian reinforcement learning, a significant advancement is noted in the conceptualization of synapses as stochastic processes, influenced by a global reward signal. This model employs the integration of spiking integrate-and-fire (IF) neurons, translating synaptic efficacy into a probabilistic framework. Herein, the learning dynamic is intricately linked to the global reward signal and the probabilistic occurrence of a pre-synaptic action potential influencing the post-synaptic neuron. This relationship is mathematically encapsulated in a logistic sigmoid function regarding the synaptic connection's learned weight and the pre-synaptic neuron's calcium concentration:
-
-\begin{equation}
-p_{ji} = \frac{1}{1 + e^{-(w_{ji} + c_{j})}}
-\end{equation}
-
-where $p_{ji}$ denotes the probability of a pre-synaptic action potential from neuron $j$ successfully triggering neurotransmitter release to the post-synaptic neuron $i$, $w_{ji}$ represents the synaptic weight from neuron $j$ to $i$, and $c_{j}$ encapsulates the calcium concentration dynamics within the pre-synaptic neuron $j$.
-
-The modulation of the synaptic weight component's plasticity, under this framework, is governed by the dopaminergic global reward signal ($R(t)$) and an eligibility trace ($\lambda_{ji}(t)$), which decays over time. This decay is represented as:
-
-\begin{equation}
-\frac{dw_{ji}}{dt} = \eta R(t) \lambda_{ji}(t)
-\end{equation}
-
-and
-
-\begin{equation}
-\Delta \lambda_{ji} = 
-\begin{cases} 
-  (1 - p_{ji}) & \text{if spike neurotransmitter release succeeds} \\
-  -p_{ji} & \text{if release fails}
-\end{cases}
-\end{equation}
-
-The eligibility trace's dynamics, akin to the eligibility trace mechanism in Temporal-Difference (TD) learning, incorporate an increase upon recent activity relevant to successful neurotransmission, decaying with temporal distance. This elegantly introduces a biologically plausible learning mechanism where recent and successfully propagated synaptic activities, in conjunction to a positive reward signal, culminate in Long-Term Potentiation (LTP) at the synaptic junction. Conversely, synaptic activities followed by a negative reward precipitate Long-Term Depression (LTD). Moreover, unsuccessful firing activities preceding a positive reward result in LTD, whereas the same failures preceding negative rewards induce LTP. This intricate balance between synaptic efficacy modulation, through the hedonistic synaptic model, underscores the fundamental tenets of neo-Hebbian reinforcement learning, presenting a robust framework for understanding the nuanced interplay between synaptic plasticity and global reward signaling in the learning process.
+In neo-Hebbian reinforcement learning, significant advancements come from a global reward signal modulating synaptic plasticity alongside an eligibility trace that decays over time~\cite{Ch_1_R21}. This trace increases with recent, successful neurotransmission and decreases as time passes, linking closely with Temporal-Difference (TD) learning mechanisms. Such dynamics allow for Long-Term Potentiation (LTP) or Depression (LTD) at synapses based on the timing of synaptic activity and the nature of the reward signal. Specifically, recent successful activities followed by positive rewards enhance LTP, while activities preceding negative rewards lead to LTD. Conversely, unsuccessful firings before positive rewards lead to LTD, but before negative rewards, they trigger LTP. 
 
 
 \textbf{Distal rewards and credit assignment} 
 
-This model introduces a nuanced approach to synaptic modification through the interaction of \ac{stdp} with a modulatory signal reflective of dopaminergic activity, embodying the essence of temporal difference (TD) learning within the realm of spiking neurons.
+This model introduces a nuanced approach to synaptic modification through the interaction of \ac{stdp} with a modulatory signal reflective of reward, embodying the essence of TD learning within the realm of spiking neurons.
 
-Central to this framework is the eligibility trace mechanism, elegantly adapted from its conventional application in TD learning to facilitate synaptic credit assignment over varying temporal extents. This adaptation allows for the dynamic modulation of synaptic strengths based on the timing and sequence of pre- and post-synaptic spikes, in conjunction with the temporal dynamics of received rewards. The eligibility trace is mathematically represented as follows:
+Central to this framework is the eligibility trace mechanism, elegantly adapted from its conventional application in TD learning to facilitate synaptic credit assignment over varying temporal extents. This adaptation allows for the dynamic modulation of synaptic strengths based on the timing and sequence of pre- and post-synaptic spikes, in conjunction with the temporal dynamics of received rewards. The eligibility trace is mathematically represented as follows~\cite{Ch_1_R22}:
 
 \begin{equation}
-    \frac{d\lambda_{ji}}{dt} = -\frac{\lambda_{ji}}{\tau_{\lambda}} + \text{STDP}(t_{\text{post}} - t_{\text{pre}})\delta(t - t^{(f)})
+    \frac{dC_{ji}}{dt} = -\frac{C_{ji}}{\tau_{C}} + \text{STDP}(t_{\text{post}} - t_{\text{pre}})\delta(t - t^{(f)})
 \end{equation}
 
-Here, $\lambda_{ji}(t)$ denotes the eligibility trace for the synapse between pre-synaptic neuron $j$ and post-synaptic neuron $i$, evolving over time with a decay governed by $\tau_{\lambda}$, and modulated by the STDP rule applied to the timing difference between pre- and post-synaptic spikes $(t_{\text{post}} - t_{\text{pre}})$. The Dirac delta function, $\delta(t - t^{(f)})$, signifies the occurrence of a spike, serving as a pivotal factor in the temporal credit assignment process.
+Here, $C_{ji}(t)$ denotes the eligibility trace for the synapse between pre-synaptic neuron $j$ and post-synaptic neuron $i$, evolving over time with a decay governed by $\tau_{C}$, and modulated by the STDP rule applied to the timing difference between pre- and post-synaptic spikes $(t_{\text{post}} - t_{\text{pre}})$. The Dirac delta function, $\delta(t - t^{(f)})$, signifies the occurrence of a spike, serving as a pivotal factor in the temporal credit assignment process.
 
 Synaptic weight updates are then guided by the interaction between the eligibility trace and the temporally decaying reward signal, $R(t)$, as captured in the following equation:
 
 \begin{equation}
-    \frac{dw_{ji}}{dt} = \lambda_{ji}(t) \cdot R(t)
+    \frac{dw_{ji}}{dt} = C_{ji}(t) \cdot R(t)
 \end{equation}
 
 where $dw_{ji}/dt$ symbolizes the rate of change in synaptic weight, contingent upon the compounded influence of the eligibility trace and the reward signal, thereby embodying a direct manifestation of reward-based learning within the synaptic framework.
 
 \textbf{Hypothesis Testing Plasticity (HTP)}
 
-The Hypothesis Testing Plasticity (HTP) focuses on the nuanced evolution of synaptic strengths through the interaction with both short-term and long-term components of synaptic weights. The HTP model delineates the dynamics of synaptic strength through a dual-component approach. This approach segregates synaptic weight into short-term and long-term components, facilitating the exploration of synaptic plasticity under varying reward conditions. In the following, the mathematical representation of this model, including the dynamics of short-term synaptic changes and the conditions for long-term consolidation is discussed.
+The HTP model focuses on the nuanced evolution of synaptic strengths through the interaction with both short-term and long-term components of synaptic weights~\cite{Ch_1_R23}. The HTP model delineates the dynamics of synaptic strength through a dual-component approach. This approach segregates synaptic weight into short-term and long-term components, facilitating the exploration of synaptic plasticity under varying reward conditions. In the following, the mathematical representation of this model, including the dynamics of short-term synaptic changes and the conditions for long-term consolidation is discussed.
 
 Short-term synaptic weight changes are governed by,
 
@@ -292,7 +272,7 @@ Short-term synaptic weight changes are governed by,
 \Delta w_{ji}^{st}(t) = -\frac{w_{ji}^{st}(t)}{\tau_{st}} + M(t) \cdot \text{RCHP}_{ji}(t)
 \end{equation}
 
-where $M(t)$, representing the dynamic concentration of dopamine, evolves as:
+\noindent where $M(t)$, representing the dynamic concentration of reward, evolves as:
 
 \begin{equation}
 \Delta M(t) = -\frac{M(t)}{\tau_{M}} + \alpha R(t) - b
@@ -304,61 +284,61 @@ Long-term synaptic changes are then formulated as:
 \Delta w_{ji}^{lt}(t) = \beta \mathcal{H}(w_{ji}^{st}(t) - \Phi)
 \end{equation}
 
-where $\mathcal{H}$ denotes the Heaviside step function, introducing a binary condition for the consolidation of synaptic changes based on the magnitude of short-term synaptic efficacy relative to the threshold $\Phi$, and $\beta$ represents the consolidation rate.
+\noindent where $\mathcal{H}$ denotes the Heaviside step function, introducing a binary condition for the consolidation of synaptic changes based on the magnitude of short-term synaptic efficacy relative to the threshold $\Phi$, and $\beta$ represents the consolidation rate.
 
 This framework integrates the dynamics of synaptic plasticity with mechanisms of reward-based learning, offering a comprehensive model for understanding the biological and computational foundations of learning and memory.
 
-\subsection*{Deep Spiking Q-Networks (DSQNs)}
+% \subsection*{Deep Spiking Q-Networks (DSQNs)}
 
-The training framework of Deep Spiking Q-Networks (DSQNs) marries the principles of reinforcement learning with the dynamics inherent to spiking neural networks (\ac{snn}s). This groundbreaking methodology utilizes the membrane voltage of non-spiking neurons as a novel representation of the Q-value, enabling the direct learning from high-dimensional sensory inputs in an end-to-end reinforcement learning setup. This section explicates the DSQN training algorithm, highlighting the derivation of the learning rule through a detailed exposition of the essential equations that govern the training process.
+% The training framework of Deep Spiking Q-Networks (DSQNs) marries the principles of reinforcement learning with the dynamics inherent to \ac{snn}s. This groundbreaking methodology utilizes the membrane voltage of non-spiking neurons as a novel representation of the Q-value, enabling the direct learning from high-dimensional sensory inputs in an end-to-end reinforcement learning setup. This section explicates the DSQN training algorithm, highlighting the derivation of the learning rule through a detailed exposition of the essential equations that govern the training process.
 
-The essence of the DSQN training strategy lies in the optimization of network weights, \(\theta\), to reduce the gap between the predicted and the target Q-values, as derived from the Bellman equation. This optimization hinges on the gradient of the loss function with respect to the weights, \(\nabla_{\theta} L(\theta)\), computed via a method specially tailored for the spike-based architecture of DSQNs.
+% The essence of the DSQN training strategy lies in the optimization of network weights, \(\theta\), to reduce the gap between the predicted and the target Q-values, as derived from the Bellman equation. This optimization hinges on the gradient of the loss function with respect to the weights, \(\nabla_{\theta} L(\theta)\), computed via a method specially tailored for the spike-based architecture of DSQNs.
 
-Each layer in the network, denoted by \(i\), receives input \(I_{t}^{i}\) and produces output \(S_{t}^{i}\) at any given timestep \(t\), with \(X_{t}^{i} = \theta^{i} I_{t}^{i}\) representing the external input to the neuron's model. The derivative of the neuron's spike function, \(\Theta'(x)\), is approached through a surrogate gradient method, \(\Theta^{\prime}(x)=\sigma^{\prime}(x)\), facilitating the application of backpropagation in the context of spiking networks.
+% Each layer in the network, denoted by \(i\), receives input \(I_{t}^{i}\) and produces output \(S_{t}^{i}\) at any given timestep \(t\), with \(X_{t}^{i} = \theta^{i} I_{t}^{i}\) representing the external input to the neuron's model. The derivative of the neuron's spike function, \(\Theta'(x)\), is approached through a surrogate gradient method, \(\Theta^{\prime}(x)=\sigma^{\prime}(x)\), facilitating the application of backpropagation in the context of spiking networks.
 
-1. \textit{Determining the Q-value Representation}: The algorithm utilizes the maximum membrane voltage over the simulation time as the Q-value representation. This choice is formalized as:
+% 1. \textit{Determining the Q-value Representation}: The algorithm utilizes the maximum membrane voltage over the simulation time as the Q-value representation. This choice is formalized as~\cite{Ch_1_R24}:
 
-\begin{equation}
-    t^{\prime}=\underset{1 \leq t \leq T}{\arg \max } V_{t}^{l}
-\end{equation}
+% \begin{equation}
+%     t^{\prime}=\underset{1 \leq t \leq T}{\arg \max } V_{t}^{l}
+% \end{equation}
 
-2. \textit{Gradient of Membrane Potential for the Output Layer}: For the last layer \(l\), the gradient of the membrane potential \(V_{t}^{l}\) with respect to \(\theta^{l}\) is pivotal, depicted as:
+% 2. \textit{Gradient of Membrane Potential for the Output Layer}: For the last layer \(l\), the gradient of the membrane potential \(V_{t}^{l}\) with respect to \(\theta^{l}\) is pivotal, depicted as:
 
-\begin{equation}
-    \frac{\delta V_{t}^{l}}{\delta \theta^{l}}=\left\{\begin{array}{ll}
-        \frac{\delta V_{t}^{l}}{\delta V_{t-1}^{l}} \frac{\delta V_{t-1}^{l}}{\delta \theta^{l}}+\frac{\delta V_{t}^{l}}{\delta X_{t}^{l}} \frac{\delta X_{t}^{l}}{\delta \theta^{l}} & \text { if } t>1 \\
-        \frac{\delta V_{t}^{l}}{\delta X_{t}^{l}} \frac{\delta X_{t}^{l}}{\delta \theta^{l}} & \text { if } t=1
-        \end{array}\right.
-\end{equation}
+% \begin{equation}
+%     \frac{\delta V_{t}^{l}}{\delta \theta^{l}}=\left\{\begin{array}{ll}
+%         \frac{\delta V_{t}^{l}}{\delta V_{t-1}^{l}} \frac{\delta V_{t-1}^{l}}{\delta \theta^{l}}+\frac{\delta V_{t}^{l}}{\delta X_{t}^{l}} \frac{\delta X_{t}^{l}}{\delta \theta^{l}} & \text { if } t>1 \\
+%         \frac{\delta V_{t}^{l}}{\delta X_{t}^{l}} \frac{\delta X_{t}^{l}}{\delta \theta^{l}} & \text { if } t=1
+%         \end{array}\right.
+% \end{equation}
 
-3. \textit{Recursive Gradient Calculation for Internal Layers}: Internal layers undergo a recursive computation of gradients to integrate spiking temporal dynamics, leading to:
+% 3. \textit{Recursive Gradient Calculation for Internal Layers}: Internal layers undergo a recursive computation of gradients to integrate spiking temporal dynamics, leading to:
 
-\begin{equation}
-    \frac{\delta Q}{\delta H_{t}^{i}}=\left\{\begin{array}{cl}
-        \frac{\delta Q}{\delta H_{t+1}^{i}} \frac{\delta H_{t+1}^{i}}{\delta H_{t}^{i}}+\frac{\delta V_{t^{\prime}}^{l}}{\delta S_{t}^{l-1}} \frac{\delta S_{t}^{l-1}}{\delta H_{t}^{i}} & \text { if } t<t^{\prime} \\
-        \frac{\delta V_{t}^{l}}{\delta S_{t}^{l-1}} \frac{\delta S_{t}^{l-1}}{\delta H_{t}^{i}} & \text { if } t=t^{\prime} \\
-        0 & \text { if } t>t^{\prime}
-        \end{array}\right.
-\end{equation}
+% \begin{equation}
+%     \frac{\delta Q}{\delta H_{t}^{i}}=\left\{\begin{array}{cl}
+%         \frac{\delta Q}{\delta H_{t+1}^{i}} \frac{\delta H_{t+1}^{i}}{\delta H_{t}^{i}}+\frac{\delta V_{t^{\prime}}^{l}}{\delta S_{t}^{l-1}} \frac{\delta S_{t}^{l-1}}{\delta H_{t}^{i}} & \text { if } t<t^{\prime} \\
+%         \frac{\delta V_{t}^{l}}{\delta S_{t}^{l-1}} \frac{\delta S_{t}^{l-1}}{\delta H_{t}^{i}} & \text { if } t=t^{\prime} \\
+%         0 & \text { if } t>t^{\prime}
+%         \end{array}\right.
+% \end{equation}
 
-\begin{equation}
-    \frac{\delta H_{t+1}^{i}}{\delta H_{t}^{i}}=\frac{\delta H_{t+1}^{i}}{\delta V_{t}^{i}} \frac{\delta V_{t}^{i}}{\delta H_{t}^{i}}=\left(1-\frac{1}{\tau}\right) \frac{\delta V_{t}^{i}}{\delta H_{t}^{i}}
-\end{equation}
+% \begin{equation}
+%     \frac{\delta H_{t+1}^{i}}{\delta H_{t}^{i}}=\frac{\delta H_{t+1}^{i}}{\delta V_{t}^{i}} \frac{\delta V_{t}^{i}}{\delta H_{t}^{i}}=\left(1-\frac{1}{\tau}\right) \frac{\delta V_{t}^{i}}{\delta H_{t}^{i}}
+% \end{equation}
 
-\begin{equation}
-    \frac{\delta V_{t^{\prime}}^{l}}{\delta S_{t}^{l-1}}=\frac{\delta V_{t^{\prime}}^{l}}{\delta V_{t}^{l}} \frac{\delta V_{t}^{l}}{\delta X_{t}^{l}} \frac{\delta X_{t}^{l}}{\delta S_{t}^{l-1}}=\left(1-\frac{1}{\tau}\right)^{t^{\prime}-t} \frac{\theta^{l}}{\tau}
-\end{equation}
+% \begin{equation}
+%     \frac{\delta V_{t^{\prime}}^{l}}{\delta S_{t}^{l-1}}=\frac{\delta V_{t^{\prime}}^{l}}{\delta V_{t}^{l}} \frac{\delta V_{t}^{l}}{\delta X_{t}^{l}} \frac{\delta X_{t}^{l}}{\delta S_{t}^{l-1}}=\left(1-\frac{1}{\tau}\right)^{t^{\prime}-t} \frac{\theta^{l}}{\tau}
+% \end{equation}
 
-4. \textit{Synaptic Weight Updates}: The update of synaptic weights follows the derived gradients, ensuring the learning process is guided by the variance between predicted and target Q-values:
+% 4. \textit{Synaptic Weight Updates}: The update of synaptic weights follows the derived gradients, ensuring the learning process is guided by the variance between predicted and target Q-values:
 
-\begin{equation}
-    \frac{\delta Q}{\delta \theta^{i}}=\left\{\begin{array}{ll}
-        \sum_{t=1}^{T} \frac{\delta Q}{\delta H_{t}^{i}} \frac{\delta H_{t}^{i}}{\delta \theta^{i}} & i<l  \\
-        \frac{\delta V_{t^{\prime}}}{\delta \theta^{i}} & i=l
-        \end{array}\right.
-\end{equation}
+% \begin{equation}
+%     \frac{\delta Q}{\delta \theta^{i}}=\left\{\begin{array}{ll}
+%         \sum_{t=1}^{T} \frac{\delta Q}{\delta H_{t}^{i}} \frac{\delta H_{t}^{i}}{\delta \theta^{i}} & i<l  \\
+%         \frac{\delta V_{t^{\prime}}}{\delta \theta^{i}} & i=l
+%         \end{array}\right.
+% \end{equation}
 
-These equations collectively outline the DSQN learning mechanism, converting spike-train outputs into continuous Q-values through non-spiking neuron dynamics, demonstrating the efficiency and robustness of spike-based reinforcement learning in energy-efficient neuromorphic computing systems.
+% These equations collectively outline the DSQN learning mechanism, converting spike-train outputs into continuous Q-values through non-spiking neuron dynamics, demonstrating the efficiency and robustness of spike-based reinforcement learning in energy-efficient neuromorphic computing systems.
 
 
 \section{Federated Learning}
@@ -368,7 +348,7 @@ A cornerstone of \ac{fl} is the aggregation method, which synthesizes model upda
 
 \subsection*{FedAvg}
 
-FedAvg, or Federated Averaging, is the seminal aggregation method in \ac{fl}, introduced by McMahan et al. It operates by averaging the weights of models updated locally by clients. The global model update in FedAvg is mathematically represented as:
+FedAvg, or Federated Averaging, is the seminal aggregation method in \ac{fl}. It operates by averaging the weights of models updated locally by clients. The global model update in FedAvg is mathematically represented as~\cite{Ch_1_R26}:
 
 \begin{equation}
     w_{\text{glob}}^{t+1} = \sum_{k=1}^{K} \frac{n_k}{n} w_k^{t+1}
@@ -378,30 +358,33 @@ where $w_{\text{glob}}^{t+1}$ denotes the global model parameters after aggregat
 
 \subsection*{FedProx}
 
-FedProx addresses heterogeneity issues in client data distributions by introducing a proximal term to the local optimization problem. This approach moderates the deviation of local models from the global model. The local update rule in FedProx is formulated as:
+FedProx addresses heterogeneity issues in client data distributions by introducing a proximal term to the local optimization problem. This approach moderates the deviation of local models from the global model. The local update rule in FedProx is formulated as~\cite{Ch_1_R27}:
 
 \begin{equation}
-    \min_{w} \mathcal{L}_k(w) + \frac{\mu}{2}\|w - w_{\text{glob}}^t\|^2
+    w_{\text{glob}}^{t+1} = \min_{w} \mathcal{L}_k(w) + \frac{\mu}{2}\|w - w_{\text{glob}}^t\|^2
 \end{equation}
 
 where $\mathcal{L}_k(w)$ is the loss on client $k$, $w_{\text{glob}}^t$ is the global model parameters at round $t$, and $\mu$ is a regularization parameter controlling the proximity between local and global models.
 
 \subsection*{Scaffold}
 
-Scaffold combats client drift by employing control variates to correct the local updates towards the global objective. The control variate updates are defined as:
+Scaffold addresses the challenges of statistical heterogeneity and client drift in federated learning environments. It combats client drift and enhances convergence by employing control variates to correct the local updates towards the global objective, effectively steering them closer to the global optimum and reducing the variance in updates caused by data non-IIDness across clients. The control variate updates are defined as~\cite{Ch_1_R28}:
 
 \begin{equation}
     c_k^{+} = c_k - c + \frac{1}{\eta L}(w_{\text{glob}}^t - w_k^t)
 \end{equation}
 
-where $c_k$ and $c$ are the control variates for client $k$ and the global model, respectively, $L$ is the number of local updates, and $\eta$ is the learning rate. This mechanism ensures consistency among local updates, steering them towards the global optimum.
+\noindent where $c_k$ and $c$ represent the control variates for client $k$ and the global model, respectively. Here, $L$ denotes the number of local updates, and $\eta$ is the learning rate. This formula reflects how the local and global control variates are adjusted to mitigate the divergence of client updates from the global update direction.
+
+By introducing control variates on both the server and client sides, Scaffold corrects the direction of local updates before they are aggregated. This not only ensures consistency among local updates but also addresses the slow convergence rates often experienced in traditional federated learning due to client drift. Specifically, the mechanism leverages the discrepancy between local and global control variates to adjust the updates, making Scaffold particularly effective in environments with heterogeneous data distributions.
+
 
 \subsection*{FedNova}
 
-FedNova introduces a normalization mechanism to adjust the aggregation process according to the number of local updates performed by each client, accommodating non-IID data scenarios more effectively. Its aggregation rule is expressed as:
+FedNova introduces a normalization mechanism to adjust the aggregation process according to the number of local updates performed by each client, accommodating non-IID data scenarios more effectively. Its aggregation rule is expressed as~\cite{Ch_1_R29}:
 
 \begin{equation}
-    w^{t+1} = w_{\text{glob}}^t - \tau_{\text{eff}} \sum_{k=1}^{K} \frac{n_k}{n} \cdot \eta d_k^t
+    w_{glob}^{t+1} = w_{glob}^t - \tau_{\text{eff}} \sum_{k=1}^{K} \frac{n_k}{n} \cdot \eta d_k^t
 \end{equation}
 
 \begin{equation}
@@ -412,70 +395,26 @@ where $G_k^t$ is the stack of gradients received from client $k$ at round $t$, $
 
 \subsection*{MOON}
 
-MOON, or Model-contrastive \ac{fl}, minimizes the contrastive loss between the local and global models to preserve model consistency across clients. The contrastive loss is given by:
+MOON, or Model-contrastive \ac{fl}, minimizes the contrastive loss between the local and global models to preserve model consistency across clients. The contrastive loss is given by~\cite{Ch_1_R30}:
 
 \begin{equation}
     l_{\text{con}} = -\log \frac{\exp(\text{sim}(w_k^t, w_{\text{glob}}^t) / \tau)}{\exp(\text{sim}(w_k^t, w_{\text{glob}}^t) / \tau) + \exp(\text{sim}(w_k^t, w_k^{\text{prev}}) / \tau)}
 \end{equation}
 
-where $\text{sim}(\cdot)$ denotes the cosine similarity between models, and $\tau$ is a temperature parameter moderating the contrastive loss.
+where $\text{sim}(\cdot)$ denotes the cosine similarity between models, and $\tau$ is a parameter moderating the contrastive loss.
 
 These aggregation methods embody the evolution of \ac{fl} towards accommodating diverse client conditions and data distributions. Each method introduces unique adjustments to the aggregation process, aiming to enhance convergence, reduce communication overhead, or improve robustness against non-IID data and adversarial clients. The selection of an appropriate aggregation technique is pivotal for the success of \ac{fl} applications, necessitating a careful consideration of the specific challenges and requirements of the deployment context.
 
-\begin{table}[H]
-\caption{Comparison of \ac{fl} Methodologies}
-\label{tab:comparison}
-\footnotesize % Further reduce font size if necessary
-\renewcommand{\arraystretch}{2} % Increase cell height for better vertical alignment
-\begin{tabularx}{\textwidth}{|>{\centering\arraybackslash}m{2.5cm}|X|X|}
-    \hline
-    \textbf{Methodology} & \textbf{Strengths} & \textbf{Weaknesses} \\
-    \hline
-    FedAvg & 
-    - Collaborative learning without data exchange. 
-    - Alleviates model heterogeneity. 
-    - Non-IID data convergence. & 
-    - Comm. overhead. \\
-    \hline
-    FedSGD & 
-    - Efficient, scalable training. 
-    - Reduces comm. overhead. 
-    - Reduced comm. rounds for convergence. & 
-    - Slower convergence on heterogeneous data. 
-    - Adversarial attack susceptibility. \\
-    \hline
-    FedProx & 
-    - Balances knowledge sharing and customization. 
-    - Addresses dataset heterogeneity. 
-    - Privacy technique compatibility. & 
-    - Tuning complexity. 
-    - Higher computational overhead. \\
-    \hline
-    AFL & 
-    - Uses side info for aggregation. 
-    - Improves performance. 
-    - Handles non-IID data. & 
-    - Side info reliability. 
-    - Potential bias. \\
-    \hline
-    DP-FedAvg & 
-    - Strong privacy. 
-    - Handles non-IID data. 
-    - Adversarial device convergence. & 
-    - Privacy-utility trade-off. 
-    - Higher computational need. \\
-    \hline
-\end{tabularx}
-\end{table}
-    
-
-
 When delving into the intricacies of \ac{fl} and various aggregation techniques, a set of evaluation metrics comes into play. These insightful metrics measure the effectiveness and efficiency of algorithms and their robustness. Some of the commonly utilized metrics include:
 
-Accuracy: A measure of the model's predictive precision, calculated as the percentage of correctly predicted labels within the test dataset.
-Loss Function: An indicator of the disparity between the predicted labels and the actual ones. Frequently used loss functions comprise mean squared error (MSE), cross-entropy loss, and hinge loss.
-Convergence Rate: An estimation of the model's speed in attaining an optimal solution. It is typically gauged by the number of training iterations needed to achieve a certain level of accuracy or loss.
-Communication Overhead: In \ac{fl}, data exchange between local devices and the central server is key. This metric quantifies the volume of data shared during the training process.
-Privacy Preservation: A key feature of \ac{fl} is data privacy. By assessing the leakage of sensitive information during the training process, the effectiveness of privacy preservation can be evaluated.
+\textbf{Accuracy}: A measure of the model's predictive precision, calculated as the percentage of correctly predicted output to the actual output.
+
+\textbf{Loss Function}: An indicator of the disparity between the predicted outputs and the actual ones. Frequently used loss functions comprise mean squared error (MSE), cross-entropy loss, and hinge loss.
+
+\textbf{Convergence Rate}: An estimation of the model's speed in attaining an optimal solution. It is typically gauged by the number of training iterations needed to achieve a certain level of accuracy or loss.
+
+\textbf{Communication Overhead}: In \ac{fl}, data exchange between local devices and the central server is key. This metric quantifies the volume of data shared during the training process.
+
+\textbf{Privacy Preservation}: A key feature of \ac{fl} is data privacy. By assessing the leakage of sensitive information during the training process, the effectiveness of privacy preservation can be evaluated.
 
 These evaluation metrics offer a broad understanding of the performance of aggregation methodologies in \ac{fl}. Utilizing these metrics, researchers can critically compare and analyze the effectiveness of different algorithms, leading to informed decisions about their implementation.
