@@ -1,1 +1,30 @@
 \chapter{Proposed Method}
+
+
+\section{Proposed Investigations}
+
+The integration of \ac{snn} with \ac{fl} presents a novel approach to multiagent reinforcement learning on the EDGE, promising to enhance learning efficiency and data privacy simultaneously. This approach, however, introduces several challenges and opportunities for further investigation. Future work will focus on three primary areas: 
+\begin{itemize}
+    \item \textbf{Stabilizing Learning in SNNs:} Addressing the challenge of learning stability and synaptic weight control in \ac{snn}s during reinforcement learning, particularly in response to dynamic environmental rewards.
+    \item \item \textbf{Managing Communication Overhead in Federated Learning:} Reducing communication overhead among agents while ensuring responsiveness to changes through adaptive communication strategies.
+    \item \textbf{Heterogeneity of Spiking Neuron Models:} Exploring the implications of agent-specific heterogeneity in spiking neuron models on collective learning outcomes and system performance.
+    \item \textbf{Resilience to Model Poisoning Attacks:} Investigating the system's vulnerability to model poisoning attacks during \ac{fl} and developing strategies to mitigate such risks.
+\end{itemize}
+
+\section{Stabilizing Learning in SNNs}
+
+The stability of learning in SNNs is crucial for their application in dynamic environments, where synaptic weights need to be carefully adjusted in response to changing reward signals. First, we will investigate the adaptation mechanisms that can be employed to maintain the stability of learning processes, focusing on the balance between synaptic plasticity and homeostasis. This involves developing algorithms that can dynamically adjust learning rates and synaptic weight updates based on the network's performance and reward feedback. Second, the challenge of integrating these mechanisms into the \ac{fl} framework will be addressed, ensuring that distributed \ac{snn}s can effectively learn from decentralized data sources while adapting to environmental changes. Finally, we will explore methods to enhance the responsiveness of \ac{snn}s to reward signals, enabling more agile adjustments to network behavior in response to fluctuating environmental conditions. This includes the use of reward-modulated plasticity rules and meta-learning approaches that can fine-tune the network's learning dynamics.
+
+\subsection{Managing Communication Overhead in Federated Learning}
+
+Efficient communication among distributed agents is a cornerstone of federated learning, particularly in EDGE computing environments where bandwidth and latency can be significant constraints. The need to reduce communication overhead without compromising the responsiveness of the system to changes presents a unique challenge. Initially, we will explore strategies for optimizing data transmission protocols and compression techniques to minimize the size of the data packets being exchanged. This involves investigating adaptive communication frameworks that dynamically adjust the frequency and granularity of data exchange based on current network conditions and learning requirements. Secondly, we will examine the impact of reduced communication on the learning process, ensuring that critical information necessary for model updates is not lost. This includes developing algorithms that can identify the most impactful updates to transmit, thereby reducing redundancy without sacrificing learning efficacy. Lastly, we aim to propose novel methods for decentralized decision-making that enable agents to respond locally to changes in their environment with minimal communication overhead. These methods will leverage local computations and inferences to reduce the dependency on centralized coordination, thereby decreasing the overall communication burden while maintaining system coherence and performance.
+
+\section{Heterogeneity of Spiking Neuron Models on Server}
+
+The heterogeneity of spiking neuron models across agents in a multiagent system introduces complexity in coordinating learning and achieving consensus on shared tasks. The first aspect of investigation will focus on understanding how different neuron models influence individual learning processes and overall system performance. This involves analyzing the variability in learning efficiency, response patterns, and adaptability to tasks. Secondly, we will develop strategies to synchronize learning among heterogeneous agents, potentially through adaptive learning algorithms that can accommodate the diversity of neuron models. This may include the introduction of intermediate representation layers or meta-protocols that normalize learning outcomes. The third area of investigation will examine the impact of neuron model heterogeneity on the robustness and resilience of the multiagent system, especially in the context of \ac{fl}, where data and learning are distributed.
+
+\section{ Resilience to Model Poisoning Attacks}
+
+Model poisoning attacks during \ac{fl} pose significant threats to the integrity and reliability of the learning process. The first step in addressing this challenge involves identifying vulnerabilities within the \ac{snn}-\ac{fl} integration that could be exploited by such attacks. This will be followed by the development of detection mechanisms for identifying anomalous behavior or compromised nodes within the federated network. Techniques such as anomaly detection algorithms, trust-based models, and secure aggregation protocols will be explored. Finally, we will design and implement robust defense mechanisms to mitigate the impact of identified attacks, ensuring the continuity and reliability of the learning process. This includes strategies for isolating compromised nodes, securing communication channels, and enhancing the overall security posture of the \ac{fl} framework.
+
+These investigations will pave the way for more resilient, efficient, and adaptive multiagent systems capable of leveraging the strengths of both \ac{snn}s and \ac{fl} in dynamic and potentially adversarial environments.
