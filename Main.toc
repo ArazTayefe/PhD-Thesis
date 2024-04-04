@@ -32,7 +32,7 @@
 \contentsline {subsection}{\numberline {4.3.2}Simulation with \ac {fl} and \ac {RCSE}}{71}{subsection.4.3.2}%
 \contentsline {section}{\numberline {4.4}Conclusion}{74}{section.4.4}%
 \contentsline {chapter}{\numberline {5}Proposed Investigations}{76}{chapter.5}%
-\contentsline {section}{\numberline {5.1}Stabilizing Learning in SNNs}{77}{section.5.1}%
-\contentsline {subsection}{\numberline {5.1.1}Managing Communication Overhead in Federated Learning}{77}{subsection.5.1.1}%
-\contentsline {section}{\numberline {5.2}Heterogeneity of Spiking Neuron Models on Server}{78}{section.5.2}%
-\contentsline {section}{\numberline {5.3}Resilience to Model Poisoning Attacks}{78}{section.5.3}%
+\contentsline {section}{\numberline {5.1}Improving Stable Learning in SNNs}{77}{section.5.1}%
+\contentsline {section}{\numberline {5.2}Managing Communication Overhead in FL}{77}{section.5.2}%
+\contentsline {section}{\numberline {5.3}Heterogeneity of Spiking Neuron Models on Server}{78}{section.5.3}%
+\contentsline {section}{\numberline {5.4}Resilience to Model Poisoning Attacks}{79}{section.5.4}%

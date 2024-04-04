@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2021/W32TeX) (preloaded format=pdflatex 2021.12.18)  3 APR 2024 18:49
+This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2021/W32TeX) (preloaded format=pdflatex 2021.12.18)  3 APR 2024 20:43
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1250,35 +1250,35 @@ Chapter 5.
 
 
 
-] [77] [78]) [79] (./Main.bbl [80
+] [77] [78]) [79] [80] (./Main.bbl [81
 
 
 
-] [81] [82] [83] [84] [85]
-Underfull \hbox (badness 1005) in paragraph at lines 307--311
+] [82] [83] [84] [85] [86]
+Underfull \hbox (badness 1005) in paragraph at lines 306--310
 []\OT1/cmr/m/n/12 M. Bia las and J. Ma^^Sndziuk, ``Spike-timing-dependent plas-tic-ity with activation-
  []
 
-[86] [87] [88]) [89] (./Main.aux (./title_page.aux) (./0_Abstract.aux) (./1_Introduction.aux) (./2_Literature_Review.aux) (./3_ATD_with_SNN.aux) (./4_FL_with_SNN.aux) (./5_Future_Work.aux) (./Main.acr))
+[87] [88] [89] [90]) [91] (./Main.aux (./title_page.aux) (./0_Abstract.aux) (./1_Introduction.aux) (./2_Literature_Review.aux) (./3_ATD_with_SNN.aux) (./4_FL_with_SNN.aux) (./5_Future_Work.aux) (./Main.acr))
 
 LaTeX Warning: There were undefined references.
 
 Package rerunfilecheck Info: File `Main.out' has not changed.
-(rerunfilecheck)             Checksum: EFB6B3FB9B4A88BD11979197D41DA1B6;6714.
+(rerunfilecheck)             Checksum: D7A1DC597E03520BA61D2CC76B7B1EE5;6652.
  ) 
 Here is how much of TeX's memory you used:
- 20407 strings out of 478353
- 394991 string characters out of 5852100
- 786067 words of memory out of 5000000
- 37769 multiletter control sequences out of 15000+600000
- 421186 words of font info for 89 fonts, out of 8000000 for 9000
+ 20415 strings out of 478353
+ 395044 string characters out of 5852100
+ 785549 words of memory out of 5000000
+ 37772 multiletter control sequences out of 15000+600000
+ 421188 words of font info for 89 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 68i,22n,77p,1536b,530s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 68i,22n,77p,1440b,530s stack positions out of 5000i,500n,10000p,200000b,80000s
 {c:/texlive/2021/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc}<c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx8.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmbxti10.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmib10.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsl12.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb><c:/texlive/2021/texmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb>
-Output written on Main.pdf (98 pages, 7448164 bytes).
+Output written on Main.pdf (100 pages, 7450640 bytes).
 PDF statistics:
- 2026 PDF objects out of 2073 (max. 8388607)
- 1714 compressed objects within 18 object streams
- 363 named destinations out of 1000 (max. 500000)
+ 2041 PDF objects out of 2073 (max. 8388607)
+ 1727 compressed objects within 18 object streams
+ 368 named destinations out of 1000 (max. 500000)
  435 words of extra memory for PDF output out of 10000 (max. 10000000)
 
