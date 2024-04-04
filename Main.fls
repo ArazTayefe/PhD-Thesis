@@ -1103,6 +1103,7 @@ INPUT ./0_Abstract.tex
 INPUT 0_Abstract.tex
 INPUT c:/texlive/2021/texmf-dist/fonts/tfm/public/cm/cmr17.tfm
 INPUT c:/texlive/2021/texmf-dist/fonts/tfm/public/cm/cmbx12.tfm
+INPUT c:/texlive/2021/texmf-dist/fonts/tfm/public/cm/cmsl12.tfm
 INPUT ./Main.toc
 INPUT Main.toc
 INPUT Main.toc
@@ -1141,7 +1142,6 @@ INPUT c:/texlive/2021/texmf-dist/fonts/tfm/public/cm/cmbsy10.tfm
 INPUT c:/texlive/2021/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmbsy8.tfm
 INPUT c:/texlive/2021/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmbsy6.tfm
 OUTPUT Main.toc
-INPUT c:/texlive/2021/texmf-dist/fonts/tfm/public/cm/cmsl12.tfm
 INPUT ./Main.lof
 INPUT Main.lof
 INPUT Main.lof
@@ -1167,6 +1167,12 @@ INPUT ./Figures/Schematic of Federated Learning.pdf
 INPUT ./Figures/Schematic of Federated Learning.pdf
 INPUT c:/texlive/2021/texmf-dist/fonts/tfm/public/cm/cmr17.tfm
 INPUT c:/texlive/2021/texmf-dist/fonts/tfm/public/cm/cmbx12.tfm
+INPUT c:/texlive/2021/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm
+INPUT c:/texlive/2021/texmf-dist/fonts/tfm/public/amsfonts/symbols/msam5.tfm
+INPUT c:/texlive/2021/texmf-dist/fonts/tfm/public/amsfonts/symbols/msbm5.tfm
+INPUT c:/texlive/2021/texmf-dist/fonts/tfm/public/cm/cmbx5.tfm
+INPUT c:/texlive/2021/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmmib5.tfm
+INPUT c:/texlive/2021/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmbsy5.tfm
 INPUT ./2_Literature_Review.tex
 INPUT ./2_Literature_Review.tex
 INPUT ./2_Literature_Review.tex
@@ -1197,12 +1203,6 @@ INPUT ./Figures/2.pdf
 INPUT Figures/2.pdf
 INPUT ./Figures/2.pdf
 INPUT ./Figures/2.pdf
-INPUT c:/texlive/2021/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm
-INPUT c:/texlive/2021/texmf-dist/fonts/tfm/public/amsfonts/symbols/msam5.tfm
-INPUT c:/texlive/2021/texmf-dist/fonts/tfm/public/amsfonts/symbols/msbm5.tfm
-INPUT c:/texlive/2021/texmf-dist/fonts/tfm/public/cm/cmbx5.tfm
-INPUT c:/texlive/2021/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmmib5.tfm
-INPUT c:/texlive/2021/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmbsy5.tfm
 INPUT ./Figures/5.pdf
 INPUT ./Figures/5.pdf
 INPUT Figures/5.pdf
@@ -1295,26 +1295,26 @@ INPUT ./Figures/Distances - BRC.pdf
 INPUT Figures/Distances - BRC.pdf
 INPUT ./Figures/Distances - BRC.pdf
 INPUT ./Figures/Distances - BRC.pdf
-INPUT ./Figures/Environment - BRC.pdf
-INPUT ./Figures/Environment - BRC.pdf
-INPUT Figures/Environment - BRC.pdf
-INPUT ./Figures/Environment - BRC.pdf
-INPUT ./Figures/Environment - BRC.pdf
-INPUT ./Figures/Distances - R cmd Change.pdf
-INPUT ./Figures/Distances - R cmd Change.pdf
-INPUT Figures/Distances - R cmd Change.pdf
-INPUT ./Figures/Distances - R cmd Change.pdf
-INPUT ./Figures/Distances - R cmd Change.pdf
 INPUT ./Figures/FACL - R_cmd Follow.pdf
 INPUT ./Figures/FACL - R_cmd Follow.pdf
 INPUT Figures/FACL - R_cmd Follow.pdf
 INPUT ./Figures/FACL - R_cmd Follow.pdf
 INPUT ./Figures/FACL - R_cmd Follow.pdf
+INPUT ./Figures/Environment - BRC.pdf
+INPUT ./Figures/Environment - BRC.pdf
+INPUT Figures/Environment - BRC.pdf
+INPUT ./Figures/Environment - BRC.pdf
+INPUT ./Figures/Environment - BRC.pdf
 INPUT ./Figures/FACL - Environment.pdf
 INPUT ./Figures/FACL - Environment.pdf
 INPUT Figures/FACL - Environment.pdf
 INPUT ./Figures/FACL - Environment.pdf
 INPUT ./Figures/FACL - Environment.pdf
+INPUT ./Figures/Distances - R cmd Change.pdf
+INPUT ./Figures/Distances - R cmd Change.pdf
+INPUT Figures/Distances - R cmd Change.pdf
+INPUT ./Figures/Distances - R cmd Change.pdf
+INPUT ./Figures/Distances - R cmd Change.pdf
 INPUT ./Figures/FACL - R_cmd Changes.pdf
 INPUT ./Figures/FACL - R_cmd Changes.pdf
 INPUT Figures/FACL - R_cmd Changes.pdf

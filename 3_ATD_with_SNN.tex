@@ -2,9 +2,7 @@
 
 \section{Introduction}
 
-Moving from Chapter 3, where we looked at controlling one drone (the leader) using a 5G network, Chapter 4 takes us into \ac{snn}s and how they can be used to control drones (the followers). In Chapter 3, we carefully studied how well different types of controllers worked for quadrotors with cellular and 5G networks. This study showed us that the leader drone could be efficiently controlled remotely while satisfying control and communication constraints.
-
-Expanding on what we learned, this chapter looks at two main things: how well \ac{snn}s handle noise, which is important because drones operate in real-world conditions with lots of disturbances, and how they can handle complex scenarios like optimal decision-making. This detailed study shows us the potential of \ac{snn}s in managing drones' complex behaviors even when there are outside disturbances and their capability to separate the reward function for the neural network's different parts.
+This chapter looks at two main things: how well \ac{snn}s handle noise and how they can handle complex scenarios like optimal decision-making. This detailed study shows us the potential of \ac{snn}s in managing complex behaviors even when there are outside disturbances and their capability to separate the reward function for the neural network's different parts.
 
 The neural structure in \ac{snn}s helps us implement complex learning systems. One good example of a complex situation is a differential game like the Active Target Defense (ATD) problem \cite{Ch5_ATD4}.
 
@@ -218,7 +216,7 @@ After training, the $\alpha$ changes to 1 and eliminates the effect of random ou
 
 A numerical simulation is conducted to evaluate the \ac{snn}'s performance in solving the ATD problem. The simulation is done in MATLAB 2022a, with a 1 $ms$ sample time. The simulation parameters for neurons are presented in Table I.
 
-\begin{table}
+\begin{table}[h]
 \caption{Parameter values for LIF neuron model \cite{Ch_1_R10}}
 \begin{center}
 \begingroup
@@ -241,7 +239,7 @@ A numerical simulation is conducted to evaluate the \ac{snn}'s performance in so
 \end{center}
 \end{table}
 
-\begin{table}
+\begin{table}[h]
 \caption{Parameter values for \ac{stdp}}
 \begin{center}
 \begingroup
@@ -286,7 +284,7 @@ The target's velocity is 0.15 $m/s$. The invader's velocity is 0.3 $m/s$. The $\
 
 The reward coefficients are set manually. The $\tau_{s}$ in Table II defines the decaying rate of $C$ in (\ref{Eq.14}) that determines the \ac{stdp} sensitivity to prior firings. According to (\ref{Eq.15}), higher $\tau_{s}$ means that the \ac{stdp} takes into account the activity of the two neurons that have fired in the relatively larger time window. Different studies have considered different values for this parameter.
 
-\begin{figure}
+\begin{figure}[h]
     \centering
     \includegraphics[scale=0.9]{Figures/C.pdf}
     \caption{An illustration of input current to \ac{snn} and synaptic current to the output neurons after training for a single connection.}
@@ -294,7 +292,7 @@ The reward coefficients are set manually. The $\tau_{s}$ in Table II defines the
 \end{figure}
 
 
-\begin{figure}
+\begin{figure}[h]
     \centering
     \includegraphics[scale=0.9]{Figures/R and C.pdf}
     \caption{Reward, eligibility trace, and weight change during the simulation for $W^{3-3}$. The $C(t) R(t)$ changes the synaptic weight by considering activation strength and reward value.}
@@ -302,11 +300,11 @@ The reward coefficients are set manually. The $\tau_{s}$ in Table II defines the
 \end{figure}
 
 
-As mentioned in Section II, the optimal capture point is the closest point from the reachable region to the target position. Figure \ref{fig:my_label6} shows the agents during the training process. In epoch 5, the defender is not able to capture the invader, and the invader reaches the target. In epoch 7, the defender learns how to block and capture the invader. The defender has won the game. However, the invader should learn to reach the minimum distance from the target.
+As mentioned in Section 3.1, the optimal capture point is the closest point from the reachable region to the target position. Figure \ref{fig:my_label6} shows the agents during the training process. In epoch 5, the defender is not able to capture the invader, and the invader reaches the target. In epoch 7, the defender learns how to block and capture the invader. The defender has won the game. However, the invader should learn to reach the minimum distance from the target.
 
 \subsection{Simulation without noise}
 
-\begin{figure}
+\begin{figure}[h]
     \centering
     \includegraphics{Figures/After learning.pdf}
     \caption{\ac{snn}'s performance after training. The highlighted region shows the defender's dominant region. The purple dot is the optimal capture point.}

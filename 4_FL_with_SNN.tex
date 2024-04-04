@@ -466,34 +466,59 @@ Figure \ref{fig_3_0} shows the simulation results for the \ac{RCSE} method. Acco
 
 \begin{figure}[H]
     \centering
+    % First row of figures
     \begin{minipage}{0.48\textwidth}
+        \centering
         \includegraphics[width=\linewidth]{Figures/Distances - BRC.pdf}
         \caption{Distances during the test phase (\ac{RCSE} method)}
         \label{fig_3_0}
-        % \vspace{15pt}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.48\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{Figures/FACL - R_cmd Follow.pdf}
+        \caption{Distances during the test phase (FACL method)}
+        \label{fig_3_3}
+    \end{minipage}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    % Second row of figures
+    \begin{minipage}{0.48\textwidth}
+        \centering
         \includegraphics[width=\linewidth]{Figures/Environment - BRC.pdf}
         \caption{Agents' trajectory during the test phase (\ac{RCSE} method)}
         \label{fig_3_1}
-        % \vspace{5pt}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.48\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{Figures/FACL - Environment.pdf}
+        \caption{Agents' trajectory during the test phase (FACL method)}
+        \label{fig_3_4}
+    \end{minipage}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    % Third row of figures
+    \begin{minipage}{0.48\textwidth}
+        \centering
         \includegraphics[width=\linewidth]{Figures/Distances - R cmd Change.pdf}
         \caption{Change in commanded distance during the test phase (\ac{RCSE} method)}
         \label{fig_3_2}
     \end{minipage}
     \hfill
     \begin{minipage}{0.48\textwidth}
-        \includegraphics[width=\linewidth]{Figures/FACL - R_cmd Follow.pdf}
-        \caption{Distances during the test phase (FACL method)}
-        \label{fig_3_3}
-        % \vspace{15pt}
-        \includegraphics[width=\linewidth]{Figures/FACL - Environment.pdf}
-        \caption{Agents' trajectory during the test phase (FACL method)}
-        \label{fig_3_4}
-        % \vspace{5pt}
+        \centering
         \includegraphics[width=\linewidth]{Figures/FACL - R_cmd Changes.pdf}
         \caption{Change in commanded distance during the test phase (FACL method)}
         \label{fig_3_5}
     \end{minipage}
 \end{figure}
+
+
 
 As mentioned in section 3, the input encoding uses the error between current and commanded distance. Therefore, one of the advantages of the encoding and learning method in this paper is that the learned policies are independent of the commanded distance. The commanded distance can be changed after training since the \ac{snn} uses the distance error. Figure \ref{fig_3_2} shows the response of the agents to change in commanded distance after training. According to this figure, when the commanded distance is changed at 30 seconds, the swarm immediately responds to this change in 2.98 seconds without disrupting the formation or any collision.
 
@@ -533,7 +558,7 @@ In order to better understand the effect of reward change on the \ac{snn}, the s
 
 Considering the numerical values presented in Table \ref{table:simulation-parameters} along with the reward coefficients \(\mathcal{C}_{Fi}^{Fj} = 0.02\) and \(\mathcal{C}_{L}^{Fj} = 0.07\), and \(r_{Fi}^{Fj} = 1\;m/s\) and \(r_{Fi}^{L} = 0.1\;m/s\), the maximum rewards at each weight update interval (\(\Delta T\)) for \(\mathcal{R}_{Fi}^{Fj}\) and \(\mathcal{R}_{Fi}^{L}\) are calculated as \(4\times 10^{-4}\) and \(7.7\times 10^{-4}\), respectively. Consequently, \(\mathcal{R}_{max}^{G} = \max(\mathcal{R}_{Fi}^{Fj},\mathcal{R}_{Fi}^{L}) = 7.7\times 10^{-4}\). The \(\Psi^{S}\) for the follower section in the network is \(\left[\frac{4\times10^{-4}}{7\times10^{-4}}\right]15.5=8.0519\), and for the leader section, it is \(\left[\frac{7\times10^{-4}}{7\times10^{-4}}\right]15.5=15.5\). The \(\eta\) and \(\beta\) for the follower section within the network are \(\frac{\mathcal{A}\mathcal{R}_{max}^{G} \ln{(2^{\lambda^2}-1)}}{\lambda\Psi^{\mathcal{S}} \log{(2)}} = 0.0011\) and \(\beta = \frac{\ln{(2^{\lambda^2}-1)}}{\Psi^{\mathcal{S}}} = 2.152\), respectively. For the leader section, these values are \(\frac{\mathcal{A}\mathcal{R}_{max}^{G} \ln{(2^{\lambda^2}-1)}}{\lambda\Psi^{\mathcal{S}} \log{(2)}} = 5.719\times 10^{-4}\) and \(\beta = \frac{\ln{(2^{\lambda^2}-1)}}{\Psi^{\mathcal{S}}} = 1.118\), respectively.
 
-\begin{figure}[H]
+\begin{figure}[!h]
     \centering
     \begin{minipage}{0.48\textwidth}
         \includegraphics[width=\linewidth]{Figures/Synaptic Weights - BRC.pdf}
@@ -548,7 +573,7 @@ Considering the numerical values presented in Table \ref{table:simulation-parame
     \end{minipage}
 \end{figure}
 
-\begin{figure}[H]
+\begin{figure}[!h]
     \centering
     \begin{minipage}{0.48\textwidth}
         \includegraphics[width=\linewidth]{Figures/RLST - Weight Increase.pdf}
@@ -571,7 +596,7 @@ Figure \ref{fig_3_9} shows the synaptic weights after the reward change. In this
 
 In this section, the proposed aggregation algorithm is tested. In this case, the agents only send their models when the Euclidean distance between the current and previously published model or the latest global model reaches a threshold. In the first phase, the simulation was done in 600 seconds, and the agents learned to follow the leader. The threshold for publishing the agents' and server models was 0.0005 and 0.00051, respectively. The reason for choosing the server's threshold a little bit higher than the agents' is that as soon as the first agent sends its model to the server, the Euclidean distance between the current and previously published model by the server reaches 0.0005, and the server distributes the model immediately. Therefore, the serve's threshold is set higher than the agents' threshold so that it waits for the other agents to send their models.
 
-Figure \ref{fig_3-7} shows the distances between agents and the leader before the reward change. According to the figure, the agents converge to the solution faster than the non-federated learning scenario without any error. Figure \ref{fig_3-8} shows the simulation results for the reward change scenario. According to the figure, the proposed aggregation method has improved the learning performance so that the swarm converges to the solution in 6 seconds.
+Figure \ref{fig_3-7} shows the distances between agents and the leader before the reward change. According to the figure, the agents converge to the solution faster than the non-\ac{fl} scenario without any error. Figure \ref{fig_3-8} shows the simulation results for the reward change scenario. According to the figure, the proposed aggregation method has improved the learning performance so that the swarm converges to the solution in 6 seconds.
 
 \begin{figure}[H]
     \centering
@@ -628,13 +653,15 @@ Therefore, the aggregation frequency is very high initially, and it reduces afte
 \end{table}
 
 
-Table \ref{tab:Results analysis} compares the proposed Federated Learning (FL) algorithm with the non-FL approach and FACL algorithm. The comparison focuses on three critical metrics: learning time, maximum error after convergence, and convergence time. The proposed \ac{fl} algorithm demonstrates significant improvements in terms of efficiency and accuracy, as evidenced by its considerably shorter learning and convergence times and a notable reduction in error after convergence.
+Table \ref{tab:Results analysis} compares the proposed \ac{fl} algorithm with the non-FL approach and FACL algorithm. The comparison focuses on three critical metrics: learning time, maximum error after convergence, and convergence time. The proposed \ac{fl} algorithm demonstrates significant improvements in terms of efficiency and accuracy, as evidenced by its considerably shorter learning and convergence times and a notable reduction in error after convergence.
 
 \section{Conclusion}
 
 In this chapter, we presented a comprehensive approach addressing the challenges of uncontrolled growth in synaptic weights and the limited responsiveness of \ac{stdp} to real-time changes within \ac{snn}s. Our proposed solution integrates the \ac{RCSE} method with a dynamic aggregation interval in \ac{fl}, significantly reducing learning time and improving performance.
 The R-CSE method introduces a novel mechanism to manage the unbounded growth of synaptic weights by dynamically adjusting the decay rate through the SoftPlus function. This adjustment is sensitive to the learning stages and rewards changes, ensuring that synaptic weight adjustments remain responsive over time. By addressing the challenge of synaptic weight saturation, the \ac{RCSE} method facilitates a balanced approach to weight adjustment, preventing network saturation and promoting continuous learning adaptability.
+
 We introduce a novel approach that uses \ac{fl} in SNN and employs the Frobenius norm to adjust weighted aggregation in \ac{fl}. Additionally, we include weight decay proportional to the time elapsed since an agent's last model publication. This improves the efficiency and responsiveness of the learning process. 
-Our model's dynamic nature of the model aggregation time adjusts based on the Euclidean norm. This metric measures the distance between the weight matrices of the agents and the server, determining reduced intervals for model publication. Our results show that the proposed aggregation method significantly accelerates agents' learning and performs better than non-federated learning and \ac{facl} cases.
+Our model's dynamic nature of the model aggregation time adjusts based on the Euclidean norm. This metric measures the distance between the weight matrices of the agents and the server, determining reduced intervals for model publication. Our results show that the proposed aggregation method significantly accelerates agents' learning and performs better than non-\ac{fl} and \ac{facl} cases.
+
 Moreover, the dynamic aggregation interval effectively reduces communication overhead between the agents and the central server, particularly after model convergence. This reduction is critical in scenarios where communication bandwidth is limited or costly. 
-Our findings suggest that integrating \ac{stdp} with federated learning, supported by our dynamic aggregation approach, provides a robust framework for advancing multi-agent reinforcement learning systems.
+Our findings suggest that integrating \ac{stdp} with \ac{fl}, supported by our dynamic aggregation approach, provides a robust framework for advancing multi-agent reinforcement learning systems.
