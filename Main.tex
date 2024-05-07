@@ -25,6 +25,7 @@
 \usepackage[shortlabels]{enumitem}
 \usepackage{amsmath}
 \usepackage{amssymb}
+\usepackage{amsthm}  % Add this line here
 \usepackage[top=1in, bottom=1in, left=1in, right=1in,includefoot=true]{geometry}
 \usepackage{lineno}
 \usepackage{array}
@@ -37,6 +38,10 @@
 \usepackage{xparse}
 \usepackage{bm}
 \usepackage{xcolor}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+
 
 \usepackage{acro}
 \input{acronym.tex}
@@ -70,11 +75,10 @@
 
 \clearpage % Ensure there's no content spill-over
 \pagenumbering{arabic} % Switch to Arabic numerals for the main content
-\include{1_Introduction}
-\include{2_Literature_Review}
-\include{3_ATD_with_SNN}
-\include{4_FL_with_SNN}
-\include{5_Future_Work}
+\include{1_Introduction_&_Literature_Review}
+\include{2_ATD_with_SNN}
+\include{3_FL_with_SNN}
+\include{4_Future_Work}
 
 
 \bibliography{Ref}

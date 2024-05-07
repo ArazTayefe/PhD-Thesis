@@ -739,6 +739,17 @@ INPUT c:/texlive/2021/texmf-dist/tex/latex/amsfonts/amssymb.sty
 INPUT c:/texlive/2021/texmf-dist/tex/latex/amsfonts/amssymb.sty
 INPUT c:/texlive/2021/texmf-dist/tex/latex/amsfonts/amssymb.sty
 INPUT c:/texlive/2021/texmf-dist/tex/latex/amsfonts/amsfonts.sty
+INPUT c:/texlive/2021/texmf-dist/tex/latex/amscls/amsthm.sty
+INPUT c:/texlive/2021/texmf-dist/tex/latex/amscls/amsthm.sty
+INPUT c:/texlive/2021/texmf-dist/tex/latex/amscls/amsthm.sty
+INPUT c:/texlive/2021/texmf-dist/tex/latex/amscls/amsthm.sty
+INPUT c:/texlive/2021/texmf-dist/tex/latex/amscls/amsthm.sty
+INPUT c:/texlive/2021/texmf-dist/tex/latex/amscls/amsthm.sty
+INPUT c:/texlive/2021/texmf-dist/tex/latex/amscls/amsthm.sty
+INPUT c:/texlive/2021/texmf-dist/tex/latex/amscls/amsthm.sty
+INPUT c:/texlive/2021/texmf-dist/tex/latex/amscls/amsthm.sty
+INPUT c:/texlive/2021/texmf-dist/tex/latex/amscls/amsthm.sty
+INPUT c:/texlive/2021/texmf-dist/tex/latex/amscls/amsthm.sty
 INPUT c:/texlive/2021/texmf-dist/tex/latex/geometry/geometry.sty
 INPUT c:/texlive/2021/texmf-dist/tex/latex/geometry/geometry.sty
 INPUT c:/texlive/2021/texmf-dist/tex/latex/geometry/geometry.sty
@@ -973,21 +984,18 @@ INPUT title_page.aux
 INPUT ./0_Abstract.aux
 INPUT 0_Abstract.aux
 INPUT 0_Abstract.aux
-INPUT ./1_Introduction.aux
-INPUT 1_Introduction.aux
-INPUT 1_Introduction.aux
-INPUT ./2_Literature_Review.aux
-INPUT 2_Literature_Review.aux
-INPUT 2_Literature_Review.aux
-INPUT ./3_ATD_with_SNN.aux
-INPUT 3_ATD_with_SNN.aux
-INPUT 3_ATD_with_SNN.aux
-INPUT ./4_FL_with_SNN.aux
-INPUT 4_FL_with_SNN.aux
-INPUT 4_FL_with_SNN.aux
-INPUT ./5_Future_Work.aux
-INPUT 5_Future_Work.aux
-INPUT 5_Future_Work.aux
+INPUT ./1_Introduction_&_Literature_Review.aux
+INPUT 1_Introduction_&_Literature_Review.aux
+INPUT 1_Introduction_&_Literature_Review.aux
+INPUT ./2_ATD_with_SNN.aux
+INPUT 2_ATD_with_SNN.aux
+INPUT 2_ATD_with_SNN.aux
+INPUT ./3_FL_with_SNN.aux
+INPUT 3_FL_with_SNN.aux
+INPUT 3_FL_with_SNN.aux
+INPUT ./4_Future_Work.aux
+INPUT 4_Future_Work.aux
+INPUT 4_Future_Work.aux
 INPUT ./Main.acr
 INPUT ./Main.acr
 INPUT Main.acr
@@ -1150,16 +1158,16 @@ INPUT ./Main.lot
 INPUT Main.lot
 INPUT Main.lot
 OUTPUT Main.lot
-INPUT ./1_Introduction.tex
-INPUT ./1_Introduction.tex
-INPUT ./1_Introduction.tex
-OUTPUT 1_Introduction.aux
-INPUT ./1_Introduction.tex
-INPUT ./1_Introduction.tex
-INPUT ./1_Introduction.tex
-INPUT 1_Introduction.tex
-INPUT ./1_Introduction.tex
-INPUT 1_Introduction.tex
+INPUT ./1_Introduction_&_Literature_Review.tex
+INPUT ./1_Introduction_&_Literature_Review.tex
+INPUT ./1_Introduction_&_Literature_Review.tex
+OUTPUT 1_Introduction_&_Literature_Review.aux
+INPUT ./1_Introduction_&_Literature_Review.tex
+INPUT ./1_Introduction_&_Literature_Review.tex
+INPUT ./1_Introduction_&_Literature_Review.tex
+INPUT 1_Introduction_&_Literature_Review.tex
+INPUT ./1_Introduction_&_Literature_Review.tex
+INPUT 1_Introduction_&_Literature_Review.tex
 INPUT ./Figures/Schematic of Federated Learning.pdf
 INPUT ./Figures/Schematic of Federated Learning.pdf
 INPUT Figures/Schematic of Federated Learning.pdf
@@ -1173,26 +1181,16 @@ INPUT c:/texlive/2021/texmf-dist/fonts/tfm/public/amsfonts/symbols/msbm5.tfm
 INPUT c:/texlive/2021/texmf-dist/fonts/tfm/public/cm/cmbx5.tfm
 INPUT c:/texlive/2021/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmmib5.tfm
 INPUT c:/texlive/2021/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmbsy5.tfm
-INPUT ./2_Literature_Review.tex
-INPUT ./2_Literature_Review.tex
-INPUT ./2_Literature_Review.tex
-OUTPUT 2_Literature_Review.aux
-INPUT ./2_Literature_Review.tex
-INPUT ./2_Literature_Review.tex
-INPUT ./2_Literature_Review.tex
-INPUT 2_Literature_Review.tex
-INPUT ./2_Literature_Review.tex
-INPUT 2_Literature_Review.tex
-INPUT ./3_ATD_with_SNN.tex
-INPUT ./3_ATD_with_SNN.tex
-INPUT ./3_ATD_with_SNN.tex
-OUTPUT 3_ATD_with_SNN.aux
-INPUT ./3_ATD_with_SNN.tex
-INPUT ./3_ATD_with_SNN.tex
-INPUT ./3_ATD_with_SNN.tex
-INPUT 3_ATD_with_SNN.tex
-INPUT ./3_ATD_with_SNN.tex
-INPUT 3_ATD_with_SNN.tex
+INPUT ./2_ATD_with_SNN.tex
+INPUT ./2_ATD_with_SNN.tex
+INPUT ./2_ATD_with_SNN.tex
+OUTPUT 2_ATD_with_SNN.aux
+INPUT ./2_ATD_with_SNN.tex
+INPUT ./2_ATD_with_SNN.tex
+INPUT ./2_ATD_with_SNN.tex
+INPUT 2_ATD_with_SNN.tex
+INPUT ./2_ATD_with_SNN.tex
+INPUT 2_ATD_with_SNN.tex
 INPUT ./Figures/1.pdf
 INPUT ./Figures/1.pdf
 INPUT Figures/1.pdf
@@ -1213,6 +1211,16 @@ INPUT ./Figures/4.pdf
 INPUT Figures/4.pdf
 INPUT ./Figures/4.pdf
 INPUT ./Figures/4.pdf
+INPUT ./Figures/C.pdf
+INPUT ./Figures/C.pdf
+INPUT Figures/C.pdf
+INPUT ./Figures/C.pdf
+INPUT ./Figures/C.pdf
+INPUT ./Figures/R and C.pdf
+INPUT ./Figures/R and C.pdf
+INPUT Figures/R and C.pdf
+INPUT ./Figures/R and C.pdf
+INPUT ./Figures/R and C.pdf
 INPUT c:/texlive/2021/texmf-dist/fonts/tfm/public/cm/cmti12.tfm
 INPUT ./Figures/During training.pdf
 INPUT ./Figures/During training.pdf
@@ -1224,16 +1232,6 @@ INPUT ./Figures/Synaptic weights.pdf
 INPUT Figures/Synaptic weights.pdf
 INPUT ./Figures/Synaptic weights.pdf
 INPUT ./Figures/Synaptic weights.pdf
-INPUT ./Figures/C.pdf
-INPUT ./Figures/C.pdf
-INPUT Figures/C.pdf
-INPUT ./Figures/C.pdf
-INPUT ./Figures/C.pdf
-INPUT ./Figures/R and C.pdf
-INPUT ./Figures/R and C.pdf
-INPUT Figures/R and C.pdf
-INPUT ./Figures/R and C.pdf
-INPUT ./Figures/R and C.pdf
 INPUT ./Figures/After learning.pdf
 INPUT ./Figures/After learning.pdf
 INPUT Figures/After learning.pdf
@@ -1244,16 +1242,16 @@ INPUT ./Figures/Noise effect.pdf
 INPUT Figures/Noise effect.pdf
 INPUT ./Figures/Noise effect.pdf
 INPUT ./Figures/Noise effect.pdf
-INPUT ./4_FL_with_SNN.tex
-INPUT ./4_FL_with_SNN.tex
-INPUT ./4_FL_with_SNN.tex
-OUTPUT 4_FL_with_SNN.aux
-INPUT ./4_FL_with_SNN.tex
-INPUT ./4_FL_with_SNN.tex
-INPUT ./4_FL_with_SNN.tex
-INPUT 4_FL_with_SNN.tex
-INPUT ./4_FL_with_SNN.tex
-INPUT 4_FL_with_SNN.tex
+INPUT ./3_FL_with_SNN.tex
+INPUT ./3_FL_with_SNN.tex
+INPUT ./3_FL_with_SNN.tex
+OUTPUT 3_FL_with_SNN.aux
+INPUT ./3_FL_with_SNN.tex
+INPUT ./3_FL_with_SNN.tex
+INPUT ./3_FL_with_SNN.tex
+INPUT 3_FL_with_SNN.tex
+INPUT ./3_FL_with_SNN.tex
+INPUT 3_FL_with_SNN.tex
 INPUT ./Figures/Consensus Flying - FL.pdf
 INPUT ./Figures/Consensus Flying - FL.pdf
 INPUT Figures/Consensus Flying - FL.pdf
@@ -1274,52 +1272,36 @@ INPUT ./Figures/SNN input-output.pdf
 INPUT Figures/SNN input-output.pdf
 INPUT ./Figures/SNN input-output.pdf
 INPUT ./Figures/SNN input-output.pdf
-INPUT c:/texlive/2021/texmf-dist/fonts/tfm/public/cm/cmbxti10.tfm
-INPUT ./Figures/W(t).pdf
-INPUT ./Figures/W(t).pdf
-INPUT Figures/W(t).pdf
-INPUT ./Figures/W(t).pdf
-INPUT ./Figures/W(t).pdf
-INPUT ./Figures/dot{W}(t).pdf
-INPUT ./Figures/dot{W}(t).pdf
-INPUT Figures/dot{W}(t).pdf
-INPUT ./Figures/dot{W}(t).pdf
-INPUT ./Figures/dot{W}(t).pdf
+INPUT ./Figures/RCSE.pdf
+INPUT ./Figures/RCSE.pdf
+INPUT Figures/RCSE.pdf
+INPUT ./Figures/RCSE.pdf
+INPUT ./Figures/RCSE.pdf
+INPUT ./Figures/RCSE Principle.pdf
+INPUT ./Figures/RCSE Principle.pdf
+INPUT Figures/RCSE Principle.pdf
+INPUT ./Figures/RCSE Principle.pdf
+INPUT ./Figures/RCSE Principle.pdf
 INPUT ./Figures/Metrics.pdf
 INPUT ./Figures/Metrics.pdf
 INPUT Figures/Metrics.pdf
 INPUT ./Figures/Metrics.pdf
 INPUT ./Figures/Metrics.pdf
-INPUT ./Figures/Distances - BRC.pdf
-INPUT ./Figures/Distances - BRC.pdf
-INPUT Figures/Distances - BRC.pdf
-INPUT ./Figures/Distances - BRC.pdf
-INPUT ./Figures/Distances - BRC.pdf
-INPUT ./Figures/FACL - R_cmd Follow.pdf
-INPUT ./Figures/FACL - R_cmd Follow.pdf
-INPUT Figures/FACL - R_cmd Follow.pdf
-INPUT ./Figures/FACL - R_cmd Follow.pdf
-INPUT ./Figures/FACL - R_cmd Follow.pdf
 INPUT ./Figures/Environment - BRC.pdf
 INPUT ./Figures/Environment - BRC.pdf
 INPUT Figures/Environment - BRC.pdf
 INPUT ./Figures/Environment - BRC.pdf
 INPUT ./Figures/Environment - BRC.pdf
-INPUT ./Figures/FACL - Environment.pdf
-INPUT ./Figures/FACL - Environment.pdf
-INPUT Figures/FACL - Environment.pdf
-INPUT ./Figures/FACL - Environment.pdf
-INPUT ./Figures/FACL - Environment.pdf
+INPUT ./Figures/Distances - BRC.pdf
+INPUT ./Figures/Distances - BRC.pdf
+INPUT Figures/Distances - BRC.pdf
+INPUT ./Figures/Distances - BRC.pdf
+INPUT ./Figures/Distances - BRC.pdf
 INPUT ./Figures/Distances - R cmd Change.pdf
 INPUT ./Figures/Distances - R cmd Change.pdf
 INPUT Figures/Distances - R cmd Change.pdf
 INPUT ./Figures/Distances - R cmd Change.pdf
 INPUT ./Figures/Distances - R cmd Change.pdf
-INPUT ./Figures/FACL - R_cmd Changes.pdf
-INPUT ./Figures/FACL - R_cmd Changes.pdf
-INPUT Figures/FACL - R_cmd Changes.pdf
-INPUT ./Figures/FACL - R_cmd Changes.pdf
-INPUT ./Figures/FACL - R_cmd Changes.pdf
 INPUT ./Figures/Environment - ARC.pdf
 INPUT ./Figures/Environment - ARC.pdf
 INPUT Figures/Environment - ARC.pdf
@@ -1379,16 +1361,16 @@ INPUT c:/texlive/2021/texmf-dist/fonts/tfm/public/amsfonts/symbols/msbm10.tfm
 INPUT c:/texlive/2021/texmf-dist/fonts/tfm/public/cm/cmbx10.tfm
 INPUT c:/texlive/2021/texmf-dist/fonts/tfm/public/cm/cmmib10.tfm
 INPUT c:/texlive/2021/texmf-dist/fonts/tfm/public/cm/cmbsy10.tfm
-INPUT ./5_Future_Work.tex
-INPUT ./5_Future_Work.tex
-INPUT ./5_Future_Work.tex
-OUTPUT 5_Future_Work.aux
-INPUT ./5_Future_Work.tex
-INPUT ./5_Future_Work.tex
-INPUT ./5_Future_Work.tex
-INPUT 5_Future_Work.tex
-INPUT ./5_Future_Work.tex
-INPUT 5_Future_Work.tex
+INPUT ./4_Future_Work.tex
+INPUT ./4_Future_Work.tex
+INPUT ./4_Future_Work.tex
+OUTPUT 4_Future_Work.aux
+INPUT ./4_Future_Work.tex
+INPUT ./4_Future_Work.tex
+INPUT ./4_Future_Work.tex
+INPUT 4_Future_Work.tex
+INPUT ./4_Future_Work.tex
+INPUT 4_Future_Work.tex
 INPUT ./Main.bbl
 INPUT Main.bbl
 INPUT ./Main.bbl
@@ -1402,21 +1384,18 @@ INPUT title_page.aux
 INPUT ./0_Abstract.aux
 INPUT 0_Abstract.aux
 INPUT 0_Abstract.aux
-INPUT ./1_Introduction.aux
-INPUT 1_Introduction.aux
-INPUT 1_Introduction.aux
-INPUT ./2_Literature_Review.aux
-INPUT 2_Literature_Review.aux
-INPUT 2_Literature_Review.aux
-INPUT ./3_ATD_with_SNN.aux
-INPUT 3_ATD_with_SNN.aux
-INPUT 3_ATD_with_SNN.aux
-INPUT ./4_FL_with_SNN.aux
-INPUT 4_FL_with_SNN.aux
-INPUT 4_FL_with_SNN.aux
-INPUT ./5_Future_Work.aux
-INPUT 5_Future_Work.aux
-INPUT 5_Future_Work.aux
+INPUT ./1_Introduction_&_Literature_Review.aux
+INPUT 1_Introduction_&_Literature_Review.aux
+INPUT 1_Introduction_&_Literature_Review.aux
+INPUT ./2_ATD_with_SNN.aux
+INPUT 2_ATD_with_SNN.aux
+INPUT 2_ATD_with_SNN.aux
+INPUT ./3_FL_with_SNN.aux
+INPUT 3_FL_with_SNN.aux
+INPUT 3_FL_with_SNN.aux
+INPUT ./4_Future_Work.aux
+INPUT 4_Future_Work.aux
+INPUT 4_Future_Work.aux
 INPUT ./Main.acr
 INPUT ./Main.acr
 INPUT Main.acr
@@ -1426,7 +1405,6 @@ INPUT c:/texlive/2021/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc
 INPUT c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb
 INPUT c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb
 INPUT c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx8.pfb
-INPUT c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmbxti10.pfb
 INPUT c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb
 INPUT c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb
 INPUT c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb

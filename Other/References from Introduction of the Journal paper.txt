@@ -1,0 +1,124 @@
+@article{Int5,
+  title={Artificial intelligence for UAV-enabled wireless networks: A survey},
+  author={Lahmeri, Mohamed-Amine and Kishk, Mustafa A and Alouini, Mohamed-Slim},
+  journal={IEEE Open Journal of the Communications Society},
+  volume={2},
+  pages={1015--1040},
+  year={2021},
+  publisher={IEEE}
+}
+
+@article{Int6,
+  title={Consensus decision-making in artificial swarms via entropy-based local negotiation and preference updating},
+  author={Zheng, Chuanqi and Lee, Kiju},
+  journal={Swarm Intelligence},
+  pages={1--21},
+  year={2023},
+  publisher={Springer}
+}
+
+@article{Int14,
+  title={Spatial properties of STDP in a self-learning spiking neural network enable controlling a mobile robot},
+  author={Lobov, Sergey A and Mikhaylov, Alexey N and Shamshin, Maxim and Makarov, Valeri A and Kazantsev, Victor B},
+  journal={Frontiers in neuroscience},
+  volume={14},
+  pages={},
+  year={2020},
+  publisher={Frontiers Media SA}
+}
+
+@article{Int20,
+  title={Network of evolvable neural units can learn synaptic learning rules and spiking dynamics},
+  author={Bertens, Paul and Lee, Seong-Whan},
+  journal={Nature Machine Intelligence},
+  volume={2},
+  number={12},
+  pages={791--799},
+  year={2020},
+  publisher={Nature Publishing Group UK London}
+}
+
+@article{Int23,
+  title={Training spiking neuronal networks to perform motor control using reinforcement and evolutionary learning},
+  author={Ha{\c{s}}egan, Daniel and Deible, Matt and Earl, Christopher and D’Onofrio, David and Hazan, Hananel and Anwar, Haroon and Neymotin, Samuel A},
+  journal={Frontiers in Computational Neuroscience},
+  volume={16},
+  pages={},
+  year={2022},
+  publisher={Frontiers}
+}
+
+@article{Int30,
+  title={Survey on federated-learning approaches in distributed environment},
+  author={Gupta, Ruchi and Alam, Tanweer},
+  journal={Wireless personal communications},
+  volume={125},
+  number={2},
+  pages={1631--1652},
+  year={2022},
+  publisher={Springer}
+}
+
+@article{Int31,
+  title={Consensus decision-making in artificial swarms via entropy-based local negotiation and preference updating},
+  author={Zheng, Chuanqi and Lee, Kiju},
+  journal={Swarm Intelligence},
+  pages={1--21},
+  year={2023},
+  publisher={Springer}
+}
+
+@article{Int32,
+  title={Distributed deformable configuration control for multi-robot systems with low-cost platforms},
+  author={Lee, Seoung Kyou},
+  journal={Swarm Intelligence},
+  volume={16},
+  number={3},
+  pages={169--209},
+  year={2022},
+  publisher={Springer}
+}
+
+@article{Int33,
+  title={Edge-based adaptive secure consensus for nonlinear multiagent systems with communication link attacks},
+  author={Zhao, Miao and Xi, Jianxiang and Wang, Le and Xia, Kehan and Zheng, Yuanshi},
+  journal={Neurocomputing},
+  pages={},
+  year={2023},
+  publisher={Elsevier}
+}
+
+@article{Int34,
+  title={Leader--follower output consensus of multiagent systems over finite fields},
+  author={Yu, Miao and Xia, Jianwei and Feng, Jun-e and Fu, Shihua and Shen, Hao},
+  journal={Neurocomputing},
+  volume={550},
+  pages={},
+  year={2023},
+  publisher={Elsevier}
+}
+
+@article{Int35,
+  title={Path-Guided Model-Free Flocking Control of Unmanned Surface Vehicles Based on Concurrent Learning Extended State Observers},
+  author={Peng, Zhouhua and Jiang, Yue and Liu, Lu and Shi, Yang},
+  journal={IEEE Transactions on Systems, Man, and Cybernetics: Systems},
+  year={2023},
+  publisher={IEEE}
+}
+
+@article{Int36,
+  title={Refined Dynamic Event-Triggering Cluster Consensus of Multiagent Systems With Fixed/Switching Topology},
+  author={Yang, Yanping and He, Wangli and Li, Shenrong},
+  journal={IEEE Transactions on Cybernetics},
+  year={2022},
+  publisher={IEEE}
+}
+
+@article{Int38,
+  title={Efficient asynchronous federated neuromorphic learning of spiking neural networks},
+  author={Wang, Yuan and Duan, Shukai and Chen, Feng},
+  journal={Neurocomputing},
+  volume={557},
+  year={2023},
+  publisher={Elsevier}
+}

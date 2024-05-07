@@ -91,9 +91,20 @@ W.~Gerstner, W.~M. Kistler, R.~Naud, and L.~Paninski, {\em Neuronal dynamics:
   From single neurons to networks and models of cognition}.
 \newblock Cambridge University Press, 2014.
 
+\bibitem{Ch_1_R32}
+D.~L. Young and C.-S. Poon, ``Hebbian covariance learning: a nexus for
+  respiratory variability, memory, and optimization?,'' {\em Advances in
+  Modeling and Control of Ventilation}, pp.~73--83, 1998.
+
 \bibitem{Ch_1_R19}
 E.~Oja, ``Simplified neuron model as a principal component analyzer,'' {\em
   Journal of mathematical biology}, vol.~15, pp.~267--273, 1982.
+
+\bibitem{Ch_1_R31}
+T.~Toyoizumi, J.-P. Pfister, K.~Aihara, and W.~Gerstner, ``Generalized
+  bienenstock--cooper--munro rule for spiking neurons that maximizes
+  information transmission,'' {\em Proceedings of the National Academy of
+  Sciences}, vol.~102, no.~14, pp.~5239--5244, 2005.
 
 \bibitem{Ch_1_R20}
 A.~Soltoggio and J.~J. Steil, ``Solving the distal reward problem with rare
@@ -143,11 +154,6 @@ H.~Z. Shouval, S.~S.-H. Wang, and G.~M. Wittenberg, ``Spike timing dependent
   plasticity: a consequence of more fundamental learning rules,'' {\em
   Frontiers in computational neuroscience}, vol.~4, 2010.
 
-\bibitem{Ch2_R7}
-E.~Nordlie, T.~Tetzlaff, and G.~T. Einevoll, ``Rate dynamics of leaky
-  integrate-and-fire neurons with strong synapses,'' {\em Frontiers in
-  computational neuroscience}, vol.~4, 2010.
-
 \bibitem{Ch2_R5}
 H.~Markram, W.~Gerstner, and P.~J. Sj{\"o}str{\"o}m, ``A history of
   spike-timing-dependent plasticity,'' {\em Frontiers in synaptic
@@ -175,37 +181,10 @@ U.~Markowska-Kaczmar and M.~Koldowski, ``Spiking neural network vs multilayer
   perceptron: who is the winner in the racing car computer game,'' {\em Soft
   Computing}, vol.~19, pp.~3465--3478, 2015.
 
-\bibitem{Ch2_R10}
-T.~DeWolf, T.~C. Stewart, J.-J. Slotine, and C.~Eliasmith, ``A spiking neural
-  model of adaptive arm control,'' {\em Proceedings of the Royal Society B:
-  Biological Sciences}, vol.~283, no.~1843, 2016.
-
 \bibitem{Ch2_R14}
 S.~Guo, Z.~Yu, F.~Deng, X.~Hu, and F.~Chen, ``Hierarchical bayesian inference
   and learning in spiking neural networks,'' {\em IEEE transactions on
   cybernetics}, vol.~49, no.~1, pp.~133--145, 2017.
-
-\bibitem{Ch2_R11}
-J.~P{\'e}rez, J.~A. Cabrera, J.~J. Castillo, and J.~M. Velasco, ``Bio-inspired
-  spiking neural network for nonlinear systems control,'' {\em Neural
-  Networks}, vol.~104, pp.~15--25, 2018.
-
-\bibitem{Ch2_R12}
-C.~Teeter, R.~Iyer, V.~Menon, N.~Gouwens, D.~Feng, J.~Berg, A.~Szafer, N.~Cain,
-  H.~Zeng, M.~Hawrylycz, {\em et~al.}, ``Generalized leaky integrate-and-fire
-  models classify multiple neuron types,'' {\em Nature communications}, vol.~9,
-  no.~1, 2018.
-
-\bibitem{Ch2_R13}
-M.~Mozafari, S.~R. Kheradpisheh, T.~Masquelier, A.~Nowzari-Dalini, and
-  M.~Ganjtabesh, ``First-spike-based visual categorization using
-  reward-modulated stdp,'' {\em IEEE transactions on neural networks and
-  learning systems}, vol.~29, no.~12, pp.~6178--6190, 2018.
-
-\bibitem{Ch2_R15}
-S.~Koul and T.~K. Horiuchi, ``Waypoint path planning with synaptic-dependent
-  spike latency,'' {\em IEEE Transactions on Circuits and Systems I: Regular
-  Papers}, vol.~66, no.~4, pp.~1544--1557, 2019.
 
 \bibitem{Ch2_R16}
 A.~Tavanaei and A.~Maida, ``Bp-stdp: Approximating backpropagation using spike
@@ -256,68 +235,6 @@ S.~Schmidgall, J.~Ashkanazy, W.~Lawson, and J.~Hays, ``Spikepropamine:
 B.~Golosio, G.~Tiddia, C.~De~Luca, E.~Pastorelli, F.~Simula, and P.~S.
   Paolucci, ``Fast simulations of highly-connected spiking cortical models
   using gpus,'' {\em Frontiers in Computational Neuroscience}, vol.~15, 2021.
-
-\bibitem{Ch2_R27}
-J.~Shen, Y.~Zhao, J.~K. Liu, and Y.~Wang, ``Hybridsnn: Combining bio-machine
-  strengths by boosting adaptive spiking neural networks,'' {\em IEEE
-  Transactions on Neural Networks and Learning Systems}, vol.~34, no.~9,
-  pp.~5841--5855, 2021.
-
-\bibitem{Ch2_R28}
-S.~F. Chevtchenko and T.~B. Ludermir, ``Combining stdp and binary networks for
-  reinforcement learning from images and sparse rewards,'' {\em Neural
-  Networks}, vol.~144, pp.~496--506, 2021.
-
-\bibitem{Ch2_R29}
-S.~Gupta, G.~Singal, D.~Garg, and S.~Jagannathan, ``Qc-sane: Robust control in
-  drl using quantile critic with spiking actor and normalized ensemble,'' {\em
-  IEEE Transactions on Neural Networks and Learning Systems}, vol.~34, no.~9,
-  pp.~6656--6662, 2021.
-
-\bibitem{Ch2_R30}
-J.~P. Fern{\'a}ndez {\em et~al.}, ``A biological-like controller using improved
-  spiking neural networks,'' {\em Neurocomputing}, vol.~463, pp.~237--250,
-  2021.
-
-\bibitem{Ch2_R31}
-A.~Barton {\em et~al.}, ``Proposal of a control algorithm for multiagent
-  cooperation using spiking neural networks,'' {\em IEEE Transactions on Neural
-  Networks and Learning Systems}, vol.~34, no.~4, pp.~2016--2027, 2021.
-
-\bibitem{Ch2_R32}
-D.~Xing {\em et~al.}, ``A brain-inspired approach for collision-free movement
-  planning in the small operational space,'' {\em IEEE Transactions on Neural
-  Networks and Learning Systems}, vol.~33, no.~5, pp.~2094--2105, 2021.
-
-\bibitem{Ch2_R33}
-G.~Liu {\em et~al.}, ``Human-level control through directly trained deep
-  spiking $q$-networks,'' {\em IEEE Transactions on Cybernetics}, 2022.
-
-\bibitem{Ch2_R34}
-D.~Antonov {\em et~al.}, ``Continuous learning of spiking networks trained with
-  local rules,'' {\em Neural Networks}, vol.~155, pp.~512--522, 2022.
-
-\bibitem{Ch2_R35}
-M.~Bia{\l}as and J.~Ma{\'n}dziuk, ``Spike-timing-dependent plasticity with
-  activation-dependent scaling for receptive fields development,'' {\em IEEE
-  Transactions on Neural Networks and Learning Systems}, vol.~33, no.~10,
-  pp.~5215--5228, 2021.
-
-\bibitem{Ch2_R36}
-S.~Coppolino {\em et~al.}, ``Sequence learning in a single trial: a spiking
-  neurons model based on hippocampal circuitry,'' {\em IEEE Transactions on
-  Neural Networks and Learning Systems}, vol.~33, no.~7, pp.~3178--3183, 2021.
-
-\bibitem{Ch2_R37}
-D.~G. Peterson {\em et~al.}, ``Modulating stdp with back-propagated error
-  signals to train snns for audio classification,'' {\em IEEE Transactions on
-  Emerging Topics in Computational Intelligence}, vol.~7, no.~1, pp.~89--101,
-  2022.
-
-\bibitem{Ch2_R38}
-X.~Cheng {\em et~al.}, ``Meta neurons improve spiking neural networks for
-  efficient spatio-temporal learning,'' {\em Neurocomputing}, vol.~531,
-  pp.~217--225, 2023.
 
 \bibitem{Ch2_R40}
 D.~Ye, R.~Yu, M.~Pan, and Z.~Han, ``Federated learning in vehicular edge
@@ -436,17 +353,16 @@ B.~McMahan, E.~Moore, D.~Ramage, S.~Hampson, and B.~A. y~Arcas,
   data,'' in {\em Artificial intelligence and statistics}, pp.~1273--1282,
   PMLR, 2017.
 
+\bibitem{FedAVE}
+Z.~Wang, Z.~Peng, X.~Fan, Z.~Wang, S.~Wu, R.~Yu, P.~Yang, C.~Zheng, and
+  C.~Wang, ``Fedave: Adaptive data value evaluation framework for collaborative
+  fairness in federated learning,'' {\em Neurocomputing}, vol.~574, 2024.
+
 \bibitem{AFL3}
 J.~Wang, Q.~Liu, H.~Liang, G.~Joshi, and H.~V. Poor, ``Tackling the objective
   inconsistency problem in heterogeneous federated optimization,'' {\em
   Advances in neural information processing systems}, vol.~33, pp.~7611--7623,
   2020.
-
-\bibitem{FACL1}
-L.~Jouffe, ``Actor-critic learning based on fuzzy inference system,'' in {\em
-  IEEE International Conference on Systems, Man and Cybernetics. Information
-  Intelligence and Systems (Cat. No. 96CH35929)}, vol.~1, pp.~339--344, IEEE,
-  1996.
 
 \bibitem{Ch5_R1}
 N.~Perez-Nieves, V.~C. Leung, P.~L. Dragotti, and D.~F. Goodman, ``Neural

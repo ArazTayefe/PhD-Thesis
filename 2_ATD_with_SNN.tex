@@ -1,0 +1,336 @@
+\chapter{Modular Learning in SNNs for Optimal Multi-Agent Decision-Making}
+
+\section{Introduction}
+
+This chapter looks at two main things: how well \ac{snn}s handle noise and how they can handle complex scenarios like optimal decision-making. This detailed study shows us the potential of \ac{snn}s in managing complex behaviors even when there are outside disturbances and their capability to separate the reward function for the neural network's different parts.
+
+The neural structure in \ac{snn}s helps us implement complex learning systems. One good example of a complex situation is a differential game like the Active Target Defense (ATD) problem \cite{Ch5_ATD4}.
+
+In the ATD, a defender tries to protect a target, while a superior invader with higher velocity than the defender and a moving target tries to reach the target and escape the defender at the same time. In the context of defense strategy, aircraft movement analysis is crucial in determining the most effective strategies.In the context of defense strategy, aircraft movement analysis is crucial in determining the most effective strategies. Law enforcement benefits from these games by minimizing escape possibilities. The ATD problems are a fundamental component of game theory, providing insights into strategic decision-making across disciplines like economics and biology. Additionally, these games find applications in Cybersecurity for modeling attacker-defender interactions \cite{Ch5_ATD4-5}.
+
+There are three distinct outcomes to the ATD game, characterized by two termination sets \cite{Ch5_ATD6}. The first outcome happens when the invader reaches the target while the defender is far from it. The second outcome happens when the defender reaches the target while the invader's distance from the target is larger than the defender's distance.
+
+\section{The ATD problem and SNN-based solution}
+
+The ATD problem has various solving methods, such as Apollonius Circle and Cartesian Ovals (CO). This chapter opts for the CO method over the Apollonius Circle because it considers the capture radius and effectiveness against superior invaders \cite{Ch5_ATD6}. The optimal capture point is considered the minimum distance between the target’s position and reachable region if the target is inside the defender’s dominant region. The defender’s dominant region is a region where the defender can reach the target without letting the invader capture the target.
+
+In this chapter, the problem is solved using reinforcement learning. It is considered that each agent knows the relative velocity of other agents. Figure \ref{fig:my_label4} shows LOS angles used as the input for the \ac{snn}s \cite{Ch5_ATD7}.
+
+\begin{figure}
+    \centering
+    \includegraphics[scale=0.75]{Figures/1.pdf}
+    \caption{Active target defense game with three agents (LOS angles are shown for both agents).}
+    \label{fig:my_label4}
+\end{figure}
+
+The \ac{stdp} algorithm is used to train two separate \ac{snn}s simultaneously that control the invader and defender. The target in this chapter moves in the environment, and the \ac{snn}s receive the LOS angles (e.g., the defender receives the LOS angle to both the invader and the target) and calculate the steering angle for the agent (Figure \ref{fig:my_label2}). In this figure, the $\phi_{I}^{T}$ represents the LOS angle to the target relative to the invader.
+
+\begin{figure}
+    \centering
+    \includegraphics[scale=0.65]{Figures/2.pdf}
+    \caption{Two \ac{snn}s simultaneously play and control the invader and defender. Each agent uses the LOS angle and relative velocities for training.}
+    \label{fig:my_label2}
+\end{figure}
+
+\section{Learning using R-STDP}
+
+\ac{stdp} is a biological learning algorithm that is believed to underlie certain learning mechanisms in the brain \cite{Ch5_STDP2}. The \ac{stdp} algorithm is based on the idea that if a pre-synaptic neuron fires just before a post-synaptic neuron, the strength of the synapse between the two neurons should be increased. Conversely, if the post-synaptic neuron fires just before the pre-synaptic neuron, the strength of the synapse should be decreased.
+
+In the \ac{snn}, the pre-synaptic neurons are input neurons, and post-synaptic neurons are output neurons. The synaptic plasticity is referred to as an eligibility trace ($C$), which is calculated based on the following equation \cite{Ch_1_R22},
+
+\begin{equation} \label{Eq.14}
+    \dot C^{i-j} = -C^{i-j}/\tau_C + STDP^{i-j}(\tau)  \delta(t - t_{pre/post})
+\end{equation}
+
+\noindent where the $C^{i-j}$ is the eligibility trace for the synaptic connection between neurons $i$ and $j$, $\tau$, is the spike timing difference between the input and output spike times, $\tau_C$ is the time constant for the synaptic plasticity, $\delta$ is the Dirac function, $t_{pre/post}$ is the firing time of the pre or post-synaptic neuron, and $STDP(\tau)$ is a function of the firing time of the input and output neurons as follow,
+
+\begin{equation} \label{Eq.15}
+    STDP^{i-j}(\tau) = \begin{cases}
+        A_{+}exp\left(\frac{-\tau}{\tau_{s}}\right) & \text{if $\tau > 0$} \\
+        A_{-}exp\left(\frac{\tau}{\tau_{s}}\right) & \text{if $\tau < 0$} \\
+        \end{cases}
+\end{equation}
+
+\noindent where $A_{+}$ and $A_{-}$ are the amplitude of the exponential function, and $\tau_{s}$ is the time constant that determines the decaying rate of the \ac{stdp} function. If $\tau_{s}$ goes to infinity, the exponential function becomes 1, and the effect of time in \ac{stdp} will be lost. 
+
+The synaptic weights are changed according to the following equation,
+
+\begin{equation} \label{Eq.16}
+    % W^{i-j}(t) = W^{i-j}(t-1) + C^{i-j}(t)R(t)
+    \dot{W}^{i-j}(t) = C^{i-j}(t)R(t)
+\end{equation}
+
+\noindent where $W^{i-j}$ is the synaptic weight between neurons $i$ and $j$, which is the amount of input ($I(t)$) that the post-synaptic neuron receives when the pre-synaptic neuron spikes, and $R(t)$ is the reward.
+
+This chapter uses the Multiplicative Synaptic Normalization (MSN) method to keep runaway excitation under control. This method keeps pre-existing memories in the network by conserving the proportional difference between smaller and larger synaptic weights. According to (\ref{Eq.13}), we can calculate the maximum input for each post-synaptic neuron (output layer).
+
+The MSN normalizes the synaptic weights based on the cumulative input synaptic weights and the maximum input as follows \cite{Ch5_STDP2},
+
+\begin{equation} \label{Eq.17}
+    \overrightarrow{W}^n(t) = \overrightarrow{W}^n(t-1) \left(\frac{{I}^{max}}{\Sigma_{\iota=1}^{N} W^\iota(t)}\right)
+\end{equation}
+
+\noindent where ${W}^n(t)$ is the vector consisting of synaptic weights that send input current to the $n^{th}$ output neuron, and $N$, is the total number of input synapses for each output neuron. Therefore, when \ac{stdp} increases a single synaptic weight, the MSN proportionally decreases the other synaptic weights for the $n^{th}$ neuron.
+
+The reward for the invader and defender is defined based on the projection of the velocities along the LOS direction. Figure \ref{fig:my_label5} shows the projected velocities for the invader and defender, where both agents measure the relative velocities from each other. It means that the invader receives a negative reward when it moves toward the defender and receives a positive reward when it moves toward the target. The defender receives a positive reward when it moves toward the target and invader. Since the velocities are constant, the reward value depends only on the headings that cause the change in relative velocities. Therefore, the LOS toward the other agents determines the reward value.
+
+\begin{figure}
+    \centering
+    \includegraphics{Figures/5.pdf}
+    \caption{Relative velocities and LOS angles used in the reward function}
+    \label{fig:my_label5}
+\end{figure}
+
+The reward for the invader considering the target and defender consists of two parts,
+
+\begin{equation} \label{Eq.18}
+    R_{I}^{T}(t) = \eta_{I}^{T}\left(V^{I}+V^{T}\right)cos\left(\phi_{I}^{T}\right)
+\end{equation}
+
+\noindent and
+
+\begin{equation} \label{Eq.19}
+    R_{I}^{D}(t) = \eta_{I}^{D}\left(V^{D}-V^{I}\right)cos\left(\phi_{I}^{D}\right)
+\end{equation}
+
+The reward for the defender also can be calculated as follows,
+
+\begin{equation} \label{Eq.20}
+    R_{D}^{T}(t) = \eta_{D}^{T}\left(V^{D}+V^{T}\right)cos\left(\phi_{D}^{T}\right)
+\end{equation}
+
+\noindent and
+
+\begin{equation} \label{Eq.21}
+    R_{D}^{I}(t) = \eta_{D}^{I}\left(V^{D}-V^{I}\right)cos\left(\phi_{D}^{I}\right)
+\end{equation}
+
+\noindent In (\ref{Eq.18})-(\ref{Eq.21}), $\eta_{I}^{T}$, $\eta_{I}^{D}$, $\eta_{D}^{T}$, and $\eta_{D}^{I}$ are constant coefficients. Adjusting these values changes the agent's attention to other agents. For example, in the invader case, increasing the $\eta_{I}^{T}$ and decreasing the $\eta_{I}^{D}$ increases the effect of the target on the output and reduces the defender's effect. The invader then places more importance on getting to the target than evading the defender.
+
+The change in synaptic weights for the invader regarding the target and defender consists of two parts as follows (the same process is true for the defender),
+
+\begin{equation} \label{Eq.22}
+    \mathbf{W}_{I}^{T}(t) = \mathbf{W}_{I}^{T}(t-1) + \mathbf{C}_{I}^{T}(t)R_{I}^{T}(t)
+\end{equation}
+\noindent and
+\begin{equation} \label{Eq.23}
+    \mathbf{W}_{I}^{D}(t) = \mathbf{W}_{I}^{D}(t-1) + \mathbf{C}_{I}^{D}(t)R_{I}^{D}(t)
+\end{equation}
+
+\noindent where $\mathbf{W}_{I}^{T}$ is a $k\times l$ matrix that represents the synaptic weights corresponding to the target ($k$ is the number of output neurons and $l$ is the number of input neurons for the target). The $\mathbf{W}_{I}^{D}$ is a $k\times m$ matrix that represents the synaptic weights regarding the defender ($m$ is the number of input neurons for the defender). The eligibility trace matrices $\mathbf{C}_{I}^{T}$ and $\mathbf{C}_{I}^{D}$ are of dimension $k\times l$ and $k\times m$, respectively.
+
+\section{Network structure and encoding method}
+
+Figure \ref{fig:my_label1} shows the defender's network structure and encoding process. The invader has the same network with different inputs. The network receives the LOS angles and converts the inputs to Fuzzy Membership Values (FMV) using \ac{grf} \cite{Ch5_SNNModel1}. Since the fuzzy membership values are used just for encoding data into the \ac{snn}, the type of the membership function does not affect the computation complexity.
+
+There are $q$ input neurons, and a membership function is assigned to each neuron. Therefore, there are $q$ membership functions. The acquired fuzzy membership values are real numbers between 0 and 1 and should be converted to the input currents. This can be done using a linear function and the minimum and maximum inputs.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics{Figures/4.pdf}
+    \caption{Network structure and encoding process for the input layer (Defender). Each neuron is associated with a membership function in \ac{grf}. The \ac{grf} encodes an input State ($S^t$) at each time step. There is both a training phase when ($\alpha  = 0$) and an operating phase when ($\alpha = 1)$.}
+    \label{fig:my_label1}
+\end{figure}
+
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale=0.9]{Figures/C.pdf}
+    \caption{An illustration of input current to \ac{snn} and synaptic current to the output neurons after training for a single connection.}
+    \label{fig:my_label8}
+\end{figure}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale=0.9]{Figures/R and C.pdf}
+    \caption{Reward, eligibility trace, and weight change during the simulation for $W^{3-3}$. The $C(t) R(t)$ changes the synaptic weight by considering activation strength and reward value.}
+    \label{fig:my_label9}
+\end{figure}
+
+ The acquired fuzzy membership values are converted to the spiking inputs for the neurons using fuzzy-to-spiking (F2S) conversion. If $FMV=0\;(t_{isi}=\infty)$, then the input to the desired neuron in the input layer is $I^{min}$, and if $FMV=1\;(t_{isi}=\Delta t, \Delta t$ is the sampling time), then the input is $I^{max}$. Therefore, the input current for the input neurons can be calculated using the following equation,
+
+\begin{equation*} \label{Eq.25}
+    I_{\sigma} = \left(I^{max} - I^{min}\right)FMV_{\sigma} + I^{min}
+\end{equation*}
+
+\noindent or
+
+\begin{equation} \label{Eq.25-1}
+    I_{\sigma} = \frac{\tau_{m}\left(V_{th} - V_{res}\right)}{\Delta t R_{m}}FMV_{\sigma}+\frac{V_{th} - E_{l}}{R_{m}}
+\end{equation}
+
+
+\noindent where $\sigma$ is the index of each neuron in the input layer and its corresponding fuzzy membership value in \ac{grf}.
+
+\begin{algorithm}
+        \caption{Weight training algorithm}
+        \label{Algorithm4.1}
+        \begin{algorithmic}[1]
+        \For{$t = 0:\Delta t: t_{final}$}
+        \State {\textbf{input} $\phi_{I}^{T}$ and $\phi_{I}^{D}$}
+        \State{$\zeta \gets$ number of input neurons}
+        \State{$\kappa \gets$ number of output neurons}
+        \For{i = 0:$2\pi/\zeta$:$2\pi$}
+        \State{$Z_{T}(i,1) = \;exp\left(-0.5(\phi_{I}^{T}-i)/\sigma\right)$}
+        \State{$Z_{D}(i,1) = \;exp\left(-0.5(\phi_{I}^{D}-i)/\sigma\right)$}
+        \EndFor
+        \State{$I^T = \left(I^{max}-I^{min}\right)Z_{T}+I^{min}$}
+        \State{$I^D = \left(I^{max}-I^{min}\right)Z_{D}+I^{min}$}
+        \State{Generate a uniform random number for exploration $u_{rnd} \in [-\theta_s,\theta_s]$}
+        \State{$j=1$}
+        \For{i = $-\theta_s$:2$\theta_s/\kappa$:$\theta_s$}
+            \State{$Z_{rnd}(j,1) = \;exp\left(-0.5(u_{rnd}-i\right)/\sigma)$}
+            \State{$j \gets j + 1$}
+        \EndFor
+        \State{$I_{rnd} = \left(I^{max}-I^{min}\right)Z_{rnd}+I^{min}$}
+        \For{j = 1 to $\kappa$}
+            \State{$I_{syn}(j,1) = \sum_{i=1}^{\zeta} W^{i-j}\delta(t-t_{i})$}
+            \Comment{$t_{i}$ is the firing time of the $i^{th}$ input neuron}
+        \EndFor
+        \vspace{10pt}
+        \State{$I_{in} = \begin{bmatrix}I^{T}\\I^{D}
+        \end{bmatrix}$ Input current}
+        \vspace{10pt}
+        \State{$I_{out} =  \alpha I_{syn}+(1-\alpha)I_{rnd}$ ($\alpha  = 0$ in training phase)}
+        \vspace{10pt}
+        \State{$\mathbf{V_m}(t+\Delta t) = (1-\frac{\Delta t}{\tau_{m}})\mathbf{V_m}(t) + \frac{\Delta t}{\tau_{m}}\left(\mathbf{E_{l}} + R_{m}\begin{bmatrix}I_{in}\\I_{out}
+        \end{bmatrix}\right)$ $\{\mathbf{V_m}$ and $\mathbf{E_{l}}$ are $[\zeta+\kappa] \times 1\}$}
+        \vspace{5pt}
+        \State{Find fired neurons in input and output layer}
+        \State{Calculate the $\mbox{\boldmath$\tau$}$ matrix that shows the difference in firing time between the fired input neurons and fired output neurons (Figure \ref{fig:my_label1})}
+        \State{Calculate $\mathbf{R-STDP}$ for all connection using (\ref{Eq.15})}
+        \State{Calculate $\mathbf{C}$ matrix using (\ref{Eq.14}) for all the connections}
+        \State{Calculate $\mathbf{W}$ matrix using (\ref{Eq.16}) for all the connections considering reward from (\ref{Eq.18}) to (\ref{Eq.21})}
+        \For{i = 1 to $\kappa$}
+            \If{sum of the input weights to i$^{th}$ neuron $\ge$ $I^{max}$}
+                \State{Normalize input weights of i$^{th}$ neuron using (\ref{Eq.17}})
+            \EndIf
+        \EndFor
+        \State{Set voltage of the fired neurons to reset voltage ($V_{res}$)}
+        \EndFor
+        \end{algorithmic}
+\end{algorithm}
+
+The output of the \ac{snn} is the steering angle ($\theta_{s}$) for the agent. The output is calculated using the weighted average method. Each neuron in the output layer represents a specific steering angle. The number of spikes for each output neuron in $\tau_{s}$ millisecond represents how much it contributes to the output. The contribution level is considered 1 for an output neuron that fires at each step time, while it is considered 0 for the output neuron that has not fired. Levels of contributions are then multiplied by the angle that each output neuron represents. Finally, the summation of all the calculated terms is divided by the summation of all levels of contributions.
+
+The output consists of two terms. One term comes from the synaptic weights, and the other term is random noise for exploration. The output of the \ac{snn} can be shown as follows,
+
+\begin{equation} \label{Eq.26}
+    I_{out} = \alpha I_{syn} + \left(1 - \alpha\right)I_{rnd}
+\end{equation}
+
+\noindent where $\alpha$ is a constant that is 0 during training and becomes 1 after training is completed, $I_{rnd}$ is a random steering angle that is selected at each time step, and $I_{syn}$ is the synaptic output (steering angle based on synaptic weights). Therefore, there are two phases: a training phase and an operating phase.
+
+During training, the input State ($S^t$) is encoded into the network, and a random steering angle ($u_{rnd}$) is encoded as a random action using the F2S process into the output layer. These two encoding currents for the input and output layer make input and output neurons fire independently. The \ac{stdp} adapts the weights for the fired neurons. Since $\alpha$ is 0 during the training, the $I_{syn}$ does not affect the \ac{snn}'s output (Equation \ref{Eq.26}). 
+
+In the training process, the output neurons and input neurons are excited separately. The input neurons are fired based on the agent's current state, whereas the agent's steering angle is randomly assigned based on the random input to the output neurons, as shown in Figure \ref{fig:my_label9}. The training algorithm then evaluates the reward for that given random steering angle. If the reward is positive, then the weight associated with the input neurons to output neurons that fired for that State is strengthened, and if the reward is negative, then the weight for the input to output neurons in (\ref{Eq.15}) is weakened. Future research will include an inhibitory effect where the weights can become negative.
+
+After training, the $\alpha$ changes to 1 and eliminates the effect of random output, and the \ac{snn}'s output is calculated based on the synaptic currents. Algorithm \ref{Algorithm4.1} shows the training process.
+
+\section{Results}
+
+A numerical simulation is conducted to evaluate the \ac{snn}'s performance in solving the ATD problem. The simulation is done in MATLAB 2022a, with a 1 $ms$ sample time. The simulation parameters for neurons are presented in Table I.
+
+\begin{table}[h]
+\caption{Parameter values for LIF neuron model \cite{Ch_1_R10}}
+\begin{center}
+\begingroup
+\setlength{\tabcolsep}{10pt} % Default value: 6pt
+\renewcommand{\arraystretch}{1.5} % Default value: 1
+\begin{tabular}{|ccc|}
+\hline
+\textbf{Parameter} & \textbf{Value} & \textbf{Description}\\
+\hline
+\textit{$R_{m}$} & 40 M$\Omega$ & Membrane Resistance\\
+\textit{$\tau_{m}$} & 30 ms & Membrane time constant\\
+\textit{$E_{l}$} & -70 mV & Resting potential\\
+\textit{$V_{res}$} & -70 mV & Reset potential\\
+\textit{$V_{0}$} & -70 mV & Initial membrane potential\\
+\textit{$V_{th}$} & -50 mV & Threshold membrane potential\\
+\hline
+\end{tabular}
+\endgroup
+\label{Table4.1}
+\end{center}
+\end{table}
+
+\begin{table}[h]
+\caption{Parameter values for \ac{stdp}}
+\begin{center}
+\begingroup
+\setlength{\tabcolsep}{10pt} % Default value: 6pt
+\renewcommand{\arraystretch}{1.5} % Default value: 1
+\begin{tabular}{|ccc|}
+\hline
+\textbf{Parameter} & \textbf{Value} & \textbf{Description}\\
+\hline
+\textit{$\tau_{s}$} & 3 ms & Time constant\\
+\textit{$A_{\pm}$} & 1 & Amplitude of the \ac{stdp} function\\
+\textit{$\eta_{D}^{T}$} & 0.90 & Reward coefficient\\
+\textit{$\eta_{D}^{I}$} & 1.10 & Reward coefficient\\
+\textit{$\eta_{I}^{T}$} & 1.20 & Reward coefficient\\
+\textit{$\eta_{I}^{D}$} & 0.80 & Reward coefficient\\
+\hline
+\end{tabular}
+\endgroup
+\label{Table4.2}
+\end{center}
+\end{table}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics{Figures/During training.pdf}
+    \caption{\ac{snn}'s performance during training. Hollow circles show the initial positions.}
+    \label{fig:my_label6}
+\end{figure}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics{Figures/Synaptic weights.pdf}
+    \caption{Changes in synaptic weights during training. Only Maximum synaptic weights for both agents are shown.}
+    \label{fig:my_label11}
+\end{figure}
+
+After several simulations, the number of input neurons for invader and defender networks was set to 20. Both agents have 10 neurons in their output layer. The encoding resolution can be enhanced by increasing the number of neurons, although this results in a higher number of synaptic connections. An optimization algorithm can be employed to determine the optimal neuron number in the \ac{snn}. Half of the input neurons for the invader are for the $\phi_{I}^{T}$, and the other half is for the $\phi_{I}^{D}$. Half of the defender's input neurons are for the $\phi_{D}^{T}$, and the other half is for the $\phi_{D}^{I}$. Since each network contains 20 input neurons, the input layer has 20 Gaussian membership functions.
+
+The output of the activation of each membership function is the input to a neuron associated with that specific membership function. There are 10 input neurons for the 10 membership functions related to each input. Furthermore, no more than 2 membership functions fire for any given input. Therefore, at most, only two neurons are excited and generate an impulse sequence for a given input.
+
+The target's velocity is 0.15 $m/s$. The invader's velocity is 0.3 $m/s$. The $\gamma$ is 0.75, so the defender's velocity is 0.225 $m/s$. The defender's capture radius ($\rho$) is set to 0.025 $m$. The maximum simulation time for each epoch is 10 seconds. The $\theta_s$ for invader and defender is $\pi/4$, and the $\sigma$ is set to 1.25. The parameter values for \ac{stdp}, shown in Table \ref{Table4.2}, are set through several simulations.
+
+The reward coefficients are set manually. The $\tau_{s}$ in Table \ref{Table4.2} defines the decaying rate of $C$ in (\ref{Eq.14}) that determines the \ac{stdp} sensitivity to prior firings. According to (\ref{Eq.15}), higher $\tau_{s}$ means that the \ac{stdp} takes into account the activity of the two neurons that have fired in the relatively larger time window. Different studies have considered different values for this parameter.
+
+As mentioned in Section 3.1, the optimal capture point is the closest point from the reachable region to the target position. Figure \ref{fig:my_label6} shows the agents during the training process. In epoch 5, the defender is not able to capture the invader, and the invader reaches the target. In epoch 7, the defender learns how to block and capture the invader. The defender has won the game. However, the invader should learn to reach the minimum distance from the target.
+
+\subsection{Simulation without noise}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics{Figures/After learning.pdf}
+    \caption{\ac{snn}'s performance after training. The highlighted region shows the defender's dominant region. The purple dot is the optimal capture point.}
+    \label{fig:my_label7}
+\end{figure}
+
+Figure \ref{fig:my_label7} shows the performance after training. Each epoch has a maximum time of 10 seconds. After 14 epochs, the defender learned to capture the target, while the invader learned to reduce its distance from the target. According to the CO, the target is inside the defender's dominant region. Therefore, although the invader's velocity is higher than the defender's velocity, it cannot reach the target. In this situation, the optimal policy for the invader is to minimize its distance from the target.
+
+According to Figure \ref{fig:my_label7}, the invader's \ac{snn} can find the optimal \cite{Ch5_ATD6} capture point for the invader, while the defender's \ac{snn} can protect the moving target against a superior invader. It should be noted that this solution is obtained without a global reference frame. This is important because, in real-world swarm applications, defining a global reference frame is difficult while the learning process is highly dependent on the precise definition of the coordinate system.
+
+Figure \ref{fig:my_label11} shows the changes in synaptic weights. Only the synaptic weights with maximum values are shown in this figure because the network has 200 synaptic connections. The minimum value is limited to zero because negative synaptic weights inhibit the post-synaptic neurons. This chapter does not consider the inhibition process. According to figure \ref{fig:my_label11}, after almost 100 seconds of simulation time, the MSN process causes the synaptic weights to converge.
+
+\subsection{Simulation with noise}
+
+In Figure \ref{fig:my_label12}, we observe the performance of two methods, namely the \ac{snn} and the Cartesian Oval (CO) method, in the presence of noise. The noise in this experiment is introduced as white Gaussian noise, characterized by a mean of zero and a variance of 0.01. Both \ac{snn} and CO receive position data that has been corrupted by this noise.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics{Figures/Noise effect.pdf}
+    \caption{\ac{snn}'s performance in noisy conditions. A white Gaussian noise with a variance of 0.01 is added to the measured inputs.}
+    \label{fig:my_label12}
+\end{figure}
+
+The results of the simulation reveal that the CO method is highly affected by the presence of noise, making it unable to calculate the optimal capture point accurately. Due to its sensitivity to measurement noise, the CO method exhibits a significant deviation from the desired capture point. On the other hand, the \ac{snn} method demonstrates a higher level of robustness against noise. Despite the presence of measurement noise, the \ac{snn} method manages to achieve the optimal capture point with an error of only 0.036 $m$. This outcome highlights the superior performance of the \ac{snn} method in noisy conditions compared to the CO method.
+
+\section{Conclusion}
+
+This chapter focused on addressing the ATD problem within a dynamic environment involving two agents, where the target is in motion. The approach involved training two \ac{snn} simultaneously to engage in a competitive game. During the game, the target transitions from the invader's dominant region to the defender's dominant region. This shift in the target's location within the defender's dominant region satisfied the necessary conditions for determining the reachable regions for both the invader and defender.
+
+To evaluate the effectiveness of the \ac{snn}'s solution, a comparison was made with an analytical solution designed for centralized problems. The results demonstrated that the \ac{snn} method was capable of identifying the optimal solution for decentralized problems, even under the presence of noise. This result holds significant practical implications, particularly in scenarios where establishing a global coordinate system for all agents proves to be challenging. The obtained solution provided by the \ac{snn} approach offers a valuable alternative in such cases, showcasing its potential in real-world applications.

@@ -1,0 +1,188 @@
+﻿                    19.2.1  A mathematical formulation of Hebb’s rule 
+
+In order to ﬁnd a mathematically formulated learning rule based on Hebb’s postulate we 
+focus on a single synapse with efﬁcacy wi j that transmits signals from a presynaptic neuron 
+j  to a postsynaptic neuron i. For the time being we content ourselves with a description in 
+﻿terms of mean ﬁring rates. In what follows, the activity of the presynaptic neuron is denoted 
+by νj  and that of the postsynaptic neuron by ν .i 
+   There are two aspects of Hebb’s postulate that are particularly important:       locality and 
+joint activity . Locality means that the change of the synaptic efﬁcacy can depend only on 
+local variables, i.e., on information that is available at the site of the synapse, such as pre- 
+and postsynaptic ﬁring rate, and the actual value of the synaptic efﬁcacy, but not on the 
+activity of other neurons. Based on the locality of Hebbian plasticity we can write down a 
+rather general formula for the change of the synaptic efﬁcacy, 
+﻿                                       19.2  Models of Hebbian learning                                        497 
+
+                                            d 
+                                               wi j  = F (wi j ;ν ,ν  ) .i j                                (19.1) 
+                                            dt 
+
+Here, dwi j /dt  is the rate of change of the synaptic coupling strength and F  is a so-far- 
+undetermined function (Sejnowski and Tesauro, 1989). We may wonder whether there are 
+other local variables (e.g., the input potential h ; see Chapter 15) that should be includedi 
+as additional arguments of the function F . It turns out that in standard rate models this is 
+not necessary, since the input potential hi is uniquely determined by the postsynaptic ﬁring 
+rate, ν   = g (h ), with a monotone gain function g. 
+        i         i 
+
+   The second important aspect of Hebb’s postulate is the notion of “joint activity” which 
+implies that pre- and postsynaptic neurons have to be active simultaneously for a synaptic 
+weight change to occur. We can use this property to learn something about the function F . 
+If F is sufﬁciently well behaved, we can expand F in a Taylor series about νi  = νj                        = 0, 
+
+                      d 
+                        w    = c  (w    ) + cpre (w    )ν   + cpost (w    )ν  + cpre (w    )ν 2 
+                     dt   i j     0   i j     1      i j  j     1       i j i     2      i j  j 
+                                   + cpost (w    )ν 2 + ccorr (w    )ν ν    + O (ν 3 ) .                    (19.2) 
+                                       2       i j  i      11     i j  i  j 
+
+The term containing ccorr on the right-hand side of (19.2) is bilinear in pre- and postsynaptic 
+                            11 
+activity. This term implements the AND condition for joint activity. If the Taylor expansion 
+had been stopped before the bilinear term, the learning rule would be called “non-Hebbian,” 
+because pre- or postsynaptic activity alone induces a change of the synaptic efﬁcacy, and 
+joint  activity  is  irrelevant.  Thus  a  Hebbian  learning  rule  needs  either  the  bilinear  term 
+  corr                     corr                                                              2 
+c11   (wi j )ν νi j with c11     > 0 or a higher-order term (such as c21 (wi j )νi  ν  ) that involvesj 
+the activity of both pre- and postsynaptic neurons. 
+
+                                Example: Hebb rules, saturation, and LTD 
+
+     The simplest choice for a Hebbian learning rule within the Taylor expansion of Eq. 
+  (19.2) is to ﬁx ccorr at a positive constant and to set all other terms in the Taylor expansion 
+                      11 
+  to zero. The result is the prototype of Hebbian learning, 
+
+                                               d 
+                                                 w    = ccorr ν ν    .                                     (19.3) 
+                                                    i j    11    i  j 
+                                              dt 
+  We  note  in  passing  that  a  learning  rule  with  ccorr        < 0  is  usually  called  anti-Hebbian 
+                                                                11 
+  because it weakens the synapse if pre- and postsynaptic neuron are active simultane- 
+  ously, a behavior that is just contrary to that postulated by Hebb. 
+     Note  that,  in  general,  the  coefﬁcient  ccorr       may  depend  on  the  current  value  of  the 
+                                                        11 
+  weight wi j . This dependence can be used to limit the growth of weights at a maximum 
+  value wmax . The two standard choices of weight-dependence are called “hard bound” 
+  and “soft bound,” respectively. Hard bound means that ccorr  = γ2  is constant in the range 
+                                                                          11 
+  0 < wi j   < wmax    and zero otherwise. Thus, weight growth stops abruptly if wi j  reaches 
+
+                          max 
+  the upper bound w           . 
+﻿498                                  Synaptic plasticity and learning 
+
+     Post     Pre     dwi j /dt ∝    dwi j /dt ∝    dwi j /dt ∝     dwi j /dt ∝         dwi j /dt ∝ 
+      νi      νj         ν  νi j     ν  νi j  −c0  (ν  −νi θ )νj   ν  (νi j −νθ ) (ν  −〈ν 〉)(νi i j −〈ν  〉)j 
+
+     ON       ON           +             +               +               +                   + 
+     ON      OFF           0             −               0              −                    − 
+     OFF      ON           0             −               −               0                   − 
+     OFF     OFF           0             −               0               0                   + 
+
+Table 19.1    The change  d wi j  of a synapse from  j to i for various Hebb rules as a function 
+                             dt 
+of pre- and postsynaptic activity. “ON” indicates a neuron ﬁring at high rate (ν  > 0), 
+whereas “OFF” means an inactive neuron (ν  = 0). From left to right: Standard Hebb 
+rule, Hebb with decay, Hebb with postsynaptic or presynaptic LTP/LTD threshold, 
+                                                           max                      max  2 
+covariance rule. The parameters are 0 < νθ            < ν       and 0 < c0  < (ν        )  . 
+
+     A soft bound for the growth of synaptic weights can be achieved if the parameter ccorr 
+                                                                                                        11 
+  in Eq. (19.3) tends to zero as wi j  approaches its maximum value wmax , 
+
+                                     ccorr (wi j ) = γ2 (wmax −wi j )β  ,                           (19.4) 
+                                      11 
+
+  with positive constants γ2  and β . The typical value of the exponent is β  = 1, but other 
+  choices are equally possible (G¨utig et al., 2003). For β  → 0, the soft-bound rule (19.4) 
+  converges to the hard-bound one. 
+     Note that neither Hebb’s original proposal nor the simple rule (19.3) contains a possi- 
+ bility for a decrease of synaptic weights. However, in a system where synapses can only 
+ be strengthened, all efﬁcacies will eventually saturate at their upper maximum value. 
+  Our formulation (19.2) is sufﬁciently general to allow for a combination  of synaptic 
+ potentiation and depression. For example, if we set wmax  = β = 1 in (19.4) and combine 
+
+  it with a choice c0 (wi j ) = −γ0 wi j , we obtain a learning rule 
+
+                                   d 
+                                     wi j  = γ2 (1 −wi j )ν νi j −γ0 wi j ,                         (19.5) 
+                                  dt 
+  where, in the absence of stimulation, synapses spontaneously decay back to zero. Many 
+  other  combinations  of  the  parameters  c0 ,...,ccorr        in  Eq.  (19.2)  exist.  They  all  give 
+                                                            11 
+ rise to valid Hebbian learning rules that exhibit both potentiation and depression; see 
+  Table 19.1. 
+
+                                       Example: Covariance rule 
+
+     Sejnowski (1977) has suggested a learning rule of the form 
+
+                                   d 
+                                     w    = γ  (ν  −〈ν 〉) (ν     −〈ν  〉) ,                          (19.6) 
+                                       i j        i     i      j      j 
+                                  dt 
+
+  called the covariance rule. This rule is based on the idea that the rates ν (t ) and νi              j (t ) 
+  ﬂuctuate around mean values 〈ν 〉, 〈ν  〉 that are taken as running averages over the recenti j 
+﻿                                     19.2   Models of Hebbian learning                                          499 
+
+ﬁring history. To allow a mapping of the covariance rule to the general framework of 
+Eq. (19.2), the mean ﬁring rates 〈ν 〉 and 〈ν  〉 have to be constant in time.i j 
+
+                                             Example: Oja’s rule 
+
+   All of the above learning rules had cpre              = cpost  = 0. Let us now consider a nonzero 
+                                                    2        2 
+quadratic term cpost  = −γ wi j . We take ccorr  = γ  > 0 and set all other parameters to zero. 
+                     2                              11 
+The learning rule 
+                                          d 
+                                                                       2 
+                                            w    = γ [ν ν     −w     ν   ]                                 (19.7) 
+                                               i j       i  j      i j i 
+                                         dt 
+is called Oja’s rule (Oja, 1982). Under some general conditions Oja’s rule converges 
+asymptotically  to  synaptic  weights  that  are  normalized  to  ∑j  w2                 = 1  while  keeping 
+                                                                                      i j 
+the essential Hebbian properties of the standard rule of Eq. (19.3); see Exercises. We 
+note that normalization of ∑j  w2            implies competition between the synapses that make 
+                                          i j 
+connections to the same postsynaptic neuron, i.e., if some weights grow, others must 
+decrease. 
+
+                              Example: Bienenstock–Cooper–Munro rule 
+
+   Higher-order terms in the expansion on the right-hand side of Eq. (19.2) lead to more 
+intricate plasticity schemes. Let us consider 
+
+                                           d 
+                                              w    = φ (ν  −ν      )ν                                      (19.8) 
+                                                i j        i     θ    j 
+                                           dt 
+with a nonlinear function φ and a reference rate νθ . If we take νθ  to be a function f  (〈ν 〉)i 
+of the average output rate 〈ν 〉, then we obtain the so-called Bienenstock–Cooper–Munroi 
+(BCM) rule (Bienenstock et al., 1982). 
+   The basic structure of the function φ  is sketched in Fig. 19.5. If presynaptic activity 
+is combined with moderate levels of postsynaptic excitation, the efﬁcacy of synapses 
+activated by presynaptic input is decreased. Weights are increased only if the level of 
+postsynaptic activity exceeds a threshold, νθ . The change of weights is restricted to those 
+synapses which are activated by presynaptic input. A common choice for the function 
+φ  is 
+                           d 
+                                                                     2        corr 
+                              w    = η ν  (ν  −ν      )ν   = c    ν   ν   −c      ν ν  ,                   (19.9) 
+                                i j       i   i     θ    j      21  i   j     11    i j 
+                           dt 
+which can be mapped to the Taylor expansion of Eq. (19.2) with c21  = η  and ccorr  = 
+                                                                                                           11 
+−ηνθ . 
+   For stationary input, it can be shown that the postsynaptic rate νi under the BCM-rule 
+(19.9) has a ﬁxed point at νθ  which is unstable (see Exercises). To avoid the postsynaptic 
+ﬁring rate blowing up or decaying to zero, it is therefore necessary to turn νθ                          into an 
+adaptive variable which depends on the average rate 〈ν 〉. The BCM rule leads to inputi 
+
+selectivity (see Exercises) and has been successfully used to describe the development 
+of receptive ﬁelds (Bienenstock et al., 1982). 
