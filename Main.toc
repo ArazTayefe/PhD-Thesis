@@ -24,15 +24,15 @@
 \contentsline {section}{\numberline {4.1}Consensus Flying Problem}{44}{section.4.1}%
 \contentsline {section}{\numberline {4.2}Proposed Method}{46}{section.4.2}%
 \contentsline {subsection}{\numberline {4.2.1}Network Structure}{46}{subsection.4.2.1}%
-\contentsline {subsection}{\numberline {4.2.2}Training algorithm}{50}{subsection.4.2.2}%
-\contentsline {subsection}{\numberline {4.2.3}Weight Stabilization using Reward-Modulated Competitive Synaptic Equilibrium (R-CSE)}{51}{subsection.4.2.3}%
+\contentsline {subsection}{\numberline {4.2.2}Training algorithm}{51}{subsection.4.2.2}%
+\contentsline {subsection}{\numberline {4.2.3}Weight Stabilization using Reward-Modulated Competitive Synaptic Equilibrium (R-CSE)}{52}{subsection.4.2.3}%
 \contentsline {subsection}{\numberline {4.2.4}Federated Learning for Consensus Flying}{57}{subsection.4.2.4}%
-\contentsline {section}{\numberline {4.3}Results and Discussion}{61}{section.4.3}%
-\contentsline {subsection}{\numberline {4.3.1}Simulation without \ac {fl}}{61}{subsection.4.3.1}%
-\contentsline {subsection}{\numberline {4.3.2}Simulation with \ac {fl} and \ac {RCSE}}{71}{subsection.4.3.2}%
-\contentsline {section}{\numberline {4.4}Conclusion}{74}{section.4.4}%
-\contentsline {chapter}{\numberline {5}Proposed Investigations}{76}{chapter.5}%
-\contentsline {section}{\numberline {5.1}Improving Stable Learning in SNNs}{77}{section.5.1}%
-\contentsline {section}{\numberline {5.2}Managing Communication Overhead in FL}{77}{section.5.2}%
-\contentsline {section}{\numberline {5.3}Heterogeneity of Spiking Neuron Models on Server}{78}{section.5.3}%
-\contentsline {section}{\numberline {5.4}Resilience to Model Poisoning Attacks}{79}{section.5.4}%
+\contentsline {section}{\numberline {4.3}Results and Discussion}{60}{section.4.3}%
+\contentsline {subsection}{\numberline {4.3.1}Simulation without \ac {fl}}{62}{subsection.4.3.1}%
+\contentsline {subsection}{\numberline {4.3.2}Simulation with \ac {fl} and \ac {RCSE}}{72}{subsection.4.3.2}%
+\contentsline {section}{\numberline {4.4}Conclusion}{75}{section.4.4}%
+\contentsline {chapter}{\numberline {5}Proposed Investigations}{77}{chapter.5}%
+\contentsline {section}{\numberline {5.1}Improving Stable Learning in SNNs}{78}{section.5.1}%
+\contentsline {section}{\numberline {5.2}Managing Communication Overhead in FL}{78}{section.5.2}%
+\contentsline {section}{\numberline {5.3}Heterogeneity of Spiking Neuron Models on Server}{79}{section.5.3}%
+\contentsline {section}{\numberline {5.4}Resilience to Model Poisoning Attacks}{80}{section.5.4}%

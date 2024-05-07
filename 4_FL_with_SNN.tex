@@ -18,31 +18,31 @@ The follower agents are equipped with an \ac{snn}, and their learning algorithm 
 This chapter employs the \ac{snn} model to train a group of swarm agents that follow a leader. Each agent has its own \ac{snn}, which is trained independently using the \ac{stdp} algorithm. Each agent receives position data from the agents nearby. The goal is for each agent to keep a commanded distance from the leader agent and the other agents in the group. The encoding and decoding processes for the input and output layers of the \ac{snn} are considered fuzzy encoding, and a novel method is introduced to stabilize the network dynamics considering the reward function. This work presents several key contributions:
 
 \begin{itemize}
-  \item The chapter presents a comprehensive method for stabilizing and enhancing the learning process in \ac{snn}. This method focuses on controlling the unbounded growth of synaptic weights in SNNs, utilizing a strategy that dynamically adapts to changes in reward conditions and coefficients. It introduces an innovative decay rate adjustment based on the status of synaptic weights. This approach not only enhances the responsiveness to weight changes but also preserves the shape of the Gaussian function formed by fuzzy encoding.
-  
-  \item In terms of advancements in \ac{fl} with \ac{stdp}, the chapter addresses the \ac{fl} challenges in the \ac{stdp} framework. It introduces an event-triggered mechanism for model publishing and receiving within the network, which improves network usage by the agents. Additionally, the chapter implements a novel weighted aggregation method on the server. This method calculates weights based on the time of arrival of the models, effectively tackling the asynchronous issues in FL.
-\end{itemize}
+    \item The chapter presents a comprehensive method for stabilizing and enhancing the learning process in \ac{snn}. This method focuses on controlling the unbounded growth of synaptic weights in SNNs, utilizing a strategy that dynamically adapts to changes in reward conditions and coefficients. It introduces a decay rate and learning rate adjustment based on the status of synaptic weights and enhances the responsiveness of the SNN weights to reward change.
+    
+    \item In terms of advancements in \ac{fl} with \ac{stdp}, the chapter addresses the \ac{fl} challenges in the \ac{stdp} framework. It introduces an event-triggered mechanism for model publishing and receiving within the network, improving network traffic. Additionally, the chapter implements a novel weighted aggregation method on the server. This method calculates weights based on the time of arrival of the models, effectively tackling the asynchronous issues in \ac{fl}.
+  \end{itemize}
 
 \section{Proposed Method}
 
 \subsection{Network Structure}
 
-This chapter assumes that each agent detects only two neighboring agents in addition to the leader. The information obtained from other agents includes the line-of-sight angle and the distance. Each agent's neural network consists of three sub-layers in the input layer, as shown in Figure \ref{fig.Network Structure}. Two sub-layers correspond to the two neighboring follower agents (\(F_{1}\) and \(F_{2}\)), and the third is dedicated to the leader (\(L\)). Inputs for these sub-layers are encoded using the Gaussian Receptive Fields (GRF) that use fuzzy membership functions. The network uses the difference between current and commanded distances within the swarm (\(r_{cmd}\)) and between followers and the leader (\(R_{cmd}\)) to stimulate input neurons.
+This chapter assumes that each agent detects only two neighboring agents in addition to the leader. The information obtained from other agents includes the Line-of-Sight (LOS) angle and the distance. Each agent's neural network consists of three sub-layers in the input layer, as shown in Figure \ref{fig.Network Structure}. Two sub-layers correspond to the two neighboring follower agents (\(F_{1}\) and \(F_{2}\)), and the third is dedicated to the leader (\(L\)). Inputs for these sub-layers are encoded using the Gaussian Receptive Fields (GRF) that use fuzzy membership functions. The network uses the difference between current and commanded distances within the swarm (\(r_{cmd}\)) and between followers and the leader (\(R_{cmd}\)) to stimulate input neurons.
 
-\begin{figure}[h]
+\begin{figure}
     \centering
     \includegraphics[scale=0.75]{Figures/Network Structure.pdf}
-    \caption{\ac{snn} structure with encoding and decoding layers. Each sub-layer consists of a fuzzy encoder and a Fuzzy-to-Spiking Converter, with the output layer receiving inputs from synaptic weights and a random action selector. During the training phase, the output layer receives input only from the random action selector, which then shifts to synaptic weight inputs after the training.}
+    \caption{\ac{snn} structure with encoding and decoding layers. Each sub-layer consists of a fuzzy encoder and the F2S Converter, with the output layer receiving inputs from synaptic weights and a random action selector. During the training phase, the output layer receives input only from the random action selector, which then shifts to synaptic weight inputs after the training.}
     \label{fig.Network Structure}
 \end{figure}
 
-Every input sub-layer is split into two parts. The first part deals with distances greater than the commanded distance, while the second focuses on the space between the agent and the commanded distance. Within each part, the Line-of-Sight angle is encoded with fuzzy membership functions. The difference between the current and commanded distance is represented as the error that changes the maximum amplitude of the fuzzy membership functions. We transform this difference into an amplitude value using the \(tanh\) function so that it is bounded between 0 and 1. An error of zero leads to an amplitude of zero, and as the error increases towards infinity, the amplitude approaches one. Consequently, the encoding function for the input layer is expressed as follows,
+Every input sub-layer is split into two parts. The first part deals with distances greater than the commanded distance, while the second focuses on the space between the agent and the commanded distance. Within each part, the LOS angle is encoded with fuzzy membership functions. The difference between the current and commanded distance is represented as the error. We transform this difference into an amplitude value using the \(tanh\) function so that it is bounded between 0 and 1. An error of zero leads to an amplitude of zero, and as the error increases towards infinity, the amplitude approaches one. Consequently, the encoding function for the input layer is expressed as follows,
 
 \begin{equation} \label{Eq.NS.1}
     \mu_{I}(\phi_{i},r_{i}) = \left| tanh(r - r_{i}) \right| \cdot \exp{\left(-\frac{(\phi_{i}-\zeta)^2}{2\sigma^2}\right)}
 \end{equation}
 
-\noindent where \( \zeta \) and \( \sigma \) are the Gaussian membership functions' center and standard deviation. The \(r_{i}\) is the distance from the corresponding agent, \(\phi_{i}\) is the line-of-sight angle, and \(\mu_{I}\) is the vector of the membership degrees. Here, \(r\) is a placeholder that can either represent \(r_{cmd}\) or \(R_{cmd}\), depending on the context. The firing strengths from fuzzy encoders are then converted to the spiking input based on the neuron model as follows \cite{NS},
+\noindent where \( \zeta \) and \( \sigma \) are the Gaussian membership functions' center and standard deviation. The \(r_{i}\) is the distance from the corresponding agent, \(\phi_{i}\) is the LOS angle, and \(\mu_{I}\) is the vector of the membership degrees. Here, \(r\) is a placeholder that can either represent \(r_{cmd}\) or \(R_{cmd}\), depending on the context. The firing strengths from fuzzy encoders are then converted to the spiking input based on the neuron model as follows \cite{NS},
 
 \begin{equation} \label{Eq.NS.2}
     I_{sub-layer} = \left(I^{max} - I^{min}\right)\mu_{I}(\phi_{i},r_{i}) + I^{min}
@@ -54,9 +54,9 @@ Every input sub-layer is split into two parts. The first part deals with distanc
     I_{sub-layer} = \frac{\tau_{m}\left(V_{th} - V_{res}\right)}{\Delta t R_{m}}\mu_{I}(\phi_{i},r_{i})+\frac{V_{th} - E_{l}}{R_{m}}
 \end{equation}
 
-The encoding process is shown in Figure \ref{fig.Encoder}. The Fuzzy to Spiking (F2S) block uses \eqref{Eq.NS.3} to calculate the inputs for the associated sub-layer.
+The encoding process is shown in Figure \ref{fig.Encoder}. The Fuzzy-to-Spiking (F2S) block uses \eqref{Eq.NS.3} to calculate the inputs for the associated sub-layer.
 
-\begin{figure}[!h]
+\begin{figure}[H]
     \centering
     \begin{minipage}{0.45\textwidth}
         \includegraphics[scale=0.75]{Figures/Encoder.pdf}
@@ -70,49 +70,49 @@ The encoding process is shown in Figure \ref{fig.Encoder}. The Fuzzy to Spiking 
     \end{minipage}
 \end{figure}
 
-The output layer has two sub-layers, and each sub-layer has two neurons. The first sub-layer determines the \(\Delta x\), and the second one determines \(\Delta y\). The first neuron of the sub-layers is for negative values, and the second one is for positive values. Each neuron is associated with the output sign, and the magnitude of the \(\Delta x\) and \(\Delta y\) is encoded into the output sub-layers based on the minimum and maximum synaptic weights. Equation \eqref{Eq.NS.3} is used to encode the magnitude of the random action into the output sub-layers. The only difference is that a function called (\(\mu_{O}\)) is used to normalize the maximum step between 0 and 1 as follows,
+The output layer has two sub-layers, and each sub-layer has two neurons. The first sub-layer determines the \(\Delta x\), and the second one determines \(\Delta y\). The first neuron of the sub-layers is for negative values, and the second one is for positive values. Each neuron is associated with the output sign, and the magnitude of the \(\Delta x\) and \(\Delta y\) is encoded into the output sub-layers based on the minimum and maximum synaptic weights. Equation \eqref{Eq.NS.3} is used to encode the magnitude of the random action into the output sub-layers. The only difference is that a function called \(\mu_{O}\) is used to normalize the maximum step between 0 and 1 as follows,
 
 \begin{equation} \label{Eq.NS.4}
-    \mu_{x} = \frac{\Delta x}{\Delta X_{max}}
+    \mu_{Ox} = \frac{\Delta x}{\Delta X_{max}}
 \end{equation}
 
 \begin{equation} \label{Eq.NS.5}
-    \mu_{y} = \frac{\Delta y}{\Delta Y_{max}}
+    \mu_{Oy} = \frac{\Delta y}{\Delta Y_{max}}
 \end{equation}
 
-\noindent where \(\Delta x\) and \(\Delta y\) are selected actions, and \(\Delta X_{max}\) and \(\Delta Y_{max}\) are maximum steps (displacements) in \(X\) and \(Y\) directions. Therefore, two random actions, one for \(\Delta x\) and one for \(\Delta y\), are generated for the training process.
+\noindent where \(\Delta x\) and \(\Delta y\) are selected actions, and \(\Delta X_{max}\) and \(\Delta Y_{max}\) are maximum steps (displacements) in \(X\) and \(Y\) directions. Two random actions, one for \(\Delta x\) and one for \(\Delta y\), are generated for the training process.
 
-The decoding of the spiking output is determined by the difference in the firing rates of the output neurons within each sub-layer. Let us denote \(f^{x+}(t)\) and \(f^{x-}(t)\) as the firing rates of the first and second output neurons, respectively, in the x-direction sub-layer at time \(t\). The equation for decoding this activity can be expressed as:
+The decoding of the spiking output is determined by the difference in the firing rates of the output neurons within each sub-layer. Let us denote \(f(t)\) as the activity of the output neurons that control the movement in the x and y-directions:
+
+\begin{align*}
+    f(i) &= 
+    \begin{cases} 
+        1 & \text{if the neuron spikes at time } i, \\
+        0 & \text{otherwise},
+    \end{cases}
+\end{align*}
+
+The equation for decoding this activity can be expressed as:
 
 \begin{equation} \label{Eq.NS.6}
     \Delta x_{decoded} = \left[ \sum_{i=t-\Delta T}^{t} \left(f^{x+}(i)-f^{x-}(i)\right) \right]\Delta X_{max}
 \end{equation}
 
-A similar process is applied for decoding in the y-direction:
+\noindent where \(f^{x+}(i)\) and \(f^{x-}(i)\) are the activities of the two output neurons associated with the x-direction. A similar process is applied for decoding in the y-direction:
 
 \begin{equation} \label{Eq.NS.7}
     \Delta y_{decoded} = \left[ \sum_{i=t-\Delta T}^{t} \left(f^{y+}(i)-f^{y-}(i)\right) \right]\Delta Y_{max}
 \end{equation}
 
-The dynamic model of agents can be represented as,
-
-\begin{equation} \label{Eq.NS.7.1}
-    \dot{X}(t) = \frac{\Delta x_{decoded}}{\Delta T}
-\end{equation}
-
-\begin{equation} \label{Eq.NS.7.2}
-     \dot{Y}(t) = \frac{\Delta y_{decoded}}{\Delta T}
-\end{equation}
-
 \noindent where \(\Delta T\) is the time window the network updates weights.
 
-One of the challenges in robotic applications is ensuring smooth transitions in actions to prevent abrupt and potentially harmful changes. To address this, the recursive random number generation method is used to produce correlated random numbers. This method ensures that the current displacements of the robot are influenced by its previous displacements, leading to smoother transitions. The recursive random number generation can be formulated as,
+One of the challenges in robotic applications is ensuring smooth transitions in actions to prevent abrupt and potentially harmful changes. Therefore, the recursive random number generation method is used to produce correlated random numbers. This method ensures that during training, the current displacements of the robot are influenced by its previous displacements, leading to smoother transitions. The recursive random number generation can be formulated as,
 
 \begin{equation} \label{Eq.NS.8}
-\mathcal{q}_t = \gamma \cdot \mathcal{q}_{t-1} + (1-\gamma) \cdot \epsilon_t
+\mathcal{q}_t = \gamma \cdot \mathcal{q}_{t-1} + (1-\gamma) \cdot \Upsilon_t
 \end{equation}
 
-\noindent where \(\mathcal{q}_{t}\) is the random action at time \( t \), \( \gamma \) is a correlation coefficient, and \( \epsilon_{t} \) is a random number drawn from a standard distribution (e.g., Gaussian) at time \( t \). This equation ensures that the random action at any given time \( t \) is a weighted combination of the previous action and a new random number.
+\noindent where \(\mathcal{q}_{t}\) is the random action at time \( t \), \( \gamma \) is a correlation coefficient, and \( \Upsilon_{t} \) is a random number drawn from a standard distribution (e.g., Gaussian) at time \( t \). This equation ensures that the random action at any given time \( t \) is a weighted combination of the previous action and a new random number.
 
 \subsection{Training algorithm}
 
@@ -172,74 +172,76 @@ The choice of setting the decay rate to \(\lambda\mathcal{A} \times \mathcal{R}_
 
 When \(|W_{max}^{\mathcal{S}}(t)| < \Psi^{\mathcal{S}} \), the reward adjusts the synaptic weights, and there is no weight decay to decrease the learning time. When \(|W_{max}^{\mathcal{S}}(t)| > \Psi^{\mathcal{S}} \), the decay rate changes the synaptic weights and brings the maximum weight to the reward zone, where \(|W_{max}^{\mathcal{S}}(t)| < \Psi^{\mathcal{S}} \) and the networks responds to reward change. 
 
-\subsection*{Proof of stability of the \ac{RCSE} method} 
-
-\textit{\textbf{Lemma}: The equilibrium point \(W_{max}^{\mathcal{S}}(t) = \Psi^{\mathcal{S}}\) of the \ac{RCSE} method is asymptotically stable, as the derivative of the Lyapunov function is non-positive.}
-
-
-We consider the dynamical system given by the equation of synaptic weights for \(W^{\mathcal{S}}(t) \geq 0\) as,
-
-\begin{equation} \label{Eq.WS.5}
-\begin{split}
-    \dot{W}^{\mathcal{S}}(t) = & \frac{1}{1 + \exp{\left[\frac{1}{\epsilon}\left( W_{max}^{\mathcal{S}}(t) - \Psi^{\mathcal{S}} \right)\right]}}  STDP(\tau)  \mathcal{R}(t) \\
-    & - \left( \frac{\mathcal{A}\mathcal{R}_{max}^{G}}{\lambda\log{(2)}} \right) \log \left(1 + \exp\left[{\left(\frac{\ln{(2^{\lambda^2}-1)}}{\Psi^{\mathcal{S}}} \right) \left( W_{max}^{\mathcal{S}}(t) - \Psi^{\mathcal{S}} \right)} \right] \right),
-\end{split}
-\end{equation}
-
-To assess the stability of this system around the equilibrium point $W_{max}^{\mathcal{S}}(t) = \Psi^{\mathcal{S}}$, we introduce a Lyapunov function candidate \(V(z)\), where \(z=W_{max}^{\mathcal{S}}(t) - \Psi^{\mathcal{S}}\). A common choice for such analyses is a quadratic function of the deviation from the equilibrium:
-
-\begin{equation}
-    V(z) = \frac{1}{2}z^2.
-\end{equation}
-
-This function is positive definite and has a minimum at the equilibrium point, satisfying the essential criteria for a Lyapunov function. The derivative of $V(z)$ with respect to time, $\dot{V}(z)$, is then calculated to determine the rate of change of the Lyapunov function along the trajectories of the system:
-
-\begin{equation}
-    \dot{V}(z) = z \dot{z}
-\end{equation}
-
-Considering the maximum value of \(STDP(\tau)  \mathcal{R}(t)\) as \(\mathcal{A}\mathcal{R}_{max}^{G}\), and substituting \(\dot{W}^{\mathcal{S}}(t)\) from Eq. \ref{Eq.WS.5} into the above expression, we have,
-
-\begin{equation} \label{Eq.WS.6}
-\begin{split}
-    \dot{V}(z) = z \times \left[ \frac{1}{1 + \exp{\left[\frac{1}{\epsilon}\left( z \right)\right]}} \mathcal{A}\mathcal{R}_{max}^{G} - \left( \frac{\mathcal{A}\mathcal{R}_{max}^{G}}{\lambda\log{(2)}} \right) \log \left(1 + \exp\left[{\left(\frac{\ln{(2^{\lambda^2}-1)}}{\Psi^{\mathcal{S}}} \right) \left( z \right)} \right] \right) \right]
-\end{split}
-\end{equation}
-
-A negative $\dot{V}(z)$ for all $W^{\mathcal{S}}(t) \neq \Psi^{\mathcal{S}}$ indicates that the system's energy decreases over time, leading to the conclusion that the equilibrium point is asymptotically stable. Conversely, a positive $\dot{V}(z)$ in any region would suggest the presence of instability or regions of attraction that do not encompass the entire state space.
-
-In the analysis of the system's stability, we focus on the behavior of the derivative of the Lyapunov function, $\dot{V}(z)$, across different regions of $z$. We decompose the dynamics of $\dot{z}$ into its constituent components to systematically analyze the stability conditions. we assess the relative magnitudes of the two main components influencing $\dot{V}(z)$:
-
-\begin{enumerate}
-    \item The first term, represented as $\frac{1}{1 + \exp{\left[\frac{1}{\epsilon}z\right]}} \mathcal{A}\mathcal{R}_{max}^{G}$, denotes the effect of learning rate and is inherently positive.
+\begin{lemma}
+    The \ac{RCSE} method is asymptotically stable in its equilibrium point \(W_{max}^{\mathcal{S}}(t) = \Psi^{\mathcal{S}}\).
+    \end{lemma}
     
-    \item The second term, $\left( \frac{\mathcal{A}\mathcal{R}_{max}^{G}}{\lambda\log{(2)}} \right) \log \left(1 + \exp\left[{\left(\frac{\ln{(2^{\lambda^2}-1)}}{\Psi^{\mathcal{S}}} \right) z} \right] \right)$, captures the dynamic decay rate of synaptic weights, which is governed by the SoftPlus function.
-\end{enumerate}
-
-\textbf{Analysis for $z < 0$}:
-
-For $z < 0$, we observe that the second term is zero. This implies that the contribution of this term to $\dot{V(z)}$ is negligible in this region. Moreover, the first term remains positive throughout, and given that it is multiplied by $z$ (which is negative in this region), the overall contribution to $\dot{V}(z)$ is negative. Consequently, $\dot{V}(z)$ is negative for $z < 0$, indicating that any perturbations from the equilibrium in this region will decrease over time, thereby contributing to the system's stability.
-
-\textbf{Analysis for $z > 0$:}
-
-For this region, the magnitude of the second term significantly exceeds that of the first term. This predominance is critical as it is associated with a negative sign in the $\dot{V}(z)$ equation. Therefore, the negative contribution of this component ensures that $\dot{V}(z)$ remains negative throughout this region. It indicates that any deviation from the equilibrium state results in the system's energy decreasing over time, leading to the conclusion that the equilibrium point $W_{max}^{\mathcal{S}}(t) = \Psi^{\mathcal{S}}$ is asymptotically stable for $z > 0$. 
-
-\begin{figure}[h]
-    \centering
-    \begin{minipage}{0.48\textwidth}
-        \includegraphics[width=\linewidth]{Figures/W(t).pdf}
-        \caption{Synaptic weight change for \(\lambda=5\), \(\Psi^{\mathcal{S}}=15.5\), and \(\mathcal{A}\mathcal{R}_{max}^{G}=0.5\)}
-        \label{fig_3_3_1}
-    \end{minipage}
-    \hfill
-    \begin{minipage}{0.48\textwidth}
-        \includegraphics[width=\linewidth]{Figures/dot{W}(t).pdf}
-        \caption{Derivation of Synaptic weight for \(\lambda=5\), \(\Psi^{\mathcal{S}}=15.5\), and \(\mathcal{A}\mathcal{R}_{max}^{G}=0.5\)}
-        \label{fig_3_3_2}
-    \end{minipage}
-\end{figure}
-
-Figures \ref{fig_3_3_1} and \ref{fig_3_3_2} demonstrate the performance of the \ac{RCSE} when it regulates the synaptic weights to prevent unbounded growth. The red dotted line represents the value of \(\Psi^{\mathcal{S}}\), which is derived from the maximum reward value of the corresponding network section. As shown in Figure \ref{fig_3_3_1}, the synaptic weight oscillates around \(\Psi^{\mathcal{S}}\), and when it drops below \(\Psi^{\mathcal{S}}\), the learning rate is set to 1. This allows any changes in the reward function to be applied to the synapse.
+\begin{proof}
+    We consider the dynamical system given by the equation of synaptic weights for \(W_{max}^{\mathcal{S}}(t) \geq 0\) that receives a positive reward (\(\mathcal{R}(t) > 0\)) as,
+    
+    \begin{equation} \label{Eq.WS.5}
+    \begin{split}
+        \dot{W}_{max}^{\mathcal{S}}(t) = & \frac{1}{1 + \exp{\left[\frac{1}{\epsilon}\left( W_{max}^{\mathcal{S}}(t) - \Psi^{\mathcal{S}} \right)\right]}}  STDP(\tau)  \mathcal{R}(t) \\
+        & - \left( \frac{\mathcal{A}\mathcal{R}_{max}^{G}}{\lambda\log{(2)}} \right) \log \left(1 + \exp\left[{\left(\frac{\ln{(2^{\lambda^2}-1)}}{\Psi^{\mathcal{S}}} \right) \left( W_{max}^{\mathcal{S}}(t) - \Psi^{\mathcal{S}} \right)} \right] \right),
+    \end{split}
+    \end{equation}
+    
+    To assess the stability of this system around the equilibrium point, we introduce a Lyapunov function candidate \(V(z)\), where \(z=W_{max}^{\mathcal{S}}(t) - \Psi^{\mathcal{S}}\). A common choice for such analyses is a quadratic function of the deviation from the equilibrium:
+    
+    \begin{equation}
+        V(z) = \frac{1}{2}z^2.
+    \end{equation}
+    
+    This positive definite function has a minimum at the equilibrium point, satisfying the essential criteria for a Lyapunov function. The derivative of $V(z)$ with respect to time, $\dot{V}(z)$, is then calculated to determine the rate of change of the Lyapunov function along the trajectories of the system:
+    
+    \begin{equation}
+        \dot{V}(z) = z \dot{z}
+    \end{equation}
+    
+    Substituting \(\dot{W}_{max}^{\mathcal{S}}(t)\) from \eqref{Eq.WS.5} into the above expression, we have,
+    
+    \begin{equation} \label{Eq.WS.6}
+    \begin{split}
+        \dot{V}(z) = z \times \left[ \frac{1}{1 + \exp{\left[\frac{1}{\epsilon}\left( z \right)\right]}} STDP(\tau)  \mathcal{R}(t) - \left( \frac{\mathcal{A}\mathcal{R}_{max}^{G}}{\lambda\log{(2)}} \right) \log \left(1 + \exp\left[{\left(\frac{\ln{(2^{\lambda^2}-1)}}{\Psi^{\mathcal{S}}} \right) \left( z \right)} \right] \right) \right]
+    \end{split}
+    \end{equation}
+    
+    A negative $\dot{V}(z)$ indicates that the system's energy decreases over time, concluding that the equilibrium point is asymptotically stable. Conversely, a positive $\dot{V}(z)$ in any region would suggest the presence of instability or regions of attraction that do not encompass the entire state space.
+    
+    In analyzing the system's stability, we focus on the behavior of the derivative of the Lyapunov function, $\dot{V}(z)$, across different regions of $z$. We decompose the dynamics of $\dot{z}$ into its constituent components to systematically analyze the stability conditions. We assess the relative magnitudes of the two main components influencing $\dot{V}(z)$:
+    
+    \begin{enumerate}
+        \item The first term, represented as $\frac{1}{1 + \exp{\left[\frac{1}{\epsilon}z\right]}} STDP(\tau)  \mathcal{R}(t)$, denotes the effect of learning rate and is inherently positive when the synaptic connection receives positive reward consistently.
+        
+        \item The second term, $\left( \frac{\mathcal{A}\mathcal{R}_{max}^{G}}{\lambda\log{(2)}} \right) \log \left(1 + \exp\left[{\left(\frac{\ln{(2^{\lambda^2}-1)}}{\Psi^{\mathcal{S}}} \right) z} \right] \right)$, captures the dynamic decay rate of synaptic weights, which is governed by the SoftPlus function.
+    \end{enumerate}
+    
+    \textbf{Analysis for $z < 0$}:
+    
+    In this region, we observe that the term \(\exp\left[{\left(\frac{\ln{(2^{\lambda^2}-1)}}{\Psi^{\mathcal{S}}} \right) z} \right]\) goes to zero and makes the term inside the \(\log\) function go to 1. This implies that the contribution of this term to $\dot{V(z)}$ is negligible in this region. Moreover, the first term remains positive throughout, and given that it is multiplied by $z$ (which is negative in this region), the overall contribution to $\dot{V}(z)$ is negative. Consequently, $\dot{V}(z)$ is negative for $z < 0$, indicating that any perturbations from the equilibrium in this region will decrease over time, thereby contributing to the system's stability.
+    
+    \textbf{Analysis for $z > 0$:}
+    
+    For this region, the magnitude of the second term significantly exceeds that of the first term. This predominance is critical as it is associated with a negative sign in the $\dot{V}(z)$ equation. Therefore, the negative contribution of this component ensures that $\dot{V}(z)$ remains negative throughout this region. It indicates that any deviation from the equilibrium state results in the system's energy decreasing over time, leading to the conclusion that the equilibrium point $W_{max}^{\mathcal{S}}(t) = \Psi^{\mathcal{S}}$ is asymptotically stable for $z > 0$. 
+    
+\end{proof}
+    
+    \begin{figure}[hb]
+        \centering
+        \begin{minipage}{0.48\textwidth}
+            \includegraphics[width=\linewidth] {Figures/RCSE.pdf}
+            \caption{Synaptic weight change for $\lambda=5, \Psi^{\mathcal{S}}=15.5$,\\ and $\mathcal{A R}^G=1$.}
+            \label{fig_3_3_1}
+        \end{minipage}
+        \begin{minipage}{0.51\textwidth}
+            \includegraphics[width=\linewidth] {Figures/RCSE Principle.pdf}
+            \vspace{5ex}
+            \caption{RCSE working principle in inhibiting the adjacent synaptic connections.}
+            \label{fig_3_3_2}
+        \end{minipage}
+    \end{figure}
+    
+    Figure \ref{fig_3_3_1} demonstrates the performance of the \ac{RCSE} when it regulates the synaptic weights to prevent unbounded growth. The red dotted line represents the value of \(\Psi^{\mathcal{S}}\), which is derived from the maximum reward value of the corresponding network section. As shown in Figure \ref{fig_3_3_1}, the synaptic weight oscillates around \(\Psi^{\mathcal{S}}\), and when it drops below \(\Psi^{\mathcal{S}}\), the learning rate is set to 1 by \eqref{Eq.WS.1}. This allows any changes in the reward function to be applied to the synapse. Figure \ref{fig_3_3_2} shows how the maximum synaptic weight of the active synapses in set \(\mathcal{S}\) stops the adjacent synaptic connections' growth by setting the learning rate of the set to 0.
 
 
 \subsection{Federated Learning for Consensus Flying}
@@ -520,7 +522,7 @@ Figure \ref{fig_3_0} shows the simulation results for the \ac{RCSE} method. Acco
 
 
 
-As mentioned in section 3, the input encoding uses the error between current and commanded distance. Therefore, one of the advantages of the encoding and learning method in this paper is that the learned policies are independent of the commanded distance. The commanded distance can be changed after training since the \ac{snn} uses the distance error. Figure \ref{fig_3_2} shows the response of the agents to change in commanded distance after training. According to this figure, when the commanded distance is changed at 30 seconds, the swarm immediately responds to this change in 2.98 seconds without disrupting the formation or any collision.
+As mentioned in section 3, the input encoding uses the error between current and commanded distance. Therefore, one of the advantages of the encoding and learning method in this chapter is that the learned policies are independent of the commanded distance. The commanded distance can be changed after training since the \ac{snn} uses the distance error. Figure \ref{fig_3_2} shows the response of the agents to change in commanded distance after training. According to this figure, when the commanded distance is changed at 30 seconds, the swarm immediately responds to this change in 2.98 seconds without disrupting the formation or any collision.
 
 Figure \ref{fig_3_3} shows the simulation results for the FACL algorithm. The training time was 1000 seconds, and the algorithm converged to the final solution in 667.26 seconds. According to the results, the agents achieved successful formation in approximately 15.85 seconds. Similarly, Figure \ref{fig_3_5} shows the simulation results for the FACL algorithm, where the commanded distances (\(r_{cmd}\) and \(R_{cmd}\)) are initially set to 2 \(m\) and at \(t=30\), the commanded distance changes to 4 \(m\). The results show that it takes 4.35 seconds for the swarm to adapt to the new command. In Figures \ref{fig_3_3} and \ref{fig_3_5}, the distances converge to the commanded distance but stay within a bias. Increasing the number of membership functions can reduce the bias, but it increases the training time of the \ac{facl} algorithm.
 

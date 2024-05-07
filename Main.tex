@@ -25,6 +25,7 @@
 \usepackage[shortlabels]{enumitem}
 \usepackage{amsmath}
 \usepackage{amssymb}
+\usepackage{amsthm}  % Add this line here
 \usepackage[top=1in, bottom=1in, left=1in, right=1in,includefoot=true]{geometry}
 \usepackage{lineno}
 \usepackage{array}
@@ -37,6 +38,10 @@
 \usepackage{xparse}
 \usepackage{bm}
 \usepackage{xcolor}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+
 
 \usepackage{acro}
 \input{acronym.tex}

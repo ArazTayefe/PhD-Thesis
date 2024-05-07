@@ -739,6 +739,17 @@ INPUT c:/texlive/2021/texmf-dist/tex/latex/amsfonts/amssymb.sty
 INPUT c:/texlive/2021/texmf-dist/tex/latex/amsfonts/amssymb.sty
 INPUT c:/texlive/2021/texmf-dist/tex/latex/amsfonts/amssymb.sty
 INPUT c:/texlive/2021/texmf-dist/tex/latex/amsfonts/amsfonts.sty
+INPUT c:/texlive/2021/texmf-dist/tex/latex/amscls/amsthm.sty
+INPUT c:/texlive/2021/texmf-dist/tex/latex/amscls/amsthm.sty
+INPUT c:/texlive/2021/texmf-dist/tex/latex/amscls/amsthm.sty
+INPUT c:/texlive/2021/texmf-dist/tex/latex/amscls/amsthm.sty
+INPUT c:/texlive/2021/texmf-dist/tex/latex/amscls/amsthm.sty
+INPUT c:/texlive/2021/texmf-dist/tex/latex/amscls/amsthm.sty
+INPUT c:/texlive/2021/texmf-dist/tex/latex/amscls/amsthm.sty
+INPUT c:/texlive/2021/texmf-dist/tex/latex/amscls/amsthm.sty
+INPUT c:/texlive/2021/texmf-dist/tex/latex/amscls/amsthm.sty
+INPUT c:/texlive/2021/texmf-dist/tex/latex/amscls/amsthm.sty
+INPUT c:/texlive/2021/texmf-dist/tex/latex/amscls/amsthm.sty
 INPUT c:/texlive/2021/texmf-dist/tex/latex/geometry/geometry.sty
 INPUT c:/texlive/2021/texmf-dist/tex/latex/geometry/geometry.sty
 INPUT c:/texlive/2021/texmf-dist/tex/latex/geometry/geometry.sty
@@ -1274,17 +1285,16 @@ INPUT ./Figures/SNN input-output.pdf
 INPUT Figures/SNN input-output.pdf
 INPUT ./Figures/SNN input-output.pdf
 INPUT ./Figures/SNN input-output.pdf
-INPUT c:/texlive/2021/texmf-dist/fonts/tfm/public/cm/cmbxti10.tfm
-INPUT ./Figures/W(t).pdf
-INPUT ./Figures/W(t).pdf
-INPUT Figures/W(t).pdf
-INPUT ./Figures/W(t).pdf
-INPUT ./Figures/W(t).pdf
-INPUT ./Figures/dot{W}(t).pdf
-INPUT ./Figures/dot{W}(t).pdf
-INPUT Figures/dot{W}(t).pdf
-INPUT ./Figures/dot{W}(t).pdf
-INPUT ./Figures/dot{W}(t).pdf
+INPUT ./Figures/RCSE.pdf
+INPUT ./Figures/RCSE.pdf
+INPUT Figures/RCSE.pdf
+INPUT ./Figures/RCSE.pdf
+INPUT ./Figures/RCSE.pdf
+INPUT ./Figures/RCSE Principle.pdf
+INPUT ./Figures/RCSE Principle.pdf
+INPUT Figures/RCSE Principle.pdf
+INPUT ./Figures/RCSE Principle.pdf
+INPUT ./Figures/RCSE Principle.pdf
 INPUT ./Figures/Metrics.pdf
 INPUT ./Figures/Metrics.pdf
 INPUT Figures/Metrics.pdf
@@ -1426,7 +1436,6 @@ INPUT c:/texlive/2021/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc
 INPUT c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb
 INPUT c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb
 INPUT c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx8.pfb
-INPUT c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmbxti10.pfb
 INPUT c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb
 INPUT c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb
 INPUT c:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb
