@@ -63,19 +63,6 @@ Y.-H. Liu and X.-J. Wang, ``Spike-frequency adaptation of a generalized leaky
 L.~Long and G.~Fang, ``A review of biologically plausible neuron models for
   spiking neural networks,'' {\em AIAA Infotech@ Aerospace 2010}, 2010.
 
-\bibitem{Ch_1_R12}
-A.~L. Hodgkin and A.~F. Huxley, ``Currents carried by sodium and potassium ions
-  through the membrane of the giant axon of loligo,'' {\em The Journal of
-  physiology}, vol.~116, no.~4, 1952.
-
-\bibitem{Ch_1_R14}
-E.~M. Izhikevich and R.~FitzHugh, ``Fitzhugh-nagumo model,'' {\em
-  Scholarpedia}, vol.~1, no.~9, 2006.
-
-\bibitem{Ch_1_R15}
-E.~M. Izhikevich, ``Simple model of spiking neurons,'' {\em IEEE Transactions
-  on neural networks}, vol.~14, no.~6, pp.~1569--1572, 2003.
-
 \bibitem{Ch_1_R16}
 D.~O. Hebb, {\em The organization of behavior: A neuropsychological theory}.
 \newblock Psychology press, 2005.
@@ -125,24 +112,18 @@ A.~Soltoggio, ``Short-term plasticity as cause--effect hypothesis testing in
   distal reward learning,'' {\em Biological cybernetics}, vol.~109, no.~1,
   pp.~75--94, 2015.
 
-\bibitem{Ch_1_R26}
-X.~Li, K.~Huang, W.~Yang, S.~Wang, and Z.~Zhang, ``On the convergence of fedavg
-  on non-iid data,'' {\em arXiv preprint arXiv:1907.02189}, 2019.
+\bibitem{Ch_1_R12}
+A.~L. Hodgkin and A.~F. Huxley, ``Currents carried by sodium and potassium ions
+  through the membrane of the giant axon of loligo,'' {\em The Journal of
+  physiology}, vol.~116, no.~4, 1952.
 
-\bibitem{Ch_1_R27}
-T.~Li, A.~K. Sahu, M.~Zaheer, M.~Sanjabi, A.~Talwalkar, and V.~Smith,
-  ``Federated optimization in heterogeneous networks,'' {\em Proceedings of
-  Machine learning and systems}, vol.~2, pp.~429--450, 2020.
+\bibitem{Ch_1_R14}
+E.~M. Izhikevich and R.~FitzHugh, ``Fitzhugh-nagumo model,'' {\em
+  Scholarpedia}, vol.~1, no.~9, 2006.
 
-\bibitem{Ch_1_R28}
-S.~P. Karimireddy, S.~Kale, M.~Mohri, S.~Reddi, S.~Stich, and A.~T. Suresh,
-  ``Scaffold: Stochastic controlled averaging for federated learning,'' in {\em
-  International conference on machine learning}, pp.~5132--5143, PMLR, 2020.
-
-\bibitem{Ch_1_R29}
-J.~Wang, Q.~Liu, H.~Liang, G.~Joshi, and H.~V. Poor, ``A novel framework for
-  the analysis and design of heterogeneous federated learning,'' {\em IEEE
-  Transactions on Signal Processing}, vol.~69, pp.~5234--5249, 2021.
+\bibitem{Ch_1_R15}
+E.~M. Izhikevich, ``Simple model of spiking neurons,'' {\em IEEE Transactions
+  on neural networks}, vol.~14, no.~6, pp.~1569--1572, 2003.
 
 \bibitem{Ch2_R9}
 S.~Song, K.~D. Miller, and L.~F. Abbott, ``Competitive hebbian learning through
@@ -235,6 +216,30 @@ S.~Schmidgall, J.~Ashkanazy, W.~Lawson, and J.~Hays, ``Spikepropamine:
 B.~Golosio, G.~Tiddia, C.~De~Luca, E.~Pastorelli, F.~Simula, and P.~S.
   Paolucci, ``Fast simulations of highly-connected spiking cortical models
   using gpus,'' {\em Frontiers in Computational Neuroscience}, vol.~15, 2021.
+
+\bibitem{Ch_1_R26}
+X.~Li, K.~Huang, W.~Yang, S.~Wang, and Z.~Zhang, ``On the convergence of fedavg
+  on non-iid data,'' {\em arXiv preprint arXiv:1907.02189}, 2019.
+
+\bibitem{Ch_1_R27}
+T.~Li, A.~K. Sahu, M.~Zaheer, M.~Sanjabi, A.~Talwalkar, and V.~Smith,
+  ``Federated optimization in heterogeneous networks,'' {\em Proceedings of
+  Machine learning and systems}, vol.~2, pp.~429--450, 2020.
+
+\bibitem{Ch_1_R28}
+S.~P. Karimireddy, S.~Kale, M.~Mohri, S.~Reddi, S.~Stich, and A.~T. Suresh,
+  ``Scaffold: Stochastic controlled averaging for federated learning,'' in {\em
+  International conference on machine learning}, pp.~5132--5143, PMLR, 2020.
+
+\bibitem{Ch_1_R29}
+J.~Wang, Q.~Liu, H.~Liang, G.~Joshi, and H.~V. Poor, ``A novel framework for
+  the analysis and design of heterogeneous federated learning,'' {\em IEEE
+  Transactions on Signal Processing}, vol.~69, pp.~5234--5249, 2021.
+
+\bibitem{Ch_1_R30}
+Q.~Li, B.~He, and D.~Song, ``Model-contrastive federated learning,'' in {\em
+  Proceedings of the IEEE/CVF conference on computer vision and pattern
+  recognition}, pp.~10713--10722, 2021.
 
 \bibitem{Ch2_R40}
 D.~Ye, R.~Yu, M.~Pan, and Z.~Han, ``Federated learning in vehicular edge

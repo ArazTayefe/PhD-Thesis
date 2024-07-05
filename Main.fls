@@ -1201,6 +1201,11 @@ INPUT ./Figures/2.pdf
 INPUT Figures/2.pdf
 INPUT ./Figures/2.pdf
 INPUT ./Figures/2.pdf
+INPUT ./Figures/SNN input-output.pdf
+INPUT ./Figures/SNN input-output.pdf
+INPUT Figures/SNN input-output.pdf
+INPUT ./Figures/SNN input-output.pdf
+INPUT ./Figures/SNN input-output.pdf
 INPUT ./Figures/5.pdf
 INPUT ./Figures/5.pdf
 INPUT Figures/5.pdf
@@ -1211,11 +1216,6 @@ INPUT ./Figures/4.pdf
 INPUT Figures/4.pdf
 INPUT ./Figures/4.pdf
 INPUT ./Figures/4.pdf
-INPUT ./Figures/C.pdf
-INPUT ./Figures/C.pdf
-INPUT Figures/C.pdf
-INPUT ./Figures/C.pdf
-INPUT ./Figures/C.pdf
 INPUT ./Figures/R and C.pdf
 INPUT ./Figures/R and C.pdf
 INPUT Figures/R and C.pdf
@@ -1267,11 +1267,6 @@ INPUT ./Figures/Encoder.pdf
 INPUT Figures/Encoder.pdf
 INPUT ./Figures/Encoder.pdf
 INPUT ./Figures/Encoder.pdf
-INPUT ./Figures/SNN input-output.pdf
-INPUT ./Figures/SNN input-output.pdf
-INPUT Figures/SNN input-output.pdf
-INPUT ./Figures/SNN input-output.pdf
-INPUT ./Figures/SNN input-output.pdf
 INPUT ./Figures/RCSE.pdf
 INPUT ./Figures/RCSE.pdf
 INPUT Figures/RCSE.pdf

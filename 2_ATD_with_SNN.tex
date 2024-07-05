@@ -34,7 +34,14 @@ The \ac{stdp} algorithm is used to train two separate \ac{snn}s simultaneously t
 
 \section{Learning using R-STDP}
 
-\ac{stdp} is a biological learning algorithm that is believed to underlie certain learning mechanisms in the brain \cite{Ch5_STDP2}. The \ac{stdp} algorithm is based on the idea that if a pre-synaptic neuron fires just before a post-synaptic neuron, the strength of the synapse between the two neurons should be increased. Conversely, if the post-synaptic neuron fires just before the pre-synaptic neuron, the strength of the synapse should be decreased.
+\ac{stdp} is a biological learning algorithm that is believed to underlie certain learning mechanisms in the brain \cite{Ch5_STDP2}. The \ac{stdp} algorithm is based on the idea that if a pre-synaptic neuron fires just before a post-synaptic neuron, the strength of the synapse between the two neurons should be increased because of the casuality. Conversely, if the post-synaptic neuron fires just before the pre-synaptic neuron, the strength of the synapse should be decreased.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale=1]{Figures/SNN input-output.pdf}
+    \caption{An illustration of input current to \ac{snn} and synaptic current to the output neurons after training for a single connection.}
+    \label{fig:my_label8}
+\end{figure}
 
 In the \ac{snn}, the pre-synaptic neurons are input neurons, and post-synaptic neurons are output neurons. The synaptic plasticity is referred to as an eligibility trace ($C$), which is calculated based on the following equation \cite{Ch_1_R22},
 
@@ -70,7 +77,7 @@ The MSN normalizes the synaptic weights based on the cumulative input synaptic w
     \overrightarrow{W}^n(t) = \overrightarrow{W}^n(t-1) \left(\frac{{I}^{max}}{\Sigma_{\iota=1}^{N} W^\iota(t)}\right)
 \end{equation}
 
-\noindent where ${W}^n(t)$ is the vector consisting of synaptic weights that send input current to the $n^{th}$ output neuron, and $N$, is the total number of input synapses for each output neuron. Therefore, when \ac{stdp} increases a single synaptic weight, the MSN proportionally decreases the other synaptic weights for the $n^{th}$ neuron.
+\noindent where $\overrightarrow{W}^n(t)$ is the vector consisting of synaptic weights that send input current to the $n^{th}$ output neuron, and $N$, is the total number of input synapses for each output neuron. Therefore, when \ac{stdp} increases a single synaptic weight, the MSN proportionally decreases the other synaptic weights for the $n^{th}$ neuron.
 
 The reward for the invader and defender is defined based on the projection of the velocities along the LOS direction. Figure \ref{fig:my_label5} shows the projected velocities for the invader and defender, where both agents measure the relative velocities from each other. It means that the invader receives a negative reward when it moves toward the defender and receives a positive reward when it moves toward the target. The defender receives a positive reward when it moves toward the target and invader. Since the velocities are constant, the reward value depends only on the headings that cause the change in relative velocities. Therefore, the LOS toward the other agents determines the reward value.
 
@@ -132,13 +139,6 @@ There are $q$ input neurons, and a membership function is assigned to each neuro
     \label{fig:my_label1}
 \end{figure}
 
-
-\begin{figure}[h]
-    \centering
-    \includegraphics[scale=0.9]{Figures/C.pdf}
-    \caption{An illustration of input current to \ac{snn} and synaptic current to the output neurons after training for a single connection.}
-    \label{fig:my_label8}
-\end{figure}
 
 \begin{figure}[h]
     \centering
@@ -223,7 +223,7 @@ The output consists of two terms. One term comes from the synaptic weights, and 
 
 During training, the input State ($S^t$) is encoded into the network, and a random steering angle ($u_{rnd}$) is encoded as a random action using the F2S process into the output layer. These two encoding currents for the input and output layer make input and output neurons fire independently. The \ac{stdp} adapts the weights for the fired neurons. Since $\alpha$ is 0 during the training, the $I_{syn}$ does not affect the \ac{snn}'s output (Equation \ref{Eq.26}). 
 
-In the training process, the output neurons and input neurons are excited separately. The input neurons are fired based on the agent's current state, whereas the agent's steering angle is randomly assigned based on the random input to the output neurons, as shown in Figure \ref{fig:my_label9}. The training algorithm then evaluates the reward for that given random steering angle. If the reward is positive, then the weight associated with the input neurons to output neurons that fired for that State is strengthened, and if the reward is negative, then the weight for the input to output neurons in (\ref{Eq.15}) is weakened. Future research will include an inhibitory effect where the weights can become negative.
+In the training process, the output neurons and input neurons are excited separately. The input neurons are fired based on the agent's current state, whereas the agent's steering angle is randomly assigned based on the random input to the output neurons, as shown in Figure \ref{fig:my_label9}. The agent then takes a step based on the random steering angle and a reward is assigned. The training algorithm then evaluates the reward for that given random steering angle. If the reward is positive, then the weight associated with the input neurons to output neurons that fired for that state is strengthened, and if the reward is negative, then the weight for the input to output neurons in (\ref{Eq.15}) is weakened. Future research will include an inhibitory effect where the weights can become negative.
 
 After training, the $\alpha$ changes to 1 and eliminates the effect of random output, and the \ac{snn}'s output is calculated based on the synaptic currents. Algorithm \ref{Algorithm4.1} shows the training process.
 
@@ -295,7 +295,7 @@ After several simulations, the number of input neurons for invader and defender 
 
 The output of the activation of each membership function is the input to a neuron associated with that specific membership function. There are 10 input neurons for the 10 membership functions related to each input. Furthermore, no more than 2 membership functions fire for any given input. Therefore, at most, only two neurons are excited and generate an impulse sequence for a given input.
 
-The target's velocity is 0.15 $m/s$. The invader's velocity is 0.3 $m/s$. The $\gamma$ is 0.75, so the defender's velocity is 0.225 $m/s$. The defender's capture radius ($\rho$) is set to 0.025 $m$. The maximum simulation time for each epoch is 10 seconds. The $\theta_s$ for invader and defender is $\pi/4$, and the $\sigma$ is set to 1.25. The parameter values for \ac{stdp}, shown in Table \ref{Table4.2}, are set through several simulations.
+The target's velocity is 0.15 $m/s$. The invader's velocity is 0.3 $m/s$. The $\gamma$ is 0.75, so the defender's velocity is 0.225 $m/s$. The defender's capture radius ($\rho$) is set to 0.025 $m$. The maximum simulation time for each epoch is 10 seconds. The $-\pi/4 < \theta_s < \pi/4$ for invader and defender, and the $\sigma$ is set to 1.25. The parameter values for \ac{stdp}, shown in Table \ref{Table4.2}, are set through several simulations.
 
 The reward coefficients are set manually. The $\tau_{s}$ in Table \ref{Table4.2} defines the decaying rate of $C$ in (\ref{Eq.14}) that determines the \ac{stdp} sensitivity to prior firings. According to (\ref{Eq.15}), higher $\tau_{s}$ means that the \ac{stdp} takes into account the activity of the two neurons that have fired in the relatively larger time window. Different studies have considered different values for this parameter.
 
@@ -333,4 +333,4 @@ The results of the simulation reveal that the CO method is highly affected by th
 
 This chapter focused on addressing the ATD problem within a dynamic environment involving two agents, where the target is in motion. The approach involved training two \ac{snn} simultaneously to engage in a competitive game. During the game, the target transitions from the invader's dominant region to the defender's dominant region. This shift in the target's location within the defender's dominant region satisfied the necessary conditions for determining the reachable regions for both the invader and defender.
 
-To evaluate the effectiveness of the \ac{snn}'s solution, a comparison was made with an analytical solution designed for centralized problems. The results demonstrated that the \ac{snn} method was capable of identifying the optimal solution for decentralized problems, even under the presence of noise. This result holds significant practical implications, particularly in scenarios where establishing a global coordinate system for all agents proves to be challenging. The obtained solution provided by the \ac{snn} approach offers a valuable alternative in such cases, showcasing its potential in real-world applications.
+To evaluate the effectiveness of the \ac{snn}'s solution, a comparison was made with Cartesian Oval designed for centralized problems. The results demonstrated that the \ac{snn} method was capable of identifying the optimal solution for decentralized problems, even under the presence of noise. This result holds significant practical implications, particularly in scenarios where establishing a global coordinate system for all agents proves to be challenging. The obtained solution provided by the \ac{snn} approach offers a valuable alternative in such cases, showcasing its potential in real-world applications.
