@@ -1,0 +1,10 @@
+\acswitchoff 
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {2.1}{\ignorespaces Parameter values for LIF neuron model \cite {Ch_1_R10}}}{31}{table.2.1}%
+\contentsline {table}{\numberline {2.2}{\ignorespaces Parameter values for \ac {stdp}}}{31}{table.2.2}%
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {3.1}{\ignorespaces Parameter values for \ac {lif} neuron model \cite {Ch_1_R10}}}{57}{table.3.1}%
+\contentsline {table}{\numberline {3.2}{\ignorespaces Simulation Parameters}}{58}{table.3.2}%
+\contentsline {table}{\numberline {3.3}{\ignorespaces Comparative Performance Analysis of the Proposed Aggregation Algorithm+\ac {RCSE} and \ac {RCSE}}}{66}{table.3.3}%
+\addvspace {10\p@ }

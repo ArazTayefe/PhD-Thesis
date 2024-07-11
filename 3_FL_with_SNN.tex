@@ -351,7 +351,7 @@ In this section, we conducted a numerical simulation to validate the performance
 
 \subsection{Simulation without \ac{fl}}
 
-In this simulation, we modeled five agents, each equipped with its own \ac{snn} model, capable of reaching a maximum speed of 1 \(m/s\). The architecture of each agent's neural network included 72 input neurons. Since each agent was designed to detect three distinct objects within its environment, the input layer was organized into sub-layers, with 24 neurons dedicated to each object. The network's output layer comprised 4 neurons, divided equally to represent negative and positive \(\Delta x\) and \(\Delta y\) movements. The \ac{snn} model in the simulation is a fully connected network, and the parameters of the \ac{lif} neuron are also represented in Table \ref{table:ParameterforLIF}.
+In this simulation, we modeled five agents, each equipped with its own \ac{snn} model, capable of reaching a maximum speed of 1 \(m/s\). The architecture of each agent's neural network included 72 input neurons. The number of input neurons was derived from a series of numerical simulations. Since each agent was designed to detect three distinct objects within its environment, the input layer was organized into sub-layers, with 24 neurons dedicated to each object (24 membership functions for each object). The network's output layer comprised 4 neurons, divided equally to represent negative and positive \(\Delta x\) and \(\Delta y\) movements. The \ac{snn} model in the simulation is a fully connected network, and the parameters of the \ac{lif} neuron are also represented in Table \ref{table:ParameterforLIF}.
 
 \begin{table}[H]
 \caption{Parameter values for \ac{lif} neuron model \cite{Ch_1_R10}}
@@ -371,7 +371,7 @@ $V_{th}$ & -50 mV & Threshold membrane potential \\
 \end{tabular}
 \end{table}
 
-The \ac{stdp} mechanism updated synaptic weights at 10 ms intervals. During these intervals, the learning algorithm adjusted the agent's states based on received data from other agents and the leader while simultaneously generating random outputs as part of an exploration strategy.
+The \ac{stdp} mechanism updated synaptic weights at 10 ms intervals. During these intervals, the learning algorithm adjusted the agent's states based on received data from other agents and the leader while simultaneously generating random outputs as part of an exploration strategy (section 3.2.3).
 
 \begin{table}[H]
 \caption{Simulation Parameters}
@@ -451,7 +451,9 @@ When the leader is transformed into an obstacle, the encoding equation for the i
     \mu_{I}(\phi_{i}) = \exp{\left(-\frac{(\phi_{i}-\zeta)^2}{2\sigma^2}\right)}
 \end{equation}
 
-The simulation proceeded for an additional 1200 seconds, during which the synaptic weights were adjusted in accordance with the new reward function given by \eqref{Eq.R-1}. The results of the reward change are shown in Figures \ref{fig_3_6} and \ref{fig_3_7}, which indicates that the agents quickly reduced their initial distance to the commanded distance of 2 m. Simultaneously, the minimum distance from the obstacle, which was the leader, increased over time, indicating that the agents adapted their behavior to maintain a greater distance from the obstacle. Figure \ref{fig_3_7} shows the trajectory of each agent after the reward change.
+The simulation proceeded for an additional 1200 seconds, during which the synaptic weights were adjusted in accordance with the new reward function given by \eqref{Eq.R-1}. In this case, because the leader is now an obstacle, so then \(\alpha^{\mathcal{S}}(t)\) in Fig. 2.4 switches to zero and training starts again with random signals to the output layer.
+
+The results of the reward change are shown in Figures \ref{fig_3_6} and \ref{fig_3_7}, which indicates that the agents quickly reduced their initial distance to the commanded distance of 2 m. Simultaneously, the minimum distance from the obstacle, which was the leader, increased over time, indicating that the agents adapted their behavior to maintain a greater distance from the obstacle. Figure \ref{fig_3_7} shows the trajectory of each agent after the reward change.
 
 \begin{figure}[ht]
     \centering
