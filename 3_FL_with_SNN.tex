@@ -180,7 +180,154 @@ The choice of setting the decay rate to \(\lambda\mathcal{A} \times \mathcal{R}_
 
 \noindent where \(\odot\) is the Hadamard product. 
 
-When \(|W_{max}^{\mathcal{S}}(t)| < \Psi^{\mathcal{S}} \), the reward adjusts the synaptic weights, and there is no weight decay to disturb the learning process. When \(|W_{max}^{\mathcal{S}}(t)| > \Psi^{\mathcal{S}} \), the decay rate changes the synaptic weights and brings the maximum weight to the reward zone, where \(|W_{max}^{\mathcal{S}}(t)| < \Psi^{\mathcal{S}} \) and the networks responds to reward change
+When \(|W_{max}^{\mathcal{S}}(t)| < \Psi^{\mathcal{S}} \), the reward adjusts the synaptic weights, and there is no weight decay to disturb the learning process. When \(|W_{max}^{\mathcal{S}}(t)| > \Psi^{\mathcal{S}} \), the decay rate changes the synaptic weights and brings the maximum weight to the reward zone, where \(|W_{max}^{\mathcal{S}}(t)| < \Psi^{\mathcal{S}} \) and the networks responds to reward change.
+
+\textbf{Numerical example for the \ac{RCSE} algorithm}
+
+% Consider a set of input neurons firing based on their fuzzy membership degrees. For an input received, a set of adjacent input neurons fires, along with an output neuron. Let the set \(\mathcal{S}\) be defined based on the fired neurons as follows:
+
+% \[
+% \mathcal{S} = \{15, 16, 17, 18, 73\}
+% \]
+
+% In this set, neurons 15, 16, 17, and 18 are fired input neurons, and neuron 73 is the fired output neuron. First, the algorithm finds the maximum synaptic weight connecting these input neurons to the output neuron, denoted as \(W_{max}^{\mathcal{S}}(t)\). Let's assume that \(W_{max}^{\mathcal{S}}(t) = 7\), and \(
+% \mathcal{R}_{max}^{\mathcal{S}} = 0.5, \quad \mathcal{R}_{max}^{G} = 1, \quad I^{max} = 15.5,\) that can be calculated based on the neuron model and the reward function characteristics.
+
+% We use these values to find the learning rate \(\boldsymbol{\alpha}^{\mathcal{S}}(t)\) for the synaptic weights.  Substituting the given values:
+% \[
+% \Psi^{\mathcal{S}} = \frac{0.5}{1} \times 15.5 = 7.75
+% \]
+
+% Assuming \(\epsilon\) is a small positive number (e.g., 0.01), the learning rate for these synaptic weights \(\boldsymbol{\alpha}^{\mathcal{S}}(t)\) can be calculated as:
+% \[
+% \boldsymbol{\alpha}^{\mathcal{S}}(t) = \frac{1}{1 + \exp{\left[\frac{1}{0.01}\left( 7 - 7.75 \right)\right]}} = \frac{1}{1 + \exp{\left[-75\right]}}
+% \]
+
+% Given that \(\exp{\left[-75\right]}\) is very close to 0, \(\boldsymbol{\alpha}^{\mathcal{S}}(t)\) approaches 1, indicating a high learning rate for synaptic adjustment.
+
+% When the maximum synaptic weight \(W_{max}^{\mathcal{S}}(t)\) surpasses the value of \(\Psi^{\mathcal{S}}\) (e.g., \(W_{max}^{\mathcal{S}}(t) = 8\)), the learning rate \(\boldsymbol{\alpha}^{\mathcal{S}}(t)\) changes as follows:
+
+% \[
+% \boldsymbol{\alpha}^{\mathcal{S}}(t) = \frac{1}{1 + \exp{\left[\frac{1}{0.01}\left( 8 - 7.75 \right)\right]}} = 0.0759
+% \]
+
+% This means that there is a negligible adjustment rate for the synaptic weights. Therefore, the maximum synaptic weight in \(\mathcal{S}\) prevents further growth, maintaining stability in the network.
+
+% When the reward changes such that \(\mathcal{R}_{max}^{\mathcal{S}} = \mathcal{R}_{max}^{G}\), the learning rate changes from 0 to 1, causing the weights to start growing again. This happens because \(\Psi^{\mathcal{S}}\) changes as follows:
+
+% Given:
+% \[
+% \mathcal{R}_{max}^{\mathcal{S}} = \mathcal{R}_{max}^{G} = 1, \quad I^{max} = 15.5, \quad W_{max}^{\mathcal{S}}(t) = 8
+% \]
+
+% Substituting into \(\Psi^{\mathcal{S}}\):
+% \[
+% \Psi^{\mathcal{S}} = \frac{\mathcal{R}_{max}^{\mathcal{S}}}{\mathcal{R}_{max}^{G}} I^{max} = \frac{1}{1} \times 15.5 = 15.5
+% \]
+
+% Now, calculating the learning rate:
+% \[
+% \boldsymbol{\alpha}^{\mathcal{S}}(t) = \frac{1}{1 + \exp{\left[\frac{1}{0.01}\left( 8 - 15.5 \right)\right]}} = \frac{1}{1 + \exp{\left[-750\right]}}
+% \]
+
+% Given that \(\exp{\left[-750\right]}\) is extremely close to 0, \(\boldsymbol{\alpha}^{\mathcal{S}}(t)\) approaches 1, indicating a very high learning rate for synaptic adjustment, allowing the weights to grow significantly.
+
+
+
+
+% ----------------------------------------------------------------
+
+Consider a set of input neurons firing based on their fuzzy membership degrees. For an input received, a set of adjacent input neurons fires, along with an output neuron. Let the set \(\mathcal{S}\) be defined based on the fired neurons as follows:
+
+\[
+\mathcal{S} = \{15, 16, 17, 18, 73\}
+\]
+
+In this set, neurons 15, 16, 17, and 18 are fired input neurons, and neuron 73 is the fired output neuron. First, the algorithm finds the maximum synaptic weight connecting these input neurons to the output neuron, denoted as \(W_{max}^{\mathcal{S}}(t)\). Let's assume that \(I^{max} = 15.5\) and \(\epsilon\) is a small positive number (e.g., 0.01).
+
+The decay rate is formulated using a SoftPlus function, which is parameterized by \(\lambda\) and \(\mathcal{A}\), where \(\lambda = 5\) and \(\mathcal{A} = 1\) in this numerical example. The \(\eta\) and \(\beta\) influence the decay rate adjustments under various synaptic conditions and reward structures.
+
+\textbf{Case 1: \(W_{max}^{\mathcal{S}}(t) < \Psi^{\mathcal{S}}\)}
+
+Let's assume that \(\mathcal{R}_{max}^{\mathcal{S}} = 0.5\) and \(\mathcal{R}_{max}^{G}=1\) (\(\Psi^{\mathcal{S}} = 0.5/1 \times 15.5 = 7.75\)), so the maximum change rate for this set (\(\mathcal{S}\)) is \(\mathcal{A}\mathcal{R}_{max}^{\mathcal{S}} = 0.5\) while the maximum change rate in the network is \(\mathcal{A}\mathcal{R}_{max}^{G} = 1\). For \(W_{max}^{\mathcal{S}}(t) = 7\), the decay rate \(\Theta^{\mathcal{S}}\) can be calculated as follows,
+
+\begin{equation*}
+    \beta = \frac{\ln{(2^{\lambda^2}-1)}}{\Psi^{\mathcal{S}}} = \frac{\ln(2^{5^2} - 1)}{7.75} = 2.236
+\end{equation*}
+
+\begin{equation*}
+    \eta = \frac{\mathcal{A}\mathcal{R}_{max}^{G} \ln{(2^{\lambda^2}-1)}}{\lambda\Psi^{\mathcal{S}} \log{(2)}} = \frac{1 \cdot 1 \cdot \ln(2^{5^2} - 1)}{5 \cdot 7.75 \cdot \log(2)} = 1.485
+\end{equation*}
+
+\begin{equation*}
+    \Theta^{\mathcal{S}} = \left( \frac{1.485}{2.236} \right) \log \left(1 + \exp \left[2.236 \cdot (7 - 7.75)\right] \right) = 0.05
+\end{equation*}
+
+\begin{equation*}
+    \boldsymbol{\alpha}^{\mathcal{S}}(t) = \frac{1}{1 + \exp{\left[\frac{1}{0.01}\left(7 - 7.75\right)\right]}} = 1
+\end{equation*}
+
+The decay rate is low enough in comparison with the learning rate to allow for synaptic growth (\(\mathcal{A}\mathcal{R}_{max}^{\mathcal{S}}\)), promoting an increase in synaptic strength.
+
+\textbf{Case 2: \(W_{max}^{\mathcal{S}}(t) > \Psi^{\mathcal{S}}\)}
+
+Let's assume that \(W_{max}^{\mathcal{S}}(t) = 10\), the decay rate \(\Theta^{\mathcal{S}}\) can be calculated as follows,
+
+\begin{equation}
+    \Theta^{\mathcal{S}} = \left( \frac{1.485}{2.236} \right) \log \left(1 + \exp \left[2.236 \cdot (10 - 7.75)\right] \right) = 1.453
+\end{equation}
+
+\begin{equation*}
+    \boldsymbol{\alpha}^{\mathcal{S}}(t) = \frac{1}{1 + \exp{\left[\frac{1}{0.01}\left(10 - 7.75\right)\right]}} \approx 0
+\end{equation*}
+
+This results in a higher decay rate for the set \(\mathcal{S}\) (while \(\alpha^{\mathcal{S}}=0\)), actively working to reduce synaptic strength towards the threshold, due to \(W_{max}^{\mathcal{S}}(t)\) exceeding \(\Psi^{\mathcal{S}}\).
+
+\textbf{Case 3: When \(\Psi^{\mathcal{S}}\) increases from 7.75 to 15.5 (Reward Change)}
+
+Assuming a reward change causes \(\Psi^{\mathcal{S}}\) to increase to 15.5 (\(\mathcal{R}_{max}^{\mathcal{S}}=\mathcal{R}_{max}^{G}=1\)) and considering \(W_{max}^{\mathcal{S}}(t) = 7.8\), the decay rate \(\Theta^{\mathcal{S}}\) is recalculated as follows,
+
+\begin{equation*}
+    \beta = \frac{\ln{(2^{\lambda^2}-1)}}{\Psi^{\mathcal{S}}} = \frac{\ln(2^{5^2} - 1)}{15.5} = 1.118
+\end{equation*}
+
+\begin{equation*}
+    \eta = \frac{\mathcal{A}\mathcal{R}_{max}^{G} \ln{(2^{\lambda^2}-1)}}{\lambda\Psi^{\mathcal{S}} \log{(2)}} = \frac{1 \cdot 1 \cdot \ln(2^{5^2} - 1)}{5 \cdot 15.5 \cdot \log(2)} = 0.743
+\end{equation*}
+
+\begin{equation*}
+    \Theta^{\mathcal{S}} = \left( \frac{0.743}{1.118} \right) \log \left(1 + \exp \left[1.118 \cdot (7.8 - 15.5)\right] \right) \approx 0
+\end{equation*}
+
+\begin{equation*}
+    \boldsymbol{\alpha}^{\mathcal{S}}(t) = \frac{1}{1 + \exp{\left[\frac{1}{0.01}\left(7.8 - 15.5\right)\right]}} = 1
+\end{equation*}
+
+The decay rate allows for synaptic growth of set \(\mathcal{S}\) as the maximum weight is below the new threshold.
+
+\textbf{Case 4: When \(\Psi^{\mathcal{S}}\) decreases from 15.5 to 7.75 (Reward Change)}
+
+If \(\Psi^{\mathcal{S}}\) decreases to 7.75 due to reward changes and assuming \(W_{max}^{\mathcal{S}}(t) = 15.6\), the decay rate \(\Theta^{\mathcal{S}}\) increases as follows,
+
+\begin{equation*}
+    \beta = \frac{\ln{(2^{\lambda^2}-1)}}{\Psi^{\mathcal{S}}} = \frac{\ln(2^{5^2} - 1)}{7.75} = 2.236
+\end{equation*}
+
+\begin{equation*}
+    \eta = \frac{\mathcal{A}\mathcal{R}_{max}^{G} \ln{(2^{\lambda^2}-1)}}{\lambda\Psi^{\mathcal{S}} \log{(2)}} = \frac{1 \cdot 1 \cdot \ln(2^{5^2} - 1)}{5 \cdot 7.75 \cdot \log(2)} = 1.485
+\end{equation*}
+
+\begin{equation*}
+    \Theta^{\mathcal{S}} = \left( \frac{1.485}{2.236} \right) \log \left(1 + \exp \left[2.236 \cdot (15.6 - 7.75)\right] \right) = 5.063
+\end{equation*}
+
+\begin{equation*}
+    \boldsymbol{\alpha}^{\mathcal{S}}(t) = \frac{1}{1 + \exp{\left[\frac{1}{0.01}\left(15.6 - 7.75\right)\right]}} = 0
+\end{equation*}
+
+In this scenario, the decay rate is very high, and the learning rate is 0. Therefore, the algorithm aggressively pulls the synaptic weight back toward the lowered threshold.
+
+
 
 \begin{lemma}
     The \ac{RCSE} method is asymptotically stable in its equilibrium point \(W_{max}^{\mathcal{S}}(t) = \Psi^{\mathcal{S}}\).

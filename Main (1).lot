@@ -1,0 +1,11 @@
+\acswitchoff 
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {1.1}{\ignorespaces Spike Response Function of the neurons in a \ac {snn}. The represented model is Leaky-Integrate and Fire model.}}{4}{table.1.1}%
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {2.1}{\ignorespaces Parameter values for LIF neuron model \cite {Ch_1_R10}}}{32}{table.2.1}%
+\contentsline {table}{\numberline {2.2}{\ignorespaces Parameter values for \ac {stdp}}}{32}{table.2.2}%
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {3.1}{\ignorespaces Parameter values for \ac {lif} neuron model \cite {Ch_1_R10}}}{58}{table.3.1}%
+\contentsline {table}{\numberline {3.2}{\ignorespaces Simulation Parameters}}{59}{table.3.2}%
+\contentsline {table}{\numberline {3.3}{\ignorespaces Comparative Performance Analysis of the Proposed Aggregation Algorithm+\ac {RCSE} and \ac {RCSE}}}{67}{table.3.3}%
+\addvspace {10\p@ }

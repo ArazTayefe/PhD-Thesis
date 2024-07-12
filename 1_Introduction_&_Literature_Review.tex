@@ -32,7 +32,33 @@ Despite these challenges, the potential benefits of integrating \ac{snn}s with \
 
 \subsection{Neuron model}
 
-In the study of computational neuroscience and the development of neural networks, particularly \ac{snn}, various neuron models have been proposed to simulate the electrical activity of neurons. These models range from simple to complex, aiming to capture the essential features of neuronal dynamics. This section overviews several key neuron models and their characteristics.
+In the study of computational neuroscience and the development of neural networks, particularly \ac{snn}, various neuron models have been proposed to simulate the electrical activity of neurons. These models range from simple to complex, aiming to capture the essential features of neuronal dynamics. The diagram in Figure \ref{Fig.SimplMdlSNN} illustrates a basic network consisting of spiking neurons. In this network, the pre-synaptic neuron (pre-neuron) in the input layer spikes in response to the input (I) and transmits these spikes through synaptic weights to the post-synaptic neuron (post-neuron). Whenever the pre-neuron spikes, the post-neuron receives input current with a value of W.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\textwidth]{Figures/Simple Spiking Neural Network.pdf}
+    \caption{Simple model of a \ac{snn}. The spike pattern shows that the neurons spike whenever the input amount reaches a threshold.}
+    \label{Fig.SimplMdlSNN}
+\end{figure}
+
+Table \ref{Table.SRF} shows the differential equations used in the network. In \ac{snn}s, the activation function, like ReLu and tanh in regular neural networks, is replaced by a differential equation that mimics the biological neuron activity.
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{cc}
+        \toprule
+        & \textbf{Spike Response Function} \\
+        \midrule
+        \textbf{Pre-Neuron} & $\dot{V}_1 = \frac{1}{\tau_m} \left[ E_L - V_1 + R_m I \right]$ \\
+        \midrule
+        \textbf{Post-Neuron} & $\dot{V}_2 = \frac{1}{\tau_m} \left[ E_L - V_2 + R_m \left( W \delta (t - t_{\text{pre}}) \right) \right]$ \\
+        \bottomrule
+    \end{tabular}
+    \caption{Spike Response Function of the neurons in an \ac{snn}.}
+    \label{Table.SRF}
+\end{table}
+
+Several spike response functions have been proposed to emulate neuron activity. In this chapter, the Leaky-Integrate and Fire model is represented because it is simple and accurate enough in emulating real neurons. This section overviews the neuron model and its characteristics.
 
 
 \subsubsection{Leaky-Integrate and Fire model}
@@ -159,45 +185,45 @@ Synaptic weight updates are then guided by the interaction between the eligibili
 
 \noindent where $dw_{ji}/dt$ symbolizes the rate of change in synaptic weight, contingent upon the compounded influence of the eligibility trace and the reward signal.
 
-\textbf{Hypothesis Testing Plasticity (HTP)}
+% \textbf{Hypothesis Testing Plasticity (HTP)}
 
-The HTP model focuses on the sophisticated evolution of synaptic strengths through the interaction with both short-term and long-term components of synaptic weights~\cite{Ch_1_R23}. The HTP model delineates the dynamics of synaptic strength through a dual-component approach. This approach separates synaptic weight into short-term and long-term components. In the following, the mathematical representation of this model, including the dynamics of short-term synaptic changes and the conditions for long-term consolidation, is discussed.
+% The HTP model focuses on the sophisticated evolution of synaptic strengths through the interaction with both short-term and long-term components of synaptic weights~\cite{Ch_1_R23}. The HTP model delineates the dynamics of synaptic strength through a dual-component approach. This approach separates synaptic weight into short-term and long-term components. In the following, the mathematical representation of this model, including the dynamics of short-term synaptic changes and the conditions for long-term consolidation, is discussed.
 
-Short-term synaptic weight changes are governed by,
+% Short-term synaptic weight changes are governed by,
 
-\begin{equation}
-\dot{w}_{ji}^{st}(t) = -\frac{w_{ji}^{st}(t)}{\tau_{st}} + M(t) \cdot \text{RCHP}_{ji}(t)
-\end{equation}
+% \begin{equation}
+% \dot{w}_{ji}^{st}(t) = -\frac{w_{ji}^{st}(t)}{\tau_{st}} + M(t) \cdot \text{RCHP}_{ji}(t)
+% \end{equation}
 
-\noindent where $M(t)$, representing the dynamic concentration of reward, evolves as:
+% \noindent where $M(t)$, representing the dynamic concentration of reward, evolves as:
 
-\begin{equation}
-\dot{M}(t) = -\frac{M(t)}{\tau_{M}} + \alpha R(t) - b
-\end{equation}
+% \begin{equation}
+% \dot{M}(t) = -\frac{M(t)}{\tau_{M}} + \alpha R(t) - b
+% \end{equation}
 
-Long-term synaptic changes are then formulated as:
+% Long-term synaptic changes are then formulated as:
 
-\begin{equation}
-\dot{w}_{ji}^{lt}(t) = \beta \mathcal{H}(w_{ji}^{st}(t) - \Phi)
-\end{equation}
+% \begin{equation}
+% \dot{w}_{ji}^{lt}(t) = \beta \mathcal{H}(w_{ji}^{st}(t) - \Phi)
+% \end{equation}
 
-\noindent where $\mathcal{H}$ denotes the Heaviside step function, introducing a binary condition for the consolidation of synaptic changes based on the magnitude of short-term synaptic weight relative to the threshold $\Phi$, and $\beta$ represents the consolidation rate.
+% \noindent where $\mathcal{H}$ denotes the Heaviside step function, introducing a binary condition for the consolidation of synaptic changes based on the magnitude of short-term synaptic weight relative to the threshold $\Phi$, and $\beta$ represents the consolidation rate.
 
-This framework integrates the dynamics of synaptic plasticity with mechanisms of reward-based learning, offering a comprehensive model for understanding the biological and computational foundations of learning and memory. The choice of the R-STDP algorithm for this thesis is underpinned by several compelling reasons:
+% This framework integrates the dynamics of synaptic plasticity with mechanisms of reward-based learning, offering a comprehensive model for understanding the biological and computational foundations of learning and memory. The choice of the R-STDP algorithm for this thesis is underpinned by several compelling reasons:
 
-\begin{enumerate}
-    \item \textbf{Biological Plausibility}: R-STDP closely mimics biological learning processes by integrating synaptic plasticity with reward signals. This alignment with natural neural mechanisms enhances the potential for developing more realistic and efficient neuromorphic systems.
+% \begin{enumerate}
+%     \item \textbf{Biological Plausibility}: R-STDP closely mimics biological learning processes by integrating synaptic plasticity with reward signals. This alignment with natural neural mechanisms enhances the potential for developing more realistic and efficient neuromorphic systems.
     
-    \item \textbf{Temporal Precision}: Unlike traditional Hebbian learning, R-STDP leverages precise spike-timing information, allowing for fine-grained synaptic modifications. This temporal specificity is crucial for tasks that require high temporal resolution, such as sensory processing and motor control.
+%     \item \textbf{Temporal Precision}: Unlike traditional Hebbian learning, R-STDP leverages precise spike-timing information, allowing for fine-grained synaptic modifications. This temporal specificity is crucial for tasks that require high temporal resolution, such as sensory processing and motor control.
     
-    \item \textbf{Robustness to Noise}: By focusing on the timing of spikes rather than just firing rates, R-STDP can be more robust to noise and fluctuations in neural activity. This robustness is particularly advantageous in real-world scenarios where sensory inputs and neural responses can be highly variable.
+%     \item \textbf{Robustness to Noise}: By focusing on the timing of spikes rather than just firing rates, R-STDP can be more robust to noise and fluctuations in neural activity. This robustness is particularly advantageous in real-world scenarios where sensory inputs and neural responses can be highly variable.
     
-    \item \textbf{Credit Assignment}: The eligibility trace mechanism in R-STDP provides an elegant solution to the credit assignment problem, distributing synaptic changes over time based on the timing of spikes and rewards. This feature supports more effective learning in complex, temporally extended tasks.
+%     \item \textbf{Credit Assignment}: The eligibility trace mechanism in R-STDP provides an elegant solution to the credit assignment problem, distributing synaptic changes over time based on the timing of spikes and rewards. This feature supports more effective learning in complex, temporally extended tasks.
     
-    \item \textbf{Adaptive Learning}: R-STDP’s capability to modulate synaptic changes based on the reward history allows for continuous adaptation and refinement of synaptic connections. This adaptive learning is essential for long-term performance and generalization in changing environments.
-\end{enumerate}
+%     \item \textbf{Adaptive Learning}: R-STDP’s capability to modulate synaptic changes based on the reward history allows for continuous adaptation and refinement of synaptic connections. This adaptive learning is essential for long-term performance and generalization in changing environments.
+% \end{enumerate}
 
-Given these advantages, the R-STDP algorithm offers a balanced approach that combines the strengths of Hebbian learning with the benefits of reinforcement learning. Its ability to integrate temporal dynamics, reward signals, and synaptic plasticity makes it a suitable choice for advancing the state-of-the-art in neuromorphic computing and autonomous systems.
+% Given these advantages, the R-STDP algorithm offers a balanced approach that combines the strengths of Hebbian learning with the benefits of reinforcement learning. Its ability to integrate temporal dynamics, reward signals, and synaptic plasticity makes it a suitable choice for advancing the state-of-the-art in neuromorphic computing and autonomous systems.
 
 % \section{Federated Learning}
 
