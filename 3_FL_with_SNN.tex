@@ -151,7 +151,7 @@ Let us define \(\boldsymbol{\alpha}\) as the learning rate matrix. We will also 
     \boldsymbol{\alpha}^{\mathcal{S}}(t) = \frac{1}{1 + \exp{\left[\frac{1}{\epsilon}\left( |W_{max}^{\mathcal{S}}(t)| - \Psi^{\mathcal{S}} \right)\right]}}, \quad \left(\Psi^{\mathcal{S}} = \frac{\mathcal{R}_{max}^{\mathcal{S}}}{\mathcal{R}_{max}^{G}} I^{max} \right)
 \end{equation}
 
-\noindent where \(\mathcal{R}_{max}^{\mathcal{S}}\) is the maximum reward in the network section (e.g., \(max(\mathcal{R}_{Fi}^{Fj})\)), \(\mathcal{R}_{max}^{G} = max(\mathcal{R}_{Fi}^{Fj}, \mathcal{R}_{Fi}^{L})\), and \(\epsilon\) is a small positive number that controls the steep of the function around \(W_{max}^{\mathcal{S}}(t) =  \Psi^{\mathcal{S}}\). This model determines the learning rate by the highest synaptic weight among the active input and output neurons. This mechanism is similar to the ``winner-takes-all'' approach. When a synaptic connection reaches its weight limit, it prevents further changes in the adjacent synaptic weights. 
+\noindent where \(\mathcal{R}_{max}^{\mathcal{S}}\) is the maximum reward in the network section (e.g., \(max(\mathcal{R}_{Fi}^{Fj})\)), \(\mathcal{R}_{max}^{G} = max(\mathcal{R}_{Fi}^{Fj}, \mathcal{R}_{Fi}^{L})\), and \(\epsilon\) is a small positive number that controls the curvature of the function around \(W_{max}^{\mathcal{S}}(t) =  \Psi^{\mathcal{S}}\). This model determines the learning rate by the highest synaptic weight among the active input and output neurons. This mechanism is similar to the ``winner-takes-all'' approach. When a synaptic connection reaches its weight limit, it prevents further changes in the adjacent synaptic weights. 
 
 The network contains a variety of reward functions, each with its own maximum and minimum values. The highest reward value in a specific area of the network sets the limit for the synaptic weight in that area. The synaptic weight limit is linked to the ratio of the local maximum reward (\(\mathcal{R}_{max}^{\mathcal{S}}\)) to the global maximum reward (\(\mathcal{R}_{max}^{G}\)). As a result, the network section with the highest local maximum reward (\(\mathcal{R}_{max}^{\mathcal{S}}=\mathcal{R}_{max}^{G}\)) attains the maximum allowable synaptic weights because \(\frac{\mathcal{R}_{max}^{\mathcal{S}}}{\mathcal{R}_{max}^{G}}=1\), while sections with lower local maximum rewards reach only a proportional fraction of the maximum weight. The adjustment of the learning rate transforms into a competitive algorithm that modifies the growth rate of individual synaptic weights by considering network parameters, like reward and maximum synaptic weight.
 
@@ -184,72 +184,19 @@ When \(|W_{max}^{\mathcal{S}}(t)| < \Psi^{\mathcal{S}} \), the reward adjusts th
 
 \textbf{Numerical example for the \ac{RCSE} algorithm}
 
-% Consider a set of input neurons firing based on their fuzzy membership degrees. For an input received, a set of adjacent input neurons fires, along with an output neuron. Let the set \(\mathcal{S}\) be defined based on the fired neurons as follows:
-
-% \[
-% \mathcal{S} = \{15, 16, 17, 18, 73\}
-% \]
-
-% In this set, neurons 15, 16, 17, and 18 are fired input neurons, and neuron 73 is the fired output neuron. First, the algorithm finds the maximum synaptic weight connecting these input neurons to the output neuron, denoted as \(W_{max}^{\mathcal{S}}(t)\). Let's assume that \(W_{max}^{\mathcal{S}}(t) = 7\), and \(
-% \mathcal{R}_{max}^{\mathcal{S}} = 0.5, \quad \mathcal{R}_{max}^{G} = 1, \quad I^{max} = 15.5,\) that can be calculated based on the neuron model and the reward function characteristics.
-
-% We use these values to find the learning rate \(\boldsymbol{\alpha}^{\mathcal{S}}(t)\) for the synaptic weights.  Substituting the given values:
-% \[
-% \Psi^{\mathcal{S}} = \frac{0.5}{1} \times 15.5 = 7.75
-% \]
-
-% Assuming \(\epsilon\) is a small positive number (e.g., 0.01), the learning rate for these synaptic weights \(\boldsymbol{\alpha}^{\mathcal{S}}(t)\) can be calculated as:
-% \[
-% \boldsymbol{\alpha}^{\mathcal{S}}(t) = \frac{1}{1 + \exp{\left[\frac{1}{0.01}\left( 7 - 7.75 \right)\right]}} = \frac{1}{1 + \exp{\left[-75\right]}}
-% \]
-
-% Given that \(\exp{\left[-75\right]}\) is very close to 0, \(\boldsymbol{\alpha}^{\mathcal{S}}(t)\) approaches 1, indicating a high learning rate for synaptic adjustment.
-
-% When the maximum synaptic weight \(W_{max}^{\mathcal{S}}(t)\) surpasses the value of \(\Psi^{\mathcal{S}}\) (e.g., \(W_{max}^{\mathcal{S}}(t) = 8\)), the learning rate \(\boldsymbol{\alpha}^{\mathcal{S}}(t)\) changes as follows:
-
-% \[
-% \boldsymbol{\alpha}^{\mathcal{S}}(t) = \frac{1}{1 + \exp{\left[\frac{1}{0.01}\left( 8 - 7.75 \right)\right]}} = 0.0759
-% \]
-
-% This means that there is a negligible adjustment rate for the synaptic weights. Therefore, the maximum synaptic weight in \(\mathcal{S}\) prevents further growth, maintaining stability in the network.
-
-% When the reward changes such that \(\mathcal{R}_{max}^{\mathcal{S}} = \mathcal{R}_{max}^{G}\), the learning rate changes from 0 to 1, causing the weights to start growing again. This happens because \(\Psi^{\mathcal{S}}\) changes as follows:
-
-% Given:
-% \[
-% \mathcal{R}_{max}^{\mathcal{S}} = \mathcal{R}_{max}^{G} = 1, \quad I^{max} = 15.5, \quad W_{max}^{\mathcal{S}}(t) = 8
-% \]
-
-% Substituting into \(\Psi^{\mathcal{S}}\):
-% \[
-% \Psi^{\mathcal{S}} = \frac{\mathcal{R}_{max}^{\mathcal{S}}}{\mathcal{R}_{max}^{G}} I^{max} = \frac{1}{1} \times 15.5 = 15.5
-% \]
-
-% Now, calculating the learning rate:
-% \[
-% \boldsymbol{\alpha}^{\mathcal{S}}(t) = \frac{1}{1 + \exp{\left[\frac{1}{0.01}\left( 8 - 15.5 \right)\right]}} = \frac{1}{1 + \exp{\left[-750\right]}}
-% \]
-
-% Given that \(\exp{\left[-750\right]}\) is extremely close to 0, \(\boldsymbol{\alpha}^{\mathcal{S}}(t)\) approaches 1, indicating a very high learning rate for synaptic adjustment, allowing the weights to grow significantly.
-
-
-
-
-% ----------------------------------------------------------------
-
 Consider a set of input neurons firing based on their fuzzy membership degrees. For an input received, a set of adjacent input neurons fires, along with an output neuron. Let the set \(\mathcal{S}\) be defined based on the fired neurons as follows:
 
 \[
 \mathcal{S} = \{15, 16, 17, 18, 73\}
 \]
 
-In this set, neurons 15, 16, 17, and 18 are fired input neurons, and neuron 73 is the fired output neuron. First, the algorithm finds the maximum synaptic weight connecting these input neurons to the output neuron, denoted as \(W_{max}^{\mathcal{S}}(t)\). Let's assume that \(I^{max} = 15.5\) and \(\epsilon\) is a small positive number (e.g., 0.01).
+In this set, neurons 15, 16, 17, and 18 are fired input neurons, and neuron 73 is the fired output neuron. First, the algorithm finds the maximum synaptic weight connecting these input neurons to the output neuron, denoted as \(W_{max}^{\mathcal{S}}(t)\). Let's assume that \(I^{max} = 15.5\) and \(\epsilon\) is a small positive number (e.g., 0.0001).
 
 The decay rate is formulated using a SoftPlus function, which is parameterized by \(\lambda\) and \(\mathcal{A}\), where \(\lambda = 5\) and \(\mathcal{A} = 1\) in this numerical example. The \(\eta\) and \(\beta\) influence the decay rate adjustments under various synaptic conditions and reward structures.
 
 \textbf{Case 1: \(W_{max}^{\mathcal{S}}(t) < \Psi^{\mathcal{S}}\)}
 
-Let's assume that \(\mathcal{R}_{max}^{\mathcal{S}} = 0.5\) and \(\mathcal{R}_{max}^{G}=1\) (\(\Psi^{\mathcal{S}} = 0.5/1 \times 15.5 = 7.75\)), so the maximum change rate for this set (\(\mathcal{S}\)) is \(\mathcal{A}\mathcal{R}_{max}^{\mathcal{S}} = 0.5\) while the maximum change rate in the network is \(\mathcal{A}\mathcal{R}_{max}^{G} = 1\). For \(W_{max}^{\mathcal{S}}(t) = 7\), the decay rate \(\Theta^{\mathcal{S}}\) can be calculated as follows,
+Let's assume that \(\mathcal{R}_{max}^{\mathcal{S}} = 0.5\) and \(\mathcal{R}_{max}^{G}=1\) (\(\Psi^{\mathcal{S}} = 0.5/1 \times 15.5 = 7.75\)), so the maximum change rate for this set \(\mathcal{S}\) is \(\mathcal{A}\mathcal{R}_{max}^{\mathcal{S}} = 0.5\) while the maximum change rate in the network is \(\mathcal{A}\mathcal{R}_{max}^{G} = 1\). For \(W_{max}^{\mathcal{S}}(t) = 7\), the decay rate \(\Theta^{\mathcal{S}}\) can be calculated as follows,
 
 \begin{equation*}
     \beta = \frac{\ln{(2^{\lambda^2}-1)}}{\Psi^{\mathcal{S}}} = \frac{\ln(2^{5^2} - 1)}{7.75} = 2.236
@@ -264,24 +211,24 @@ Let's assume that \(\mathcal{R}_{max}^{\mathcal{S}} = 0.5\) and \(\mathcal{R}_{m
 \end{equation*}
 
 \begin{equation*}
-    \boldsymbol{\alpha}^{\mathcal{S}}(t) = \frac{1}{1 + \exp{\left[\frac{1}{0.01}\left(7 - 7.75\right)\right]}} = 1
+    \boldsymbol{\alpha}^{\mathcal{S}}(t) = \frac{1}{1 + \exp{\left[\frac{1}{0.0001}\left(7 - 7.75\right)\right]}} = 1
 \end{equation*}
 
 The decay rate is low enough in comparison with the learning rate to allow for synaptic growth (\(\mathcal{A}\mathcal{R}_{max}^{\mathcal{S}}\)), promoting an increase in synaptic strength.
 
 \textbf{Case 2: \(W_{max}^{\mathcal{S}}(t) > \Psi^{\mathcal{S}}\)}
 
-Let's assume that \(W_{max}^{\mathcal{S}}(t) = 10\), the decay rate \(\Theta^{\mathcal{S}}\) can be calculated as follows,
+Let's assume that \(W_{max}^{\mathcal{S}}(t) = 10\), the decay and learning rates can be calculated as follows,
 
 \begin{equation}
     \Theta^{\mathcal{S}} = \left( \frac{1.485}{2.236} \right) \log \left(1 + \exp \left[2.236 \cdot (10 - 7.75)\right] \right) = 1.453
 \end{equation}
 
 \begin{equation*}
-    \boldsymbol{\alpha}^{\mathcal{S}}(t) = \frac{1}{1 + \exp{\left[\frac{1}{0.01}\left(10 - 7.75\right)\right]}} \approx 0
+    \boldsymbol{\alpha}^{\mathcal{S}}(t) = \frac{1}{1 + \exp{\left[\frac{1}{0.0001}\left(10 - 7.75\right)\right]}} \approx 0
 \end{equation*}
 
-This results in a higher decay rate for the set \(\mathcal{S}\) (while \(\alpha^{\mathcal{S}}=0\)), actively working to reduce synaptic strength towards the threshold, due to \(W_{max}^{\mathcal{S}}(t)\) exceeding \(\Psi^{\mathcal{S}}\).
+This results in a higher decay rate for the set \(\mathcal{S}\) (while \(\alpha^{\mathcal{S}}=0\)), actively working to reduce synaptic strength towards the threshold \(\Psi^{\mathcal{S}}\), due to \(W_{max}^{\mathcal{S}}(t)\) exceeding \(\Psi^{\mathcal{S}}\).
 
 \textbf{Case 3: When \(\Psi^{\mathcal{S}}\) increases from 7.75 to 15.5 (Reward Change)}
 
@@ -498,7 +445,7 @@ In this section, we conducted a numerical simulation to validate the performance
 
 \subsection{Simulation without \ac{fl}}
 
-In this simulation, we modeled five agents, each equipped with its own \ac{snn} model, capable of reaching a maximum speed of 1 \(m/s\). The architecture of each agent's neural network included 72 input neurons. The number of input neurons was derived from a series of numerical simulations. Since each agent was designed to detect three distinct objects within its environment, the input layer was organized into sub-layers, with 24 neurons dedicated to each object (24 membership functions for each object). The network's output layer comprised 4 neurons, divided equally to represent negative and positive \(\Delta x\) and \(\Delta y\) movements. The \ac{snn} model in the simulation is a fully connected network, and the parameters of the \ac{lif} neuron are also represented in Table \ref{table:ParameterforLIF}.
+In this simulation, we modeled five agents, each equipped with its own \ac{snn} model, capable of reaching a maximum speed of 1 \(m/s\). The architecture of each agent's neural network included 72 input neurons. The number of input neurons was derived from a series of numerical simulations. Since each agent was designed to detect three distinct objects within its environment, the input layer was organized into sub-layers, with 24 neurons dedicated to each object (24 membership functions and neurons for each object). The network's output layer comprised 4 neurons, divided equally to represent negative and positive \(\Delta x\) and \(\Delta y\) movements. The \ac{snn} model in the simulation is a fully connected network, and the parameters of the \ac{lif} neuron are also represented in Table \ref{table:ParameterforLIF}.
 
 \begin{table}[H]
 \caption{Parameter values for \ac{lif} neuron model \cite{Ch_1_R10}}
@@ -598,7 +545,7 @@ When the leader is transformed into an obstacle, the encoding equation for the i
     \mu_{I}(\phi_{i}) = \exp{\left(-\frac{(\phi_{i}-\zeta)^2}{2\sigma^2}\right)}
 \end{equation}
 
-The simulation proceeded for an additional 1200 seconds, during which the synaptic weights were adjusted in accordance with the new reward function given by \eqref{Eq.R-1}. In this case, because the leader is now an obstacle, so then \(\alpha^{\mathcal{S}}(t)\) in Fig. 2.4 switches to zero and training starts again with random signals to the output layer.
+The simulation proceeded for an additional 1200 seconds, during which the synaptic weights were adjusted in accordance with the new reward function given by \eqref{Eq.R-1}. In this case, because the leader is now an obstacle, so then \(\alpha^{\mathcal{S}}(t)\) in Figure \ref{fig_3_3_2} switches to 1 and training starts again with random signals to the output layer.
 
 The results of the reward change are shown in Figures \ref{fig_3_6} and \ref{fig_3_7}, which indicates that the agents quickly reduced their initial distance to the commanded distance of 2 m. Simultaneously, the minimum distance from the obstacle, which was the leader, increased over time, indicating that the agents adapted their behavior to maintain a greater distance from the obstacle. Figure \ref{fig_3_7} shows the trajectory of each agent after the reward change.
 
@@ -616,6 +563,8 @@ The results of the reward change are shown in Figures \ref{fig_3_6} and \ref{fig
         \label{fig_3_7}
     \end{minipage}
 \end{figure}
+
+Each agent in the swarm detects two neighboring agents and the leader, acquiring the Line-of-Sight angle and distance. Their neural network consists of three sub-layers in the input layer: two for neighboring followers (\(F_{1}\) and \(F_{2}\)) and one for the leader (\(L\)), with inputs encoded using Gaussian Receptive Fields and fuzzy membership functions. The network uses differences between current and commanded distances within the swarm (\(r_{cmd}\)) and between followers and the leader (\(R_{cmd}\)) to stimulate input neurons, which are split into parts for distances greater than and within the commanded distance, encoding the LOS angle with fuzzy membership functions. Errors in distances are transformed into amplitude values using the \(tanh\) function, bounded between 0 and 1. Each agent's neural network includes 72 input neurons, with 24 neurons per detected object, derived from numerical simulations. The output layer has 4 neurons representing positive and negative \(\Delta x\) and \(\Delta y\) movements.
 
 In order to better understand the effect of reward change on the \ac{snn}, the synaptic weights matrix before and after reward change has been illustrated in Figures \ref{fig_3_8} and \ref{fig_3_9}, the vertical axis shows the output neurons. The first output neuron is for negative displacement in the x-direction, while the second output neuron is dedicated to positive displacement in the x-direction. Similarly, the third output neuron corresponds to negative displacement in the y-direction and the fourth output neuron to positive displacement in the y-direction. The horizontal axis shows the input neurons. The neuron IDs from 1 to 24 are for the first sub-layer dedicated to the neighboring follower. The network has two sub-layers for the neighboring follower agents, but only one is shown since they are similar in the case of synaptic weight values. The neuron numbers from 25 to 48 are for the sub-layer dedicated to the leader. The \ac{RCSE} method aims to maintain the synaptic weight matrix gradient while adapting to changes in the reward signal.
 

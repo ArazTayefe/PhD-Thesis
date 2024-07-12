@@ -157,6 +157,7 @@ Modern adaptations in \ac{snn}s integrate the concept of rewards, adding a third
 In neo-Hebbian reinforcement learning, significant advancements come from a global reward signal modulating synaptic plasticity alongside an eligibility trace that decays over time~\cite{Ch_1_R21}. This trace increases with recent, successful neurotransmission and decreases as time passes, linking closely with Temporal-Difference (TD) learning mechanisms. Such dynamics allow for Long-Term Potentiation (LTP) or Depression (LTD) at synapses based on the timing of synaptic activity and the nature of the reward signal. Specifically, recent successful activities followed by positive rewards enhance LTP, while activities preceding negative rewards lead to LTD.
 
 
+
 \textbf{Distal rewards and credit assignment} 
 
 This model introduces a sophisticated approach to synaptic modification through the interaction of \ac{stdp} with a modulatory signal reflective of reward, embodying the essence of TD learning within the realm of spiking neurons.
@@ -422,7 +423,8 @@ NeuronGPU, a library for simulating large-scale networks of spiking neurons with
 
 \subsection{Federated Learning}
 
-Federated Learning (FL) aggregation methods form a cornerstone of how distributed models learn collectively while maintaining the privacy of local data. The seminal aggregation method in FL is FedAvg, or Federated Averaging. As introduced by McMahan et al.~\cite{Ch_1_R26}, FedAvg operates by averaging the weights of models updated locally by clients. This simple yet effective approach allows a global model to benefit from diverse local updates without sharing the data itself.
+
+\ac{fl} aggregation methods form a cornerstone of how distributed models learn collectively while maintaining the privacy of local data. The seminal aggregation method in FL is FedAvg, or Federated Averaging. As introduced by McMahan et al.~\cite{Ch_1_R26}, FedAvg operates by averaging the weights of models updated locally by clients. This simple yet effective approach allows a global model to benefit from diverse local updates without sharing the data itself.
 
 Addressing heterogeneity in client data distributions, the FedProx method~\cite{Ch_1_R27}, introduced by Li et al., modifies the local optimization process. FedProx introduces a proximal term which moderates the deviation of local updates from the global model, aiming to stabilize training across clients with non-IID data.
 

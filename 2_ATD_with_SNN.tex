@@ -34,7 +34,7 @@ The \ac{stdp} algorithm is used to train two separate \ac{snn}s simultaneously t
 
 \section{Learning using R-STDP}
 
-\ac{stdp} is a biological learning algorithm that is believed to underlie certain learning mechanisms in the brain \cite{Ch5_STDP2}. The \ac{stdp} algorithm is based on the idea that if a pre-synaptic neuron fires just before a post-synaptic neuron, the strength of the synapse between the two neurons should be increased because of the casuality. Conversely, if the post-synaptic neuron fires just before the pre-synaptic neuron, the strength of the synapse should be decreased.
+\ac{stdp} is a biological learning algorithm that is believed to underlie certain learning mechanisms in the brain \cite{Ch5_STDP2}. The \ac{stdp} algorithm is based on the idea that if a pre-synaptic neuron fires just before a post-synaptic neuron and the network receives a reward, the strength of the synapse between the two neurons should be increased.
 
 \begin{figure}[h]
     \centering
@@ -223,7 +223,7 @@ The output consists of two terms. One term comes from the synaptic weights, and 
 
 During training, the input State ($S^t$) is encoded into the network, and a random steering angle ($u_{rnd}$) is encoded as a random action using the F2S process into the output layer. These two encoding currents for the input and output layer make input and output neurons fire independently. The \ac{stdp} adapts the weights for the fired neurons. Since $\alpha$ is 0 during the training, the $I_{syn}$ does not affect the \ac{snn}'s output (Equation \ref{Eq.26}). 
 
-In the training process, the output neurons and input neurons are excited separately. The input neurons are fired based on the agent's current state, whereas the agent's steering angle is randomly assigned based on the random input to the output neurons, as shown in Figure \ref{fig:my_label9}. The agent then takes a step based on the random steering angle and a reward is assigned. The training algorithm then evaluates the reward for that given random steering angle. If the reward is positive, then the weight associated with the input neurons to output neurons that fired for that state is strengthened, and if the reward is negative, then the weight for the input to output neurons in (\ref{Eq.15}) is weakened. Future research will include an inhibitory effect where the weights can become negative.
+In the training process, the output and input neurons are excited separately. The input neurons are fired based on the agent's current state, whereas the agent's steering angle is randomly assigned based on the random input to the output neurons, as shown in Figure \ref{fig:my_label9}. The agent then takes a step based on the random steering angle and a reward is assigned. The training algorithm then evaluates the reward for that given random steering angle. If the reward is positive, then the weight associated with the input neurons to output neurons that fired for that state is strengthened, and if the reward is negative, then the weight for the input to output neurons in (\ref{Eq.15}) is weakened. Future research will include an inhibitory effect where the weights can become negative.
 
 After training, the $\alpha$ changes to 1 and eliminates the effect of random output, and the \ac{snn}'s output is calculated based on the synaptic currents. Algorithm \ref{Algorithm4.1} shows the training process.
 
