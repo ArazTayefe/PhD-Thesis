@@ -1,7 +1,7 @@
 \acswitchoff 
 \addvspace {10\p@ }
 \contentsline {figure}{\numberline {1.1}{\ignorespaces Schematic diagram to illustrate distributed learning and \ac {fl} \cite {Ch_1_R1}.}}{1}{figure.1.1}%
-\contentsline {figure}{\numberline {1.2}{\ignorespaces Simple model of a \ac {snn}. The spike pattern shows that the neurons spike whenever the input amount reaches a threshold.}}{4}{figure.1.2}%
+\contentsline {figure}{\numberline {1.2}{\ignorespaces Simple model of a \ac {snn}. The spike pattern shows that the neurons spike whenever the voltage of the neruon reaches a threshold.}}{4}{figure.1.2}%
 \addvspace {10\p@ }
 \contentsline {figure}{\numberline {2.1}{\ignorespaces Active target defense game with three agents (LOS angles are shown for both agents).}}{21}{figure.2.1}%
 \contentsline {figure}{\numberline {2.2}{\ignorespaces Two \ac {snn}s simultaneously play and control the invader and defender. Each agent uses the LOS angle and relative velocities for training.}}{21}{figure.2.2}%

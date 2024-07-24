@@ -37,7 +37,7 @@ In the study of computational neuroscience and the development of neural network
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.5\textwidth]{Figures/Simple Spiking Neural Network.pdf}
-    \caption{Simple model of a \ac{snn}. The spike pattern shows that the neurons spike whenever the input amount reaches a threshold.}
+    \caption{Simple model of a \ac{snn}. The spike pattern shows that the neurons spike whenever the voltage of the neruon reaches a threshold.}
     \label{Fig.SimplMdlSNN}
 \end{figure}
 
@@ -68,7 +68,7 @@ The \ac{lif} model is a biological model that can be represented as a circuit wi
     R_{m}C_{m}\frac{dV_m\left(t\right)}{dt} = E_{l} - V_m\left(t\right) + R_{m}I\left(t\right)
 \end{equation}
 
-\noindent where $V_{m}(t)$ is the neuron's membrane potential, $R_{m}$ is the membrane resistance, $C_{m}$ is the membrane capacitance, $E_{l}$ is the resting potential, and $I(t)$ is the input current. The neuron spikes when its potential reaches the threshold potential ($V_{th}$). The potential of the neuron immediately reaches the reset potential ($V_{res}$) after it spikes.
+\noindent where $V_{m}(t)$ is the neuron's membrane potential shown as \(V_{1}\) and \(V_{2}\) in Table \ref{Table.SRF}, $R_{m}$ is the membrane resistance, $C_{m}$ is the membrane capacitance, $E_{l}$ is the resting potential, and $I(t)$ is the input current. The neuron spikes when its potential reaches the threshold potential ($V_{th}$). The potential of the neuron immediately reaches the reset potential ($V_{res}$) after it spikes.
 
 The spike rate is a parameter that determines how fast the neuron spikes \cite{Ch_1_R11}.
 
