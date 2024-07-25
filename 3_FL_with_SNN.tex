@@ -4,7 +4,7 @@
 
 This chapter studies the cooperation between follower drones to follow the leader drone by integrating \ac{stdp} and \ac{fl}. The cooperation problem is formation flying or ``Consensus Flying". The consensus flying problem deals with ensuring drones can work together in real-time to agree on their flight paths and positions. When many drones are close together, like in swarms, avoiding crashes is vital. Advanced algorithms and communication methods are needed so drones can exchange information and handle changing situations and unexpected obstacles.
 
-As shown in Figure \ref{fig.Consensus Flying}, a swarm of agents (follower drones) flies around a leader. The leader is controlled from a remote base station, and the swarm agents should learn to fly safely with the leader. The leader sends its position to all agents, and each agent only sees two neighboring agents. The swarm aims to learn how to keep a commanded distance from each other and the leader. The commanded distance is provided from the leader. Each agent uses the onboard sensors to find the distance and line of sight from neighboring agents.
+As shown in Figure \ref{fig.Consensus Flying}, a swarm of agents (follower drones) flies around a leader. The leader is controlled from a remote base station, and the swarm agents should learn to fly safely with the leader. The leader sends its position to all agents, and each agent only sees two neighboring agents. The swarm aims to learn how to keep a commanded distance from each other and the leader. The commanded distance is provided from the leader. Each agent uses the onboard sensors to find the distance and line of sight to neighboring agents.
 
 \begin{figure}[H]
     \centering
@@ -119,7 +119,7 @@ One of the challenges in robotic applications is ensuring smooth transitions in 
 \mathcal{q}_t = \gamma \cdot \mathcal{q}_{t-1} + (1-\gamma) \cdot \Upsilon_t
 \end{equation}
 
-\noindent where \(\mathcal{q}_{t}\) is the random action at time \( t \), \( \gamma \) is a correlation coefficient, and \( \Upsilon_{t} \) is a random number drawn from a standard distribution (e.g., Gaussian) at time \( t \). This equation ensures that the random action at any given time \( t \) is a weighted combination of the previous action and a new random number.
+\noindent where \(\mathcal{q}_{t}\) is the random action at time \( t \), \( \gamma \) is a correlation coefficient, and \( \Upsilon_{t} \) is a random number drawn from a standard distribution (e.g., Gaussian) at time \( t \). This equation ensures that the random action at any given time \( t \) is a weighted combination of the previous action and a new random number. This approach is a first-order filter, and the output is a colored noise.
 
 \subsection{Training algorithm}
 
@@ -133,7 +133,7 @@ The \ac{stdp} algorithm without considering the eligibility trace (\(C\)) is use
     \mathcal{R}_{Fi}^{L}(t) = \mathcal{C}_{Fi}^{L}\left[r_{Fi}^{L}(t-1)-r_{Fi}^{L}(t)\right] tanh{(r_{Fi}^{L}(t)-R_{cmd})}
 \end{equation}
 
-\noindent where, \(\mathcal{R}_{Fi}^{Fj}\), \(r_{Fi}^{Fj}\), and \(r_{cmd}\) denote the reward, distance, and commanded distance between two \(i\) and \(j\) follower agents, respectively. Similarly, \(\mathcal{R}_{Fi}^{L}\), \(r_{Fi}^{L}\), and \(R_{cmd}\) represent the reward, distance, and the commanded distance between the follower agent \(i\) and the Leader (\(L\)), respectively. The \(\mathcal{C}_{Fi}^{Fj}\) and \(\mathcal{C}_{Fi}^{L}\) show the reward coefficients and the \(tanh{(r_{Fi}^{Fj}(t)-r_{cmd})}\) and \(tanh{(r_{Fi}^{L}(t)-R_{cmd})}\) functions determine the reward's sign according to the agents' relative distance and the commanded distance. The expressions \(r_{Fi}^{Fj}(t-1)-r_{Fi}^{Fj}(t)\) and \(r_{Fi}^{L}(t-1)-r_{Fi}^{L}(t)\) specify the magnitude of the instantaneous reward.
+\noindent where, \(\mathcal{R}_{Fi}^{Fj}\), \(r_{Fi}^{Fj}\), and \(r_{cmd}\) denote the reward, distance, and commanded distance between two \(i\) and \(j\) follower agents, respectively. Similarly, \(\mathcal{R}_{Fi}^{L}\), \(r_{Fi}^{L}\), and \(R_{cmd}\) represent the reward, distance, and the commanded distance between the follower agent \(i\) and the Leader (\(L\)), respectively. The term \(\mathcal{C}_{Fi}^{Fj}\) and \(\mathcal{C}_{Fi}^{L}\) are reward coefficients and the \(tanh{(r_{Fi}^{Fj}(t)-r_{cmd})}\) and \(tanh{(r_{Fi}^{L}(t)-R_{cmd})}\) functions determine the reward's sign according to the agents' relative distance and the commanded distance. The expressions \(r_{Fi}^{Fj}(t-1)-r_{Fi}^{Fj}(t)\) and \(r_{Fi}^{L}(t-1)-r_{Fi}^{L}(t)\) specify the magnitude of the instantaneous reward.
 
 If an agent finds itself farther away from the commanded distance than a neighboring agent or the leader, it will be rewarded positively for decreasing its distance. Conversely, moving closer results in a negative reward if the agent is within the commanded distance from a neighboring agent or the leader. This system is designed to encourage the maintenance of a commanded distance: being too far away from the commanded distance invites a penalty. At the same time, positive reinforcement is given for closing the gap between the current distance and the commanded distance.
 
@@ -143,9 +143,9 @@ One of the challenges in \ac{stdp} is the unbounded growth or decay of synaptic 
 
 Controlling the excessive increase of synaptic weights in \ac{snn}s is important to maintain network resilience and function. If not controlled, this growth can lead to saturation, affecting the network's ability to learn and adapt. When the network receives fuzzy sets of firing strengths as input, the synaptic weights grow in a pattern influenced by the Gaussian function's shape used for fuzzy encoding. Imposing a limit on synaptic weights disrupts this growth pattern over time, and eventually, all the synaptic weights reach the maximum. Weight normalization, while preventing excessive growth in one part of the network, can inhibit overall growth; when a synaptic connection reaches its maximum, its activation subsequently diminishes other weights. 
 
-Traditional methods like L1 regularization and weight decay employ a constant decay rate, which can slow the network's responsiveness to changes in rewards. Alternatively, a more advanced approach, the Bienenstock, Cooper, and Munro (BCM) method dynamically adjusts both a threshold and a decay rate in response to input variations. However, this method does not provide a control mechanism for the fuzzy inputs. In this paper, we introduce a method called \ac{RCSE} to manage the unbounded growth of synaptic weights while maintaining the gradual change in the synaptic weights formed due to differences in firing strength from fuzzy membership functions. Our method also dynamically adjusts the network when the reward changes by adjusting the maximum synaptic weight based on the reward.
+Traditional methods like L1 regularization and weight decay employ a constant decay rate, which can slow the network's responsiveness to changes in rewards. Alternatively, a more advanced approach, the Bienenstock, Cooper, and Munro (BCM) method dynamically adjusts both a threshold and a decay rate in response to input variations. However, this method does not provide a control mechanism for the fuzzy inputs. In this chapter, we introduce a method called \ac{RCSE} to manage the unbounded growth of synaptic weights while maintaining the gradual change in the synaptic weights formed due to differences in firing strength from fuzzy membership functions. Our method also dynamically adjusts the network when the reward changes by adjusting the maximum synaptic weight based on the reward.
 
-Let us define \(\boldsymbol{\alpha}\) as the learning rate matrix. We will also use \(\mathcal{S}\) to represent the set of input and output neurons that fired at time \(t\) in one of the network sections. If we consider \(W_{max}^{\mathcal{S}}(t)\) as the maximum weight among the firing neurons in set \(\mathcal{S}\), then we can characterize the learning rate using a Sigmoid function. This function gradually transitions from 1 to 0 as the learning process advances, as explained below:
+Let us define \(\boldsymbol{\alpha}\) as the learning rate matrix. We will also use \(\mathcal{S}\) to represent the set of input and output neurons that fired at time \(t\) in one of the network sections. If we consider \(W_{max}^{\mathcal{S}}(t)\) as the maximum weight among the firing neurons in set \(\mathcal{S}\), then we can characterize the learning rate using a Sigmoid function. The learning rate function (\(\boldsymbol{\alpha}^{\mathcal{S}}(t)\)) gradually transitions from 1 to 0 as the learning process advances, as explained below:
 
 \begin{equation} \label{Eq.WS.1}
     \boldsymbol{\alpha}^{\mathcal{S}}(t) = \frac{1}{1 + \exp{\left[\frac{1}{\epsilon}\left( |W_{max}^{\mathcal{S}}(t)| - \Psi^{\mathcal{S}} \right)\right]}}, \quad \left(\Psi^{\mathcal{S}} = \frac{\mathcal{R}_{max}^{\mathcal{S}}}{\mathcal{R}_{max}^{G}} I^{max} \right)
@@ -157,7 +157,7 @@ The network contains a variety of reward functions, each with its own maximum an
 
 A significant challenge in learning algorithms is their capacity to adapt to changes in rewards. Commonly, once the learning rate reduces to zero, weight adjustments stop. To address this, a variable decay rate is introduced to prevent weights in each network section from indefinitely remaining at their peak values. In our method, the decay rate is represented as a matrix, and it is calculated using the SoftPlus function, enabling it to adjust according to the current stage of learning. This method ensures that weight modifications continue to respond effectively to changes in the learning environment.
 
-This paper defines the decay rate as a function of the maximum synaptic weight among neurons in the set \(\mathcal{S}\). This approach is designed to address a critical aspect: when the maximum synaptic weight in \(\mathcal{S}\) reaches its peak (\(|W_{max}^{\mathcal{S}}(t)| = \Psi^{\mathcal{S}}\)), it is essential that the learning rate remains above zero. This condition is necessary to allow weight change and prevent the learning rate from stagnating at zero. Simultaneously, the learning rate must not exceed the maximum acceptable rate of weight change, which is \(\mathcal{A} \times \mathcal{R}_{max}^{G}\). When the reward coefficients change after training, it can cause \(|W_{max}^{\mathcal{S}}(t)|\) to exceed \(\Psi^{\mathcal{S}}\) for set \(\mathcal{S}\). With these considerations, we propose that the decay rate should be set to \(\mathcal{A}/\lambda \times \mathcal{R}_{max}^{G}\) when \(|W_{max}^{\mathcal{S}}(t)| = \Psi^{\mathcal{S}}\) and increase to \(\lambda\mathcal{A} \times \mathcal{R}_{max}^{G}\) when \(|W_{max}^{\mathcal{S}}(t)| = 2 \Psi^{\mathcal{S}}\), where \(\lambda\) is a coefficient that controls the rate of decay when \(|W_{max}^{\mathcal{S}}(t)| > \Psi^{\mathcal{S}}\). 
+This chapter defines the decay rate as a function of the maximum synaptic weight among neurons in the set \(\mathcal{S}\). This approach is designed to address a critical aspect: when the maximum synaptic weight in \(\mathcal{S}\) reaches its peak (\(|W_{max}^{\mathcal{S}}(t)| = \Psi^{\mathcal{S}}\)), it is essential that the learning rate remains above zero. This condition is necessary to allow weight change and prevent the learning rate from stagnating at zero. Simultaneously, the learning rate must not exceed the maximum acceptable rate of weight change, which is \(\mathcal{A} \times \mathcal{R}_{max}^{G}\). When the reward coefficients change after training, it can cause \(|W_{max}^{\mathcal{S}}(t)|\) to exceed \(\Psi^{\mathcal{S}}\) for set \(\mathcal{S}\). With these considerations, we propose that the decay rate should be set to \(\mathcal{A}/\lambda \times \mathcal{R}_{max}^{G}\) when \(|W_{max}^{\mathcal{S}}(t)| = \Psi^{\mathcal{S}}\) and increase to \(\lambda\mathcal{A} \times \mathcal{R}_{max}^{G}\) when \(|W_{max}^{\mathcal{S}}(t)| = 2 \Psi^{\mathcal{S}}\), where \(\lambda\) is a coefficient that controls the rate of decay when \(|W_{max}^{\mathcal{S}}(t)| > \Psi^{\mathcal{S}}\). 
 
 By applying the mentioned condition and solving for the SoftPlus function, the decay rate function can be obtained as follows,
 
@@ -445,7 +445,7 @@ In this section, we conducted a numerical simulation to validate the performance
 
 \subsection{Simulation without \ac{fl}}
 
-In this simulation, we modeled five agents, each equipped with its own \ac{snn} model, capable of reaching a maximum speed of 1 \(m/s\). The architecture of each agent's neural network included 72 input neurons. The number of input neurons was derived from a series of numerical simulations. Since each agent was designed to detect three distinct objects within its environment, the input layer was organized into sub-layers, with 24 neurons dedicated to each object (24 membership functions and neurons for each object). The network's output layer comprised 4 neurons, divided equally to represent negative and positive \(\Delta x\) and \(\Delta y\) movements. The \ac{snn} model in the simulation is a fully connected network, and the parameters of the \ac{lif} neuron are also represented in Table \ref{table:ParameterforLIF}.
+In this simulation, we modeled five agents, each equipped with its own \ac{snn} model, capable of reaching a maximum speed of 1 \(m/s\). The architecture of each agent's neural network included 72 input neurons. The number of input neurons was derived from a series of numerical simulations. Since each agent was designed to detect three distinct objects within its environment, the input layer was organized into sub-layers, with 24 neurons dedicated to each object (24 membership functions and neurons for each object). The network's output layer comprised 4 neurons, divided equally to represent negative and positive \(\Delta x\) and \(\Delta y\) movements. The \ac{snn} model in the simulation is a fully connected network, and the parameters of the \ac{lif} neuron are also presented in Table \ref{table:ParameterforLIF}.
 
 \begin{table}[H]
 \caption{Parameter values for \ac{lif} neuron model \cite{Ch_1_R10}}
@@ -531,7 +531,7 @@ Figure \ref{fig_3_0} shows the simulation results for the \ac{RCSE} method. Acco
     \end{minipage}
 \end{figure}
 
-As mentioned in section 3, the input encoding uses the error between current and commanded distance. Therefore, one of the advantages of the encoding and learning method in this paper is that the learned policies are independent of the commanded distance. The commanded distance can be changed after training since the \ac{snn} uses the distance error. Figure \ref{fig_3_2} shows the agents' response to changes in commanded distance after training. According to this figure, when the commanded distance is changed at 30 seconds, the swarm immediately responds to this change in 2.98 seconds without disrupting the formation or any collision.
+As mentioned in section 3, the input encoding uses the error between current and commanded distance. Therefore, one of the advantages of the encoding and learning method in this chapter is that the learned policies are independent of the commanded distance. The commanded distance can be changed after training since the \ac{snn} uses the distance error. Figure \ref{fig_3_2} shows the agents' response to changes in commanded distance after training. According to this figure, when the commanded distance is changed at 30 seconds, the swarm immediately responds to this change in 2.98 seconds without disrupting the formation or any collision.
 
 After 600 seconds, the leader is changed into an obstacle, and its reward coefficient \(\mathcal{C}_{F}^{L}\) is changed to 0.0175. The reward sign function, \(\tanh\) in \eqref{Eq.TA.4}, is also changed to -1, so the reward function for the leader is changed as follows,
 
@@ -547,7 +547,7 @@ When the leader is transformed into an obstacle, the encoding equation for the i
 
 The simulation proceeded for an additional 1200 seconds, during which the synaptic weights were adjusted in accordance with the new reward function given by \eqref{Eq.R-1}. In this case, because the leader is now an obstacle, so then \(\alpha^{\mathcal{S}}(t)\) in Figure \ref{fig_3_3_2} switches to 1 and training starts again with random signals to the output layer.
 
-The results of the reward change are shown in Figures \ref{fig_3_6} and \ref{fig_3_7}, which indicates that the agents quickly reduced their initial distance to the commanded distance of 2 m. Simultaneously, the minimum distance from the obstacle, which was the leader, increased over time, indicating that the agents adapted their behavior to maintain a greater distance from the obstacle. Figure \ref{fig_3_7} shows the trajectory of each agent after the reward change.
+The results of the reward change are shown in Figures \ref{fig_3_6} and \ref{fig_3_7}, which indicates that the agents quickly reduced their initial distance to the commanded distance of 2 m. Simultaneously, the minimum distance from the obstacle, which was the leader, increased over time, indicating that the agents adapted their behavior to maintain a greater distance from the obstacle. Figure \ref{fig_3_6} shows the trajectory of each agent after the reward change.
 
 \begin{figure}[ht]
     \centering
@@ -587,7 +587,7 @@ Considering the numerical values presented in Table \ref{table:simulation-parame
 
 The visual patterns observed in the synaptic weights matrix in Figure \ref{fig_3_8} and \ref{fig_3_9}, specifically, the gradual increases and decreases in values across weights, directly result from applying Gaussian membership functions for encoding. As illustrated in the heatmap visualization, regions of higher values denote areas closer to the function's center, where the degree of membership peaks. Conversely, areas of lower values reflect points moving away from the center, where the membership degree decreases according to the Gaussian distribution's tails. Figure \ref{fig_3_3_2} further demonstrates this behavior.
 
-Since the reward coefficients for followers and leaders are different, their maximum allowed synaptic weights are also different. The proposed method for controlling the unbounded growth of synaptic weights has successfully stabilized the network.
+Since the reward coefficients for followers and leaders are different, their maximum allowed synaptic weights are also different. The proposed method given by \eqref{Eq.WS.4} for controlling the unbounded growth of synaptic weights has successfully stabilized the network.
 
 \begin{figure}[H]
     \centering
@@ -604,25 +604,25 @@ Since the reward coefficients for followers and leaders are different, their max
     \end{minipage}
 \end{figure}
 
-Figures \ref{fig_3_10} and \ref{fig_3_11} show the synaptic weights after the reward change. In this case, since the reward coefficients are changed, the \(\eta\) and \(\beta\) values are changed for the represented sub-layers, and the proposed method has helped the \ac{stdp} algorithm to adjust the weights based on the new situation in the environment.
+Figures \ref{fig_3_10} and \ref{fig_3_11} show the synaptic weights after the reward change. In this case, since the reward coefficients are changed, the \(\eta\) and \(\beta\) values in \eqref{Eq.WS.3} are changed for the represented sub-layers, and the proposed method has helped the \ac{stdp} algorithm to adjust the weights based on the new situation in the environment.
 
 \subsection{Simulation with \ac{fl} and \ac{RCSE}}
 
 In this section, the proposed aggregation algorithm is tested. In this case, the agents only send their models when the Euclidean distance between the current and previously published model or the latest global model reaches a threshold. In the first phase, the simulation was done in 600 seconds, and the agents learned to follow the leader. The threshold for publishing the agents' and server models was 0.0005 and 0.00051, respectively. The reason for choosing the server's threshold higher than the agents' is that as soon as the first agent sends its model to the server, the Euclidean distance between the current and previously published model by the server reaches 0.0005, and the server distributes the model immediately. Therefore, the serve's threshold is set higher than the agents' threshold, so it waits for the other agents to send their models.
 
-Figure \ref{fig_3-7} shows the distances between agents and the leader before the reward change. According to the figure, the agents converge to the solution faster than the non-federated learning scenario without any error. Figure \ref{fig_3-8} shows the simulation results for the reward change scenario. According to the figure, the proposed event-triggered \ac{fl} method has improved the learning performance so that the swarm converges to the solution in 6 seconds.
+Figure \ref{fig_3-7} shows the distances between agents and the leader before the reward change, indicating that the agents converge to the solution faster than in the scenario where federated learning has not been used, without any error. Figure \ref{fig_3-8} shows the simulation results for the reward change scenario, indicating that the proposed event-triggered \ac{fl} method has improved the learning performance, enabling the swarm to converge to the solution in 6 seconds. In this case, the neural network learned the policies in less time while preserving the performance.
 
 \begin{figure}[H]
     \centering
     \begin{minipage}{0.48\textwidth}
         \includegraphics[width=\linewidth]{Figures/Distances - BRC - DAI.pdf}
-        \caption{Distances during the test phase before reward change in the proposed event-triggered \ac{fl} method.}
+        \caption{Distances during the test phase (\(\boldsymbol{\alpha}^{\mathcal{S}}=0\)) before reward change in the proposed event-triggered \ac{fl} method.}
         \label{fig_3-7}
     \end{minipage}
     \hfill
     \begin{minipage}{0.48\textwidth}
         \includegraphics[width=\linewidth]{Figures/Distances - ARC - DAI.pdf}
-        \caption{Distances during the test phase after reward change in the proposed event-triggered \ac{fl} method.}
+        \caption{Distances during the test phase (\(\boldsymbol{\alpha}^{\mathcal{S}}=0\)) after reward change in the proposed event-triggered \ac{fl} method.}
         \label{fig_3-8}
     \end{minipage}
 \end{figure}
@@ -645,7 +645,7 @@ The norm of the synaptic weights can represent the changes in the synaptic weigh
 \end{figure}
 
 
-Therefore, the aggregation frequency is very high initially, and it reduces after the change in synaptic weights goes to zero because of the learning rate in (\ref{Eq.WS.1}). Also, after the reward changes and the leader becomes an obstacle after 600 seconds, the Euclidean distance between the converged and current models increases and reaches the threshold. As soon as the first agent sends its model to the server, the aggregation process starts again, and the agents adjust the associated synaptic weight.
+Therefore, the aggregation frequency is very high initially, and it reduces after the change in synaptic weights goes to zero because the learning rate matrix in (\ref{Eq.WS.1}) goes to zero. Also, after the reward changes and the leader becomes an obstacle after 600 seconds, the Euclidean distance between the converged and current models increases and reaches the threshold. As soon as the first agent sends its model to the server, the aggregation process starts again, and the agents adjust the associated synaptic weight.
 
 \begin{table}[H]
     \centering
@@ -657,7 +657,7 @@ Therefore, the aggregation frequency is very high initially, and it reduces afte
     \hline
                                 & \textbf{FL+\ac{RCSE}} & \textbf{\ac{RCSE}} \\
     \hline
-    \textbf{Learning Time - Training Phase (s)}                & 261.92               & 554.71\\
+    \textbf{Learning (Convergence) Time - Training Phase (s)}                & 261.92               & 554.71\\
     \textbf{Max Distance Convergence Error - Test Phase (\%)} & 0.71             & 1.95\\
     \textbf{Convergence Time for Distance - Test Phase (s)}             & 5.81           & 8.94\\
     \hline
@@ -672,8 +672,11 @@ Table \ref{tab:Results analysis} compares the results and focuses on three criti
 \section{Conclusion}
 
 In this chapter, we presented a comprehensive approach addressing the challenges of uncontrolled growth in synaptic weights and the limited responsiveness of \ac{stdp} to real-time changes within \ac{snn}s. Our proposed solution integrates the \ac{RCSE} method with a dynamic aggregation interval in \ac{fl} and significantly reduces learning time while improving performance.
+
 The R-CSE method introduces a novel mechanism to manage the unbounded growth of synaptic weights by dynamically adjusting the decay rate through the SoftPlus function. This adjustment is sensitive to the learning stages and rewards changes, ensuring that synaptic weight adjustments remain responsive over time. By addressing the challenge of synaptic weight saturation, the \ac{RCSE} method facilitates a balanced approach to weight adjustment, preventing network saturation and promoting continuous learning adaptability.
+
 We introduce a novel approach that uses \ac{fl} in SNN and employs the Frobenius norm to adjust weighted aggregation in \ac{fl}. Additionally, we include weight decay proportional to the time elapsed since an agent's last model publication. This improves the efficiency and responsiveness of the learning process.
 
-Our model's dynamic nature of the model aggregation time adjusts based on the Euclidean norm. This metric measures the distance between the weight matrices of the agents and the server, determining reduced intervals for model publication. Our results show that the proposed aggregation method significantly accelerates agents' learning while increasing the accuracy of the swarm in following the commanded distance.
-Moreover, the dynamic aggregation interval effectively reduces communication overhead between the agents and the central server, particularly after model converges and the algorithm switches from the training mode to the operational mode. This reduction is critical when communication bandwidth is limited or costly. This approach is particularly advantageous in 5G networks, where efficient bandwidth use can enhance the overall throughput and reduce latency in real-time applications. Moreover, the adaptive use of communication resources aligns with the scalable and flexible infrastructure of 5G, optimizing network performance even during peak demand periods.
+Our proposed method adjusts its aggregation time based on the Euclidean norm. This metric measures the distance between the weight matrices of the agents and the server, determining reduced intervals for model publication. Our results show that the proposed aggregation method significantly accelerates agents' learning while reducing the distance convergence error (Table \ref{tab:Results analysis}).
+
+Moreover, the dynamic aggregation interval effectively reduces communication overhead between the agents and the central server, particularly after model converges and the algorithm switches from the training mode to the operational mode (\(\boldsymbol{\alpha}^{\mathcal{S}}\) matrix is zero). This reduction is critical when communication bandwidth is limited or costly. This approach is particularly advantageous in 5G networks, where efficient bandwidth use can enhance the overall throughput and reduce latency in real-time applications. Moreover, the adaptive use of communication resources aligns with the scalable and flexible infrastructure of 5G, optimizing network performance even during peak demand periods.

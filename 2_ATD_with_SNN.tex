@@ -6,9 +6,9 @@ This chapter looks at two main things: how well \ac{snn}s handle noise and how t
 
 The neural structure in \ac{snn}s helps us implement complex learning systems. One good example of a complex situation is a differential game like the Active Target Defense (ATD) problem \cite{Ch5_ATD4}.
 
-In the ATD, a defender tries to protect a target, while a superior invader with higher velocity than the defender and a moving target tries to reach the target and escape the defender at the same time. In the context of defense strategy, aircraft movement analysis is crucial in determining the most effective strategies.In the context of defense strategy, aircraft movement analysis is crucial in determining the most effective strategies. Law enforcement benefits from these games by minimizing escape possibilities. The ATD problems are a fundamental component of game theory, providing insights into strategic decision-making across disciplines like economics and biology. Additionally, these games find applications in Cybersecurity for modeling attacker-defender interactions \cite{Ch5_ATD4-5}.
+In the ATD, a defender tries to protect a target, while a superior invader with higher velocity than the defender and a moving target tries to reach the target and escape the defender at the same time. In the context of defense strategy, aircraft movement analysis is crucial in determining the most effective strategies. In the context of defense strategy, aircraft movement analysis is crucial in determining the most effective strategies. Law enforcement benefits from these games by minimizing escape possibilities. The ATD problems are a fundamental component of game theory, providing insights into strategic decision-making across disciplines like economics and biology. Additionally, these games find applications in Cybersecurity for modeling attacker-defender interactions \cite{Ch5_ATD4-5}.
 
-There are three distinct outcomes to the ATD game, characterized by two termination sets \cite{Ch5_ATD6}. The first outcome happens when the invader reaches the target while the defender is far from it. The second outcome happens when the defender reaches the target while the invader's distance from the target is larger than the defender's distance.
+There are two distinct outcomes to the ATD game, characterized by two termination sets \cite{Ch5_ATD6}. The first outcome happens when the invader reaches the target while the defender is far from it. The second outcome happens when the defender reaches the target while the invader's distance from the target is larger than the defender's distance.
 
 \section{The ATD problem and SNN-based solution}
 
@@ -229,7 +229,7 @@ After training, the $\alpha$ changes to 1 and eliminates the effect of random ou
 
 \section{Results}
 
-A numerical simulation is conducted to evaluate the \ac{snn}'s performance in solving the ATD problem. The simulation is done in MATLAB 2022a, with a 1 $ms$ sample time. The simulation parameters for neurons are presented in Table I.
+A numerical simulation is conducted to evaluate the \ac{snn}'s performance in solving the ATD problem. The simulation is done in MATLAB 2022a, with a 1 $ms$ sample time. The simulation parameters for neurons are presented in Table \ref{Table4.1}.
 
 \begin{table}[h]
 \caption{Parameter values for LIF neuron model \cite{Ch_1_R10}}
@@ -306,7 +306,7 @@ As mentioned in Section 3.1, the optimal capture point is the closest point from
 \begin{figure}[h]
     \centering
     \includegraphics{Figures/After learning.pdf}
-    \caption{\ac{snn}'s performance after training. The highlighted region shows the defender's dominant region. The purple dot is the optimal capture point.}
+    \caption{\ac{snn}'s performance after training. The highlighted region shows the defender's dominant region. The purple dot is the optimal capture point. The CO Type-E shows the reachable regions of the Invader and the Defender.}
     \label{fig:my_label7}
 \end{figure}
 
