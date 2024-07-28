@@ -113,13 +113,25 @@ The equation for decoding this activity can be expressed as:
 
 \noindent where \(\Delta T\) is the time window the network updates weights.
 
-One of the challenges in robotic applications is ensuring smooth transitions in actions to prevent abrupt and potentially harmful changes. Therefore, the recursive random number generation method is used to produce correlated random numbers. This method ensures that during training, the current displacements of the robot are influenced by its previous displacements, leading to smoother transitions. The recursive random number generation can be formulated as,
+The synaptic current entering the output layer is composed of two distinct components:
+
+\begin{equation} \label{Eq.NS.9}
+    I_{out} = \left(1 - \alpha\right) I_{syn} + \alpha I_{rnd}
+\end{equation}
+
+\noindent where \(\alpha\) is the learning rate that is set to 1 during the training phase and gradually tends to 0 after training is completed, enabling the system to transition from exploratory to operational modes. \(I_{rnd}\) denotes the random steering angle, and \(I_{syn}\) represents the steering angle output determined by the synaptic weights.
+
+During the training phase, the current state (\(S^t\)) is encoded into the network, and a steering angle (\(u_{rnd}\)) is generated randomly via the Feature to Spike (F2S) process into the output layer. This dual encoding process leads to the independent firing of neurons in both the input and output layers. The synaptic weights are adapted based on the activity of these firing neurons through Spike-Timing Dependent Plasticity (STDP). As \(\alpha\) is set to 1 during this phase, \(I_{syn}\) has no influence on the SNN’s output, allowing for purely explorative behavior based on the dynamics of \(I_{rnd}\).
+
+To enhance the smoothness of these transitions and generate the random component \(I_{rnd}\), a recursive random number generation method is utilized:
 
 \begin{equation} \label{Eq.NS.8}
 \mathcal{q}_t = \gamma \cdot \mathcal{q}_{t-1} + (1-\gamma) \cdot \Upsilon_t
 \end{equation}
 
-\noindent where \(\mathcal{q}_{t}\) is the random action at time \( t \), \( \gamma \) is a correlation coefficient, and \( \Upsilon_{t} \) is a random number drawn from a standard distribution (e.g., Gaussian) at time \( t \). This equation ensures that the random action at any given time \( t \) is a weighted combination of the previous action and a new random number. This approach is a first-order filter, and the output is a colored noise.
+In this equation, \(\mathcal{q}_{t}\) represents the random action at time \(t\), \(\gamma\) is a correlation coefficient that controls the influence of the previous action, and \(\Upsilon_{t}\) is a random number drawn from a standard distribution (e.g., Gaussian) at time \(t\). This recursive formulation ensures that the action at any given time \(t\) is a weighted blend of the previous action and a new random input, functioning as a first-order filter to produce colored noise.
+
+
 
 \subsection{Training algorithm}
 
@@ -145,7 +157,15 @@ Controlling the excessive increase of synaptic weights in \ac{snn}s is important
 
 Traditional methods like L1 regularization and weight decay employ a constant decay rate, which can slow the network's responsiveness to changes in rewards. Alternatively, a more advanced approach, the Bienenstock, Cooper, and Munro (BCM) method dynamically adjusts both a threshold and a decay rate in response to input variations. However, this method does not provide a control mechanism for the fuzzy inputs. In this chapter, we introduce a method called \ac{RCSE} to manage the unbounded growth of synaptic weights while maintaining the gradual change in the synaptic weights formed due to differences in firing strength from fuzzy membership functions. Our method also dynamically adjusts the network when the reward changes by adjusting the maximum synaptic weight based on the reward.
 
-Let us define \(\boldsymbol{\alpha}\) as the learning rate matrix. We will also use \(\mathcal{S}\) to represent the set of input and output neurons that fired at time \(t\) in one of the network sections. If we consider \(W_{max}^{\mathcal{S}}(t)\) as the maximum weight among the firing neurons in set \(\mathcal{S}\), then we can characterize the learning rate using a Sigmoid function. The learning rate function (\(\boldsymbol{\alpha}^{\mathcal{S}}(t)\)) gradually transitions from 1 to 0 as the learning process advances, as explained below:
+The enhanced version of the \ac{stdp} method considering the control mechanism from \ac{RCSE} algorithm is expressed as follows,
+
+\begin{equation} \label{Eq.WS.4}
+    \dot{\bm{W}}(t) = \bm{\alpha} \odot \textbf{STDP}(\tau) \odot \mathcal{R}(t) - \bm{\Theta} \odot \text{sgn}(\bm{W})
+\end{equation}
+
+\noindent where \(\odot\) is the Hadamard product, \(\bm{\alpha}\) is the learning rate matrix, and \(\bm{\Theta}\) is the decay rate matrix. The primary distinction between the \ac{RCSE} method and the approach detailed in Section 2.4 lies in the decay rate, which allows the learning system to remain adaptable after the learning phase, and in the learning rate, which is represented as a matrix rather than a scalar value affecting all synaptic weights uniformly. These modifications enhance the learning algorithm's flexibility in responding to reward changes and provide greater control over synaptic weight adjustments.
+
+Let us define \(\mathcal{S}\) as the set of input and output neurons that fired at time \(t\) in one of the network sections. If we consider \(W_{max}^{\mathcal{S}}(t)\) as the maximum weight among the firing neurons in set \(\mathcal{S}\), then we can characterize the learning rate using a Sigmoid function. The learning rate value (\(\boldsymbol{\alpha}^{\mathcal{S}}(t)\)) gradually transitions from 1 to 0 as the learning process advances, as explained below:
 
 \begin{equation} \label{Eq.WS.1}
     \boldsymbol{\alpha}^{\mathcal{S}}(t) = \frac{1}{1 + \exp{\left[\frac{1}{\epsilon}\left( |W_{max}^{\mathcal{S}}(t)| - \Psi^{\mathcal{S}} \right)\right]}}, \quad \left(\Psi^{\mathcal{S}} = \frac{\mathcal{R}_{max}^{\mathcal{S}}}{\mathcal{R}_{max}^{G}} I^{max} \right)
@@ -157,7 +177,7 @@ The network contains a variety of reward functions, each with its own maximum an
 
 A significant challenge in learning algorithms is their capacity to adapt to changes in rewards. Commonly, once the learning rate reduces to zero, weight adjustments stop. To address this, a variable decay rate is introduced to prevent weights in each network section from indefinitely remaining at their peak values. In our method, the decay rate is represented as a matrix, and it is calculated using the SoftPlus function, enabling it to adjust according to the current stage of learning. This method ensures that weight modifications continue to respond effectively to changes in the learning environment.
 
-This chapter defines the decay rate as a function of the maximum synaptic weight among neurons in the set \(\mathcal{S}\). This approach is designed to address a critical aspect: when the maximum synaptic weight in \(\mathcal{S}\) reaches its peak (\(|W_{max}^{\mathcal{S}}(t)| = \Psi^{\mathcal{S}}\)), it is essential that the learning rate remains above zero. This condition is necessary to allow weight change and prevent the learning rate from stagnating at zero. Simultaneously, the learning rate must not exceed the maximum acceptable rate of weight change, which is \(\mathcal{A} \times \mathcal{R}_{max}^{G}\). When the reward coefficients change after training, it can cause \(|W_{max}^{\mathcal{S}}(t)|\) to exceed \(\Psi^{\mathcal{S}}\) for set \(\mathcal{S}\). With these considerations, we propose that the decay rate should be set to \(\mathcal{A}/\lambda \times \mathcal{R}_{max}^{G}\) when \(|W_{max}^{\mathcal{S}}(t)| = \Psi^{\mathcal{S}}\) and increase to \(\lambda\mathcal{A} \times \mathcal{R}_{max}^{G}\) when \(|W_{max}^{\mathcal{S}}(t)| = 2 \Psi^{\mathcal{S}}\), where \(\lambda\) is a coefficient that controls the rate of decay when \(|W_{max}^{\mathcal{S}}(t)| > \Psi^{\mathcal{S}}\). 
+This chapter defines the decay rate as a function of the maximum synaptic weight among neurons in the set \(\mathcal{S}\). This approach is designed to address a critical aspect: when the maximum synaptic weight in \(\mathcal{S}\) reaches its peak (\(|W_{max}^{\mathcal{S}}(t)| = \Psi^{\mathcal{S}}\)), it is essential that the learning rate remains above zero. This condition is necessary to allow weight change and prevent the learning rate from stagnating at zero (\eqref{Eq.WS.4}). Simultaneously, the learning rate must not exceed the maximum acceptable rate of weight change, which is \(\mathcal{A} \times \mathcal{R}_{max}^{G}\). When the reward coefficients change after training, it can cause \(|W_{max}^{\mathcal{S}}(t)|\) to exceed \(\Psi^{\mathcal{S}}\) for set \(\mathcal{S}\). With these considerations, we propose that the decay rate should be set to \(\mathcal{A}/\lambda \times \mathcal{R}_{max}^{G}\) when \(|W_{max}^{\mathcal{S}}(t)| = \Psi^{\mathcal{S}}\) and increase to \(\lambda\mathcal{A} \times \mathcal{R}_{max}^{G}\) when \(|W_{max}^{\mathcal{S}}(t)| = 2 \Psi^{\mathcal{S}}\), where \(\lambda\) is a coefficient that controls the rate of decay when \(|W_{max}^{\mathcal{S}}(t)| > \Psi^{\mathcal{S}}\). 
 
 By applying the mentioned condition and solving for the SoftPlus function, the decay rate function can be obtained as follows,
 
@@ -172,13 +192,8 @@ By applying the mentioned condition and solving for the SoftPlus function, the d
     \Theta^{\mathcal{S}} = \left( \frac{\mathcal{A}\mathcal{R}_{max}^{G}}{\lambda\log{(2)}} \right) \log \left(1 + \exp\left[{\left(\frac{\ln{(2^{\lambda^2}-1)}}{\Psi^{\mathcal{S}}} \right) \left( |W_{max}^{\mathcal{S}}(t)| - \Psi^{\mathcal{S}} \right)} \right] \right)
 \end{equation}
 
-The choice of setting the decay rate to \(\lambda\mathcal{A} \times \mathcal{R}_{max}^{G}\) when \(|W_{max}^{\mathcal{S}}(t)| = 2 \Psi^{\mathcal{S}}\) is based on the feature of reward coefficients. Specifically, when the reward coefficients in \eqref{Eq.TA.3} and \eqref{Eq.TA.4} increase, leading to new condition where \(\mathcal{R}_{max}^{\mathcal{S}}\) or \(\mathcal{R}_{max}^{G}\) change, the \(|W_{max}^{\mathcal{S}}(t)|\) is allowed to increase. Conversely, a decrease in the reward coefficient, resulting in \(|W_{max}^{\mathcal{S}}(t)| > \Psi^{\mathcal{S}}\), necessitates a higher decay rate to reduce the \(|W_{max}^{\mathcal{S}}(t)|\) back to \(\Psi^{\mathcal{S}}\). The enhanced version of the \ac{stdp} method considering the control mechanism from \ac{RCSE} algorithm is expressed as follows,
+The choice of setting the decay rate to \(\lambda\mathcal{A} \times \mathcal{R}_{max}^{G}\) when \(|W_{max}^{\mathcal{S}}(t)| = 2 \Psi^{\mathcal{S}}\) is based on the feature of reward coefficients. Specifically, when the reward coefficients in \eqref{Eq.TA.3} and \eqref{Eq.TA.4} increase, leading to new condition where \(\mathcal{R}_{max}^{\mathcal{S}}\) or \(\mathcal{R}_{max}^{G}\) change, the \(|W_{max}^{\mathcal{S}}(t)|\) is allowed to increase. Conversely, a decrease in the reward coefficient, resulting in \(|W_{max}^{\mathcal{S}}(t)| > \Psi^{\mathcal{S}}\), necessitates a higher decay rate to reduce the \(|W_{max}^{\mathcal{S}}(t)|\) back to \(\Psi^{\mathcal{S}}\).
 
-\begin{equation} \label{Eq.WS.4}
-    \dot{\bm{W}}(t) = \bm{\alpha} \odot \textbf{STDP}(\tau) \odot \mathcal{R}(t) - \bm{\Theta} \odot \text{sgn}(\bm{W})
-\end{equation}
-
-\noindent where \(\odot\) is the Hadamard product. 
 
 When \(|W_{max}^{\mathcal{S}}(t)| < \Psi^{\mathcal{S}} \), the reward adjusts the synaptic weights, and there is no weight decay to disturb the learning process. When \(|W_{max}^{\mathcal{S}}(t)| > \Psi^{\mathcal{S}} \), the decay rate changes the synaptic weights and brings the maximum weight to the reward zone, where \(|W_{max}^{\mathcal{S}}(t)| < \Psi^{\mathcal{S}} \) and the networks responds to reward change.
 
@@ -214,15 +229,15 @@ Let's assume that \(\mathcal{R}_{max}^{\mathcal{S}} = 0.5\) and \(\mathcal{R}_{m
     \boldsymbol{\alpha}^{\mathcal{S}}(t) = \frac{1}{1 + \exp{\left[\frac{1}{0.0001}\left(7 - 7.75\right)\right]}} = 1
 \end{equation*}
 
-The decay rate is low enough in comparison with the learning rate to allow for synaptic growth (\(\mathcal{A}\mathcal{R}_{max}^{\mathcal{S}}\)), promoting an increase in synaptic strength.
+According to \eqref{Eq.WS.4}, the decay rate is low enough in comparison with the learning rate to allow for synaptic growth (\(\mathcal{A}\mathcal{R}_{max}^{\mathcal{S}}\)), promoting an increase in synaptic strength.
 
 \textbf{Case 2: \(W_{max}^{\mathcal{S}}(t) > \Psi^{\mathcal{S}}\)}
 
 Let's assume that \(W_{max}^{\mathcal{S}}(t) = 10\), the decay and learning rates can be calculated as follows,
 
-\begin{equation}
+\begin{equation*}
     \Theta^{\mathcal{S}} = \left( \frac{1.485}{2.236} \right) \log \left(1 + \exp \left[2.236 \cdot (10 - 7.75)\right] \right) = 1.453
-\end{equation}
+\end{equation*}
 
 \begin{equation*}
     \boldsymbol{\alpha}^{\mathcal{S}}(t) = \frac{1}{1 + \exp{\left[\frac{1}{0.0001}\left(10 - 7.75\right)\right]}} \approx 0
@@ -274,8 +289,6 @@ If \(\Psi^{\mathcal{S}}\) decreases to 7.75 due to reward changes and assuming \
 
 In this scenario, the decay rate is very high, and the learning rate is 0. Therefore, the algorithm aggressively pulls the synaptic weight back toward the lowered threshold.
 
-
-
 \begin{lemma}
     The \ac{RCSE} method is asymptotically stable in its equilibrium point \(W_{max}^{\mathcal{S}}(t) = \Psi^{\mathcal{S}}\).
     \end{lemma}
@@ -322,7 +335,7 @@ In this scenario, the decay rate is very high, and the learning rate is 0. There
     
     \textbf{Analysis for $z < 0$}:
     
-    In this region, we observe that the term \(\exp\left[{\left(\frac{\ln{(2^{\lambda^2}-1)}}{\Psi^{\mathcal{S}}} \right) z} \right]\) goes to zero and makes the term inside the \(\log\) function go to 1. This implies that the contribution of this term to $\dot{V}(z)$ is negligible in this region. Moreover, the first term remains positive throughout, and given that it is multiplied by $z$ (which is negative in this region), the overall contribution to $\dot{V}(z)$ is negative. Consequently, $\dot{V}(z)$ is negative for $z < 0$, indicating that any perturbations from the equilibrium in this region will decrease over time, thereby contributing to the system's stability.
+    In this region, the term \(\exp\left[{\left(\frac{\ln{(2^{\lambda^2}-1)}}{\Psi^{\mathcal{S}}} \right) z} \right]\)  tends to zero for \(z \rightarrow -\infty\) and makes the term inside the \(\log\) function go to 1. This implies that the contribution of this term to $\dot{V}(z)$ is negligible in this region. Moreover, the first term remains positive throughout, and given that it is multiplied by $z$ (which is negative in this region), the overall contribution to $\dot{V}(z)$ is negative. Consequently, $\dot{V}(z)$ is negative for $z < 0$, indicating that any perturbations from the equilibrium in this region will decrease over time, thereby contributing to the system's stability.
     
     \textbf{Analysis for $z > 0$:}
     
@@ -585,7 +598,7 @@ Considering the numerical values presented in Table \ref{table:simulation-parame
     \end{minipage}
 \end{figure}
 
-The visual patterns observed in the synaptic weights matrix in Figure \ref{fig_3_8} and \ref{fig_3_9}, specifically, the gradual increases and decreases in values across weights, directly result from applying Gaussian membership functions for encoding. As illustrated in the heatmap visualization, regions of higher values denote areas closer to the function's center, where the degree of membership peaks. Conversely, areas of lower values reflect points moving away from the center, where the membership degree decreases according to the Gaussian distribution's tails. Figure \ref{fig_3_3_2} further demonstrates this behavior.
+The visual patterns observed in the synaptic weights matrix in Figure \ref{fig_3_8} and \ref{fig_3_9}, specifically, the gradual increases and decreases in values across weights, directly result from applying Gaussian membership functions for encoding. As illustrated in the heatmap visualization, regions of higher values denote areas closer to the function's center, where the degree of membership peaks. Conversely, areas of lower values reflect points moving away from the center, where the membership degree decreases according to the Gaussian distribution's tails. Figure \ref{fig_3_3_2} further demonstrates this behavior. The differences in synaptic strengths arise from variations in spike rates, reflecting differences in membership degree.
 
 Since the reward coefficients for followers and leaders are different, their maximum allowed synaptic weights are also different. The proposed method given by \eqref{Eq.WS.4} for controlling the unbounded growth of synaptic weights has successfully stabilized the network.
 
@@ -616,13 +629,13 @@ Figure \ref{fig_3-7} shows the distances between agents and the leader before th
     \centering
     \begin{minipage}{0.48\textwidth}
         \includegraphics[width=\linewidth]{Figures/Distances - BRC - DAI.pdf}
-        \caption{Distances during the test phase (\(\boldsymbol{\alpha}^{\mathcal{S}}=0\)) before reward change in the proposed event-triggered \ac{fl} method.}
+        \caption{Distances during the test phase before reward change in the proposed event-triggered \ac{fl} method.}
         \label{fig_3-7}
     \end{minipage}
     \hfill
     \begin{minipage}{0.48\textwidth}
         \includegraphics[width=\linewidth]{Figures/Distances - ARC - DAI.pdf}
-        \caption{Distances during the test phase (\(\boldsymbol{\alpha}^{\mathcal{S}}=0\)) after reward change in the proposed event-triggered \ac{fl} method.}
+        \caption{Distances during the test phase after reward change in the proposed event-triggered \ac{fl} method.}
         \label{fig_3-8}
     \end{minipage}
 \end{figure}
@@ -679,4 +692,4 @@ We introduce a novel approach that uses \ac{fl} in SNN and employs the Frobenius
 
 Our proposed method adjusts its aggregation time based on the Euclidean norm. This metric measures the distance between the weight matrices of the agents and the server, determining reduced intervals for model publication. Our results show that the proposed aggregation method significantly accelerates agents' learning while reducing the distance convergence error (Table \ref{tab:Results analysis}).
 
-Moreover, the dynamic aggregation interval effectively reduces communication overhead between the agents and the central server, particularly after model converges and the algorithm switches from the training mode to the operational mode (\(\boldsymbol{\alpha}^{\mathcal{S}}\) matrix is zero). This reduction is critical when communication bandwidth is limited or costly. This approach is particularly advantageous in 5G networks, where efficient bandwidth use can enhance the overall throughput and reduce latency in real-time applications. Moreover, the adaptive use of communication resources aligns with the scalable and flexible infrastructure of 5G, optimizing network performance even during peak demand periods.
+Moreover, the dynamic aggregation interval effectively reduces communication overhead between the agents and the central server, particularly after model converges and the algorithm switches from the training mode to the operational mode. This reduction is critical when communication bandwidth is limited or costly. This approach is particularly advantageous in 5G networks, where efficient bandwidth use can enhance the overall throughput and reduce latency in real-time applications. Moreover, the adaptive use of communication resources aligns with the scalable and flexible infrastructure of 5G, optimizing network performance even during peak demand periods.
