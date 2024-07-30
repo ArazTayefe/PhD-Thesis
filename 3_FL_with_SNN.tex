@@ -558,7 +558,7 @@ When the leader is transformed into an obstacle, the encoding equation for the i
     \mu_{I}(\phi_{i}) = \exp{\left(-\frac{(\phi_{i}-\zeta)^2}{2\sigma^2}\right)}
 \end{equation}
 
-The simulation proceeded for an additional 1200 seconds, during which the synaptic weights were adjusted in accordance with the new reward function given by \eqref{Eq.R-1}. In this case, because the leader is now an obstacle, so then \(\alpha^{\mathcal{S}}(t)\) in Figure \ref{fig_3_3_2} switches to 1 and training starts again with random signals to the output layer.
+The simulation proceeded for an additional 1200 seconds, during which the synaptic weights were adjusted in accordance with the new reward function given by \eqref{Eq.R-1}. In this case, because the leader is now an obstacle, so then \(\alpha^{\mathcal{S}}(t)\) in Figure \ref{fig_3_3_2} switches to 1 and weight adaptation starts again.
 
 The results of the reward change are shown in Figures \ref{fig_3_6} and \ref{fig_3_7}, which indicates that the agents quickly reduced their initial distance to the commanded distance of 2 m. Simultaneously, the minimum distance from the obstacle, which was the leader, increased over time, indicating that the agents adapted their behavior to maintain a greater distance from the obstacle. Figure \ref{fig_3_6} shows the trajectory of each agent after the reward change.
 
