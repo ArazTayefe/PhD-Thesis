@@ -333,7 +333,7 @@ In this scenario, the decay rate is very high, and the learning rate is 0. There
     
 \end{proof}
     
-    \begin{figure}[hb]
+    \begin{figure}[h]
         \centering
         \begin{minipage}{0.48\textwidth}
             \includegraphics[width=\linewidth] {Figures/RCSE.pdf}
@@ -450,7 +450,7 @@ In this section, we conducted a numerical simulation to validate the performance
 
 In this simulation, we modeled five agents, each equipped with its own \ac{snn} model, capable of reaching a maximum speed of 1 \(m/s\). The architecture of each agent's neural network included 72 input neurons. The number of input neurons was derived from a series of numerical simulations. Since each agent was designed to detect three distinct objects within its environment, the input layer was organized into sub-layers, with 24 neurons dedicated to each object (24 membership functions and neurons for each object). The network's output layer comprised 4 neurons, divided equally to represent negative and positive \(\Delta x\) and \(\Delta y\) movements. The \ac{snn} model in the simulation is a fully connected network, and the parameters of the \ac{lif} neuron are also presented in Table \ref{table:ParameterforLIF}.
 
-\begin{table}[h]
+\begin{table}[H]
 \caption{Parameter values for \ac{lif} neuron model \cite{Ch_1_R10}}
 \label{table:ParameterforLIF}
 \centering
@@ -470,7 +470,7 @@ $V_{th}$ & -50 mV & Threshold membrane potential \\
 
 The \ac{stdp} mechanism updated synaptic weights at 10 ms intervals. During these intervals, the learning algorithm adjusted the agent's states based on received data from other agents and the leader while simultaneously generating random outputs as part of an exploration strategy (section 3.2.3).
 
-\begin{table}[h]
+\begin{table}[H]
 \caption{Simulation Parameters}
 \label{table:simulation-parameters}
 \centering
@@ -499,7 +499,7 @@ Table \ref{table:simulation-parameters} shows the simulation parameters. The sim
 
 In order to monitor the swarm performance, the minimum and maximum distances of each agent from other agents and the minimum and maximum distances of the swarm from the leader were measured. Figure \ref{fig:distances} shows the definition of the distances.
 
-\begin{figure}[h]
+\begin{figure}[H]
     \centering
         \begin{minipage}{0.4\textwidth}
         \includegraphics[width=\linewidth]{Figures/Metrics.pdf}
@@ -519,7 +519,7 @@ The simulation included two phases. During the initial phase, the objective was 
 
 Figure \ref{fig_3_0} shows the simulation results for the \ac{RCSE} method. According to the results, the agents rapidly aligned around the leader within 6.89 seconds, and the maximum distance was reduced from 7.632 meters to the target distance of 2 meters. The swarm completed the formation around the leader in approximately 8.94 seconds, avoiding collisions.
 
-\begin{figure}[h]
+\begin{figure}[H]
     \centering
     \begin{minipage}{0.48\textwidth}
         \includegraphics[width=\linewidth]{Figures/Distances - BRC.pdf}
@@ -552,7 +552,7 @@ The simulation proceeded for an additional 1200 seconds, during which the synapt
 
 The results of the reward change are shown in Figures \ref{fig_3_6} and \ref{fig_3_7}, which indicates that the agents quickly reduced their initial distance to the commanded distance of 2 m. Simultaneously, the minimum distance from the obstacle, which was the leader, increased over time, indicating that the agents adapted their behavior to maintain a greater distance from the obstacle. Figure \ref{fig_3_6} shows the trajectory of each agent after the reward change.
 
-\begin{figure}[h]
+\begin{figure}[H]
     \centering
     \begin{minipage}{0.48\textwidth}
         \includegraphics[width=\linewidth]{Figures/Environment - ARC.pdf}
@@ -573,7 +573,7 @@ In order to better understand the effect of reward change on the \ac{snn}, the s
 
 Considering the numerical values presented in Table \ref{table:simulation-parameters} along with the reward coefficients \(\mathcal{C}_{Fi}^{Fj} = 0.02\) and \(\mathcal{C}_{L}^{Fj} = 0.07\), and \(r_{Fi}^{Fj} = 1\;m/s\) and \(r_{Fi}^{L} = 0.1\;m/s\), the maximum rewards at each weight update interval (\(\Delta T\)) for \(\mathcal{R}_{Fi}^{Fj}\) and \(\mathcal{R}_{Fi}^{L}\) are calculated using \eqref{Eq.TA.3} and \eqref{Eq.TA.4} as \(4\times 10^{-4}\) and \(7.7\times 10^{-4}\), respectively. Consequently, \(\mathcal{R}_{max}^{G} = \max(\mathcal{R}_{Fi}^{Fj},\mathcal{R}_{Fi}^{L}) = 7.7\times 10^{-4}\). The \(\Psi^{S}\) for the follower section in the network is \(\left[\frac{4\times10^{-4}}{7\times10^{-4}}\right]15.5=8.0519\), and for the leader section, it is \(\left[\frac{7\times10^{-4}}{7\times10^{-4}}\right]15.5=15.5\). The \(\eta\) and \(\beta\) for the follower section within the network are \(\frac{\mathcal{A}\mathcal{R}_{max}^{G} \ln{(2^{\lambda^2}-1)}}{\lambda\Psi^{\mathcal{S}} \log{(2)}} = 0.0011\) and \(\beta = \frac{\ln{(2^{\lambda^2}-1)}}{\Psi^{\mathcal{S}}} = 2.152\), respectively. For the leader section, these values are \(\frac{\mathcal{A}\mathcal{R}_{max}^{G} \ln{(2^{\lambda^2}-1)}}{\lambda\Psi^{\mathcal{S}} \log{(2)}} = 5.719\times 10^{-4}\) and \(\beta = \frac{\ln{(2^{\lambda^2}-1)}}{\Psi^{\mathcal{S}}} = 1.118\), respectively.
 
-\begin{figure}[h]
+\begin{figure}[H]
     \centering
     \begin{minipage}{0.48\textwidth}
         \includegraphics[width=\linewidth]{Figures/Synaptic Weights - BRC.pdf}
@@ -592,7 +592,7 @@ The visual patterns observed in the synaptic weights matrix in Figure \ref{fig_3
 
 Since the reward coefficients for followers and leaders are different, their maximum allowed synaptic weights are also different. The proposed method given by \eqref{Eq.WS.4} for controlling the unbounded growth of synaptic weights has successfully stabilized the network.
 
-\begin{figure}[h]
+\begin{figure}[H]
     \centering
     \begin{minipage}{0.48\textwidth}
         \includegraphics[width=\linewidth]{Figures/RLST - Weight Increase.pdf}
@@ -615,7 +615,7 @@ In this section, the proposed aggregation algorithm is tested. In this case, the
 
 Figure \ref{fig_3-7} shows the distances between agents and the leader before the reward change, indicating that the agents converge to the solution faster than in the scenario where federated learning has not been used, without any error. Figure \ref{fig_3-8} shows the simulation results for the reward change scenario, indicating that the proposed event-triggered \ac{fl} method has improved the learning performance, enabling the swarm to converge to the solution in 6 seconds. In this case, the neural network learned the policies in less time while preserving the performance.
 
-\begin{figure}[h]
+\begin{figure}[H]
     \centering
     \begin{minipage}{0.48\textwidth}
         \includegraphics[width=\linewidth]{Figures/Distances - BRC - DAI.pdf}
@@ -650,7 +650,7 @@ The norm of the synaptic weights can represent the changes in the synaptic weigh
 
 Therefore, the aggregation frequency is very high initially, and it reduces after the change in synaptic weights goes to zero because the learning rate matrix in (\ref{Eq.WS.1}) goes to zero. Also, after the reward changes and the leader becomes an obstacle after 600 seconds, the Euclidean distance between the converged and current models increases and reaches the threshold. As soon as the first agent sends its model to the server, the aggregation process starts again, and the agents adjust the associated synaptic weight.
 
-\begin{table}[H]
+\begin{table}[h]
     \centering
     \small
     \caption{Comparative Performance Analysis of the Proposed Aggregation Algorithm+\ac{RCSE} and \ac{RCSE}}
