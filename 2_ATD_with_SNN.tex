@@ -135,7 +135,7 @@ There are $q$ input neurons, and a membership function is assigned to each neuro
 \begin{figure}[h]
     \centering
     \includegraphics{Figures/4.pdf}
-    \caption{Network structure and encoding process for the input layer (Defender). Each neuron is associated with a membership function in \ac{grf}. The \ac{grf} encodes an input State ($S^t$) at each time step. There is both a training phase when ($\alpha  = 0$) and an operating phase when ($\alpha = 1)$.}
+    \caption{Network structure and encoding process for the input layer (Defender). Each neuron is associated with a membership function in \ac{grf}. The \ac{grf} encodes an input State ($S^t$) at each time step. There is both a training phase when ($\xi  = 0$) and an operating phase when ($\xi = 1)$.}
     \label{fig:my_label1}
 \end{figure}
 
@@ -191,7 +191,7 @@ There are $q$ input neurons, and a membership function is assigned to each neuro
         \State{$I_{in} = \begin{bmatrix}I^{T}\\I^{D}
         \end{bmatrix}$ Input current}
         \vspace{10pt}
-        \State{$I_{out} =  \alpha I_{syn}+(1-\alpha)I_{rnd}$ ($\alpha  = 0$ in training phase)}
+        \State{$I_{out} =  \xi I_{syn}+(1-\xi)I_{rnd}$ ($\xi  = 0$ in training phase)}
         \vspace{10pt}
         \State{$\mathbf{V_m}(t+\Delta t) = (1-\frac{\Delta t}{\tau_{m}})\mathbf{V_m}(t) + \frac{\Delta t}{\tau_{m}}\left(\mathbf{E_{l}} + R_{m}\begin{bmatrix}I_{in}\\I_{out}
         \end{bmatrix}\right)$ $\{\mathbf{V_m}$ and $\mathbf{E_{l}}$ are $[\zeta+\kappa] \times 1\}$}
@@ -216,16 +216,16 @@ The output of the \ac{snn} is the steering angle ($\theta_{s}$) for the agent. T
 The output consists of two terms. One term comes from the synaptic weights, and the other term is random noise for exploration. The output of the \ac{snn} can be shown as follows,
 
 \begin{equation} \label{Eq.26}
-    I_{out} = \alpha I_{syn} + \left(1 - \alpha\right)I_{rnd}
+    I_{out} = \xi I_{syn} + \left(1 - \xi\right)I_{rnd}
 \end{equation}
 
-\noindent where $\alpha$ is a constant that is 0 during training and becomes 1 after training is completed, $I_{rnd}$ is a random steering angle that is selected at each time step, and $I_{syn}$ is the synaptic output (steering angle based on synaptic weights). Therefore, there are two phases: a training phase and an operating phase.
+\noindent where $\xi$ is a constant that is 0 during training and becomes 1 after training is completed, $I_{rnd}$ is a random steering angle that is selected at each time step, and $I_{syn}$ is the synaptic output (steering angle based on synaptic weights). Therefore, there are two phases: a training phase and an operating phase.
 
-During training, the input State ($S^t$) is encoded into the network, and a random steering angle ($u_{rnd}$) is encoded as a random action using the F2S process into the output layer. These two encoding currents for the input and output layer make input and output neurons fire independently. The \ac{stdp} adapts the weights for the fired neurons. Since $\alpha$ is 0 during the training, the $I_{syn}$ does not affect the \ac{snn}'s output (Equation \ref{Eq.26}). 
+During training, the input State ($S^t$) is encoded into the network, and a random steering angle ($u_{rnd}$) is encoded as a random action using the F2S process into the output layer. These two encoding currents for the input and output layer make input and output neurons fire independently. The \ac{stdp} adapts the weights for the fired neurons. Since $\xi$ is 0 during the training, the $I_{syn}$ does not affect the \ac{snn}'s output (Equation \ref{Eq.26}). 
 
 In the training process, the output and input neurons are excited separately. The input neurons are fired based on the agent's current state, whereas the agent's steering angle is randomly assigned based on the random input to the output neurons, as shown in Figure \ref{fig:my_label9}. The agent then takes a step based on the random steering angle and a reward is assigned. The training algorithm then evaluates the reward for that given random steering angle. If the reward is positive, then the weight associated with the input neurons to output neurons that fired for that state is strengthened, and if the reward is negative, then the weight for the input to output neurons in (\ref{Eq.15}) is weakened. Future research will include an inhibitory effect where the weights can become negative.
 
-After training, the $\alpha$ changes to 1 and eliminates the effect of random output, and the \ac{snn}'s output is calculated based on the synaptic currents. Algorithm \ref{Algorithm4.1} shows the training process.
+After training, the $\xi$ changes to 1 and eliminates the effect of random output, and the \ac{snn}'s output is calculated based on the synaptic currents. Algorithm \ref{Algorithm4.1} shows the training process.
 
 \section{Results}
 
