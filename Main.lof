@@ -11,26 +11,26 @@
 \contentsline {figure}{\numberline {2.6}{\ignorespaces Reward, eligibility trace, and weight change during the simulation for $W^{3-3}$. The $C(t) R(t)$ changes the synaptic weight by considering activation strength and reward value.}}{27}{figure.2.6}%
 \contentsline {figure}{\numberline {2.7}{\ignorespaces \ac {snn}'s performance during training. Hollow circles show the initial positions.}}{31}{figure.2.7}%
 \contentsline {figure}{\numberline {2.8}{\ignorespaces Changes in synaptic weights during training. Only Maximum synaptic weights for both agents are shown.}}{32}{figure.2.8}%
-\contentsline {figure}{\numberline {2.9}{\ignorespaces \ac {snn}'s performance after training. The highlighted region shows the defender's dominant region. The purple dot is the optimal capture point. The CO Type-E shows the reachable regions of the Invader and the Defender.}}{33}{figure.2.9}%
-\contentsline {figure}{\numberline {2.10}{\ignorespaces \ac {snn}'s performance in noisy conditions. A white Gaussian noise with a variance of 0.01 is added to the measured inputs.}}{35}{figure.2.10}%
+\contentsline {figure}{\numberline {2.9}{\ignorespaces \ac {snn}'s performance after training. The highlighted region shows the defender's dominant region. The purple dot is the optimal capture point. The CO Type-E shows the reachable regions of the Invader and the Defender.}}{34}{figure.2.9}%
+\contentsline {figure}{\numberline {2.10}{\ignorespaces \ac {snn}'s performance in noisy conditions. A white Gaussian noise with a variance of 0.01 is added to the measured inputs.}}{36}{figure.2.10}%
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {3.1}{\ignorespaces The central server (the leader) and the surrounding follower agents (white drones). The follower agents learn to fly in a formation to maintain the commanded distance. The Local models trained individually by follower agents are sent to the leader. The leader aggregates the models and sends back the global model for another round of training of the follower agents.}}{38}{figure.3.1}%
-\contentsline {figure}{\numberline {3.2}{\ignorespaces \ac {snn} structure with encoding and decoding layers. Each sub-layer consists of a fuzzy encoder and the F2S Converter, with the output layer receiving inputs from synaptic weights and a random action selector. During the training phase, the output layer receives input only from the random action selector, which then shifts to synaptic weight inputs after the training.}}{40}{figure.3.2}%
-\contentsline {figure}{\numberline {3.3}{\ignorespaces The fuzzy encoding principle for the input sub-layer.}}{42}{figure.3.3}%
-\contentsline {figure}{\numberline {3.4}{\ignorespaces Synaptic weight change for $\lambda =5, \Psi ^{\mathcal {S}}=15.5$,\\ and $\mathcal {A R}^G=1$.}}{53}{figure.3.4}%
-\contentsline {figure}{\numberline {3.5}{\ignorespaces RCSE working principle in inhibiting the adjacent synaptic connections.}}{53}{figure.3.5}%
-\contentsline {figure}{\numberline {3.6}{\ignorespaces Measured distances used for evaluating swarm flight performance and collision detection.}}{61}{figure.3.6}%
-\contentsline {figure}{\numberline {3.7}{\ignorespaces Agents' trajectory during the test phase}}{61}{figure.3.7}%
-\contentsline {figure}{\numberline {3.8}{\ignorespaces Variation of distances within the swarm during the test phase}}{62}{figure.3.8}%
-\contentsline {figure}{\numberline {3.9}{\ignorespaces Adaptive response to commanded distance adjustments - reconfiguration during the test phase}}{62}{figure.3.9}%
-\contentsline {figure}{\numberline {3.10}{\ignorespaces Trajectory adaptations of following agents in response to reward change for the leader during the test phase.}}{64}{figure.3.10}%
-\contentsline {figure}{\numberline {3.11}{\ignorespaces Variations in distances after reward changes and Leader becomes Obstacle - test phase.}}{64}{figure.3.11}%
-\contentsline {figure}{\numberline {3.12}{\ignorespaces Synaptic Weights before Reward change.}}{66}{figure.3.12}%
-\contentsline {figure}{\numberline {3.13}{\ignorespaces Synaptic Weights after Reward change.}}{66}{figure.3.13}%
-\contentsline {figure}{\numberline {3.14}{\ignorespaces Synaptic weights increase after reward change.}}{67}{figure.3.14}%
-\contentsline {figure}{\numberline {3.15}{\ignorespaces Synaptic weights decrease after reward change.}}{67}{figure.3.15}%
-\contentsline {figure}{\numberline {3.16}{\ignorespaces Distances during the test phase before reward change in the proposed event-triggered \ac {fl} method.}}{68}{figure.3.16}%
-\contentsline {figure}{\numberline {3.17}{\ignorespaces Distances during the test phase after reward change in the proposed event-triggered \ac {fl} method.}}{68}{figure.3.17}%
-\contentsline {figure}{\numberline {3.18}{\ignorespaces Frobenius norm of the Agent 1's weighs during the learning phase. The reward changes for the Leader after 600 s.}}{69}{figure.3.18}%
-\contentsline {figure}{\numberline {3.19}{\ignorespaces Communication times for agents and the Central Server (Leader). Red and blue dots show the times that agents and the Central Server have sent their model, respectively.}}{69}{figure.3.19}%
+\contentsline {figure}{\numberline {3.1}{\ignorespaces The central server (the leader) and the surrounding follower agents (white drones). The follower agents learn to fly in a formation to maintain the commanded distance. The Local models trained individually by follower agents are sent to the leader. The leader aggregates the models and sends back the global model for another round of training of the follower agents.}}{39}{figure.3.1}%
+\contentsline {figure}{\numberline {3.2}{\ignorespaces \ac {snn} structure with encoding and decoding layers. Each sub-layer consists of a fuzzy encoder and the F2S Converter, with the output layer receiving inputs from synaptic weights and a random action selector. During the training phase, the output layer receives input only from the random action selector, which then shifts to synaptic weight inputs after the training.}}{41}{figure.3.2}%
+\contentsline {figure}{\numberline {3.3}{\ignorespaces The fuzzy encoding principle for the input sub-layer.}}{43}{figure.3.3}%
+\contentsline {figure}{\numberline {3.4}{\ignorespaces Synaptic weight change for $\lambda =5, \Psi ^{\mathcal {S}}=15.5$,\\ and $\mathcal {A R}^G=1$.}}{54}{figure.3.4}%
+\contentsline {figure}{\numberline {3.5}{\ignorespaces RCSE working principle in inhibiting the adjacent synaptic connections.}}{54}{figure.3.5}%
+\contentsline {figure}{\numberline {3.6}{\ignorespaces Measured distances used for evaluating swarm flight performance and collision detection.}}{62}{figure.3.6}%
+\contentsline {figure}{\numberline {3.7}{\ignorespaces Agents' trajectory during the test phase}}{62}{figure.3.7}%
+\contentsline {figure}{\numberline {3.8}{\ignorespaces Variation of distances within the swarm during the test phase}}{63}{figure.3.8}%
+\contentsline {figure}{\numberline {3.9}{\ignorespaces Adaptive response to commanded distance adjustments - reconfiguration during the test phase}}{63}{figure.3.9}%
+\contentsline {figure}{\numberline {3.10}{\ignorespaces Trajectory adaptations of following agents in response to reward change for the leader during the test phase.}}{65}{figure.3.10}%
+\contentsline {figure}{\numberline {3.11}{\ignorespaces Variations in distances after reward changes and Leader becomes Obstacle - test phase.}}{65}{figure.3.11}%
+\contentsline {figure}{\numberline {3.12}{\ignorespaces Synaptic Weights before Reward change.}}{67}{figure.3.12}%
+\contentsline {figure}{\numberline {3.13}{\ignorespaces Synaptic Weights after Reward change.}}{67}{figure.3.13}%
+\contentsline {figure}{\numberline {3.14}{\ignorespaces Synaptic weights increase after reward change.}}{68}{figure.3.14}%
+\contentsline {figure}{\numberline {3.15}{\ignorespaces Synaptic weights decrease after reward change.}}{68}{figure.3.15}%
+\contentsline {figure}{\numberline {3.16}{\ignorespaces Distances during the test phase before reward change in the proposed event-triggered \ac {fl} method.}}{69}{figure.3.16}%
+\contentsline {figure}{\numberline {3.17}{\ignorespaces Distances during the test phase after reward change in the proposed event-triggered \ac {fl} method.}}{69}{figure.3.17}%
+\contentsline {figure}{\numberline {3.18}{\ignorespaces Frobenius norm of the Agent 1's weighs during the learning phase. The reward changes for the Leader after 600 s.}}{70}{figure.3.18}%
+\contentsline {figure}{\numberline {3.19}{\ignorespaces Communication times for agents and the Central Server (Leader). Red and blue dots show the times that agents and the Central Server have sent their model, respectively.}}{70}{figure.3.19}%
 \addvspace {10\p@ }
