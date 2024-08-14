@@ -279,59 +279,59 @@ If \(\Psi^{\mathcal{S}}\) decreases to 7.75 due to reward changes and assuming \
 
 In this scenario, the decay rate is very high, and the learning rate is 0. Therefore, the algorithm aggressively pulls the synaptic weight back toward the lowered threshold.
 
-\begin{lemma}
-    The \ac{RCSE} method is asymptotically stable in its equilibrium point \(W_{max}^{\mathcal{S}}(t) = \Psi^{\mathcal{S}}\).
-    \end{lemma}
+% \begin{lemma}
+%     The \ac{RCSE} method is asymptotically stable in its equilibrium point \(W_{max}^{\mathcal{S}}(t) = \Psi^{\mathcal{S}}\).
+%     \end{lemma}
     
-\begin{proof}
-    We consider the dynamical system given by the equation of synaptic weights for \(W_{max}^{\mathcal{S}}(t) \geq 0\) that receives a positive reward (\(\mathcal{R}(t) > 0\)) as,
+% \begin{proof}
+%     We consider the dynamical system given by the equation of synaptic weights for \(W_{max}^{\mathcal{S}}(t) \geq 0\) that receives a positive reward (\(\mathcal{R}(t) > 0\)) as,
     
-    \begin{equation} \label{Eq.WS.5}
-    \begin{split}
-        \dot{W}_{max}^{\mathcal{S}}(t) = & \frac{1}{1 + \exp{\left[\frac{1}{\epsilon}\left( W_{max}^{\mathcal{S}}(t) - \Psi^{\mathcal{S}} \right)\right]}}  STDP(\tau)  \mathcal{R}(t) \\
-        & - \left( \frac{\mathcal{A}\mathcal{R}_{max}^{G}}{\lambda\log{(2)}} \right) \log \left(1 + \exp\left[{\left(\frac{\ln{(2^{\lambda^2}-1)}}{\Psi^{\mathcal{S}}} \right) \left( W_{max}^{\mathcal{S}}(t) - \Psi^{\mathcal{S}} \right)} \right] \right),
-    \end{split}
-    \end{equation}
+%     \begin{equation} \label{Eq.WS.5}
+%     \begin{split}
+%         \dot{W}_{max}^{\mathcal{S}}(t) = & \frac{1}{1 + \exp{\left[\frac{1}{\epsilon}\left( W_{max}^{\mathcal{S}}(t) - \Psi^{\mathcal{S}} \right)\right]}}  STDP(\tau)  \mathcal{R}(t) \\
+%         & - \left( \frac{\mathcal{A}\mathcal{R}_{max}^{G}}{\lambda\log{(2)}} \right) \log \left(1 + \exp\left[{\left(\frac{\ln{(2^{\lambda^2}-1)}}{\Psi^{\mathcal{S}}} \right) \left( W_{max}^{\mathcal{S}}(t) - \Psi^{\mathcal{S}} \right)} \right] \right),
+%     \end{split}
+%     \end{equation}
     
-    To assess the stability of this system around the equilibrium point, we introduce a Lyapunov function candidate \(V(z)\), where \(z=W_{max}^{\mathcal{S}}(t) - \Psi^{\mathcal{S}}\). A common choice for such analyses is a quadratic function of the deviation from the equilibrium:
+%     To assess the stability of this system around the equilibrium point, we introduce a Lyapunov function candidate \(V(z)\), where \(z=W_{max}^{\mathcal{S}}(t) - \Psi^{\mathcal{S}}\). A common choice for such analyses is a quadratic function of the deviation from the equilibrium:
     
-    \begin{equation}
-        V(z) = \frac{1}{2}z^2.
-    \end{equation}
+%     \begin{equation}
+%         V(z) = \frac{1}{2}z^2.
+%     \end{equation}
     
-    This positive definite function has a minimum at the equilibrium point, satisfying the essential criteria for a Lyapunov function. The derivative of $V(z)$ with respect to time, $\dot{V}(z)$, is then calculated to determine the rate of change of the Lyapunov function along the trajectories of the system:
+%     This positive definite function has a minimum at the equilibrium point, satisfying the essential criteria for a Lyapunov function. The derivative of $V(z)$ with respect to time, $\dot{V}(z)$, is then calculated to determine the rate of change of the Lyapunov function along the trajectories of the system:
     
-    \begin{equation}
-        \dot{V}(z) = z \dot{z}
-    \end{equation}
+%     \begin{equation}
+%         \dot{V}(z) = z \dot{z}
+%     \end{equation}
     
-    Substituting \(\dot{W}_{max}^{\mathcal{S}}(t)\) from \eqref{Eq.WS.5} into the above expression, we have,
+%     Substituting \(\dot{W}_{max}^{\mathcal{S}}(t)\) from \eqref{Eq.WS.5} into the above expression, we have,
     
-    \begin{equation} \label{Eq.WS.6}
-    \begin{split}
-        \dot{V}(z) = z \times \left[ \frac{1}{1 + \exp{\left[\frac{1}{\epsilon}\left( z \right)\right]}} STDP(\tau)  \mathcal{R}(t) - \left( \frac{\mathcal{A}\mathcal{R}_{max}^{G}}{\lambda\log{(2)}} \right) \log \left(1 + \exp\left[{\left(\frac{\ln{(2^{\lambda^2}-1)}}{\Psi^{\mathcal{S}}} \right) \left( z \right)} \right] \right) \right]
-    \end{split}
-    \end{equation}
+%     \begin{equation} \label{Eq.WS.6}
+%     \begin{split}
+%         \dot{V}(z) = z \times \left[ \frac{1}{1 + \exp{\left[\frac{1}{\epsilon}\left( z \right)\right]}} STDP(\tau)  \mathcal{R}(t) - \left( \frac{\mathcal{A}\mathcal{R}_{max}^{G}}{\lambda\log{(2)}} \right) \log \left(1 + \exp\left[{\left(\frac{\ln{(2^{\lambda^2}-1)}}{\Psi^{\mathcal{S}}} \right) \left( z \right)} \right] \right) \right]
+%     \end{split}
+%     \end{equation}
     
-    A negative $\dot{V}(z)$ indicates that the system's energy decreases over time, concluding that the equilibrium point is asymptotically stable. Conversely, a positive $\dot{V}(z)$ in any region would suggest the presence of instability or regions of attraction that do not encompass the entire state space.
+%     A negative $\dot{V}(z)$ indicates that the system's energy decreases over time, concluding that the equilibrium point is asymptotically stable. Conversely, a positive $\dot{V}(z)$ in any region would suggest the presence of instability or regions of attraction that do not encompass the entire state space.
     
-    In analyzing the system's stability, we focus on the behavior of the derivative of the Lyapunov function, $\dot{V}(z)$, across different regions of $z$. We decompose the dynamics of $\dot{z}$ into its constituent components to systematically analyze the stability conditions. We assess the relative magnitudes of the two main components influencing $\dot{V}(z)$:
+%     In analyzing the system's stability, we focus on the behavior of the derivative of the Lyapunov function, $\dot{V}(z)$, across different regions of $z$. We decompose the dynamics of $\dot{z}$ into its constituent components to systematically analyze the stability conditions. We assess the relative magnitudes of the two main components influencing $\dot{V}(z)$:
     
-    \begin{enumerate}
-        \item The first term, represented as $\frac{1}{1 + \exp{\left[\frac{1}{\epsilon}z\right]}} STDP(\tau)  \mathcal{R}(t)$, denotes the effect of learning rate and is inherently positive when the synaptic connection receives positive reward consistently.
+%     \begin{enumerate}
+%         \item The first term, represented as $\frac{1}{1 + \exp{\left[\frac{1}{\epsilon}z\right]}} STDP(\tau)  \mathcal{R}(t)$, denotes the effect of learning rate and is inherently positive when the synaptic connection receives positive reward consistently.
         
-        \item The second term, $\left( \frac{\mathcal{A}\mathcal{R}_{max}^{G}}{\lambda\log{(2)}} \right) \log \left(1 + \exp\left[{\left(\frac{\ln{(2^{\lambda^2}-1)}}{\Psi^{\mathcal{S}}} \right) z} \right] \right)$, captures the dynamic decay rate of synaptic weights, which is governed by the SoftPlus function.
-    \end{enumerate}
+%         \item The second term, $\left( \frac{\mathcal{A}\mathcal{R}_{max}^{G}}{\lambda\log{(2)}} \right) \log \left(1 + \exp\left[{\left(\frac{\ln{(2^{\lambda^2}-1)}}{\Psi^{\mathcal{S}}} \right) z} \right] \right)$, captures the dynamic decay rate of synaptic weights, which is governed by the SoftPlus function.
+%     \end{enumerate}
     
-    \textbf{Analysis for $z < 0$}:
+%     \textbf{Analysis for $z < 0$}:
     
-    In this region, the term \(\exp\left[{\left(\frac{\ln{(2^{\lambda^2}-1)}}{\Psi^{\mathcal{S}}} \right) z} \right]\)  tends to zero for \(z \rightarrow -\infty\) and makes the term inside the \(\log\) function go to 1. This implies that the contribution of this term to $\dot{V}(z)$ is negligible in this region. Moreover, the first term remains positive throughout, and given that it is multiplied by $z$ (which is negative in this region), the overall contribution to $\dot{V}(z)$ is negative. Consequently, $\dot{V}(z)$ is negative for $z < 0$, indicating that any perturbations from the equilibrium in this region will decrease over time, thereby contributing to the system's stability.
+%     In this region, the term \(\exp\left[{\left(\frac{\ln{(2^{\lambda^2}-1)}}{\Psi^{\mathcal{S}}} \right) z} \right]\)  tends to zero for \(z \rightarrow -\infty\) and makes the term inside the \(\log\) function go to 1. This implies that the contribution of this term to $\dot{V}(z)$ is negligible in this region. Moreover, the first term remains positive throughout, and given that it is multiplied by $z$ (which is negative in this region), the overall contribution to $\dot{V}(z)$ is negative. Consequently, $\dot{V}(z)$ is negative for $z < 0$, indicating that any perturbations from the equilibrium in this region will decrease over time, thereby contributing to the system's stability.
     
-    \textbf{Analysis for $z > 0$:}
+%     \textbf{Analysis for $z > 0$:}
     
-    For this region, the magnitude of the second term significantly exceeds that of the first term. This predominance is critical as it is associated with a negative sign in the $\dot{V}(z)$ equation. Therefore, the negative contribution of this component ensures that $\dot{V}(z)$ remains negative throughout this region. It indicates that any deviation from the equilibrium state results in the system's energy decreasing over time, leading to the conclusion that the equilibrium point $W_{max}^{\mathcal{S}}(t) = \Psi^{\mathcal{S}}$ is asymptotically stable for $z > 0$. 
+%     For this region, the magnitude of the second term significantly exceeds that of the first term. This predominance is critical as it is associated with a negative sign in the $\dot{V}(z)$ equation. Therefore, the negative contribution of this component ensures that $\dot{V}(z)$ remains negative throughout this region. It indicates that any deviation from the equilibrium state results in the system's energy decreasing over time, leading to the conclusion that the equilibrium point $W_{max}^{\mathcal{S}}(t) = \Psi^{\mathcal{S}}$ is asymptotically stable for $z > 0$. 
     
-\end{proof}
+% \end{proof}
     
     \begin{figure}[h]
         \centering
