@@ -25,12 +25,14 @@
 \contentsline {figure}{\numberline {3.9}{\ignorespaces Adaptive response to commanded distance adjustments - reconfiguration during the test phase}}{61}{figure.3.9}%
 \contentsline {figure}{\numberline {3.10}{\ignorespaces Trajectory adaptations of following agents in response to reward change for the leader during the test phase.}}{63}{figure.3.10}%
 \contentsline {figure}{\numberline {3.11}{\ignorespaces Variations in distances after reward changes and Leader becomes Obstacle - test phase.}}{63}{figure.3.11}%
-\contentsline {figure}{\numberline {3.12}{\ignorespaces Synaptic Weights before Reward change.}}{65}{figure.3.12}%
-\contentsline {figure}{\numberline {3.13}{\ignorespaces Synaptic Weights after Reward change.}}{65}{figure.3.13}%
-\contentsline {figure}{\numberline {3.14}{\ignorespaces Synaptic weights increase after reward change.}}{66}{figure.3.14}%
-\contentsline {figure}{\numberline {3.15}{\ignorespaces Synaptic weights decrease after reward change.}}{66}{figure.3.15}%
-\contentsline {figure}{\numberline {3.16}{\ignorespaces Distances during the test phase before reward change in the proposed event-triggered \ac {fl} method.}}{67}{figure.3.16}%
-\contentsline {figure}{\numberline {3.17}{\ignorespaces Distances during the test phase after reward change in the proposed event-triggered \ac {fl} method.}}{67}{figure.3.17}%
-\contentsline {figure}{\numberline {3.18}{\ignorespaces Frobenius norm of the Agent 1's weighs during the learning phase. The reward changes for the Leader after 600 s.}}{68}{figure.3.18}%
-\contentsline {figure}{\numberline {3.19}{\ignorespaces Communication times for agents and the Central Server (Leader). Red and blue dots show the times that agents and the Central Server have sent their model, respectively.}}{68}{figure.3.19}%
+\contentsline {figure}{\numberline {3.12}{\ignorespaces Synaptic Weights before Reward change in \ac {RCSE} method.}}{65}{figure.3.12}%
+\contentsline {figure}{\numberline {3.13}{\ignorespaces Synaptic Weights after Reward change in \ac {RCSE} method.}}{65}{figure.3.13}%
+\contentsline {figure}{\numberline {3.14}{\ignorespaces Synaptic Weights before Reward change in Multiplicative Synaptic Normalization method.}}{65}{figure.3.14}%
+\contentsline {figure}{\numberline {3.15}{\ignorespaces Synaptic Weights after Reward change in Multiplicative Synaptic Normalization method.}}{65}{figure.3.15}%
+\contentsline {figure}{\numberline {3.16}{\ignorespaces Synaptic weights increase after reward change in \ac {RCSE} method.}}{66}{figure.3.16}%
+\contentsline {figure}{\numberline {3.17}{\ignorespaces Synaptic weights decrease after reward change in \ac {RCSE} method.}}{66}{figure.3.17}%
+\contentsline {figure}{\numberline {3.18}{\ignorespaces Distances during the test phase before reward change in the proposed event-triggered \ac {fl} method.}}{68}{figure.3.18}%
+\contentsline {figure}{\numberline {3.19}{\ignorespaces Distances during the test phase after reward change in the proposed event-triggered \ac {fl} method.}}{68}{figure.3.19}%
+\contentsline {figure}{\numberline {3.20}{\ignorespaces Frobenius norm of the Agent 1's weighs during the learning phase. The reward changes for the Leader after 600 s.}}{69}{figure.3.20}%
+\contentsline {figure}{\numberline {3.21}{\ignorespaces Communication times for agents and the Central Server (Leader). Red and blue dots show the times that agents and the Central Server have sent their model, respectively.}}{69}{figure.3.21}%
 \addvspace {10\p@ }

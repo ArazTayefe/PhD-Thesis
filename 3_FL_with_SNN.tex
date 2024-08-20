@@ -577,14 +577,30 @@ Considering the numerical values presented in Table \ref{table:simulation-parame
     \centering
     \begin{minipage}{0.48\textwidth}
         \includegraphics[width=\linewidth]{Figures/Synaptic Weights - BRC.pdf}
-        \caption{Synaptic Weights before Reward change.}
+        \caption{Synaptic Weights before Reward change in \ac{RCSE} method.}
         \label{fig_3_8}
     \end{minipage}
     \hfill
     \begin{minipage}{0.48\textwidth}
         \includegraphics[width=\linewidth]{Figures/Synaptic Weights - ARC.pdf}
-        \caption{Synaptic Weights after Reward change.}
+        \caption{Synaptic Weights after Reward change in \ac{RCSE} method.}
         \label{fig_3_9}
+    \end{minipage}
+\end{figure}
+
+
+\begin{figure}[H]
+    \centering
+    \begin{minipage}{0.48\textwidth}
+        \includegraphics[width=\linewidth]{Figures/Synaptic Weights - BRC.pdf}
+        \caption{Synaptic Weights before Reward change in Multiplicative Synaptic Normalization method.}
+        \label{fig_3_8_1}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.48\textwidth}
+        \includegraphics[width=\linewidth]{Figures/Synaptic Weights - ARC.pdf}
+        \caption{Synaptic Weights after Reward change in Multiplicative Synaptic Normalization method.}
+        \label{fig_3_9_1}
     \end{minipage}
 \end{figure}
 
@@ -596,16 +612,17 @@ Since the reward coefficients for followers and leaders are different, their max
     \centering
     \begin{minipage}{0.48\textwidth}
         \includegraphics[width=\linewidth]{Figures/RLST - Weight Increase.pdf}
-        \caption{Synaptic weights increase after reward change.}
+        \caption{Synaptic weights increase after reward change in \ac{RCSE} method.}
         \label{fig_3_10}
     \end{minipage}
     \hfill
     \begin{minipage}{0.48\textwidth}
         \includegraphics[width=\linewidth]{Figures/RLST - Weight Decrease.pdf}
-        \caption{Synaptic weights decrease after reward change.}
+        \caption{Synaptic weights decrease after reward change in \ac{RCSE} method.}
         \label{fig_3_11}
     \end{minipage}
 \end{figure}
+
 
 Figures \ref{fig_3_10} and \ref{fig_3_11} show the synaptic weights after the reward change. In this case, since the reward coefficients are changed, the \(\eta\) and \(\beta\) values in \eqref{Eq.WS.3} are changed for the represented sub-layers, and the proposed method has helped the \ac{stdp} algorithm to adjust the weights based on the new situation in the environment.
 
