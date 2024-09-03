@@ -592,13 +592,13 @@ Considering the numerical values presented in Table \ref{table:simulation-parame
 \begin{figure}[H]
     \centering
     \begin{minipage}{0.48\textwidth}
-        \includegraphics[width=\linewidth]{Figures/Synaptic Weights - BRC.pdf}
+        \includegraphics[width=\linewidth]{Figures/MSN - Before Reward Change.pdf}
         \caption{Synaptic Weights before Reward change in Multiplicative Synaptic Normalization method.}
         \label{fig_3_8_1}
     \end{minipage}
     \hfill
     \begin{minipage}{0.48\textwidth}
-        \includegraphics[width=\linewidth]{Figures/Synaptic Weights - ARC.pdf}
+        \includegraphics[width=\linewidth]{Figures/MSN - After Reward Change.pdf}
         \caption{Synaptic Weights after Reward change in Multiplicative Synaptic Normalization method.}
         \label{fig_3_9_1}
     \end{minipage}
@@ -607,6 +607,8 @@ Considering the numerical values presented in Table \ref{table:simulation-parame
 The visual patterns observed in the synaptic weights matrix in Figure \ref{fig_3_8} and \ref{fig_3_9}, specifically, the gradual increases and decreases in values across weights, directly result from applying Gaussian membership functions for encoding. As illustrated in the heatmap visualization, regions of higher values denote areas closer to the function's center, where the degree of membership peaks. Conversely, areas of lower values reflect points moving away from the center, where the membership degree decreases according to the Gaussian distribution's tails. Figure \ref{fig_3_3_2} further demonstrates this behavior. The differences in synaptic strengths arise from variations in spike rates, reflecting differences in membership degree.
 
 Since the reward coefficients for followers and leaders are different, their maximum allowed synaptic weights are also different. The proposed method given by \eqref{Eq.WS.4} for controlling the unbounded growth of synaptic weights has successfully stabilized the network.
+
+Figures \ref{fig_3_8_1} and \ref{fig_3_9_1} show the performance of the Multiplicative Synaptic Normalization (MSN) method. According to the results, this method cannot control the weight growth because of the coexistence of the excitatory and inhibitory (positive and negative synaptic weights). This method adjusts the weights when the summation of the input synaptic weights to an output neuron exceeds the maximum synaptic weight. In this case, the condition is never satisfied since positive and negative synaptic weights cancel out each other. According to Figure \ref{fig_3_9_1}, when the reward changes for the Leader, the MSN cannot adjust the weights because it does not have the reward-modulated decay rate mechanism.
 
 \begin{figure}[H]
     \centering
