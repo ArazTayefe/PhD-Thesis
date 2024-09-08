@@ -17,22 +17,23 @@
 \contentsline {figure}{\numberline {3.1}{\ignorespaces The central server (the leader) and the surrounding follower agents (white drones). The follower agents learn to fly in a formation to maintain the commanded distance. The Local models trained individually by follower agents are sent to the leader. The leader aggregates the models and sends back the global model for another round of training of the follower agents.}}{39}{figure.3.1}%
 \contentsline {figure}{\numberline {3.2}{\ignorespaces \ac {snn} structure with encoding and decoding layers. Each sub-layer consists of a fuzzy encoder and the F2S Converter, with the output layer receiving inputs from synaptic weights and a random action selector. During the training phase, the output layer receives input only from the random action selector, which then shifts to synaptic weight inputs after the training (test phase).}}{41}{figure.3.2}%
 \contentsline {figure}{\numberline {3.3}{\ignorespaces The fuzzy encoding principle for the input sub-layer.}}{43}{figure.3.3}%
-\contentsline {figure}{\numberline {3.4}{\ignorespaces Synaptic weight change for $\lambda =5, \Psi ^{\mathcal {S}}=15.5$,\\ and $\mathcal {A R}^G=1$.}}{52}{figure.3.4}%
-\contentsline {figure}{\numberline {3.5}{\ignorespaces RCSE working principle in inhibiting the adjacent synaptic connections.}}{52}{figure.3.5}%
-\contentsline {figure}{\numberline {3.6}{\ignorespaces Measured distances used for evaluating swarm flight performance and collision detection.}}{60}{figure.3.6}%
-\contentsline {figure}{\numberline {3.7}{\ignorespaces Agents' trajectory during the test phase}}{60}{figure.3.7}%
-\contentsline {figure}{\numberline {3.8}{\ignorespaces Variation of distances within the swarm during the test phase}}{61}{figure.3.8}%
-\contentsline {figure}{\numberline {3.9}{\ignorespaces Adaptive response to commanded distance adjustments - reconfiguration during the test phase}}{61}{figure.3.9}%
-\contentsline {figure}{\numberline {3.10}{\ignorespaces Trajectory adaptations of following agents in response to reward change for the leader during the test phase.}}{63}{figure.3.10}%
-\contentsline {figure}{\numberline {3.11}{\ignorespaces Variations in distances after reward changes and Leader becomes Obstacle - test phase.}}{63}{figure.3.11}%
-\contentsline {figure}{\numberline {3.12}{\ignorespaces Synaptic Weights before Reward change in \ac {RCSE} method.}}{65}{figure.3.12}%
-\contentsline {figure}{\numberline {3.13}{\ignorespaces Synaptic Weights after Reward change in \ac {RCSE} method.}}{65}{figure.3.13}%
-\contentsline {figure}{\numberline {3.14}{\ignorespaces Synaptic Weights before Reward change in Multiplicative Synaptic Normalization method.}}{65}{figure.3.14}%
-\contentsline {figure}{\numberline {3.15}{\ignorespaces Synaptic Weights after Reward change in Multiplicative Synaptic Normalization method.}}{65}{figure.3.15}%
-\contentsline {figure}{\numberline {3.16}{\ignorespaces Synaptic weights increase after reward change in \ac {RCSE} method.}}{66}{figure.3.16}%
-\contentsline {figure}{\numberline {3.17}{\ignorespaces Synaptic weights decrease after reward change in \ac {RCSE} method.}}{66}{figure.3.17}%
-\contentsline {figure}{\numberline {3.18}{\ignorespaces Distances during the test phase before reward change in the proposed event-triggered \ac {fl} method.}}{68}{figure.3.18}%
-\contentsline {figure}{\numberline {3.19}{\ignorespaces Distances during the test phase after reward change in the proposed event-triggered \ac {fl} method.}}{68}{figure.3.19}%
-\contentsline {figure}{\numberline {3.20}{\ignorespaces Frobenius norm of the Agent 1's weighs during the learning phase. The reward changes for the Leader after 600 s.}}{69}{figure.3.20}%
-\contentsline {figure}{\numberline {3.21}{\ignorespaces Communication times for agents and the Central Server (Leader). Red and blue dots show the times that agents and the Central Server have sent their model, respectively.}}{69}{figure.3.21}%
+\contentsline {figure}{\numberline {3.4}{\ignorespaces Synaptic weight change for $\lambda =5, \Psi ^{\mathcal {S}}=15.5$,\\ and $\mathcal {A}\mathcal { R}_{max}^G=1$.}}{52}{figure.3.4}%
+\contentsline {figure}{\numberline {3.5}{\ignorespaces Reward-based learning rate and decay rate functions. In the blue region (active learning rate), the reward adjusts the weights, and in the red region (active decay rate), the RCSE method controls synaptic growth.}}{52}{figure.3.5}%
+\contentsline {figure}{\numberline {3.6}{\ignorespaces RCSE working principle in inhibiting the adjacent synaptic connections. The heatmap shows the synaptic weight matrix. Neurons have different firing strengths due to the difference in fuzzy membership values, which affects the increase or decrease rate and shapes the patterns in the synaptic weight matrix.}}{53}{figure.3.6}%
+\contentsline {figure}{\numberline {3.7}{\ignorespaces Measured distances used for evaluating swarm flight performance and collision detection.}}{61}{figure.3.7}%
+\contentsline {figure}{\numberline {3.8}{\ignorespaces Agents' trajectory during the test phase}}{61}{figure.3.8}%
+\contentsline {figure}{\numberline {3.9}{\ignorespaces Variation of distances within the swarm during the test phase}}{62}{figure.3.9}%
+\contentsline {figure}{\numberline {3.10}{\ignorespaces Adaptive response to commanded distance adjustments - reconfiguration during the test phase}}{62}{figure.3.10}%
+\contentsline {figure}{\numberline {3.11}{\ignorespaces Trajectory adaptations of following agents in response to reward change for the leader during the test phase.}}{64}{figure.3.11}%
+\contentsline {figure}{\numberline {3.12}{\ignorespaces Variations in distances after reward changes and Leader becomes Obstacle - test phase.}}{64}{figure.3.12}%
+\contentsline {figure}{\numberline {3.13}{\ignorespaces Synaptic Weights before Reward change in \ac {RCSE} method.}}{66}{figure.3.13}%
+\contentsline {figure}{\numberline {3.14}{\ignorespaces Synaptic Weights after Reward change in \ac {RCSE} method.}}{66}{figure.3.14}%
+\contentsline {figure}{\numberline {3.15}{\ignorespaces Synaptic Weights before Reward change in Multiplicative Synaptic Normalization method.}}{66}{figure.3.15}%
+\contentsline {figure}{\numberline {3.16}{\ignorespaces Synaptic Weights after Reward change in Multiplicative Synaptic Normalization method.}}{66}{figure.3.16}%
+\contentsline {figure}{\numberline {3.17}{\ignorespaces Synaptic weights increase after reward change in \ac {RCSE} method.}}{67}{figure.3.17}%
+\contentsline {figure}{\numberline {3.18}{\ignorespaces Synaptic weights decrease after reward change in \ac {RCSE} method.}}{67}{figure.3.18}%
+\contentsline {figure}{\numberline {3.19}{\ignorespaces Distances during the test phase before reward change in the proposed event-triggered \ac {fl} method.}}{69}{figure.3.19}%
+\contentsline {figure}{\numberline {3.20}{\ignorespaces Distances during the test phase after reward change in the proposed event-triggered \ac {fl} method.}}{69}{figure.3.20}%
+\contentsline {figure}{\numberline {3.21}{\ignorespaces Frobenius norm of the Agent 1's weighs during the learning phase. The reward changes for the Leader after 600 s.}}{70}{figure.3.21}%
+\contentsline {figure}{\numberline {3.22}{\ignorespaces Communication times for agents and the Central Server (Leader). Red and blue dots show the times that agents and the Central Server have sent their model, respectively.}}{70}{figure.3.22}%
 \addvspace {10\p@ }

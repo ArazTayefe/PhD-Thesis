@@ -332,23 +332,33 @@ In this scenario, the decay rate is very high, and the learning rate is 0. There
 %     For this region, the magnitude of the second term significantly exceeds that of the first term. This predominance is critical as it is associated with a negative sign in the $\dot{V}(z)$ equation. Therefore, the negative contribution of this component ensures that $\dot{V}(z)$ remains negative throughout this region. It indicates that any deviation from the equilibrium state results in the system's energy decreasing over time, leading to the conclusion that the equilibrium point $W_{max}^{\mathcal{S}}(t) = \Psi^{\mathcal{S}}$ is asymptotically stable for $z > 0$. 
     
 % \end{proof}
-    
-    \begin{figure}[h]
-        \centering
-        \begin{minipage}{0.48\textwidth}
-            \includegraphics[width=\linewidth] {Figures/RCSE.pdf}
-            \caption{Synaptic weight change for $\lambda=5, \Psi^{\mathcal{S}}=15.5$,\\ and $\mathcal{A R}^G=1$.}
-            \label{fig_3_3_1}
-        \end{minipage}
-        \begin{minipage}{0.51\textwidth}
-            \includegraphics[width=\linewidth] {Figures/RCSE Principle.pdf}
-            \vspace{5ex}
-            \caption{RCSE working principle in inhibiting the adjacent synaptic connections.}
-            \label{fig_3_3_2}
-        \end{minipage}
-    \end{figure}
-    
-    Figure \ref{fig_3_3_1} demonstrates the performance of the \ac{RCSE} when it regulates the synaptic weights to prevent unbounded growth. The red dotted line represents the value of \(\Psi^{\mathcal{S}}\), which is derived from the maximum reward value of the corresponding network section. As shown in Figure \ref{fig_3_3_1}, the synaptic weight oscillates around \(\Psi^{\mathcal{S}}\), and when it drops below \(\Psi^{\mathcal{S}}\), the learning rate is set to 1 by \eqref{Eq.WS.1}. This allows any changes in the reward function to be applied to the synapse. Figure \ref{fig_3_3_2} shows how the maximum synaptic weight of the active synapses in set \(\mathcal{S}\) stops the adjacent synaptic connections' growth by setting the learning rate of the set to 0.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale=0.5] {Figures/RCSE.pdf}
+    \caption{Synaptic weight change for $\lambda=5, \Psi^{\mathcal{S}}=15.5$,\\ and $\mathcal{A}\mathcal{ R}_{max}^G=1$.}
+    \label{fig_3_3_1}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=1] {Figures/RCSE Graphical Representation.pdf}
+    \caption{Reward-based learning rate and decay rate functions. In the blue region (active learning rate), the reward adjusts the weights, and in the red region (active decay rate), the RCSE method controls synaptic growth.}
+    \label{fig_3_3_2}
+\end{figure}
+
+Figure \ref{fig_3_3_1} demonstrates the performance of the \ac{RCSE} when it regulates the synaptic weights to prevent unbounded growth. The red dotted line represents the value of \(\Psi^{\mathcal{S}}\), which is derived from the maximum reward value of the corresponding network section. As shown in Figure \ref{fig_3_3_1}, the synaptic weight oscillates around \(\Psi^{\mathcal{S}}\), and when it drops below \(\Psi^{\mathcal{S}}\), the learning rate is set to 1 by \eqref{Eq.WS.1}. This allows any changes in the reward function to be applied to the synapse.  
+
+According to Figure \ref{fig_3_3_2}, when \(W_{max}^{\mathcal{S}} \leq \Psi^{\mathcal{S}}\), synaptic weights in set \(\mathcal{S}\) increase. If the reward changes, \(\Psi^{\mathcal{S}}\) also changes. Depending on the current value of \(W_{max}^{\mathcal{S}}\), the \ac{RCSE} either increases or decreases the synaptic weights within set \(\mathcal{S}\).
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=\linewidth] {Figures/RCSE Principle.pdf}
+    \caption{RCSE working principle in inhibiting the adjacent synaptic connections. The heatmap shows the synaptic weight matrix. Neurons have different firing strengths due to the difference in fuzzy membership values, which affects the increase or decrease rate and shapes the patterns in the synaptic weight matrix.}
+    \label{fig_3_3_3}
+\end{figure}
+
+Figure \ref{fig_3_3_3} shows how the maximum synaptic weight of the active synapses in set \(\mathcal{S}\) stops the adjacent synaptic connections' growth by setting the learning rate of the set to 0.
 
 
 \subsection{Federated Learning for Consensus Flying}
