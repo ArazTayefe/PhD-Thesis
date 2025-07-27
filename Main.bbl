@@ -112,7 +112,7 @@ A.~L. Hodgkin and A.~F. Huxley, ``Currents carried by sodium and potassium ions
   through the membrane of the giant axon of loligo,'' {\em The Journal of
   physiology}, vol.~116, no.~4, 1952.
 
-\bibitem{Ch_1_R15}
+\bibitem{izhikevich2003simple}
 E.~M. Izhikevich, ``Simple model of spiking neurons,'' {\em IEEE Transactions
   on neural networks}, vol.~14, no.~6, pp.~1569--1572, 2003.
 
@@ -173,7 +173,7 @@ C.~Hur, B.~Ibrokhimov, and S.~Kang, ``N3-cpl: Neuroplasticity-based
   neuromorphic network cell proliferation learning,'' {\em Neurocomputing},
   vol.~411, pp.~193--205, 2020.
 
-\bibitem{Ch2_R19}
+\bibitem{Salt2019Parameter}
 L.~Salt, D.~Howard, G.~Indiveri, and Y.~Sandamirskaya, ``Parameter optimization
   and learning in a spiking neural network for uav obstacle avoidance targeting
   neuromorphic processors,'' {\em IEEE Transactions on Neural Networks and
@@ -360,19 +360,9 @@ J.~Wang, Q.~Liu, H.~Liang, G.~Joshi, and H.~V. Poor, ``Tackling the objective
   Advances in neural information processing systems}, vol.~33, pp.~7611--7623,
   2020.
 
-\bibitem{Ch5_R1}
-N.~Perez-Nieves, V.~C. Leung, P.~L. Dragotti, and D.~F. Goodman, ``Neural
-  heterogeneity promotes robust learning,'' {\em Nature communications},
-  vol.~12, no.~1, 2021.
-
-\bibitem{Ch5_R2}
-B.~Chakraborty and S.~Mukhopadhyay, ``Heterogeneous neuronal and synaptic
-  dynamics for spike-efficient unsupervised learning: Theory and design
-  principles,'' {\em arXiv preprint arXiv:2302.11618}, 2023.
-
-\bibitem{Ch5_R3}
-E.~Bagdasaryan, O.~Poursaeed, and V.~Shmatikov, ``Differential privacy has
-  disparate impact on model accuracy,'' {\em Advances in neural information
-  processing systems}, vol.~32, 2019.
+\bibitem{dias2021swarm}
+P.~G.~F. Dias, M.~C. Silva, G.~P. Rocha~Filho, P.~A. Vargas, L.~P. Cota, and
+  G.~Pessin, ``Swarm robotics: A perspective on the latest reviewed concepts
+  and applications,'' {\em Sensors}, vol.~21, no.~6, 2021.
 
 \end{thebibliography}

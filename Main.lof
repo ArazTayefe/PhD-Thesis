@@ -37,3 +37,17 @@
 \contentsline {figure}{\numberline {3.21}{\ignorespaces Frobenius norm of the Agent 1's weighs during the learning phase. The reward changes for the Leader after 600 s.}}{70}{figure.3.21}%
 \contentsline {figure}{\numberline {3.22}{\ignorespaces Communication times for agents and the Central Server (Leader). Red and blue dots show the times that agents and the Central Server have sent their model, respectively.}}{70}{figure.3.22}%
 \addvspace {10\p@ }
+\contentsline {figure}{\numberline {4.1}{\ignorespaces Swarm of robots performing docking mission. Each agent pushes the Payload towards the Central Hub to align them together. The central Hub and agents are equipped with a \ac {dvs} that streams high-frequency data for the proximity mission.}}{74}{figure.4.1}%
+\contentsline {figure}{\numberline {4.2}{\ignorespaces Deep \ac {snn} Architecture with Entropy-Based Adaptive Pooling and Structured Hidden Layers for Swarm Robotics. The purple connections are excitatory, and the yellow connections are inhibitory. }}{84}{figure.4.2}%
+\contentsline {figure}{\numberline {4.3}{\ignorespaces Structured First Hidden Layer Architecture with \ac {alm}, Payload, and Agent Perception Repositories for Visual Perception.}}{89}{figure.4.3}%
+\contentsline {figure}{\numberline {4.4}{\ignorespaces Structured Second Hidden Layer Architecture with Mission-Phase and Regulatory Neuron Repositories.}}{92}{figure.4.4}%
+\contentsline {figure}{\numberline {4.5}{\ignorespaces Reward function pipeline for the payload case. The pipeline illustrates the raw \ac {dvs} events, the attention-based fuzzy map, the normalized hidden layer activity during the initial training phase (\(r_q^{(1)}\)), and the modulation signal calculated as the difference between the attention map and the hidden layer activity (\(\alpha _q\)).}}{98}{figure.4.5}%
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Raw \ac {dvs} Events}}}{98}{figure.4.5}%
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Attention Fuzzy Map (16x16)}}}{98}{figure.4.5}%
+\contentsline {subfigure}{\numberline {(c)}{\ignorespaces {Hidden Layer Activity (16x16)}}}{98}{figure.4.5}%
+\contentsline {subfigure}{\numberline {(d)}{\ignorespaces {Post-neuron reward (Modulation Signal)}}}{98}{figure.4.5}%
+\contentsline {figure}{\numberline {4.6}{\ignorespaces Reward function pipeline for the agents case. This pipeline demonstrates the raw \ac {dvs} events for multiple agents, the reduced entropy-based fuzzy map used for attention, the hidden layer’s normalized activity, and the modulation signal computed for reward-based learning in the spiking neural network.}}{99}{figure.4.6}%
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Raw \ac {dvs} Events}}}{99}{figure.4.6}%
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Attention Fuzzy Map (16x16)}}}{99}{figure.4.6}%
+\contentsline {subfigure}{\numberline {(c)}{\ignorespaces {Hidden Layer Activity (16x16)}}}{99}{figure.4.6}%
+\contentsline {subfigure}{\numberline {(d)}{\ignorespaces {Post-neuron reward (Modulation Signal)}}}{99}{figure.4.6}%
