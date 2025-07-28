@@ -124,7 +124,6 @@ The maximum value for the input current makes the neuron fire at each sample tim
 
 In this section, we obtained the minimum and maximum values for input current using (\ref{Eq.9}) and (\ref{Eq.13}). These equations are used in the learning and encoding processes of the \ac{snn}.
 
-% Following our exploration of the Leaky Integrate-and-Fire (LIF) model, which provides a simplified framework for simulating the basic properties of neuronal firing, we now introduce other biologically-inspired models taht incorporate the dynamics of ionic currents and more complex neuronal behaviors.
 
 \subsection{Learning Approaches in SNNs}
 
@@ -186,109 +185,6 @@ Synaptic weight updates are then guided by the interaction between the eligibili
 
 \noindent where $dw_{ji}/dt$ symbolizes the rate of change in synaptic weight, contingent upon the compounded influence of the eligibility trace and the reward signal.
 
-% \textbf{Hypothesis Testing Plasticity (HTP)}
-
-% The HTP model focuses on the sophisticated evolution of synaptic strengths through the interaction with both short-term and long-term components of synaptic weights~\cite{Ch_1_R23}. The HTP model delineates the dynamics of synaptic strength through a dual-component approach. This approach separates synaptic weight into short-term and long-term components. In the following, the mathematical representation of this model, including the dynamics of short-term synaptic changes and the conditions for long-term consolidation, is discussed.
-
-% Short-term synaptic weight changes are governed by,
-
-% \begin{equation}
-% \dot{w}_{ji}^{st}(t) = -\frac{w_{ji}^{st}(t)}{\tau_{st}} + M(t) \cdot \text{RCHP}_{ji}(t)
-% \end{equation}
-
-% \noindent where $M(t)$, representing the dynamic concentration of reward, evolves as:
-
-% \begin{equation}
-% \dot{M}(t) = -\frac{M(t)}{\tau_{M}} + \alpha R(t) - b
-% \end{equation}
-
-% Long-term synaptic changes are then formulated as:
-
-% \begin{equation}
-% \dot{w}_{ji}^{lt}(t) = \beta \mathcal{H}(w_{ji}^{st}(t) - \Phi)
-% \end{equation}
-
-% \noindent where $\mathcal{H}$ denotes the Heaviside step function, introducing a binary condition for the consolidation of synaptic changes based on the magnitude of short-term synaptic weight relative to the threshold $\Phi$, and $\beta$ represents the consolidation rate.
-
-% This framework integrates the dynamics of synaptic plasticity with mechanisms of reward-based learning, offering a comprehensive model for understanding the biological and computational foundations of learning and memory. The choice of the R-STDP algorithm for this thesis is underpinned by several compelling reasons:
-
-% \begin{enumerate}
-%     \item \textbf{Biological Plausibility}: R-STDP closely mimics biological learning processes by integrating synaptic plasticity with reward signals. This alignment with natural neural mechanisms enhances the potential for developing more realistic and efficient neuromorphic systems.
-    
-%     \item \textbf{Temporal Precision}: Unlike traditional Hebbian learning, R-STDP leverages precise spike-timing information, allowing for fine-grained synaptic modifications. This temporal specificity is crucial for tasks that require high temporal resolution, such as sensory processing and motor control.
-    
-%     \item \textbf{Robustness to Noise}: By focusing on the timing of spikes rather than just firing rates, R-STDP can be more robust to noise and fluctuations in neural activity. This robustness is particularly advantageous in real-world scenarios where sensory inputs and neural responses can be highly variable.
-    
-%     \item \textbf{Credit Assignment}: The eligibility trace mechanism in R-STDP provides an elegant solution to the credit assignment problem, distributing synaptic changes over time based on the timing of spikes and rewards. This feature supports more effective learning in complex, temporally extended tasks.
-    
-%     \item \textbf{Adaptive Learning}: R-STDP’s capability to modulate synaptic changes based on the reward history allows for continuous adaptation and refinement of synaptic connections. This adaptive learning is essential for long-term performance and generalization in changing environments.
-% \end{enumerate}
-
-% Given these advantages, the R-STDP algorithm offers a balanced approach that combines the strengths of Hebbian learning with the benefits of reinforcement learning. Its ability to integrate temporal dynamics, reward signals, and synaptic plasticity makes it a suitable choice for advancing the state-of-the-art in neuromorphic computing and autonomous systems.
-
-% \section{Federated Learning}
-
-
-% A cornerstone of \ac{fl} is the aggregation method, which synthesizes model updates from clients to improve a global model. This section delves into the main aggregation algorithms in \ac{fl}, highlighting their operational principles and underlying equations.
-
-% \subsection*{FedAvg}
-
-% FedAvg, or Federated Averaging, is the seminal aggregation method in \ac{fl}. It operates by averaging the weights of models updated locally by clients. The global model update in FedAvg is mathematically represented as~\cite{Ch_1_R26}:
-
-% \begin{equation}
-%     w_{\text{glob}}^{t+1} = \sum_{k=1}^{K} \frac{n_k}{n} w_k^{t+1}
-% \end{equation}
-
-% \noindent where $w_{\text{glob}}^{t+1}$ denotes the global model parameters after aggregation, $n_k$ is the number of data points at client $k$, $n$ is the total number of data points across all clients, and $w_k^{t+1}$ represents the parameters of the model updated locally by client $k$.
-
-% \subsection*{FedProx}
-
-% FedProx addresses heterogeneity issues in client data distributions by introducing a proximal term to the local optimization problem. This approach moderates the deviation of local models from the global model. The local update rule in FedProx is formulated as~\cite{Ch_1_R27}:
-
-% \begin{equation}
-%     w_{\text{glob}}^{t+1} = \min_{w} \mathcal{L}_k(w) + \frac{\mu}{2}\|w - w_{\text{glob}}^t\|^2
-% \end{equation}
-
-% \noindent where $\mathcal{L}_k(w)$ is the loss on client $k$, $w_{\text{glob}}^t$ is the global model parameters at time $t$, and $\mu$ is a regularization parameter controlling the proximity between local and global models.
-
-% \subsection*{Scaffold}
-
-% Scaffold addresses the challenges of statistical heterogeneity and client drift in \ac{fl} environments. It restricts client drift and enhances convergence by employing control variates to correct the local updates towards the global objective, effectively steering them closer to the global optimum and reducing the variance in updates caused by data that is not Independent and Identically Distributed (IID) across all clients. The control variate updates are defined as~\cite{Ch_1_R28}:
-
-% \begin{equation}
-%     c_k^{+} = c_k - c + \frac{1}{\eta L}(w_{\text{glob}}^t - w_k^t)
-% \end{equation}
-
-% \noindent where $c_k$ and $c$ represent the control variates for client $k$ and the global model, respectively. Here, $L$ denotes the number of local updates, and $\eta$ is the learning rate. The control variates \(c_k\) for each client are commonly initialized to zero, allowing unbiased initial updates. The global control variate \(c\) is typically chosen by aggregating or averaging these local variates \(c_k\) from all clients, which helps align individual client updates more closely with the global model objective. By introducing control variates on both the server and client sides, Scaffold corrects the direction of local updates before they are aggregated. This ensures consistency among local updates and addresses the slow convergence rates often experienced in traditional \ac{fl} due to client drift. Specifically, the mechanism leverages the discrepancy between local and global control variates to adjust the updates, making Scaffold particularly effective in environments with heterogeneous data distributions.
-
-
-% \subsection*{FedNova}
-
-% FedNova introduces a normalization mechanism to adjust the aggregation process according to the number of local updates performed by each client, accommodating non-IID data scenarios more effectively. Its aggregation rule is expressed as~\cite{Ch_1_R29}:
-
-% \begin{equation}
-%     w_{glob}^{t+1} = w_{glob}^t - \tau_{\text{eff}} \sum_{k=1}^{K} \frac{n_k}{n} \cdot \eta d_k^t
-% \end{equation}
-
-% \begin{equation}
-%     d_k^t = G_k^t a_k^t / \|a_k^t\|_1
-% \end{equation}
-
-% \noindent where $G_k^t$ is the stack of gradients received from client $k$ at round $t$, $a_k^t$ is a non-negative vector representing the local update rate, and $\tau_{\text{eff}}$ is the effective step size.
-
-% \subsection*{MOON}
-
-% MOON, or Model-contrastive \ac{fl}, minimizes the contrastive loss between the local and global models to preserve model consistency across clients. The contrastive loss is given by:
-
-% \begin{equation}
-%     l_{\text{con}} = -\log \left( \frac{\exp(\text{sim}(w_k^t, w_{\text{glob}}^t) / \tau)}{\exp(\text{sim}(w_k^t, w_{\text{glob}}^t) / \tau) + \exp(\text{sim}(w_k^t, w_k^{\text{prev}}) / \tau)} \right)
-% \end{equation}
-
-% \noindent where $\text{sim}(\cdot)$ denotes the cosine similarity between models, indicating how aligned or similar two model parameter sets are by calculating the cosine of the angle between them. This similarity metric is essential for understanding how closely the local model parameters $w_k^t$ of client $k$ at training iteration $t$ match with the global model parameters $w_{\text{glob}}^t$, as well as how these parameters have evolved from the previous iteration $w_k^{\text{prev}}$. The global model parameters $w_{\text{glob}}^t$ are derived by aggregating updates from all participating clients, aiming to reflect a consensus model that captures learned patterns across the network.
-
-% The parameter $\tau$, known as the temperature parameter, plays a critical role in moderating the contrastive loss. It adjusts the sensitivity of the loss function to differences in model similarity, affecting how aggressively the algorithm seeks to align the local and global models. A higher $\tau$ value results in a smoother loss function, potentially making the training process more tolerant to variations among models.
-
-% These aggregation methods embody the evolution of \ac{fl} towards accommodating diverse client conditions and data distributions. Each method introduces unique adjustments to the aggregation process, aiming to enhance convergence, reduce communication overhead, or improve robustness against non-IID data and adversarial clients.
 
 \section{Literature Review}
 
@@ -337,88 +233,6 @@ Mathematical constraints influencing Hebbian learning and STDP in \ac{snn}s were
 ``Spikepropamine," incorporating differentiable plasticity within \ac{snn}s, was presented. This approach enables adaptive learning and improved task performance, signifying advancements in neuromorphic computing and robotics applications of \ac{snn}s \cite{Ch2_R25}.
 
 NeuronGPU, a library for simulating large-scale networks of spiking neurons with GPU acceleration, was developed. This tool demonstrated scalability and efficiency in simulating complex neuronal dynamics, marking a significant contribution to computational neuroscience tools \cite{Ch2_R26}.
-
-% \ac{snn} and their learning algorithms have garnered significant attention for their potential to model complex neural dynamics and learning processes observed in biological systems. This literature review explores various facets of \ac{snn}s, focusing on their learning mechanisms, including STDP, and their applications in solving computational tasks that mirror biological learning behaviors.
-
-% The investigation of competitive Hebbian learning through STDP revealed how the timing of spikes modulates synaptic efficacy. This highlighted temporal dynamics' significance in synaptic modification and competitive learning within neural circuits \cite{Ch2_R9}.
-
-% In \cite{Ch_1_R22}, the distal reward problem by linking STDP with dopamine signaling was tackled, illustrating a novel approach to reward-based learning in the brain. The study proposed a model in which dopamine modulated STDP mechanisms, effectively capturing the essence of reward-based learning processes.
-
-% Another research posited that STDP emerges from fundamental learning rules governed by intracellular calcium dynamics. This challenged the primacy of STDP, suggesting a deeper biophysical basis for synaptic strength regulation \cite{Ch2_R6}.
-
-% An examination of rate dynamics in LIF neurons with strong synapses focused on synaptic strength's influence on neural computation. Findings provided insights into synaptic integration and its effects on neurons' computational properties \cite{Ch2_R7}.
-
-% In \cite{Ch2_R5}, an extensive review of the development and implications of STDP in neural circuits was provided. Their work highlighted the critical role of precise spike timing in synaptic modification, enriching our understanding of the neural basis for learning and memory.
-
-% A study on multiagent reinforcement learning within the Iterated Prisoner's Dilemma framework highlighted \ac{snn}s' comparable or enhanced performance against traditional models. This emphasized spike timing's critical role in complex decision-making \cite{Ch2_R4}.
-
-% The introduction of a model for parallel path planning using spiking neural activity was inspired by hippocampal navigation strategies. The model efficiently solved spatial navigation problems through simulations, showcasing the biologically plausible mechanisms of cognitive tasks within \ac{snn}s \cite{Ch2_R3}.
-
-% In a pioneering study, the implementation of probabilistic inference within LIF neuron networks was demonstrated, illustrating the transformation of Bayesian networks into a computable framework for \ac{snn}s. The methodology involved the adaptation of Bayesian networks to facilitate computation by \ac{snn}s, with findings highlighting \ac{snn}s' capability to perform complex cognitive functions through probabilistic reasoning \cite{Ch2_R1}.
-
-% The performance comparison between \ac{snn}s and multilayer perceptrons in a computer-based racing game showed \ac{snn}s' superior adaptability and decision-making capabilities in dynamic environments. This was attributed to the efficient processing of real-time data through spike-based mechanisms \cite{Ch2_R2}.
-
-
-% %% ------------------------------------------------------------
-
-% A spiking neural model aimed at adaptive arm control integrates structures and mechanisms from the motor cortex and cerebellum, mapped onto a simulated three-link arm. Utilizing a stability framework, it dynamically adapts to arm dynamics and kinematic structure changes, such as growth or movement through different media \cite{Ch2_R10}. This model demonstrates the potential of \ac{snn}s in replicating complex motor control tasks, suggesting their applicability in both understanding biological systems and robotics.
-
-% Hierarchical Bayesian inference within \ac{snn}s introduces a learning algorithm based on synaptic plasticity, showcasing the ability of \ac{snn}s to execute complex tasks like pattern recognition through hierarchical structures \cite{Ch2_R14}. This emphasizes the adaptability and computational efficiency of \ac{snn}s.
-
-% A bio-inspired \ac{snn} framework for nonlinear system control focuses on UAV obstacle avoidance, employing a hierarchical learning approach through \ac{stdp} \cite{Ch2_R11}. This network effectively processes visual data for real-time control in robotics, showcasing the significance of \ac{snn}s in neuromorphic computing applications.
-
-% Generalized leaky integrate-and-fire (GLIF) models classify multiple neuron types by fitting these models to a diverse set of electrophysiological data \cite{Ch2_R12}. This work demonstrates the capability of simple neuron models to represent complex neural dynamics, providing tools for neural circuit studies.
-
-% First-spike-based visual categorization employs \ac{stdp} in \ac{snn}s, highlighting their efficiency in pattern recognition tasks by leveraging the temporal dynamics of spikes \cite{Ch2_R13}. This approach offers a promising method for neuromorphic hardware implementations.
-
-% Synaptic-dependent spike latency in \ac{snn}s for UAV control employs spiking activity simulations in response to environmental stimuli for efficient path planning \cite{Ch2_R15}. This study exemplifies \ac{snn} applications in navigation and control, highlighting their potential in real-time decision-making for autonomous systems.
-
-% BP-STDP, approximating backpropagation using STDP, bridges the gap between \ac{snn} mechanisms and traditional neural network computational efficiency \cite{Ch2_R16}. This algorithm advances learning algorithms for \ac{snn}s, making them more accessible for machine learning tasks.
-
-% Indirect and direct training methods for \ac{snn}s in end-to-end control of a lane-keeping vehicle highlight the effectiveness of both approaches in utilizing \ac{snn}s for real-world control tasks, providing insights into training \ac{snn}s for complex systems like autonomous vehicles \cite{Ch2_R17}.
-
-% N3-CPL, a neuroplasticity-based learning method for neuromorphic networks, focuses on cell proliferation in \ac{snn}s, enhancing learning capabilities through mechanisms inspired by biological neural network growth and adaptation \cite{Ch2_R18}.
-
-% Parameter optimization in an \ac{snn} model for UAV obstacle avoidance tackles the challenge of tuning \ac{snn} parameters for specific tasks using optimization techniques, emphasizing the importance of optimization in \ac{snn} application for real-time processing and decision-making \cite{Ch2_R19}.
-
-% A methodology for multi-task autonomous learning in mobile robots using \ac{snn}s was proposed in \cite{Ch2_R20}. Modified Integrate-and-Fire and \ac{lif} neuron models were employed, alongside a task switch mechanism inspired by lateral inhibition and a novel learning rule based on \ac{stdp}. This approach demonstrated \ac{snn}s' capabilities in efficiently learning and adapting across various tasks such as obstacle avoidance and target tracking.
-
-% An autonomous learning framework that combines \ac{snn}s with a pre-trained binary Convolutional Neural Network for image-based reinforcement learning was developed in \cite{Ch2_R21}. This hybrid model efficiently processes high-dimensional sensory data and learns from sparse rewards, highlighting the synergistic potential of \ac{snn}s and CNNs in complex visual environments.
-
-% A transfer learning algorithm for \ac{snn}s aimed at deep learning tasks was introduced by \cite{Ch2_R22}, utilizing Centered Kernel Alignment for domain distance measurement and focusing on domain-invariant representation. This methodology enables effective knowledge transfer, showcasing the scalability and adaptability of \ac{snn}s.
-
-% The integration of \ac{snn}s within wireless communication systems, focusing on energy-efficient, distributed processing, was investigated in \cite{Ch_1_R4}. Through \ac{fl} and neuromorphic sensing, the potential for \ac{snn}s to enhance low-power edge intelligence and communication was demonstrated.
-
-% Mathematical constraints influencing Hebbian learning and STDP in \ac{snn}s were explored in \cite{Ch2_R24}. The analysis revealed relationships between synaptic weight promotion/demotion probabilities and normalized weights, offering insights into optimizing \ac{snn} training.
-
-% ``Spikepropamine," incorporating differentiable plasticity within \ac{snn}s, was presented in \cite{Ch2_R25}. This approach enables adaptive learning and improved task performance, signifying advancements in neuromorphic computing and robotics applications of \ac{snn}s.
-
-% NeuronGPU, a library for simulating large-scale networks of spiking neurons with GPU acceleration, was developed in \cite{Ch2_R26}. This tool demonstrated scalability and efficiency in simulating complex neuronal dynamics, marking a significant contribution to computational neuroscience tools.
-
-% HybridSNN, an architecture blending shallow \ac{snn}s with machine learning techniques for adaptive deep learning, was proposed by \cite{Ch2_R27}. The effectiveness of this architecture in complex pattern recognition tasks was showcased through data-driven optimization and a novel network structure.
-
-% The integration of STDP learning with binary networks for image-based reinforcement learning was explored by \cite{Ch2_R28}. This methodology enabled efficient learning from high-dimensional inputs and sparse rewards, highlighting the utility of \ac{snn}s in reinforcement learning frameworks.
-
-% QC\_SANE, a robust DRL framework utilizing a quantile critic with a spiking actor and normalized ensemble, was introduced in \cite{Ch2_R29}. This approach significantly enhanced performance and robustness in continuous control problems, demonstrating the potential of \ac{snn}s in DRL applications.
-
-
-% A novel biological-like controller utilizing enhanced \ac{snn}s aimed at emulating human arm control was introduced \cite{Ch2_R30}. The incorporation of a novel synapse model simulating biological synapses with multiple channels significantly enhances the realism of synaptic interactions. Through supervised STDP learning, the model effectively adapts and learns from dynamic changes, showcasing efficient control over arm movements.
-
-% Another study presented a control algorithm for multiagent cooperation using \ac{snn}s, leveraging the Izhikevich model of spiking neurons \cite{Ch2_R31}. The algorithm's capability for dynamic restructuring of the neural network in real-time facilitates adaptive cooperative behavior among agents. This control algorithm exhibited efficient cooperation through simulations, marking an advancement over traditional neural network approaches in dynamic environments.
-
-% The development of a brain-inspired approach for collision-free movement planning in small operational spaces using \ac{snn}s was also documented \cite{Ch2_R32}. By integrating the \ac{lif} neuron model with a dynamic learning mechanism, the \ac{snn} successfully simulates complex movement planning and adaptation, validating its applicability to tasks requiring precise control and collision avoidance.
-
-% Deep Spiking Q-Networks (DSQNs) were introduced for human-level control in reinforcement learning tasks, incorporating back-propagated error signals into an STDP-based learning framework \cite{Ch2_R33}. DSQNs achieve high performance on Atari game simulations, demonstrating the potential of directly trained \ac{snn}s for complex decision-making tasks.
-
-% Continuous learning in \ac{snn}s trained with local rules to mitigate catastrophic forgetting (CF) was explored, proposing architecture-based methods, memory replay, and regularization techniques \cite{Ch2_R34}. These methods effectively reduce CF, highlighting the potential of \ac{snn}s for continuous and adaptive learning.
-
-% Investigations into STDP with activation-dependent scaling for receptive field development in \ac{snn}s showcased the modified STDP rule's enhancement of the network's autonomous development of receptive fields \cite{Ch2_R35}. This improvement in classification accuracy on the MNIST dataset underscores the importance of adaptive learning rules in optimizing \ac{snn} performance for pattern recognition tasks.
-
-% A focus on sequence learning in \ac{snn}s modeled on hippocampal circuitry achieved learning in a single trial \cite{Ch2_R36}. Inspired by the brain's hippocampal structure, the network architecture demonstrates effective sequence learning capabilities, offering insights into how biological principles can enhance learning efficiency in neural networks.
-
-% A learning algorithm modulating STDP with back-propagated error signals for audio classification tasks was developed \cite{Ch2_R37}. This study demonstrates the feasibility of training \ac{snn}s for complex auditory pattern recognition, achieving competitive performance and marking a significant advancement in training \ac{snn}s for real-world applications.
-
-% Meta neurons were introduced to improve \ac{snn}s for efficient spatio-temporal learning \cite{Ch2_R38}. Incorporating second-order dynamics and a recovery variable into neuron models, the \ac{snn}s exhibit enhanced performance across various learning tasks, highlighting the potential of advanced neuron models in capturing complex patterns and improving \ac{snn}s' generalization ability.
 
 
 \subsection{Federated Learning}
