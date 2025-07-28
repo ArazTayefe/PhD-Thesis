@@ -9,8 +9,6 @@
 \contentsline {table}{\numberline {3.2}{\ignorespaces Simulation Parameters}}{65}{table.3.2}%
 \contentsline {table}{\numberline {3.3}{\ignorespaces Comparative Performance Analysis of the Proposed Aggregation Algorithm+\ac {RCSE} and \ac {RCSE}}}{75}{table.3.3}%
 \addvspace {10\p@ }
-\contentsline {subtable}{\numberline {(a)}{\ignorespaces {The oscillatory Gaussian envelope when the payload \ac {alm} is active.}}}{108}{table.4.1}%
-\contentsline {subtable}{\numberline {(b)}{\ignorespaces {The oscillatory Gaussian envelope when the agent \ac {alm} is active.}}}{108}{table.4.1}%
-\contentsline {table}{\numberline {4.1}{\ignorespaces Physical parameters of the payload and agents used in the docking simulations.}}{108}{table.4.1}%
-\contentsline {table}{\numberline {4.2}{\ignorespaces Neuron layer configurations: model, excitability type, number of neurons \(N\), and simulation time step \(\Delta t\).}}{108}{table.4.2}%
+\contentsline {table}{\numberline {4.1}{\ignorespaces Physical parameters of the payload and agents used in the docking simulations.}}{110}{table.4.1}%
+\contentsline {table}{\numberline {4.2}{\ignorespaces Neuron layer configurations: model, excitability type, number of neurons \(N\), and simulation time step \(\Delta t\).}}{111}{table.4.2}%
 \addvspace {10\p@ }

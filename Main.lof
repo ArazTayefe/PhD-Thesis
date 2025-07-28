@@ -51,4 +51,7 @@
 \contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Attention Fuzzy Map (16x16)}}}{104}{figure.4.6}%
 \contentsline {subfigure}{\numberline {(c)}{\ignorespaces {Hidden Layer Activity (16x16)}}}{104}{figure.4.6}%
 \contentsline {subfigure}{\numberline {(d)}{\ignorespaces {Post-neuron reward (Modulation Signal)}}}{104}{figure.4.6}%
+\contentsline {figure}{\numberline {4.7}{\ignorespaces Proposed Federated Learning Framework}}{108}{figure.4.7}%
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {The oscillatory Gaussian envelope when the payload \ac {alm} is active.}}}{108}{figure.4.7}%
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {The oscillatory Gaussian envelope when the agent \ac {alm} is active.}}}{108}{figure.4.7}%
 \addvspace {10\p@ }

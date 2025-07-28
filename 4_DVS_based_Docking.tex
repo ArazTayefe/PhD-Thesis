@@ -678,6 +678,54 @@ The \ac{stdp} algorithm for weight update for the second hidden layer and output
 \end{equation}
 where \(\mathbf{R}\) is broadcast across all post-synaptic neurons, enabling layer-wide, reward-driven synaptic updates aligned with the temporal structure of environmental feedback. This approach ensures that the first hidden layer learns using neuron-specific, attention-modulated updates, while the deeper layers benefit from global, phase-synchronized reward signals, leading to layered and stable online learning within the deep spiking neural network. This structure allows the network to adaptively refine synaptic weights in response to asynchronous event-driven sensory input and reward signals during autonomous multi-agent docking missions.
 
+\subsection{Federated Learning via Autoencoder-Based Weight Compression}
+
+We consider a decentralized learning framework consisting of $M$ agents, denoted by $\mathcal{A} = \{A_1, A_2, \dots, A_M\}$, each of which trains a local deep spiking neural network (SNN) to perform a common task, such as autonomous docking. Each agent has access only to its own private dataset and may use a unique SNN architecture, introducing structural heterogeneity into the learning system. To facilitate collaboration without directly exchanging large and heterogeneous model parameters, we propose a federated learning (FL) scheme in which autoencoders are employed to compress synaptic weight matrices into a fixed-size latent representation prior to aggregation.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\linewidth]{Figures/Proposed Federated Learning Framework.pdf}
+    \caption{Proposed Federated Learning Framework}
+    \label{fig:enter-label}
+\end{figure}
+
+Each agent $A_i$ trains its local SNN using reward-modulated spike-timing-dependent plasticity (R-STDP). Let $\mathbf{W}_i^{(l)}[t] \in \mathbb{R}^{n_l \times n_{l-1}}$ denote the weight matrix of the $l^{\text{th}}$ layer at time $t$, where $n_l$ is the number of neurons in that layer. To detect significant updates in synaptic connectivity, we monitor the entropy of the weight distribution. The entropy at time $t$ is given by
+\[
+H_i^{(l)}[t] = -\sum_{j,k} p_{jk} \log p_{jk}, \quad p_{jk} = \frac{|\mathbf{W}_i^{(l)}[j,k]|}{\sum_{u,v} |\mathbf{W}_i^{(l)}[u,v]|}.
+\]
+An event is considered significant and worth encoding if the change in entropy exceeds a threshold $\delta_H$, i.e.,
+\[
+|H_i^{(l)}[t] - H_i^{(l)}[t-1]| > \delta_H.
+\]
+When this condition is satisfied, the weight matrix $\mathbf{W}_i^{(l)}[t]$ is stored as a training sample for the autoencoder.
+
+After accumulating a sufficient number of such samples, each agent trains a local autoencoder to compress the weight matrices. The encoder function $f_{\theta_E}: \mathbb{R}^{n_l \times n_{l-1}} \rightarrow \mathbb{R}^{d_z}$, parameterized by $\theta_E$, maps the high-dimensional weight matrix into a fixed-size latent vector, where $d_z \ll n_l \cdot n_{l-1}$. The decoder function $g_{\theta_D}: \mathbb{R}^{d_z} \rightarrow \mathbb{R}^{n_l \times n_{l-1}}$, with parameters $\theta_D$, reconstructs the original matrix from the latent code. The autoencoder is trained to minimize the reconstruction loss
+\[
+\mathcal{L}_{\text{AE}} = \frac{1}{S} \sum_{s=1}^S \left\| \mathbf{W}_{i,s}^{(l)} - g_{\theta_D}(f_{\theta_E}(\mathbf{W}_{i,s}^{(l)})) \right\|_F^2,
+\]
+where $S$ denotes the number of training samples and $\|\cdot\|_F$ represents the Frobenius norm.
+
+At designated synchronization intervals, each agent encodes its most recent weight matrix into a latent vector:
+\[
+\mathbf{z}_i^{(l)} = f_{\theta_E}(\mathbf{W}_i^{(l)}).
+\]
+These latent vectors are transmitted to a central aggregator, where they are combined using a simple averaging scheme:
+\[
+\bar{\mathbf{z}}^{(l)} = \frac{1}{M} \sum_{i=1}^M \mathbf{z}_i^{(l)}.
+\]
+The aggregated latent representation $\bar{\mathbf{z}}^{(l)}$ is then sent back to each agent. Using its own decoder, each agent reconstructs the global estimate of the weight matrix as
+\[
+\bar{\mathbf{W}}_i^{(l)} = g_{\theta_D}(\bar{\mathbf{z}}^{(l)}),
+\]
+and updates its local model by substituting the current layer with the reconstructed global weights:
+\[
+\mathbf{W}_i^{(l)} \leftarrow \bar{\mathbf{W}}_i^{(l)}.
+\]
+
+This framework offers several critical advantages. First, it achieves communication efficiency by transmitting compact latent vectors rather than high-dimensional weight matrices. Second, privacy is preserved since raw weights and local data are never shared across agents. Third, the use of fixed-dimensional latent representations enables compatibility between agents with structurally different neural networks. Finally, the entropy-based triggering mechanism ensures that communication and autoencoder training are activated only when meaningful changes occur, thereby reducing unnecessary computation and bandwidth usage.
+
+
+
 \section{Results}
 
 In our high‐fidelity simulation of the multi‐agent docking task, the central payload is modeled as a rigid disc of radius \(R_p\) and mass \(m_p\).  A team of identical agents, each represented as a point mass \(m\) with its own collision radius \(R\), cooperatively pushes the payload towards the docking center.  Agent–payload and inter‐agent collisions are handled via a linear spring–damper model with stiffness \(k\) and damping coefficient \(c\).  Each agent can exert a thrust force of up to \(F_{\max}\) in the \(x\)– and \(y\)–directions.  The specific parameter values used in all simulations are listed in Table \ref{tab:physparams}.
