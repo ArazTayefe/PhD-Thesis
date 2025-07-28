@@ -3,52 +3,52 @@
 \contentsline {figure}{\numberline {1.1}{\ignorespaces Schematic diagram to illustrate distributed learning and \ac {fl} \cite {Ch_1_R1}.}}{1}{figure.1.1}%
 \contentsline {figure}{\numberline {1.2}{\ignorespaces Simple model of a \ac {snn}. The spike pattern shows that the neurons spike whenever the voltage of the neuron reaches a threshold.}}{4}{figure.1.2}%
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {2.1}{\ignorespaces Active target defense game with three agents (LOS angles are shown for both agents).}}{21}{figure.2.1}%
-\contentsline {figure}{\numberline {2.2}{\ignorespaces Two \ac {snn}s simultaneously play and control the invader and defender. Each agent uses the LOS angle and relative velocities for training.}}{21}{figure.2.2}%
-\contentsline {figure}{\numberline {2.3}{\ignorespaces An illustration of input current to \ac {snn} and synaptic current to the output neurons after training for a single connection.}}{22}{figure.2.3}%
-\contentsline {figure}{\numberline {2.4}{\ignorespaces Relative velocities and LOS angles used in the reward function}}{24}{figure.2.4}%
-\contentsline {figure}{\numberline {2.5}{\ignorespaces Network structure and encoding process for the input layer (Defender). Each neuron is associated with a membership function in \ac {grf}. The \ac {grf} encodes an input State ($S^t$) at each time step. There is both a training phase when ($\xi = 0$) and an operating phase when ($\xi = 1)$.}}{26}{figure.2.5}%
-\contentsline {figure}{\numberline {2.6}{\ignorespaces Reward, eligibility trace, and weight change during the simulation for $W^{3-3}$. The $C(t) R(t)$ changes the synaptic weight by considering activation strength and reward value.}}{27}{figure.2.6}%
-\contentsline {figure}{\numberline {2.7}{\ignorespaces \ac {snn}'s performance during training. Hollow circles show the initial positions.}}{31}{figure.2.7}%
-\contentsline {figure}{\numberline {2.8}{\ignorespaces Changes in synaptic weights during training. Only Maximum synaptic weights for both agents are shown.}}{32}{figure.2.8}%
-\contentsline {figure}{\numberline {2.9}{\ignorespaces \ac {snn}'s performance after training. The highlighted region shows the defender's dominant region. The purple dot is the optimal capture point. The CO Type-E shows the reachable regions of the Invader and the Defender.}}{34}{figure.2.9}%
-\contentsline {figure}{\numberline {2.10}{\ignorespaces \ac {snn}'s performance in noisy conditions. A white Gaussian noise with a variance of 0.01 is added to the measured inputs.}}{36}{figure.2.10}%
+\contentsline {figure}{\numberline {2.1}{\ignorespaces Active target defense game with three agents (LOS angles are shown for both agents).}}{26}{figure.2.1}%
+\contentsline {figure}{\numberline {2.2}{\ignorespaces Two \ac {snn}s simultaneously play and control the invader and defender. Each agent uses the LOS angle and relative velocities for training.}}{26}{figure.2.2}%
+\contentsline {figure}{\numberline {2.3}{\ignorespaces An illustration of input current to \ac {snn} and synaptic current to the output neurons after training for a single connection.}}{27}{figure.2.3}%
+\contentsline {figure}{\numberline {2.4}{\ignorespaces Relative velocities and LOS angles used in the reward function}}{29}{figure.2.4}%
+\contentsline {figure}{\numberline {2.5}{\ignorespaces Network structure and encoding process for the input layer (Defender). Each neuron is associated with a membership function in \ac {grf}. The \ac {grf} encodes an input State ($S^t$) at each time step. There is both a training phase when ($\xi = 0$) and an operating phase when ($\xi = 1)$.}}{31}{figure.2.5}%
+\contentsline {figure}{\numberline {2.6}{\ignorespaces Reward, eligibility trace, and weight change during the simulation for $W^{3-3}$. The $C(t) R(t)$ changes the synaptic weight by considering activation strength and reward value.}}{32}{figure.2.6}%
+\contentsline {figure}{\numberline {2.7}{\ignorespaces \ac {snn}'s performance during training. Hollow circles show the initial positions.}}{36}{figure.2.7}%
+\contentsline {figure}{\numberline {2.8}{\ignorespaces Changes in synaptic weights during training. Only Maximum synaptic weights for both agents are shown.}}{37}{figure.2.8}%
+\contentsline {figure}{\numberline {2.9}{\ignorespaces \ac {snn}'s performance after training. The highlighted region shows the defender's dominant region. The purple dot is the optimal capture point. The CO Type-E shows the reachable regions of the Invader and the Defender.}}{39}{figure.2.9}%
+\contentsline {figure}{\numberline {2.10}{\ignorespaces \ac {snn}'s performance in noisy conditions. A white Gaussian noise with a variance of 0.01 is added to the measured inputs.}}{41}{figure.2.10}%
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {3.1}{\ignorespaces The central server (the leader) and the surrounding follower agents (white drones). The follower agents learn to fly in a formation to maintain the commanded distance. The Local models trained individually by follower agents are sent to the leader. The leader aggregates the models and sends back the global model for another round of training of the follower agents.}}{39}{figure.3.1}%
-\contentsline {figure}{\numberline {3.2}{\ignorespaces \ac {snn} structure with encoding and decoding layers. Each sub-layer consists of a fuzzy encoder and the F2S Converter, with the output layer receiving inputs from synaptic weights and a random action selector. During the training phase, the output layer receives input only from the random action selector, which then shifts to synaptic weight inputs after the training (test phase).}}{41}{figure.3.2}%
-\contentsline {figure}{\numberline {3.3}{\ignorespaces The fuzzy encoding principle for the input sub-layer.}}{43}{figure.3.3}%
-\contentsline {figure}{\numberline {3.4}{\ignorespaces Synaptic weight change for $\lambda =5, \Psi ^{\mathcal {S}}=15.5$,\\ and $\mathcal {A}\mathcal { R}_{max}^G=1$.}}{52}{figure.3.4}%
-\contentsline {figure}{\numberline {3.5}{\ignorespaces Reward-based learning rate and decay rate functions. In the blue region (active learning rate), the reward adjusts the weights, and in the red region (active decay rate), the RCSE method controls synaptic growth.}}{52}{figure.3.5}%
-\contentsline {figure}{\numberline {3.6}{\ignorespaces RCSE working principle in inhibiting the adjacent synaptic connections. The heatmap shows the synaptic weight matrix. Neurons have different firing strengths due to the difference in fuzzy membership values, which affects the increase or decrease rate and shapes the patterns in the synaptic weight matrix.}}{53}{figure.3.6}%
-\contentsline {figure}{\numberline {3.7}{\ignorespaces Measured distances used for evaluating swarm flight performance and collision detection.}}{61}{figure.3.7}%
-\contentsline {figure}{\numberline {3.8}{\ignorespaces Agents' trajectory during the test phase}}{61}{figure.3.8}%
-\contentsline {figure}{\numberline {3.9}{\ignorespaces Variation of distances within the swarm during the test phase}}{62}{figure.3.9}%
-\contentsline {figure}{\numberline {3.10}{\ignorespaces Adaptive response to commanded distance adjustments - reconfiguration during the test phase}}{62}{figure.3.10}%
-\contentsline {figure}{\numberline {3.11}{\ignorespaces Trajectory adaptations of following agents in response to reward change for the leader during the test phase.}}{64}{figure.3.11}%
-\contentsline {figure}{\numberline {3.12}{\ignorespaces Variations in distances after reward changes and Leader becomes Obstacle - test phase.}}{64}{figure.3.12}%
-\contentsline {figure}{\numberline {3.13}{\ignorespaces Synaptic Weights before Reward change in \ac {RCSE} method.}}{66}{figure.3.13}%
-\contentsline {figure}{\numberline {3.14}{\ignorespaces Synaptic Weights after Reward change in \ac {RCSE} method.}}{66}{figure.3.14}%
-\contentsline {figure}{\numberline {3.15}{\ignorespaces Synaptic Weights before Reward change in Multiplicative Synaptic Normalization method.}}{66}{figure.3.15}%
-\contentsline {figure}{\numberline {3.16}{\ignorespaces Synaptic Weights after Reward change in Multiplicative Synaptic Normalization method.}}{66}{figure.3.16}%
-\contentsline {figure}{\numberline {3.17}{\ignorespaces Synaptic weights increase after reward change in \ac {RCSE} method.}}{67}{figure.3.17}%
-\contentsline {figure}{\numberline {3.18}{\ignorespaces Synaptic weights decrease after reward change in \ac {RCSE} method.}}{67}{figure.3.18}%
-\contentsline {figure}{\numberline {3.19}{\ignorespaces Distances during the test phase before reward change in the proposed event-triggered \ac {fl} method.}}{69}{figure.3.19}%
-\contentsline {figure}{\numberline {3.20}{\ignorespaces Distances during the test phase after reward change in the proposed event-triggered \ac {fl} method.}}{69}{figure.3.20}%
-\contentsline {figure}{\numberline {3.21}{\ignorespaces Frobenius norm of the Agent 1's weighs during the learning phase. The reward changes for the Leader after 600 s.}}{70}{figure.3.21}%
-\contentsline {figure}{\numberline {3.22}{\ignorespaces Communication times for agents and the Central Server (Leader). Red and blue dots show the times that agents and the Central Server have sent their model, respectively.}}{70}{figure.3.22}%
+\contentsline {figure}{\numberline {3.1}{\ignorespaces The central server (the leader) and the surrounding follower agents (white drones). The follower agents learn to fly in a formation to maintain the commanded distance. The Local models trained individually by follower agents are sent to the leader. The leader aggregates the models and sends back the global model for another round of training of the follower agents.}}{44}{figure.3.1}%
+\contentsline {figure}{\numberline {3.2}{\ignorespaces \ac {snn} structure with encoding and decoding layers. Each sub-layer consists of a fuzzy encoder and the F2S Converter, with the output layer receiving inputs from synaptic weights and a random action selector. During the training phase, the output layer receives input only from the random action selector, which then shifts to synaptic weight inputs after the training (test phase).}}{46}{figure.3.2}%
+\contentsline {figure}{\numberline {3.3}{\ignorespaces The fuzzy encoding principle for the input sub-layer.}}{48}{figure.3.3}%
+\contentsline {figure}{\numberline {3.4}{\ignorespaces Synaptic weight change for $\lambda =5, \Psi ^{\mathcal {S}}=15.5$,\\ and $\mathcal {A}\mathcal { R}_{max}^G=1$.}}{57}{figure.3.4}%
+\contentsline {figure}{\numberline {3.5}{\ignorespaces Reward-based learning rate and decay rate functions. In the blue region (active learning rate), the reward adjusts the weights, and in the red region (active decay rate), the RCSE method controls synaptic growth.}}{57}{figure.3.5}%
+\contentsline {figure}{\numberline {3.6}{\ignorespaces RCSE working principle in inhibiting the adjacent synaptic connections. The heatmap shows the synaptic weight matrix. Neurons have different firing strengths due to the difference in fuzzy membership values, which affects the increase or decrease rate and shapes the patterns in the synaptic weight matrix.}}{58}{figure.3.6}%
+\contentsline {figure}{\numberline {3.7}{\ignorespaces Measured distances used for evaluating swarm flight performance and collision detection.}}{66}{figure.3.7}%
+\contentsline {figure}{\numberline {3.8}{\ignorespaces Agents' trajectory during the test phase}}{66}{figure.3.8}%
+\contentsline {figure}{\numberline {3.9}{\ignorespaces Variation of distances within the swarm during the test phase}}{67}{figure.3.9}%
+\contentsline {figure}{\numberline {3.10}{\ignorespaces Adaptive response to commanded distance adjustments - reconfiguration during the test phase}}{67}{figure.3.10}%
+\contentsline {figure}{\numberline {3.11}{\ignorespaces Trajectory adaptations of following agents in response to reward change for the leader during the test phase.}}{69}{figure.3.11}%
+\contentsline {figure}{\numberline {3.12}{\ignorespaces Variations in distances after reward changes and Leader becomes Obstacle - test phase.}}{69}{figure.3.12}%
+\contentsline {figure}{\numberline {3.13}{\ignorespaces Synaptic Weights before Reward change in \ac {RCSE} method.}}{71}{figure.3.13}%
+\contentsline {figure}{\numberline {3.14}{\ignorespaces Synaptic Weights after Reward change in \ac {RCSE} method.}}{71}{figure.3.14}%
+\contentsline {figure}{\numberline {3.15}{\ignorespaces Synaptic Weights before Reward change in Multiplicative Synaptic Normalization method.}}{71}{figure.3.15}%
+\contentsline {figure}{\numberline {3.16}{\ignorespaces Synaptic Weights after Reward change in Multiplicative Synaptic Normalization method.}}{71}{figure.3.16}%
+\contentsline {figure}{\numberline {3.17}{\ignorespaces Synaptic weights increase after reward change in \ac {RCSE} method.}}{72}{figure.3.17}%
+\contentsline {figure}{\numberline {3.18}{\ignorespaces Synaptic weights decrease after reward change in \ac {RCSE} method.}}{72}{figure.3.18}%
+\contentsline {figure}{\numberline {3.19}{\ignorespaces Distances during the test phase before reward change in the proposed event-triggered \ac {fl} method.}}{74}{figure.3.19}%
+\contentsline {figure}{\numberline {3.20}{\ignorespaces Distances during the test phase after reward change in the proposed event-triggered \ac {fl} method.}}{74}{figure.3.20}%
+\contentsline {figure}{\numberline {3.21}{\ignorespaces Frobenius norm of the Agent 1's weighs during the learning phase. The reward changes for the Leader after 600 s.}}{75}{figure.3.21}%
+\contentsline {figure}{\numberline {3.22}{\ignorespaces Communication times for agents and the Central Server (Leader). Red and blue dots show the times that agents and the Central Server have sent their model, respectively.}}{75}{figure.3.22}%
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {4.1}{\ignorespaces Swarm of robots performing docking mission. Each agent pushes the Payload towards the Central Hub to align them together. The central Hub and agents are equipped with a \ac {dvs} that streams high-frequency data for the proximity mission.}}{74}{figure.4.1}%
-\contentsline {figure}{\numberline {4.2}{\ignorespaces Deep \ac {snn} Architecture with Entropy-Based Adaptive Pooling and Structured Hidden Layers for Swarm Robotics. The purple connections are excitatory, and the yellow connections are inhibitory. }}{84}{figure.4.2}%
-\contentsline {figure}{\numberline {4.3}{\ignorespaces Structured First Hidden Layer Architecture with \ac {alm}, Payload, and Agent Perception Repositories for Visual Perception.}}{89}{figure.4.3}%
-\contentsline {figure}{\numberline {4.4}{\ignorespaces Structured Second Hidden Layer Architecture with Mission-Phase and Regulatory Neuron Repositories.}}{92}{figure.4.4}%
-\contentsline {figure}{\numberline {4.5}{\ignorespaces Reward function pipeline for the payload case. The pipeline illustrates the raw \ac {dvs} events, the attention-based fuzzy map, the normalized hidden layer activity during the initial training phase (\(r_q^{(1)}\)), and the modulation signal calculated as the difference between the attention map and the hidden layer activity (\(\alpha _q\)).}}{98}{figure.4.5}%
-\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Raw \ac {dvs} Events}}}{98}{figure.4.5}%
-\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Attention Fuzzy Map (16x16)}}}{98}{figure.4.5}%
-\contentsline {subfigure}{\numberline {(c)}{\ignorespaces {Hidden Layer Activity (16x16)}}}{98}{figure.4.5}%
-\contentsline {subfigure}{\numberline {(d)}{\ignorespaces {Post-neuron reward (Modulation Signal)}}}{98}{figure.4.5}%
-\contentsline {figure}{\numberline {4.6}{\ignorespaces Reward function pipeline for the agents case. This pipeline demonstrates the raw \ac {dvs} events for multiple agents, the reduced entropy-based fuzzy map used for attention, the hidden layer’s normalized activity, and the modulation signal computed for reward-based learning in the spiking neural network.}}{99}{figure.4.6}%
-\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Raw \ac {dvs} Events}}}{99}{figure.4.6}%
-\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Attention Fuzzy Map (16x16)}}}{99}{figure.4.6}%
-\contentsline {subfigure}{\numberline {(c)}{\ignorespaces {Hidden Layer Activity (16x16)}}}{99}{figure.4.6}%
-\contentsline {subfigure}{\numberline {(d)}{\ignorespaces {Post-neuron reward (Modulation Signal)}}}{99}{figure.4.6}%
+\contentsline {figure}{\numberline {4.1}{\ignorespaces Swarm of robots performing docking mission. Each agent pushes the Payload towards the Central Hub to align them together. The central Hub and agents are equipped with a \ac {dvs} that streams high-frequency data for the proximity mission.}}{79}{figure.4.1}%
+\contentsline {figure}{\numberline {4.2}{\ignorespaces Deep \ac {snn} Architecture with Entropy-Based Adaptive Pooling and Structured Hidden Layers for Swarm Robotics. The purple connections are excitatory, and the yellow connections are inhibitory. }}{89}{figure.4.2}%
+\contentsline {figure}{\numberline {4.3}{\ignorespaces Structured First Hidden Layer Architecture with \ac {alm}, Payload, and Agent Perception Repositories for Visual Perception.}}{94}{figure.4.3}%
+\contentsline {figure}{\numberline {4.4}{\ignorespaces Structured Second Hidden Layer Architecture with Mission-Phase and Regulatory Neuron Repositories.}}{97}{figure.4.4}%
+\contentsline {figure}{\numberline {4.5}{\ignorespaces Reward function pipeline for the payload case. The pipeline illustrates the raw \ac {dvs} events, the attention-based fuzzy map, the normalized hidden layer activity during the initial training phase (\(r_q^{(1)}\)), and the modulation signal calculated as the difference between the attention map and the hidden layer activity (\(\alpha _q\)).}}{103}{figure.4.5}%
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Raw \ac {dvs} Events}}}{103}{figure.4.5}%
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Attention Fuzzy Map (16x16)}}}{103}{figure.4.5}%
+\contentsline {subfigure}{\numberline {(c)}{\ignorespaces {Hidden Layer Activity (16x16)}}}{103}{figure.4.5}%
+\contentsline {subfigure}{\numberline {(d)}{\ignorespaces {Post-neuron reward (Modulation Signal)}}}{103}{figure.4.5}%
+\contentsline {figure}{\numberline {4.6}{\ignorespaces Reward function pipeline for the agents case. This pipeline demonstrates the raw \ac {dvs} events for multiple agents, the reduced entropy-based fuzzy map used for attention, the hidden layer’s normalized activity, and the modulation signal computed for reward-based learning in the spiking neural network.}}{104}{figure.4.6}%
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Raw \ac {dvs} Events}}}{104}{figure.4.6}%
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Attention Fuzzy Map (16x16)}}}{104}{figure.4.6}%
+\contentsline {subfigure}{\numberline {(c)}{\ignorespaces {Hidden Layer Activity (16x16)}}}{104}{figure.4.6}%
+\contentsline {subfigure}{\numberline {(d)}{\ignorespaces {Post-neuron reward (Modulation Signal)}}}{104}{figure.4.6}%
 \addvspace {10\p@ }

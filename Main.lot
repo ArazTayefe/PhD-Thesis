@@ -2,15 +2,15 @@
 \addvspace {10\p@ }
 \contentsline {table}{\numberline {1.1}{\ignorespaces Spike Response Function of the neurons in an \ac {snn}.}}{5}{table.1.1}%
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {2.1}{\ignorespaces Parameter values for LIF neuron model \cite {Ch_1_R10}}}{30}{table.2.1}%
-\contentsline {table}{\numberline {2.2}{\ignorespaces Parameter values for \ac {stdp}}}{31}{table.2.2}%
+\contentsline {table}{\numberline {2.1}{\ignorespaces Parameter values for LIF neuron model \cite {Ch_1_R10}}}{35}{table.2.1}%
+\contentsline {table}{\numberline {2.2}{\ignorespaces Parameter values for \ac {stdp}}}{36}{table.2.2}%
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {3.1}{\ignorespaces Parameter values for \ac {lif} neuron model \cite {Ch_1_R10}}}{59}{table.3.1}%
-\contentsline {table}{\numberline {3.2}{\ignorespaces Simulation Parameters}}{60}{table.3.2}%
-\contentsline {table}{\numberline {3.3}{\ignorespaces Comparative Performance Analysis of the Proposed Aggregation Algorithm+\ac {RCSE} and \ac {RCSE}}}{70}{table.3.3}%
+\contentsline {table}{\numberline {3.1}{\ignorespaces Parameter values for \ac {lif} neuron model \cite {Ch_1_R10}}}{64}{table.3.1}%
+\contentsline {table}{\numberline {3.2}{\ignorespaces Simulation Parameters}}{65}{table.3.2}%
+\contentsline {table}{\numberline {3.3}{\ignorespaces Comparative Performance Analysis of the Proposed Aggregation Algorithm+\ac {RCSE} and \ac {RCSE}}}{75}{table.3.3}%
 \addvspace {10\p@ }
-\contentsline {subtable}{\numberline {(a)}{\ignorespaces {The oscillatory Gaussian envelope when the payload \ac {alm} is active.}}}{103}{table.4.1}%
-\contentsline {subtable}{\numberline {(b)}{\ignorespaces {The oscillatory Gaussian envelope when the agent \ac {alm} is active.}}}{103}{table.4.1}%
-\contentsline {table}{\numberline {4.1}{\ignorespaces Physical parameters of the payload and agents used in the docking simulations.}}{103}{table.4.1}%
-\contentsline {table}{\numberline {4.2}{\ignorespaces Neuron layer configurations: model, excitability type, number of neurons \(N\), and simulation time step \(\Delta t\).}}{103}{table.4.2}%
+\contentsline {subtable}{\numberline {(a)}{\ignorespaces {The oscillatory Gaussian envelope when the payload \ac {alm} is active.}}}{108}{table.4.1}%
+\contentsline {subtable}{\numberline {(b)}{\ignorespaces {The oscillatory Gaussian envelope when the agent \ac {alm} is active.}}}{108}{table.4.1}%
+\contentsline {table}{\numberline {4.1}{\ignorespaces Physical parameters of the payload and agents used in the docking simulations.}}{108}{table.4.1}%
+\contentsline {table}{\numberline {4.2}{\ignorespaces Neuron layer configurations: model, excitability type, number of neurons \(N\), and simulation time step \(\Delta t\).}}{108}{table.4.2}%
 \addvspace {10\p@ }

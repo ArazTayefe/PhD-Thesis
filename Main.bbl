@@ -1,4 +1,4 @@
-\begin{thebibliography}{10}
+\begin{thebibliography}{100}
 
 \bibitem{Ch_1_R1}
 Y.~Venkatesha, Y.~Kim, L.~Tassiulas, and P.~Panda, ``Federated learning with
@@ -302,6 +302,220 @@ Q.~Wu, X.~Chen, T.~Ouyang, Z.~Zhou, X.~Zhang, S.~Yang, and J.~Zhang, ``Hiflash:
 \bibitem{Ch2_R53}
 G.~Xia, J.~Chen, C.~Yu, and J.~Ma, ``Poisoning attacks in federated learning: A
   survey,'' {\em IEEE Access}, vol.~11, pp.~10708--10722, 2023.
+
+\bibitem{tan2019consensus}
+X.~Tan, J.~Cao, and X.~Li, ``Consensus of leader-following multiagent systems:
+  A distributed event-triggered impulsive control strategy,'' {\em IEEE
+  Transactions on Cybernetics}, vol.~49, no.~3, pp.~792--801, 2019.
+
+\bibitem{du2020dynamic}
+S.~Du, T.~Liu, and D.~W.~C. Ho, ``Dynamic event-triggered control for
+  leader-following consensus of multiagent systems,'' {\em IEEE Transactions on
+  Systems, Man, and Cybernetics: Systems}, vol.~50, no.~10, pp.~3243--3251,
+  2020.
+
+\bibitem{liu2020fixedtime}
+J.~Liu {\em et~al.}, ``Fixed-time leader–follower consensus of networked
+  nonlinear systems via event/self-triggered control,'' {\em IEEE Transactions
+  on Neural Networks and Learning Systems}, vol.~31, no.~11, pp.~5029--5037,
+  2020.
+
+\bibitem{cao2024event}
+L.~Cao, Z.~Cheng, Y.~Liu, and H.~Li, ``Event-based adaptive neural network
+  fixed-time cooperative formation for multiagent systems,'' {\em IEEE
+  Transactions on Neural Networks and Learning Systems}, vol.~35, no.~5,
+  pp.~6467--6477, 2024.
+
+\bibitem{zhang2020eventtriggered}
+Y.~Zhang, J.~Sun, H.~Liang, and H.~Li, ``Event-triggered adaptive tracking
+  control for multiagent systems with unknown disturbances,'' {\em IEEE
+  Transactions on Cybernetics}, vol.~50, no.~3, pp.~890--901, 2020.
+
+\bibitem{nguyen2020deep}
+T.~T. Nguyen, N.~D. Nguyen, and S.~Nahavandi, ``Deep reinforcement learning for
+  multiagent systems: A review of challenges, solutions, and applications,''
+  {\em IEEE Transactions on Cybernetics}, vol.~50, no.~9, pp.~3826--3839, 2020.
+
+\bibitem{liang2021neural}
+H.~Liang, G.~Liu, H.~Zhang, and T.~Huang, ``Neural-network-based
+  event-triggered adaptive control of nonaffine nonlinear multiagent systems
+  with dynamic uncertainties,'' {\em IEEE Transactions on Neural Networks and
+  Learning Systems}, vol.~32, no.~5, pp.~2239--2250, 2021.
+
+\bibitem{shen2020neural}
+Q.~Shen, P.~Shi, J.~Zhu, S.~Wang, and Y.~Shi, ``Neural networks-based
+  distributed adaptive control of nonlinear multiagent systems,'' {\em IEEE
+  Transactions on Neural Networks and Learning Systems}, vol.~31, no.~3,
+  pp.~1010--1021, 2020.
+
+\bibitem{liu2021event}
+Y.~Liu, X.~Wang, H.~Zhang, and G.~Chen, ``Event-triggered control for
+  multiagent systems with sensor faults and input saturation,'' {\em IEEE
+  Transactions on Systems, Man, and Cybernetics: Systems}, vol.~51, no.~7,
+  pp.~3855--3866, 2021.
+
+\bibitem{wang2019prescribed}
+Y.~Wang, Y.~Song, D.~J. Hill, and M.~Krstic, ``Prescribed-time consensus and
+  containment control of networked multiagent systems,'' {\em IEEE Transactions
+  on Cybernetics}, vol.~49, no.~4, pp.~1138--1151, 2019.
+
+\bibitem{Trslic2020}
+P.~Trsli{\'c}, M.~Rossi, L.~Robinson, C.~W. O’Donnel, A.~Weir, J.~Coleman,
+  J.~Riordan, E.~Omerdi{\'c}, G.~Dooly, and D.~Toal, ``Vision based autonomous
+  docking for work class rovs,'' {\em IEEE Journal of Oceanic Engineering},
+  2020.
+\newblock Available online 2019.
+
+\bibitem{Figueiredo2020}
+A.~B. Figueiredo and A.~C. Matos, ``Mvido: A high performance monocular
+  vision-based system for docking a hovering auv,'' {\em Journal of Field
+  Robotics}, 2020.
+
+\bibitem{Sankaranarayanan2025}
+V.~N. Sankaranarayanan, A.~Banerjee, S.~Satpute, and G.~Nikolakopoulos, ``Safe
+  docking of a payload-carrying spacecraft using state constrained adaptive
+  control,'' {\em Journal of Guidance, Control, and Dynamics}, 2025.
+
+\bibitem{Nikhilraj2025}
+A.~Nikhilraj, H.~Simha, and H.~Priyadarshan, ``Modeling, guidance and control
+  of quadrotor uavs on {SE}(3) in application to autonomous docking,'' {\em
+  International Journal of Robotics Research}, 2025.
+
+\bibitem{Narvaez2021}
+E.~Narv{\'a}ez, A.~A. Ravankar, A.~Ravankar, T.~Emaru, and Y.~Kobayashi,
+  ``Autonomous vtol-uav docking system for heterogeneous multirobot team,''
+  {\em IEEE Robotics and Automation Letters}, 2021.
+
+\bibitem{Lashkari2020}
+N.~Lashkari, M.~Biglarbegian, and S.~X. Yang, ``Development of a novel robust
+  control method for formation of heterogeneous multiple mobile robots with
+  autonomous docking capability,'' {\em Robotics and Autonomous Systems}, 2020.
+
+\bibitem{Li2022}
+H.~Li, H.~Wang, L.~Cui, J.~Li, Q.~Wei, and J.~Xia, ``Design and experiments of
+  a compact self-assembling mobile modular robot with joint actuation and
+  onboard visual-based perception,'' {\em IEEE Transactions on Robotics}, 2022.
+
+\bibitem{Jia2023}
+F.~Jia, M.~Afaq, B.~Ripka, Q.~Huda, and R.~Ahmad, ``Vision- and lidar-based
+  autonomous docking and recharging of a mobile robot for machine tending in
+  autonomous manufacturing environments,'' {\em IEEE Transactions on Industrial
+  Informatics}, 2023.
+
+\bibitem{Oh2025}
+J.~S. Oh and M.~Y. Kim, ``Regression-based docking system for autonomous mobile
+  robots using a monocular camera and aruco markers,'' {\em IEEE Transactions
+  on Automation Science and Engineering}, 2025.
+
+\bibitem{TavanaeiMaida2018BPSTDP}
+A.~Tavanaei and A.~Maida, ``Bp-stdp: Approximating backpropagation using spike
+  timing dependent plasticity,'' {\em International Journal of Neural Systems},
+  vol.~28, no.~10, p.~1850032, 2018.
+
+\bibitem{AnwaniRajendran2020NormAD}
+N.~Anwani and B.~Rajendran, ``Training multi-layer spiking neural networks
+  using normad based spatio-temporal error backpropagation,'' {\em IEEE
+  Transactions on Neural Networks and Learning Systems}, vol.~31, no.~12,
+  pp.~4939--4951, 2020.
+
+\bibitem{TaherkhaniBelatreche2018BPSL}
+A.~Taherkhani, A.~Belatreche, Y.~Li, and L.~P. Maguire, ``A supervised learning
+  algorithm for learning precise timing of multiple spikes in multilayer
+  spiking neural networks,'' {\em IEEE Transactions on Neural Networks and
+  Learning Systems}, vol.~29, no.~12, pp.~6079--6090, 2018.
+
+\bibitem{KimPanda2021SALT}
+Y.~Kim and P.~Panda, ``Optimizing deeper spiking neural networks for dynamic
+  vision sensing,'' {\em IEEE Transactions on Pattern Analysis and Machine
+  Intelligence}, vol.~43, no.~2, pp.~674--687, 2021.
+
+\bibitem{KimHuh2018Weighted}
+J.~Kim, H.~Kim, S.~Huh, J.~Lee, and K.~Choi, ``Deep neural networks with
+  weighted spikes,'' {\em Advances in Neural Information Processing Systems},
+  vol.~31, pp.~1129--1138, 2018.
+
+\bibitem{WangZhang2025Ternary}
+S.~Wang, D.~Zhang, A.~Belatreche, Y.~Xiao, H.~Qing, W.~Wei, M.~Zhang, and
+  Y.~Yang, ``Ternary spike-based neuromorphic signal processing system,'' {\em
+  Nature Electronics}, vol.~8, no.~1, pp.~45--58, 2025.
+
+\bibitem{LinYuan2020ReRAM}
+J.~Lin and J.-S. Yuan, ``A scalable and reconfigurable in-memory architecture
+  for ternary deep spiking neural network with reram based neurons,'' {\em IEEE
+  Transactions on Neural Networks and Learning Systems}, vol.~31, no.~4,
+  pp.~1355--1370, 2020.
+
+\bibitem{YangVoyles2025FOSTDGD}
+Y.~Yang, R.~M. Voyles, H.~H. Zhang, and R.~A. Nawrocki, ``Fractional-order
+  spike-timing-dependent gradient descent for multi-layer spiking neural
+  networks,'' {\em IEEE Transactions on Neural Networks and Learning Systems},
+  vol.~36, no.~2, pp.~1120--1133, 2025.
+
+\bibitem{DingZhang2025Init}
+J.~Ding, J.~Zhang, T.~Huang, J.~K. Liu, and Z.~Yu, ``Assisting training of deep
+  spiking neural networks with parameter initialization,'' {\em IEEE
+  Transactions on Circuits and Systems I}, vol.~72, no.~1, pp.~56--68, 2025.
+
+\bibitem{HuangDing2025Residual}
+Z.~Huang, J.~Ding, Z.~Pan, H.~Li, Y.~Fang, Z.~Yu, and J.~K. Liu, ``Converting
+  high-performance and low-latency snns through explicit modeling of residual
+  error in anns,'' {\em Neural Networks}, vol.~161, pp.~345--358, 2025.
+
+\bibitem{XuLi2021DIET}
+W.~Xu, Y.~Li, G.~Chen, and L.~Shi, ``Diet-snn: Deep-learning-inspired
+  energy-efficient training of spiking neural networks,'' {\em IEEE
+  Transactions on Neural Networks and Learning Systems}, vol.~32, no.~10,
+  pp.~4567--4579, 2021.
+
+\bibitem{Lee2014RealTimeGesture}
+J.~Lee, T.~Delbruck, M.~Pfeiffer, P.~K. Park, C.-W. Shin, H.-Y. Ryu, {\em
+  et~al.}, ``Real-time gesture interface based on event-driven processing from
+  stereo silicon retinas,'' {\em IEEE Transactions on Neural Networks and
+  Learning Systems}, vol.~25, no.~9, pp.~2250--2263, 2014.
+
+\bibitem{Seifozzakerini2018Hough}
+S.~Seifozzakerini, W.-Y. Yau, K.~Mao, and H.~Nejati, ``Hough transform
+  implementation for event-based systems: Concepts and challenges,'' {\em
+  Frontiers in Computational Neuroscience}, vol.~12, p.~103, 2018.
+
+\bibitem{Bichler2012Extraction}
+O.~Bichler, D.~Querlioz, S.~J. Thorpe, J.-P. Bourgoin, and C.~Gamrat,
+  ``Extraction of temporally correlated features from dynamic vision sensors
+  with spike-timing-dependent plasticity,'' {\em Neural Networks}, vol.~32,
+  pp.~339--348, 2012.
+
+\bibitem{Thiele2018EventBased}
+J.~C. Thiele, O.~Bichler, and A.~Dupret, ``Event-based, timescale invariant
+  unsupervised online deep learning with stdp,'' {\em Frontiers in
+  Computational Neuroscience}, vol.~12, p.~46, 2018.
+
+\bibitem{Zhao2014Feedforward}
+B.~Zhao, R.~Ding, S.~Chen, B.~Linares-Barranco, and H.~Tang, ``Feedforward
+  categorization on aer motion events using cortex-like features in a spiking
+  neural network,'' {\em IEEE Transactions on Neural Networks and Learning
+  Systems}, vol.~26, no.~9, pp.~1963--1978, 2014.
+
+\bibitem{Barchid2023Localization}
+S.~Barchid, G.~M. Caron, K.~Ouni, {\em et~al.}, ``Spiking neural networks for
+  frame-based and event-based single object localization,'' {\em
+  Neurocomputing}, vol.~559, 2023.
+
+\bibitem{Zanatta2023Directly}
+L.~Zanatta, A.~D. Mauro, F.~Barchi, A.~Bartolini, L.~Benini, and A.~Acquaviva,
+  ``Directly-trained spiking neural networks for deep reinforcement learning:
+  Energy efficient implementation of event-based obstacle avoidance on a
+  neuromorphic accelerator,'' {\em Neurocomputing}, vol.~562, 2023.
+
+\bibitem{VicenteSola2024SpikingAction}
+A.~Vicente-Sola, D.~L. Manna, P.~Kirkland, G.~D. Caterina, and T.~Bihl,
+  ``Spiking neural networks for event-based action recognition: A new task to
+  understand their advantage,'' {\em Neurocomputing}, vol.~611, 2024.
+
+\bibitem{Yang2024SelfSupervised}
+S.~Yang, B.~Linares-Barranco, Y.~Wu, and B.~D. Chen, ``Self-supervised
+  high-order information bottleneck learning of spiking neural network for
+  robust event-based optical flow estimation,'' {\em IEEE Transactions on
+  Pattern Analysis and Machine Intelligence}, 2024.
 
 \bibitem{Ch5_ATD4}
 M.~Pachter, E.~Garcia, and D.~W. Casbeer, ``Differential game of guarding a
