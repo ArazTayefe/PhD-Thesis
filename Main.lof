@@ -1,118 +1,118 @@
 \acswitchoff 
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {1.1}{\ignorespaces Simple model of a \ac {snn}. The spike pattern shows that the neurons spike whenever the voltage of the neuron reaches a threshold.}}{4}{figure.1.1}%
+\contentsline {figure}{\numberline {1.1}{\ignorespaces Simple model of a \ac {snn}. The spike pattern shows that the neurons spike whenever the voltage of the neuron reaches a threshold.}}{3}{figure.1.1}%
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {2.1}{\ignorespaces Active target defense game with three agents (LOS angles are shown for both agents).}}{26}{figure.2.1}%
-\contentsline {figure}{\numberline {2.2}{\ignorespaces Two \ac {snn}s simultaneously play and control the invader and defender. Each agent uses the LOS angle and relative velocities for training.}}{26}{figure.2.2}%
-\contentsline {figure}{\numberline {2.3}{\ignorespaces An illustration of input current to \ac {snn} and synaptic current to the output neurons after training for a single connection.}}{27}{figure.2.3}%
-\contentsline {figure}{\numberline {2.4}{\ignorespaces Relative velocities and LOS angles used in the reward function}}{29}{figure.2.4}%
-\contentsline {figure}{\numberline {2.5}{\ignorespaces Network structure and encoding process for the input layer (Defender). Each neuron is associated with a membership function in \ac {grf}. The \ac {grf} encodes an input State ($S^t$) at each time step. There is both a training phase when ($\xi = 0$) and an operating phase when ($\xi = 1)$.}}{31}{figure.2.5}%
-\contentsline {figure}{\numberline {2.6}{\ignorespaces Reward, eligibility trace, and weight change during the simulation for $W^{3-3}$. The $C(t) R(t)$ changes the synaptic weight by considering activation strength and reward value.}}{32}{figure.2.6}%
-\contentsline {figure}{\numberline {2.7}{\ignorespaces \ac {snn}'s performance during training. Hollow circles show the initial positions.}}{36}{figure.2.7}%
-\contentsline {figure}{\numberline {2.8}{\ignorespaces Changes in synaptic weights during training. Only Maximum synaptic weights for both agents are shown.}}{37}{figure.2.8}%
-\contentsline {figure}{\numberline {2.9}{\ignorespaces \ac {snn}'s performance after training. The highlighted region shows the defender's dominant region. The purple dot is the optimal capture point. The CO Type-E shows the reachable regions of the Invader and the Defender.}}{39}{figure.2.9}%
-\contentsline {figure}{\numberline {2.10}{\ignorespaces \ac {snn}'s performance in noisy conditions. A white Gaussian noise with a variance of 0.01 is added to the measured inputs.}}{41}{figure.2.10}%
+\contentsline {figure}{\numberline {2.1}{\ignorespaces Active target defense game with three agents (LOS angles are shown for both agents).}}{25}{figure.2.1}%
+\contentsline {figure}{\numberline {2.2}{\ignorespaces Two \ac {snn}s simultaneously play and control the invader and defender. Each agent uses the LOS angle and relative velocities for training.}}{25}{figure.2.2}%
+\contentsline {figure}{\numberline {2.3}{\ignorespaces An illustration of input current to \ac {snn} and synaptic current to the output neurons after training for a single connection.}}{26}{figure.2.3}%
+\contentsline {figure}{\numberline {2.4}{\ignorespaces Relative velocities and LOS angles used in the reward function}}{28}{figure.2.4}%
+\contentsline {figure}{\numberline {2.5}{\ignorespaces Network structure and encoding process for the input layer (Defender). Each neuron is associated with a membership function in \ac {grf}. The \ac {grf} encodes an input State ($S^t$) at each time step. There is both a training phase when ($\xi = 0$) and an operating phase when ($\xi = 1)$.}}{30}{figure.2.5}%
+\contentsline {figure}{\numberline {2.6}{\ignorespaces Reward, eligibility trace, and weight change during the simulation for $W^{3-3}$. The $C(t) R(t)$ changes the synaptic weight by considering activation strength and reward value.}}{31}{figure.2.6}%
+\contentsline {figure}{\numberline {2.7}{\ignorespaces \ac {snn}'s performance during training. Hollow circles show the initial positions.}}{35}{figure.2.7}%
+\contentsline {figure}{\numberline {2.8}{\ignorespaces Changes in synaptic weights during training. Only Maximum synaptic weights for both agents are shown.}}{36}{figure.2.8}%
+\contentsline {figure}{\numberline {2.9}{\ignorespaces \ac {snn}'s performance after training. The highlighted region shows the defender's dominant region. The purple dot is the optimal capture point. The CO Type-E shows the reachable regions of the Invader and the Defender.}}{38}{figure.2.9}%
+\contentsline {figure}{\numberline {2.10}{\ignorespaces \ac {snn}'s performance in noisy conditions. A white Gaussian noise with a variance of 0.01 is added to the measured inputs.}}{40}{figure.2.10}%
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {3.1}{\ignorespaces The central server (the leader) and the surrounding follower agents (white drones). The follower agents learn to fly in a formation to maintain the commanded distance. The Local models trained individually by follower agents are sent to the leader. The leader aggregates the models and sends back the global model for another round of training of the follower agents.}}{44}{figure.3.1}%
-\contentsline {figure}{\numberline {3.2}{\ignorespaces \ac {snn} structure with encoding and decoding layers. Each sub-layer consists of a fuzzy encoder and the F2S Converter, with the output layer receiving inputs from synaptic weights and a random action selector. During the training phase, the output layer receives input only from the random action selector, which then shifts to synaptic weight inputs after the training (test phase).}}{46}{figure.3.2}%
-\contentsline {figure}{\numberline {3.3}{\ignorespaces The fuzzy encoding principle for the input sub-layer.}}{48}{figure.3.3}%
-\contentsline {figure}{\numberline {3.4}{\ignorespaces Synaptic weight change for $\lambda =5, \Psi ^{\mathcal {S}}=15.5$,\\ and $\mathcal {A}\mathcal { R}_{max}^G=1$.}}{57}{figure.3.4}%
-\contentsline {figure}{\numberline {3.5}{\ignorespaces Reward-based learning rate and decay rate functions. In the blue region (active learning rate), the reward adjusts the weights, and in the red region (active decay rate), the RCSE method controls synaptic growth.}}{57}{figure.3.5}%
-\contentsline {figure}{\numberline {3.6}{\ignorespaces RCSE working principle in inhibiting the adjacent synaptic connections. The heatmap shows the synaptic weight matrix. Neurons have different firing strengths due to the difference in fuzzy membership values, which affects the increase or decrease rate and shapes the patterns in the synaptic weight matrix.}}{58}{figure.3.6}%
-\contentsline {figure}{\numberline {3.7}{\ignorespaces Measured distances used for evaluating swarm flight performance and collision detection.}}{66}{figure.3.7}%
-\contentsline {figure}{\numberline {3.8}{\ignorespaces Agents' trajectory during the test phase}}{66}{figure.3.8}%
-\contentsline {figure}{\numberline {3.9}{\ignorespaces Variation of distances within the swarm during the test phase}}{67}{figure.3.9}%
-\contentsline {figure}{\numberline {3.10}{\ignorespaces Adaptive response to commanded distance adjustments - reconfiguration during the test phase}}{67}{figure.3.10}%
-\contentsline {figure}{\numberline {3.11}{\ignorespaces Trajectory adaptations of following agents in response to reward change for the leader during the test phase.}}{69}{figure.3.11}%
-\contentsline {figure}{\numberline {3.12}{\ignorespaces Variations in distances after reward changes and Leader becomes Obstacle - test phase.}}{69}{figure.3.12}%
-\contentsline {figure}{\numberline {3.13}{\ignorespaces Synaptic Weights before Reward change in \ac {RCSE} method.}}{71}{figure.3.13}%
-\contentsline {figure}{\numberline {3.14}{\ignorespaces Synaptic Weights after Reward change in \ac {RCSE} method.}}{71}{figure.3.14}%
-\contentsline {figure}{\numberline {3.15}{\ignorespaces Synaptic Weights before Reward change in Multiplicative Synaptic Normalization method.}}{71}{figure.3.15}%
-\contentsline {figure}{\numberline {3.16}{\ignorespaces Synaptic Weights after Reward change in Multiplicative Synaptic Normalization method.}}{71}{figure.3.16}%
-\contentsline {figure}{\numberline {3.17}{\ignorespaces Synaptic weights increase after reward change in \ac {RCSE} method.}}{72}{figure.3.17}%
-\contentsline {figure}{\numberline {3.18}{\ignorespaces Synaptic weights decrease after reward change in \ac {RCSE} method.}}{72}{figure.3.18}%
-\contentsline {figure}{\numberline {3.19}{\ignorespaces Distances during the test phase before reward change in the proposed event-triggered \ac {fl} method.}}{74}{figure.3.19}%
-\contentsline {figure}{\numberline {3.20}{\ignorespaces Distances during the test phase after reward change in the proposed event-triggered \ac {fl} method.}}{74}{figure.3.20}%
-\contentsline {figure}{\numberline {3.21}{\ignorespaces Frobenius norm of the Agent 1's weighs during the learning phase. The reward changes for the Leader after 600 s.}}{75}{figure.3.21}%
-\contentsline {figure}{\numberline {3.22}{\ignorespaces Communication times for agents and the Central Server (Leader). Red and blue dots show the times that agents and the Central Server have sent their model, respectively.}}{75}{figure.3.22}%
+\contentsline {figure}{\numberline {3.1}{\ignorespaces The central server (the leader) and the surrounding follower agents (white drones). The follower agents learn to fly in a formation to maintain the commanded distance. The Local models trained individually by follower agents are sent to the leader. The leader aggregates the models and sends back the global model for another round of training of the follower agents.}}{43}{figure.3.1}%
+\contentsline {figure}{\numberline {3.2}{\ignorespaces \ac {snn} structure with encoding and decoding layers. Each sub-layer consists of a fuzzy encoder and the F2S Converter, with the output layer receiving inputs from synaptic weights and a random action selector. During the training phase, the output layer receives input only from the random action selector, which then shifts to synaptic weight inputs after the training (test phase).}}{45}{figure.3.2}%
+\contentsline {figure}{\numberline {3.3}{\ignorespaces The fuzzy encoding principle for the input sub-layer.}}{47}{figure.3.3}%
+\contentsline {figure}{\numberline {3.4}{\ignorespaces Synaptic weight change for $\lambda =5, \Psi ^{\mathcal {S}}=15.5$,\\ and $\mathcal {A}\mathcal { R}_{max}^G=1$.}}{56}{figure.3.4}%
+\contentsline {figure}{\numberline {3.5}{\ignorespaces Reward-based learning rate and decay rate functions. In the blue region (active learning rate), the reward adjusts the weights, and in the red region (active decay rate), the RCSE method controls synaptic growth.}}{56}{figure.3.5}%
+\contentsline {figure}{\numberline {3.6}{\ignorespaces RCSE working principle in inhibiting the adjacent synaptic connections. The heatmap shows the synaptic weight matrix. Neurons have different firing strengths due to the difference in fuzzy membership values, which affects the increase or decrease rate and shapes the patterns in the synaptic weight matrix.}}{57}{figure.3.6}%
+\contentsline {figure}{\numberline {3.7}{\ignorespaces Measured distances used for evaluating swarm flight performance and collision detection.}}{65}{figure.3.7}%
+\contentsline {figure}{\numberline {3.8}{\ignorespaces Agents' trajectory during the test phase}}{65}{figure.3.8}%
+\contentsline {figure}{\numberline {3.9}{\ignorespaces Variation of distances within the swarm during the test phase}}{66}{figure.3.9}%
+\contentsline {figure}{\numberline {3.10}{\ignorespaces Adaptive response to commanded distance adjustments - reconfiguration during the test phase}}{66}{figure.3.10}%
+\contentsline {figure}{\numberline {3.11}{\ignorespaces Trajectory adaptations of following agents in response to reward change for the leader during the test phase.}}{68}{figure.3.11}%
+\contentsline {figure}{\numberline {3.12}{\ignorespaces Variations in distances after reward changes and Leader becomes Obstacle - test phase.}}{68}{figure.3.12}%
+\contentsline {figure}{\numberline {3.13}{\ignorespaces Synaptic Weights before Reward change in \ac {RCSE} method.}}{70}{figure.3.13}%
+\contentsline {figure}{\numberline {3.14}{\ignorespaces Synaptic Weights after Reward change in \ac {RCSE} method.}}{70}{figure.3.14}%
+\contentsline {figure}{\numberline {3.15}{\ignorespaces Synaptic Weights before Reward change in Multiplicative Synaptic Normalization method.}}{70}{figure.3.15}%
+\contentsline {figure}{\numberline {3.16}{\ignorespaces Synaptic Weights after Reward change in Multiplicative Synaptic Normalization method.}}{70}{figure.3.16}%
+\contentsline {figure}{\numberline {3.17}{\ignorespaces Synaptic weights increase after reward change in \ac {RCSE} method.}}{71}{figure.3.17}%
+\contentsline {figure}{\numberline {3.18}{\ignorespaces Synaptic weights decrease after reward change in \ac {RCSE} method.}}{71}{figure.3.18}%
+\contentsline {figure}{\numberline {3.19}{\ignorespaces Distances during the test phase before reward change in the proposed event-triggered \ac {fl} method.}}{73}{figure.3.19}%
+\contentsline {figure}{\numberline {3.20}{\ignorespaces Distances during the test phase after reward change in the proposed event-triggered \ac {fl} method.}}{73}{figure.3.20}%
+\contentsline {figure}{\numberline {3.21}{\ignorespaces Frobenius norm of the Agent 1's weighs during the learning phase. The reward changes for the Leader after 600 s.}}{74}{figure.3.21}%
+\contentsline {figure}{\numberline {3.22}{\ignorespaces Communication times for agents and the Central Server (Leader). Red and blue dots show the times that agents and the Central Server have sent their model, respectively.}}{74}{figure.3.22}%
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {4.1}{\ignorespaces 3D schematic of the multi-agent docking mission environment. Multiple agents work collaboratively to push a central Payload towards a \ac {scs} for docking alignment.}}{82}{figure.4.1}%
-\contentsline {figure}{\numberline {4.2}{\ignorespaces 2D representation of robots performing docking mission. Each agent pushes the Payload towards the \ac {scs} to align them together. The \ac {scs} and agents are equipped with a \ac {dvs} that streams high-frequency data for the proximity mission.}}{83}{figure.4.2}%
-\contentsline {figure}{\numberline {4.3}{\ignorespaces Deep \ac {snn} Architecture with entropy-based adaptive pooling, multi-repository hidden layers, and biologically-inspired inhibitory and excitatory synapses. Purple, red, and blue arrows denote excitatory and yellow arrows denote inhibitory pathways.}}{92}{figure.4.3}%
-\contentsline {figure}{\numberline {4.4}{\ignorespaces Structured First Hidden Layer Architecture with Payload, and Agent Perception Repositories for Visual Perception.}}{97}{figure.4.4}%
-\contentsline {figure}{\numberline {4.5}{\ignorespaces Structured Second Hidden Layer architecture showing the Formation-Flying (\ac {ffm}), Collaborative Docking (\ac {cdm}), Mission Phase Control (\ac {dpd}), and Regulatory Formation Phase (\ac {fpd}) repositories interconnected through inhibitory (yellow) and excitatory (purple) synapses. External stimulation from contact sensors triggers mission-phase transitions.}}{100}{figure.4.5}%
-\contentsline {figure}{\numberline {4.6}{\ignorespaces Output Layer Architecture with Lateral Inhibition between Opposing Direction Neurons to Enforce Winner-Take-All Dynamics within Each Control Axis.}}{102}{figure.4.6}%
-\contentsline {figure}{\numberline {4.7}{\ignorespaces Computation of the input activity matrix (\(A\)) from the time-averaged spiking activity of the input layer neurons.}}{105}{figure.4.7}%
-\contentsline {figure}{\numberline {4.8}{\ignorespaces Reward function pipeline for the Payload. The pipeline illustrates the raw \ac {dvs} events, the attention-based map, the normalized hidden layer activity during the initial training phase, and the reward signal calculated as the difference between the attention map and the hidden layer activity (\(r_q\)).}}{107}{figure.4.8}%
-\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Raw \ac {dvs} Events of the payload}}}{107}{figure.4.8}%
-\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Attention Map (\(\mathcal {A}^{\text {Attention}}\))}}}{107}{figure.4.8}%
-\contentsline {subfigure}{\numberline {(c)}{\ignorespaces {Hidden Layer Activity (\(A_{1}^{\text {hidden}}\))}}}{107}{figure.4.8}%
-\contentsline {subfigure}{\numberline {(d)}{\ignorespaces {Post-neuron reward (\(r\))}}}{107}{figure.4.8}%
-\contentsline {figure}{\numberline {4.9}{\ignorespaces Reward function pipeline for the agents. This pipeline demonstrates the raw \ac {dvs} events for multiple agents, the attention map, the hidden layer’s normalized activity, and the modulation signal computed for reward.}}{108}{figure.4.9}%
-\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Raw \ac {dvs} Events of the agents}}}{108}{figure.4.9}%
-\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Attention Map (\(\mathcal {A}^{\text {Attention}}\))}}}{108}{figure.4.9}%
-\contentsline {subfigure}{\numberline {(c)}{\ignorespaces {Hidden Layer Activity (\(A_{1}^{\text {hidden}}\))}}}{108}{figure.4.9}%
-\contentsline {subfigure}{\numberline {(d)}{\ignorespaces {Post-neuron reward (\(r\))}}}{108}{figure.4.9}%
-\contentsline {figure}{\numberline {4.10}{\ignorespaces Numerical example setup for Gaussian attention computation in the first hidden layer. (a) shows the input activity matrix representing time-averaged firing rates from the input layer. (b) illustrates the spatial arrangement of hidden-layer neurons, each serving as a query point for attention calculation.}}{110}{figure.4.10}%
-\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Input activity matrix $(A^{\mathrm {input}})$ for numerical example of Gaussian attention computation.}}}{110}{figure.4.10}%
-\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Hidden-layer centers of attention (queries) for numerical example of Gaussian attention computation.}}}{110}{figure.4.10}%
-\contentsline {figure}{\numberline {4.11}{\ignorespaces Attention weight computation for hidden neuron \( q = (2,2) \) at position \( (x_q, y_q) = (-0.333, -0.333) \). (a) shows the Gaussian weight map \( G_q \) centered at the hidden neuron’s location. (b) illustrates the element-wise product of the weight map with the input activity matrix, highlighting the contributions to the attention calculation.}}{112}{figure.4.11}%
-\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Gaussian weight map $(G_q)$.}}}{112}{figure.4.11}%
-\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Weighted input activity $(G_q \odot A^{\mathrm {input}})$.}}}{112}{figure.4.11}%
-\contentsline {figure}{\numberline {4.12}{\ignorespaces The DVS event image is masked by the upsampled binary detection mask derived from the first hidden layer’s output, isolating events corresponding to the active object (Payload or agent).}}{118}{figure.4.12}%
-\contentsline {figure}{\numberline {4.13}{\ignorespaces The oscillatory Gaussian envelope used to compute the motion direction signal $\mathcal {H}$ for reward modulation in the second hidden layer. }}{119}{figure.4.13}%
-\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {The oscillatory Gaussian envelope when the \ac {alm} is off (Payload's moves away from the center results in negative values).}}}{119}{figure.4.13}%
-\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {The oscillatory Gaussian envelope when the agent \ac {alm} is on (Agent's moves away from the center results in positive values).}}}{119}{figure.4.13}%
-\contentsline {figure}{\numberline {4.14}{\ignorespaces Schematic of the per-layer R-STDP weight update. The eligibility trace is calculated based on the firing rate of the neurons in layer \(\ell \) and \(\ell +1\). The per-neuron reward (\(r_q\)) is computed based on the layer-specific reward functions. The weight update is obtained by multiplying the eligibility trace by the per-neuron reward.}}{127}{figure.4.14}%
-\contentsline {figure}{\numberline {4.15}{\ignorespaces Effect of the \ac {alm} on visual perception. The ALM significantly enhances the visibility of proximal agents in the DVS input, improving the network's ability to detect and differentiate them from the payload.}}{131}{figure.4.15}%
-\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Simulation of the environment with Agents' \ac {alm} turned off, showing baseline brightness distribution.}}}{131}{figure.4.15}%
-\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Simulation of the environment with Agents' \ac {alm} turned on, illustrating enhanced visibility and separation of each agent.}}}{131}{figure.4.15}%
-\contentsline {figure}{\numberline {4.16}{\ignorespaces Attention maps illustrating the effect of the \ac {alm} on visual focus. The \ac {alm} enables dynamic shifting of attention from the payload to the proximal agent by generating distinct DVS event patterns. Colorbar values indicate the normalized attention strength, where brighter regions correspond to locations receiving stronger attention under the Gaussian-weighted mapping. }}{132}{figure.4.16}%
-\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Attention map when the Agents' \ac {alm} is off, highlighting the detected payload position.}}}{132}{figure.4.16}%
-\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Attention map when the Agents' \ac {alm} is on, emphasizing the detected proximal agent’s position.}}}{132}{figure.4.16}%
-\contentsline {figure}{\numberline {4.17}{\ignorespaces SNN structure in the first hidden layer: (a) with Agents' \ac {alm} turned off, focusing on payload detection; (b) with Agents' \ac {alm} turned on, emphasizing proximal agent detection. Inactive neuron repositories and the connections are shown in gray. The dotted lines are also inactive inhibitory connections.}}{133}{figure.4.17}%
-\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {}}}{133}{figure.4.17}%
-\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {}}}{133}{figure.4.17}%
-\contentsline {figure}{\numberline {4.18}{\ignorespaces Detector repository activity during initial training with \ac {alm} off. The payload detector remains active, while the proximal agent detector is suppressed due to inhibitory competition.}}{134}{figure.4.18}%
-\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Activity of the Payload detector repository during initial training phases with the Agents' \ac {alm} turned off.}}}{134}{figure.4.18}%
-\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Activity of the proximal agent detector repository during initial training phases with the Agents' \ac {alm} turned off.}}}{134}{figure.4.18}%
-\contentsline {figure}{\numberline {4.19}{\ignorespaces Detector repository activity during initial training with \ac {alm} on. The proximal agent detector becomes active, while the payload detector is suppressed by ALM-induced inhibition.}}{135}{figure.4.19}%
-\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Activity of the Payload detector repository during initial training phases with the Agents' \ac {alm} turned on.}}}{135}{figure.4.19}%
-\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Activity of the proximal agent detector repository during initial training phases with the Agents' \ac {alm} turned on.}}}{135}{figure.4.19}%
-\contentsline {figure}{\numberline {4.20}{\ignorespaces Detector repository activity after learning convergence with \ac {alm} off. The payload detector shows strong, localized activity, while the proximal agent detector remains inactive.}}{136}{figure.4.20}%
-\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Activity of the Payload detector repository after learning convergence with the Agents' \ac {alm} turned off.}}}{136}{figure.4.20}%
-\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Activity of the proximal agent detector repository after learning convergence with the Agents' \ac {alm} turned off.}}}{136}{figure.4.20}%
-\contentsline {figure}{\numberline {4.21}{\ignorespaces Detector repository activity after learning convergence with \ac {alm} on. The proximal agent detector shows strong, localized activity, while the payload detector remains inactive.}}{137}{figure.4.21}%
-\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Activity of the Payload detector repository after learning convergence with the Agents' \ac {alm} turned on.}}}{137}{figure.4.21}%
-\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Activity of the proximal agent detector repository after learning convergence with the Agents' \ac {alm} turned on.}}}{137}{figure.4.21}%
-\contentsline {figure}{\numberline {4.22}{\ignorespaces Second hidden layer activity for the formation and docking phases for Agent 1: (a) FFM activity 135 degree that matches the LOS of the Payload regarding the Agent 1 and (b) CDM activity shows 45 degree LOS toward the docking point.}}{138}{figure.4.22}%
-\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Initial iterations of the formation phase.}}}{138}{figure.4.22}%
-\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Initial iterations of the docking phase}}}{138}{figure.4.22}%
-\contentsline {figure}{\numberline {4.23}{\ignorespaces Hidden layer 2 and output layer activity during the formation phase.}}{139}{figure.4.23}%
-\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Commanded velocity generated by the Hidden layer 2 activity during the formation phase vs the actual agent's LOS regarding the payload.}}}{139}{figure.4.23}%
-\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Output layer activity during formation phase}}}{139}{figure.4.23}%
-\contentsline {figure}{\numberline {4.24}{\ignorespaces Hidden layer 2 and output layer activity during the docking phase.}}{140}{figure.4.24}%
-\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Hidden layer 2 activity during docking phase}}}{140}{figure.4.24}%
-\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Output layer activity during docking phase}}}{140}{figure.4.24}%
-\contentsline {figure}{\numberline {4.25}{\ignorespaces Distances during time.}}{141}{figure.4.25}%
-\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Agent 1's distance from the payload during formation phase}}}{141}{figure.4.25}%
-\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Payload's distance from the docking center}}}{141}{figure.4.25}%
-\contentsline {figure}{\numberline {4.26}{\ignorespaces Reward profile during the docking phase}}{142}{figure.4.26}%
-\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Formation phase}}}{142}{figure.4.26}%
-\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Docking phase}}}{142}{figure.4.26}%
-\contentsline {figure}{\numberline {4.27}{\ignorespaces Views during the formation phase at different time steps.}}{143}{figure.4.27}%
-\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {View From the Hub Center at 5 seconds}}}{143}{figure.4.27}%
-\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {DVS View From the Hub Center at 5 seconds}}}{143}{figure.4.27}%
-\contentsline {subfigure}{\numberline {(c)}{\ignorespaces {View From the Hub Center at 15 seconds}}}{143}{figure.4.27}%
-\contentsline {subfigure}{\numberline {(d)}{\ignorespaces {DVS View From the Hub Center at 15 seconds}}}{143}{figure.4.27}%
-\contentsline {figure}{\numberline {4.28}{\ignorespaces Views during the docking phase at different time steps.}}{144}{figure.4.28}%
-\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {View From the Hub Center at 30 seconds}}}{144}{figure.4.28}%
-\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {DVS View From the Hub Center at 30 seconds}}}{144}{figure.4.28}%
-\contentsline {subfigure}{\numberline {(c)}{\ignorespaces {View From the Hub Center at 60 seconds}}}{144}{figure.4.28}%
-\contentsline {subfigure}{\numberline {(d)}{\ignorespaces {DVS View From the Hub Center at 60 seconds}}}{144}{figure.4.28}%
-\contentsline {figure}{\numberline {4.29}{\ignorespaces Views during the final approach and soft capture.}}{145}{figure.4.29}%
-\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {View From the Hub Center at 99 seconds}}}{145}{figure.4.29}%
-\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {DVS View From the Hub Center at 99 seconds}}}{145}{figure.4.29}%
-\contentsline {subfigure}{\numberline {(c)}{\ignorespaces {View From the Hub Center at docking completion}}}{145}{figure.4.29}%
-\contentsline {subfigure}{\numberline {(d)}{\ignorespaces {DVS View From the Hub Center at docking completion}}}{145}{figure.4.29}%
+\contentsline {figure}{\numberline {4.1}{\ignorespaces 3D schematic of the multi-agent docking mission environment. Multiple agents work collaboratively to push a central Payload towards a \ac {scs} for docking alignment.}}{81}{figure.4.1}%
+\contentsline {figure}{\numberline {4.2}{\ignorespaces 2D representation of robots performing docking mission. Each agent pushes the Payload towards the \ac {scs} to align them together. The \ac {scs} and agents are equipped with a \ac {dvs} that streams high-frequency data for the proximity mission.}}{82}{figure.4.2}%
+\contentsline {figure}{\numberline {4.3}{\ignorespaces Deep \ac {snn} Architecture with entropy-based adaptive pooling, multi-repository hidden layers, and biologically-inspired inhibitory and excitatory synapses. Purple, red, and blue arrows denote excitatory and yellow arrows denote inhibitory pathways.}}{91}{figure.4.3}%
+\contentsline {figure}{\numberline {4.4}{\ignorespaces Structured First Hidden Layer Architecture with Payload, and Agent Perception Repositories for Visual Perception.}}{96}{figure.4.4}%
+\contentsline {figure}{\numberline {4.5}{\ignorespaces Structured Second Hidden Layer architecture showing the Formation-Flying (\ac {ffm}), Collaborative Docking (\ac {cdm}), Mission Phase Control (\ac {dpd}), and Regulatory Formation Phase (\ac {fpd}) repositories interconnected through inhibitory (yellow) and excitatory (purple) synapses. External stimulation from contact sensors triggers mission-phase transitions.}}{99}{figure.4.5}%
+\contentsline {figure}{\numberline {4.6}{\ignorespaces Output Layer Architecture with Lateral Inhibition between Opposing Direction Neurons to Enforce Winner-Take-All Dynamics within Each Control Axis.}}{101}{figure.4.6}%
+\contentsline {figure}{\numberline {4.7}{\ignorespaces Computation of the input activity matrix (\(A\)) from the time-averaged spiking activity of the input layer neurons.}}{104}{figure.4.7}%
+\contentsline {figure}{\numberline {4.8}{\ignorespaces Reward function pipeline for the Payload. The pipeline illustrates the raw \ac {dvs} events, the attention-based map, the normalized hidden layer activity during the initial training phase, and the reward signal calculated as the difference between the attention map and the hidden layer activity (\(r_q\)).}}{106}{figure.4.8}%
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Raw \ac {dvs} Events of the payload}}}{106}{figure.4.8}%
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Attention Map (\(\mathcal {A}^{\text {Attention}}\))}}}{106}{figure.4.8}%
+\contentsline {subfigure}{\numberline {(c)}{\ignorespaces {Hidden Layer Activity (\(A_{1}^{\text {hidden}}\))}}}{106}{figure.4.8}%
+\contentsline {subfigure}{\numberline {(d)}{\ignorespaces {Post-neuron reward (\(r\))}}}{106}{figure.4.8}%
+\contentsline {figure}{\numberline {4.9}{\ignorespaces Reward function pipeline for the agents. This pipeline demonstrates the raw \ac {dvs} events for multiple agents, the attention map, the hidden layer’s normalized activity, and the modulation signal computed for reward.}}{107}{figure.4.9}%
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Raw \ac {dvs} Events of the agents}}}{107}{figure.4.9}%
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Attention Map (\(\mathcal {A}^{\text {Attention}}\))}}}{107}{figure.4.9}%
+\contentsline {subfigure}{\numberline {(c)}{\ignorespaces {Hidden Layer Activity (\(A_{1}^{\text {hidden}}\))}}}{107}{figure.4.9}%
+\contentsline {subfigure}{\numberline {(d)}{\ignorespaces {Post-neuron reward (\(r\))}}}{107}{figure.4.9}%
+\contentsline {figure}{\numberline {4.10}{\ignorespaces Numerical example setup for Gaussian attention computation in the first hidden layer. (a) shows the input activity matrix representing time-averaged firing rates from the input layer. (b) illustrates the spatial arrangement of hidden-layer neurons, each serving as a query point for attention calculation.}}{109}{figure.4.10}%
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Input activity matrix $(A^{\mathrm {input}})$ for numerical example of Gaussian attention computation.}}}{109}{figure.4.10}%
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Hidden-layer centers of attention (queries) for numerical example of Gaussian attention computation.}}}{109}{figure.4.10}%
+\contentsline {figure}{\numberline {4.11}{\ignorespaces Attention weight computation for hidden neuron \( q = (2,2) \) at position \( (x_q, y_q) = (-0.333, -0.333) \). (a) shows the Gaussian weight map \( G_q \) centered at the hidden neuron’s location. (b) illustrates the element-wise product of the weight map with the input activity matrix, highlighting the contributions to the attention calculation.}}{111}{figure.4.11}%
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Gaussian weight map $(G_q)$.}}}{111}{figure.4.11}%
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Weighted input activity $(G_q \odot A^{\mathrm {input}})$.}}}{111}{figure.4.11}%
+\contentsline {figure}{\numberline {4.12}{\ignorespaces The DVS event image is masked by the upsampled binary detection mask derived from the first hidden layer’s output, isolating events corresponding to the active object (Payload or agent).}}{117}{figure.4.12}%
+\contentsline {figure}{\numberline {4.13}{\ignorespaces The oscillatory Gaussian envelope used to compute the motion direction signal $\mathcal {H}$ for reward modulation in the second hidden layer. }}{118}{figure.4.13}%
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {The oscillatory Gaussian envelope when the \ac {alm} is off (Payload's moves away from the center results in negative values).}}}{118}{figure.4.13}%
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {The oscillatory Gaussian envelope when the agent \ac {alm} is on (Agent's moves away from the center results in positive values).}}}{118}{figure.4.13}%
+\contentsline {figure}{\numberline {4.14}{\ignorespaces Schematic of the per-layer R-STDP weight update. The eligibility trace is calculated based on the firing rate of the neurons in layer \(\ell \) and \(\ell +1\). The per-neuron reward (\(r_q\)) is computed based on the layer-specific reward functions. The weight update is obtained by multiplying the eligibility trace by the per-neuron reward.}}{126}{figure.4.14}%
+\contentsline {figure}{\numberline {4.15}{\ignorespaces Effect of the \ac {alm} on visual perception. The ALM significantly enhances the visibility of proximal agents in the DVS input, improving the network's ability to detect and differentiate them from the payload.}}{130}{figure.4.15}%
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Simulation of the environment with Agents' \ac {alm} turned off, showing baseline brightness distribution.}}}{130}{figure.4.15}%
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Simulation of the environment with Agents' \ac {alm} turned on, illustrating enhanced visibility and separation of each agent.}}}{130}{figure.4.15}%
+\contentsline {figure}{\numberline {4.16}{\ignorespaces Attention maps illustrating the effect of the \ac {alm} on visual focus. The \ac {alm} enables dynamic shifting of attention from the payload to the proximal agent by generating distinct DVS event patterns. Colorbar values indicate the normalized attention strength, where brighter regions correspond to locations receiving stronger attention under the Gaussian-weighted mapping. }}{131}{figure.4.16}%
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Attention map when the Agents' \ac {alm} is off, highlighting the detected payload position.}}}{131}{figure.4.16}%
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Attention map when the Agents' \ac {alm} is on, emphasizing the detected proximal agent’s position.}}}{131}{figure.4.16}%
+\contentsline {figure}{\numberline {4.17}{\ignorespaces SNN structure in the first hidden layer: (a) with Agents' \ac {alm} turned off, focusing on payload detection; (b) with Agents' \ac {alm} turned on, emphasizing proximal agent detection. Inactive neuron repositories and the connections are shown in gray. The dotted lines are also inactive inhibitory connections.}}{132}{figure.4.17}%
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {}}}{132}{figure.4.17}%
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {}}}{132}{figure.4.17}%
+\contentsline {figure}{\numberline {4.18}{\ignorespaces Detector repository activity during initial training with \ac {alm} off. The payload detector remains active, while the proximal agent detector is suppressed due to inhibitory competition.}}{133}{figure.4.18}%
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Activity of the Payload detector repository during initial training phases with the Agents' \ac {alm} turned off.}}}{133}{figure.4.18}%
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Activity of the proximal agent detector repository during initial training phases with the Agents' \ac {alm} turned off.}}}{133}{figure.4.18}%
+\contentsline {figure}{\numberline {4.19}{\ignorespaces Detector repository activity during initial training with \ac {alm} on. The proximal agent detector becomes active, while the payload detector is suppressed by ALM-induced inhibition.}}{134}{figure.4.19}%
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Activity of the Payload detector repository during initial training phases with the Agents' \ac {alm} turned on.}}}{134}{figure.4.19}%
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Activity of the proximal agent detector repository during initial training phases with the Agents' \ac {alm} turned on.}}}{134}{figure.4.19}%
+\contentsline {figure}{\numberline {4.20}{\ignorespaces Detector repository activity after learning convergence with \ac {alm} off. The payload detector shows strong, localized activity, while the proximal agent detector remains inactive.}}{135}{figure.4.20}%
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Activity of the Payload detector repository after learning convergence with the Agents' \ac {alm} turned off.}}}{135}{figure.4.20}%
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Activity of the proximal agent detector repository after learning convergence with the Agents' \ac {alm} turned off.}}}{135}{figure.4.20}%
+\contentsline {figure}{\numberline {4.21}{\ignorespaces Detector repository activity after learning convergence with \ac {alm} on. The proximal agent detector shows strong, localized activity, while the payload detector remains inactive.}}{136}{figure.4.21}%
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Activity of the Payload detector repository after learning convergence with the Agents' \ac {alm} turned on.}}}{136}{figure.4.21}%
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Activity of the proximal agent detector repository after learning convergence with the Agents' \ac {alm} turned on.}}}{136}{figure.4.21}%
+\contentsline {figure}{\numberline {4.22}{\ignorespaces Second hidden layer activity for the formation and docking phases for Agent 1: (a) FFM activity 135 degree that matches the LOS of the Payload regarding the Agent 1 and (b) CDM activity shows 45 degree LOS toward the docking point.}}{137}{figure.4.22}%
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Initial iterations of the formation phase.}}}{137}{figure.4.22}%
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Initial iterations of the docking phase}}}{137}{figure.4.22}%
+\contentsline {figure}{\numberline {4.23}{\ignorespaces Hidden layer 2 and output layer activity during the formation phase.}}{138}{figure.4.23}%
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Commanded velocity generated by the Hidden layer 2 activity during the formation phase vs the actual agent's LOS regarding the payload.}}}{138}{figure.4.23}%
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Output layer activity during formation phase}}}{138}{figure.4.23}%
+\contentsline {figure}{\numberline {4.24}{\ignorespaces Hidden layer 2 and output layer activity during the docking phase.}}{139}{figure.4.24}%
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Hidden layer 2 activity during docking phase}}}{139}{figure.4.24}%
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Output layer activity during docking phase}}}{139}{figure.4.24}%
+\contentsline {figure}{\numberline {4.25}{\ignorespaces Distances during time.}}{140}{figure.4.25}%
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Agent 1's distance from the payload during formation phase}}}{140}{figure.4.25}%
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Payload's distance from the docking center}}}{140}{figure.4.25}%
+\contentsline {figure}{\numberline {4.26}{\ignorespaces Reward profile during the docking phase}}{141}{figure.4.26}%
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Formation phase}}}{141}{figure.4.26}%
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Docking phase}}}{141}{figure.4.26}%
+\contentsline {figure}{\numberline {4.27}{\ignorespaces Views during the formation phase at different time steps.}}{142}{figure.4.27}%
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {View From the Hub Center at 5 seconds}}}{142}{figure.4.27}%
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {DVS View From the Hub Center at 5 seconds}}}{142}{figure.4.27}%
+\contentsline {subfigure}{\numberline {(c)}{\ignorespaces {View From the Hub Center at 15 seconds}}}{142}{figure.4.27}%
+\contentsline {subfigure}{\numberline {(d)}{\ignorespaces {DVS View From the Hub Center at 15 seconds}}}{142}{figure.4.27}%
+\contentsline {figure}{\numberline {4.28}{\ignorespaces Views during the docking phase at different time steps.}}{143}{figure.4.28}%
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {View From the Hub Center at 30 seconds}}}{143}{figure.4.28}%
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {DVS View From the Hub Center at 30 seconds}}}{143}{figure.4.28}%
+\contentsline {subfigure}{\numberline {(c)}{\ignorespaces {View From the Hub Center at 60 seconds}}}{143}{figure.4.28}%
+\contentsline {subfigure}{\numberline {(d)}{\ignorespaces {DVS View From the Hub Center at 60 seconds}}}{143}{figure.4.28}%
+\contentsline {figure}{\numberline {4.29}{\ignorespaces Views during the final approach and soft capture.}}{144}{figure.4.29}%
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {View From the Hub Center at 99 seconds}}}{144}{figure.4.29}%
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {DVS View From the Hub Center at 99 seconds}}}{144}{figure.4.29}%
+\contentsline {subfigure}{\numberline {(c)}{\ignorespaces {View From the Hub Center at docking completion}}}{144}{figure.4.29}%
+\contentsline {subfigure}{\numberline {(d)}{\ignorespaces {DVS View From the Hub Center at docking completion}}}{144}{figure.4.29}%
 \addvspace {10\p@ }

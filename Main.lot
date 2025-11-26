@@ -2,14 +2,14 @@
 \addvspace {10\p@ }
 \contentsline {table}{\numberline {1.1}{\ignorespaces Spike Response Function of the neurons in an \ac {snn}.}}{4}{table.1.1}%
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {2.1}{\ignorespaces Parameter values for LIF neuron model \cite {Ch_1_R10}}}{35}{table.2.1}%
-\contentsline {table}{\numberline {2.2}{\ignorespaces Parameter values for \ac {stdp}}}{36}{table.2.2}%
+\contentsline {table}{\numberline {2.1}{\ignorespaces Parameter values for LIF neuron model \cite {Ch_1_R10}}}{34}{table.2.1}%
+\contentsline {table}{\numberline {2.2}{\ignorespaces Parameter values for \ac {stdp}}}{35}{table.2.2}%
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {3.1}{\ignorespaces Parameter values for \ac {lif} neuron model \cite {Ch_1_R10}}}{64}{table.3.1}%
-\contentsline {table}{\numberline {3.2}{\ignorespaces Simulation Parameters}}{65}{table.3.2}%
-\contentsline {table}{\numberline {3.3}{\ignorespaces Comparative Performance Analysis of the Proposed Aggregation Algorithm+\ac {RCSE} and \ac {RCSE}}}{75}{table.3.3}%
+\contentsline {table}{\numberline {3.1}{\ignorespaces Parameter values for \ac {lif} neuron model \cite {Ch_1_R10}}}{63}{table.3.1}%
+\contentsline {table}{\numberline {3.2}{\ignorespaces Simulation Parameters}}{64}{table.3.2}%
+\contentsline {table}{\numberline {3.3}{\ignorespaces Comparative Performance Analysis of the Proposed Aggregation Algorithm+\ac {RCSE} and \ac {RCSE}}}{74}{table.3.3}%
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {4.1}{\ignorespaces Physical parameters of the Payload and agents used in the docking simulations.}}{128}{table.4.1}%
-\contentsline {table}{\numberline {4.2}{\ignorespaces Neuron layer configurations with full descriptions of each functional subgroup.}}{129}{table.4.2}%
-\contentsline {table}{\numberline {4.3}{\ignorespaces Layer-wise Learning Parameters}}{130}{table.4.3}%
+\contentsline {table}{\numberline {4.1}{\ignorespaces Physical parameters of the Payload and agents used in the docking simulations.}}{127}{table.4.1}%
+\contentsline {table}{\numberline {4.2}{\ignorespaces Neuron layer configurations with full descriptions of each functional subgroup.}}{128}{table.4.2}%
+\contentsline {table}{\numberline {4.3}{\ignorespaces Layer-wise Learning Parameters}}{129}{table.4.3}%
 \addvspace {10\p@ }

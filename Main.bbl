@@ -22,33 +22,6 @@ J.~L. Lobo, J.~Del~Ser, A.~Bifet, and N.~Kasabov, ``Spiking neural networks and
   online learning: An overview and perspectives,'' {\em Neural Networks},
   vol.~121, pp.~88--100, 2020.
 
-\bibitem{Ch_1_R6}
-S.~Dora and N.~Kasabov, ``Spiking neural networks for computational
-  intelligence: an overview,'' {\em Big Data and Cognitive Computing}, vol.~5,
-  no.~4, 2021.
-
-\bibitem{Ch_1_R7}
-K.~Xie, Z.~Zhang, B.~Li, J.~Kang, D.~Niyato, S.~Xie, and Y.~Wu, ``Efficient
-  federated learning with spike neural networks for traffic sign recognition,''
-  {\em IEEE Transactions on Vehicular Technology}, vol.~71, no.~9,
-  pp.~9980--9992, 2022.
-
-\bibitem{Ch_1_R8}
-W.~J. Yun, Y.~Kwak, H.~Baek, S.~Jung, M.~Ji, M.~Bennis, J.~Park, and J.~Kim,
-  ``Slimfl: Federated learning with superposition coding over slimmable neural
-  networks,'' {\em IEEE/ACM Transactions on Networking}, 2023.
-
-\bibitem{Ch_1_R9}
-H.~Yang, K.-Y. Lam, L.~Xiao, Z.~Xiong, H.~Hu, D.~Niyato, and H.~Vincent~Poor,
-  ``Lead federated neuromorphic learning for wireless edge artificial
-  intelligence,'' {\em Nature communications}, vol.~13, no.~1, pp.~42--69,
-  2022.
-
-\bibitem{Ch_1_R10}
-A.~M. AbdelAty, M.~E. Fouda, and A.~M. Eltawil, ``On numerical approximations
-  of fractional-order spiking neuron models,'' {\em Communications in Nonlinear
-  Science and Numerical Simulation}, vol.~105, 2022.
-
 \bibitem{Ch_1_R13}
 Y.-H. Liu and X.-J. Wang, ``Spike-frequency adaptation of a generalized leaky
   integrate-and-fire model neuron,'' {\em Journal of computational
@@ -499,6 +472,12 @@ Z.~Yang, M.~Chen, W.~Saad, C.~S. Hong, and M.~Shikh-Bahaei, ``Energy efficient
   Transactions on Wireless Communications}, vol.~20, no.~3, pp.~1935--1949,
   2020.
 
+\bibitem{Ch_1_R9}
+H.~Yang, K.-Y. Lam, L.~Xiao, Z.~Xiong, H.~Hu, D.~Niyato, and H.~Vincent~Poor,
+  ``Lead federated neuromorphic learning for wireless edge artificial
+  intelligence,'' {\em Nature communications}, vol.~13, no.~1, pp.~42--69,
+  2022.
+
 \bibitem{Ch2_R49}
 A.~B. Mansour, G.~Carenini, A.~Duplessis, and D.~Naccache, ``Federated learning
   aggregation: New robust algorithms with guarantees,'' in {\em 2022 21st IEEE
@@ -554,6 +533,11 @@ A.~D. Bird, P.~Jedlicka, and H.~Cuntz, ``Dendritic normalisation improves
 J.~L. Lobo, I.~La{\~n}a, J.~Del~Ser, M.~N. Bilbao, and N.~Kasabov, ``Evolving
   spiking neural networks for online learning over drifting data streams,''
   {\em Neural Networks}, vol.~108, pp.~1--19, 2018.
+
+\bibitem{Ch_1_R10}
+A.~M. AbdelAty, M.~E. Fouda, and A.~M. Eltawil, ``On numerical approximations
+  of fractional-order spiking neuron models,'' {\em Communications in Nonlinear
+  Science and Numerical Simulation}, vol.~105, 2022.
 
 \bibitem{NS}
 M.~Tayefe~Ramezanlou, H.~Schwartz, I.~Lambadaris, M.~Barbeau, and S.~H.~R.
