@@ -1,7 +1,6 @@
 \acswitchoff 
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {1.1}{\ignorespaces Schematic diagram to illustrate distributed learning and \ac {fl} \cite {Ch_1_R1}.}}{1}{figure.1.1}%
-\contentsline {figure}{\numberline {1.2}{\ignorespaces Simple model of a \ac {snn}. The spike pattern shows that the neurons spike whenever the voltage of the neuron reaches a threshold.}}{4}{figure.1.2}%
+\contentsline {figure}{\numberline {1.1}{\ignorespaces Simple model of a \ac {snn}. The spike pattern shows that the neurons spike whenever the voltage of the neuron reaches a threshold.}}{4}{figure.1.1}%
 \addvspace {10\p@ }
 \contentsline {figure}{\numberline {2.1}{\ignorespaces Active target defense game with three agents (LOS angles are shown for both agents).}}{26}{figure.2.1}%
 \contentsline {figure}{\numberline {2.2}{\ignorespaces Two \ac {snn}s simultaneously play and control the invader and defender. Each agent uses the LOS angle and relative velocities for training.}}{26}{figure.2.2}%
@@ -68,52 +67,52 @@
 \contentsline {figure}{\numberline {4.15}{\ignorespaces Effect of the \ac {alm} on visual perception. The ALM significantly enhances the visibility of proximal agents in the DVS input, improving the network's ability to detect and differentiate them from the payload.}}{131}{figure.4.15}%
 \contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Simulation of the environment with Agents' \ac {alm} turned off, showing baseline brightness distribution.}}}{131}{figure.4.15}%
 \contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Simulation of the environment with Agents' \ac {alm} turned on, illustrating enhanced visibility and separation of each agent.}}}{131}{figure.4.15}%
-\contentsline {figure}{\numberline {4.16}{\ignorespaces Attention maps illustrating the effect of the \ac {alm} on visual focus. The \ac {alm} enables dynamic shifting of attention from the payload to the proximal agent by generating distinct DVS event patterns. Colorbar values indicate the normalized attention strength, where brighter regions correspond to locations receiving stronger attention under the Gaussian-weighted mapping. }}{133}{figure.4.16}%
-\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Attention map when the Agents' \ac {alm} is off, highlighting the detected payload position.}}}{133}{figure.4.16}%
-\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Attention map when the Agents' \ac {alm} is on, emphasizing the detected proximal agent’s position.}}}{133}{figure.4.16}%
-\contentsline {figure}{\numberline {4.17}{\ignorespaces SNN structure in the first hidden layer: (a) with Agents' \ac {alm} turned off, focusing on payload detection; (b) with Agents' \ac {alm} turned on, emphasizing proximal agent detection. Inactive neuron repositories and the connections are shown in gray. The dotted lines are also inactive inhibitory connections.}}{135}{figure.4.17}%
-\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {}}}{135}{figure.4.17}%
-\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {}}}{135}{figure.4.17}%
-\contentsline {figure}{\numberline {4.18}{\ignorespaces Detector repository activity during initial training with \ac {alm} off. The payload detector remains active, while the proximal agent detector is suppressed due to inhibitory competition.}}{137}{figure.4.18}%
-\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Activity of the Payload detector repository during initial training phases with the Agents' \ac {alm} turned off.}}}{137}{figure.4.18}%
-\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Activity of the proximal agent detector repository during initial training phases with the Agents' \ac {alm} turned off.}}}{137}{figure.4.18}%
-\contentsline {figure}{\numberline {4.19}{\ignorespaces Detector repository activity during initial training with \ac {alm} on. The proximal agent detector becomes active, while the payload detector is suppressed by ALM-induced inhibition.}}{139}{figure.4.19}%
-\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Activity of the Payload detector repository during initial training phases with the Agents' \ac {alm} turned on.}}}{139}{figure.4.19}%
-\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Activity of the proximal agent detector repository during initial training phases with the Agents' \ac {alm} turned on.}}}{139}{figure.4.19}%
-\contentsline {figure}{\numberline {4.20}{\ignorespaces Detector repository activity after learning convergence with \ac {alm} off. The payload detector shows strong, localized activity, while the proximal agent detector remains inactive.}}{141}{figure.4.20}%
-\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Activity of the Payload detector repository after learning convergence with the Agents' \ac {alm} turned off.}}}{141}{figure.4.20}%
-\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Activity of the proximal agent detector repository after learning convergence with the Agents' \ac {alm} turned off.}}}{141}{figure.4.20}%
-\contentsline {figure}{\numberline {4.21}{\ignorespaces Detector repository activity after learning convergence with \ac {alm} on. The proximal agent detector shows strong, localized activity, while the payload detector remains inactive.}}{143}{figure.4.21}%
-\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Activity of the Payload detector repository after learning convergence with the Agents' \ac {alm} turned on.}}}{143}{figure.4.21}%
-\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Activity of the proximal agent detector repository after learning convergence with the Agents' \ac {alm} turned on.}}}{143}{figure.4.21}%
-\contentsline {figure}{\numberline {4.22}{\ignorespaces Second hidden layer activity for the formation and docking phases for Agent 1: (a) FFM activity 135 degree that matches the LOS of the Payload regarding the Agent 1 and (b) CDM activity shows 45 degree LOS toward the docking point.}}{145}{figure.4.22}%
-\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Initial iterations of the formation phase.}}}{145}{figure.4.22}%
-\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Initial iterations of the docking phase}}}{145}{figure.4.22}%
-\contentsline {figure}{\numberline {4.23}{\ignorespaces Hidden layer 2 and output layer activity during the formation phase.}}{146}{figure.4.23}%
-\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Commanded velocity generated by the Hidden layer 2 activity during the formation phase vs the actual agent's LOS regarding the payload.}}}{146}{figure.4.23}%
-\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Output layer activity during formation phase}}}{146}{figure.4.23}%
-\contentsline {figure}{\numberline {4.24}{\ignorespaces Hidden layer 2 and output layer activity during the docking phase.}}{148}{figure.4.24}%
-\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Hidden layer 2 activity during docking phase}}}{148}{figure.4.24}%
-\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Output layer activity during docking phase}}}{148}{figure.4.24}%
-\contentsline {figure}{\numberline {4.25}{\ignorespaces Distances during time.}}{149}{figure.4.25}%
-\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Agent 1's distance from the payload during formation phase}}}{149}{figure.4.25}%
-\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Payload's distance from the docking center}}}{149}{figure.4.25}%
-\contentsline {figure}{\numberline {4.26}{\ignorespaces Reward profile during the docking phase}}{150}{figure.4.26}%
-\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Formation phase}}}{150}{figure.4.26}%
-\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Docking phase}}}{150}{figure.4.26}%
-\contentsline {figure}{\numberline {4.27}{\ignorespaces Views during the formation phase at different time steps.}}{152}{figure.4.27}%
-\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {View From the Hub Center at 5 seconds}}}{152}{figure.4.27}%
-\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {DVS View From the Hub Center at 5 seconds}}}{152}{figure.4.27}%
-\contentsline {subfigure}{\numberline {(c)}{\ignorespaces {View From the Hub Center at 15 seconds}}}{152}{figure.4.27}%
-\contentsline {subfigure}{\numberline {(d)}{\ignorespaces {DVS View From the Hub Center at 15 seconds}}}{152}{figure.4.27}%
-\contentsline {figure}{\numberline {4.28}{\ignorespaces Views during the docking phase at different time steps.}}{154}{figure.4.28}%
-\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {View From the Hub Center at 30 seconds}}}{154}{figure.4.28}%
-\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {DVS View From the Hub Center at 30 seconds}}}{154}{figure.4.28}%
-\contentsline {subfigure}{\numberline {(c)}{\ignorespaces {View From the Hub Center at 60 seconds}}}{154}{figure.4.28}%
-\contentsline {subfigure}{\numberline {(d)}{\ignorespaces {DVS View From the Hub Center at 60 seconds}}}{154}{figure.4.28}%
-\contentsline {figure}{\numberline {4.29}{\ignorespaces Views during the final approach and soft capture.}}{156}{figure.4.29}%
-\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {View From the Hub Center at 99 seconds}}}{156}{figure.4.29}%
-\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {DVS View From the Hub Center at 99 seconds}}}{156}{figure.4.29}%
-\contentsline {subfigure}{\numberline {(c)}{\ignorespaces {View From the Hub Center at docking completion}}}{156}{figure.4.29}%
-\contentsline {subfigure}{\numberline {(d)}{\ignorespaces {DVS View From the Hub Center at docking completion}}}{156}{figure.4.29}%
+\contentsline {figure}{\numberline {4.16}{\ignorespaces Attention maps illustrating the effect of the \ac {alm} on visual focus. The \ac {alm} enables dynamic shifting of attention from the payload to the proximal agent by generating distinct DVS event patterns. Colorbar values indicate the normalized attention strength, where brighter regions correspond to locations receiving stronger attention under the Gaussian-weighted mapping. }}{132}{figure.4.16}%
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Attention map when the Agents' \ac {alm} is off, highlighting the detected payload position.}}}{132}{figure.4.16}%
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Attention map when the Agents' \ac {alm} is on, emphasizing the detected proximal agent’s position.}}}{132}{figure.4.16}%
+\contentsline {figure}{\numberline {4.17}{\ignorespaces SNN structure in the first hidden layer: (a) with Agents' \ac {alm} turned off, focusing on payload detection; (b) with Agents' \ac {alm} turned on, emphasizing proximal agent detection. Inactive neuron repositories and the connections are shown in gray. The dotted lines are also inactive inhibitory connections.}}{133}{figure.4.17}%
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {}}}{133}{figure.4.17}%
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {}}}{133}{figure.4.17}%
+\contentsline {figure}{\numberline {4.18}{\ignorespaces Detector repository activity during initial training with \ac {alm} off. The payload detector remains active, while the proximal agent detector is suppressed due to inhibitory competition.}}{134}{figure.4.18}%
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Activity of the Payload detector repository during initial training phases with the Agents' \ac {alm} turned off.}}}{134}{figure.4.18}%
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Activity of the proximal agent detector repository during initial training phases with the Agents' \ac {alm} turned off.}}}{134}{figure.4.18}%
+\contentsline {figure}{\numberline {4.19}{\ignorespaces Detector repository activity during initial training with \ac {alm} on. The proximal agent detector becomes active, while the payload detector is suppressed by ALM-induced inhibition.}}{135}{figure.4.19}%
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Activity of the Payload detector repository during initial training phases with the Agents' \ac {alm} turned on.}}}{135}{figure.4.19}%
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Activity of the proximal agent detector repository during initial training phases with the Agents' \ac {alm} turned on.}}}{135}{figure.4.19}%
+\contentsline {figure}{\numberline {4.20}{\ignorespaces Detector repository activity after learning convergence with \ac {alm} off. The payload detector shows strong, localized activity, while the proximal agent detector remains inactive.}}{136}{figure.4.20}%
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Activity of the Payload detector repository after learning convergence with the Agents' \ac {alm} turned off.}}}{136}{figure.4.20}%
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Activity of the proximal agent detector repository after learning convergence with the Agents' \ac {alm} turned off.}}}{136}{figure.4.20}%
+\contentsline {figure}{\numberline {4.21}{\ignorespaces Detector repository activity after learning convergence with \ac {alm} on. The proximal agent detector shows strong, localized activity, while the payload detector remains inactive.}}{137}{figure.4.21}%
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Activity of the Payload detector repository after learning convergence with the Agents' \ac {alm} turned on.}}}{137}{figure.4.21}%
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Activity of the proximal agent detector repository after learning convergence with the Agents' \ac {alm} turned on.}}}{137}{figure.4.21}%
+\contentsline {figure}{\numberline {4.22}{\ignorespaces Second hidden layer activity for the formation and docking phases for Agent 1: (a) FFM activity 135 degree that matches the LOS of the Payload regarding the Agent 1 and (b) CDM activity shows 45 degree LOS toward the docking point.}}{138}{figure.4.22}%
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Initial iterations of the formation phase.}}}{138}{figure.4.22}%
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Initial iterations of the docking phase}}}{138}{figure.4.22}%
+\contentsline {figure}{\numberline {4.23}{\ignorespaces Hidden layer 2 and output layer activity during the formation phase.}}{139}{figure.4.23}%
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Commanded velocity generated by the Hidden layer 2 activity during the formation phase vs the actual agent's LOS regarding the payload.}}}{139}{figure.4.23}%
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Output layer activity during formation phase}}}{139}{figure.4.23}%
+\contentsline {figure}{\numberline {4.24}{\ignorespaces Hidden layer 2 and output layer activity during the docking phase.}}{140}{figure.4.24}%
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Hidden layer 2 activity during docking phase}}}{140}{figure.4.24}%
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Output layer activity during docking phase}}}{140}{figure.4.24}%
+\contentsline {figure}{\numberline {4.25}{\ignorespaces Distances during time.}}{141}{figure.4.25}%
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Agent 1's distance from the payload during formation phase}}}{141}{figure.4.25}%
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Payload's distance from the docking center}}}{141}{figure.4.25}%
+\contentsline {figure}{\numberline {4.26}{\ignorespaces Reward profile during the docking phase}}{142}{figure.4.26}%
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Formation phase}}}{142}{figure.4.26}%
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Docking phase}}}{142}{figure.4.26}%
+\contentsline {figure}{\numberline {4.27}{\ignorespaces Views during the formation phase at different time steps.}}{143}{figure.4.27}%
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {View From the Hub Center at 5 seconds}}}{143}{figure.4.27}%
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {DVS View From the Hub Center at 5 seconds}}}{143}{figure.4.27}%
+\contentsline {subfigure}{\numberline {(c)}{\ignorespaces {View From the Hub Center at 15 seconds}}}{143}{figure.4.27}%
+\contentsline {subfigure}{\numberline {(d)}{\ignorespaces {DVS View From the Hub Center at 15 seconds}}}{143}{figure.4.27}%
+\contentsline {figure}{\numberline {4.28}{\ignorespaces Views during the docking phase at different time steps.}}{144}{figure.4.28}%
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {View From the Hub Center at 30 seconds}}}{144}{figure.4.28}%
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {DVS View From the Hub Center at 30 seconds}}}{144}{figure.4.28}%
+\contentsline {subfigure}{\numberline {(c)}{\ignorespaces {View From the Hub Center at 60 seconds}}}{144}{figure.4.28}%
+\contentsline {subfigure}{\numberline {(d)}{\ignorespaces {DVS View From the Hub Center at 60 seconds}}}{144}{figure.4.28}%
+\contentsline {figure}{\numberline {4.29}{\ignorespaces Views during the final approach and soft capture.}}{145}{figure.4.29}%
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {View From the Hub Center at 99 seconds}}}{145}{figure.4.29}%
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {DVS View From the Hub Center at 99 seconds}}}{145}{figure.4.29}%
+\contentsline {subfigure}{\numberline {(c)}{\ignorespaces {View From the Hub Center at docking completion}}}{145}{figure.4.29}%
+\contentsline {subfigure}{\numberline {(d)}{\ignorespaces {DVS View From the Hub Center at docking completion}}}{145}{figure.4.29}%
 \addvspace {10\p@ }

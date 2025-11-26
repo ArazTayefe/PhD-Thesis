@@ -773,7 +773,7 @@ A^{\mathrm{input}}=
 \begin{figure}[H]
     \centering
     \subfigure[Input activity matrix $(A^{\mathrm{input}})$ for numerical example of Gaussian attention computation.]{
-        \includegraphics[width=0.48\linewidth]{Figures/Input activity matrix (8x8).pdf}
+        \includegraphics[width=0.45\linewidth]{Figures/Input activity matrix (8x8).pdf}
     }
     \hfill
     \subfigure[Hidden-layer centers of attention (queries) for numerical example of Gaussian attention computation.]{
@@ -820,11 +820,11 @@ G_q(4,4)=0.1645\cdot 0.1645=0.027.
 \begin{figure}[H]
     \centering
     \subfigure[Gaussian weight map $(G_q)$.]{
-        \includegraphics[width=0.48\linewidth]{Figures/Gaussian weight map.pdf}
+        \includegraphics[width=0.45\linewidth]{Figures/Gaussian weight map.pdf}
     }
     \hfill
     \subfigure[Weighted input activity $(G_q \odot A^{\mathrm{input}})$.]{
-        \includegraphics[width=0.48\linewidth]{Figures/Weighted activity.pdf}
+        \includegraphics[width=0.45\linewidth]{Figures/Weighted activity.pdf}
     }
     \caption{Attention weight computation for hidden neuron \( q = (2,2) \) at position \( (x_q, y_q) = (-0.333, -0.333) \). (a) shows the Gaussian weight map \( G_q \) centered at the hidden neuron’s location. (b) illustrates the element-wise product of the weight map with the input activity matrix, highlighting the contributions to the attention calculation.}
     \label{fig:AttentionExampleWeights}
@@ -1795,7 +1795,7 @@ In our \ac{snn} implementation, we configure four layers of Izhikevich neurons, 
 
 \begin{table}[ht]
   \centering
-  \begin{tabular}{lcccp{4.8cm}}
+  \begin{tabular}{lcccp{4.5cm}}
     \hline
     \textbf{Layer} & \textbf{Type} & \textbf{\# Neurons} & \textbf{Description} \\
     \hline
@@ -1807,7 +1807,7 @@ In our \ac{snn} implementation, we configure four layers of Izhikevich neurons, 
     \hline
     Hidden 1 
     & Class 2 
-    & $512 + 20 + 20 = 552$ 
+    & $552$ 
     & \makecell[l]{%
         512 Visual neurons \\ 
         20 Payload Attention Dominance (PAD) \\ 
@@ -1816,7 +1816,7 @@ In our \ac{snn} implementation, we configure four layers of Izhikevich neurons, 
     \hline
     Hidden 2 
     & Class 2 
-    & $45 + 45 + 20 + 20 = 130$ 
+    & $130$ 
     & \makecell[l]{%
         45 Formation Flying Mission (FFM) \\
         45 Collaborative Docking Mission (CDM) \\
@@ -1865,11 +1865,11 @@ Figure~\ref{fig:light_sim} illustrates the effect of activating the \ac{alm} on 
     \setcounter{subfigure}{0}
     \centering
     \subfigure[Simulation of the environment with Agents' \ac{alm} turned off, showing baseline brightness distribution.]{
-        \includegraphics[width=0.48\linewidth]{Figures/Env Ligh Simulation - ALM off.pdf}
+        \includegraphics[width=0.45\linewidth]{Figures/Env Ligh Simulation - ALM off.pdf}
     }
     \hfill
     \subfigure[Simulation of the environment with Agents' \ac{alm} turned on, illustrating enhanced visibility and separation of each agent.]{
-        \includegraphics[width=0.48\linewidth]{Figures/Env Ligh Simulation - ALM on.pdf}
+        \includegraphics[width=0.45\linewidth]{Figures/Env Ligh Simulation - ALM on.pdf}
     }
     \caption{Effect of the \ac{alm} on visual perception. The ALM significantly enhances the visibility of proximal agents in the DVS input, improving the network's ability to detect and differentiate them from the payload.}
     \label{fig:light_sim}
@@ -1884,11 +1884,11 @@ Figure~\ref{fig:attention_maps} demonstrates how the attention mechanism is modu
     \setcounter{subfigure}{0}
     \centering
     \subfigure[Attention map when the Agents' \ac{alm} is off, highlighting the detected payload position.]{
-        \includegraphics[width=0.48\linewidth]{Figures/Attention Map - ALM off.pdf}
+        \includegraphics[width=0.45\linewidth]{Figures/Attention Map - ALM off.pdf}
     }
     \hfill
     \subfigure[Attention map when the Agents' \ac{alm} is on, emphasizing the detected proximal agent’s position.]{
-        \includegraphics[width=0.48\linewidth]{Figures/Attention Map - ALM on.pdf}
+        \includegraphics[width=0.45\linewidth]{Figures/Attention Map - ALM on.pdf}
     }
     \caption{Attention maps illustrating the effect of the \ac{alm} on visual focus. The \ac{alm} enables dynamic shifting of attention from the payload to the proximal agent by generating distinct DVS event patterns. Colorbar values indicate the normalized attention strength, where brighter regions correspond to locations receiving stronger attention under the Gaussian-weighted mapping.
 }
@@ -1901,11 +1901,11 @@ Figure~\ref{fig:snn_structurewithalmrepresentations} illustrates the structural 
     \setcounter{subfigure}{0}
     \centering
     \subfigure[]{
-        \includegraphics[width=0.48\linewidth]{Figures/SNN Structure with ALM off for Results.pdf}
+        \includegraphics[width=0.45\linewidth]{Figures/SNN Structure with ALM off for Results.pdf}
     }
     \hfill
     \subfigure[]{
-        \includegraphics[width=0.48\linewidth]{Figures/SNN Structure with ALM on for Results.pdf}
+        \includegraphics[width=0.45\linewidth]{Figures/SNN Structure with ALM on for Results.pdf}
     }
     \caption{SNN structure in the first hidden layer: (a) with Agents' \ac{alm} turned off, focusing on payload detection; (b) with Agents' \ac{alm} turned on, emphasizing proximal agent detection. Inactive neuron repositories and the connections are shown in gray. The dotted lines are also inactive inhibitory connections.}
     \label{fig:snn_structurewithalmrepresentations}
@@ -1918,11 +1918,11 @@ Figure~\ref{fig:repository_activity} shows how the payload and proximal agent de
     \setcounter{subfigure}{0}
     \centering
     \subfigure[Activity of the Payload detector repository during initial training phases with the Agents' \ac{alm} turned off.]{
-        \includegraphics[width=0.48\linewidth]{Figures/Payload Detector Activity - ILI - ALM off.pdf}
+        \includegraphics[width=0.45\linewidth]{Figures/Payload Detector Activity - ILI - ALM off.pdf}
     }
     \hfill
     \subfigure[Activity of the proximal agent detector repository during initial training phases with the Agents' \ac{alm} turned off.]{
-        \includegraphics[width=0.48\linewidth]{Figures/Agent Detector Activity - ILI - ALM off.pdf}
+        \includegraphics[width=0.45\linewidth]{Figures/Agent Detector Activity - ILI - ALM off.pdf}
     }
     \caption{Detector repository activity during initial training with \ac{alm} off. The payload detector remains active, while the proximal agent detector is suppressed due to inhibitory competition.}
     \label{fig:repository_activity}
@@ -1934,11 +1934,11 @@ Figure~\ref{fig:repository_activity_on} shows the complementary case to the prev
     \setcounter{subfigure}{0}
     \centering
     \subfigure[Activity of the Payload detector repository during initial training phases with the Agents' \ac{alm} turned on.]{
-        \includegraphics[width=0.48\linewidth]{Figures//Payload Detector Activity - ILI - ALM on.pdf}
+        \includegraphics[width=0.45\linewidth]{Figures//Payload Detector Activity - ILI - ALM on.pdf}
     }
     \hfill
     \subfigure[Activity of the proximal agent detector repository during initial training phases with the Agents' \ac{alm} turned on.]{
-        \includegraphics[width=0.48\linewidth]{Figures/Agent Detector Activity - ILI - ALM on.pdf}
+        \includegraphics[width=0.45\linewidth]{Figures/Agent Detector Activity - ILI - ALM on.pdf}
     }
     \caption{Detector repository activity during initial training with \ac{alm} on. The proximal agent detector becomes active, while the payload detector is suppressed by ALM-induced inhibition.}
     \label{fig:repository_activity_on}
@@ -1951,11 +1951,11 @@ Figure~\ref{fig:converged_activity_off} shows the activity of the first hidden l
     \setcounter{subfigure}{0}
     \centering
     \subfigure[Activity of the Payload detector repository after learning convergence with the Agents' \ac{alm} turned off.]{
-        \includegraphics[width=0.48\linewidth]{Figures//Payload Detector Activity - ALM off.pdf}
+        \includegraphics[width=0.45\linewidth]{Figures//Payload Detector Activity - ALM off.pdf}
     }
     \hfill
     \subfigure[Activity of the proximal agent detector repository after learning convergence with the Agents' \ac{alm} turned off.]{
-        \includegraphics[width=0.48\linewidth]{Figures/Agent Detector Activity - ALM off.pdf}
+        \includegraphics[width=0.45\linewidth]{Figures/Agent Detector Activity - ALM off.pdf}
     }
     \caption{Detector repository activity after learning convergence with \ac{alm} off. The payload detector shows strong, localized activity, while the proximal agent detector remains inactive.}
     \label{fig:converged_activity_off}
@@ -1967,11 +1967,11 @@ Figure~\ref{fig:converged_activity_on} illustrates the activity of the first hid
     \setcounter{subfigure}{0}
     \centering
     \subfigure[Activity of the Payload detector repository after learning convergence with the Agents' \ac{alm} turned on.]{
-        \includegraphics[width=0.48\linewidth]{Figures/Payload Detector Activity - ALM on.pdf}
+        \includegraphics[width=0.45\linewidth]{Figures/Payload Detector Activity - ALM on.pdf}
     }
     \hfill
     \subfigure[Activity of the proximal agent detector repository after learning convergence with the Agents' \ac{alm} turned on.]{
-        \includegraphics[width=0.48\linewidth]{Figures/Agent Detector Activity - ALM on.pdf}
+        \includegraphics[width=0.45\linewidth]{Figures/Agent Detector Activity - ALM on.pdf}
     }
     \caption{Detector repository activity after learning convergence with \ac{alm} on. The proximal agent detector shows strong, localized activity, while the payload detector remains inactive.}
     \label{fig:converged_activity_on}
@@ -1986,11 +1986,11 @@ Figure \ref{fig:HL2Activity} presents the activity patterns of the second hidden
     \setcounter{subfigure}{0}
     \centering
     \subfigure[Initial iterations of the formation phase.]{
-        \includegraphics[width=0.48\linewidth]{Figures/FFM Act.pdf}
+        \includegraphics[width=0.45\linewidth]{Figures/FFM Act.pdf}
     }
     \hfill
     \subfigure[Initial iterations of the docking phase]{
-        \includegraphics[width=0.48\linewidth]{Figures/CDM Act.pdf}
+        \includegraphics[width=0.45\linewidth]{Figures/CDM Act.pdf}
     }
     \caption{Second hidden layer activity for the formation and docking phases for Agent 1: (a) FFM activity 135 degree that matches the LOS of the Payload regarding the Agent 1 and (b) CDM activity shows 45 degree LOS toward the docking point.}
     \label{fig:HL2Activity}
@@ -2002,11 +2002,11 @@ Figures~\ref{fig:HL2OLActivityFormation} and~\ref{fig:HL2OLActivityDocking} disp
     \setcounter{subfigure}{0}
     \centering
     \subfigure[Commanded velocity generated by the Hidden layer 2 activity during the formation phase vs the actual agent's LOS regarding the payload.]{
-        \includegraphics[width=0.48\linewidth]{Figures/Actual vs HL2 Formation.pdf}
+        \includegraphics[width=0.45\linewidth]{Figures/Actual vs HL2 Formation.pdf}
     }
     \hfill
     \subfigure[Output layer activity during formation phase]{
-        \includegraphics[width=0.48\linewidth]{Figures/HL2 vs OL Formation.pdf}
+        \includegraphics[width=0.45\linewidth]{Figures/HL2 vs OL Formation.pdf}
     }
     \caption{Hidden layer 2 and output layer activity during the formation phase.}
     \label{fig:HL2OLActivityFormation}
@@ -2021,11 +2021,11 @@ Similarly, in Figure~\ref{fig:HL2OLActivityDocking}a, the activity of the second
     \setcounter{subfigure}{0}
     \centering
     \subfigure[Hidden layer 2 activity during docking phase]{
-        \includegraphics[width=0.48\linewidth]{Figures/Actual vs HL2 Docking.pdf}
+        \includegraphics[width=0.45\linewidth]{Figures/Actual vs HL2 Docking.pdf}
     }
     \hfill
     \subfigure[Output layer activity during docking phase]{
-        \includegraphics[width=0.48\linewidth]{Figures/HL2 vs OL Docking.pdf}
+        \includegraphics[width=0.45\linewidth]{Figures/HL2 vs OL Docking.pdf}
     }
     \caption{Hidden layer 2 and output layer activity during the docking phase.}
     \label{fig:HL2OLActivityDocking}
@@ -2037,11 +2037,11 @@ Figures~\ref{fig:Distances} illustrates the distances during the formation and d
     \setcounter{subfigure}{0}
     \centering
     \subfigure[Agent 1's distance from the payload during formation phase]{
-        \includegraphics[width=0.48\linewidth]{Figures/Distance from Payload - Formation.pdf}
+        \includegraphics[width=0.45\linewidth]{Figures/Distance from Payload - Formation.pdf}
     }
     \hfill
     \subfigure[Payload's distance from the docking center]{
-        \includegraphics[width=0.48\linewidth]{Figures/Distance from Docking Center - Docking.pdf}
+        \includegraphics[width=0.45\linewidth]{Figures/Distance from Docking Center - Docking.pdf}
     }
     \caption{Distances during time.}
     \label{fig:Distances}
@@ -2051,11 +2051,11 @@ Figures~\ref{fig:Distances} illustrates the distances during the formation and d
 %     \setcounter{subfigure}{0}
 %     \centering
 %     \subfigure[\ac{scs} view during docking phase]{
-%         \includegraphics[width=0.48\linewidth]{Figures/Env - Docked.pdf}
+%         \includegraphics[width=0.45\linewidth]{Figures/Env - Docked.pdf}
 %     }
 %     \hfill
 %     \subfigure[Payload's velocity during docking phase]{
-%         \includegraphics[width=0.48\linewidth]{Figures/Payload Velocity During Docking.pdf}
+%         \includegraphics[width=0.45\linewidth]{Figures/Payload Velocity During Docking.pdf}
 %     }
 %     \caption{\ac{scs} view and payload velocity during docking phase with first layer trained.}
 %     \label{fig:SCSAndPayloadVelocity}
@@ -2067,11 +2067,11 @@ Figure~\ref{fig:Rewards} presents the reward profiles during both the formation 
     \setcounter{subfigure}{0}
     \centering
     \subfigure[Formation phase]{
-        \includegraphics[width=0.48\linewidth]{Figures/Reward Formation.pdf}
+        \includegraphics[width=0.45\linewidth]{Figures/Reward Formation.pdf}
     }
     \hfill
     \subfigure[Docking phase]{
-        \includegraphics[width=0.48\linewidth]{Figures/Reward Docking.pdf}
+        \includegraphics[width=0.45\linewidth]{Figures/Reward Docking.pdf}
     }
     \caption{Reward profile during the docking phase}
     \label{fig:Rewards}
@@ -2083,19 +2083,19 @@ The cooperative docking sequence can be divided into three main phases: formatio
     \setcounter{subfigure}{0}
     \centering
     \subfigure[View From the Hub Center at 5 seconds]{
-        \includegraphics[width=0.48\linewidth]{Figures/Env 5 s.pdf}
+        \includegraphics[width=0.45\linewidth]{Figures/Env 5 s.pdf}
     }
     \hfill
     \subfigure[DVS View From the Hub Center at 5 seconds]{
-        \includegraphics[width=0.48\linewidth]{Figures/DVS 5 s.pdf}
+        \includegraphics[width=0.45\linewidth]{Figures/DVS 5 s.pdf}
     }
     \\[1ex]
     \subfigure[View From the Hub Center at 15 seconds]{
-        \includegraphics[width=0.48\linewidth]{Figures/Env 15 s.pdf}
+        \includegraphics[width=0.45\linewidth]{Figures/Env 15 s.pdf}
     }
     \hfill
     \subfigure[DVS View From the Hub Center at 15 seconds]{
-        \includegraphics[width=0.48\linewidth]{Figures/DVS 15 s.pdf}
+        \includegraphics[width=0.45\linewidth]{Figures/DVS 15 s.pdf}
     }
 
     \caption{Views during the formation phase at different time steps.}
@@ -2107,19 +2107,19 @@ During the formation phase (Figure~\ref{fig:EnvDVS_5_15}), the agents converge t
     \setcounter{subfigure}{0}
     \centering
     \subfigure[View From the Hub Center at 30 seconds]{
-        \includegraphics[width=0.48\linewidth]{Figures/Env 30 s.pdf}
+        \includegraphics[width=0.45\linewidth]{Figures/Env 30 s.pdf}
     }
     \hfill
     \subfigure[DVS View From the Hub Center at 30 seconds]{
-        \includegraphics[width=0.48\linewidth]{Figures/DVS 30 s.pdf}
+        \includegraphics[width=0.45\linewidth]{Figures/DVS 30 s.pdf}
     }
     \\[1ex]
     \subfigure[View From the Hub Center at 60 seconds]{
-        \includegraphics[width=0.48\linewidth]{Figures/Env 60 s.pdf}
+        \includegraphics[width=0.45\linewidth]{Figures/Env 60 s.pdf}
     }
     \hfill
     \subfigure[DVS View From the Hub Center at 60 seconds]{
-        \includegraphics[width=0.48\linewidth]{Figures/DVS 60 s.pdf}
+        \includegraphics[width=0.45\linewidth]{Figures/DVS 60 s.pdf}
     }
 
     \caption{Views during the docking phase at different time steps.}
@@ -2133,19 +2133,19 @@ In Figure~\ref{fig:EnvDVS_30_60}(a), the formation stabilizes and the payload st
     \setcounter{subfigure}{0}
     \centering
     \subfigure[View From the Hub Center at 99 seconds]{
-        \includegraphics[width=0.48\linewidth]{Figures/Env 99 s.pdf}
+        \includegraphics[width=0.45\linewidth]{Figures/Env 99 s.pdf}
     }
     \hfill
     \subfigure[DVS View From the Hub Center at 99 seconds]{
-        \includegraphics[width=0.48\linewidth]{Figures/DVS 99 s.pdf}
+        \includegraphics[width=0.45\linewidth]{Figures/DVS 99 s.pdf}
     }
     \\[1ex]
     \subfigure[View From the Hub Center at docking completion]{
-        \includegraphics[width=0.48\linewidth]{Figures/Env Docked.pdf}
+        \includegraphics[width=0.45\linewidth]{Figures/Env Docked.pdf}
     }
     \hfill
     \subfigure[DVS View From the Hub Center at docking completion]{
-        \includegraphics[width=0.48\linewidth]{Figures/DVS Docked.pdf}
+        \includegraphics[width=0.45\linewidth]{Figures/DVS Docked.pdf}
     }
 
     \caption{Views during the final approach and soft capture.}
