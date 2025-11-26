@@ -574,9 +574,45 @@ J.~Wang, Q.~Liu, H.~Liang, G.~Joshi, and H.~V. Poor, ``Tackling the objective
   Advances in neural information processing systems}, vol.~33, pp.~7611--7623,
   2020.
 
+\bibitem{9138762}
+G.~Gallego, T.~Delbrück, G.~Orchard, C.~Bartolozzi, B.~Taba, A.~Censi,
+  S.~Leutenegger, A.~J. Davison, J.~Conradt, K.~Daniilidis, and D.~Scaramuzza,
+  ``Event-based vision: A survey,'' {\em IEEE Transactions on Pattern Analysis
+  and Machine Intelligence}, vol.~44, no.~1, pp.~154--180, 2022.
+
 \bibitem{dias2021swarm}
 P.~G.~F. Dias, M.~C. Silva, G.~P. Rocha~Filho, P.~A. Vargas, L.~P. Cota, and
   G.~Pessin, ``Swarm robotics: A perspective on the latest reviewed concepts
   and applications,'' {\em Sensors}, vol.~21, no.~6, 2021.
+
+\bibitem{graca2025towards}
+R.~Graca and T.~Delbruck, ``Towards a physically realistic computationally
+  efficient dvs pixel model,'' {\em arXiv preprint arXiv:2505.07386}, 2025.
+
+\bibitem{botelho2024explicit}
+A.~Botelho, P.~Rosa, and J.~M. Lemos, ``Explicit spacecraft thruster control
+  allocation with minimum impulse bit,'' {\em IEEE Transactions on Control
+  Systems Technology}, 2024.
+
+\bibitem{mei2025modeling}
+Y.~Mei, X.~Zhou, and X.~Tan, ``Modeling and mixed-integer nonlinear mpc of
+  positive-negative pressure pneumatic systems,'' {\em arXiv preprint
+  arXiv:2510.00433}, 2025.
+
+\bibitem{izhikevich2004model}
+E.~M. Izhikevich, ``Which model to use for cortical spiking neurons?,'' {\em
+  IEEE transactions on neural networks}, vol.~15, no.~5, pp.~1063--1070, 2004.
+
+\bibitem{SpaceXDragon}
+SpaceX, ``Dragon.'' Online: Available at
+  https://www.spacex.com/vehicles/dragon/, 2025.
+\newblock Accessed: 27-Oct-2025.
+
+\bibitem{NASA_IDSS_IDD_RevF}
+NASA, ESA, JAXA, CSA, and Roscosmos, ``International docking system standard
+  (idss) -- interface definition document (idd), revision~f,'' tech. rep.,
+  National Aeronautics and Space Administration (NASA), July 2022.
+\newblock Approved for Public Release. Available:
+  https://www.internationaldockingstandard.com/.
 
 \end{thebibliography}
