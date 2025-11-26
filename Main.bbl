@@ -438,11 +438,6 @@ Y.~Zhan, P.~Li, Z.~Qu, D.~Zeng, and S.~Guo, ``A learning-based incentive
   mechanism for federated learning,'' {\em IEEE Internet of Things Journal},
   vol.~7, no.~7, pp.~6360--6368, 2020.
 
-\bibitem{Ch_1_R1}
-Y.~Venkatesha, Y.~Kim, L.~Tassiulas, and P.~Panda, ``Federated learning with
-  spiking neural networks,'' {\em IEEE Transactions on Signal Processing},
-  vol.~69, pp.~6183--6194, 2021.
-
 \bibitem{Ch2_R43}
 M.~Chen, D.~G{\"u}nd{\"u}z, K.~Huang, W.~Saad, M.~Bennis, A.~V. Feljan, and
   H.~V. Poor, ``Distributed learning in wireless networks: Recent progress and
@@ -472,18 +467,6 @@ Z.~Yang, M.~Chen, W.~Saad, C.~S. Hong, and M.~Shikh-Bahaei, ``Energy efficient
   Transactions on Wireless Communications}, vol.~20, no.~3, pp.~1935--1949,
   2020.
 
-\bibitem{Ch_1_R9}
-H.~Yang, K.-Y. Lam, L.~Xiao, Z.~Xiong, H.~Hu, D.~Niyato, and H.~Vincent~Poor,
-  ``Lead federated neuromorphic learning for wireless edge artificial
-  intelligence,'' {\em Nature communications}, vol.~13, no.~1, pp.~42--69,
-  2022.
-
-\bibitem{Ch2_R49}
-A.~B. Mansour, G.~Carenini, A.~Duplessis, and D.~Naccache, ``Federated learning
-  aggregation: New robust algorithms with guarantees,'' in {\em 2022 21st IEEE
-  International Conference on Machine Learning and Applications (ICMLA)},
-  pp.~721--726, IEEE, 2022.
-
 \bibitem{Ch2_R50}
 A.~Jarwan and M.~Ibnkahla, ``Edge-based federated deep reinforcement learning
   for iot traffic management,'' {\em IEEE Internet of Things Journal}, vol.~10,
@@ -504,6 +487,17 @@ Q.~Wu, X.~Chen, T.~Ouyang, Z.~Zhou, X.~Zhang, S.~Yang, and J.~Zhang, ``Hiflash:
 \bibitem{Ch2_R53}
 G.~Xia, J.~Chen, C.~Yu, and J.~Ma, ``Poisoning attacks in federated learning: A
   survey,'' {\em IEEE Access}, vol.~11, pp.~10708--10722, 2023.
+
+\bibitem{Ch_1_R1}
+Y.~Venkatesha, Y.~Kim, L.~Tassiulas, and P.~Panda, ``Federated learning with
+  spiking neural networks,'' {\em IEEE Transactions on Signal Processing},
+  vol.~69, pp.~6183--6194, 2021.
+
+\bibitem{Ch_1_R9}
+H.~Yang, K.-Y. Lam, L.~Xiao, Z.~Xiong, H.~Hu, D.~Niyato, and H.~Vincent~Poor,
+  ``Lead federated neuromorphic learning for wireless edge artificial
+  intelligence,'' {\em Nature communications}, vol.~13, no.~1, pp.~42--69,
+  2022.
 
 \bibitem{Ch5_ATD4}
 M.~Pachter, E.~Garcia, and D.~W. Casbeer, ``Differential game of guarding a
