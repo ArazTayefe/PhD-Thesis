@@ -581,11 +581,6 @@ A.~Botelho, P.~Rosa, and J.~M. Lemos, ``Explicit spacecraft thruster control
   allocation with minimum impulse bit,'' {\em IEEE Transactions on Control
   Systems Technology}, 2024.
 
-\bibitem{mei2025modeling}
-Y.~Mei, X.~Zhou, and X.~Tan, ``Modeling and mixed-integer nonlinear mpc of
-  positive-negative pressure pneumatic systems,'' {\em arXiv preprint
-  arXiv:2510.00433}, 2025.
-
 \bibitem{izhikevich2004model}
 E.~M. Izhikevich, ``Which model to use for cortical spiking neurons?,'' {\em
   IEEE transactions on neural networks}, vol.~15, no.~5, pp.~1063--1070, 2004.

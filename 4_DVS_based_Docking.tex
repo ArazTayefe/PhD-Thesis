@@ -1,6 +1,6 @@
 \chapter{Vision-Based Multi-Agent Docking with Deep Spiking Neural Networks}
 
-Autonomous docking of multiple agents in close-proximity missions, such as on-orbit servicing, satellite formation flying, and swarm Payload alignment, poses unique challenges in precision, robustness, and energy efficiency. In these missions, a team of robots must cooperate without centralized control, perceive relative pose information under stringent bandwidth and latency constraints, and execute coordinated maneuvers despite dynamic uncertainties and limited onboard resources. To address these challenges, this chapter introduces a fully decentralized, vision-based docking framework for swarm robots, combining \ac{dvs} event streams, \ac{alm}s, and a Deep \ac{snn} trained with \ac{stdp}. The sparse, asynchronous output of DVS cameras and the event-driven nature of spiking neural networks contribute to low-latency and energy-efficient control, which supports the development of responsive and resource-aware systems for proximity docking \cite{9138762}.
+Autonomous docking of multiple agents in close-proximity missions, such as on-orbit servicing, satellite formation flying, and swarm Payload alignment, poses unique challenges in precision, robustness, and energy efficiency. In these missions, a team of robots must cooperate without centralized control, perceive relative pose information under stringent bandwidth and latency constraints, and execute coordinated maneuvers despite dynamic uncertainties and limited onboard resources. To address these challenges, this chapter introduces a fully decentralized, vision-based docking framework for swarm robots, combining \ac{dvs} event streams, \acp{alm}, and a Deep \ac{snn} trained with \ac{stdp}. The sparse, asynchronous output of DVS cameras and the event-driven nature of spiking neural networks contribute to low-latency and energy-efficient control, which supports the development of responsive and resource-aware systems for proximity docking \cite{9138762}.
 
 
 
@@ -14,8 +14,7 @@ This work presents a biologically interpretable and scalable neuromorphic archit
     The proposed variable entropy-based kernel computes spatial importance weights from local event entropy, enabling robust feature extraction from asynchronous visual inputs without frame reconstruction.
 
     \item \textbf{Short-term memory via bistable neurons:}  
-    A population of bistable Izhikevich neurons is designed to emulate a phase-locked-loop (PLL) mechanism (rather than tracking a sinusoidal phase, the neurons stabilize their membrane potentials so that recent DVS event patterns remain represented for tens of milliseconds.), providing short-term temporal memory of event sequences.  
-    These neurons maintain transient membrane states that store \ac{dvs} activity over tens of milliseconds, supporting temporal continuity in event-driven perception when objects stop moving.
+    A population of bistable Izhikevich neurons is designed to emulate a phase–locked–loop–like mechanism in the dynamical sense. Rather than tracking the phase of a sinusoidal input, each neuron possesses an intrinsic oscillatory attractor that becomes entrained by transient DVS events. Once driven into this oscillatory state, the neuron maintains sustained spiking in the absence of further input, analogous to phase capture in a PLL. Event-triggered inhibitory inputs act as a reset mechanism, returning the neuron to its resting equilibrium and effectively unlocking the loop. This bistable excitation–inhibition structure provides short-term temporal memory on the order of tens of milliseconds, preserving recent event activity while guaranteeing temporal continuity in event-driven perception when visual motion ceases.
 
     \item \textbf{Attention-guided object detection through phase-encoded ALM inhibition:}  
     The first hidden layer includes neurons that emit phase-encoded inhibitory signals synchronized with a physical \ac{alm}. This mechanism uses \ac{alm}s to gate attention toward agents in the \ac{dvs} field of view, suppressing background noise and enhancing agent detection in sparse event streams.
@@ -57,9 +56,9 @@ In the specific application of this study, the swarm agents are tasked with push
 
 The primary objective of this chapter is to develop a decentralized vision-based swarm docking system utilizing Deep \ac{snn}s trained with \ac{stdp}, which uses the asynchronous, sparse, and high-temporal-resolution output of \ac{dvs} cameras to guide the swarm behavior effectively. Each agent in the swarm runs its own local \ac{snn} onboard, processing sensory information independently and learning control policies in a distributed manner, which allows the swarm to remain scalable and robust to individual agent failures.
 
-In this environment, \ac{alm}s are installed exclusively on the agents to enhance their visibility within the event-based vision system. Each agent only sees the neighboring agent using \ac{dvs} events and does not direct measurement of the positions. Because the Payload has a considerably larger surface area, it naturally generates sufficient brightness changes to trigger events in the \ac{dvs} sensor without the need for additional illumination. In contrast, the agents are compact and would otherwise produce sparse event activity; thus, their \acp{alm} are used to amplify their visual signatures and ensure reliable detection by the vision system. This configuration simplifies the temporal structure of the event stream while still enabling accurate agent identification and segmentation within the spatiotemporal data.
+In this environment, \ac{alm}s are installed exclusively on the agents to enhance their visibility within the event-based vision system. Each agent only sees its neighboring agents via \ac{dvs} events and does not directly measure their positions. The Payload has a considerably larger surface area; as such, it naturally generates sufficient brightness changes to trigger events in the \ac{dvs} sensor without the need for additional illumination. In contrast, the agents are compact and would otherwise produce sparse event activity; thus, their \acp{alm} are used to amplify their visual signatures and ensure reliable detection by the vision system. This configuration simplifies the temporal structure of the event stream while still enabling accurate agent identification and segmentation within the spatiotemporal data.
 
-When the agents are flying and have not made contact with the Payload, they rely solely on their onboard \ac{dvs} for environment perception. This allows them to capture events corresponding to nearby agents and the Payload. Once an agent makes physical contact with the Payload, its onboard force contact sensor activates and the \ac{alm} signal is turned off. The onboard \ac{dvs} data is then replaced by the \ac{scs} \ac{dvs}, providing a more comprehensive and centralized perspective of the Payload and the surrounding agents.
+When the agents are flying and have not made contact with the Payload, they rely solely on their onboard \ac{dvs} for environment perception. This allows them to capture events corresponding to nearby agents and the Payload. Once an agent makes physical contact with the Payload, its onboard force contact sensor activates and the \ac{alm} signal is turned off. The agents' onboard \ac{dvs} data is then replaced by the \ac{scs} \ac{dvs}, providing a more comprehensive and centralized perspective of the Payload and the surrounding agents.
 
 
 \subsection{Event-Based Camera Simulation}
@@ -174,7 +173,7 @@ The total force on a free agent \( a \) is the sum of its thrust and agent–age
     \frac{d^2 \mathbf{p}_a(t)}{dt^2} = \frac{\mathbf{F}_a^{\text{total}}(t)}{m_a}.
 \end{equation}
 
-Agent–Payload interactions are not modeled via a spring–damper; instead, first contact triggers a rigid attachment for a fixed duration \( \tau_{\text{attach}}=10\,\mathrm{s} \). Let \( \mathbf{p}_P, \mathbf{V}_P, R_P, m_P \) be the Payload pose, velocity, radius, and mass. Attachment is triggered when
+Agent–Payload interactions are not modeled via a spring–damper system; instead, first contact triggers a rigid attachment for a fixed duration \( \tau_{\text{attach}}=10\,\mathrm{s} \). Let \( \mathbf{p}_P, \mathbf{V}_P, R_P, m_P \) be the Payload pose, velocity, radius, and mass. Attachment is triggered when
 \begin{equation}
     \Delta_{iP}(t) \;=\; R_i + R_P - \|\mathbf{p}_i(t) - \mathbf{p}_P(t)\| \;>\; 0.
 \end{equation}
@@ -248,19 +247,22 @@ Here $N_{x^-}(k)$ and $N_{x^+}(k)$ denote the spike counts of the output neurons
 \dot{\mathbf{p}}(t)=\mathbf{V}(t),\qquad
 m\,\dot{\mathbf{V}}(t)=\mathbf{u}_{\mathrm{tot}}(t)+\mathbf{f}_{\mathrm{coll}}(t),
 \end{equation}
-where $\mathbf{f}_{\mathrm{coll}}(t)$ denotes the spring–damper collision force modeled previously. Because the pulse–width is fixed by the MIB, the actuation becomes hybrid and time–quantized: whenever $\mathbf{s}_k\neq\mathbf{0}$ the commanded magnitude $F_{\max}$ is maintained for the entire interval $[kT_{\mathrm{mib}},(k{+}1)T_{\mathrm{mib}})$, precluding mid–window reversals.
+where $\mathbf{f}_{\mathrm{coll}}(t)$ denotes the spring–damper collision force modeled previously. 
+The thruster \ac{mib} fixes the pulse width. As a result, the thrust command is applied in discrete time intervals, while the system dynamics remain continuous. Whenever $\mathbf{s}_k \neq \mathbf{0}$, a constant thrust of magnitude $F_{\max}$ is held over the entire interval $[kT_{\mathrm{mib}}, (k{+}1)T_{\mathrm{mib}})$. Within that interval, no change in thrust direction or magnitude is possible.
 
-To keep the agent within a controllable speed envelope under the discrete thrust actuation, a velocity governor is applied synchronously with the \ac{snn} output at every interval $T_{\mathrm{mib}}$.  
-At each update step $k$, the instantaneous velocity $\mathbf{V}_k=[V_{x,k},V_{y,k}]^{\mathsf{T}}$ is compared against a predefined speed limit $V_{\max}>0$.  
-When the absolute velocity in an axis exceeds this limit, a corrective force proportional to the excess speed is generated; otherwise, the governor remains inactive.  
-The per–axis control law is expressed as
-\begin{equation}
-    u_{\mathrm{gov},x}[k] = -\,m\,K_g\,\big(|V_{x,k}|-V_{\max}\big)_{+}\,\operatorname{sign}(v_{x,k})
-\end{equation}
-\begin{equation}
-    u_{\mathrm{gov},y}[k] = -\,m\,K_g\,\big(|V_{y,k}|-V_{\max}\big)_{+}\,\operatorname{sign}(v_{y,k})
-\end{equation}
-where $(x)_{+}=\max(0,x)$ denotes the positive–part operator, returning $x$ if $x>0$ and $0$ otherwise, and $K_g>0$ is the feedback gain. Because the governor is evaluated at the same discrete interval as the \ac{snn} output, its effect appears as an intermittent corrective pulse rather than a continuous viscous drag. It effectively prevents the agent from exceeding the controllable velocity envelope, ensuring that thrust reversals can occur within a few actuation periods despite the inertia and the 50\,ms minimum–impulse constraint. This interaction between discrete actuation and velocity feedback introduces nonconvexity into optimization–based controllers such as Model-Predictive Contoller \cite{mei2025modeling}, since the control inputs $\mathbf{s}_k\in\{-1,0,+1\}^2$ and their timing are inherently discrete and coupled to the system dynamics. In contrast, the proposed \ac{snn} adapts to this hybrid behavior by learning spike patterns that anticipate the motor’s quantized response, thereby compensating for the nonlinear and discontinuous actuation without requiring explicit mixed–integer optimization.
+% Because the pulse–width is fixed by the MIB, the actuation becomes hybrid and time–quantized: whenever $\mathbf{s}_k\neq\mathbf{0}$ the commanded magnitude $F_{\max}$ is maintained for the entire interval $[kT_{\mathrm{mib}},(k{+}1)T_{\mathrm{mib}})$, precluding mid–window reversals.
+
+% To keep the agent within a controllable speed envelope under the discrete thrust actuation, a velocity governor is applied synchronously with the \ac{snn} output at every interval $T_{\mathrm{mib}}$.  
+% At each update step $k$, the instantaneous velocity $\mathbf{V}_k=[V_{x,k},V_{y,k}]^{\mathsf{T}}$ is compared against a predefined speed limit $V_{\max}>0$.  
+% When the absolute velocity in an axis exceeds this limit, a corrective force proportional to the excess speed is generated; otherwise, the governor remains inactive.  
+% The per–axis control law is expressed as
+% \begin{equation}
+%     u_{\mathrm{gov},x}[k] = -\,m\,K_g\,\big(|V_{x,k}|-V_{\max}\big)_{+}\,\operatorname{sign}(v_{x,k})
+% \end{equation}
+% \begin{equation}
+%     u_{\mathrm{gov},y}[k] = -\,m\,K_g\,\big(|V_{y,k}|-V_{\max}\big)_{+}\,\operatorname{sign}(v_{y,k})
+% \end{equation}
+% where $(x)_{+}=\max(0,x)$ denotes the positive–part operator, returning $x$ if $x>0$ and $0$ otherwise, and $K_g>0$ is the feedback gain. Because the governor is evaluated at the same discrete interval as the \ac{snn} output, its effect appears as an intermittent corrective pulse rather than a continuous viscous drag. It effectively prevents the agent from exceeding the controllable velocity envelope, ensuring that thrust reversals can occur within a few actuation periods despite the inertia and the 50\,ms minimum–impulse constraint. This interaction between discrete actuation and velocity feedback introduces nonconvexity into optimization–based controllers such as Model-Predictive Contoller \cite{mei2025modeling}, since the control inputs $\mathbf{s}_k\in\{-1,0,+1\}^2$ and their timing are inherently discrete and coupled to the system dynamics. In contrast, the proposed \ac{snn} adapts to this hybrid behavior by learning spike patterns that anticipate the motor’s quantized response, thereby compensating for the nonlinear and discontinuous actuation without requiring explicit mixed–integer optimization.
 
 \subsection{Neuron model}
 
@@ -377,7 +379,7 @@ u \leftarrow u + d.
 
 \subsection{Deep \ac{snn} Structure}
 
-The neural network implemented in this study consists of four layers: an entropy-pooled input layer that processes sensory information from a \ac{dvs}, the first hidden layer that learns visual perception and attention through \ac{alm} repositories for \ac{pa} and \ac{n2a}, the second hidden layer that governs the mission phases through regulatory and control repositories (\ac{fpd}, \ac{dpd}, \ac{ffm}, and \ac{cdm}), and an output layer responsible for generating motor control commands. Each of these layers employs a distinct parameterization of the Izhikevich neuron model to achieve its respective function within the network.
+The neural network implemented in this study consists of four layers: an entropy-pooled input layer that processes sensory information from a \ac{dvs}, the first hidden layer that learns visual perception and attention through \ac{alm} repositories for \ac{pa} and \ac{n2a}, the second hidden layer that governs the mission phases through regulatory and control repositories (\ac{fpd}, \ac{dpd}, \ac{ffm}, and \ac{cdm}), and an output layer responsible for generating motor control commands. Each of these layers employs a distinct parameterization of the Izhikevich neuron model to achieve its respective function within the network. The term dominance refers to a dynamical winner--take--all condition enforced through lateral inhibition at the population level.
 
 \begin{figure}[H]
     \centering
@@ -392,7 +394,7 @@ The second stage is the first hidden layer, which is organized into multiple rep
 
 The third stage is the second hidden layer, which is divided into four functionally distinct repositories: the \ac{fpd}, \ac{dpd}, \ac{ffm}, and \ac{cdm} neural repositories. These submodules are composed of bistable and Class 2 Izhikevich neurons that govern phase-gated transitions between formation and docking behaviors, ensuring smooth and stable policy switching across mission stages.
 
-Finally, the output layer consists of four spiking neurons corresponding to the thrust directions \(x^{-}\), \(x^{+}\), \(y^{-}\), and \(y^{+}\). These neurons generate directional control commands based on the collective spiking activity, which is refined through \ac{stdp}. Each layer in the network employs layer-specific reward to adapt its synaptic weights autonomously. This hierarchical organization enables the agents to perform phase-dependent policy switching, attention-driven visual perception, and decentralized coordination during both formation flying and collaborative docking.
+Finally, the output layer consists of four spiking neurons corresponding to the thrust directions \(x^{-}\), \(x^{+}\), \(y^{-}\), and \(y^{+}\). These neurons generate directional control commands based on the collective spiking activity, which is refined through \ac{stdp}. Each layer in the network employs layer-specific rewards to adapt its synaptic weights autonomously. This hierarchical organization enables the agents to perform phase-dependent policy switching, attention-driven visual perception, and decentralized coordination during both formation flying and collaborative docking.
 
 \subsubsection{Input Layer}
 
@@ -483,56 +485,86 @@ Low-entropy (homogeneous) regions are pooled using a larger kernel \( \rho_{\max
 
 % This input mapping is crucial in shaping the dynamic behavior of bistable neurons. In the case of an ON event, the neuron receives a transient positive input current that is applied for a single simulation step. However, due to the bistable nature of the model, the neuron does not immediately return to rest after the stimulus disappears. Instead, it remains in an active spiking state, continuously firing until it is explicitly reset by an OFF event. This reset occurs when the same neuron index receives an inhibitory current corresponding to a negative event in the \ac{dvs} stream.
 
-\subsubsection*{Bistability-based input encoding and inhibitory weight calibration}
+% \subsubsection*{Bistability-based input encoding and inhibitory weight calibration}
 
-The input layer consists of ``bistable'' spiking neurons, each implemented using the Izhikevich neuron model operating in the bistable regime \cite{izhikevich2004model}. This configuration allows each neuron to remain either in a stable quiescent state or in a self-sustained spiking state, thus providing a persistent memory of recent input events. The bistable dynamics act as a phase-locked loop (PLL)–like mechanism: once a neuron is driven into its spiking orbit by an excitatory input, it continues to oscillate (phase-lock) with its intrinsic limit cycle until an inhibitory current resets it to the resting equilibrium. Consequently, the neuron preserves a trace of the most recent event polarity, effectively encoding event history over extended timescales.
+% The input layer consists of ``bistable'' spiking neurons, each implemented using the Izhikevich neuron model operating in the bistable regime \cite{izhikevich2004model}. This configuration allows each neuron to remain either in a stable quiescent state or in a self-sustained spiking state, thus providing a persistent memory of recent input events. The bistable dynamics act as a phase-locked loop (PLL)–like mechanism: once a neuron is driven into its spiking orbit by an excitatory input, it continues to oscillate (phase-lock) with its intrinsic limit cycle until an inhibitory current resets it to the resting equilibrium. Consequently, the neuron preserves a trace of the most recent event polarity, effectively encoding event history over extended timescales.
 
-At steady state, setting $\dot{v}=\dot{u}=0$ in the Izhikevich model yields the fixed-point equations:
+% At steady state, setting $\dot{v}=\dot{u}=0$ in the Izhikevich model yields the fixed-point equations:
+% \begin{align}
+% u &= b v, \\
+% 0.04v^2 + (5-b)v + (140+I) &= 0.
+% \end{align}
+% The equilibrium membrane potentials $v^*$ are given by the quadratic roots, and their stability depends on the discriminant
+% \begin{equation}
+% \mathbf{D} = (5 - b)^2 - 4(0.04)(140 + I).
+% \end{equation}
+% When $\mathbf{D}>0$, the neuron possesses two distinct real equilibria, corresponding respectively to a stable resting state and an unstable point near a spiking limit cycle. This coexistence of a fixed point and a self-sustained oscillatory attractor defines the bistable regime.
+
+% To determine the inhibitory current that precisely stabilizes the resting branch, we compute the critical current $I_{\rm crit}$ at which the $v$-nullcline touches its extremum:
+% \begin{equation}
+% \frac{\partial}{\partial v}\bigl(0.04v^2 + 5v + 140 - u + I\bigr) = 0
+% \;\Longrightarrow\;
+% 0.08v + 5 = 0.
+% \end{equation}
+% Hence,
+% \begin{equation}
+% v^*=-\frac{5}{0.08}=-62.5,\qquad u^* = b\,v^* = 1.5\times(-62.5)=-93.75.
+% \end{equation}
+
+% The $v$-nullcline is the curve in the $(v,u)$ phase plane where the instantaneous voltage derivative vanishes ($\dot v=0$); the $u$-nullcline is where $\dot u=0$. Equilibria are intersection points of these two curves.
+
+% Substituting $(v^*,u^*)$ into the nullcline equation gives
+% \begin{align}
+% 0.04(v^*)^2 + 5v^* + 140 - u^* + I_{\rm crit} = 0
+% \\
+% I_{\rm crit} = u^* - 0.04(v^*)^2 - 5v^* - 140
+% = -93.75 - 156.25 + 312.5 - 140 = -77.5.
+% \end{align}
+% Therefore, the inhibitory pulse amplitude required to place the neuron exactly at the saddle–node boundary is $-77.5$ to silence the neuron and return it to the resting equilibrium. Each input neuron receives currents proportional to the preprocessed \ac{dvs} event matrix $E'$, where ON events $(+1)$ and OFF events $(-1)$ are mapped to distinct neuron indices. The current injection rule is defined as
+% \begin{align}
+% I_i(t) =
+% \begin{cases}
+% 100, & \text{if } E'_i = +1, \\[3pt]
+% -77.5, & \text{if } E'_i = -1, \\[3pt]
+% -65, & \text{otherwise},
+% \end{cases}
+% \end{align}
+% where $I_i(t)=100$ is a transient excitatory drive, $I_{\rm inh}=-77.5$ is the inhibitory weight derived above, and $I_i(t)=-65$ represents the baseline current maintaining the neuron at rest. In this implementation, $I_i(t)=100$ corresponds to the maximum depolarizing current that pushes the neuron toward the spiking attractor, while $I_i(t)=-65$ ensures quiescence in the absence of events.
+
+
+% Upon receiving an ON event, a neuron is momentarily excited with $I_i(t)=100$ for a single simulation step. Owing to its bistability, it transitions into the spiking attractor and continues to fire even after the input is removed (like a phase-locked oscillator maintaining its phase after synchronization). The state of persistent spiking corresponds to the neuron being ``locked'' onto the active phase of the event stream. When the corresponding OFF event occurs, the neuron receives an inhibitory pulse of amplitude $I_i(t)=-77.5$, which pushes the state variable back across the saddle–node threshold, thereby terminating spiking and restoring the quiescent equilibrium.  
+
+% This mechanism enables the input layer to function as a short-term memory system. Even in the absence of new motion or visual changes in the environment, neurons that were previously excited by object movement continue to spike, thereby maintaining a persistent representation of object locations. As a result, the network retains awareness of the last known positions of salient features, making it especially suitable for processing sparse, asynchronous data and tracking static or intermittently visible targets.
+
+\subsubsection*{Bistability-based input encoding and inhibitory calibration}
+
+The input layer is composed of bistable spiking neurons implemented using the Izhikevich model in a parameter regime where a stable resting equilibrium coexists with a self-sustained spiking attractor \cite{izhikevich2004model}. This bistability enables each neuron to retain a memory of recent excitation without requiring recurrent connections. An excitatory input event can switch the neuron from rest into the spiking attractor, where it remains active until an explicit inhibitory input returns it to quiescence. In this sense, the neuron maintains an internal dynamical state that persists after the removal of the input, providing short-term temporal memory of event polarity. This behavior is analogous to phase capture in oscillatory systems, in that a transient input induces a stable oscillatory response that persists until actively reset, although no explicit sinusoidal phase tracking is performed.
+
+At steady state, setting $\dot v=\dot u=0$ in the Izhikevich model yields
 \begin{align}
 u &= b v, \\
-0.04v^2 + (5-b)v + (140+I) &= 0.
+0.04v^2 + (5-b)v + (140+I) &= 0,
 \end{align}
-The equilibrium membrane potentials $v^*$ are given by the quadratic roots, and their stability depends on the discriminant
+with equilibrium points determined by the discriminant
 \begin{equation}
 \mathbf{D} = (5 - b)^2 - 4(0.04)(140 + I).
 \end{equation}
-When $\mathbf{D}>0$, the neuron possesses two distinct real equilibria, corresponding respectively to a stable resting state and an unstable point near a spiking limit cycle. This coexistence of a fixed point and a self-sustained oscillatory attractor defines the bistable regime.
-
-To determine the inhibitory current that precisely stabilizes the resting branch, we compute the critical current $I_{\rm crit}$ at which the $v$-nullcline touches its extremum:
+When $\mathbf{D}>0$, the system admits two real equilibria corresponding to a stable resting state and an unstable equilibrium associated with the onset of a spiking limit cycle, defining the bistable regime. The critical inhibitory current required to collapse the oscillatory attractor is obtained by enforcing tangency of the $v$-nullcline,
 \begin{equation}
-\frac{\partial}{\partial v}\bigl(0.04v^2 + 5v + 140 - u + I\bigr) = 0
-\;\Longrightarrow\;
-0.08v + 5 = 0.
+\frac{\partial}{\partial v}\bigl(0.04v^2 + 5v + 140 - u + I\bigr)=0
+\;\Rightarrow\;
+v^*=-62.5,\quad u^*=b\,v^*=-93.75,
 \end{equation}
-Hence,
+which yields $I_{\rm crit}=-77.5$. Based on this analysis, each input neuron receives current according to the preprocessed DVS event $E'_i$,
 \begin{equation}
-v^*=-\frac{5}{0.08}=-62.5,\qquad u^* = b\,v^* = 1.5\times(-62.5)=-93.75.
-\end{equation}
-
-The $v$-nullcline is the curve in the $(v,u)$ phase plane where the instantaneous voltage derivative vanishes ($\dot v=0$); the $u$-nullcline is where $\dot u=0$. Equilibria are intersection points of these two curves.
-
-Substituting $(v^*,u^*)$ into the nullcline equation gives
-\begin{align}
-0.04(v^*)^2 + 5v^* + 140 - u^* + I_{\rm crit} = 0
-\\
-I_{\rm crit} = u^* - 0.04(v^*)^2 - 5v^* - 140
-= -93.75 - 156.25 + 312.5 - 140 = -77.5.
-\end{align}
-Therefore, the inhibitory pulse amplitude required to place the neuron exactly at the saddle–node boundary is $-77.5$ to silence the neuron and return it to the resting equilibrium. Each input neuron receives currents proportional to the preprocessed \ac{dvs} event matrix $E'$, where ON events $(+1)$ and OFF events $(-1)$ are mapped to distinct neuron indices. The current injection rule is defined as
-\begin{align}
-I_i(t) =
+I_i(t)=
 \begin{cases}
-100, & \text{if } E'_i = +1, \\[3pt]
--77.5, & \text{if } E'_i = -1, \\[3pt]
+100, & E'_i=+1,\\
+-77.5, & E'_i=-1,\\
 -65, & \text{otherwise},
 \end{cases}
-\end{align}
-where $I_i(t)=100$ is a transient excitatory drive, $I_{\rm inh}=-77.5$ is the inhibitory weight derived above, and $I_i(t)=-65$ represents the baseline current maintaining the neuron at rest. In this implementation, $I_i(t)=100$ corresponds to the maximum depolarizing current that pushes the neuron toward the spiking attractor, while $I_i(t)=-65$ ensures quiescence in the absence of events.
-
-
-Upon receiving an ON event, a neuron is momentarily excited with $I_i(t)=100$ for a single simulation step. Owing to its bistability, it transitions into the spiking attractor and continues to fire even after the input is removed (like a phase-locked oscillator maintaining its phase after synchronization). The state of persistent spiking corresponds to the neuron being ``locked'' onto the active phase of the event stream. When the corresponding OFF event occurs, the neuron receives an inhibitory pulse of amplitude $I_i(t)=-77.5$, which pushes the state variable back across the saddle–node threshold, thereby terminating spiking and restoring the quiescent equilibrium.  
-
-This mechanism enables the input layer to function as a short-term memory system. Even in the absence of new motion or visual changes in the environment, neurons that were previously excited by object movement continue to spike, thereby maintaining a persistent representation of object locations. As a result, the network retains awareness of the last known positions of salient features, making it especially suitable for processing sparse, asynchronous data and tracking static or intermittently visible targets.
+\end{equation}
+where excitatory ON events induce a transition into the spiking attractor, OFF events actively reset the neuron to rest, and the baseline current maintains quiescence. This bistability-based encoding allows recently active visual features to remain represented for tens of milliseconds even in the absence of new events, ensuring temporal continuity in sparse, event-driven perception.
 
 \subsubsection{Hidden Layers}
 \subsubsection*{First Hidden Layer: Attention and Perception of \ac{dvs} Events}
