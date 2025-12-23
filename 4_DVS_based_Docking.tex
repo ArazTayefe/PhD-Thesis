@@ -379,7 +379,7 @@ u \leftarrow u + d.
 
 \subsection{Deep \ac{snn} Structure}
 
-The neural network implemented in this study consists of four layers: an entropy-pooled input layer that processes sensory information from a \ac{dvs}, the first hidden layer that learns visual perception and attention through \ac{alm} repositories for \ac{pa} and \ac{n2a}, the second hidden layer that governs the mission phases through regulatory and control repositories (\ac{fpd}, \ac{dpd}, \ac{ffm}, and \ac{cdm}), and an output layer responsible for generating motor control commands. Each of these layers employs a distinct parameterization of the Izhikevich neuron model to achieve its respective function within the network. The term dominance refers to a dynamical winner--take--all condition enforced through lateral inhibition at the population level.
+The neural network implemented in this study consists of four layers: an entropy-pooled input layer that processes sensory information from a \ac{dvs}, the first hidden layer that learns visual perception and attention through \ac{alm} repositories (\ac{pai} and \ac{naai}) for \ac{par} and \ac{naar}, the second hidden layer that governs the mission phases through regulatory and control repositories (\ac{dpi}, \ac{rpi}, \ac{rpr}, and \ac{dpr}), and an output layer responsible for generating motor control commands. Each of these layers employs a distinct parameterization of the Izhikevich neuron model to achieve its respective function within the network. The term dominator refers to a dynamical winner--take--all condition enforced through lateral inhibition at the population level. 
 
 \begin{figure}[H]
     \centering
@@ -390,9 +390,9 @@ The neural network implemented in this study consists of four layers: an entropy
 
 In this study, we design a deep \ac{snn} architecture tailored for swarm robotics applications requiring perception, decision-making, and control under strict energy and computational constraints. The network consists of four main stages. The first is an entropy-based adaptive pooling input layer that compresses \ac{dvs} event data into a \(32 \times 32\) map while preserving temporal contrast information. This layer provides a compact and information-rich representation of dynamic visual stimuli, forming the input to subsequent processing layers. 
 
-The second stage is the first hidden layer, which is organized into multiple repositories of neurons to separate and process attention-related signals. Specifically, it includes repositories for both payload and neighboring-agent attention (\ac{pa} and \ac{n2a}), as well as \ac{pad} and \ac{n2ad} repositories that regulate the excitatory and inhibitory interactions between these attention pathways. This structure allows the network to perform selective attention and inhibition based on the relative activation of these neuron groups.
+The second stage is the first hidden layer, which is organized into multiple repositories of neurons to separate and process attention-related signals. Specifically, it includes repositories for both payload and neighboring-agent attention (\ac{par} and \ac{naar}), as well as \ac{pai} and \ac{naai} repositories that regulate the excitatory and inhibitory interactions between these attention pathways. This structure allows the network to perform selective attention and inhibition based on the relative activation of these neuron groups.
 
-The third stage is the second hidden layer, which is divided into four functionally distinct repositories: the \ac{fpd}, \ac{dpd}, \ac{ffm}, and \ac{cdm} neural repositories. These submodules are composed of bistable and Class 2 Izhikevich neurons that govern phase-gated transitions between formation and docking behaviors, ensuring smooth and stable policy switching across mission stages.
+The third stage is the second hidden layer, which is divided into four functionally distinct repositories: the \ac{dpi}, \ac{rpi}, \ac{rpr}, and \ac{dpr}. These submodules are composed of bistable and Class 2 Izhikevich neurons that govern phase-gated transitions between formation and docking behaviors, ensuring smooth and stable policy switching across mission stages.
 
 Finally, the output layer consists of four spiking neurons corresponding to the thrust directions \(x^{-}\), \(x^{+}\), \(y^{-}\), and \(y^{+}\). These neurons generate directional control commands based on the collective spiking activity, which is refined through \ac{stdp}. Each layer in the network employs layer-specific rewards to adapt its synaptic weights autonomously. This hierarchical organization enables the agents to perform phase-dependent policy switching, attention-driven visual perception, and decentralized coordination during both formation flying and collaborative docking.
 
@@ -569,7 +569,7 @@ where excitatory ON events induce a transition into the spiking attractor, OFF e
 \subsubsection{Hidden Layers}
 \subsubsection*{First Hidden Layer: Attention and Perception of \ac{dvs} Events}
 
-The first hidden layer of the \ac{snn} is designed to perform early-stage visual feature extraction, dimensionality reduction, and fuzzy representation of the environment while incorporating \ac{alm}-based attention and gating mechanisms. This layer contains four repositories of neurons that collectively process the \ac{dvs} input to distinguish between the Payload and proximal agents while encoding these features in a fuzzy spatial representation guided by reward function (section \ref{FirstLayerTraining}).
+The first hidden layer of the \ac{snn} is designed to perform early-stage visual feature extraction, dimensionality reduction, and activity-coded spatial representation of the environment while incorporating \ac{alm}-based attention and gating mechanisms. This layer contains four repositories of neurons that collectively process the \ac{dvs} input to distinguish between the Payload and proximal agents while encoding these features in a activity-coded spatial representation guided by reward function (section \ref{FirstLayerTraining}).
 
 \begin{figure}[H]
     \centering
@@ -578,34 +578,32 @@ The first hidden layer of the \ac{snn} is designed to perform early-stage visual
     \label{firsthiddenlayer}
 \end{figure}
 
-All neurons in this layer employ the Izhikevich model with Class 2 excitability for smooth frequency modulation, while the N2A Dominance Repository neurons specifically use a bistable configuration to maintain persistent spiking during activation intervals. This bistability enables autonomous inhibition without continuous external input: once N2A Dominance Repository neurons are activated (transitioning from stable to unstable state), they continue firing until the inhibitory reset signal is received. Each bistable neuron is initialized with consistent membrane and recovery variables to guarantee readiness for event-triggered activation.
+All neurons in this layer employ the Izhikevich model with Class 2 excitability for smooth frequency modulation, while the \ac{naai} neurons specifically use a bistable configuration to maintain persistent spiking during activation intervals. This bistability enables autonomous inhibition without continuous external input: once \ac{naai} neurons are activated, they continue firing until the inhibitory reset signal is received. Each bistable neuron is initialized with consistent membrane and recovery variables to guarantee readiness for event-triggered activation. The \ac{alm}s are mounted on each agent transmit light periodically at a frequency designed for phase-shifted activation patterns. The \ac{alm}s are configured to blink with a period \(20 \, \text{ms} \), remaining active for \(10 \, \text{ms} \).
 
-The \ac{alm}s are mounted on each agent transmit light periodically at a frequency designed for phase-shifted activation patterns. The \ac{alm}s are configured to blink with a period \(20 \, \text{ms} \), remaining active for \(10 \, \text{ms} \). To avoid "synchronous silences" across the ALM neuron population — i.e., moments when all ALM neurons happen to be silent (or conversely all fire simultaneously) at a single sample time — the stimulation delivered during each activation interval is jittered by adding uniformly distributed random noise to the input current. Specifically, for each time step within the activation window the input current is perturbed by \(\delta \mathbf{I}\). This produces sparse, staggered firing so that at least some ALM neurons are active at each sample time, preventing perfectly synchronous firing or silence and thereby maintaining continuous inhibitory/gating activity.
-
-Functionally, the first hidden layer separates the Payload position channel and the proximal agents' position channel, representing them in a fuzzy spatial format (firing rates indicate the degree of activity associated with that spatial region) using the spiking activity of its neurons. This fuzzy coding is achieved by mapping the processed \ac{dvs} input onto the neurons while allowing the network to maintain partial activation across spatial regions, enabling smooth transitions between detected object configurations. Additionally, the first hidden layer performs dimensionality reduction by projecting the high-resolution \ac{dvs} input onto two separate repositories (one for the Payload and one for proximal agents) each represented on an 16 \(\times\) 16 grid.
+Functionally, the first hidden layer separates the Payload position channel and the proximal agents' position channel, representing them in a activity-coded spatial representation (firing rates indicate the degree of activity associated with that spatial region) using the spiking activity of its neurons. This activity-coded spatial representation is achieved by mapping the processed \ac{dvs} input onto the neurons while allowing the network to maintain partial activation across spatial regions, enabling smooth transitions between detected object configurations. Additionally, the first hidden layer performs dimensionality reduction by projecting the high-resolution \ac{dvs} input onto two separate repositories (one for the Payload and one for proximal agents) each represented on an 16 \(\times\) 16 grid.
 
 The spiking patterns generated within this layer create unique states in the network, allowing the system to distinguish different object configurations in the environment. During operation, when the agents' \ac{alm}s are active, the corresponding \ac{alm} neurons in the first hidden layer fire and inhibit the Payload detection repository. This inhibitation ensures that during the weight update phase of the network, only the connections associated with the agent detection repository are updated. When the agents' \ac{alm}s turn off, the Payload detection neurons fire, and the connections associated with the Payload detection repository are updated in the subsequent weight update phase.
 
-Through this mechanism, the first hidden layer dynamically manages the flow of information based on the phase-synchronized \ac{alm} signals, ensuring clear separation between agent and Payload representations, maintaining fuzzy spatial coding, reducing input dimensionality, and creating structured, distinguishable states for downstream processing in the \ac{snn}.
+Through this mechanism, the first hidden layer dynamically manages the flow of information based on the \ac{alm} signals, ensuring clear separation between agent and Payload representations, maintaining activity-coded spatial representation, reducing input dimensionality, and creating structured, distinguishable states for downstream processing in the \ac{snn}.
 
 \subsubsection*{Second Hidden Layer: Mission Phase Control and Synaptic Pathway Switching}
 
 The second hidden layer governs mission-phase control and synaptic pathway switching by utilizing structured neuron repositories that enable the network to autonomously transition between formation-flying and docking behaviors while learning phase-dependent control policies through spiking activity driven by external sensory feedback.
 
-Within this layer, the Formation-Flying Mission (\ac{ffm}), Collaborative Docking Mission (\ac{cdm}), Docking Phase Dominance (\ac{dpd}), and Formation Phase Dominance (\ac{fpd}) repositories are interconnected to enforce phase-gated learning. The \ac{ffm} and \ac{cdm} repositories act as primary output conduits through which synaptic connections to the motor control layer are routed, enabling phase-specific \ac{stdp}-based updates only in the currently active pathway. Inactive pathways remain unchanged, preserving previously learned control policies. The \ac{dpd} and \ac{fpd} repositories regulate these transitions through event-based mutual inhibition and excitatory control.
+Within this layer, the Rendezvous Phase Repository (\ac{rpr}), Docking Phase Repository (\ac{dpr}), Docking Phase Inhibitor (\ac{dpi}), and Rendezvous Phase Inhibitor (\ac{rpi}) repositories are interconnected to enforce phase-gated learning. The \ac{rpr} and \ac{dpr} repositories act as primary output conduits through which synaptic connections to the motor control layer are routed, enabling phase-specific \ac{stdp}-based updates only in the currently active pathway. Inactive pathways remain unchanged, preserving previously learned control policies. The \ac{rpi} and \ac{dpi} repositories regulate these transitions through event-based mutual inhibition and excitatory control.
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=1\linewidth]{Figures/Hidden Layer 2.pdf}
-    \caption{Structured Second Hidden Layer architecture showing the Formation-Flying (\ac{ffm}), Collaborative Docking (\ac{cdm}), Mission Phase Control (\ac{dpd}), and Regulatory Formation Phase (\ac{fpd}) repositories interconnected through inhibitory (yellow) and excitatory (purple) synapses. External stimulation from contact sensors triggers mission-phase transitions.}
+    \caption{Structured Second Hidden Layer architecture showing the Formation Flying Mission, Collaborative Docking Mission, Docking Phase Dominance, and Formation Phase Dominance repositories interconnected through inhibitory (yellow) and excitatory (purple) synapses. External stimulation from contact sensors triggers mission-phase transitions.}
     \label{secondhiddenlayer}
 \end{figure}
 
-The neurons within the second hidden layer employ models capable of producing persistent spiking according to the input (Class 2 model), and rapid state transitions required for dynamic mission control. The \ac{ffm} and \ac{cdm} neurons are configured to exhibit regular, sustained spiking, enabling them to produce stable outputs during their respective active phases. In contrast, the \ac{fpd} neurons exhibit bistable firing patterns, enabling them to maintain persistent activity while providing controlled inhibition during phase transitions. The \ac{dpd} neurons use bistable neuron model, designed to generate rapid and transient spiking patterns that effectively trigger phase switches by inhibiting the active repositories when mission conditions change.
+The neurons within the second hidden layer employ models capable of producing persistent spiking according to the input (Class 2 model), and rapid state transitions required for dynamic mission control. The \ac{rpr} and \ac{dpr} neurons are configured to exhibit regular, sustained spiking, enabling them to produce stable outputs during their respective active phases. In contrast, the \ac{dpi} neurons exhibit bistable firing patterns, enabling them to maintain persistent activity while providing controlled inhibition during phase transitions. The \ac{rpi} neurons use bistable neuron model, designed to generate rapid and transient spiking patterns that effectively trigger phase switches by inhibiting the active repositories when mission conditions change.
 
-During formation flying, the agent has not contacted the Payload, the \ac{ffm} neurons maintain persistent spiking activity. In this phase, the active learning pathway extends from the input layer to the visual processing layer, through the \ac{ffm}, to the output layer, where synaptic connections within the \ac{ffm} repository are updated according to the \ac{stdp} rule. Upon Payload contact, the \ac{dpd} neurons are activated, signaling the transition to the docking phase. The \ac{dpd} neurons inhibit both \ac{ffm} and \ac{fpd} neurons. This inhibition silences \ac{ffm} and \ac{fpd} activity, releasing the \ac{cdm} neurons from inhibition and allowing them to fire, thereby enabling the network to transition to the docking phase. During docking, the active learning pathway becomes the input layer to the visual processing layer, to the \ac{cdm}, and continues to the output layer, allowing the network to learn the docking policy explicitly through the active \ac{cdm} connections.
+During rendezvous phase, the agent has not contacted the Payload, the \ac{rpr} neurons maintain persistent spiking activity. In this phase, the active learning pathway extends from the input layer to the visual processing layer, through the \ac{rpr}, to the output layer, where synaptic connections within the \ac{rpr} repository are updated according to the \ac{stdp} rule. Upon Payload contact, the \ac{rpi} neurons are activated, signaling the transition to the docking phase. The \ac{rpi} neurons inhibit both \ac{rpr} and \ac{dpi} neurons. This inhibition silences \ac{rpr} and \ac{dpi} activity, releasing the \ac{dpr} neurons from inhibition and allowing them to fire, thereby enabling the network to transition to the docking phase. During docking, the active learning pathway becomes the input layer to the visual processing layer, to the \ac{dpr}, and continues to the output layer, allowing the network to learn the docking policy explicitly through the active \ac{dpr} connections.
 
-This structure ensures that only the relevant neuron repository (\ac{ffm} or \ac{cdm}) is active during each mission phase, enforcing phase-specific learning while preventing interference between formation flying and docking. This phase-gated connectivity enables energy-efficient, event-driven learning aligned with the sparse nature of \ac{snn}s, providing reliable mission-phase transitions for autonomous docking missions.
+This structure ensures that only the relevant neuron repository (\ac{rpr} or \ac{dpr}) is active during each mission phase, enforcing phase-specific learning while preventing interference between formation flying and docking. This phase-gated connectivity enables energy-efficient, event-driven learning aligned with the sparse nature of \ac{snn}s, providing reliable mission-phase transitions for autonomous docking missions.
 
 % \subsubsection{Output Layer and PWM Signal Generation}
 
@@ -1822,12 +1820,12 @@ In our simulation of the multi‐agent docking task, the central Payload is mode
 
 According to the International Docking System Standard (IDSS)~\cite{NASA_IDSS_IDD_RevF}, soft capture is required to occur with a lateral (radial) misalignment of less than~0.10~m and a relative lateral rate not exceeding~0.04~m/s at initial contact.
 
-In our \ac{snn} implementation, we configure four layers of Izhikevich neurons, each simulated with a time step of \(\Delta t = 0.1\) ms. The input layer comprises 1024 neurons that encode the preprocessed DVS currents. The first hidden layer contains \(512\) visual-processing neurons together with \(20\) \ac{pad} and \(20\) \ac{n2ad} attention units, for a total of \(552\) neurons; the ALM repositories operate in the Class 2 excitability regime for smooth frequency modulation. The second hidden layer comprises \(130\) Class 2 neurons: \(45\) \ac{ffm}, \(45\) \ac{cdm}, \(20\) \ac{dpd}, and \(20\) \ac{fpd}. Finally, the output layer consists of \(4\) Bistabilitiy neurons that generate directional PWM control signals for the \(X\)– and \(Y\)–axis thrust commands. Table~\ref{tab:neuronparams} summarizes these layer configurations.
+In our \ac{snn} implementation, we configure four layers of Izhikevich neurons, each simulated with a time step of \(\Delta t = 0.1\) ms. The input layer comprises 1024 neurons that encode the preprocessed DVS currents. The first hidden layer contains \(512\) visual-processing neurons together with \(20\) \ac{pai} and \(20\) \ac{naai} units, for a total of \(552\) neurons; the ALM repositories operate in the Class 2 excitability regime for smooth frequency modulation. The second hidden layer comprises \(130\) Class 2 neurons: \(45\) \ac{rpr}, \(45\) \ac{dpr}, \(20\) \ac{rpi}, and \(20\) \ac{dpi}. Finally, the output layer consists of \(4\) Bistabilitiy neurons that generate directional PWM control signals for the \(X\)– and \(Y\)–axis thrust commands. Table~\ref{tab:neuronparams} summarizes these layer configurations.
 
 
 \begin{table}[ht]
   \centering
-  \begin{tabular}{lcccp{4.5cm}}
+  \begin{tabular}{lcccp{4.8cm}}
     \hline
     \textbf{Layer} & \textbf{Type} & \textbf{\# Neurons} & \textbf{Description} \\
     \hline
@@ -1839,21 +1837,22 @@ In our \ac{snn} implementation, we configure four layers of Izhikevich neurons, 
     \hline
     Hidden 1 
     & Class 2 
-    & $552$ 
+    & $512 + 20 + 20 = 552$ 
     & \makecell[l]{%
-        512 Visual neurons \\ 
-        20 Payload Attention Dominance (PAD) \\ 
-        20 Neighboring Agent Attention Dominance (N2AD)}
+        512 Visual neurons (Payload Attention Repository (PAR) + Neighboring Agent Attention Repository (NAAR)) \\ 
+        20 Payload Attention Inhibitor (PAI) \\ 
+        20 Neighboring Agent Attention Inhibitor (NAAI)}
     \\[0.5ex]
     \hline
     Hidden 2 
     & Class 2 
-    & $130$ 
+    & $45 + 45 + 20 + 20 = 130$ 
     & \makecell[l]{%
-        45 Formation Flying Mission (FFM) \\
-        45 Collaborative Docking Mission (CDM) \\
-        20 Docking Phase Dominance (DPD) \\
-        20 Formation Phase Dominance (FPD)}
+        45 Rendezvous Phase Repository (RPR) \\
+        20 Rendezvous Phase Inhibitor (RPI) \\
+        45 Docking Phase Repository (DPR) \\
+        20 Docking Phase Inhibitor (DPI) \\
+        }
     \\[0.5ex]
     \hline
     Output 
@@ -1865,6 +1864,8 @@ In our \ac{snn} implementation, we configure four layers of Izhikevich neurons, 
   \caption{Neuron layer configurations with full descriptions of each functional subgroup.}
   \label{tab:neuronparams}
 \end{table}
+
+
 
 
 
@@ -1888,7 +1889,7 @@ Reward interval $T_r^{(\ell)}$ [ms] & 10 & 10 & 50\\
 \end{tabularx}
 \end{table}
 
-To ensure robust inhibitory control and prevent phase‐mixing, each of the \ac{fpd}, \ac{dpd}, and \ac{alm} repositories is implemented with multiple neurons rather than a single unit. By deploying more than one neuron per repository, we ensure that at least one neuron will fire at each sample time, maintaining a continuous inhibitory or gating signal even under variable spiking conditions. Furthermore, we introduce small random perturbations to the initial membrane potentials and Izhikevich parameters across neurons within each repository. This heterogeneity breaks up synchrony, if all neurons in a repository were identical and initialized identically, they would tend to fire simultaneously, weakening phase separation. Instead, randomized initialization ensures staggered spiking, which improves the temporal coverage of inhibition and strengthens the decoupling of formation‐flying and docking learning phases.
+To ensure robust inhibitory control and prevent phase‐mixing, each of the \ac{pai}, \ac{naai}, \ac{rpi}, and \ac{dpi} repositories is implemented with multiple neurons rather than a single unit. By deploying more than one neuron per repository, we ensure that at least one neuron will fire at each sample time, maintaining a continuous inhibitory or gating signal even under variable spiking conditions. Furthermore, we introduce small random perturbations to the initial membrane potentials and Izhikevich parameters across neurons within each repository. This heterogeneity breaks up synchrony, if all neurons in a repository were identical and initialized identically, they would tend to fire simultaneously, weakening phase separation. Instead, randomized initialization ensures staggered spiking, which improves the temporal coverage of inhibition and strengthens the decoupling of formation‐flying and docking learning phases.
 
 Figure~\ref{fig:light_sim} illustrates the effect of activating the \ac{alm} on the agents’ visual perception. When the \ac{alm} is turned off (Figure~\ref{fig:light_sim}a), the proximal agent produces relatively weak brightness variations compared to the payload, resulting in limited event generation in the \ac{dvs}. As a consequence, the visual perception layer has difficulty distinguishing the smaller agent from the background. In contrast, when the \ac{alm} is turned on (Figure~\ref{fig:light_sim}b), the proximal agent generates a higher concentration of brightness and corresponding \ac{dvs} events despite its smaller physical size relative to the payload. This increased event activity enhances the attention mechanism, allowing the network to more clearly separate and detect proximal agents alongside the payload. 
 
@@ -1943,7 +1944,7 @@ Figure~\ref{fig:snn_structurewithalmrepresentations} illustrates the structural 
     \label{fig:snn_structurewithalmrepresentations}
 \end{figure}
 
-Figure~\ref{fig:repository_activity} shows how the payload and proximal agent detector repositories behave during the early training phase when the agents' ALM is inactive. The grid cells are generated according to the neurons' firing rates shown in Figure~\ref{FiringActivityMatrix}. As illustrated in Figure~\ref{fig:repository_activity}a, the payload detector repository exhibits strong and consistent activity because it responds directly to the bright and stationary visual signature of the payload. In contrast, the proximal agent detector repository remains largely inactive (Figure~\ref{fig:repository_activity}b). Its activity is suppressed by the inhibitory signals originating from the payload detector repository, which dominates the competition when the ALM is turned off. This inhibitory interaction causes the network to allocate most of its representational capacity to the payload. As a result, the \ac{stdp} learning rule primarily reinforces the synaptic pathways leading to the payload detector repository, while the connections to the proximal agent detector repository receive little or no strengthening at this stage.
+Figure~\ref{fig:repository_activity} shows how the payload and proximal agent detector repositories behave during the early training phase when the agents' ALM is inactive. The grid cells are generated according to the neurons' firing rates shown in Figure~\ref{fig:FiringActivityMatrix}. As illustrated in Figure~\ref{fig:repository_activity}a, the payload detector repository exhibits strong and consistent activity because it responds directly to the bright and stationary visual signature of the payload. In contrast, the proximal agent detector repository remains largely inactive (Figure~\ref{fig:repository_activity}b). Its activity is suppressed by the inhibitory signals originating from the payload detector repository, which dominates the competition when the ALM is turned off. This inhibitory interaction causes the network to allocate most of its representational capacity to the payload. As a result, the \ac{stdp} learning rule primarily reinforces the synaptic pathways leading to the payload detector repository, while the connections to the proximal agent detector repository receive little or no strengthening at this stage.
 
 % Initial Learning Iterations
 \begin{figure}[H]
@@ -2012,7 +2013,7 @@ Figure~\ref{fig:converged_activity_on} illustrates the activity of the first hid
 
 
 The results presented in Figures~\ref{fig:HL2Activity}--\ref{fig:Rewards} illustrate the behavior of the agents during both the formation and docking phases while the training of the second hidden layer and the output layer is still ongoing. These figures demonstrate how the agents adapt their actions and control strategies as learning progresses, with the network gradually refining its representations and motor outputs to achieve coordinated docking and formation maneuvers.
-Figure \ref{fig:HL2Activity} presents the activity patterns of the second hidden layer repositories during both the formation and docking phases for Agent 1. In Figure~\ref{fig:HL2Activity}a, during the formation phase, the \ac{ffm} repository exhibits a pronounced activity peak around \(135^\circ\), which aligns with the line-of-sight (LOS) direction from Agent 1 to the payload. This indicates that the \ac{ffm} has effectively learned to orient its activity towards the payload, facilitating stable formation flying. Conversely, in Figure~\ref{fig:HL2Activity}b, during the docking phase, the \ac{cdm} repository shows a significant activity peak around \(45^\circ\), corresponding to the LOS direction from Agent 1 to the docking point. This shift in activity demonstrates that the \ac{cdm} has adapted its representation to focus on guiding the payload towards the docking location, highlighting the dynamic reconfiguration of repository activity in response to task demands.
+Figure \ref{fig:HL2Activity} presents the activity patterns of the second hidden layer repositories during both the formation and docking phases for Agent 1. In Figure~\ref{fig:HL2Activity}a, during the formation phase, the \ac{rpr} exhibits a pronounced activity peak around \(135^\circ\), which aligns with the line-of-sight (LOS) direction from Agent 1 to the payload. This indicates that the \ac{rpr} has effectively learned to orient its activity towards the payload, facilitating stable formation flying. Conversely, in Figure~\ref{fig:HL2Activity}b, during the docking phase, the \ac{dpr} repository shows a significant activity peak around \(45^\circ\), corresponding to the LOS direction from Agent 1 to the docking point. This shift in activity demonstrates that the \ac{dpr} has adapted its representation to focus on guiding the payload towards the docking location, highlighting the dynamic reconfiguration of repository activity in response to task demands.
 
 \begin{figure}[H]
     \setcounter{subfigure}{0}
