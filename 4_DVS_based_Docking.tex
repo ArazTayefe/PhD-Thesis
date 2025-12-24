@@ -1,6 +1,6 @@
 \chapter{Vision-Based Multi-Agent Docking with Deep Spiking Neural Networks}
 
-Autonomous docking of multiple agents in close-proximity missions, such as on-orbit servicing, satellite formation flying, and swarm Payload alignment, poses unique challenges in precision, robustness, and energy efficiency. In these missions, a team of robots must cooperate without centralized control, perceive relative pose information under stringent bandwidth and latency constraints, and execute coordinated maneuvers despite dynamic uncertainties and limited onboard resources. To address these challenges, this chapter introduces a fully decentralized, vision-based docking framework for swarm robots, combining \ac{dvs} event streams, \acp{alm}, and a Deep \ac{snn} trained with \ac{stdp}. The sparse, asynchronous output of DVS cameras and the event-driven nature of spiking neural networks contribute to low-latency and energy-efficient control, which supports the development of responsive and resource-aware systems for proximity docking \cite{9138762}.
+Autonomous docking of multiple agents in close-proximity missions, such as on-orbit servicing, satellite formation flying, and swarm payload alignment, poses unique challenges in precision, robustness, and energy efficiency. In these missions, a team of robots must cooperate without centralized control, perceive relative pose information under stringent bandwidth and latency constraints, and execute coordinated maneuvers despite dynamic uncertainties and limited onboard resources. To address these challenges, this chapter introduces a fully decentralized, vision-based docking framework for swarm robots, combining \ac{dvs} event streams, \acp{alm}, and a Deep \ac{snn} trained with \ac{stdp}. The sparse, asynchronous output of DVS cameras and the event-driven nature of spiking neural networks contribute to low-latency and energy-efficient control, which supports the development of responsive and resource-aware systems for proximity docking \cite{9138762}.
 
 
 
@@ -27,7 +27,7 @@ This work presents a biologically interpretable and scalable neuromorphic archit
 
 \end{enumerate}
 
-The remainder of this chapter is organized as follows. The Preliminaries section outlines the docking mission problem with swarm robots, describes the event-based camera simulation setup, details the dynamic models of the Payload and agents, and explains the neuron model employed in our network. The Proposed Neuromorphic Framework section presents the architecture of the deep \ac{snn}, including the input layer design with entropy-based adaptive pooling, the encoding configuration, the hidden layers for visual processing and mission phase switching, and the output layer for PWM signal generation. This section also covers the training of the deep \ac{snn} using \ac{stdp}, detailing the reward functions for different hidden layers and the synaptic weight update rules. The Results section evaluates the proposed framework, followed by the Conclusion.
+The remainder of this chapter is organized as follows. The Preliminaries section outlines the docking mission problem with swarm robots, describes the event-based camera simulation setup, details the dynamic models of the payload and agents, and explains the neuron model employed in our network. The Proposed Neuromorphic Framework section presents the architecture of the deep \ac{snn}, including the input layer design with entropy-based adaptive pooling, the encoding configuration, the hidden layers for visual processing and mission phase switching, and the output layer for PWM signal generation. This section also covers the training of the deep \ac{snn} using \ac{stdp}, detailing the reward functions for different hidden layers and the synaptic weight update rules. The Results section evaluates the proposed framework, followed by the Conclusion.
 
 
 \section{Preliminaries}
@@ -37,35 +37,35 @@ Swarm robotics, inspired by the collective behaviors observed in natural systems
 
 The desired collective behavior of the swarm emerges from the local interactions among the individual robots and between the robots and their environment. This paradigm contrasts with traditional robotic systems, which often rely on a central controller to dictate the actions of individual robots. The term ``docking missions," in the context of swarm robotics, encompasses a range of cooperative tasks in which multiple robots must achieve a state of connection or close proximity. This includes tasks such as rendezvous, where the objective is for multiple robots to converge at a common location or maintain a defined spatial relationship; assembly, where robots collaboratively work to form a desired structure or connect with other robots or objects to create a larger, functional entity.
 
-In the specific application of this study, the swarm agents are tasked with pushing a Payload towards a \ac{scs} to achieve a precise docking alignment. Each agent is equipped with thrusters, allowing them to move in 2D space, and a \ac{dvs} mounted on board provides them with visual feedback about the environment and proximal agents. Additionally, a \ac{dvs} camera is mounted at the center of the \ac{scs}, providing a global event-based view of the Payload and agents during docking.
+In the specific application of this study, the swarm agents are tasked with pushing a payload towards a \ac{scs} to achieve a precise docking alignment. Each agent is equipped with thrusters, allowing them to move in 2D space, and a \ac{dvs} mounted on board provides them with visual feedback about the environment and proximal agents. Additionally, a \ac{dvs} camera is mounted at the center of the \ac{scs}, providing a global event-based view of the payload and agents during docking.
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=1\linewidth]{Figures/3D Environment.pdf}
-    \caption{3D schematic of the multi-agent docking mission environment. Multiple agents work collaboratively to push a central Payload towards a \ac{scs} for docking alignment.}
+    \caption{3D schematic of the multi-agent docking mission environment. Multiple agents work collaboratively to push a central payload towards a \ac{scs} for docking alignment.}
     \label{fig:DockingMissionSchematic}
 \end{figure}
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.9\linewidth]{Figures/Figure 1.pdf}
-    \caption{2D representation of robots performing docking mission. Each agent pushes the Payload towards the \ac{scs} to align them together. The \ac{scs} and agents are equipped with a \ac{dvs} that streams high-frequency data for the proximity mission.}
+    \caption{2D representation of robots performing docking mission. Each agent pushes the payload towards the \ac{scs} to align them together. The \ac{scs} and agents are equipped with a \ac{dvs} that streams high-frequency data for the proximity mission.}
     \label{fig:DockingMissionfigure}
 \end{figure}
 
 
 The primary objective of this chapter is to develop a decentralized vision-based swarm docking system utilizing Deep \ac{snn}s trained with \ac{stdp}, which uses the asynchronous, sparse, and high-temporal-resolution output of \ac{dvs} cameras to guide the swarm behavior effectively. Each agent in the swarm runs its own local \ac{snn} onboard, processing sensory information independently and learning control policies in a distributed manner, which allows the swarm to remain scalable and robust to individual agent failures.
 
-In this environment, \ac{alm}s are installed exclusively on the agents to enhance their visibility within the event-based vision system. Each agent only sees its neighboring agents via \ac{dvs} events and does not directly measure their positions. The Payload has a considerably larger surface area; as such, it naturally generates sufficient brightness changes to trigger events in the \ac{dvs} sensor without the need for additional illumination. In contrast, the agents are compact and would otherwise produce sparse event activity; thus, their \acp{alm} are used to amplify their visual signatures and ensure reliable detection by the vision system. This configuration simplifies the temporal structure of the event stream while still enabling accurate agent identification and segmentation within the spatiotemporal data.
+In this environment, \ac{alm}s are installed exclusively on the agents to enhance their visibility within the event-based vision system. Each agent only sees its neighboring agents via \ac{dvs} events and does not directly measure their positions. The payload has a considerably larger surface area; as such, it naturally generates sufficient brightness changes to trigger events in the \ac{dvs} sensor without the need for additional illumination. In contrast, the agents are compact and would otherwise produce sparse event activity; thus, their \acp{alm} are used to amplify their visual signatures and ensure reliable detection by the vision system. This configuration simplifies the temporal structure of the event stream while still enabling accurate agent identification and segmentation within the spatiotemporal data.
 
-When the agents are flying and have not made contact with the Payload, they rely solely on their onboard \ac{dvs} for environment perception. This allows them to capture events corresponding to nearby agents and the Payload. Once an agent makes physical contact with the Payload, its onboard force contact sensor activates and the \ac{alm} signal is turned off. The agents' onboard \ac{dvs} data is then replaced by the \ac{scs} \ac{dvs}, providing a more comprehensive and centralized perspective of the Payload and the surrounding agents.
+When the agents are flying and have not made contact with the payload, they rely solely on their onboard \ac{dvs} for environment perception. This allows them to capture events corresponding to nearby agents and the payload. Once an agent makes physical contact with the payload, its onboard force contact sensor activates and the \ac{alm} signal is turned off. The agents' onboard \ac{dvs} data is then replaced by the \ac{scs} \ac{dvs}, providing a more comprehensive and centralized perspective of the payload and the surrounding agents.
 
 
 \subsection{Event-Based Camera Simulation}
 
 This section presents the simulation methodology for modeling brightness-based visual input and generating asynchronous events for \ac{snn}s using \ac{dvs}. Two distinct \ac{dvs} camera models are used in this study: one mounted on each agent and one placed at a fixed position on the \ac{scs}. Both cameras independently perceive the environment and produce separate event streams based on the change in perceived brightness over time.
 
-The environment is populated by multiple agents and a Payload object, each modeled as circular shapes with defined physical properties such as radius and centroid location. Each \ac{dvs} camera discretizes its field of view into a grid of $N_y \times N_x$ pixels, where each pixel corresponds to a fixed location in the simulated physical space. The spatial mapping between the continuous world coordinates and the discrete \ac{dvs} pixel grid is defined through a static transformation.
+The environment is populated by multiple agents and a payload object, each modeled as circular shapes with defined physical properties such as radius and centroid location. Each \ac{dvs} camera discretizes its field of view into a grid of $N_y \times N_x$ pixels, where each pixel corresponds to a fixed location in the simulated physical space. The spatial mapping between the continuous world coordinates and the discrete \ac{dvs} pixel grid is defined through a static transformation.
 
 For each \ac{dvs} view, a brightness map is generated at every simulation time step. Let $X_w$ and $Y_w$ represent the 2D coordinate meshgrids over the \ac{dvs} image plane in world units. The initial brightness grid $E(x,y)$ is set to a constant background value $\zeta_{\text{bg}}$ across all pixels. For each object in the scene, we determine which pixels of the DVS grid fall inside its circular outline. The brightness of these pixels is then calculated using Lambertian reflectance, which varies with the object’s orientation and its distance to each light source.
 
@@ -152,7 +152,7 @@ Otherwise, no event is generated and $e(x,y) = 0$. These updates are performed f
 \subsection{Dynamic Model of the Payload and Agents} 
 \label{sec:agent_dynamics}
 
-Each agent in the swarm is modeled as a point mass of mass \( m \) and radius \(R\). The dynamic state of each agent includes its position, velocity, thrust-based control forces, and interaction forces arising from \emph{agent--agent} collisions. A central Payload object with its own dynamics is influenced by contacts with the agents via a time-limited attachment rule (described below).
+Each agent in the swarm is modeled as a point mass of mass \( m \) and radius \(R\). The dynamic state of each agent includes its position, velocity, thrust-based control forces, and interaction forces arising from \emph{agent--agent} collisions. A central payload object with its own dynamics is influenced by contacts with the agents via a time-limited attachment rule (described below).
 
 The state of agent \( i \) at time \( t \) is defined as $\mathbf{p}_i(t) = \begin{bmatrix} X_i(t) \\ Y_i(t) \end{bmatrix}$ and $\mathbf{V}_i(t) = \begin{bmatrix} V_{x_i}(t) \\ V_{y_i}(t) \end{bmatrix}$, and the control thrusts along the X and Y axes are derived from spike activity in the output layer of a \ac{snn}. Agent--agent interactions are modeled using a spring–damper system. Let agent \( a \) with position \( \mathbf{p}_a \), velocity \( \mathbf{V}_a \), and radius \( R_a \) interact with agent \( b \) with position \( \mathbf{p}_b \), velocity \( \mathbf{V}_b \), and radius \( R_b \). The collision force is
 \begin{align}
@@ -173,16 +173,16 @@ The total force on a free agent \( a \) is the sum of its thrust and agent–age
     \frac{d^2 \mathbf{p}_a(t)}{dt^2} = \frac{\mathbf{F}_a^{\text{total}}(t)}{m_a}.
 \end{equation}
 
-Agent–Payload interactions are not modeled via a spring–damper system; instead, first contact triggers a rigid attachment for a fixed duration \( \tau_{\text{attach}}=10\,\mathrm{s} \). Let \( \mathbf{p}_P, \mathbf{V}_P, R_P, m_P \) be the Payload pose, velocity, radius, and mass. Attachment is triggered when
+Agent–payload interactions are not modeled via a spring–damper system; instead, first contact triggers a rigid attachment for a fixed duration \( \tau_{\text{attach}}=10\,\mathrm{s} \). Let \( \mathbf{p}_P, \mathbf{V}_P, R_P, m_P \) be the payload pose, velocity, radius, and mass. Attachment is triggered when
 \begin{equation}
     \Delta_{iP}(t) \;=\; R_i + R_P - \|\mathbf{p}_i(t) - \mathbf{p}_P(t)\| \;>\; 0.
 \end{equation}
-While attached, the agent’s pose is locked to a fixed offset \( \boldsymbol{\delta}_i \) on the Payload surface and shares its velocity:
+While attached, the agent’s pose is locked to a fixed offset \( \boldsymbol{\delta}_i \) on the payload surface and shares its velocity:
 \begin{equation}
     \mathbf{p}_i(t) = \mathbf{p}_P(t) + \boldsymbol{\delta}_i,\qquad
     \mathbf{V}_i(t) = \mathbf{V}_P(t), \qquad t\in[t_0,\, t_0+\tau_{\text{attach}}].
 \end{equation}
-During attachment, the agent’s thrust is routed to the Payload, and the Payload integrates with the \emph{effective mass} of itself plus all currently attached agents:
+During attachment, the agent’s thrust is routed to the payload, and the payload integrates with the \emph{effective mass} of itself plus all currently attached agents:
 \begin{align}
     \mathcal{Z}(t) &:= \{\,i \;|\; i \text{ attached at } t \,\}, \\
     m_{\mathrm{eff}}(t) &= m_P + \sum_{i\in\mathcal{Z}(t)} m_i, \\
@@ -191,7 +191,7 @@ During attachment, the agent’s thrust is routed to the Payload, and the Payloa
 \end{align}
 After \( \tau_{\text{attach}} \), the agent detaches and resumes free-agent dynamics.
 
-These equations describe the continuous-time dynamics of the agents and the Payload with agent–agent collision handling, attachment-mediated agent–Payload coupling, thrust routing to the Payload during attachment, and mass aggregation for the translational motion of the combined system (center-of-mass dynamics) over the attachment interval. Rotational dynamics of the Payload are neglected in this simplified model.
+These equations describe the continuous-time dynamics of the agents and the payload with agent–agent collision handling, attachment-mediated agent–payload coupling, thrust routing to the payload during attachment, and mass aggregation for the translational motion of the combined system (center-of-mass dynamics) over the attachment interval. Rotational dynamics of the payload are neglected in this simplified model.
 
 % \paragraph{Velocity feedback and speed governor.}
 % When an agent has inertia, an action change does not instantaneously reverse motion. If the \ac{snn} correctly commands a turn but the velocity has not yet changed sign, reward terms based on instantaneous motion direction can remain negative during the transient, producing misleading feedback. To avoid pushing the agent into a regime where the available thrust cannot promptly reverse the motion, we add a velocity feedback loop that limits speed.
@@ -227,7 +227,7 @@ These equations describe the continuous-time dynamics of the agents and the Payl
 % increases beyond that range, ensuring the agent remains in a controllable speed envelope where a change of thrust can reverse its motion within a short transient.
 % Practically, this reduces reward ambiguity during reversals: although the \ac{snn} may select the correct opposite action, the velocity direction—and thus direction-based reward—lags until inertia is overcome. The governor limits the peak speed so that reversals occur quickly, aligning reward with intent and stabilising learning.
 
-% During rigid attachment to the Payload, the agent’s thrust is routed to the Payload and the same form of dynamics applies to the Payload with the aggregated effective mass.
+% During rigid attachment to the payload, the agent’s thrust is routed to the payload and the same form of dynamics applies to the payload with the aggregated effective mass.
 
 The agent actuation in the simulation follows a thruster model, in which each nozzle exhibits a \ac{mib} of 50 ms \cite{botelho2024explicit}. A minimum‑impulse bit (MIB) is the thruster's minimum non‑zero on‑time (i.e., the smallest pulse duration the thruster can produce). Consequently, thrust updates are issued at a fixed actuation interval $T_{\mathrm{mib}}=50\ \mathrm{ms}$, while the physics are integrated with a smaller step $\Delta t>0$. Let $k\in\mathbb{N}$ index the \ac{mib} windows and define $t\in[kT_{\mathrm{mib}},(k{+}1)T_{\mathrm{mib}})$. The thrust decoded from the output layer of the \ac{snn}, $\mathbf{u}_{\mathrm{snn}}(t)\in\mathbb{R}^2$, is zero–order–held over each window and quantized by the thruster on–time constraint:
 \begin{equation}
@@ -569,22 +569,22 @@ where excitatory ON events induce a transition into the spiking attractor, OFF e
 \subsubsection{Hidden Layers}
 \subsubsection*{First Hidden Layer: Attention and Perception of \ac{dvs} Events}
 
-The first hidden layer of the \ac{snn} is designed to perform early-stage visual feature extraction, dimensionality reduction, and activity-coded spatial representation of the environment while incorporating \ac{alm}-based attention and gating mechanisms. This layer contains four repositories of neurons that collectively process the \ac{dvs} input to distinguish between the Payload and proximal agents while encoding these features in a activity-coded spatial representation guided by reward function (section \ref{FirstLayerTraining}).
+The first hidden layer of the \ac{snn} is designed to perform early-stage visual feature extraction, dimensionality reduction, and activity-coded spatial representation of the environment while incorporating \ac{alm}-based attention and gating mechanisms. This layer contains four repositories of neurons that collectively process the \ac{dvs} input to distinguish between the payload and proximal agents while encoding these features in a activity-coded spatial representation guided by reward function (section \ref{FirstLayerTraining}).
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=1\linewidth]{Figures/Hidden Layer 1.pdf}
-    \caption{Structured First Hidden Layer Architecture with Payload, and Agent Perception Repositories for Visual Perception.}
+    \caption{Structured First Hidden Layer Architecture with payload, and Agent Perception Repositories for Visual Perception.}
     \label{firsthiddenlayer}
 \end{figure}
 
 All neurons in this layer employ the Izhikevich model with Class 2 excitability for smooth frequency modulation, while the \ac{naai} neurons specifically use a bistable configuration to maintain persistent spiking during activation intervals. This bistability enables autonomous inhibition without continuous external input: once \ac{naai} neurons are activated, they continue firing until the inhibitory reset signal is received. Each bistable neuron is initialized with consistent membrane and recovery variables to guarantee readiness for event-triggered activation. The \ac{alm}s are mounted on each agent transmit light periodically at a frequency designed for phase-shifted activation patterns. The \ac{alm}s are configured to blink with a period \(20 \, \text{ms} \), remaining active for \(10 \, \text{ms} \).
 
-Functionally, the first hidden layer separates the Payload position channel and the proximal agents' position channel, representing them in a activity-coded spatial representation (firing rates indicate the degree of activity associated with that spatial region) using the spiking activity of its neurons. This activity-coded spatial representation is achieved by mapping the processed \ac{dvs} input onto the neurons while allowing the network to maintain partial activation across spatial regions, enabling smooth transitions between detected object configurations. Additionally, the first hidden layer performs dimensionality reduction by projecting the high-resolution \ac{dvs} input onto two separate repositories (one for the Payload and one for proximal agents) each represented on an 16 \(\times\) 16 grid.
+Functionally, the first hidden layer separates the payload position channel and the proximal agents' position channel, representing them in a activity-coded spatial representation (firing rates indicate the degree of activity associated with that spatial region) using the spiking activity of its neurons. This activity-coded spatial representation is achieved by mapping the processed \ac{dvs} input onto the neurons while allowing the network to maintain partial activation across spatial regions, enabling smooth transitions between detected object configurations. Additionally, the first hidden layer performs dimensionality reduction by projecting the high-resolution \ac{dvs} input onto two separate repositories (one for the payload and one for proximal agents) each represented on an 16 \(\times\) 16 grid.
 
-The spiking patterns generated within this layer create unique states in the network, allowing the system to distinguish different object configurations in the environment. During operation, when the agents' \ac{alm}s are active, the corresponding \ac{alm} neurons in the first hidden layer fire and inhibit the Payload detection repository. This inhibitation ensures that during the weight update phase of the network, only the connections associated with the agent detection repository are updated. When the agents' \ac{alm}s turn off, the Payload detection neurons fire, and the connections associated with the Payload detection repository are updated in the subsequent weight update phase.
+The spiking patterns generated within this layer create unique states in the network, allowing the system to distinguish different object configurations in the environment. During operation, when the agents' \ac{alm}s are active, the corresponding \ac{alm} neurons in the first hidden layer fire and inhibit the payload detection repository. This inhibitation ensures that during the weight update phase of the network, only the connections associated with the agent detection repository are updated. When the agents' \ac{alm}s turn off, the payload detection neurons fire, and the connections associated with the payload detection repository are updated in the subsequent weight update phase.
 
-Through this mechanism, the first hidden layer dynamically manages the flow of information based on the \ac{alm} signals, ensuring clear separation between agent and Payload representations, maintaining activity-coded spatial representation, reducing input dimensionality, and creating structured, distinguishable states for downstream processing in the \ac{snn}.
+Through this mechanism, the first hidden layer dynamically manages the flow of information based on the \ac{alm} signals, ensuring clear separation between agent and payload representations, maintaining activity-coded spatial representation, reducing input dimensionality, and creating structured, distinguishable states for downstream processing in the \ac{snn}.
 
 \subsubsection*{Second Hidden Layer: Mission Phase Control and Synaptic Pathway Switching}
 
@@ -595,13 +595,13 @@ Within this layer, the Rendezvous Phase Repository (\ac{rpr}), Docking Phase Rep
 \begin{figure}[H]
     \centering
     \includegraphics[width=1\linewidth]{Figures/Hidden Layer 2.pdf}
-    \caption{Structured Second Hidden Layer architecture showing the Formation Flying Mission, Collaborative Docking Mission, Docking Phase Dominance, and Formation Phase Dominance repositories interconnected through inhibitory (yellow) and excitatory (purple) synapses. External stimulation from contact sensors triggers mission-phase transitions.}
+    \caption{Structured Second Hidden Layer architecture showing the Rendezvous Phase Repository, Docking Phase Repository, Rendezvous Phase Inhibitor, and Docking Phase Inhibitor repositories interconnected through inhibitory (yellow) and excitatory (purple) synapses. External stimulation from contact sensors triggers mission-phase transitions.}
     \label{secondhiddenlayer}
 \end{figure}
 
 The neurons within the second hidden layer employ models capable of producing persistent spiking according to the input (Class 2 model), and rapid state transitions required for dynamic mission control. The \ac{rpr} and \ac{dpr} neurons are configured to exhibit regular, sustained spiking, enabling them to produce stable outputs during their respective active phases. In contrast, the \ac{dpi} neurons exhibit bistable firing patterns, enabling them to maintain persistent activity while providing controlled inhibition during phase transitions. The \ac{rpi} neurons use bistable neuron model, designed to generate rapid and transient spiking patterns that effectively trigger phase switches by inhibiting the active repositories when mission conditions change.
 
-During rendezvous phase, the agent has not contacted the Payload, the \ac{rpr} neurons maintain persistent spiking activity. In this phase, the active learning pathway extends from the input layer to the visual processing layer, through the \ac{rpr}, to the output layer, where synaptic connections within the \ac{rpr} repository are updated according to the \ac{stdp} rule. Upon Payload contact, the \ac{rpi} neurons are activated, signaling the transition to the docking phase. The \ac{rpi} neurons inhibit both \ac{rpr} and \ac{dpi} neurons. This inhibition silences \ac{rpr} and \ac{dpi} activity, releasing the \ac{dpr} neurons from inhibition and allowing them to fire, thereby enabling the network to transition to the docking phase. During docking, the active learning pathway becomes the input layer to the visual processing layer, to the \ac{dpr}, and continues to the output layer, allowing the network to learn the docking policy explicitly through the active \ac{dpr} connections.
+During rendezvous phase, the agent has not contacted the payload, the \ac{rpr} neurons maintain persistent spiking activity. In this phase, the active learning pathway extends from the input layer to the visual processing layer, through the \ac{rpr}, to the output layer, where synaptic connections within the \ac{rpr} repository are updated according to the \ac{stdp} rule. Upon payload contact, the \ac{rpi} neurons are activated, signaling the transition to the docking phase. The \ac{rpi} neurons inhibit both \ac{rpr} and \ac{dpi} neurons. This inhibition silences \ac{rpr} and \ac{dpi} activity, releasing the \ac{dpr} neurons from inhibition and allowing them to fire, thereby enabling the network to transition to the docking phase. During docking, the active learning pathway becomes the input layer to the visual processing layer, to the \ac{dpr}, and continues to the output layer, allowing the network to learn the docking policy explicitly through the active \ac{dpr} connections.
 
 This structure ensures that only the relevant neuron repository (\ac{rpr} or \ac{dpr}) is active during each mission phase, enforcing phase-specific learning while preventing interference between formation flying and docking. This phase-gated connectivity enables energy-efficient, event-driven learning aligned with the sparse nature of \ac{snn}s, providing reliable mission-phase transitions for autonomous docking missions.
 
@@ -636,7 +636,7 @@ The output layer of the \ac{snn} consists of four ``bistable'' Izhikevich neuron
 
 To ensure that only one neuron within each axis dominates during a 50~ms actuation window, a pairwise lateral inhibition mechanism is introduced between opposing directional neurons (\(X^-\)–\(X^+\) and \(Y^-\)–\(Y^+\)). When one neuron in a pair fires, it instantaneously suppresses its counterpart via a strong inhibitory synapse, effectively enforcing a winner–take–all behavior along each control axis. This mechanism ensures that the neuron representing the intended direction fires at a significantly higher rate, while its opposite neuron produces only a few residual spikes.
 
-Such lateral inhibition serves two essential functions. First, it sharpens directional selectivity, guaranteeing that only one motor command per axis is active at any given time, preventing thrust conflicts. Second, it improves the fidelity of reward assignment under \ac{stdp}. Without this inhibition, both neurons in a pair might fire at comparable rates, causing the reward signal to propagate to the non-contributing neuron. With lateral inhibition, the suppressed neuron produces very few spikes during the \ac{mib} window and therefore receives negligible eligibility trace updates, ensuring that the reward is applied only to the neuron responsible for the chosen action. Figure~\ref{outputlayer} shows how lateral inhibition is implemented between opposing direction neurons in the output layer to enforce winner-take-all dynamics within each control axis. When \(X^+\) fires, it inhibits \(X^-\), and vice versa; similarly for the \(Y\) axis neurons.
+Such lateral inhibition serves two essential functions. First, it sharpens directional selectivity, guaranteeing that only one thrust command per axis is active at any given time, preventing thrust conflicts. Second, it improves the fidelity of reward assignment under \ac{stdp}. Without this inhibition, both neurons in a pair might fire at comparable rates, causing the reward signal to propagate to the non-contributing neuron. With lateral inhibition, the suppressed neuron produces very few spikes during the \ac{mib} window and therefore receives negligible eligibility trace updates, ensuring that the reward is applied only to the neuron responsible for the chosen action. Figure~\ref{outputlayer} shows how lateral inhibition is implemented between opposing direction neurons in the output layer to enforce winner-take-all dynamics within each control axis. When \(X^+\) fires, it inhibits \(X^-\), and vice versa; similarly for the \(Y\) axis neurons.
 
 \begin{figure}[H]
     \centering
@@ -645,9 +645,9 @@ Such lateral inhibition serves two essential functions. First, it sharpens direc
     \label{outputlayer}
 \end{figure}
 
-A distinctive property of the output layer compared with the upstream layers is the adaptation of its synaptic time constants to match the actuation cycle of the physical system. The eligibility trace \(\mathcal{C}(t)\), which integrates pre–post spike correlations prior to reward arrival, follows an exponential decay whose time constant is set to \(\tau_{\mathcal{C}} = 100~\text{ms}\). This value corresponds to twice the \ac{mib} duration, ensuring that the effect of an action persists long enough for its motor consequence to manifest before the reward is delivered.
+A distinctive property of the output layer compared with the upstream layers is the adaptation of its synaptic time constants to match the actuation cycle of the physical system. The eligibility trace \(\mathcal{C}(t)\), which integrates pre–post spike correlations prior to reward arrival, follows an exponential decay whose time constant is set to \(\tau_{\mathcal{C}} = 100~\text{ms}\). This value corresponds to twice the \ac{mib} duration, ensuring that the effect of an action persists long enough for its thrust consequence to manifest before the reward is delivered.
 
-The reward is computed every \(T_{\mathrm{mib}} = 50~\text{ms}\), synchronously with the control update interval. Since the physical effect of an action is evaluated one cycle later (approximately 100~ms after the initiating spike), the \ac{stdp} rule correctly associates each synaptic modification with its corresponding behavioral outcome. This \ac{mib}-synchronized design enables each layer to operate at its appropriate temporal resolution that is shorter (e.g., 10~ms) for sensory and visual processing layers that handle high-rate \ac{dvs} events, and longer (e.g., 50–100~ms) for the motor layers constrained by actuation dynamic. 
+The reward is computed every \(T_{\mathrm{mib}} = 50~\text{ms}\), synchronously with the control update interval. Since the physical effect of an action is evaluated one cycle later (approximately 100~ms after the initiating spike), the \ac{stdp} rule correctly associates each synaptic modification with its corresponding behavioral outcome. This \ac{mib}-synchronized design enables each layer to operate at its appropriate temporal resolution that is shorter (e.g., 10~ms) for sensory and visual processing layers that handle high-rate \ac{dvs} events, and longer (e.g., 50–100~ms) for the thrust layers constrained by actuation dynamics. 
 
 At each control window, the total number of spikes emitted by each output neuron within the 50~ms interval is accumulated to form the PWM duty ratio:
 \begin{equation}
@@ -661,7 +661,8 @@ The resulting firing ratios are then mapped to the corresponding thrust directio
 F_X^{\text{thrust}} &= F_{\max}\,\operatorname{sign}\!\big(\mathrm{duty}_{X^+}-\mathrm{duty}_{X^-}\big),\\
 F_Y^{\text{thrust}} &= F_{\max}\,\operatorname{sign}\!\big(\mathrm{duty}_{Y^+}-\mathrm{duty}_{Y^-}\big),
 \end{align}
-where \(F_{\max}\) is the maximum available thrust. 
+where \(F_{\max}\) is the maximum available thrust. Although lateral inhibition enforces a winner–take–all regime, inhibition is not ideal; the suppressed neuron may emit sparse residual spikes within a control window, and the thrust direction is therefore robustly determined by the sign of the dominant neuron’s firing excess.
+
 Each neuron’s activity thus directly determines the discrete thrust command applied to the corresponding micro-thruster, while the difference between opposing neurons defines the net thrust along each axis. 
 If both neurons in a pair fire simultaneously, their contributions cancel, producing zero net force and preventing control conflicts.
 
@@ -691,19 +692,19 @@ where \( v_i(\tau) \) is the membrane potential of neuron \( i \) at time \(\tau
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.75\linewidth]{Figures/Firing Activity Matrix.pdf}
-    \caption{Computation of the input activity matrix (\(A\)) from the time-averaged spiking activity of the input layer neurons.}
+    \caption{Computation of the activity matrix (\(A\)) from the time-averaged spiking activity.}
     \label{fig:FiringActivityMatrix}
 \end{figure}
 
-Similarly, for the first hidden layer (\(A_1^{\text{hidden}}\)), the Payload detector and agent detector repositories compute:
+Similarly, for the first hidden layer (\(A^{\text{H1}}(i)\)), the payload detector and agent detector repositories compute:
 
 \begin{equation}
-A_1^{\text{hidden}} = \frac{1}{T} \sum_{t-T}^{t} f_i^{\text{hidden}}.
+A^{\text{H1}}(i) = \frac{1}{T} \sum_{\tau=t-T}^{t} f_i^{\text{H1}}(\tau).
 \end{equation}
 
 The activity matrix shown in Figure~\ref{fig:FiringActivityMatrix} is calculated separately for each repository (one matrix for the payload detector and one for the agent detector based on their number of neurons). 
 
-These form the matrices \(A_{\text{Payload}}\) and \(A_{\text{agent}}\), representing the spatial activity maps (location of the objects) for the Payload and agents, respectively. To compute the attention map, the input activity matrix \(A^{\text{input}} \) is compared with the positions represented in the first hidden layer using a Gaussian-weighted mapping. For the first hidden layer activity matrix at \((x_q, y_q)\) and an input position \((x_k, y_k)\), the squared Euclidean distance is:
+These form the matrices \(A_{\text{payload}}\) and \(A_{\text{agent}}\), representing the spatial activity maps (location of the objects) for the payload and agents, respectively. To compute the attention map, the input activity matrix \(A^{\text{input}} \) is compared with the positions represented in the first hidden layer using a Gaussian-weighted mapping. For the first hidden layer activity matrix at \((x_q, y_q)\) and an input position \((x_k, y_k)\), the squared Euclidean distance is:
 
 \begin{equation}
 d_{kq}^2 = (x_k - x_q)^2 + (y_k - y_q)^2.
@@ -716,17 +717,17 @@ and the attention weight assigned is:
 where \( \sigma_A=[0.05, 0.1] \) is a scale parameter controlling the sensitivity. The modulation signal \(r_q^{(1)}\), which serves as the reward for the first hidden layer neuron \(q\), is computed directly by comparing the attention-weighted input activity with the current hidden layer activity:
 
 \begin{equation}
-     \mathcal{A}_{q}^{\text{Attention}} = \frac{\sum_k \gamma_{kq} \cdot A_k^{\text{input}}}{\sum_{k=1}^{K}\gamma_{kq} + \epsilon},
+     \mathcal{A}^{\text{Attention}}(q) = \frac{\sum_k \gamma_{kq} \cdot A^{\text{input}}(k)}{\sum_{k=1}^{K}\gamma_{kq} + \epsilon},
 \end{equation}
 
 \begin{equation}
-r_q^{(1)} = A_{1,q}^{\text{hidden}} \times \left(\mathcal{A}_{q}^{\text{Attention}} - A_{1,q}^{\text{hidden}}\right),
+r^{\text{H1}}(q) = A^{\text{H1}}(q) \times \left(\mathcal{A}^{\text{Attention}}(q) - A^{\text{H1}}(q)\right),
 \end{equation}
-where \(k\in\{1,\dots,K\}\) is the index of the input sites, and \(\epsilon\) ensures numerical stability. This formulation emphasizes high-activity regions aligned with the \ac{alm} areas and directly provides the per-neuron learning signal. When the hidden layer activity \( A_1^{\text{hidden}} \) matches the attention-driven reward, the \(r_q \rightarrow 0\), stopping the weight updates for that neuron during the iteration.
+where \(k\in\{1,\dots,K\}\) is the index of the input sites, and \(\epsilon\) ensures numerical stability. This formulation emphasizes high-activity regions aligned with the \ac{alm} areas and directly provides the per-neuron learning signal. When the hidden layer activity \( A^{\text{H1}} \) matches the attention-driven reward, the \(r^{\text{H1}}(q) \rightarrow 0\), stopping the weight updates for that neuron during the iteration.
 
-At each time step, the activity of both the Payload detector neurons and the agent detector neurons is compared with the attention map. A lateral inhibition mechanism ensures that only one repository is active at a time. As a result, the inhibited neurons do not generate spikes, and there is no active synaptic path from the input neurons to these inhibited neurons during that interval. Consequently, the reward signal for the inhibited repository is effectively multiplied by the zero activity of that repository (plasticity is 0), and no weight updates occur for those synapses. This selective gating ensures that only the active repository receives a weight update.
+At each time step, the activity of both the payload detector neurons and the agent detector neurons is compared with the attention map. A lateral inhibition mechanism ensures that only one repository is active at a time. As a result, the inhibited neurons do not generate spikes, and there is no active synaptic path from the input neurons to these inhibited neurons during that interval. Consequently, the reward signal for the inhibited repository is effectively multiplied by the zero activity of that repository (plasticity is 0), and no weight updates occur for those synapses. This selective gating ensures that only the active repository receives a weight update.
 
- Figure \ref{fig:PayloadRewardPipeline} shows how the reward function pipeline works for the agent detection process in the first hidden layer. The reward signal provides the value of \(r_q\) for each neuron, corresponding to each pixel in the representation.
+Figure \ref{fig:payloadRewardPipeline} shows how the reward function pipeline works for the agent detection process in the first hidden layer. The reward signal provides the value of \(r_q\) for each neuron, corresponding to each pixel in the representation.
 
 \begin{figure}[H]
     \centering
@@ -745,12 +746,12 @@ At each time step, the activity of both the Payload detector neurons and the age
     \subfigure[Post-neuron reward (\(r\))]{
         \includegraphics[width=0.45\linewidth]{Figures/Payload_ModulationSignal.pdf}
     }
-    \caption{Reward function pipeline for the Payload. The pipeline illustrates the raw \ac{dvs} events, the attention-based map, the normalized hidden layer activity during the initial training phase, and the reward signal calculated as the difference between the attention map and the hidden layer activity (\(r_q\)).}
+    \caption{Reward function pipeline for the payload. The pipeline illustrates the raw \ac{dvs} events, the attention-based map, the normalized hidden layer activity during the initial training phase, and the reward signal calculated as the difference between the attention map and the hidden layer activity (\(r_q\)).}
 
-    \label{fig:PayloadRewardPipeline}
+    \label{fig:payloadRewardPipeline}
 \end{figure}
 
-Each grid cell in Figure~\ref{fig:PayloadRewardPipeline}(d) shows the reward value assigned to the corresponding neuron in the payload detector repository of the first hidden layer. The spatial arrangement of these neurons follows the same layout as illustrated in Figure~\ref{fig:FiringActivityMatrix}, where each cell represents a specific neuron’s position within the repository grid.
+Each grid cell in Figure~\ref{fig:payloadRewardPipeline}(d) shows the reward value assigned to the corresponding neuron in the payload detector repository of the first hidden layer. The spatial arrangement of these neurons follows the same layout as illustrated in Figure~\ref{fig:FiringActivityMatrix}, where each cell represents a specific neuron’s position within the repository grid.
 
 Figure \ref{fig:AgentsRewardPipeline} shows an example of the reward function pipeline for the agent detector repository in the first hidden layer.
 
@@ -775,7 +776,7 @@ Figure \ref{fig:AgentsRewardPipeline} shows an example of the reward function pi
     \label{fig:AgentsRewardPipeline}
 \end{figure}
 
-This design enables the first hidden layer to adaptively learn distinct environmental configurations (the spatial positions of the Payload and nearby agents), using event-based attention and ensures stable convergence in layered \ac{snn} learning.
+This design enables the first hidden layer to adaptively learn distinct environmental configurations (the spatial positions of the payload and nearby agents), using event-based attention and ensures stable convergence in layered \ac{snn} learning.
 
 \paragraph{Numerical example (explicit Gaussian attention with $d_{kq}^2$ and $\gamma_{kq}$)}
 Use an $8\times 8$ input grid and a $4\times 4$ hidden grid (same as Figure~\ref{fig:FiringActivityMatrix}). Coordinates follow the code:
@@ -965,7 +966,7 @@ hidden neuron ``queries'' the spatio–temporal activity of the input grid.
 \emph{Hidden-layer activities.}
 Let the current hidden activities for the payload and agent detectors be
 \[
-A_{\text{Payload}}=
+A_{\text{payload}}=
 \begin{bmatrix}
 0.050 & 0.100 & 0.000 & 0.000\\
 0.100 & 0.200 & 0.000 & 0.000\\
@@ -991,7 +992,7 @@ r_q = A_{1,q}^{\text{hidden}}\big(\mathcal{A}_{q}^{\text{Attention}} - A_{1,q}^{
 \)
 the elementwise rewards for the payload detector become
 \[
-r_{\text{Payload}}
+r_{\text{payload}}
 =
 \begin{bmatrix}
 -0.0025 & -0.0086 & 0       & 0       \\
@@ -1019,7 +1020,7 @@ row-wise vectorizations of the two matrices,
 r_{1}^{\text{hidden}}
 =
 \begin{bmatrix}
-\operatorname{rowvec}\!\big(r_{\text{Payload}}\big) \\
+\operatorname{rowvec}\!\big(r_{\text{payload}}\big) \\
 \operatorname{rowvec}\!\big(r_{\text{Agent}}\big)
 \end{bmatrix}
 \in \mathbb{R}^{32\times 1}.
@@ -1065,7 +1066,7 @@ where $\odot$ denotes element-wise multiplication. The resulting event image con
 \begin{figure}[H]
     \centering
     \includegraphics[width=1\linewidth]{Figures/Second hidden Layer Reward Pipeline 1.pdf}
-    \caption{The DVS event image is masked by the upsampled binary detection mask derived from the first hidden layer’s output, isolating events corresponding to the active object (Payload or agent).}
+    \caption{The DVS event image is masked by the upsampled binary detection mask derived from the first hidden layer’s output, isolating events corresponding to the active object (payload or agent).}
     \label{fig:SecondLayerEventMasking}
 \end{figure}
 
@@ -1074,7 +1075,7 @@ For the second hidden layer, the reward is designed to align synaptic updates wi
 f_{\text{osc}} = \frac{1}{T_{\text{ALM}}}, \qquad \omega = 2\pi f_{\text{osc}}.
 \end{equation}
 
-Let $G^{(e)} \in \mathbb{R}_+^{N_e\times N_e}$ be the Gaussian kernel sampled at the DVS resolution $N_e$, centered at the Payload, with standard deviation $\sigma_g$. The scalar value that detects the motion direction (whether the object is getting closer to the center of the Gaussian envelope or not) is computed as
+Let $G^{(e)} \in \mathbb{R}_+^{N_e\times N_e}$ be the Gaussian kernel sampled at the DVS resolution $N_e$, centered at the payload, with standard deviation $\sigma_g$. The scalar value that detects the motion direction (whether the object is getting closer to the center of the Gaussian envelope or not) is computed as
 
 \begin{equation}
 \mathcal{H} = \frac{1}{Z} \sum_{m=1}^{N_e}\sum_{n=1}^{N_e} E_{\mathrm{det}}^{(e)}(m,n) \, G^{(e)}(m,n,t) \in \mathbb{R}.
@@ -1094,7 +1095,7 @@ G(x, y, t) = \alpha(t) \,\exp\!\left(-\frac{x^2 + y^2}{2\sigma(t)^2}\right), \qu
 
 \begin{figure}[H]
     \centering
-    \subfigure[The oscillatory Gaussian envelope when the \ac{alm} is off (Payload's moves away from the center results in negative values).]{
+    \subfigure[The oscillatory Gaussian envelope when the \ac{alm} is off (payload's moves away from the center results in negative values).]{
         \includegraphics[width=0.45\linewidth]{Figures/Payload.pdf}
     }
     \hfill
@@ -1105,7 +1106,7 @@ G(x, y, t) = \alpha(t) \,\exp\!\left(-\frac{x^2 + y^2}{2\sigma(t)^2}\right), \qu
     \label{fig:SecondLayerGaussianEnvelope}
 \end{figure}
 
-Figure~\ref{fig:SecondLayerGaussianEnvelope} illustrates the oscillatory Gaussian envelope used to compute the motion direction signal $\mathcal{H}$ for reward modulation in the second hidden layer. The envelope alternates between focusing on the Payload and the agents based on which \ac{alm} is active. When the amplitude is positive, the envelope concentrates on the Payload; when negative, it shifts focus to the agents. This dynamic modulation allows the network to adaptively learn from the relevant object based on the current task context. Getting close to the center of the Gaussian envelope can produce negative or positive $\mathcal{H}$ values depending on the phase of the oscillation, thereby influencing the reward signal accordingly.
+Figure~\ref{fig:SecondLayerGaussianEnvelope} illustrates the oscillatory Gaussian envelope used to compute the motion direction signal $\mathcal{H}$ for reward modulation in the second hidden layer. The envelope alternates between focusing on the payload and the agents based on which \ac{alm} is active. When the amplitude is positive, the envelope concentrates on the payload; when negative, it shifts focus to the agents. This dynamic modulation allows the network to adaptively learn from the relevant object based on the current task context. Getting close to the center of the Gaussian envelope can produce negative or positive $\mathcal{H}$ values depending on the phase of the oscillation, thereby influencing the reward signal accordingly.
 
 Each agent is equipped with a planar Inertial Measurement Unit (IMU) measuring the planar velocity $\mathbf{V} = [V_x, V_y]^\top$. Heading and normalized speed are
 \begin{equation}
@@ -1796,7 +1797,7 @@ where \(\circ\) denotes element–wise multiplication.
 
 \subsection{Multi-Agent Docking Task Simulation Setup}
 \label{sec:simsetup}
-In our simulation of the multi‐agent docking task, the central Payload is modeled as a rigid disc of radius \(R_p\) and mass \(m_p\). A team of identical agents, each represented as a point mass \(m\) with its own collision radius \(R\), cooperatively pushes the Payload towards the docking center. Agent–Payload and inter‐agent collisions are handled via a linear spring–damper model with stiffness \(k\) and damping coefficient \(c\). Each agent can exert a thrust force of up to \(F_{\max}\) in the \(x\)– and \(y\)–directions. The specific parameter values used in all simulations are listed in Table \ref{tab:physparams} \cite{SpaceXDragon}.
+In our simulation of the multi‐agent docking task, the central payload is modeled as a rigid disc of radius \(R_p\) and mass \(m_p\). A team of identical agents, each represented as a point mass \(m\) with its own collision radius \(R\), cooperatively pushes the payload towards the docking center. Agent–payload and inter‐agent collisions are handled via a linear spring–damper model with stiffness \(k\) and damping coefficient \(c\). Each agent can exert a thrust force of up to \(F_{\max}\) in the \(x\)– and \(y\)–directions. The specific parameter values used in all simulations are listed in Table \ref{tab:physparams} \cite{SpaceXDragon}.
 
 \begin{table}[ht]
   \centering
@@ -1814,7 +1815,7 @@ In our simulation of the multi‐agent docking task, the central Payload is mode
                          & Max thrust, \(F_{\max}\) & 400        & N             \\
       \hline
     \end{tabular}
-    \caption{Physical parameters of the Payload and agents used in the docking simulations.}
+    \caption{Physical parameters of the payload and agents used in the docking simulations.}
   \label{tab:physparams}
 \end{table}
 
@@ -1950,7 +1951,7 @@ Figure~\ref{fig:repository_activity} shows how the payload and proximal agent de
 \begin{figure}[H]
     \setcounter{subfigure}{0}
     \centering
-    \subfigure[Activity of the Payload detector repository during initial training phases with the Agents' \ac{alm} turned off.]{
+    \subfigure[Activity of the payload detector repository during initial training phases with the Agents' \ac{alm} turned off.]{
         \includegraphics[width=0.45\linewidth]{Figures/Payload Detector Activity - ILI - ALM off.pdf}
     }
     \hfill
@@ -1966,8 +1967,8 @@ Figure~\ref{fig:repository_activity_on} shows the complementary case to the prev
 \begin{figure}[H]
     \setcounter{subfigure}{0}
     \centering
-    \subfigure[Activity of the Payload detector repository during initial training phases with the Agents' \ac{alm} turned on.]{
-        \includegraphics[width=0.45\linewidth]{Figures//Payload Detector Activity - ILI - ALM on.pdf}
+    \subfigure[Activity of the payload detector repository during initial training phases with the Agents' \ac{alm} turned on.]{
+        \includegraphics[width=0.45\linewidth]{Figures/Payload Detector Activity - ILI - ALM on.pdf}
     }
     \hfill
     \subfigure[Activity of the proximal agent detector repository during initial training phases with the Agents' \ac{alm} turned on.]{
@@ -1983,8 +1984,8 @@ Figure~\ref{fig:converged_activity_off} shows the activity of the first hidden l
 \begin{figure}[H]
     \setcounter{subfigure}{0}
     \centering
-    \subfigure[Activity of the Payload detector repository after learning convergence with the Agents' \ac{alm} turned off.]{
-        \includegraphics[width=0.45\linewidth]{Figures//Payload Detector Activity - ALM off.pdf}
+    \subfigure[Activity of the payload detector repository after learning convergence with the Agents' \ac{alm} turned off.]{
+        \includegraphics[width=0.45\linewidth]{Figures/Payload Detector Activity - ALM off.pdf}
     }
     \hfill
     \subfigure[Activity of the proximal agent detector repository after learning convergence with the Agents' \ac{alm} turned off.]{
@@ -1999,7 +2000,7 @@ Figure~\ref{fig:converged_activity_on} illustrates the activity of the first hid
 \begin{figure}[H]
     \setcounter{subfigure}{0}
     \centering
-    \subfigure[Activity of the Payload detector repository after learning convergence with the Agents' \ac{alm} turned on.]{
+    \subfigure[Activity of the payload detector repository after learning convergence with the Agents' \ac{alm} turned on.]{
         \includegraphics[width=0.45\linewidth]{Figures/Payload Detector Activity - ALM on.pdf}
     }
     \hfill
@@ -2025,7 +2026,7 @@ Figure \ref{fig:HL2Activity} presents the activity patterns of the second hidden
     \subfigure[Initial iterations of the docking phase]{
         \includegraphics[width=0.45\linewidth]{Figures/CDM Act.pdf}
     }
-    \caption{Second hidden layer activity for the formation and docking phases for Agent 1: (a) FFM activity 135 degree that matches the LOS of the Payload regarding the Agent 1 and (b) CDM activity shows 45 degree LOS toward the docking point.}
+    \caption{Second hidden layer activity for the formation and docking phases for Agent 1: (a) FFM activity 135 degree that matches the LOS of the payload regarding the Agent 1 and (b) CDM activity shows 45 degree LOS toward the docking point.}
     \label{fig:HL2Activity}
 \end{figure}
 
