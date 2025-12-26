@@ -676,9 +676,9 @@ If both neurons in a pair fire simultaneously, their contributions cancel, produ
 The reward function in the \ac{snn} provides a structured feedback mechanism that directly guides synaptic plasticity. Its role is to compare the firing rates of the hidden layer with the event-based sensory input and to generate a modulation signal that drives weight updates. In this way, the reward function ensures that the hidden layer gradually aligns its perception (activity patterns) with the external sensory events. At each reward computation step, the input layer activity is calculated as the time-averaged firing activity:
 
 \begin{equation}
-A(i)^{\text{input}} = \frac{1}{T} \sum_{t-T}^{t} f_i,
+A^{\text{input}}(i) = \frac{1}{T} \sum_{\tau=t-T}^{t} f_i^{\text{input}}(\tau),
 \end{equation}
-where \( f_i(\tau) \in \{0,1\} \) indicates whether neuron \( i \) generated a spike at time \(\tau\). Each entry \(A(i)^{\text{input}}\) is the time-averaged firing rate of neuron \( i \) over the window (T). For example, the fraction of time steps in that window when neuron \( i \) fired; the matrix collects these per-neuron values.
+where \( f_i^{\text{input}}(\tau) \in \{0,1\} \) indicates whether neuron \( i \) generated a spike at time \(\tau\). Each entry \(A^{\text{input}}(i)\) is the time-averaged firing rate of neuron \( i \) over the window (T). For example, the fraction of time steps in that window when neuron \( i \) fired; the matrix collects these per-neuron values.
 Specifically, 
 \begin{equation}
 f_i(\tau) =
@@ -687,7 +687,7 @@ f_i(\tau) =
 0, & \text{otherwise},
 \end{cases}
 \end{equation}
-where \( v_i(\tau) \) is the membrane potential of neuron \( i \) at time \(\tau\) and \( v_{\text{th}} \) is the firing threshold. Figure \ref{fig:FiringActivityMatrix} illustrates how the activity matrix is computed from the time-averaged spiking activity of a layer $n$. Each element $A(i)^{\text{input}}$ represents the fraction of time steps in which neuron \( i \) fired within the update window $T$.
+where \( v_i(\tau) \) is the membrane potential of neuron \( i \) at time \(\tau\) and \( v_{\text{th}} \) is the firing threshold. Figure \ref{fig:FiringActivityMatrix} illustrates how the activity matrix is computed from the time-averaged spiking activity of a layer $n$. Each element $A^{\text{input}}(i)$ represents the fraction of time steps in which neuron \( i \) fired within the update window $T$.
 
 \begin{figure}[H]
     \centering
@@ -696,7 +696,7 @@ where \( v_i(\tau) \) is the membrane potential of neuron \( i \) at time \(\tau
     \label{fig:FiringActivityMatrix}
 \end{figure}
 
-Similarly, for the first hidden layer (\(A^{\text{H1}}(i)\)), the payload detector and agent detector repositories compute:
+Similarly to Figure~\ref{fig:FiringActivityMatrix}, for the first hidden layer (\(A^{\text{H1}}(i)\)), the payload detector and agent detector repositories compute:
 
 \begin{equation}
 A^{\text{H1}}(i) = \frac{1}{T} \sum_{\tau=t-T}^{t} f_i^{\text{H1}}(\tau).
@@ -704,17 +704,24 @@ A^{\text{H1}}(i) = \frac{1}{T} \sum_{\tau=t-T}^{t} f_i^{\text{H1}}(\tau).
 
 The activity matrix shown in Figure~\ref{fig:FiringActivityMatrix} is calculated separately for each repository (one matrix for the payload detector and one for the agent detector based on their number of neurons). 
 
-These form the matrices \(A_{\text{payload}}\) and \(A_{\text{agent}}\), representing the spatial activity maps (location of the objects) for the payload and agents, respectively. To compute the attention map, the input activity matrix \(A^{\text{input}} \) is compared with the positions represented in the first hidden layer using a Gaussian-weighted mapping. For the first hidden layer activity matrix at \((x_q, y_q)\) and an input position \((x_k, y_k)\), the squared Euclidean distance is:
+% These form the matrices \(A_{\text{payload}}\) and \(A_{\text{agent}}\), representing the spatial activity maps (location of the objects) for the payload and agents, respectively. 
+
+
+To compute the attention map, the input activity matrix \(A^{\text{input}} \) is compared with the positions represented in the first hidden layer using a Gaussian-weighted mapping. Each neuron is permanently assigned to one grid cell. Therefore, every neuron has an associated spatial coordinate that is defined by its index. For a first hidden-layer neuron indexed by \(q\), whose receptive-field center is located at \((x_q, y_q)\), and the input-layer indexed by \(k\), located at \((x_k, y_k)\), the squared Euclidean distance is given by:
 
 \begin{equation}
 d_{kq}^2 = (x_k - x_q)^2 + (y_k - y_q)^2.
 \end{equation}
-and the attention weight assigned is:
+
+Here, \(x_k\) and \(y_k\) are not the physical positions estimated by the agents. Instead, they are fixed, normalized coordinates based on the grid indices of the input and first hidden layer activity maps. These coordinates are static, predefined, and known in advance from the network topology. The attention weight assigned is:
 
 \begin{equation}
 \gamma_{kq} = \exp\left( -\frac{d_{kq}^2}{2 \sigma_A^2} \right),
 \end{equation}
-where \( \sigma_A=[0.05, 0.1] \) is a scale parameter controlling the sensitivity. The modulation signal \(r_q^{(1)}\), which serves as the reward for the first hidden layer neuron \(q\), is computed directly by comparing the attention-weighted input activity with the current hidden layer activity:
+where \( \sigma_A=[0.05, 0.1] \) is a scale parameter controlling the sensitivity. 
+
+
+The modulation signal \(r^{\text{H1}}(q)\), which serves as the reward for the first hidden layer neuron \(q\), is computed directly by comparing the attention-weighted input activity with the current hidden layer activity:
 
 \begin{equation}
      \mathcal{A}^{\text{Attention}}(q) = \frac{\sum_k \gamma_{kq} \cdot A^{\text{input}}(k)}{\sum_{k=1}^{K}\gamma_{kq} + \epsilon},
@@ -722,16 +729,18 @@ where \( \sigma_A=[0.05, 0.1] \) is a scale parameter controlling the sensitivit
 
 \begin{equation}
 r^{\text{H1}}(q) = A^{\text{H1}}(q) \times \left(\mathcal{A}^{\text{Attention}}(q) - A^{\text{H1}}(q)\right),
+    \label{reward1HiddenLayer}
 \end{equation}
-where \(k\in\{1,\dots,K\}\) is the index of the input sites, and \(\epsilon\) ensures numerical stability. This formulation emphasizes high-activity regions aligned with the \ac{alm} areas and directly provides the per-neuron learning signal. When the hidden layer activity \( A^{\text{H1}} \) matches the attention-driven reward, the \(r^{\text{H1}}(q) \rightarrow 0\), stopping the weight updates for that neuron during the iteration.
 
-At each time step, the activity of both the payload detector neurons and the agent detector neurons is compared with the attention map. A lateral inhibition mechanism ensures that only one repository is active at a time. As a result, the inhibited neurons do not generate spikes, and there is no active synaptic path from the input neurons to these inhibited neurons during that interval. Consequently, the reward signal for the inhibited repository is effectively multiplied by the zero activity of that repository (plasticity is 0), and no weight updates occur for those synapses. This selective gating ensures that only the active repository receives a weight update.
+This formulation emphasizes high-activity regions aligned with the \ac{alm} areas and directly provides the per-neuron learning signal. When the hidden layer activity \( A^{\text{H1}} \) matches the attention-driven reward, the \(r^{\text{H1}}(q) \rightarrow 0\), stopping the weight updates for that neuron during the iteration.
+
+At each time step, the activity of both the payload detector neurons and the agent detector neurons is compared with the attention map. A lateral inhibition mechanism ensures that only one repository is active at a time. As a result, the inhibited neurons do not generate spikes, and there is no active synaptic path from the input neurons to these inhibited neurons during that interval. Consequently, according to \eqref{reward1HiddenLayer}, the reward signal for any inhibited repository is effectively multiplied by the zero activity of that repository (\(A^{\text{H1}}=0 \)), and no weight updates occur for those synapses. This selective gating ensures that only the active repository receives a weight update.
 
 Figure \ref{fig:payloadRewardPipeline} shows how the reward function pipeline works for the agent detection process in the first hidden layer. The reward signal provides the value of \(r_q\) for each neuron, corresponding to each pixel in the representation.
 
 \begin{figure}[H]
     \centering
-    \subfigure[Raw \ac{dvs} Events of the payload]{
+    \subfigure[Raw \ac{dvs} Events of the payload (Agent or \ac{scs} view)]{
         \includegraphics[width=0.45\linewidth]{Figures/Payload_RawDVS.pdf}
     }
     \hfill
@@ -739,11 +748,11 @@ Figure \ref{fig:payloadRewardPipeline} shows how the reward function pipeline wo
         \includegraphics[width=0.45\linewidth]{Figures/Payload_AttentionFuzzyMap.pdf}
     }
     \vfill
-    \subfigure[Hidden Layer Activity (\(A_{1}^{\text{hidden}}\))]{
+    \subfigure[First Hidden Layer Activity (\(A^{\text{H1}}\))]{
         \includegraphics[width=0.45\linewidth]{Figures/Payload_HiddenLayerActivity.pdf}
     }
     \hfill
-    \subfigure[Post-neuron reward (\(r\))]{
+    \subfigure[First Hidden Layer Reward (\(r^{\text{H1}}\))]{
         \includegraphics[width=0.45\linewidth]{Figures/Payload_ModulationSignal.pdf}
     }
     \caption{Reward function pipeline for the payload. The pipeline illustrates the raw \ac{dvs} events, the attention-based map, the normalized hidden layer activity during the initial training phase, and the reward signal calculated as the difference between the attention map and the hidden layer activity (\(r_q\)).}
@@ -757,7 +766,7 @@ Figure \ref{fig:AgentsRewardPipeline} shows an example of the reward function pi
 
 \begin{figure}[H]
     \centering
-    \subfigure[Raw \ac{dvs} Events of the agents]{
+    \subfigure[Raw \ac{dvs} Events of the agents (Agent or \ac{scs} view)]{
         \includegraphics[width=0.45\linewidth]{Figures/Agents_RawDVS.pdf}
     }
     \hfill
@@ -765,11 +774,11 @@ Figure \ref{fig:AgentsRewardPipeline} shows an example of the reward function pi
         \includegraphics[width=0.45\linewidth]{Figures/Agents_AttentionFuzzyMap.pdf}
     }
     \vfill
-    \subfigure[Hidden Layer Activity (\(A_{1}^{\text{hidden}}\))]{
+    \subfigure[First Hidden Layer Activity (\(A^{\text{H1}}\))]{
         \includegraphics[width=0.45\linewidth]{Figures/Agents_HiddenLayerActivity.pdf}
     }
     \hfill
-    \subfigure[Post-neuron reward  (\(r\))]{
+    \subfigure[First Hidden Layer Reward (\(r^{\text{H1}}\))]{
         \includegraphics[width=0.45\linewidth]{Figures/Agents_ModulationSignal.pdf}
     }
     \caption{Reward function pipeline for the agents. This pipeline demonstrates the raw \ac{dvs} events for multiple agents, the attention map, the hidden layer’s normalized activity, and the modulation signal computed for reward.}
@@ -1032,22 +1041,27 @@ Positive entries indicate that the attention-driven input estimate exceeds the n
 
 \subsubsection{Reward Function for the Second Hidden Layer}
 
-Let the incoming \ac{dvs} events be represented as an image $E \in \{-1,0,+1\}^{N_e \times N_e}$, where each pixel encodes a negative, positive, or absent brightness change. The first hidden layer produces two separate detection maps, $P_{\mathrm{pay}}$ and $P_{\mathrm{agt}}$, each of size $N_m \times N_m$ (according to the activity matrix shown in Figure~\ref{fig:FiringActivityMatrix}). These maps indicate how strongly the network believes that the payload or a proximal agent is present at each spatial location.
+Incoming \ac{dvs} events are represented as an image $E \in \{-1,0,+1\}^{N_e \times N_e}$, where each pixel encodes a negative, positive, or absent brightness change. The first hidden layer consists of two distinct neuron sections dedicated to payload detection and proximal agent detection, respectively. For each section, the time-averaged spiking activity is aggregated according to the activity-matrix construction rule illustrated in Figure~\ref{fig:FiringActivityMatrix}, resulting in two separate grid-based activity maps, $A_{pay}^{\text{H1}}$ and $A_{agt}^{\text{H1}}$, each of size $N_m \times N_m$.
 
-Because the first hidden layer incorporates a lateral inhibition mechanism, only one of these maps can be active at a time: when the payload detector becomes active, the agent detector is suppressed, and vice versa. For this reason, the current detection state of the network can be expressed simply as
+Each grid cell in $A_{pay}^{\text{H1}}$ and $A_{agt}^{\text{H1}}$ corresponds to a fixed group of neurons in the respective section of the first hidden layer and represents the local firing-rate activity for that spatial region. These maps provide a spatial representation of the payload and proximal agents, indicating the extent to which the network associates each grid location with the presence of the corresponding object. The first hidden layer also incorporates a lateral inhibition mechanism, which ensures that only one of these two detection maps is active at any given time. When the payload detector neurons are active, the agent detector neurons are suppressed, and vice versa. Consequently, the instantaneous detection state of the network can be expressed as
+
 \begin{equation}
-    P_{\mathrm{det}} = P_{\mathrm{pay}} + P_{\mathrm{agt}},
+    A^{\text{H1}}_{\mathrm{det}} = A_{pay}^{\text{H1}} + A_{agt}^{\text{H1}},
+    \label{eq:DetectionState}
 \end{equation}
-since exactly one of the terms is nonzero at any given moment.
+since at any given moment exactly one of the two terms on the right-hand side of~\eqref{eq:DetectionState} is nonzero.
 
-To extract a binary foreground mask from this detection map, a sigmoid function is applied,
+
+To construct a binary activity-selection mask from the detection map, a sigmoid
+nonlinearity is applied element-wise,
 \begin{equation}
     B(i,j) =
-\frac{1}{1 + \exp\!\left[-\beta\left(P_{\mathrm{det}}(i,j)-\Upsilon\right)\right]},
+    \frac{1}{1 + \exp\!\left[-\beta\left(A^{\text{H1}}_{\mathrm{det}}(i,j)-\Upsilon\right)\right]},
 \end{equation}
-where $\Upsilon$ is a soft threshold and $\beta \gg 1$ controls the sharpness of the transition. For large $\beta$, any nonzero detection value above the threshold is pushed very close to $1$, producing a clean binary-like mask while remaining differentiable.
+here, $\Upsilon$ denotes a soft threshold, and $\beta \gg 1$ determines the steepness of the transition. This operation converts the detection map into a logical mask that distinguishes active from inactive grid cells. Grid locations with nonzero and sufficiently large values of $A^{\text{H1}}_{\mathrm{det}}(i,j)$ approach $1$, whereas locations with zero or negligible activity remain near $0$. Consequently, the resulting mask identifies spatial regions with high neural activity and suppresses regions that do not contribute to the detection process.
 
-To apply the low–resolution mask $B$ to the full DVS frame, it must be expanded from size $N_m\times N_m$ to the event resolution $N_e\times N_e$. Because the ratio $\kappa = N_e / N_m$ is an integer, this upsampling can be performed by nearest–neighbor replication: each entry of $B$ is copied into a $\kappa\times\kappa$ block in the high–resolution image. Formally, 
+
+The \ac{dvs} produces events at the sensor resolution $N_e \times N_e$, corresponding to the native pixel grid of the event-based camera. In contrast, the activity maps generated by the entropy-based pooling input layer and the first hidden layer are defined on a coarser spatial grid of size $N_m \times N_m$, where each grid cell aggregates the activity of a fixed block of \ac{dvs} pixels according to the pooling rule described in Fig.~\ref{fig:FiringActivityMatrix}. Throughout this work, $N_e$ denotes the event (sensor) resolution, while $N_m$ refers to the pooled neural resolution. To apply the low-resolution activity-selection mask $B$ to the original \ac{dvs} event image, the mask must be expanded from a size of $N_m \times N_m$ to the event resolution $N_e \times N_e$. Since the ratio $\kappa = N_e / N_m$ is an integer, this expansion is implemented using nearest-neighbor replication. Each entry of $B$ is copied into a $\kappa \times \kappa$ block in the high-resolution grid, producing a mask that is spatially aligned with the original \ac{dvs} events. Formally, 
 \begin{equation}
 \mathcal{E}(B)
 = B \otimes \mathbf{1}_{\kappa\times\kappa},
@@ -1055,7 +1069,7 @@ To apply the low–resolution mask $B$ to the full DVS frame, it must be expande
 (\mathcal{E}(B))_{m,n}
 = B_{\lceil m/\kappa \rceil,\;\lceil n/\kappa \rceil}.
 \end{equation}
-This operation ensures that every pixel $(m,n)$ in the enlarged mask $\mathcal{E}(B)$ inherits the value of the corresponding coarse mask element from $B$, producing a properly aligned high–resolution binary mask. Finally, the upsampled mask is applied to the DVS event frame to isolate only the currently detected object (payload or proximal agent),
+This operation ensures that every pixel $(m,n)$ in the enlarged mask $\mathcal{E}(B)$ inherits the value of the corresponding coarse mask element from $B$, producing a properly aligned high event resolution binary mask. Finally, the upsampled mask is applied to the \ac{dvs} event frame to isolate only the currently detected object (payload or proximal agent),
 \begin{equation}
 E_{\mathrm{det}}
 = E \odot \mathcal{E}(B),
