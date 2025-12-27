@@ -1052,8 +1052,7 @@ Each grid cell in $A_{pay}^{\text{H1}}$ and $A_{agt}^{\text{H1}}$ corresponds to
 since at any given moment exactly one of the two terms on the right-hand side of~\eqref{eq:DetectionState} is nonzero.
 
 
-To construct a binary activity-selection mask from the detection map, a sigmoid
-nonlinearity is applied element-wise,
+To construct a binary activity-selection mask from the detection map, a Sigmoid function is applied element-wise,
 \begin{equation}
     B(i,j) =
     \frac{1}{1 + \exp\!\left[-\beta\left(A^{\text{H1}}_{\mathrm{det}}(i,j)-\Upsilon\right)\right]},
@@ -1105,7 +1104,31 @@ yielding the oscillatory Gaussian envelope
 G(x, y, t) = \alpha(t) \,\exp\!\left(-\frac{x^2 + y^2}{2\sigma(t)^2}\right), \quad (x, y) \in [-1, 1]^2.
 \end{equation}
 
+\begin{figure}[H]
+    \centering
+    \subfigure[]{
+        \includegraphics[width=0.48\linewidth]{Figures/2D Gaussian Reward (Approaching the Center).pdf}
+    }
+    \hfill
+    \subfigure[]{
+        \includegraphics[width=0.48\linewidth]{Figures/2D Gaussian Reward (Going Away from the Center).pdf}
+    }
+    \caption{}
+    \label{fig:Positive2DGaussianReward}
+\end{figure}
 
+\begin{figure}[H]
+    \centering
+    \subfigure[]{
+        \includegraphics[width=0.48\linewidth]{Figures/Negative Reward - 2D Gaussian Reward (Approaching the Center).pdf}
+    }
+    \hfill
+    \subfigure[]{
+        \includegraphics[width=0.48\linewidth]{Figures/Negative Reward - 2D Gaussian Reward (Going Away from the Center).pdf}
+    }
+    \caption{}
+    \label{fig:Negative2DGaussianReward}
+\end{figure}
 
 \begin{figure}[H]
     \centering
