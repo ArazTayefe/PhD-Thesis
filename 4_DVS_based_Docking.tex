@@ -1103,84 +1103,148 @@ yielding the oscillatory Gaussian envelope
 \begin{equation}
 G(x, y, t) = \alpha(t) \,\exp\!\left(-\frac{x^2 + y^2}{2\sigma(t)^2}\right), \quad (x, y) \in [-1, 1]^2.
 \end{equation}
-
 \begin{figure}[H]
     \centering
-    \subfigure[]{
+    \subfigure[Payload approaching the center results in positive \(\mathcal{H}\) value based on the 2D Gaussian function with higher standard deviation.]{
         \includegraphics[width=0.48\linewidth]{Figures/2D Gaussian Reward (Approaching the Center).pdf}
     }
-    \hfill
-    \subfigure[]{
+    \hfill 
+    \subfigure[Payload moving away from the center results in negative \(\mathcal{H}\) value based on the 2D Gaussian function with higher standard deviation.]{
         \includegraphics[width=0.48\linewidth]{Figures/2D Gaussian Reward (Going Away from the Center).pdf}
     }
-    \caption{}
+    \caption{Payload motion direction detection using a 2D Gaussian reward function with higher standard deviation.}
     \label{fig:Positive2DGaussianReward}
 \end{figure}
 
+Figure~\ref{fig:Positive2DGaussianReward} illustrates how the motion direction of the payload is detected using a 2D Gaussian reward function with a higher standard deviation. When the payload moves closer to the center of the Gaussian envelope (\(G(x,y,t)\)), it results in a positive \(\mathcal{H}\) value, indicating favorable movement towards the target. Conversely, when the payload moves away from the center, it yields a negative \(\mathcal{H}\) value, signaling unfavorable movement away from the target.
+
 \begin{figure}[H]
     \centering
-    \subfigure[]{
+    \subfigure[Neighboring agent approaching the center results in negative \(\mathcal{H}\) value based on the 2D Gaussian function with lower standard deviation.]{
         \includegraphics[width=0.48\linewidth]{Figures/Negative Reward - 2D Gaussian Reward (Approaching the Center).pdf}
     }
     \hfill
-    \subfigure[]{
+    \subfigure[Neighboring agent moving away from the center results in positive \(\mathcal{H}\) value based on the 2D Gaussian function with lower standard deviation.]{
         \includegraphics[width=0.48\linewidth]{Figures/Negative Reward - 2D Gaussian Reward (Going Away from the Center).pdf}
     }
-    \caption{}
+    \caption{Neighboring agent motion direction detection using a 2D Gaussian reward function with lower standard deviation.}
     \label{fig:Negative2DGaussianReward}
 \end{figure}
+
+Figure~\ref{fig:Negative2DGaussianReward} demonstrates how the motion direction of a neighboring agent is detected using a 2D Gaussian reward function with a lower standard deviation. When the neighboring agent moves closer to the center of the Gaussian envelope (\(G(x,y,t)\)), it results in a negative \(\mathcal{H}\) value, indicating unfavorable movement towards the target. Conversely, when the neighboring agent moves away from the center, it yields a positive \(\mathcal{H}\) value, signaling favorable movement away from the target.
 
 \begin{figure}[H]
     \centering
     \subfigure[The oscillatory Gaussian envelope when the \ac{alm} is off (payload's moves away from the center results in negative values).]{
-        \includegraphics[width=0.45\linewidth]{Figures/Payload.pdf}
+        \includegraphics[width=0.48\linewidth]{Figures/Payload.pdf}
     }
     \hfill
     \subfigure[The oscillatory Gaussian envelope when the agent \ac{alm} is on (Agent's moves away from the center results in positive values).]{
-        \includegraphics[width=0.45\linewidth]{Figures/Agent.pdf}
+        \includegraphics[width=0.47\linewidth]{Figures/Agent.pdf}
     }
-    \caption{The oscillatory Gaussian envelope used to compute the motion direction signal $\mathcal{H}$ for reward modulation in the second hidden layer. }
+    \caption{The oscillatory Gaussian envelope used to compute the motion direction signal $\mathcal{H}$ for reward modulation in the second hidden layer. The center can be \ac{scs} or the agent's \ac{dvs} center.}
     \label{fig:SecondLayerGaussianEnvelope}
 \end{figure}
 
 Figure~\ref{fig:SecondLayerGaussianEnvelope} illustrates the oscillatory Gaussian envelope used to compute the motion direction signal $\mathcal{H}$ for reward modulation in the second hidden layer. The envelope alternates between focusing on the payload and the agents based on which \ac{alm} is active. When the amplitude is positive, the envelope concentrates on the payload; when negative, it shifts focus to the agents. This dynamic modulation allows the network to adaptively learn from the relevant object based on the current task context. Getting close to the center of the Gaussian envelope can produce negative or positive $\mathcal{H}$ values depending on the phase of the oscillation, thereby influencing the reward signal accordingly.
 
-Each agent is equipped with a planar Inertial Measurement Unit (IMU) measuring the planar velocity $\mathbf{V} = [V_x, V_y]^\top$. Heading and normalized speed are
+Each agent is equipped with a planar inertial measurement unit (IMU) that measures the planar velocity
+\(\mathbf{V} = [V_x, V_y]^\top\).
+From this measurement, the instantaneous heading and normalized speed are computed as
 \begin{equation}
-\varphi = \operatorname{atan2}(V_y, V_x), \qquad \bar{\mathcal{V}} = \frac{\|\mathbf{V}\|}{V_{\max}}.
+\varphi = \operatorname{atan2}\left(V_y, V_x\right), \qquad
+\bar{\mathcal{V}} = \frac{\|\mathbf{V}\|}{V_{\max}},
+\end{equation}
+where \(V_{\max}\) denotes the maximum admissible planar speed.
+
+To obtain a population-based representation of velocity, the velocity space is discretized into an
+\(N_g \times N_g\) grid (as shown in Figure~\ref{fig:FiringActivityMatrix} for the activity matrix).
+Each grid cell corresponds to a fixed reference direction \((x_i, y_j)\), with
+\(x_i, y_j \in [-1,1]\).
+These reference points are expressed in normalized polar coordinates as
+\begin{equation}
+R_{ij} = \frac{\sqrt{x_i^2 + y_j^2}}{\sqrt{2}}, \qquad
+\Theta_{ij} = \operatorname{atan2}\left(y_j, x_i\right).
 \end{equation}
 
-The velocity is encoded into an $N_g\times N_g$ grid with cell centers $(x_i, y_j)$ (a point whose $x$- and $y$-coordinates both range from $-1$ to $1$), normalized polar coordinates
+For a given velocity direction \(\varphi\), the angular mismatch between the reference direction
+\(\Theta_{ij}\) and the actual heading is computed as follows:
 \begin{equation}
-R_{ij} = \frac{\sqrt{x_i^2 + y_j^2}}{\sqrt{2}}, \quad \Theta_{ij} = \operatorname{atan2}(y_j, x_i),
+\Delta\theta_{ij}
+=
+\operatorname{atan2}\!\left(
+\sin(\Theta_{ij}-\varphi),\, \cos(\Theta_{ij}-\varphi)
+\right).
 \end{equation}
-and wrapped angular difference
-\begin{equation}
-\Delta\theta_{ij} = \operatorname{atan2}\big( \sin(\Theta_{ij} - \varphi), \cos(\Theta_{ij} - \varphi) \big).
-\end{equation}
-The separable membership is
-\begin{equation}
-\mu_r(i,j) = \exp\!\left(-\frac{(R_{ij} - \bar{\mathcal{V}})^2}{2\sigma_r^2}\right), \quad
-\mu_\theta(i,j) = \exp\!\left(-\frac{\Delta\theta_{ij}^2}{2\sigma_\theta^2}\right),
-\end{equation}
-\begin{equation}
-M_{ij} = \frac{\mu_r(i,j) \,\mu_\theta(i,j)}{\max_{a,b} \mu_r(a,b) \,\mu_\theta(a,b)},
-\end{equation}
-with opposite-direction map $\widetilde{M} = M(\varphi+\pi)$.
 
-Let $A \in [0,1]$ be the normalized activity vector of neurons in the second hidden layer (spikes per $\Delta T$ divided by a maximum). The reward is decomposed into positive and negative parts
+A separable Gaussian membership function is used to quantify the similarity between the current velocity
+and each grid cell in terms of both speed and direction.
+The radial and angular memberships are defined as
 \begin{equation}
-\mathcal{H}_+ = \frac{\mathcal{H} + |\mathcal{H}|}{2} \ge 0, \quad \mathcal{H}_- = \frac{|\mathcal{H}| - \mathcal{H}}{2} \ge 0,
+\mu_r(i,j)
+=
+\exp\!\left(-\frac{(R_{ij}-\bar{\mathcal{V}})^2}{2\sigma_r^2}\right),
+\qquad
+\mu_\theta(i,j)
+=
+\exp\!\left(-\frac{\Delta\theta_{ij}^2}{2\sigma_\theta^2}\right).
 \end{equation}
-yielding the per-neuron reward
+Their product yields a velocity-aligned activity template,
 \begin{equation}
-L_i = \mathcal{H}_+ M_i + \mathcal{H}_- \widetilde{M}_i.
+M_{ij}
+=
+\frac{\mu_r(i,j)\,\mu_\theta(i,j)}
+{\max_{a,b} \mu_r(a,b)\,\mu_\theta(a,b)},
 \end{equation}
-The modulation signal for each neuron in this layer is
+which represents the desired neural activity pattern associated with the agent’s current velocity.
+An opposite-direction template is obtained by rotating the heading by \(\pi\),
 \begin{equation}
-r^{(2)} = ((v_x ~= 0) || (v_y ~= 0))\times(\mathcal{H}_+ (M - A) + \mathcal{H}_- (\widetilde{M} - A)),
+\widetilde{M} = M(\varphi + \pi).
 \end{equation}
-which pushes activity toward $M$ for $\mathcal{H}>0$ and toward $\widetilde{M}$ for $\mathcal{H}<0$, and vanishes for $\mathcal{H}=0$.
+
+
+\begin{figure}
+    \centering
+    \subfigure[]{
+        \includegraphics[width=0.48\linewidth]{Figures/Example for 2nd HL Velocity Reward (Positive).pdf}
+    }
+    \hfill
+    \subfigure[]{
+        \includegraphics[width=0.48\linewidth]{Figures/Example for 2nd HL Velocity Reward (Negative).pdf}
+    }
+    \caption{Velocity-aligned activity template \(M\) (left) and opposite-direction template \(\widetilde{M}\) (right) for an agent moving with heading \(\varphi = \pi/4\) and normalized speed \(\bar{\mathcal{V}} = 0.6\).}
+    \label{fig:VelocityTemplates}
+\end{figure}
+
+Let \(A \in [0,1]\) denote the normalized activity of neurons in the second hidden layer, defined as the
+number of spikes emitted within a time window \(\Delta T\) divided by a maximum firing count.
+The scalar reward signal \(\mathcal{H}\) is decomposed into positive and negative components as
+\begin{equation}
+\mathcal{H}_+ = \frac{\mathcal{H} + |\mathcal{H}|}{2}, \qquad
+\mathcal{H}_- = \frac{|\mathcal{H}| - \mathcal{H}}{2},
+\end{equation}
+with \(\mathcal{H}_+ \ge 0\) representing reinforcement and \(\mathcal{H}_- \ge 0\) representing punishment.
+
+Using this decomposition, the per-neuron reward assignment is defined as
+\begin{equation}
+L_i = \mathcal{H}_+ M_i + \mathcal{H}_- \widetilde{M}_i,
+\end{equation}
+such that positive reward reinforces neurons aligned with the current velocity direction,
+while negative reward reinforces neurons encoding the opposite direction.
+
+Finally, the reward-modulated learning signal applied to the second hidden layer is given by
+\begin{equation}
+r^{H2}
+=
+\big((V_x \neq 0)\lor(V_y \neq 0)\big)
+\big(
+\mathcal{H}_+(M-A) + \mathcal{H}_-(\widetilde{M}-A)
+\big),
+\end{equation}
+which is active only when the agent is in motion.
+According to Figure~\ref{fig:VelocityTemplates}, this signal drives the neural activity toward the velocity-consistent template \(M\) under positive
+reward and toward the opposite template \(\widetilde{M}\) under negative reward, while vanishing when
+\(\mathcal{H}=0\).
 
 \paragraph{Numerical example (second hidden layer with the provided data)}
 We set $N_e=8$, $N_m=4$, hence the upsampling factor is $\kappa=N_e/N_m=2$.  
@@ -1372,39 +1436,71 @@ The masked events and Gaussian envelope yield a small \emph{negative} reward ($r
 
 \subsubsection{Output Layer Reward Computation Based on Directional Error}
 
-The output layer comprises four neurons actuating along the $\pm X$ and $\pm Y$ axes. The reward is constructed to align the output action with the commanded direction decoded from the preceding layer.
 
-Let the second hidden layer provide a directional activity over $N$ evenly spaced angular bins with centers
-\[
-\mu_k \;=\; \frac{360^\circ}{N}\,k,\qquad k\in\{0,\dots,N-1\},
-\]
-and nonnegative weights $w_k$ given by $10~ms$ binned spike counts. The commanded direction is decoded by the circular mean
-\[
-C \;=\; \sum_{k=0}^{N-1} w_k \cos(\mu_k),\qquad
-S \;=\; \sum_{k=0}^{N-1} w_k \sin(\mu_k),\qquad
-\theta_{\mathrm{cmd}} \;=\; \operatorname{atan2}(S,\,C)\in[0^\circ,360^\circ).
-\]
+The output layer consists of four neurons that generate thrust commands along the Cartesian
+directions \(\pm X\) and \(\pm Y\).
+The role of the reward at this layer is to align the generated action with a commanded
+motion direction provided by the preceding (second hidden) layer.
 
-Denote by $L,R,D,U$ the $50~ms$ averaged spike counts of the four output neurons corresponding to $-X,+X,-Y,+Y$, respectively. The instantaneous action vector is formed as
+The second hidden layer encodes motion direction using a population of neurons whose
+preferred directions are uniformly distributed over the unit circle.
+Each neuron responds most strongly when the motion direction matches its preferred
+orientation.
+Let \(\mu_k \in [0,2\pi)\) denote the preferred direction of the \(k\)-th neuron.
+The activity of each neuron is quantified by a binned spike count \(w_k \ge 0\), defined as
+the total number of spikes emitted within a fixed temporal window of duration
+\(\Delta T = 10~\mathrm{ms}\).
+This temporal binning converts discrete spike trains into a nonnegative scalar activity
+that can be used for population-level decoding.
 
-\[
-\mathbf{a} \;=\; (L-R,\; D-U),
-\qquad
-\theta_{\mathrm{act}} \;=\; \operatorname{atan2}(D-U,\; L-R)\in[0^\circ,360^\circ),
-\]
-so that the cosine and sine of $\theta_{\mathrm{act}}$ are obtained directly from the normalized components of $\mathbf{a}$. Writing the trigonometric discrepancies
-\[
-\Delta_c \;=\; \cos(\theta_{\mathrm{cmd}})-\cos(\theta_{\mathrm{act}}),\qquad
-\Delta_s \;=\; \sin(\theta_{\mathrm{cmd}})-\sin(\theta_{\mathrm{act}}),
-\]
-the four per-neuron rewards are
-\[
-r_{X^-} \;=\; \Delta_c,\qquad
-r_{X^+} \;=\; -\Delta_c,\qquad
-r_{Y^-} \;=\; \Delta_s,\qquad
-r_{Y^+} \;=\; -\Delta_s,
-\]
-which encourage thrust along the commanded direction and suppress the opposite directions.
+The commanded motion direction is extracted from this population activity using a
+circular mean.
+Specifically, the population is interpreted as a set of weighted unit vectors oriented
+along \(\mu_k\), and their vector sum is computed as
+\begin{equation}
+C = \sum_k w_k \cos(\mu_k), \qquad
+S = \sum_k w_k \sin(\mu_k).
+\end{equation}
+The commanded direction is then given by the angle of the resulting vector,
+\begin{equation}
+\theta_{\mathrm{cmd}} = \operatorname{atan2}(S,\,C),
+\end{equation}
+which corresponds to the circular mean of the population activity and yields a direction.
+
+
+The output layer consists of four neurons associated with thrust along the negative and
+positive \(X\) and \(Y\) directions.
+Let \(a_x\) and \(a_y\) denote the net thrust components along the \(X\) and \(Y\) axes,
+obtained as the difference between the spike activities of neurons encoding opposite
+directions and averaged over a \(50~\mathrm{ms}\) window.
+These components define the instantaneous action vector, \(\mathbf{a} = (a_x, a_y)\). The direction of this vector represents the action executed by the network.
+Since only the direction of the action is relevant for reward assignment, explicit
+normalization of \(\mathbf{a}\) is not required; the angular information is extracted
+directly via
+\begin{equation}
+\theta_{\mathrm{act}} = \operatorname{atan2}(a_y,\; a_x).
+\end{equation}
+
+To assess directional consistency, the commanded and executed directions are compared
+through their trigonometric components.
+The discrepancies along the \(X\) and \(Y\) axes are defined as
+\begin{equation}
+\Delta_c = \cos(\theta_{\mathrm{cmd}}) - \cos(\theta_{\mathrm{act}}), \qquad
+\Delta_s = \sin(\theta_{\mathrm{cmd}}) - \sin(\theta_{\mathrm{act}}).
+\end{equation}
+These quantities measure the mismatch between the desired and actual motion directions in
+each Cartesian dimension.
+
+Based on these discrepancies, the per-neuron rewards for the output layer are assigned as
+\begin{equation}
+r_{X^-} = \Delta_c, \qquad
+r_{X^+} = -\Delta_c, \qquad
+r_{Y^-} = \Delta_s, \qquad
+r_{Y^+} = -\Delta_s.
+\end{equation}
+This reward structure reinforces neurons whose activity contributes to reducing the
+directional error between the commanded motion (decoded from the second hidden layer) and
+the executed action, while suppressing neurons that drive motion in the opposite direction.
 
 % \subsubsection{Output Layer Reward Computation Based on Directional Error}
 
@@ -1463,14 +1559,33 @@ which encourage thrust along the commanded direction and suppress the opposite d
 \subsubsection{Weight Update using \ac{stdp}}
 \label{subsubsec:stdp_weight_update}
 
-To ensure consistent hierarchical learning, the synaptic plasticity of each layer is modulated by the convergence state of its preceding layer. Let $r^{\ell}$ denote the instantaneous reward of the layer $\ell$.  
-The effective reward of the layer $\ell$ is adaptively damped according to the stability of the previous layer as
+To ensure consistent hierarchical learning, synaptic plasticity in each layer is modulated
+by the convergence state of the preceding layer.
+Let \(r^{\ell-1}_i\) denote the instantaneous reward signal associated with neuron \(i\) in
+layer \(\ell-1\).
+The overall activity-dependent instability of that layer is summarized by the scalar
+measure
 \begin{equation}
-r^{\ell} = r^{\ell} \, \exp\!\left(- a_{L} \, \max(r^{\ell-1})\right),
+\mathcal{R}^{\ell-1} = \max_i \, |r^{\ell-1}_i|,
 \end{equation}
-where $a_{L}>0$ is a tunable damping coefficient that controls how strongly the upstream plasticity suppresses downstream adaptation.  
-This hierarchical modulation ensures that the second hidden layer begins significant adaptation only after the first hidden layer produces stable and reliable feature representations, and the output layer adapts only when the directional encoding in the second hidden layer becomes consistent.  
-As a result, synaptic updates propagate through the network in a layer-wise manner, reducing interference between layers and promoting coherent temporal convergence of the entire spiking hierarchy.
+which captures the largest magnitude of reward-driven fluctuations within the layer.
+
+Since the reward signals \(r^{\ell-1}_i\) are bounded by construction, the quantity
+\(\mathcal{R}^{\ell-1}\) is finite and nonnegative.
+Using this measure, the effective reward driving learning in layer \(\ell\) is defined as
+\begin{equation}
+r^{\ell}_{\mathrm{eff}}
+=
+r^{\ell} \exp\!\left(-a_L \, \mathcal{R}^{\ell-1}\right),
+\label{effectiveReward}
+\end{equation}
+where \(a_L > 0\) is a tunable damping coefficient.
+
+This exponential modulation suppresses downstream plasticity when the preceding layer
+exhibits large reward fluctuations, indicating ongoing adaptation.
+As learning in layer \(\ell-1\) stabilizes and \(\mathcal{R}^{\ell-1}\) decreases, enabling gradual
+adaptation in layer \(\ell\).
+
 
 \begin{figure}[H]
     \centering
@@ -1479,19 +1594,19 @@ As a result, synaptic updates propagate through the network in a layer-wise mann
     \label{fig:weight_update}
 \end{figure}
 
-The network is partitioned into layers using index bounds \(\{\ell=1,\dots,L-1\}\). For each layer \(\ell\), let \(\mathcal{J}_\ell\) be the set of presynaptic indices and \(\mathcal{I}_{\ell+1}\) the set of postsynaptic indices. Denote by \(\mathbf{C}^{(\ell)}(t)\in\mathbb{R}^{|\mathcal{I}_{\ell+1}|\times|\mathcal{J}_\ell|}\) the eligibility (credit–assignment) matrix produced by the \ac{stdp} kernel from pre– and post–spike timings up to time \(t\). In continuous time an admissible form is
+As shown in Figure~\ref{fig:weight_update}, the network is partitioned into layers using indices \(\{\ell=1,\dots,L-1\}\). For each layer \(\ell\), let \(\mathcal{J}_\ell\) be the set of presynaptic indices and \(\mathcal{I}_{\ell+1}\) the set of postsynaptic indices ($h, i,$ and $j$ in Layer $l$). Denote by \(\mathbf{C}^{(\ell)}(t)\in\mathbb{R}^{|\mathcal{I}_{\ell+1}|\times|\mathcal{J}_\ell|}\) the eligibility (credit–assignment) matrix produced by the \ac{stdp} kernel from pre– and post–spike timings up to time \(t\). In continuous time an admissible form is
 \begin{equation}
 \dot{\mathbf{C}^l}(t) = -\frac{1}{\tau_c}\mathbf{C}^l(t) + \mathbf{STDP}(\tau) \delta(t - \mathbf{T}^l)
 \end{equation}
-where, \(\tau_c\) is the constant for the decay of \( \mathbf{C}_{\text{post, pre}}(t) \), the \(\tau\) is the spike time difference between pre and post neurons, and \(\mathbf{T}^l\) is the matrix that shows the firing times of pre- and post-synaptic neurons. In discrete implementation this eligibility is maintained internally and sampled at update times; the weight rule below treats \(\mathbf{C}^{(\ell)}(t)\) as known.
+where, \(\tau_c\) is the constant for the decay of \( \mathbf{C}_{\text{post, pre}}(t) \), the \(\tau\) is the spike time difference between pre- and post-synaptic neurons (e.g., $h$ and $q$ in Figure~\ref{fig:weight_update}), and \(\mathbf{T}^l\) is the matrix that shows the firing times of pre- and post-synaptic neurons. In discrete implementation this eligibility is maintained internally and sampled at update times; the weight rule below treats \(\mathbf{C}^{(\ell)}(t)\) as known.
 
-Per–neuron rewards are computed on the postsynaptic side of each layer. Let \(\boldsymbol{r}^{(\ell)}(t)\;=\;\big[r^{(\ell)}_{i}(t)\big]_{i\in\mathcal{I}_{\ell+1}}\in\mathbb{R}^{|\mathcal{I}_{\ell+1}|}\) collect the layer–specific reward vector, respectively. The instantaneous, gated R-STDP update for layer \(\ell\) is then
+Per–neuron rewards  computed on the postsynaptic side of each layer. Let \(\boldsymbol{r}^{(\ell)}(t)\;=\;\big[r^{(\ell)}_{q}(t)\big]_{q\in\mathcal{I}_{\ell+1}}\in\mathbb{R}^{|\mathcal{I}_{\ell+1}|}\) (Figure~\ref{fig:weight_update}) collect the layer–specific reward vector, respectively. The instantaneous, gated R-STDP update for layer \(\ell\) is then
 \begin{equation}
-\Delta\mathbf{W}^{(\ell)}(t)\;=\; \boldsymbol{r}^{(\ell)}(t) \circ \mathbf{C}^{(\ell)}(t)
+\Delta\mathbf{W}^{(\ell)}(t)\;=\; \boldsymbol{r}^{(\ell)}_{\mathrm{eff}}(t) \circ \mathbf{C}^{(\ell)}(t)
 \;\;\in\;\mathbb{R}^{|\mathcal{I}_{\ell+1}|\times|\mathcal{J}_\ell|},
 \label{eq:layer_update}
 \end{equation}
-where \(\circ\) denotes element–wise multiplication. 
+where \(\circ\) denotes element–wise multiplication.  
 
 
 % \subsubsection{Per--Neuron, Cross--Resolution Federated Aggregation}
@@ -1858,7 +1973,7 @@ In our simulation of the multi‐agent docking task, the central payload is mode
 
 According to the International Docking System Standard (IDSS)~\cite{NASA_IDSS_IDD_RevF}, soft capture is required to occur with a lateral (radial) misalignment of less than~0.10~m and a relative lateral rate not exceeding~0.04~m/s at initial contact.
 
-In our \ac{snn} implementation, we configure four layers of Izhikevich neurons, each simulated with a time step of \(\Delta t = 0.1\) ms. The input layer comprises 1024 neurons that encode the preprocessed DVS currents. The first hidden layer contains \(512\) visual-processing neurons together with \(20\) \ac{pai} and \(20\) \ac{naai} units, for a total of \(552\) neurons; the ALM repositories operate in the Class 2 excitability regime for smooth frequency modulation. The second hidden layer comprises \(130\) Class 2 neurons: \(45\) \ac{rpr}, \(45\) \ac{dpr}, \(20\) \ac{rpi}, and \(20\) \ac{dpi}. Finally, the output layer consists of \(4\) Bistabilitiy neurons that generate directional PWM control signals for the \(X\)– and \(Y\)–axis thrust commands. Table~\ref{tab:neuronparams} summarizes these layer configurations.
+In our \ac{snn} implementation, we configure four layers of Izhikevich neurons, each simulated with a time step of \(\Delta t = 0.1\) ms. The input layer comprises 1024 neurons that encode the preprocessed DVS currents. The first hidden layer contains \(512\) visual-processing neurons together with \(20\) \ac{pai} and \(20\) \ac{naai} units, for a total of \(552\) neurons; the ALM repositories operate in the Class 2 excitability regime for smooth frequency modulation. The second hidden layer comprises \(130\) Class 2 neurons: \(45\) \ac{rpr}, \(45\) \ac{dpr}, \(20\) \ac{rpi}, and \(20\) \ac{dpi}. Finally, the output layer consists of \(4\) Bistability neurons that generate directional PWM control signals for the \(X\)– and \(Y\)–axis thrust commands. Table~\ref{tab:neuronparams} summarizes these layer configurations.
 
 
 \begin{table}[ht]
@@ -1877,7 +1992,8 @@ In our \ac{snn} implementation, we configure four layers of Izhikevich neurons, 
     & Class 2 
     & $512 + 20 + 20 = 552$ 
     & \makecell[l]{%
-        512 Visual neurons (Payload Attention Repository (PAR) + Neighboring Agent Attention Repository (NAAR)) \\ 
+        256 Payload Attention Repository (PAR)\\
+        256 Neighboring Agent Attention Repository (NAAR) \\ 
         20 Payload Attention Inhibitor (PAI) \\ 
         20 Neighboring Agent Attention Inhibitor (NAAI)}
     \\[0.5ex]
@@ -1902,9 +2018,6 @@ In our \ac{snn} implementation, we configure four layers of Izhikevich neurons, 
   \caption{Neuron layer configurations with full descriptions of each functional subgroup.}
   \label{tab:neuronparams}
 \end{table}
-
-
-
 
 
 Table~\ref{tab:learning_params} details the learning–related parameters and schedules used by the network during training. Each layer employs STDP modulated by reward signals, with eligibility traces governing synaptic updates. The parameters are carefully chosen to balance learning speed and stability, ensuring effective adaptation to the docking task.
