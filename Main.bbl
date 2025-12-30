@@ -585,6 +585,15 @@ A.~Botelho, P.~Rosa, and J.~M. Lemos, ``Explicit spacecraft thruster control
 E.~M. Izhikevich, ``Which model to use for cortical spiking neurons?,'' {\em
   IEEE transactions on neural networks}, vol.~15, no.~5, pp.~1063--1070, 2004.
 
+\bibitem{wilmes2023dendrites}
+K.~A. Wilmes and C.~Clopath, ``Dendrites help mitigate the plasticity-stability
+  dilemma,'' {\em Scientific Reports}, vol.~13, no.~1, p.~6543, 2023.
+
+\bibitem{fremaux2016neuromodulated}
+N.~Fr{\'e}maux and W.~Gerstner, ``Neuromodulated spike-timing-dependent
+  plasticity, and theory of three-factor learning rules,'' {\em Frontiers in
+  neural circuits}, vol.~9, p.~85, 2016.
+
 \bibitem{SpaceXDragon}
 SpaceX, ``Dragon.'' Online: Available at
   https://www.spacex.com/vehicles/dragon/, 2025.
