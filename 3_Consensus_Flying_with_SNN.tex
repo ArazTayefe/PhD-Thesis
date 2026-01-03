@@ -15,7 +15,7 @@ As shown in Figure \ref{fig.Consensus Flying}, a swarm of agents (follower drone
 
 The follower agents are equipped with an \ac{snn}, and their learning algorithm incorporates \ac{stdp} and \ac{fl}. Each follower agent trains a local network (\(M_{loc}^{n}\)) using \ac{stdp} and sends its model to the leader as the central server. The leader aggregates models and sends back the global model (\(M^{Global}\)).
 
-This chapter employs the \ac{snn} model to train a group of swarm agents that follow a leader. Each agent has its own \ac{snn}, which is trained independently using the \ac{stdp} algorithm. Each agent receives position data from the agents nearby. The goal is for each agent to keep a commanded distance from the leader agent and the other agents in the group. The encoding and decoding processes for the input and output layers of the \ac{snn} are fuzzy encoding, and a novel method is introduced to stabilize the network dynamics considering the reward function. This work presents several key contributions:
+This chapter employs the \ac{snn} model to train a group of swarm agents that follow a leader. Each agent has its own \ac{snn}, which is trained independently using the \ac{stdp} algorithm. Each agent receives position data from the agents nearby. The goal is for each agent to keep a commanded distance from the leader agent and the other agents in the group. The encoding and decoding processes for the input and output layers of the \ac{snn} are fuzzy encoding, and a novel method is introduced to stabilize the network dynamics considering the reward function. This chapter presents several key contributions:
 
 \begin{itemize}
     \item The chapter presents a comprehensive method for stabilizing and enhancing the learning process in \ac{snn}. This method focuses on controlling the unbounded growth of synaptic weights in SNNs, utilizing a strategy that dynamically adapts to changes in reward conditions and coefficients. It introduces a decay rate and learning rate adjustment based on the status of synaptic weights and enhances the responsiveness of the SNN weights to reward change.
@@ -27,48 +27,83 @@ This chapter employs the \ac{snn} model to train a group of swarm agents that fo
 
 \subsection{Network Structure}
 
-This chapter assumes that each agent detects only two neighboring agents in addition to the leader. The information obtained from other agents includes the Line-of-Sight (LOS) angle and the distance. Each agent's neural network consists of three sub-layers in the input layer, as shown in Figure \ref{fig.Network Structure}. Two sub-layers correspond to the two neighboring follower agents (\(F_{1}\) and \(F_{2}\)), and the third is dedicated to the leader (\(L\)). Inputs for these sub-layers are encoded using the Gaussian Receptive Fields (GRF) that use fuzzy membership functions. The network uses the difference between current and commanded distances within the swarm (\(r_{cmd}\)) and between followers and the leader (\(R_{cmd}\)) to stimulate input neurons.
+
+This chapter assumes that each agent detects only two neighboring agents in addition to the leader. The information obtained from other agents includes the Line-of-Sight (LOS) angle and the distance. Each agent’s neural network consists of three sub-layers in the input layer. Two sub-layers correspond to the two neighboring follower agents ($F_{1}$ and $F_{2}$), and the third sub-layer is dedicated to the leader ($L$). The inputs to these sub-layers are encoded using Gaussian Receptive Fields (GRFs) through fuzzy membership functions. The network uses the difference between the current and commanded distances within the swarm ($r_{cmd}$) and between followers and the leader ($R_{cmd}$) to stimulate the input neurons.
+
+Every input sub-layer is divided into two parts. The first part represents distances greater than the commanded distance, while the second part corresponds to distances smaller than the commanded value. Within each part, the LOS angle is encoded using Gaussian membership functions. The difference between the current distance and the commanded distance is treated as an error signal. This error is transformed into an amplitude using the hyperbolic tangent function so that it is bounded between 0 and 1. An error of zero produces zero amplitude, while large errors asymptotically lead to unit amplitude. Accordingly, the fuzzy encoding function for the input layer is defined as
+
+\begin{equation} \label{Eq.NS.1}
+    \mu_{I}(\phi_{i},r_{i}) =
+    \left| \tanh(r - r_{i}) \right|
+    \cdot
+    \exp\!\left(-\frac{(\phi_{i}-\zeta)^2}{2\sigma^2}\right),
+\end{equation}
+
+\noindent
+where $\zeta$ and $\sigma$ denote the center and standard deviation of the Gaussian membership functions, respectively. The variable $r_{i}$ represents the distance to the corresponding agent, $\phi_{i}$ is the LOS angle, and $\mu_{I}$ is the resulting membership degree. The variable $r$ acts as a placeholder and represents either $r_{cmd}$ or $R_{cmd}$, depending on whether the interaction is between followers or between a follower and the leader.
+
+The firing strengths produced by the fuzzy encoders are converted into input currents for the spiking neurons using the neuron model dynamics. The fuzzy-to-spiking conversion is given by~\cite{NS}
+
+\begin{equation} \label{Eq.NS.3}
+    I_{sub\text{-}layer}
+    =
+    \frac{\tau_{m}\left(V_{th} - V_{res}\right)}{\Delta t R_{m}}
+    \mu_{I}(\phi_{i},r_{i})
+    +
+    \frac{V_{th} - E_{l}}{R_{m}},
+\end{equation}
+
+\noindent
+where $\tau_{m}$ is the membrane time constant, $R_{m}$ is the membrane resistance, $\Delta t$ is the simulation time step, $V_{th}$ and $V_{res}$ denote the firing threshold and reset potentials, respectively, and $E_{l}$ is the leak reversal potential.
 
 \begin{figure}[H]
     \centering
     \includegraphics[scale=0.75]{Figures/Network Structure.pdf}
-    \caption{\ac{snn} structure with encoding and decoding layers. Each sub-layer consists of a fuzzy encoder and the F2S Converter, with the output layer receiving inputs from synaptic weights and a random action selector. During the training phase, the output layer receives input only from the random action selector, which then shifts to synaptic weight inputs after the training (test phase).}
+    \caption{\ac{snn} structure with encoding and decoding layers. Each input sub-layer consists of a fuzzy encoder followed by the fuzzy-to-spiking current conversion defined in \eqref{Eq.NS.3}. During the training phase, the output layer receives input only from the random action selector, which is replaced by synaptic weight inputs during the testing phase.}
     \label{fig.Network Structure}
 \end{figure}
 
-Every input sub-layer is split into two parts. The first part deals with distances greater than the commanded distance, while the second focuses on the space between the agent and the commanded distance. Within each part, the LOS angle is encoded with fuzzy membership functions. The difference between the current and commanded distance is represented as the error. We transform this difference into an amplitude value using the \(tanh\) function so that it is bounded between 0 and 1. An error of zero leads to an amplitude of zero, and as the error increases towards infinity, the amplitude approaches one. Consequently, the encoding function for the input layer is expressed as follows,
-
-\begin{equation} \label{Eq.NS.1}
-    \mu_{I}(\phi_{i},r_{i}) = \left| tanh(r - r_{i}) \right| \cdot \exp{\left(-\frac{(\phi_{i}-\zeta)^2}{2\sigma^2}\right)}
-\end{equation}
-
-\noindent where \( \zeta \) and \( \sigma \) are the Gaussian membership functions' center and standard deviation. The \(r_{i}\) is the distance from the corresponding agent, \(\phi_{i}\) is the LOS angle, and \(\mu_{I}\) is the vector of the membership degrees. Here, \(r\) is a placeholder that can either represent \(r_{cmd}\) or \(R_{cmd}\), depending on the context. The firing strengths from fuzzy encoders are then converted to the spiking input based on the neuron model as follows \cite{NS},
+For completeness, an alternative linear mapping between fuzzy membership values and input current can also be employed,
 
 \begin{equation} \label{Eq.NS.2}
-    I_{sub-layer} = \left(I^{max} - I^{min}\right)\mu_{I}(\phi_{i},r_{i}) + I^{min}
+    I_{sub\text{-}layer}
+    =
+    \left(I^{max} - I^{min}\right)\mu_{I}(\phi_{i},r_{i}) + I^{min},
 \end{equation}
 
-\noindent or
+\noindent
+where $I^{max}$ and $I^{min}$ denote the maximum and minimum allowable input currents defined in \eqref{Eq.9} and \eqref{Eq.13}. This formulation provides a simplified current scaling while preserving the same encoding structure.
 
-\begin{equation} \label{Eq.NS.3}
-    I_{sub-layer} = \frac{\tau_{m}\left(V_{th} - V_{res}\right)}{\Delta t R_{m}}\mu_{I}(\phi_{i},r_{i})+\frac{V_{th} - E_{l}}{R_{m}}
-\end{equation}
 
-The encoding process is shown in Figure \ref{fig.Encoder}. The Fuzzy-to-Spiking (F2S) block uses \eqref{Eq.NS.3} to calculate the inputs for the associated sub-layer.
+
+% This chapter assumes that each agent detects only two neighboring agents in addition to the leader. The information obtained from other agents includes the Line-of-Sight (LOS) angle and the distance. Each agent's neural network consists of three sub-layers in the input layer, as shown in Figure \ref{fig.Network Structure}. Two sub-layers correspond to the two neighboring follower agents (\(F_{1}\) and \(F_{2}\)), and the third is dedicated to the leader (\(L\)). Inputs for these sub-layers are encoded using the Gaussian Receptive Fields (GRF) that use fuzzy membership functions. The network uses the difference between current and commanded distances within the swarm (\(r_{cmd}\)) and between followers and the leader (\(R_{cmd}\)) to stimulate input neurons.
 
 % \begin{figure}[H]
 %     \centering
-%     \begin{minipage}{0.45\textwidth}
-%         \includegraphics[scale=0.75]{Figures/Encoder.pdf}
-%         \caption{The fuzzy encoding principle for the input sub-layer.}
-%         \label{fig.Encoder}
-%     \end{minipage}
-%     \begin{minipage}{0.45\textwidth}
-%         \includegraphics[scale=0.75]{Figures/SNN input-output.pdf}
-%         \caption{Input and output of the SNN}
-%         \label{fig.SNN-input-output}
-%     \end{minipage}
+%     \includegraphics[scale=0.75]{Figures/Network Structure.pdf}
+%     \caption{\ac{snn} structure with encoding and decoding layers. Each sub-layer consists of a fuzzy encoder and the Fuzzy-to-Spiking converter (described in \eqref{Eq.NS.3}), with the output layer receiving inputs from synaptic weights and a random action selector. During the training phase, the output layer receives input only from the random action selector, which then shifts to synaptic weight inputs after the training (test phase).}
+%     \label{fig.Network Structure}
 % \end{figure}
+
+% Every input sub-layer is split into two parts. The first part deals with distances greater than the commanded distance, while the second focuses on the space between the agent and the commanded distance. Within each part, the LOS angle is encoded with fuzzy membership functions. The difference between the current and commanded distance is represented as the error. We transform this difference into an amplitude value using the \(tanh\) function so that it is bounded between 0 and 1. An error of zero leads to an amplitude of zero, and as the error increases towards infinity, the amplitude approaches one. Consequently, the encoding function for the input layer is expressed as follows,
+
+% \begin{equation} \label{Eq.NS.1}
+%     \mu_{I}(\phi_{i},r_{i}) = \left| tanh(r - r_{i}) \right| \cdot \exp{\left(-\frac{(\phi_{i}-\zeta)^2}{2\sigma^2}\right)}
+% \end{equation}
+
+% \noindent where \( \zeta \) and \( \sigma \) are the Gaussian membership functions' center and standard deviation. The \(r_{i}\) is the distance from the corresponding agent, \(\phi_{i}\) is the LOS angle, and \(\mu_{I}\) is the vector of the membership degrees. Here, \(r\) is a placeholder that can either represent \(r_{cmd}\) or \(R_{cmd}\), depending on the context. The firing strengths from fuzzy encoders are then converted to the spiking input based on the neuron model as follows \cite{NS},
+
+% \begin{equation} \label{Eq.NS.2}
+%     I_{sub-layer} = \left(I^{max} - I^{min}\right)\mu_{I}(\phi_{i},r_{i}) + I^{min}
+% \end{equation}
+
+% \noindent or
+
+% \begin{equation} \label{Eq.NS.3}
+%     I_{sub-layer} = \frac{\tau_{m}\left(V_{th} - V_{res}\right)}{\Delta t R_{m}}\mu_{I}(\phi_{i},r_{i})+\frac{V_{th} - E_{l}}{R_{m}}
+% \end{equation}
+
+% The encoding process is shown in Figure \ref{fig.Encoder}. The Fuzzy-to-Spiking (F2S) block uses \eqref{Eq.NS.3} to calculate the inputs for the associated sub-layer.
 
 \begin{figure}[ht]
     \centering
@@ -111,7 +146,7 @@ The equation for decoding this activity can be expressed as:
     \Delta y_{decoded} = \left[ \sum_{i=t-\Delta T}^{t} \left(f^{y+}(i)-f^{y-}(i)\right) \right]\Delta Y_{max}
 \end{equation}
 
-\noindent where \(\Delta T\) is the time window the network updates weights.
+\noindent where \(\Delta T\) is the time window that the network uses to update the weights.
 
 One of the challenges in robotic applications is ensuring smooth transitions in actions to prevent abrupt and potentially harmful changes. Therefore, the recursive random number generation method is used to produce correlated random numbers. This method ensures that during training, the current displacements of the robot are influenced by its previous displacements, leading to smoother transitions. The recursive random number generation can be formulated as,
 
@@ -454,7 +489,7 @@ The proposed algorithm allows agents to communicate less often and save energy. 
 
 \section{Results and Discussion}
 
-In this section, we conducted a numerical simulation to validate the performance of the proposed method. The simulation involves a group of five agents flying around a leader who is moving in a circular path. Initially, a scenario without implementing \ac{fl} was conducted to evaluate the performance of the \ac{snn} in achieving coordinated flight. During this phase, the effect of the change in reward was simulated to examine the \ac{RCSE} method. In the second part of the simulation, the proposed \ac{fl} aggregation algorithm is used, where the leader agent acts as a central server. Finally, the algorithm was tested both before and after changing the rewards.
+In this section, we conducted a numerical simulation to validate the performance of the proposed method. The simulation involves a group of five agents flying around a leader who is moving in a circular path. Initially, a scenario without implementing \ac{fl} was conducted to evaluate the performance of the \ac{snn} in achieving coordinated flight. During this phase, the effect of the change in reward was simulated to examine the \ac{RCSE} method. In the second part of the simulation, the proposed \ac{fl} aggregation algorithm is used, where the leader agent acts as a central server. Finally, the algorithm was tested both before and after changing the rewards (changing the environment).
 
 \subsection{Simulation without \ac{fl}}
 
@@ -478,7 +513,7 @@ $V_{th}$ & -50 mV & Threshold membrane potential \\
 \end{tabular}
 \end{table}
 
-The \ac{stdp} mechanism updated synaptic weights at 10 ms intervals. During these intervals, the learning algorithm adjusted the agent's states based on received data from other agents and the leader while simultaneously generating random outputs as part of an exploration strategy (section 3.2.3).
+The \ac{stdp} mechanism updated synaptic weights at 10 ms intervals. During these intervals, the learning algorithm adjusted the agent's states based on received data from other agents and the leader (section 3.2.3).
 
 \begin{table}[H]
 \caption{Simulation Parameters}
@@ -552,15 +587,35 @@ After 600 seconds, the leader is changed into an obstacle, and its reward coeffi
     \mathcal{R}_{Fi}^{L}(t) = -\mathcal{C}_{Fi}^{L}\left[r_{Fi}^{L}(t-1)-r_{Fi}^{L}(t)\right]
 \end{equation}
 
-When the leader is transformed into an obstacle, the encoding equation for the input layer must be changed. This is because the obstacle has no commanded distance, and the agents must maintain a commanded distance only from each other. Therefore, the commanded distance from the obstacle encoder in the input layer must be removed. Therefore, \eqref{Eq.NS.1} can then be rewritten as follows:
+The original encoding function (\eqref{Eq.NS.1}) for the input layer is recalled here for clarity:
+\begin{equation*} \label{Eq.NS.1_recall}
+    \mu_{I}(\phi_{i},r_{i}) =
+    \left| \tanh(r - r_{i}) \right|
+    \cdot
+    \exp\!\left(-\frac{(\phi_{i}-\zeta)^2}{2\sigma^2}\right),
+\end{equation*}
+where the hyperbolic tangent term scales the angular membership by the magnitude of the distance error $(r-r_i)$, and the Gaussian term encodes the LOS angle.
 
+The $\tanh(\cdot)$ factor in \eqref{Eq.NS.1_recall} serves as an amplitude modulation that depends on the difference between the current distance and a commanded distance $r$. This term is meaningful only when a desired reference distance exists, as it maps the distance error into a bounded gain that increases with deviation from the command and vanishes when the error is zero.
+
+When the leader is redefined as an obstacle, no commanded distance is associated with it. In this case, the distance variable $r$ is undefined for the obstacle encoder, and the distance error term $(r - r_i)$ cannot be formed. Mathematically, this removes the distance-dependent modulation from the encoding process. Consequently, the membership function reduces to its angular component, yielding
 \begin{equation} \label{Eq.R-2}
-    \mu_{I}(\phi_{i}) = \exp{\left(-\frac{(\phi_{i}-\zeta)^2}{2\sigma^2}\right)}
+    \mu_{I}(\phi_{i}) =
+    \exp\!\left(-\frac{(\phi_{i}-\zeta)^2}{2\sigma^2}\right).
 \end{equation}
+
+Equation~\eqref{Eq.R-2} can therefore be interpreted as a special case of \eqref{Eq.NS.1_recall}, corresponding to the absence of a distance reference. In this case, the encoding preserves directional (LOS) information while intentionally discarding distance-based scaling, which is consistent with obstacle avoidance behavior where only angular awareness, rather than distance regulation toward a commanded value, is required.
+
+
+% When the leader is transformed into an obstacle, the encoding equation for the input layer must be changed. This is because the obstacle has no commanded distance, and the agents must maintain a commanded distance only from each other. Therefore, the commanded distance from the obstacle encoder in the input layer must be removed. Therefore, \eqref{Eq.NS.1} can then be rewritten as follows:
+
+% \begin{equation} \label{Eq.R-2}
+%     \mu_{I}(\phi_{i}) = \exp{\left(-\frac{(\phi_{i}-\zeta)^2}{2\sigma^2}\right)}
+% \end{equation}
 
 The simulation proceeded for an additional 1200 seconds, during which the synaptic weights were adjusted in accordance with the new reward function given by \eqref{Eq.R-1}. In this case, because the leader is now an obstacle, so then \(\alpha^{\mathcal{S}}(t)\) in Figure \ref{fig_3_3_2} switches to 1 and weight adaptation starts again.
 
-The results of the reward change are shown in Figures \ref{fig_3_6} and \ref{fig_3_7}, which indicates that the agents quickly reduced their initial distance to the commanded distance of 2 m. Simultaneously, the minimum distance from the obstacle, which was the leader, increased over time, indicating that the agents adapted their behavior to maintain a greater distance from the obstacle. Figure \ref{fig_3_6} shows the trajectory of each agent after the reward change.
+The results of the reward change (change in environment) are shown in Figures \ref{fig_3_6} and \ref{fig_3_7}, which indicates that the agents quickly reduced their initial distance to the commanded distance of 2 m. Simultaneously, the minimum distance from the obstacle, which was the leader, increased over time, indicating that the agents adapted their behavior to maintain a greater distance from the obstacle. Figure \ref{fig_3_6} shows the trajectory of each agent after the reward change.
 
 \begin{figure}[H]
     \centering
@@ -577,9 +632,11 @@ The results of the reward change are shown in Figures \ref{fig_3_6} and \ref{fig
     \end{minipage}
 \end{figure}
 
-Each agent in the swarm detects two neighboring agents and the leader, acquiring the Line-of-Sight angle and distance. Their neural network consists of three sub-layers in the input layer: two for neighboring followers (\(F_{1}\) and \(F_{2}\)) and one for the leader (\(L\)), with inputs encoded using Gaussian Receptive Fields and fuzzy membership functions. The network uses differences between current and commanded distances within the swarm (\(r_{cmd}\)) and between followers and the leader (\(R_{cmd}\)) to stimulate input neurons, which are split into parts for distances greater than and within the commanded distance, encoding the LOS angle with fuzzy membership functions. Errors in distances are transformed into amplitude values using the \(tanh\) function, bounded between 0 and 1. Each agent's neural network includes 72 input neurons, with 24 neurons per detected object, derived from numerical simulations. The output layer has 4 neurons representing positive and negative \(\Delta x\) and \(\Delta y\) movements.
+% Each agent in the swarm detects two neighboring agents and the leader, acquiring the Line-of-Sight angle and distance. Their neural network consists of three sub-layers in the input layer: two for neighboring followers (\(F_{1}\) and \(F_{2}\)) and one for the leader (\(L\)), with inputs encoded using Gaussian Receptive Fields and fuzzy membership functions. The network uses differences between current and commanded distances within the swarm (\(r_{cmd}\)) and between followers and the leader (\(R_{cmd}\)) to stimulate input neurons, which are split into parts for distances greater than and within the commanded distance, encoding the LOS angle with fuzzy membership functions. Errors in distances are transformed into amplitude values using the \(tanh\) function, bounded between 0 and 1. Each agent's neural network includes 72 input neurons, with 24 neurons for each of the three objects that it detects. These objects are two neighboring agents and the leader. The output layer has 4 neurons representing positive and negative \(\Delta x\) and \(\Delta y\) movements.
 
-In order to better understand the effect of reward change on the \ac{snn}, the synaptic weights matrix before and after reward change has been illustrated in Figures \ref{fig_3_8} and \ref{fig_3_9}, the vertical axis shows the output neurons. The first output neuron is for negative displacement in the x-direction, while the second output neuron is dedicated to positive displacement in the x-direction. Similarly, the third output neuron corresponds to negative displacement in the y-direction and the fourth output neuron to positive displacement in the y-direction. The horizontal axis shows the input neurons. The neuron IDs from 1 to 24 are for the first sub-layer dedicated to the neighboring follower. The network has two sub-layers for the neighboring follower agents, but only one is shown since they are similar in the case of synaptic weight values. The neuron numbers from 25 to 48 are for the sub-layer dedicated to the leader. The \ac{RCSE} method aims to maintain the synaptic weight matrix gradient while adapting to changes in the reward signal.
+Each agent in the swarm detects two neighboring agents and the leader, acquiring the Line-of-Sight angle and distance. Their neural network consists of three sub-layers in the input layer: two for neighboring followers (\(F_{1}\) and \(F_{2}\)) and one for the leader (\(L\)), with inputs encoded using Gaussian Receptive Fields and fuzzy membership functions. The network uses the difference between the current and commanded distances within the swarm ($r_{cmd}$) and between each follower and the leader ($R_{cmd}$) as input to stimulate the input neurons. Each input channel is divided into two regions: those with distances greater than the commanded value and those within the commanded value. Within each region, the LOS angle is encoded using fuzzy membership functions. Errors in distances are transformed into amplitude values using the \(tanh\) function, bounded between 0 and 1. Each agent's neural network includes 72 input neurons, with 24 neurons for each of the three objects that it detects. These objects are two neighboring agents and the leader. The output layer has 4 neurons representing positive and negative \(\Delta x\) and \(\Delta y\) movements.
+
+In order to better understand the effect of reward change (change in environment) on the \ac{snn}, the synaptic weights matrix before and after reward change has been illustrated in Figures \ref{fig_3_8} and \ref{fig_3_9}, the vertical axis shows the output neurons. The first output neuron is for negative displacement in the x-direction, while the second output neuron is dedicated to positive displacement in the x-direction. Similarly, the third output neuron corresponds to negative displacement in the y-direction and the fourth output neuron to positive displacement in the y-direction. The horizontal axis shows the input neurons. The neuron IDs from 1 to 24 are for the first sub-layer dedicated to the neighboring follower. The network has two sub-layers for the neighboring follower agents, but only one is shown since they are similar in the case of synaptic weight values. The neuron numbers from 25 to 48 are for the sub-layer dedicated to the leader. The \ac{RCSE} method aims to maintain the synaptic weight matrix gradient while adapting to changes in the reward signal.
 
 Considering the numerical values presented in Table \ref{table:simulation-parameters} along with the reward coefficients \(\mathcal{C}_{Fi}^{Fj} = 0.02\) and \(\mathcal{C}_{L}^{Fj} = 0.07\), and \(r_{Fi}^{Fj} = 1\;m/s\) and \(r_{Fi}^{L} = 0.1\;m/s\), the maximum rewards at each weight update interval (\(\Delta T\)) for \(\mathcal{R}_{Fi}^{Fj}\) and \(\mathcal{R}_{Fi}^{L}\) are calculated using \eqref{Eq.TA.3} and \eqref{Eq.TA.4} as \(4\times 10^{-4}\) and \(7.7\times 10^{-4}\), respectively. Consequently, \(\mathcal{R}_{max}^{G} = \max(\mathcal{R}_{Fi}^{Fj},\mathcal{R}_{Fi}^{L}) = 7.7\times 10^{-4}\). The \(\Psi^{S}\) for the follower section in the network is \(\left[\frac{4\times10^{-4}}{7\times10^{-4}}\right]15.5=8.0519\), and for the leader section, it is \(\left[\frac{7\times10^{-4}}{7\times10^{-4}}\right]15.5=15.5\). The \(\eta\) and \(\beta\) for the follower section within the network are \(\frac{\mathcal{A}\mathcal{R}_{max}^{G} \ln{(2^{\lambda^2}-1)}}{\lambda\Psi^{\mathcal{S}} \log{(2)}} = 0.0011\) and \(\beta = \frac{\ln{(2^{\lambda^2}-1)}}{\Psi^{\mathcal{S}}} = 2.152\), respectively. For the leader section, these values are \(\frac{\mathcal{A}\mathcal{R}_{max}^{G} \ln{(2^{\lambda^2}-1)}}{\lambda\Psi^{\mathcal{S}} \log{(2)}} = 5.719\times 10^{-4}\) and \(\beta = \frac{\ln{(2^{\lambda^2}-1)}}{\Psi^{\mathcal{S}}} = 1.118\), respectively.
 
@@ -618,7 +675,7 @@ The visual patterns observed in the synaptic weights matrix in Figure \ref{fig_3
 
 Since the reward coefficients for followers and leaders are different, their maximum allowed synaptic weights are also different. The proposed method given by \eqref{Eq.WS.4} for controlling the unbounded growth of synaptic weights has successfully stabilized the network.
 
-Figures \ref{fig_3_8_1} and \ref{fig_3_9_1} show the performance of the Multiplicative Synaptic Normalization (MSN) method. According to the results, this method cannot control the weight growth because of the coexistence of the excitatory and inhibitory (positive and negative synaptic weights). This method adjusts the weights when the summation of the input synaptic weights to an output neuron exceeds the maximum synaptic weight. In this case, the condition is never satisfied since positive and negative synaptic weights cancel out each other. According to Figure \ref{fig_3_9_1}, when the reward changes for the Leader, the MSN cannot adjust the weights because it does not have the reward-modulated decay rate mechanism.
+Figures \ref{fig_3_8_1} and \ref{fig_3_9_1} show the performance of the Multiplicative Synaptic Normalization (MSN) method. According to the results, this method cannot control the weight growth because of the coexistence of the excitatory and inhibitory (positive and negative synaptic weights). This method adjusts the weights when the summation of the input synaptic weights to an output neuron exceeds the maximum synaptic weight. In this case, the condition is never satisfied because positive and negative synaptic weights cancel each other, which is why we see synaptic weight values around 30 or -50 that are not within the $I^{minimum}$ and $I^{maximum}$ range. According to Figure \ref{fig_3_9_1}, when the reward changes for the Leader, the MSN cannot adjust the weights because it does not have the reward-modulated decay rate mechanism.
 
 \begin{figure}[H]
     \centering
@@ -636,11 +693,11 @@ Figures \ref{fig_3_8_1} and \ref{fig_3_9_1} show the performance of the Multipli
 \end{figure}
 
 
-Figures \ref{fig_3_10} and \ref{fig_3_11} show the synaptic weights after the reward change. In this case, since the reward coefficients are changed, the \(\eta\) and \(\beta\) values in \eqref{Eq.WS.3} are changed for the represented sub-layers, and the proposed method has helped the \ac{stdp} algorithm to adjust the weights based on the new situation in the environment.
+Figures \ref{fig_3_10} and \ref{fig_3_11} show the synaptic weights after the reward change (change in environment). In this case, since the reward coefficients are changed, the \(\eta\) and \(\beta\) values in \eqref{Eq.WS.3} are changed for the represented sub-layers, and the proposed method has helped the \ac{stdp} algorithm to adjust the weights based on the new situation in the environment.
 
-\subsection{Simulation with \ac{fl} and \ac{RCSE}}
+\subsection{Simulation with Federated Learning and Reward-modulated Competitive Synaptic Equilibrium}
 
-In this section, the proposed aggregation algorithm is tested. In this case, the agents only send their models when the Euclidean distance between the current and previously published model or the latest global model reaches a threshold. In the first phase, the simulation was done in 600 seconds, and the agents learned to follow the leader. The threshold for publishing the agents' and server models was 0.0005 and 0.00051, respectively. The reason for choosing the server's threshold higher than the agents' is that as soon as the first agent sends its model to the server, the Euclidean distance between the current and previously published model by the server reaches 0.0005, and the server distributes the model immediately. Therefore, the serve's threshold is set higher than the agents' threshold, so it waits for the other agents to send their models.
+In this section, the proposed aggregation algorithm is tested. In this case, the agents only send their models when the Euclidean distance between the current and previously published model or the latest global model reaches a threshold. In the first phase, the simulation was done in 600 seconds, and the agents learned to follow the leader. The threshold for publishing the agents' and server models (\eqref{Eq.AFL.4} and \eqref{Eq.AFL.5}) was 0.0005 and 0.00051, respectively. The reason for choosing the server's threshold higher than the agents' is that as soon as the first agent sends its model to the server, the Euclidean distance between the current and previously published model by the server reaches 0.0005, and the server distributes the model immediately. Therefore, the serve's threshold is set higher than the agents' threshold, so it waits for the other agents to send their models.
 
 Figure \ref{fig_3-7} shows the distances between agents and the leader before the reward change, indicating that the agents converge to the solution faster than in the scenario where federated learning has not been used, without any error. Figure \ref{fig_3-8} shows the simulation results for the reward change scenario, indicating that the proposed event-triggered \ac{fl} method has improved the learning performance, enabling the swarm to converge to the solution in 6 seconds. In this case, the neural network learned the policies in less time while preserving the performance.
 
@@ -659,7 +716,7 @@ Figure \ref{fig_3-7} shows the distances between agents and the leader before th
     \end{minipage}
 \end{figure}
 
-The norm of the synaptic weights can represent the changes in the synaptic weights due to the change in the environment during the training process, which can be used to adjust the learning process in SNNs. In the proposed event-triggered \ac{fl} method, agents communicate with the Central Server (leader) during training. According to Figure \ref{fig:3-10}, the aggregation step time is small at the beginning of the training and increases as the \ac{snn} models converge to the final solution. The rate of change of the norm of the synaptic weights determines the communication sample time of the aggregation process, which results in small aggregation intervals when the change rate is high and larger intervals when it reduces.
+The norm of the synaptic weights can represent the changes in the synaptic weights due to the change in the environment during the training process, which can be used to adjust the learning process in SNNs. In the proposed event-triggered \ac{fl} method, agents communicate with the Central Server (leader) during training. According to Figure \ref{fig:3-10}, the aggregation step time is small at the beginning of the training and increases as the \ac{snn} models converge to the final solution. The rate of change of the norm of the synaptic weights (change in Frobenius norm showed in \eqref{Eq.AFL.3}) determines the communication sample time of the aggregation process, which results in small aggregation intervals when the change rate is high and larger intervals when it reduces.
 
 \begin{figure}[H]
     \centering
@@ -677,7 +734,7 @@ The norm of the synaptic weights can represent the changes in the synaptic weigh
 \end{figure}
 
 
-Therefore, the aggregation frequency is very high initially, and it reduces after the change in synaptic weights goes to zero because the learning rate matrix in (\ref{Eq.WS.1}) goes to zero. Also, after the reward changes and the leader becomes an obstacle after 600 seconds, the Euclidean distance between the converged and current models increases and reaches the threshold. As soon as the first agent sends its model to the server, the aggregation process starts again, and the agents adjust the associated synaptic weight.
+Initially, the aggregation frequency is high, but it decreases as the change in synaptic weights approaches zero. This reduction occurs because the learning rate matrix in (\ref{Eq.WS.1}) also approaches zero. The Sigmoid function is specifically designed to output 0 when the maximum synaptic weight exceeds the threshold and to output 1 when it is below the threshold. Also, after the reward changes and the leader becomes an obstacle after 600 seconds, the Euclidean distance between the converged and current models increases and reaches the threshold. As soon as the first agent sends its model to the server, the aggregation process starts again (change in synaptic weights and the Frobenius norm shown in \eqref{Eq.AFL.3}), and the agents adjust the associated synaptic weight.
 
 \begin{table}[h]
     \centering
@@ -698,12 +755,13 @@ Therefore, the aggregation frequency is very high initially, and it reduces afte
     \label{tab:Results analysis}
 \end{table}
 
+It should be noted that in the test phase, the synaptic weights oscillate around the converged values. When they are lower than the converged value, the learning rate is 1; otherwise, it is 0. The decay rate pulls them away from the converged value, and the reward pulls them back toward it. The oscillation arises from the hard threshold mechanism, defined by the Sigmoid function. Therefore, if the reward changes (due to environmental changes), synaptic weights can adjust quickly because the learning rate returns to 1. 
 
 Table \ref{tab:Results analysis} compares the results and focuses on three critical metrics: learning time, maximum error after convergence, and convergence time. The proposed \ac{fl} algorithm demonstrates significant improvements in terms of efficiency and accuracy, as evidenced by its considerably shorter learning and convergence times and a notable reduction in error after convergence.
 
 \section{Conclusion}
 
-In this chapter, we presented a comprehensive approach addressing the challenges of uncontrolled growth in synaptic weights and the limited responsiveness of \ac{stdp} to real-time changes within \ac{snn}s. Our proposed solution integrates the \ac{RCSE} method with a dynamic aggregation interval in \ac{fl} and significantly reduces learning time while improving performance.
+In this chapter, we presented a comprehensive approach addressing the challenges of uncontrolled growth in synaptic weights (shown in Figures \ref{fig_3_8_1} and \ref{fig_3_9_1}) and the limited responsiveness of \ac{stdp} to real-time changes within \ac{snn}s. Our proposed solution integrates the \ac{RCSE} method with a dynamic aggregation interval in \ac{fl} and significantly reduces learning time while improving performance.
 
 The R-CSE method introduces a novel mechanism to manage the unbounded growth of synaptic weights by dynamically adjusting the decay rate through the SoftPlus function. This adjustment is sensitive to the learning stages and rewards changes, ensuring that synaptic weight adjustments remain responsive over time. By addressing the challenge of synaptic weight saturation, the \ac{RCSE} method facilitates a balanced approach to weight adjustment, preventing network saturation and promoting continuous learning adaptability.
 

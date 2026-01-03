@@ -6,7 +6,7 @@ This chapter looks at two main things: how well \ac{snn}s handle noise and how t
 
 The neural structure in \ac{snn}s helps us implement complex learning systems. One good example of a complex situation is a differential game like the Active Target Defense (ATD) problem \cite{Ch5_ATD4}.
 
-In the ATD, a defender tries to protect a target, while a superior invader with higher velocity than the defender and a moving target tries to reach the target and escape the defender at the same time. In the context of defense strategy, aircraft movement analysis is crucial in determining the most effective strategies. In the context of defense strategy, aircraft movement analysis is crucial in determining the most effective strategies. Law enforcement benefits from these games by minimizing escape possibilities. The ATD problems are a fundamental component of game theory, providing insights into strategic decision-making across disciplines like economics and biology. Additionally, these games find applications in Cybersecurity for modeling attacker-defender interactions \cite{Ch5_ATD4-5}.
+In the ATD, a defender tries to protect a target, while a superior invader with higher velocity than the defender and a moving target tries to reach the target and escape the defender at the same time. In the context of defense strategy, aircraft movement analysis is crucial in determining the most effective strategies. Law enforcement benefits from these games by minimizing escape possibilities. The ATD problems are a fundamental component of game theory, providing insights into strategic decision-making across disciplines like economics and biology. Additionally, these games find applications in Cybersecurity for modeling attacker-defender interactions \cite{Ch5_ATD4-5}.
 
 There are two distinct outcomes to the ATD game, characterized by two termination sets \cite{Ch5_ATD6}. The first outcome happens when the invader reaches the target while the defender is far from it. The second outcome happens when the defender reaches the target while the invader's distance from the target is larger than the defender's distance.
 
@@ -43,22 +43,53 @@ The \ac{stdp} algorithm is used to train two separate \ac{snn}s simultaneously t
     \label{fig:my_label8}
 \end{figure}
 
-In the \ac{snn}, the pre-synaptic neurons are input neurons, and post-synaptic neurons are output neurons. The synaptic plasticity is referred to as an eligibility trace ($C$), which is calculated based on the following equation \cite{Ch_1_R22},
+% In the \ac{snn}, the pre-synaptic neurons are input neurons, and post-synaptic neurons are output neurons. The synaptic plasticity is referred to as an eligibility trace ($C$), which is calculated based on the following equation \cite{Ch_1_R22},
+
+% \begin{equation} \label{Eq.14}
+%     \dot C^{i-j} = -C^{i-j}/\tau_C + STDP^{i-j}(\tau)  \delta(t - t_{pre/post})
+% \end{equation}
+
+% \noindent where the $C^{i-j}$ is the eligibility trace for the synaptic connection between neurons $i$ and $j$, $\tau$, is the spike timing difference between the input and output spike times, $\tau_C$ is the time constant for the synaptic plasticity, $\delta$ is the Dirac function, $t_{pre/post}$ is the firing time of the pre or post-synaptic neuron, and $STDP(\tau)$ is a function of the firing time of the input and output neurons as follow,
+
+% \begin{equation} \label{Eq.15}
+%     STDP^{i-j}(\tau) = \begin{cases}
+%         A_{+}exp\left(\frac{-\tau}{\tau_{s}}\right) & \text{if $\tau > 0$} \\
+%         A_{-}exp\left(\frac{\tau}{\tau_{s}}\right) & \text{if $\tau < 0$} \\
+%         \end{cases}
+% \end{equation}
+
+% \noindent where $A_{+}$ and $A_{-}$ are the amplitude of the exponential function, and $\tau_{s}$ is the time constant that determines the decaying rate of the \ac{stdp} function. If $\tau_{s}$ goes to infinity, the exponential function becomes 1, and the effect of time in \ac{stdp} will be lost. 
+
+In the \ac{snn}, pre-synaptic neurons correspond to input neurons, while post-synaptic neurons correspond to output neurons. Synaptic plasticity is governed by an eligibility trace, denoted by $C^{i\rightarrow j}$, which accumulates spike-timing correlations and decays over time. The eligibility trace evolves according to~\cite{Ch_1_R22}
 
 \begin{equation} \label{Eq.14}
-    \dot C^{i-j} = -C^{i-j}/\tau_C + STDP^{i-j}(\tau)  \delta(t - t_{pre/post})
+    \dot{C}^{i\rightarrow j}(t)
+    =
+    -\frac{C^{i\rightarrow j}(t)}{\tau_C}
+    +
+    \sum_{t_{\text{pre}},\,t_{\text{post}}}
+    \text{STDP}^{i\rightarrow j}(t_{\text{post}} - t_{\text{pre}})
+    \,\delta(t - t_{\text{post}}),
 \end{equation}
 
-\noindent where the $C^{i-j}$ is the eligibility trace for the synaptic connection between neurons $i$ and $j$, $\tau$, is the spike timing difference between the input and output spike times, $\tau_C$ is the time constant for the synaptic plasticity, $\delta$ is the Dirac function, $t_{pre/post}$ is the firing time of the pre or post-synaptic neuron, and $STDP(\tau)$ is a function of the firing time of the input and output neurons as follow,
+\noindent
+where $C^{i\rightarrow j}(t)$ is the eligibility trace associated with the synapse from pre-synaptic neuron $i$ to post-synaptic neuron $j$, and $\tau_C$ is the eligibility decay time constant. The variables $t_{\text{pre}}$ and $t_{\text{post}}$ denote the firing times of the pre- and post-synaptic neurons, respectively. The Dirac delta function $\delta(t - t_{\text{post}})$ ensures that the eligibility trace is updated only at post-synaptic spike times, while the magnitude of the update depends on the relative spike timing $t_{\text{post}} - t_{\text{pre}}$ through the \ac{stdp} kernel.
+
+The spike-timing-dependent plasticity function is defined as
 
 \begin{equation} \label{Eq.15}
-    STDP^{i-j}(\tau) = \begin{cases}
-        A_{+}exp\left(\frac{-\tau}{\tau_{s}}\right) & \text{if $\tau > 0$} \\
-        A_{-}exp\left(\frac{\tau}{\tau_{s}}\right) & \text{if $\tau < 0$} \\
-        \end{cases}
+    \text{STDP}^{i\rightarrow j}(\tau) =
+    \begin{cases}
+        A_{+}\exp\!\left(-\dfrac{\tau}{\tau_s}\right), & \tau > 0, \\
+        A_{-}\exp\!\left(\dfrac{\tau}{\tau_s}\right),  & \tau < 0,
+    \end{cases}
 \end{equation}
 
-\noindent where $A_{+}$ and $A_{-}$ are the amplitude of the exponential function, and $\tau_{s}$ is the time constant that determines the decaying rate of the \ac{stdp} function. If $\tau_{s}$ goes to infinity, the exponential function becomes 1, and the effect of time in \ac{stdp} will be lost. 
+\noindent
+where $\tau = t_{\text{post}} - t_{\text{pre}}$ is the spike timing difference, $A_{+}$ and $A_{-}$ are the amplitudes of potentiation and depression, respectively, and $\tau_s$ is the \ac{stdp} time constant that determines the temporal sensitivity of synaptic modification.
+
+The parameter $\tau_s$ controls how strongly synaptic updates depend on precise spike timing. For small $\tau_s$, the exponential terms decay rapidly, and only closely timed pre- and post-synaptic spikes contribute significantly to the eligibility trace. As $\tau_s$ increases, the temporal window of interaction widens, allowing spikes separated by larger time intervals to influence synaptic plasticity. In the limiting case $\tau_s \rightarrow \infty$, the exponential terms converge to unity, and the STDP function becomes independent of spike timing. In this regime, synaptic updates no longer encode temporal causality and reduce to constant-amplitude contributions at each post-synaptic spike, eliminating the temporal selectivity that characterizes spike-timing-dependent plasticity.
+
 
 The synaptic weights are changed according to the following equation,
 
@@ -68,6 +99,10 @@ The synaptic weights are changed according to the following equation,
 \end{equation}
 
 \noindent where $W^{i-j}$ is the synaptic weight between neurons $i$ and $j$, which is the amount of input ($I(t)$) that the post-synaptic neuron receives when the pre-synaptic neuron spikes, and $R(t)$ is the reward.
+
+The \ac{stdp} time constant $\tau_s$ is selected in relation to the synaptic weight update interval $\Delta T$. The objective is to ensure that spike pairs occurring anywhere within the update interval produce a meaningful contributions to the eligibility trace. To this end, $\tau_s$ is chosen such that the exponential \ac{stdp} kernel decays substantially, but not completely, over the duration of $\Delta T$. In this chapter, the weight update interval is set to $\Delta T = 10~\mathrm{ms}$, and $\tau_s$ is selected as $\tau_s = 3~\mathrm{ms}$. With this choice, when pre- and post-synaptic neurons fire close in time near the beginning of the update interval, the resulting eligibility trace retains a nonzero value when the time reaches the end of the interval, allowing the subsequent reward signal to modulate the corresponding synaptic weight.
+
+
 
 This chapter uses the Multiplicative Synaptic Normalization (MSN) method to keep runaway excitation under control. This method keeps pre-existing memories in the network by conserving the proportional difference between smaller and larger synaptic weights. According to (\ref{Eq.13}), we can calculate the maximum input for each post-synaptic neuron (output layer).
 
@@ -128,14 +163,22 @@ The change in synaptic weights for the invader regarding the target and defender
 
 \section{Network structure and encoding method}
 
-Figure \ref{fig:my_label1} shows the defender's network structure and encoding process. The invader has the same network with different inputs. The network receives the LOS angles and converts the inputs to Fuzzy Membership Values (FMV) using \ac{grf} \cite{Ch5_SNNModel1}. Since the fuzzy membership values are used just for encoding data into the \ac{snn}, the type of the membership function does not affect the computation complexity.
+Figure \ref{fig:my_label1} illustrates the defender’s network structure and encoding process. The invader employs the same network architecture with different inputs. The network receives the line-of-sight (LOS) angles and converts them into fuzzy membership values (FMVs) using Gaussian receptive fields (GRFs)~\cite{Ch5_SNNModel1}. Since the fuzzy membership values are used solely for encoding continuous inputs into the spiking neural network, the specific choice of the membership function does not affect the computational complexity of the model.
 
-There are $q$ input neurons, and a membership function is assigned to each neuron. Therefore, there are $q$ membership functions. The acquired fuzzy membership values are real numbers between 0 and 1 and should be converted to the input currents. This can be done using a linear function and the minimum and maximum inputs.
+Let $x \in \mathbb{R}$ denote an input variable (e.g., a LOS angle). The Gaussian receptive field associated with the $i$-th input neuron is defined as
+
+\begin{equation}
+\mu_i(x) = \exp\!\left( -\frac{(x - c_i)^2}{2\sigma_i^2} \right),
+\end{equation}
+where $c_i$ is the center of the receptive field and $\sigma_i$ controls its width. Each input neuron is assigned a distinct receptive field, and the corresponding membership value $\mu_i(x) \in [0,1]$ represents the degree to which the input activates that neuron.
+
+There are $q$ input neurons, and a membership function is assigned to each neuron. Therefore, there are $q$ membership functions. The acquired fuzzy membership values are real numbers between 0 and 1 and are converted into input currents.. This can be done using a linear function and the minimum and maximum inputs.
+
 
 \begin{figure}[H]
     \centering
     \includegraphics{Figures/4.pdf}
-    \caption{Network structure and encoding process for the input layer (Defender). Each neuron is associated with a membership function in \ac{grf}. The \ac{grf} encodes an input State ($S^t$) at each time step. There is both a training phase when ($\xi  = 0$) and an operating phase when ($\xi = 1)$.}
+    \caption{Network structure and encoding process for the input layer (Defender). Each neuron is associated with a membership function in \ac{grf}. The \ac{grf} encodes an input State ($S^t$) at each time step. There is both a training phase when ($\xi  = 0$) and an operating phase when ($\xi = 1)$. The "F2S Conversion" block converts fuzzy membership values to currents for the neurons according to \eqref{Eq.25-1}.}
     \label{fig:my_label1}
 \end{figure}
 

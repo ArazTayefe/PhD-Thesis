@@ -181,15 +181,16 @@ In neo-Hebbian reinforcement learning, significant advancements come from a glob
 
 \textbf{Distal rewards and credit assignment} 
 
-This model introduces a sophisticated approach to synaptic modification through the interaction of \ac{stdp} with a modulatory signal reflective of reward, embodying the essence of TD learning within the realm of spiking neurons.
+This model introduces a sophisticated approach to synaptic modification through the interaction of \ac{stdp} with a modulatory reward signal, embodying the essence of TD learning within the realm of spiking neurons.
 
-Central to this framework is the eligibility trace mechanism, elegantly adapted from its conventional application in TD learning to facilitate synaptic credit assignment over varying temporal extents. This adaptation allows for the dynamic modulation of synaptic strengths based on the timing and sequence of pre- and post-synaptic spikes, in conjunction with the temporal dynamics of received rewards. The eligibility trace is mathematically represented as follows~\cite{Ch_1_R22}:
+
+Central to this framework is the eligibility trace mechanism, elegantly adapted from its conventional application in TD learning to facilitate synaptic credit assignment over varying temporal horizons. This adaptation allows for the dynamic modulation of synaptic strengths based on the timing and sequence of pre- and post-synaptic spikes, in conjunction with the temporal dynamics of received rewards. The eligibility trace is mathematically represented as follows~\cite{Ch_1_R22}:
 
 \begin{equation}
     \frac{dC_{ji}}{dt} = -\frac{C_{ji}}{\tau_{C}} + \text{STDP}(t_{\text{post}} - t_{\text{pre}})\delta(t - t^{(f)})
 \end{equation}
 
-Here, $C_{ji}(t)$ denotes the eligibility trace for the synapse between pre-synaptic neuron $j$ and post-synaptic neuron $i$, evolving with a decay governed by $\tau_{C}$. The Dirac delta function, $\delta(t - t^{(f)})$, signifies the occurrence of a spike, serving as a pivotal factor in the temporal credit assignment process. 
+Here, $C_{ji}(t)$ denotes the eligibility trace for the synapse between pre-synaptic neuron $j$ and post-synaptic neuron $i$, evolving with a decay governed by $\tau_{C}$. The variables $t_{\text{pre}}$ and $t_{\text{post}}$ represent the most recent firing times of the pre- and post-synaptic neurons, respectively. The Dirac delta function, $\delta(t - t^{(f)})$, signifies the occurrence of a spike, serving as a pivotal factor in the temporal credit assignment process. 
 
 The STDP function can be represented as follows,
 
