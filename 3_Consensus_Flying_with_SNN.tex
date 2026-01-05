@@ -426,7 +426,12 @@ The global model on the server (Leader) is then computed using a weighted averag
 
 \noindent where the term \(\|.\|_F\) is the Frobenius norm, and \(m\) and \(n\) are the dimensions of the matrix \(\bm{\overline{W}}_{k}(t)\), used for normalizing the Frobenius norm. \(T_{k}\) indicates the time at which agent \(k\) last transmitted its local model to the central server, and \(\tau_{cs}\) is a time constant that reduces the weight to zero if there is no recent update from the agent.
 
-Both agents and the central server employ an event-triggered mechanism for transmitting local and global models. Throughout the training phase, each agent calculates the Euclidean distance between the most recent global model from the central server and its current synaptic weights matrix, as follows,
+% Both agents and the central server employ an event-triggered mechanism for transmitting local and global models. Throughout the training phase, each agent calculates the Euclidean distance between the most recent global model from the central server and its current synaptic weights matrix, as follows,
+
+Both agents and the central server employ an event-triggered mechanism for transmitting local and global models. In the proposed method, the reward-modulated synaptic dynamics in \eqref{Eq.WS.4} remain active until the synaptic weights reach a competitive equilibrium, i.e., until the weight variations become negligible due to the coupled effect of the learning-rate gate \eqref{Eq.WS.1} and the decay mechanism \eqref{Eq.WS.3}. This steady regime is referred to as the testing phase, during which the weights remain effectively constant under unchanged reward condition (no change in the environment). Nevertheless, because the \ac{RCSE} mechanism maintains bounded oscillations around the equilibrium threshold $\Psi^{\mathcal{S}}$, the learning-rate gate can intermittently return to $\alpha^{\mathcal{S}}(t)\approx 1$ when $|W^{\mathcal{S}}_{\max}(t)|$ drops below $\Psi^{\mathcal{S}}$. Therefore, if the reward structure changes after convergence, the network can resume adaptation immediately when $\alpha^{\mathcal{S}}(t)$ becomes active again, without requiring reinitialization.
+
+Throughout the training phase, each agent calculates the Euclidean distance between the most recent global model published by the central server and its current synaptic weight matrix, as follows,
+
 
 \begin{equation} \label{Eq.AFL.4}
 \mathcal{D}_{a}(\bm{\overline{W}}_{k}(t), \bm{\overline{W}}_{G}(T_{cs})) = \frac{1}{2 \sqrt{mn}}\sqrt{\sum_{i=1}^{m}\sum_{j=1}^{n} (a_{ij} - b_{ij})^2}
@@ -449,7 +454,26 @@ Incorporating the proposed \ac{fl} method with the \ac{RCSE} algorithm, the modi
     & + \delta(t-T_{cs})I_{k}^{max}\left(\bm{\overline{W}}_{G}(t) - \bm{\overline{W}}_{k}(t)\right)
 \end{align}
 
-\noindent where \(\delta\) is the Dirac delta function. Algorithm~\ref{Algorithm.1} shows the step-by-step implementation process of the proposed method. The \(\bm{\overline{W}}_{G}(t) - \bm{\overline{W}}_{k}(t)\) part is the difference between the agent's current model and the global model at aggregation time. Therefore, the change in synaptic weights \(\dot{\bm{W}}_{k}(t)\) is the difference between models when \(t=T_{cs}\).
+\noindent where \(\delta\) is the Dirac delta function. 
+
+Equation~\eqref{Eq.AFL.6} describes the complete synaptic weight dynamics when the proposed \ac{RCSE} learning rule is integrated with the federated learning update mechanism. The equation consists of two distinct components that are activated at different time instants and serve different purposes in the learning process.
+
+The first term,
+\[
+(1-\delta(t-T_{cs})) \left[ \bm{\alpha} \odot \textbf{STDP}(\tau) \odot \mathcal{R}(t)
+- \bm{\Theta} \odot \text{sgn}(\bm{W}_{k}(t)) \right],
+\]
+governs the continuous-time local learning dynamics at the agent level. When $t \neq T_{cs}$, the Dirac delta function evaluates to zero, and the synaptic weights evolve according to reward-modulated STDP regulated by the \ac{RCSE} mechanism. In this case, weight adaptation is driven by the interaction of spike timing and reward through $\textbf{STDP}(\tau) \odot \mathcal{R}(t)$, while excessive growth is counteracted by the decay term $\bm{\Theta} \odot \text{sgn}(\bm{W}_{k}(t))$. The learning-rate matrix $\bm{\alpha}$ selectively enables or suppresses learning for each active synaptic set based on the competitive equilibrium defined by $\Psi^{\mathcal{S}}$.
+
+The second term,
+\[
+\delta(t-T_{cs}) I_{k}^{max} \left(\bm{\overline{W}}_{G}(t) - \bm{\overline{W}}_{k}(t)\right),
+\]
+models the instantaneous federated synchronization event that occurs when the central server publishes a new global model at time $T_{cs}$. At this instant, the Dirac delta function becomes active, suppressing the local learning dynamics and applying a discrete correction that pulls the local synaptic weight matrix toward the global model.
+
+The factor $I_{k}^{max}$ appears because the global model $\bm{\overline{W}}_{G}(t)$ and the local model $\bm{\overline{W}}_{k}(t)$ are defined in normalized form within the interval $[-1,1]$. Multiplying the difference by $I_{k}^{max}$ rescales the federated update back to the physical synaptic weight domain of agent $k$, ensuring dimensional consistency with the continuous-time learning dynamics. This scaling guarantees that the magnitude of the federated correction is compatible with the agent’s allowable synaptic weight range and preserves proportionality across agents with different maximum synaptic capacities.
+
+Algorithm~\ref{Algorithm.1} shows the step-by-step implementation process of the proposed method. The \(\bm{\overline{W}}_{G}(t) - \bm{\overline{W}}_{k}(t)\) part is the difference between the agent's current model and the global model at aggregation time. Therefore, the change in synaptic weights \(\dot{\bm{W}}_{k}(t)\) is the difference between models when \(t=T_{cs}\).
 
 \begin{algorithm} [H]
 \caption{High-Level Algorithm for the Proposed \ac{fl} Algorithm}
