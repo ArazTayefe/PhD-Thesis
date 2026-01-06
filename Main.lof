@@ -63,65 +63,65 @@
 \contentsline {figure}{\numberline {4.13}{\ignorespaces Payload motion direction detection using a 2D Gaussian reward function with higher standard deviation.}}{116}{figure.4.13}%
 \contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Payload approaching the center results in positive \(\mathcal {H}\) value based on the 2D Gaussian function with higher standard deviation.}}}{116}{figure.4.13}%
 \contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Payload moving away from the center results in negative \(\mathcal {H}\) value based on the 2D Gaussian function with higher standard deviation.}}}{116}{figure.4.13}%
-\contentsline {figure}{\numberline {4.14}{\ignorespaces Neighboring agent motion direction detection using a 2D Gaussian reward function with lower standard deviation.}}{117}{figure.4.14}%
-\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Neighboring agent approaching the center results in negative \(\mathcal {H}\) value based on the 2D Gaussian function with lower standard deviation.}}}{117}{figure.4.14}%
-\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Neighboring agent moving away from the center results in positive \(\mathcal {H}\) value based on the 2D Gaussian function with lower standard deviation.}}}{117}{figure.4.14}%
-\contentsline {figure}{\numberline {4.15}{\ignorespaces The oscillatory Gaussian envelope used to compute the motion direction signal $\mathcal {H}$ for reward modulation in the second hidden layer. The center can be \ac {scs} or the agent's \ac {dvs} center.}}{118}{figure.4.15}%
-\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {The oscillatory Gaussian envelope when the \ac {alm} is off (payload's moves away from the center results in negative values).}}}{118}{figure.4.15}%
-\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {The oscillatory Gaussian envelope when the agent \ac {alm} is on (Agent's moves away from the center results in positive values).}}}{118}{figure.4.15}%
-\contentsline {figure}{\numberline {4.16}{\ignorespaces Velocity-aligned activity template \(M\) (left) and opposite-direction template \(\setbox \z@ \hbox {\mathsurround \z@ $\textstyle M$}\mathaccent "0365{M}\) (right) for an agent moving with heading \(\varphi = \pi /4\) and normalized speed \(\bar {\mathcal {V}} = 0.6\).}}{120}{figure.4.16}%
-\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {}}}{120}{figure.4.16}%
-\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {}}}{120}{figure.4.16}%
-\contentsline {figure}{\numberline {4.17}{\ignorespaces Schematic of the per-layer R-STDP weight update. The eligibility trace is calculated based on the firing rate of the neurons in layer \(\ell \) and \(\ell +1\). The per-neuron reward (\(r_q\)) is computed based on the layer-specific reward functions. The weight update is obtained by multiplying the eligibility trace by the per-neuron reward.}}{129}{figure.4.17}%
-\contentsline {figure}{\numberline {4.18}{\ignorespaces Effect of the \ac {alm} on visual perception. The ALM significantly enhances the visibility of proximal agents in the DVS input, improving the network's ability to detect and differentiate them from the payload.}}{133}{figure.4.18}%
-\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Simulation of the environment with Agents' \ac {alm} turned off, showing baseline brightness distribution.}}}{133}{figure.4.18}%
-\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Simulation of the environment with Agents' \ac {alm} turned on, illustrating enhanced visibility and separation of each agent.}}}{133}{figure.4.18}%
-\contentsline {figure}{\numberline {4.19}{\ignorespaces Attention maps illustrating the effect of the \ac {alm} on visual focus. The \ac {alm} enables dynamic shifting of attention from the payload to the proximal agent by generating distinct DVS event patterns. Colorbar values indicate the normalized attention strength, where brighter regions correspond to locations receiving stronger attention.}}{135}{figure.4.19}%
-\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Attention map when the Agents' \ac {alm} is off, highlighting the detected payload position.}}}{135}{figure.4.19}%
-\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Attention map when the Agents' \ac {alm} is on, emphasizing the detected proximal agent’s position.}}}{135}{figure.4.19}%
-\contentsline {figure}{\numberline {4.20}{\ignorespaces SNN structure in the first hidden layer under externally controlled attention signaling: (a) agents’ \ac {alm} disabled, which corresponds to the absence of ALM illumination and results in payload-focused visual processing; (b) agents’ \ac {alm} enabled, which corresponds to active ALM illumination and emphasizes proximal agent detection. Inactive neuron repositories and synaptic connections are depicted in gray, while dotted lines represent inactive inhibitory pathways.}}{137}{figure.4.20}%
-\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {}}}{137}{figure.4.20}%
-\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {}}}{137}{figure.4.20}%
-\contentsline {figure}{\numberline {4.21}{\ignorespaces Detector repository activity during initial training with \ac {alm} off. The payload detector remains active, while the proximal agent detector is suppressed due to inhibitory competition.}}{139}{figure.4.21}%
-\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Activity of the payload detector repository during initial training phases with the Agents' \ac {alm} turned off.}}}{139}{figure.4.21}%
-\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Activity of the proximal agent detector repository during initial training phases with the Agents' \ac {alm} turned off.}}}{139}{figure.4.21}%
-\contentsline {figure}{\numberline {4.22}{\ignorespaces Detector repository activity during initial training with \ac {alm} on. The proximal agent detector becomes active, while the payload detector is suppressed by ALM-induced inhibition.}}{141}{figure.4.22}%
-\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Activity of the payload detector repository during initial training phases with the Agents' \ac {alm} turned on.}}}{141}{figure.4.22}%
-\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Activity of the proximal agent detector repository during initial training phases with the Agents' \ac {alm} turned on.}}}{141}{figure.4.22}%
-\contentsline {figure}{\numberline {4.23}{\ignorespaces Agent detector repository activity after learning convergence with \ac {alm} off. The payload detector shows strong, localized activity, while the proximal agent detector remains inactive.}}{143}{figure.4.23}%
-\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Activity of the payload detector repository after learning convergence with the Agents' \ac {alm} turned off.}}}{143}{figure.4.23}%
-\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Activity of the proximal agent detector repository after learning convergence with the Agents' \ac {alm} turned off.}}}{143}{figure.4.23}%
-\contentsline {figure}{\numberline {4.24}{\ignorespaces Agent detector repository activity after learning convergence with \ac {alm} on. The proximal agent detector shows strong, localized activity, while the payload detector remains inactive.}}{145}{figure.4.24}%
-\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Activity of the payload detector repository after learning convergence with the Agents' \ac {alm} turned on.}}}{145}{figure.4.24}%
-\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Activity of the proximal agent detector repository after learning convergence with the Agents' \ac {alm} turned on.}}}{145}{figure.4.24}%
-\contentsline {figure}{\numberline {4.25}{\ignorespaces Second hidden layer activity for the rendezvous and docking phases for Agent 1: (a) FFM activity 135 degree that matches the LOS of the payload regarding the Agent 1 and (b) CDM activity shows 45 degree LOS toward the docking point.}}{147}{figure.4.25}%
-\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Initial iterations of the rendezvous phase.}}}{147}{figure.4.25}%
-\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Initial iterations of the docking phase}}}{147}{figure.4.25}%
-\contentsline {figure}{\numberline {4.26}{\ignorespaces Hidden layer 2 and output layer activity during the rendezvous phase.}}{149}{figure.4.26}%
-\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Commanded heading generated by the Hidden layer 2 activity during the rendezvous phase vs the actual agent's LOS regarding the payload.}}}{149}{figure.4.26}%
-\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Output layer activity during rendezvous phase}}}{149}{figure.4.26}%
-\contentsline {figure}{\numberline {4.27}{\ignorespaces Hidden layer 2 and output layer activity during the docking phase.}}{151}{figure.4.27}%
-\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Hidden layer 2 activity during docking phase}}}{151}{figure.4.27}%
-\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Output layer activity during docking phase}}}{151}{figure.4.27}%
-\contentsline {figure}{\numberline {4.28}{\ignorespaces Distances during time.}}{152}{figure.4.28}%
-\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Agent 1's distance from the payload during rendezvous phase}}}{152}{figure.4.28}%
-\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Payload's distance from the docking center}}}{152}{figure.4.28}%
-\contentsline {figure}{\numberline {4.29}{\ignorespaces Reward profile during the docking phase}}{153}{figure.4.29}%
-\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Formation phase}}}{153}{figure.4.29}%
-\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Docking phase}}}{153}{figure.4.29}%
-\contentsline {figure}{\numberline {4.30}{\ignorespaces Views during the rendezvous phase at different time steps. In the \ac {dvs} views, yellow regions represent the direction of motion as determined by event polarities, while white lines in (a) and (b) depict the trajectories of the payload and agents.}}{155}{figure.4.30}%
-\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {View From the \ac {scs} at 5 seconds}}}{155}{figure.4.30}%
-\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {DVS View From the \ac {scs} at 5 seconds}}}{155}{figure.4.30}%
-\contentsline {subfigure}{\numberline {(c)}{\ignorespaces {View From the \ac {scs} at 15 seconds}}}{155}{figure.4.30}%
-\contentsline {subfigure}{\numberline {(d)}{\ignorespaces {DVS View From the \ac {scs} at 15 seconds}}}{155}{figure.4.30}%
-\contentsline {figure}{\numberline {4.31}{\ignorespaces Views during the docking phase at different time steps. In the \ac {dvs} views, yellow regions represent the direction of motion as determined by event polarities, while white lines in (a) and (b) depict the trajectories of the payload and agents.}}{157}{figure.4.31}%
-\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {View From the \ac {scs} at 30 seconds}}}{157}{figure.4.31}%
-\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {DVS View From the \ac {scs} at 30 seconds}}}{157}{figure.4.31}%
-\contentsline {subfigure}{\numberline {(c)}{\ignorespaces {View From the \ac {scs} at 60 seconds}}}{157}{figure.4.31}%
-\contentsline {subfigure}{\numberline {(d)}{\ignorespaces {DVS View From the \ac {scs} at 60 seconds}}}{157}{figure.4.31}%
-\contentsline {figure}{\numberline {4.32}{\ignorespaces Views during the final approach and soft capture. In the \ac {dvs} views, yellow regions represent the direction of motion as determined by event polarities, while white lines in (a) and (b) depict the trajectories of the payload and agents.}}{159}{figure.4.32}%
-\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {View From the \ac {scs} at 99 seconds}}}{159}{figure.4.32}%
-\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {DVS View From the \ac {scs} at 99 seconds}}}{159}{figure.4.32}%
-\contentsline {subfigure}{\numberline {(c)}{\ignorespaces {View From the \ac {scs} at docking completion}}}{159}{figure.4.32}%
-\contentsline {subfigure}{\numberline {(d)}{\ignorespaces {DVS View From the \ac {scs} at docking completion}}}{159}{figure.4.32}%
+\contentsline {figure}{\numberline {4.14}{\ignorespaces Neighboring agent motion direction detection using a 2D Gaussian reward function with lower standard deviation.}}{116}{figure.4.14}%
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Neighboring agent approaching the center results in negative \(\mathcal {H}\) value based on the 2D Gaussian function with lower standard deviation.}}}{116}{figure.4.14}%
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Neighboring agent moving away from the center results in positive \(\mathcal {H}\) value based on the 2D Gaussian function with lower standard deviation.}}}{116}{figure.4.14}%
+\contentsline {figure}{\numberline {4.15}{\ignorespaces The oscillatory Gaussian envelope used to compute the motion direction signal $\mathcal {H}$ for reward modulation in the second hidden layer. The center can be \ac {scs} or the agent's \ac {dvs} center.}}{117}{figure.4.15}%
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {The oscillatory Gaussian envelope when the \ac {alm} is off (payload's moves away from the center results in negative values).}}}{117}{figure.4.15}%
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {The oscillatory Gaussian envelope when the agent \ac {alm} is on (Agent's moves away from the center results in positive values).}}}{117}{figure.4.15}%
+\contentsline {figure}{\numberline {4.16}{\ignorespaces Velocity-aligned activity template \(M\) (left) and opposite-direction template \(\setbox \z@ \hbox {\mathsurround \z@ $\textstyle M$}\mathaccent "0365{M}\) (right) for an agent moving with heading \(\varphi = \pi /4\) and normalized speed \(\bar {\mathcal {V}} = 0.6\).}}{119}{figure.4.16}%
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {}}}{119}{figure.4.16}%
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {}}}{119}{figure.4.16}%
+\contentsline {figure}{\numberline {4.17}{\ignorespaces Schematic of the per-layer R-STDP weight update. The eligibility trace is calculated based on the firing rate of the neurons in layer \(\ell \) and \(\ell +1\). The per-neuron reward (\(r_q\)) is computed based on the layer-specific reward functions. The weight update is obtained by multiplying the eligibility trace by the per-neuron reward.}}{127}{figure.4.17}%
+\contentsline {figure}{\numberline {4.18}{\ignorespaces Effect of the \ac {alm} on visual perception. The ALM significantly enhances the visibility of proximal agents in the DVS input, improving the network's ability to detect and differentiate them from the payload.}}{131}{figure.4.18}%
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Simulation of the environment with Agents' \ac {alm} turned off, showing baseline brightness distribution.}}}{131}{figure.4.18}%
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Simulation of the environment with Agents' \ac {alm} turned on, illustrating enhanced visibility and separation of each agent.}}}{131}{figure.4.18}%
+\contentsline {figure}{\numberline {4.19}{\ignorespaces Attention maps illustrating the effect of the \ac {alm} on visual focus. The \ac {alm} enables dynamic shifting of attention from the payload to the proximal agent by generating distinct DVS event patterns. Colorbar values indicate the normalized attention strength, where brighter regions correspond to locations receiving stronger attention.}}{132}{figure.4.19}%
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Attention map when the Agents' \ac {alm} is off, highlighting the detected payload position.}}}{132}{figure.4.19}%
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Attention map when the Agents' \ac {alm} is on, emphasizing the detected proximal agent’s position.}}}{132}{figure.4.19}%
+\contentsline {figure}{\numberline {4.20}{\ignorespaces SNN structure in the first hidden layer under externally controlled attention signaling: (a) agents’ \ac {alm} disabled, which corresponds to the absence of ALM illumination and results in payload-focused visual processing; (b) agents’ \ac {alm} enabled, which corresponds to active ALM illumination and emphasizes proximal agent detection. Inactive neuron repositories and synaptic connections are depicted in gray, while dotted lines represent inactive inhibitory pathways.}}{133}{figure.4.20}%
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {}}}{133}{figure.4.20}%
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {}}}{133}{figure.4.20}%
+\contentsline {figure}{\numberline {4.21}{\ignorespaces Detector repository activity during initial training with \ac {alm} off. The payload detector remains active, while the proximal agent detector is suppressed due to inhibitory competition.}}{134}{figure.4.21}%
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Activity of the payload detector repository during initial training phases with the Agents' \ac {alm} turned off.}}}{134}{figure.4.21}%
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Activity of the proximal agent detector repository during initial training phases with the Agents' \ac {alm} turned off.}}}{134}{figure.4.21}%
+\contentsline {figure}{\numberline {4.22}{\ignorespaces Detector repository activity during initial training with \ac {alm} on. The proximal agent detector becomes active, while the payload detector is suppressed by ALM-induced inhibition.}}{135}{figure.4.22}%
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Activity of the payload detector repository during initial training phases with the Agents' \ac {alm} turned on.}}}{135}{figure.4.22}%
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Activity of the proximal agent detector repository during initial training phases with the Agents' \ac {alm} turned on.}}}{135}{figure.4.22}%
+\contentsline {figure}{\numberline {4.23}{\ignorespaces Agent detector repository activity after learning convergence with \ac {alm} off. The payload detector shows strong, localized activity, while the proximal agent detector remains inactive.}}{136}{figure.4.23}%
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Activity of the payload detector repository after learning convergence with the Agents' \ac {alm} turned off.}}}{136}{figure.4.23}%
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Activity of the proximal agent detector repository after learning convergence with the Agents' \ac {alm} turned off.}}}{136}{figure.4.23}%
+\contentsline {figure}{\numberline {4.24}{\ignorespaces Agent detector repository activity after learning convergence with \ac {alm} on. The proximal agent detector shows strong, localized activity, while the payload detector remains inactive.}}{137}{figure.4.24}%
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Activity of the payload detector repository after learning convergence with the Agents' \ac {alm} turned on.}}}{137}{figure.4.24}%
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Activity of the proximal agent detector repository after learning convergence with the Agents' \ac {alm} turned on.}}}{137}{figure.4.24}%
+\contentsline {figure}{\numberline {4.25}{\ignorespaces Second hidden layer activity for the rendezvous and docking phases for Agent 1: (a) FFM activity 135 degree that matches the LOS of the payload regarding the Agent 1 and (b) CDM activity shows 45 degree LOS toward the docking point.}}{138}{figure.4.25}%
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Initial iterations of the rendezvous phase.}}}{138}{figure.4.25}%
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Initial iterations of the docking phase}}}{138}{figure.4.25}%
+\contentsline {figure}{\numberline {4.26}{\ignorespaces Hidden layer 2 and output layer activity during the rendezvous phase.}}{139}{figure.4.26}%
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Commanded heading generated by the Hidden layer 2 activity during the rendezvous phase vs the actual agent's LOS regarding the payload.}}}{139}{figure.4.26}%
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Output layer activity during rendezvous phase}}}{139}{figure.4.26}%
+\contentsline {figure}{\numberline {4.27}{\ignorespaces Hidden layer 2 and output layer activity during the docking phase.}}{140}{figure.4.27}%
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Hidden layer 2 activity during docking phase}}}{140}{figure.4.27}%
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Output layer activity during docking phase}}}{140}{figure.4.27}%
+\contentsline {figure}{\numberline {4.28}{\ignorespaces Distances during time.}}{141}{figure.4.28}%
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Agent 1's distance from the payload during rendezvous phase}}}{141}{figure.4.28}%
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Payload's distance from the docking center}}}{141}{figure.4.28}%
+\contentsline {figure}{\numberline {4.29}{\ignorespaces Reward profile during the docking phase}}{142}{figure.4.29}%
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Formation phase}}}{142}{figure.4.29}%
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Docking phase}}}{142}{figure.4.29}%
+\contentsline {figure}{\numberline {4.30}{\ignorespaces Views during the rendezvous phase at different time steps. In the \ac {dvs} views, yellow regions represent the direction of motion as determined by event polarities, while white lines in (a) and (b) depict the trajectories of the payload and agents.}}{143}{figure.4.30}%
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {View From the \ac {scs} at 5 seconds}}}{143}{figure.4.30}%
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {DVS View From the \ac {scs} at 5 seconds}}}{143}{figure.4.30}%
+\contentsline {subfigure}{\numberline {(c)}{\ignorespaces {View From the \ac {scs} at 15 seconds}}}{143}{figure.4.30}%
+\contentsline {subfigure}{\numberline {(d)}{\ignorespaces {DVS View From the \ac {scs} at 15 seconds}}}{143}{figure.4.30}%
+\contentsline {figure}{\numberline {4.31}{\ignorespaces Views during the docking phase at different time steps. In the \ac {dvs} views, yellow regions represent the direction of motion as determined by event polarities, while white lines in (a) and (b) depict the trajectories of the payload and agents.}}{144}{figure.4.31}%
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {View From the \ac {scs} at 30 seconds}}}{144}{figure.4.31}%
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {DVS View From the \ac {scs} at 30 seconds}}}{144}{figure.4.31}%
+\contentsline {subfigure}{\numberline {(c)}{\ignorespaces {View From the \ac {scs} at 60 seconds}}}{144}{figure.4.31}%
+\contentsline {subfigure}{\numberline {(d)}{\ignorespaces {DVS View From the \ac {scs} at 60 seconds}}}{144}{figure.4.31}%
+\contentsline {figure}{\numberline {4.32}{\ignorespaces Views during the final approach and soft capture. In the \ac {dvs} views, yellow regions represent the direction of motion as determined by event polarities, while white lines in (a) and (b) depict the trajectories of the payload and agents.}}{145}{figure.4.32}%
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {View From the \ac {scs} at 99 seconds}}}{145}{figure.4.32}%
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {DVS View From the \ac {scs} at 99 seconds}}}{145}{figure.4.32}%
+\contentsline {subfigure}{\numberline {(c)}{\ignorespaces {View From the \ac {scs} at docking completion}}}{145}{figure.4.32}%
+\contentsline {subfigure}{\numberline {(d)}{\ignorespaces {DVS View From the \ac {scs} at docking completion}}}{145}{figure.4.32}%
 \addvspace {10\p@ }
