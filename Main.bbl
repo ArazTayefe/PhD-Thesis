@@ -533,11 +533,20 @@ A.~M. AbdelAty, M.~E. Fouda, and A.~M. Eltawil, ``On numerical approximations
   of fractional-order spiking neuron models,'' {\em Communications in Nonlinear
   Science and Numerical Simulation}, vol.~105, 2022.
 
+\bibitem{feldman2020spike}
+D.~E. Feldman, ``Spike timing--dependent plasticity,'' {\em Neural Circuit and
+  Cognitive Development}, pp.~127--141, 2020.
+
 \bibitem{NS}
 M.~Tayefe~Ramezanlou, H.~Schwartz, I.~Lambadaris, M.~Barbeau, and S.~H.~R.
   Naqvi, ``Learning a policy for pursuit-evasion games using spiking neural
   networks and the stdp algorithm,'' in {\em IEEE International Conference on
   Systems, Man, and Cybernetics (SMC)}, pp.~1918--1925, 2023.
+
+\bibitem{udeigwe2017emergent}
+L.~C. Udeigwe, P.~W. Munro, and G.~B. Ermentrout, ``Emergent dynamical
+  properties of the bcm learning rule,'' {\em The Journal of Mathematical
+  Neuroscience}, vol.~7, no.~1, p.~2, 2017.
 
 \bibitem{AFL1}
 P.~Qi, D.~Chiaro, A.~Guzzo, M.~Ianni, G.~Fortino, and F.~Piccialli, ``Model
