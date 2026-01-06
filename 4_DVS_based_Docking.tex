@@ -229,7 +229,7 @@ These equations describe the continuous-time dynamics of the agents and the payl
 
 % During rigid attachment to the payload, the agent’s thrust is routed to the payload and the same form of dynamics applies to the payload with the aggregated effective mass.
 
-The agent actuation in the simulation follows a thruster model, in which each nozzle exhibits a \ac{mib} of 50 ms \cite{botelho2024explicit}. A minimum‑impulse bit (MIB) is the thruster's minimum non‑zero on‑time (i.e., the smallest pulse duration the thruster can produce). Consequently, thrust updates are issued at a fixed actuation interval $T_{\mathrm{mib}}=50\ \mathrm{ms}$, while the physics are integrated with a smaller step $\Delta t>0$. Let $k\in\mathbb{N}$ index the \ac{mib} windows and define $t\in[kT_{\mathrm{mib}},(k{+}1)T_{\mathrm{mib}})$. The thrust decoded from the output layer of the \ac{snn}, $\mathbf{u}_{\mathrm{snn}}(t)\in\mathbb{R}^2$, is zero–order–held over each window and quantized by the thruster on–time constraint:
+The agent actuation in the simulation follows a thruster model, in which each nozzle exhibits a \ac{mib} of 50 ms \cite{botelho2024explicit}. A \ac{mib} is the thruster's minimum non‑zero on‑time (i.e., the smallest pulse duration the thruster can produce). Consequently, thrust updates are issued at a fixed actuation interval $T_{\mathrm{mib}}=50\ \mathrm{ms}$, while the physics are integrated with a smaller step $\Delta t>0$. Let $k\in\mathbb{N}$ index the \ac{mib} windows and define $t\in[kT_{\mathrm{mib}},(k{+}1)T_{\mathrm{mib}})$. The thrust decoded from the output layer of the \ac{snn}, $\mathbf{u}_{\mathrm{snn}}(t)\in\mathbb{R}^2$, is zero–order–held over each window and quantized by the thruster on–time constraint:
 \begin{equation}
 \mathbf{u}_{\mathrm{thr}}(t)
 \,=\,F_{\max}\,\mathbf{s}_k,\qquad
@@ -242,7 +242,7 @@ where the sign vector $\mathbf{s}_k$ is inferred from the spike counts in the la
 s_{k,x}=\operatorname{sign}\big(N_{x^-}(k)-N_{x^+}(k)\big),\qquad
 s_{k,y}=\operatorname{sign}\big(N_{y^-}(k)-N_{y^+}(k)\big),\qquad \operatorname{sign}(0)=0.
 \end{equation*}
-Here $N_{x^-}(k)$ and $N_{x^+}(k)$ denote the spike counts of the output neurons encoding the negative and positive $X$ thrust directions, respectively, during MIB window $k$ (and analogously $N_{y^-},N_{y^+}$ for the $Y$ axis). The translational dynamics of a free agent of mass $m$ are
+Here $N_{x^-}(k)$ and $N_{x^+}(k)$ denote the spike counts of the output neurons encoding the negative and positive $X$ thrust directions, respectively, during \ac{mib} window $k$ (and analogously $N_{y^-},N_{y^+}$ for the $Y$ axis). The translational dynamics of a free agent of mass $m$ are
 \begin{equation}
 \dot{\mathbf{p}}(t)=\mathbf{V}(t),\qquad
 m\,\dot{\mathbf{V}}(t)=\mathbf{u}_{\mathrm{tot}}(t)+\mathbf{f}_{\mathrm{coll}}(t),
