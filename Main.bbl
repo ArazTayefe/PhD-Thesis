@@ -79,11 +79,6 @@ E.~M. Izhikevich, ``Solving the distal reward problem through linkage of stdp
   and dopamine signaling,'' {\em Cerebral cortex}, vol.~17, pp.~2443--2452,
   2007.
 
-\bibitem{Ch_1_R12}
-A.~L. Hodgkin and A.~F. Huxley, ``Currents carried by sodium and potassium ions
-  through the membrane of the giant axon of loligo,'' {\em The Journal of
-  physiology}, vol.~116, no.~4, 1952.
-
 \bibitem{izhikevich2003simple}
 E.~M. Izhikevich, ``Simple model of spiking neurons,'' {\em IEEE Transactions
   on neural networks}, vol.~14, no.~6, pp.~1569--1572, 2003.
@@ -98,27 +93,11 @@ H.~Z. Shouval, S.~S.-H. Wang, and G.~M. Wittenberg, ``Spike timing dependent
   plasticity: a consequence of more fundamental learning rules,'' {\em
   Frontiers in computational neuroscience}, vol.~4, 2010.
 
-\bibitem{Ch2_R5}
-H.~Markram, W.~Gerstner, and P.~J. Sj{\"o}str{\"o}m, ``A history of
-  spike-timing-dependent plasticity,'' {\em Frontiers in synaptic
-  neuroscience}, vol.~3, 2011.
-
 \bibitem{Ch2_R4}
 V.~Vassiliades, A.~Cleanthous, and C.~Christodoulou, ``Multiagent reinforcement
   learning: spiking and nonspiking agents in the iterated prisoner's dilemma,''
   {\em IEEE transactions on neural networks}, vol.~22, no.~4, pp.~639--653,
   2011.
-
-\bibitem{Ch2_R3}
-F.~Ponulak and J.~J. Hopfield, ``Rapid, parallel path planning by propagating
-  wavefronts of spiking neural activity,'' {\em Frontiers in computational
-  neuroscience}, vol.~7, 2013.
-
-\bibitem{Ch2_R1}
-D.~Probst, M.~A. Petrovici, I.~Bytschok, J.~Bill, D.~Pecevski, J.~Schemmel, and
-  K.~Meier, ``Probabilistic inference in discrete spaces can be implemented
-  into networks of lif neurons,'' {\em Frontiers in computational
-  neuroscience}, vol.~9, 2015.
 
 \bibitem{Ch2_R2}
 U.~Markowska-Kaczmar and M.~Koldowski, ``Spiking neural network vs multilayer
