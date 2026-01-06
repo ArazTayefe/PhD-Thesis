@@ -163,7 +163,7 @@ The change in synaptic weights for the invader regarding the target and defender
 
 \section{Network structure and encoding method}
 
-Figure \ref{fig:my_label1} illustrates the defender’s network structure and encoding process. The invader employs the same network architecture with different inputs. The network receives the line-of-sight (LOS) angles and converts them into fuzzy membership values (FMVs) using Gaussian receptive fields (GRFs)~\cite{Ch5_SNNModel1}. Since the fuzzy membership values are used solely for encoding continuous inputs into the spiking neural network, the specific choice of the membership function does not affect the computational complexity of the model.
+Figure \ref{fig:my_label1} illustrates the defender’s network structure and encoding process. The invader employs the same network architecture with different inputs. The network receives the line-of-sight (LOS) angles and converts them into fuzzy membership values (FMVs) using \ac{grf}~\cite{Ch5_SNNModel1}. Since the fuzzy membership values are used solely for encoding continuous inputs into the spiking neural network, the specific choice of the membership function does not affect the computational complexity of the model.
 
 Let $x \in \mathbb{R}$ denote an input variable (e.g., a LOS angle). The Gaussian receptive field associated with the $i$-th input neuron is defined as
 
