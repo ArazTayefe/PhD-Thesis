@@ -1431,11 +1431,11 @@ A=
 \]
 Since $\mathcal{H}<0$,
 \[
-r^{(2)}=\mathcal{H}_+(M-A)+\mathcal{H}_-(\widetilde{M}-A)=0.011\,(\widetilde{M}-A),
+r^{H2}=\mathcal{H}_+(M-A)+\mathcal{H}_-(\widetilde{M}-A)=0.011\,(\widetilde{M}-A),
 \]
 so
 \[
-r^{(2)}=
+r^{H2}=
 \begin{bmatrix}
 \phantom{-}0.003&-0.001&-0.003\\
 \phantom{-}0.006&-0.005&-0.002\\
@@ -1446,7 +1446,7 @@ r^{(2)}=
 The shape of this reward (matrix form) follows the same rule as Figure~\ref{fig:FiringActivityMatrix}, and each array shows the reward value for each associated neuron. 
 
 \emph{Interpretation.}
-The masked events and Gaussian envelope yield a small \emph{negative} reward ($r=-0.011$), so learning pushes activity toward the \emph{opposite} velocity map $\widetilde{M}$: cells aligned with $\varphi+\pi$ are encouraged (positive entries in $L$), while currently overactive cells are suppressed by the negative entries of $\dot{W}$.
+The masked events and Gaussian envelope yield a small \emph{negative} motion signal ($-0.011$), so learning pushes activity toward the \emph{opposite} velocity map $\widetilde{M}$: cells aligned with $\varphi+\pi$ are encouraged (positive entries in $L$), while currently overactive cells are suppressed by the negative entries of $\dot{W}$.
 
 \subsubsection{Output Layer Reward Computation Based on Directional Error}
 
