@@ -687,7 +687,7 @@ f_i(\tau) =
 0, & \text{otherwise},
 \end{cases}
 \end{equation}
-where \( v_i(\tau) \) is the membrane potential of neuron \( i \) at time \(\tau\) and \( v_{\text{th}} \) is the firing threshold. Figure \ref{fig:FiringActivityMatrix} illustrates how the activity matrix is computed from the time-averaged spiking activity of a layer $n$. Each element $A^{\text{input}}(i)$ represents the fraction of time steps in which neuron \( i \) fired within the update window $T$.
+where \( v_i(\tau) \) is the membrane potential of neuron \( i \) at time \(\tau\) and \( v_{\text{th}} \) is the firing threshold. Figure \ref{fig:FiringActivityMatrix} illustrates how the activity matrix is computed from the time-averaged spiking activity of a layer $n$. Each element represents the fraction of time steps in which neuron \( i \) fired within the update window $T$.
 
 \begin{figure}[H]
     \centering
@@ -696,7 +696,7 @@ where \( v_i(\tau) \) is the membrane potential of neuron \( i \) at time \(\tau
     \label{fig:FiringActivityMatrix}
 \end{figure}
 
-Similarly to Figure~\ref{fig:FiringActivityMatrix}, for the first hidden layer (\(A^{\text{H1}}(i)\)), the payload detector and agent detector repositories compute:
+Similarly to Figure~\ref{fig:FiringActivityMatrix}, for the first hidden layer (\(A^{\text{H1}}\)), the payload detector and agent detector repositories compute:
 
 \begin{equation}
 A^{\text{H1}}(i) = \frac{1}{T} \sum_{\tau=t-T}^{t} f_i^{\text{H1}}(\tau).
@@ -1260,7 +1260,7 @@ According to Figure~\ref{fig:VelocityTemplates}, this signal drives the neural a
 reward and toward the opposite template \(\widetilde{M}\) under negative reward, while vanishing when
 \(\mathcal{H}=0\).
 
-\paragraph{Numerical example (second hidden layer with the provided data)}
+\paragraph{Numerical example for the second hidden layer reward computation.}
 We set $N_e=8$, $N_m=4$, hence the upsampling factor is $\kappa=N_e/N_m=2$.  
 At the current instant the oscillatory envelope has amplitude $\alpha(t)=1$ (as given).  
 Unless noted, all numbers are rounded to $3$ decimals.
