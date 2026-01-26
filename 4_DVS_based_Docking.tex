@@ -245,7 +245,7 @@ s_{k,y}=\operatorname{sign}\big(N_{y^-}(k)-N_{y^+}(k)\big),\qquad \operatorname{
 Here $N_{x^-}(k)$ and $N_{x^+}(k)$ denote the spike counts of the output neurons encoding the negative and positive $X$ thrust directions, respectively, during \ac{mib} window $k$ (and analogously $N_{y^-},N_{y^+}$ for the $Y$ axis). The translational dynamics of a free agent of mass $m$ are
 \begin{equation}
 \dot{\mathbf{p}}(t)=\mathbf{V}(t),\qquad
-m\,\dot{\mathbf{V}}(t)=\mathbf{u}_{\mathrm{tot}}(t)+\mathbf{f}_{\mathrm{coll}}(t),
+m\,\dot{\mathbf{V}}(t)=\mathbf{u}_{\mathrm{thr}}(t)+\mathbf{f}_{\mathrm{coll}}(t),
 \end{equation}
 where $\mathbf{f}_{\mathrm{coll}}(t)$ denotes the spring–damper collision force modeled previously. 
 The thruster \ac{mib} fixes the pulse width. As a result, the thrust command is applied in discrete time intervals, while the system dynamics remain continuous. Whenever $\mathbf{s}_k \neq \mathbf{0}$, a constant thrust of magnitude $F_{\max}$ is held over the entire interval $[kT_{\mathrm{mib}}, (k{+}1)T_{\mathrm{mib}})$. Within that interval, no change in thrust direction or magnitude is possible.
@@ -283,7 +283,7 @@ u \leftarrow u + d.
 \end{cases}
 \end{equation}
 
-\noindent where $a$ and $b$ are the neuron parameters, $v$ is the membrane potential (in mV), $u$ is a slow recovery variable, $I(t)$ is the external input current, and $c$ and $d$ define how the system is reset after a spike.
+\noindent where $a$ and $\mathbf{B}$ are the neuron parameters, $v$ is the membrane potential (in mV), $u$ is a slow recovery variable, $I(t)$ is the external input current, and $c$ and $d$ define how the system is reset after a spike.
 
 % \subsection{Random Synaptic Weight Initialization}
 
@@ -414,7 +414,7 @@ Pr(q) = \frac{1}{|\Omega|} \sum_{(i,j) \in \Omega} \mathbb{I}(E_{i,j} = q), \qua
 H(\Omega) = -\sum_{q \in \{-1, 0, +1\}} Pr(q) \log_2 Pr(q),
 \end{equation}
 
-\noindent excluding terms where \( Pr(q) = 0 \). This entropy quantifies the diversity of event types in the region, with \( H(\Omega) = 0 \) indicating uniform activity and \( H_{\max} = \log_2(3) \approx 1.585 \) indicating maximum variability. The factor 3 in \((H_{\max}=\log_2(3))\) comes from the three possible event categories ((-1,0,+1)); the maximum entropy is reached when these categories are equally likely (probability (1/3) each, i.e., (1/3+1/3+1/3)).
+\noindent excluding terms where \( Pr(q) = 0 \). This entropy quantifies the diversity of event types in the region, with \( H(\Omega) = 0 \) indicating uniform activity and \( H_{\max} = \log_2(3) \approx 1.585 \) indicating maximum variability. The factor 3 in \((H_{\max}=\log_2(3))\) comes from the three possible event categories (-1,0,+1); the maximum entropy is reached when these categories are equally likely (probability (1/3) each, i.e., (1/3+1/3+1/3)).
 
 The entropy value is then mapped to a pooling kernel size \( \rho \in [\rho_{\min}, \rho_{\max}] \) using a linear transformation that adaptively controls the local compression ratio:
 
@@ -599,7 +599,7 @@ Within this layer, the Rendezvous Phase Repository (\ac{rpr}), Docking Phase Rep
     \label{secondhiddenlayer}
 \end{figure}
 
-The neurons within the second hidden layer employ models capable of producing persistent spiking according to the input (Class 2 model), and rapid state transitions required for dynamic mission control. The \ac{rpr} and \ac{dpr} neurons are configured to exhibit regular, sustained spiking, enabling them to produce stable outputs during their respective active phases. In contrast, the \ac{dpi} neurons exhibit bistable firing patterns, enabling them to maintain persistent activity while providing controlled inhibition during phase transitions. The \ac{rpi} neurons use bistable neuron model, designed to generate rapid and transient spiking patterns that effectively trigger phase switches by inhibiting the active repositories when mission conditions change.
+The neurons within the second hidden layer employ models capable of producing persistent spiking according to the input (Class 2 model), and rapid state transitions required for dynamic mission control. The \ac{rpr} and \ac{dpr} neurons are configured to exhibit regular, sustained spiking, enabling them to produce stable outputs during their respective active phases. In contrast, the \ac{dpi} neurons exhibit bistable firing patterns, enabling them to maintain persistent activity while providing controlled inhibition during phase transitions. The \ac{rpi} neurons use a bistable neuron model, designed to generate rapid and transient spiking patterns that effectively trigger phase switches by inhibiting the active repositories when mission conditions change.
 
 During rendezvous phase, the agent has not contacted the payload, the \ac{rpr} neurons maintain persistent spiking activity. In this phase, the active learning pathway extends from the input layer to the visual processing layer, through the \ac{rpr}, to the output layer, where synaptic connections within the \ac{rpr} repository are updated according to the \ac{stdp} rule. Upon payload contact, the \ac{rpi} neurons are activated, signaling the transition to the docking phase. The \ac{rpi} neurons inhibit both \ac{rpr} and \ac{dpi} neurons. This inhibition silences \ac{rpr} and \ac{dpi} activity, releasing the \ac{dpr} neurons from inhibition and allowing them to fire, thereby enabling the network to transition to the docking phase. During docking, the active learning pathway becomes the input layer to the visual processing layer, to the \ac{dpr}, and continues to the output layer, allowing the network to learn the docking policy explicitly through the active \ac{dpr} connections.
 
@@ -664,7 +664,7 @@ F_Y^{\text{thrust}} &= F_{\max}\,\operatorname{sign}\!\big(\mathrm{duty}_{Y^+}-\
 where \(F_{\max}\) is the maximum available thrust. Although lateral inhibition enforces a winner–take–all regime, inhibition is not ideal; the suppressed neuron may emit sparse residual spikes within a control window, and the thrust direction is therefore robustly determined by the sign of the dominant neuron’s firing excess.
 
 Each neuron’s activity thus directly determines the discrete thrust command applied to the corresponding micro-thruster, while the difference between opposing neurons defines the net thrust along each axis. 
-If both neurons in a pair fire simultaneously, their contributions cancel, producing zero net force and preventing control conflicts.
+If both neurons in a pair fire simultaneously, their contributions cancel, producing zero net force and preventing control conflicts (simultaneous activity of thrusters in opposite directions).
 
 
 
@@ -676,9 +676,9 @@ If both neurons in a pair fire simultaneously, their contributions cancel, produ
 The reward function in the \ac{snn} provides a structured feedback mechanism that directly guides synaptic plasticity. Its role is to compare the firing rates of the hidden layer with the event-based sensory input and to generate a modulation signal that drives weight updates. In this way, the reward function ensures that the hidden layer gradually aligns its perception (activity patterns) with the external sensory events. At each reward computation step, the input layer activity is calculated as the time-averaged firing activity:
 
 \begin{equation}
-A^{\text{input}}(i) = \frac{1}{T} \sum_{\tau=t-T}^{t} f_i^{\text{input}}(\tau),
+\mathbf{A}^{\text{input}}(i) = \frac{1}{T} \sum_{\tau=t-T}^{t} f_i^{\text{input}}(\tau),
 \end{equation}
-where \( f_i^{\text{input}}(\tau) \in \{0,1\} \) indicates whether neuron \( i \) generated a spike at time \(\tau\). Each entry \(A^{\text{input}}(i)\) is the time-averaged firing rate of neuron \( i \) over the window (T). For example, the fraction of time steps in that window when neuron \( i \) fired; the matrix collects these per-neuron values.
+where \( f_i^{\text{input}}(\tau) \in \{0,1\} \) indicates whether neuron \( i \) generated a spike at time \(\tau\). Each entry \(\mathbf{A}^{\text{input}}(i)\) is the time-averaged firing rate of neuron \( i \) over the window (T). For example, the fraction of time steps in that window when neuron \( i \) fired; the matrix collects these per-neuron values.
 Specifically, 
 \begin{equation}
 f_i(\tau) =
@@ -696,16 +696,16 @@ where \( v_i(\tau) \) is the membrane potential of neuron \( i \) at time \(\tau
     \label{fig:FiringActivityMatrix}
 \end{figure}
 
-Similarly to Figure~\ref{fig:FiringActivityMatrix}, for the first hidden layer (\(A^{\text{H1}}\)), the payload detector and agent detector repositories compute:
+Similarly to Figure~\ref{fig:FiringActivityMatrix}, for the first hidden layer \(\mathbf{A}^{\text{H1}}\), the payload detector and agent detector repositories compute:
 
 \begin{equation}
-A^{\text{H1}}(i) = \frac{1}{T} \sum_{\tau=t-T}^{t} f_i^{\text{H1}}(\tau).
+\mathbf{A}^{\text{H1}}(i) = \frac{1}{T} \sum_{\tau=t-T}^{t} f_i^{\text{H1}}(\tau).
 \end{equation}
 
 The activity matrix shown in Figure~\ref{fig:FiringActivityMatrix} is calculated separately for each repository (one matrix for the payload detector and one for the agent detector based on their number of neurons). 
 
 
-To compute the attention map, the input activity matrix \(A^{\text{input}} \) is compared with the positions represented in the first hidden layer using a Gaussian-weighted mapping. Each neuron is permanently assigned to one grid cell. Therefore, every neuron has an associated spatial coordinate that is defined by its index. For a first hidden-layer neuron indexed by \(q\), whose receptive-field center is located at \((x_q, y_q)\), and the input-layer indexed by \(k\), located at \((x_k, y_k)\), the squared Euclidean distance is given by:
+To compute the attention map, the input activity matrix \(\mathbf{A}^{\text{input}} \) is compared with the positions represented in the first hidden layer using a Gaussian-weighted mapping. Each neuron is permanently assigned to one grid cell. Therefore, every neuron has an associated spatial coordinate that is defined by its index. For a first hidden-layer neuron indexed by \(q\), whose receptive-field center is located at \((x_q, y_q)\), and the input-layer indexed by \(k\), located at \((x_k, y_k)\), the squared Euclidean distance is given by:
 
 \begin{equation}
 d_{kq}^2 = (x_k - x_q)^2 + (y_k - y_q)^2.
@@ -722,17 +722,17 @@ where \( \sigma_A=[0.05, 0.1] \) is a scale parameter controlling the sensitivit
 The modulation signal \(r^{\text{H1}}(q)\), which serves as the reward for the first hidden layer neuron \(q\), is computed directly by comparing the attention-weighted input activity with the current hidden layer activity:
 
 \begin{equation}
-     \mathcal{A}^{\text{Attention}}(q) = \frac{\sum_k \gamma_{kq} \cdot A^{\text{input}}(k)}{\sum_{k=1}^{K}\gamma_{kq} + \epsilon},
+     \mathcal{A}^{\text{Attention}}(q) = \frac{\sum_k \gamma_{kq} \cdot \mathbf{A}^{\text{input}}(k)}{\sum_{k=1}^{K}\gamma_{kq} + \epsilon},
 \end{equation}
 
 \begin{equation}
-r^{\text{H1}}(q) = A^{\text{H1}}(q) \times \left(\mathcal{A}^{\text{Attention}}(q) - A^{\text{H1}}(q)\right),
+r^{\text{H1}}(q) = \mathbf{A}^{\text{H1}}(q) \times \left(\mathcal{A}^{\text{Attention}}(q) - \mathbf{A}^{\text{H1}}(q)\right),
     \label{reward1HiddenLayer}
 \end{equation}
 
-This formulation emphasizes high-activity regions aligned with the \ac{alm} areas and directly provides the per-neuron learning signal. When the hidden layer activity \( A^{\text{H1}} \) matches the attention-driven reward, the \(r^{\text{H1}}(q) \rightarrow 0\), stopping the weight updates for that neuron during the iteration.
+This formulation emphasizes high-activity regions aligned with the \ac{alm} areas and directly provides the per-neuron learning signal. When the hidden layer activity \( \mathbf{A}^{\text{H1}} \) matches the attention-driven reward, the \(r^{\text{H1}}(q) \rightarrow 0\), stopping the weight updates for that neuron during the iteration.
 
-At each time step, the activity of both the payload detector neurons and the agent detector neurons is compared with the attention map. A lateral inhibition mechanism ensures that only one repository is active at a time. As a result, the inhibited neurons do not generate spikes, and there is no active synaptic path from the input neurons to these inhibited neurons during that interval. Consequently, according to \eqref{reward1HiddenLayer}, the reward signal for any inhibited repository is effectively multiplied by the zero activity of that repository (\(A^{\text{H1}}=0 \)), and no weight updates occur for those synapses. This selective gating ensures that only the active repository receives a weight update.
+At each time step, the activity of both the payload detector neurons and the agent detector neurons is compared with the attention map. A lateral inhibition mechanism ensures that only one repository is active at a time. As a result, the inhibited neurons do not generate spikes, and there is no active synaptic path from the input neurons to these inhibited neurons during that interval. Consequently, according to \eqref{reward1HiddenLayer}, the reward signal for any inhibited repository is effectively multiplied by the zero activity of that repository (\(\mathbf{A}^{\text{H1}}=0 \)), and no weight updates occur for those synapses. This selective gating ensures that only the active repository receives a weight update.
 
 Figure \ref{fig:payloadRewardPipeline} shows how the reward function pipeline works for the agent detection process in the first hidden layer. The reward signal provides the value of \(r^{\text{H1}}(q)\) for each neuron, corresponding to each pixel in the representation.
 
@@ -746,7 +746,7 @@ Figure \ref{fig:payloadRewardPipeline} shows how the reward function pipeline wo
         \includegraphics[width=0.45\linewidth]{Figures/Payload_AttentionFuzzyMap.pdf}
     }
     \vfill
-    \subfigure[First Hidden Layer Activity (\(A^{\text{H1}}\))]{
+    \subfigure[First Hidden Layer Activity (\(\mathbf{A}^{\text{H1}}\))]{
         \includegraphics[width=0.45\linewidth]{Figures/Payload_HiddenLayerActivity.pdf}
     }
     \hfill
@@ -772,7 +772,7 @@ Figure \ref{fig:AgentsRewardPipeline} shows an example of the reward function pi
         \includegraphics[width=0.45\linewidth]{Figures/Agents_AttentionFuzzyMap.pdf}
     }
     \vfill
-    \subfigure[First Hidden Layer Activity (\(A^{\text{H1}}\))]{
+    \subfigure[First Hidden Layer Activity (\(\mathbf{A}^{\text{H1}}\))]{
         \includegraphics[width=0.45\linewidth]{Figures/Agents_HiddenLayerActivity.pdf}
     }
     \hfill
@@ -805,7 +805,7 @@ x_q,y_q\in\{-1,\,-0.333,\,0.333,\,1\}.
 
 Set the attention scale to $\sigma_A=0.1$ and $\epsilon=0.001$. Let the time--averaged input activity (illustrated in Figure~\ref{fig:FiringActivityMatrix}) be
 \[
-A^{\text{input}}=
+\mathbf{A}^{\text{input}}=
 \begin{bmatrix}
 0&0&0&0&0&0&0&0\\
 0&0.6&0.8&0.7&0&0&0&0\\
@@ -820,7 +820,7 @@ A^{\text{input}}=
 
 \begin{figure}[H]
     \centering
-    \subfigure[Input activity matrix $(A^{\text{input}})$ for numerical example of Gaussian attention computation.]{
+    \subfigure[Input activity matrix $(\mathbf{A}^{\text{input}})$ for numerical example of Gaussian attention computation.]{
         \includegraphics[width=0.45\linewidth]{Figures/Input activity matrix (8x8).pdf}
     }
     \hfill
@@ -851,7 +851,7 @@ Define the analogous 8-vector for the vertical axis, $g_y(r\,|\,y_q)$, which ass
 
 The attention at $q$ is the normalized weighted average
 \[
-\mathcal{A}^{\text{Attention}}(q)=\frac{\sum_{r,c} \gamma_{kq}\,A^{\text{input}}(r,c)}{\sum_{r,c} \gamma_{kq}+\epsilon}.
+\mathcal{A}^{\text{Attention}}(q)=\frac{\sum_{r,c} \gamma_{kq}\,\mathbf{A}^{\text{input}}(r,c)}{\sum_{r,c} \gamma_{kq}+\epsilon}.
 \]
 
 \emph{Example 1: hidden neuron $q=(2,2)$ at $(x_q,y_q)=(-0.333,-0.333)$.}
@@ -877,7 +877,7 @@ Form $\gamma_{q}=g_y\,g_x^\top$. Non-negligible entries are the $2\times 2$ bloc
         \includegraphics[width=0.45\linewidth]{Figures/Gaussian weight map.pdf}
     }
     \hfill
-    \subfigure[Weighted input activity $(\gamma_{q} \odot A^{\text{input}})$.]{
+    \subfigure[Weighted input activity $(\gamma_{q} \odot \mathbf{A}^{\text{input}})$.]{
         \includegraphics[width=0.45\linewidth]{Figures/Weighted activity.pdf}
     }
     \caption{Attention weight computation for hidden neuron \( q = (2,2) \) at position \( (x_q, y_q) = (-0.333, -0.333) \). (a) shows the Gaussian weight map \( \gamma_{q} \) centered at the hidden neuron’s location. (b) illustrates the element-wise product of the weight map with the input activity matrix, highlighting the contributions to the attention calculation.}
@@ -889,7 +889,7 @@ The denominator (with $\epsilon$) is
 \[
 S_q=\sum_{r,c}\gamma_{q}(r,c)+\epsilon\approx(0.398+0.104+0.104+0.027)+0.001=0.635.
 \]
-The numerator uses the corresponding entries from $A^{\text{input}}$:
+The numerator uses the corresponding entries from $\mathbf{A}^{\text{input}}$:
 \[
 N_q=0.404\cdot 1.000+0.104\cdot 0.800+0.104\cdot 0.900+0.027\cdot 0.700=0.594.
 \]
@@ -916,7 +916,7 @@ Non-negligible weights sit on rows $3{:}4$ and columns $1{:}2$:
 \gamma_{q}(4,2)=0.163\cdot 0.017=0.003.
 \]
 The denominator is $S_q\approx 0.636+0.011+0.163+0.003+0.001=0.814$.  
-The numerator uses $A^{\text{input}}(3,2)=0.7$ and $A^{\text{input}}(4,2)=0.6$:
+The numerator uses $\mathbf{A}^{\text{input}}(3,2)=0.7$ and $\mathbf{A}^{\text{input}}(4,2)=0.6$:
 \[
 N_q=0.011\cdot 0.7+0.003\cdot 0.6=0.009.
 \]
@@ -989,7 +989,7 @@ hidden neuron ``queries'' the spatio–temporal activity of the input grid.
 \emph{Hidden-layer activities.}
 Let the current hidden activities for the payload and agent detectors be
 \[
-A^{\text{H1}}_{\text{payload}}=
+\mathbf{A}^{\text{H1}}_{\text{payload}}=
 \begin{bmatrix}
 0.050 & 0.100 & 0.000 & 0.000\\
 0.100 & 0.200 & 0.000 & 0.000\\
@@ -997,7 +997,7 @@ A^{\text{H1}}_{\text{payload}}=
 0.000 & 0.000 & 0.050 & 0.100
 \end{bmatrix},
 \qquad
-A^{\text{H1}}_{\text{agent}}=
+\mathbf{A}^{\text{H1}}_{\text{agent}}=
 \begin{bmatrix}
 0.000 & 0.020 & 0.000 & 0.000\\
 0.010 & 0.010 & 0.000 & 0.000\\
@@ -1011,7 +1011,7 @@ The activity matrices presented above are defined for the scenario when the \ac{
 \emph{Reward computation.}
 Using the multiplicative reward definition
 \(
-r^{\text{H1}}(q) = A^{\text{H1}}(q)\big(\mathcal{A}_{q}^{\text{Attention}} - A^{\text{H1}}(q)\big),
+r^{\text{H1}}(q) = \mathbf{A}^{\text{H1}}(q)\big(\mathcal{A}_{q}^{\text{Attention}} - \mathbf{A}^{\text{H1}}(q)\big),
 \)
 the elementwise rewards for the payload detector become
 \[
@@ -1055,12 +1055,12 @@ Positive entries indicate that the attention-driven input estimate exceeds the n
 
 \subsubsection{Reward Function for the Second Hidden Layer}
 
-Incoming \ac{dvs} events are represented as an image $E \in \{-1,0,+1\}^{N_e \times N_e}$, where each pixel encodes a negative, positive, or absent brightness change. The first hidden layer consists of two distinct neuron sections dedicated to payload detection and proximal agent detection, respectively. For each section, the time-averaged spiking activity is aggregated according to the activity-matrix construction rule illustrated in Figure~\ref{fig:FiringActivityMatrix}, resulting in two separate grid-based activity maps, $A_{pay}^{\text{H1}}$ and $A_{agt}^{\text{H1}}$, each of size $N_m \times N_m$.
+Incoming \ac{dvs} events are represented as an image $E \in \{-1,0,+1\}^{N_e \times N_e}$, where each pixel encodes a negative, positive, or absent brightness change. The first hidden layer consists of two distinct neuron sections dedicated to payload detection and proximal agent detection, respectively. For each section, the time-averaged spiking activity is aggregated according to the activity-matrix construction rule illustrated in Figure~\ref{fig:FiringActivityMatrix}, resulting in two separate grid-based activity maps, $\mathbf{A}_{pay}^{\text{H1}}$ and $\mathbf{A}_{agt}^{\text{H1}}$, each of size $N_m \times N_m$.
 
-Each grid cell in $A_{pay}^{\text{H1}}$ and $A_{agt}^{\text{H1}}$ corresponds to a fixed group of neurons in the respective section of the first hidden layer and represents the local firing-rate activity for that spatial region. These maps provide a spatial representation of the payload and proximal agents, indicating the extent to which the network associates each grid location with the presence of the corresponding object. The first hidden layer also incorporates a lateral inhibition mechanism, which ensures that only one of these two detection maps is active at any given time. When the payload detector neurons are active, the agent detector neurons are suppressed, and vice versa. Consequently, the instantaneous detection state of the network can be expressed as
+Each grid cell in $\mathbf{A}_{pay}^{\text{H1}}$ and $\mathbf{A}_{agt}^{\text{H1}}$ corresponds to a fixed group of neurons in the respective section of the first hidden layer and represents the local firing-rate activity for that spatial region. These maps provide a spatial representation of the payload and proximal agents, indicating the extent to which the network associates each grid location with the presence of the corresponding object. The first hidden layer also incorporates a lateral inhibition mechanism, which ensures that only one of these two detection maps is active at any given time. When the payload detector neurons are active, the agent detector neurons are suppressed, and vice versa. Consequently, the instantaneous detection state of the network can be expressed as
 
 \begin{equation}
-    A^{\text{H1}}_{\mathrm{det}} = A_{pay}^{\text{H1}} + A_{agt}^{\text{H1}},
+    \mathbf{A}^{\text{H1}}_{\mathrm{det}} = \mathbf{A}_{pay}^{\text{H1}} + \mathbf{A}_{agt}^{\text{H1}},
     \label{eq:DetectionState}
 \end{equation}
 since at any given moment exactly one of the two terms on the right-hand side of~\eqref{eq:DetectionState} is nonzero.
@@ -1068,24 +1068,24 @@ since at any given moment exactly one of the two terms on the right-hand side of
 
 To construct a binary activity-selection mask from the detection map, a Sigmoid function is applied element-wise,
 \begin{equation}
-    B(i,j) =
-    \frac{1}{1 + \exp\!\left[-\beta\left(A^{\text{H1}}_{\mathrm{det}}(i,j)-\Upsilon\right)\right]},
+    \mathbf{B}(i,j) =
+    \frac{1}{1 + \exp\!\left[-\beta\left(\mathbf{A}^{\text{H1}}_{\mathrm{det}}(i,j)-\Upsilon\right)\right]},
 \end{equation}
-here, $\Upsilon$ denotes a soft threshold, and $\beta \gg 1$ determines the steepness of the transition. This operation converts the detection map into a logical mask that distinguishes active from inactive grid cells. Grid locations with nonzero and sufficiently large values of $A^{\text{H1}}_{\mathrm{det}}(i,j)$ approach $1$, whereas locations with zero or negligible activity remain near $0$. Consequently, the resulting mask identifies spatial regions with high neural activity and suppresses regions that do not contribute to the detection process.
+here, $\Upsilon$ denotes a soft threshold, and $\beta \gg 1$ determines the steepness of the transition. This operation converts the detection map into a logical mask that distinguishes active from inactive grid cells. Grid locations with nonzero and sufficiently large values of $\mathbf{A}^{\text{H1}}_{\mathrm{det}}(i,j)$ approach $1$, whereas locations with zero or negligible activity remain near $0$. Consequently, the resulting mask identifies spatial regions with high neural activity and suppresses regions that do not contribute to the detection process.
 
 
-The \ac{dvs} produces events at the sensor resolution $N_e \times N_e$, corresponding to the native pixel grid of the event-based camera. In contrast, the activity maps generated by the entropy-based pooling input layer and the first hidden layer are defined on a coarser spatial grid of size $N_m \times N_m$, where each grid cell aggregates the activity of a fixed block of \ac{dvs} pixels according to the pooling rule described in Fig.~\ref{fig:FiringActivityMatrix}. Throughout this work, $N_e$ denotes the event (sensor) resolution, while $N_m$ refers to the pooled neural resolution. To apply the low-resolution activity-selection mask $B$ to the original \ac{dvs} event image, the mask must be expanded from a size of $N_m \times N_m$ to the event resolution $N_e \times N_e$. Since the ratio $\kappa = N_e / N_m$ is an integer, this expansion is implemented using nearest-neighbor replication. Each entry of $B$ is copied into a $\kappa \times \kappa$ block in the high-resolution grid, producing a mask that is spatially aligned with the original \ac{dvs} events. Formally, 
+The \ac{dvs} produces events at the sensor resolution $N_e \times N_e$, corresponding to the native pixel grid of the event-based camera. In contrast, the activity maps generated by the entropy-based pooling input layer and the first hidden layer are defined on a coarser spatial grid of size $N_m \times N_m$, where each grid cell aggregates the activity of a fixed block of \ac{dvs} pixels according to the pooling rule described in Fig.~\ref{fig:FiringActivityMatrix}. Throughout this work, $N_e$ denotes the event (sensor) resolution, while $N_m$ refers to the pooled neural resolution. To apply the low-resolution activity-selection mask $\mathbf{B}$ to the original \ac{dvs} event image, the mask must be expanded from a size of $N_m \times N_m$ to the event resolution $N_e \times N_e$. Since the ratio $\kappa = N_e / N_m$ is an integer, this expansion is implemented using nearest-neighbor replication. Each entry of $\mathbf{B}$ is copied into a $\kappa \times \kappa$ block in the high-resolution grid, producing a mask that is spatially aligned with the original \ac{dvs} events. Formally, 
 \begin{equation}
-\mathcal{E}(B)
+\mathcal{E}(\mathbf{B})
 = B \otimes \mathbf{1}_{\kappa\times\kappa},
 \qquad
-(\mathcal{E}(B))_{m,n}
+(\mathcal{E}(\mathbf{B}))_{m,n}
 = B_{\lceil m/\kappa \rceil,\;\lceil n/\kappa \rceil}.
 \end{equation}
-This operation ensures that every pixel $(m,n)$ in the enlarged mask $\mathcal{E}(B)$ inherits the value of the corresponding coarse mask element from $B$, producing a properly aligned high event resolution binary mask. Finally, the upsampled mask is applied to the \ac{dvs} event frame to isolate only the currently detected object (payload or proximal agent),
+This operation ensures that every pixel $(m,n)$ in the enlarged mask $\mathcal{E}(\mathbf{B})$ inherits the value of the corresponding coarse mask element from $\mathbf{B}$, producing a properly aligned high event resolution binary mask. Finally, the upsampled mask is applied to the \ac{dvs} event frame to isolate only the currently detected object (payload or proximal agent),
 \begin{equation}
 E_{\mathrm{det}}
-= E \odot \mathcal{E}(B),
+= E \odot \mathcal{E}(\mathbf{B}),
 \end{equation}
 where $\odot$ denotes element-wise multiplication. The resulting event image contains only the events emitted from the active target, with all other regions suppressed by the mask.
 
@@ -1205,7 +1205,7 @@ The radial and angular memberships are defined as
 \end{equation}
 Their product yields a velocity-aligned activity template,
 \begin{equation}
-M_{ij}
+\mathbf{M}_{ij}
 =
 \frac{\mu_r(i,j)\,\mu_\theta(i,j)}
 {\max_{a,b} \mu_r(a,b)\,\mu_\theta(a,b)},
@@ -1213,7 +1213,7 @@ M_{ij}
 which represents the desired neural activity pattern associated with the agent’s current velocity.
 An opposite-direction template is obtained by rotating the heading by \(\pi\),
 \begin{equation}
-\widetilde{M} = M(\varphi + \pi).
+\widetilde{\mathbf{M}} = \mathbf{M}(\varphi + \pi).
 \end{equation}
 
 
@@ -1226,11 +1226,11 @@ An opposite-direction template is obtained by rotating the heading by \(\pi\),
     \subfigure[]{
         \includegraphics[width=0.47\linewidth]{Figures/Example for 2nd HL Velocity Reward (Negative).pdf}
     }
-    \caption{Velocity-aligned activity template \(M\) (left) and opposite-direction template \(\widetilde{M}\) (right) for an agent moving with heading \(\varphi = \pi/4\) and normalized speed \(\bar{\mathcal{V}} = 0.6\).}
+    \caption{Velocity-aligned activity template \(\mathbf{M}\) (left) and opposite-direction template \(\widetilde{\mathbf{M}}\) (right) for an agent moving with heading \(\varphi = \pi/4\) and normalized speed \(\bar{\mathcal{V}} = 0.6\).}
     \label{fig:VelocityTemplates}
 \end{figure}
 
-Let \(A \in [0,1]\) denote the normalized activity of neurons in the second hidden layer, defined as the
+Let \(\mathbf{A} \in [0,1]\) denote the normalized activity of neurons in the second hidden layer, defined as the
 number of spikes emitted within a time window \(\Delta T\) divided by a maximum firing count.
 The scalar reward signal \(\mathcal{H}\) is decomposed into positive and negative components as
 \begin{equation}
@@ -1241,23 +1241,23 @@ with \(\mathcal{H}_+ \ge 0\) representing reinforcement and \(\mathcal{H}_- \ge 
 
 Using this decomposition, the per-neuron reward assignment is defined as
 \begin{equation}
-L_i = \mathcal{H}_+ M_i + \mathcal{H}_- \widetilde{M}_i,
+L_i = \mathcal{H}_+ \mathbf{M}_i + \mathcal{H}_- \widetilde{\mathbf{M}}_i,
 \end{equation}
 such that positive reward reinforces neurons aligned with the current velocity direction,
 while negative reward reinforces neurons encoding the opposite direction.
 
 Finally, the reward-modulated learning signal applied to the second hidden layer is given by
 \begin{equation}
-r^{H2}
-=
-\big((V_x \neq 0)\lor(V_y \neq 0)\big)
-\big(
-\mathcal{H}_+(M-A) + \mathcal{H}_-(\widetilde{M}-A)
-\big),
+r^{H2} =
+\begin{cases}
+\mathcal{H}_+(\mathbf{M}-\mathbf{A}) + \mathcal{H}_-(\widetilde{\mathbf{M}}-\mathbf{A}),
+& \text{if } (V_x \neq 0)\ \lor\ (V_y \neq 0),\\[0.5ex]
+0, & \text{if } V_x = 0 \ \land\ V_y = 0.
+\end{cases}
 \end{equation}
 which is active only when the agent is in motion.
-According to Figure~\ref{fig:VelocityTemplates}, this signal drives the neural activity toward the velocity-consistent template \(M\) under positive
-reward and toward the opposite template \(\widetilde{M}\) under negative reward, while vanishing when
+According to Figure~\ref{fig:VelocityTemplates}, this signal drives the neural activity toward the velocity-consistent template \(\mathbf{M}\) under positive
+reward and toward the opposite template \(\widetilde{\mathbf{M}}\) under negative reward, while vanishing when
 \(\mathcal{H}=0\).
 
 \paragraph{Numerical example for the second hidden layer reward computation.}
@@ -1278,26 +1278,26 @@ E=
 0&0&0&0&-1&-1&-1&0\\
 0&0&0&0&0&0&0&0
 \end{bmatrix},\quad
-A_{pay}^{\text{H1}}=
+\mathbf{A}_{pay}^{\text{H1}}=
 \begin{bmatrix}
 0&0&0&0\\
 0&0&0.1&0.1\\
 0&0.1&0.8&0.7\\
 0&0.3&0.7&0.5
 \end{bmatrix},\quad
-A_{agt}^{\text{H1}}=\mathbf{0}_{4\times 4}.
+\mathbf{A}_{agt}^{\text{H1}}=\mathbf{0}_{4\times 4}.
 \]
-Thus $A_{\mathrm{det}}^{\text{H1}}=A_{pay}^{\text{H1}}$.
+Thus $A_{\mathrm{det}}^{\text{H1}}=\mathbf{A}_{pay}^{\text{H1}}$.
 
 \emph{Binarization and upsampling.}
 With threshold $\Upsilon=0.3$ and steepness $\beta=10$,
 \[
-B(i,j)=\frac{1}{1+\exp\!\big(-\beta(A_{\mathrm{det}}^{\text{H1}}(i,j)-\Upsilon)\big)}.
+\mathbf{B}(i,j)=\frac{1}{1+\exp\!\big(-\beta(A_{\mathrm{det}}^{\text{H1}}(i,j)-\Upsilon)\big)}.
 \]
-For example $B(3,3)=\frac{1}{1+\exp(-10(0.8-0.3))}=\frac{1}{1+e^{-5}}=0.993$.  
+For example $\mathbf{B}(3,3)=\frac{1}{1+\exp(-10(0.8-0.3))}=\frac{1}{1+e^{-5}}=0.993$.  
 The full matrix is
 \[
-B=
+\mathbf{B}=
 \begin{bmatrix}
 0.047&0.047&0.047&0.047\\
 0.047&0.047&0.119&0.119\\
@@ -1305,9 +1305,9 @@ B=
 0.047&0.500&0.982&0.881
 \end{bmatrix}.
 \]
-Nearest–neighbor upsampling by $\kappa=2$ gives $\mathcal{E}(B)=B\otimes\mathbf{1}_{2\times 2}$:
+Nearest–neighbor upsampling by $\kappa=2$ gives $\mathcal{E}(\mathbf{B})=\mathbf{B}\otimes\mathbf{1}_{2\times 2}$:
 \[
-\mathcal{E}(B)=
+\mathcal{E}(\mathbf{B})=
 \begin{bmatrix}
 0.047&0.047&0.047&0.047&0.047&0.047&0.047&0.047\\
 0.047&0.047&0.047&0.047&0.047&0.047&0.047&0.047\\
@@ -1322,7 +1322,7 @@ Nearest–neighbor upsampling by $\kappa=2$ gives $\mathcal{E}(B)=B\otimes\mathb
 
 \emph{Masked events.}
 \[
-E_{\mathrm{det}}=E\odot \mathcal{E}(B)=
+E_{\mathrm{det}}=E\odot \mathcal{E}(\mathbf{B})=
 \begin{bmatrix}
 0&0&0&0&0&0&0&0\\
 0&0.047&-0.047&0&0&0&0&0\\
@@ -1343,7 +1343,7 @@ G^{(e)}(m,n)=\exp\!\Big(-\frac{x^2+y^2}{2\sigma_g^2}\Big).
 \]
 This yields
 \[
-G^{(e)}=
+\mathbf{G}^{(e)}=
 \begin{bmatrix}
 0.119&0.201&0.284&0.338&0.338&0.284&0.201&0.119\\
 0.201&0.338&0.478&0.569&0.569&0.478&0.338&0.201\\
@@ -1354,11 +1354,11 @@ G^{(e)}=
 0.201&0.338&0.478&0.569&0.569&0.478&0.338&0.201\\
 0.119&0.201&0.284&0.338&0.338&0.284&0.201&0.119
 \end{bmatrix},\qquad
-Z=\sum_{m,n}G^{(e)}(m,n)=29.761.
+Z=\sum_{m,n}\mathbf{G}^{(e)}(m,n)=29.761.
 \]
 The motion-direction signal is
 \[
-\mathcal{H}=\frac{1}{Z}\sum_{m,n} E_{\mathrm{det}}(m,n)\,G^{(e)}(m,n).
+\mathcal{H}=\frac{1}{Z}\sum_{m,n} E_{\mathrm{det}}(m,n)\,\mathbf{G}^{(e)}(m,n).
 \]
 Only $11$ positions are nonzero,
 \[
@@ -1403,15 +1403,15 @@ With $\sigma_r=0.3$, $\sigma_\theta=0.6$,
 0.003&0.115&0.742
 \end{bmatrix}.
 \]
-Normalize $M_{ij}=\mu_r(i,j)\mu_\theta(i,j)/\max_{a,b}\mu_r(a,b)\mu_\theta(a,b)$ and form the opposite-direction map $\widetilde{M}=M(\varphi+\pi)$:
+Normalize \(\mathbf{M}_{ij}=\mu_r(i,j)\mu_\theta(i,j)/\max_{a,b}\mu_r(a,b)\mu_\theta(a,b)\) and form the opposite-direction map \(\widetilde{\mathbf{M}}=\mathbf{M}(\varphi+\pi)\):
 \[
-M=
+\mathbf{M}=
 \begin{bmatrix}
 0.000&0.008&0.102\\
 0.000&0.129&1.000\\
 0.002&0.132&0.417
 \end{bmatrix},\qquad
-\widetilde{M}=
+\widetilde{\mathbf{M}}=
 \begin{bmatrix}
 0.417&0.132&0.002\\
 1.000&0.000&0.000\\
@@ -1422,7 +1422,7 @@ M=
 \emph{Per–neuron reward and signed credit.}
 Let the normalized second–layer activities be
 \[
-A=
+\mathbf{A}=
 \begin{bmatrix}
 0.100&0.200&0.300\\
 0.400&0.500&0.200\\
@@ -1431,7 +1431,7 @@ A=
 \]
 Since $\mathcal{H}<0$,
 \[
-r^{H2}=\mathcal{H}_+(M-A)+\mathcal{H}_-(\widetilde{M}-A)=0.011\,(\widetilde{M}-A),
+r^{H2}=\mathcal{H}_+(\mathbf{M}-\mathbf{A})+\mathcal{H}_-(\widetilde{\mathbf{M}}-\mathbf{A})=0.011\,(\widetilde{\mathbf{M}}-\mathbf{A}),
 \]
 so
 \[
@@ -1446,7 +1446,7 @@ r^{H2}=
 The shape of this reward (matrix form) follows the same rule as Figure~\ref{fig:FiringActivityMatrix}, and each array shows the reward value for each associated neuron. 
 
 \emph{Interpretation.}
-The masked events and Gaussian envelope yield a small \emph{negative} motion signal ($-0.011$), so learning pushes activity toward the \emph{opposite} velocity map $\widetilde{M}$: cells aligned with $\varphi+\pi$ are encouraged (positive entries in $L$), while currently overactive cells are suppressed by the negative entries of $\dot{W}$.
+The masked events and Gaussian envelope yield a small \emph{negative} motion signal ($-0.011$), so learning pushes activity toward the \emph{opposite} velocity map \(\widetilde{\mathbf{M}}\): cells aligned with \(\varphi+\pi\) are encouraged (positive entries in \(\mathbf{L}\)), while currently overactive cells are suppressed by the negative entries of \(\dot{\mathbf{W}}\).
 
 \subsubsection{Output Layer Reward Computation Based on Directional Error}
 
@@ -1597,10 +1597,7 @@ r^{\ell} \exp\!\left(-a_L \, \mathcal{R}^{\ell-1}\right),
 \end{equation}
 where \(a_L > 0\) is a tunable damping coefficient.
 
-This exponential modulation suppresses downstream plasticity when the preceding layer
-exhibits large reward fluctuations, indicating ongoing adaptation.
-As learning in layer \(\ell-1\) stabilizes and \(\mathcal{R}^{\ell-1}\) decreases, enabling gradual
-adaptation in layer \(\ell\).
+This exponential modulation suppresses downstream plasticity when the preceding layer exhibits large reward fluctuations, indicating ongoing adaptation. As learning in layer \(\ell-1\) stabilizes and its weight adjustment becomes negligible ($|r^{\ell-1}_i|$ goes to zero), the \(\mathcal{R}^{\ell-1}\) decreases, enabling gradual adaptation in layer \(\ell\).
 
 
 \begin{figure}[H]
@@ -1614,12 +1611,11 @@ As shown in Figure~\ref{fig:weight_update}, the network is partitioned into laye
 \begin{equation}
 \dot{\mathbf{C}^l}(t) = -\frac{1}{\tau_c}\mathbf{C}^l(t) + \mathbf{STDP}(\tau) \delta(t - \mathbf{T}^l)
 \end{equation}
-where, \(\tau_c\) is the constant for the decay of \( \mathbf{C}_{\text{post, pre}}(t) \), the \(\tau\) is the spike time difference between pre- and post-synaptic neurons (e.g., $h$ and $q$ in Figure~\ref{fig:weight_update}), and \(\mathbf{T}^l\) is the matrix that shows the firing times of pre- and post-synaptic neurons. In discrete implementation this eligibility is maintained internally and sampled at update times; the weight rule below treats \(\mathbf{C}^{(\ell)}(t)\) as known.
+where, \(\tau_c\) is the constant for the decay of \(\mathbf{C}^l(t)\), the \(\tau\) is the spike time difference between pre- and post-synaptic neurons (e.g., $h$ and $q$ in Figure~\ref{fig:weight_update}), and \(\mathbf{T}^l\) is the matrix that shows the firing times of pre- and post-synaptic neurons. In discrete implementation this eligibility is maintained internally and sampled at update times; the weight rule below treats \(\mathbf{C}^{(\ell)}(t)\) as known.
 
-Per–neuron rewards  computed on the postsynaptic side of each layer. Let \(\boldsymbol{r}^{(\ell)}(t)\;=\;\big[r^{(\ell)}_{q}(t)\big]_{q\in\mathcal{I}_{\ell+1}}\in\mathbb{R}^{|\mathcal{I}_{\ell+1}|}\) (Figure~\ref{fig:weight_update}) collect the layer–specific reward vector, respectively. The instantaneous, gated R-STDP update for layer \(\ell\) is then
+Per–neuron rewards computed on the postsynaptic side of each layer. The instantaneous, gated R-STDP update for layer \(\ell\) is then
 \begin{equation}
-\Delta\mathbf{W}^{(\ell)}(t)\;=\; \boldsymbol{r}^{(\ell)}_{\mathrm{eff}}(t) \circ \mathbf{C}^{(\ell)}(t)
-\;\;\in\;\mathbb{R}^{|\mathcal{I}_{\ell+1}|\times|\mathcal{J}_\ell|},
+\Delta\mathbf{W}^{(\ell)}(t)\;=\; \boldsymbol{r}^{(\ell)}_{\mathrm{eff}}(t) \circ \mathbf{C}^{(\ell)}(t),
 \label{eq:layer_update}
 \end{equation}
 where \(\circ\) denotes element–wise multiplication. 
@@ -1692,7 +1688,7 @@ where \(\circ\) denotes element–wise multiplication.
 % We then set $\boldsymbol{\pi}^{[\mathcal{X}]}_{h}=\big[\,\mathbf{c}^{[\mathcal{X}]}_{h};\,\delta^{[\mathcal{X}]}_{h}\,\big]$, so $p_{\mathrm{sig}}=d+1$.
 % This summarizes where the update is concentrated (centroid) and how wide it is (spread).
 
-% \emph{(B) Topographic index (no explicit grid).}
+% \emph{(\mathbf{B}) Topographic index (no explicit grid).}
 % If only the postsynaptic order is known, use the normalized index
 % $\tau^{[\mathcal{X}]}_{h}=(h-\tfrac{1}{2})/\mathcal{P}^{[\mathcal{X}]} \in (0,1)$ and set
 % $\boldsymbol{\pi}^{[\mathcal{X}]}_{h}=\tau^{[\mathcal{X}]}_{h}$ (so $p_{\mathrm{sig}}=1$).
@@ -2056,7 +2052,11 @@ Reward interval $T_r^{(\ell)}$ [ms] & 10 & 10 & 50\\
 \end{tabularx}
 \end{table}
 
-To ensure robust inhibitory control and prevent interference between functional phases, each of the \ac{pai}, \ac{naai}, \ac{rpi}, and \ac{dpi} repositories is implemented with multiple neurons rather than a single unit. Implementing each inhibitory repository with multiple neurons distributes the inhibitory signal across a population instead of depending on a single spiking unit. Consequently, variability in individual spike trains is averaged at the population level, which ensures that at least one neuron fires during each sampling interval and maintains a continuous inhibitory or gating signal. Additionally, small random perturbations are applied to the initial membrane potentials and Izhikevich parameters of neurons within each repository. This heterogeneity prevents neurons with identical dynamics from firing synchronously. If all neurons are initialized identically, inhibitory spikes occur in brief, simultaneous bursts, resulting in prolonged intervals without inhibitory activity. In contrast, randomized initialization leads to neurons spiking at slightly different times, thereby distributing inhibitory events over time and ensuring a more continuous inhibitory influence.
+To generate a stable inhibitory control signal, each inhibitory repository (\ac{pai}, \ac{naai}, \ac{rpi}, and \ac{dpi}) is implemented as a small population of neurons rather than a single inhibitory unit. Each neuron in the repository emits inhibitory spikes, which are delivered to the target repository via inhibitory synapses. The effective inhibitory signal is the sum of the population's spiking activity, rather than the output of an individual neuron.
+
+Distributing inhibition across multiple neurons improves temporal reliability. Spike trains from individual neurons are inherently variable. A single inhibitory neuron may remain silent for extended intervals because of stochastic firing. By contrast, a population of inhibitory neurons ensures spikes are distributed over time, so at least one neuron fires within each sampling window. As a result, the downstream repository receives a continuous inhibitory or gating signal rather than brief, intermittent bursts.
+
+To achieve this, small random perturbations are applied to neurons’ initial membrane potentials and Izhikevich parameters within each inhibitory repository. This heterogeneity prevents synchronous firing. Without it, identically initialized neurons tend to spike simultaneously, producing short inhibitory bursts and long periods of inactivity. Random initialization causes neurons to spike at slightly different times, spreading inhibitory events, and maintaining stable inhibition throughout each phase.
 
 Figure~\ref{fig:light_sim} illustrates the effect of activating the \ac{alm} on the agents’ visual perception. When the \ac{alm} is turned off (Figure~\ref{fig:light_sim}a), the proximal agent produces relatively weak brightness variations compared to the payload, resulting in limited event generation in the \ac{dvs}. As a consequence, the visual perception layer has difficulty distinguishing the smaller agent from the background. In contrast, when the \ac{alm} is turned on (Figure~\ref{fig:light_sim}b), the proximal agent generates a higher concentration of brightness and corresponding \ac{dvs} events despite its smaller physical size relative to the payload. This increased event activity enhances the attention mechanism, allowing the network to more clearly separate and detect proximal agents alongside the payload. 
 
@@ -2123,7 +2123,7 @@ Figure~\ref{fig:repository_activity} shows how the payload and proximal agent de
     \subfigure[Activity of the proximal agent detector repository during initial training phases with the Agents' \ac{alm} turned off.]{
         \includegraphics[width=0.47\linewidth]{Figures/Agent Detector Activity - ILI - ALM off.pdf}
     }
-    \caption{Detector repository activity during initial training with \ac{alm} off. The payload detector remains active, while the proximal agent detector is suppressed due to inhibitory competition.}
+    \caption{Detector repository activity during initial training with \ac{alm} off. The payload detector remains active, while the proximal agent detector is suppressed due to inhibitory signals from the payload attention Inhibitor.}
     \label{fig:repository_activity}
 \end{figure}
 
@@ -2175,9 +2175,6 @@ Figure~\ref{fig:converged_activity_on} illustrates the activity of the first hid
     \caption{Agent detector repository activity after learning convergence with \ac{alm} on. The proximal agent detector shows strong, localized activity, while the payload detector remains inactive.}
     \label{fig:converged_activity_on}
 \end{figure}
-
-
-
 
 The results presented in Figures~\ref{fig:HL2Activity}--\ref{fig:Rewards} illustrate the behavior of the agents during both the rendezvous and docking phases while the training of the second hidden layer and the output layer is still ongoing. These figures demonstrate how the agents adapt their actions and control strategies as learning progresses, with the network gradually refining its representations and motor outputs to achieve coordinated docking and rendezvous maneuvers.
 Figure \ref{fig:HL2Activity} presents the activity patterns of the second hidden layer repositories during both the rendezvous and docking phases for Agent 1. In Figure~\ref{fig:HL2Activity}a, during the rendezvous phase, the \ac{rpr} exhibits a pronounced activity peak around \(135^\circ\), which aligns with the Line-of-Sight (LOS) direction from Agent 1 to the payload. This indicates that the \ac{rpr} has effectively learned to orient its activity towards the payload, facilitating stable rendezvous. Conversely, in Figure~\ref{fig:HL2Activity}b, during the docking phase, the \ac{dpr} repository shows a significant activity peak around \(45^\circ\), corresponding to the LOS direction from Agent 1 to the docking point. This shift in activity demonstrates that the \ac{dpr} has adapted its representation to focus on guiding the payload towards the docking location, highlighting the dynamic reconfiguration of repository activity in response to task demands.
