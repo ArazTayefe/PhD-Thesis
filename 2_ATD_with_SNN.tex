@@ -361,7 +361,28 @@ Figure \ref{fig:my_label11} shows the changes in synaptic weights. Only the syna
 
 \subsection{Simulation with noise}
 
-In Figure \ref{fig:my_label12}, we observe the performance of two methods, namely the \ac{snn} and the Cartesian Oval (CO) method, in the presence of noise. The noise in this experiment is introduced as white Gaussian noise, characterized by a mean of zero and a variance of 0.01. Both \ac{snn} and CO receive position data that has been corrupted by this noise.
+In Figure \ref{fig:my_label12}, we observe the performance of two methods, namely the \ac{snn} and the Cartesian Oval (CO) method, in the presence of noise. The CO method computes the capture location by explicitly constructing the boundary that separates the reachable regions of the attacker and the defender under constant-speed motion. This boundary is defined as a CO, which represents the locus of points for which the time-to-go of both players is equal. Let $(x_A,y_A)$ denote the attacker position, $d$ the distance between the attacker and defender, $\rho$ the initial distance between the attacker and the target, and $\gamma = v_D / v_A$ the defender-to-attacker speed ratio. The capture boundary is parameterized as
+\begin{equation}
+x = x_A + r(\phi)\cos(\lambda + \phi + \pi), \quad
+y = y_A + r(\phi)\sin(\lambda + \phi + \pi),
+\end{equation}
+where $\lambda$ is the line-of-sight angle from the attacker to the defender and $\phi$ is a free angular parameter. The radial function $r(\phi)$ is given by
+\begin{equation}
+r(\phi) =
+\frac{\gamma \rho + d \cos\phi \pm
+\sqrt{(\gamma \rho + d \cos\phi)^2 - (1-\gamma^2)(d^2 - \rho^2)}}
+{1-\gamma^2},
+\end{equation}
+with $\phi$ constrained to the interval $\phi \in [-\phi_l,\phi_l]$, where
+\begin{equation}
+\phi_l =
+\arccos\!\left(
+\frac{\sqrt{(1-\gamma^2)(d^2-\rho^2)} - \gamma \rho}{d}
+\right).
+\end{equation}
+The capture location is determined by evaluating this parametric curve and selecting the point on the oval that satisfies the game termination condition, i.e., equal arrival time of the attacker and defender to the target. Since the oval is constructed directly from instantaneous position measurements, any perturbation in the measured states affects the shape and position of the oval, making the resulting capture point sensitive to measurement noise.
+
+The noise in this experiment is introduced as white Gaussian noise, characterized by a mean of zero and a variance of 0.01. Both \ac{snn} and CO receive position data that has been corrupted by this noise.
 
 \begin{figure}[H]
     \centering

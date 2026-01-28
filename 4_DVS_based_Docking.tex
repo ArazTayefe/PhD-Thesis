@@ -14,7 +14,7 @@ This work presents a biologically interpretable and scalable neuromorphic archit
     The proposed variable entropy-based kernel computes spatial importance weights from local event entropy, enabling robust feature extraction from asynchronous visual inputs without frame reconstruction.
 
     \item \textbf{Short-term memory via bistable neurons:}  
-    A population of bistable Izhikevich neurons is designed to emulate a phase–locked–loop–like mechanism in the dynamical sense. Rather than tracking the phase of a sinusoidal input, each neuron possesses an intrinsic oscillatory attractor that becomes entrained by transient DVS events. Once driven into this oscillatory state, the neuron maintains sustained spiking in the absence of further input, analogous to phase capture in a PLL. Event-triggered inhibitory inputs act as a reset mechanism, returning the neuron to its resting equilibrium and effectively unlocking the loop. This bistable excitation–inhibition structure provides short-term temporal memory on the order of tens of milliseconds, preserving recent event activity while guaranteeing temporal continuity in event-driven perception when visual motion ceases.
+    A population of bistable Izhikevich neurons is designed to provide a dynamical short-term memory mechanism based on intrinsic oscillatory behavior. Rather than tracking the phase of an external periodic signal, each neuron exhibits an internal oscillatory attractor that can be activated by transient \ac{dvs} events. Once the neuron transitions into this oscillatory state, it maintains sustained spiking activity even in the absence of further input. Event-triggered inhibitory signals act as a reset mechanism, returning the neuron to its resting equilibrium and terminating the oscillatory activity. This bistable excitation–inhibition structure enables short-term temporal memory on the order of tens of milliseconds, preserving recent event information while ensuring temporal continuity in event-driven perception when visual motion temporarily ceases.
 
     \item \textbf{Attention-guided object detection through phase-encoded ALM inhibition:}  
     The first hidden layer includes neurons that emit phase-encoded inhibitory signals synchronized with a physical \ac{alm}. This mechanism uses \ac{alm}s to gate attention toward agents in the \ac{dvs} field of view, suppressing background noise and enhancing agent detection in sparse event streams.
@@ -538,7 +538,7 @@ Low-entropy (homogeneous) regions are pooled using a larger kernel \( \rho_{\max
 
 \subsubsection*{Bistability-based input encoding and inhibitory calibration}
 
-The input layer is composed of bistable spiking neurons implemented using the Izhikevich model in a parameter regime where a stable resting equilibrium coexists with a self-sustained spiking attractor \cite{izhikevich2004model}. This bistability enables each neuron to retain a memory of recent excitation without requiring recurrent connections. An excitatory input event can switch the neuron from rest into the spiking attractor, where it remains active until an explicit inhibitory input returns it to quiescence. In this sense, the neuron maintains an internal dynamical state that persists after the removal of the input, providing short-term temporal memory of event polarity. This behavior is analogous to phase capture in oscillatory systems, in that a transient input induces a stable oscillatory response that persists until actively reset, although no explicit sinusoidal phase tracking is performed.
+The input layer is composed of bistable spiking neurons implemented using the Izhikevich model in a parameter regime where a stable resting equilibrium coexists with a self-sustained spiking attractor \cite{izhikevich2004model}. This bistability enables each neuron to retain a memory of recent excitation without requiring recurrent connections. An excitatory input event can switch the neuron from rest into the spiking attractor, where it remains active until an explicit inhibitory input returns it to quiescence. In this sense, the neuron maintains an internal dynamical state that persists after the removal of the input, providing short-term temporal memory of event polarity. 
 
 At steady state, setting $\dot v=\dot u=0$ in the Izhikevich model yields
 \begin{align}
@@ -663,8 +663,7 @@ F_Y^{\text{thrust}} &= F_{\max}\,\operatorname{sign}\!\big(\mathrm{duty}_{Y^+}-\
 \end{align}
 where \(F_{\max}\) is the maximum available thrust. Although lateral inhibition enforces a winner–take–all regime, inhibition is not ideal; the suppressed neuron may emit sparse residual spikes within a control window, and the thrust direction is therefore robustly determined by the sign of the dominant neuron’s firing excess.
 
-Each neuron’s activity thus directly determines the discrete thrust command applied to the corresponding micro-thruster, while the difference between opposing neurons defines the net thrust along each axis. 
-If both neurons in a pair fire simultaneously, their contributions cancel, producing zero net force and preventing control conflicts (simultaneous activity of thrusters in opposite directions).
+Each neuron’s activity thus directly determines the discrete thrust command applied to the corresponding micro-thruster, while the difference between opposing neurons defines the net thrust along each axis. If both neurons in a pair fire simultaneously, their contributions cancel, producing zero net force and preventing control conflicts (simultaneous activity of thrusters in opposite directions).
 
 
 
@@ -677,6 +676,7 @@ The reward function in the \ac{snn} provides a structured feedback mechanism tha
 
 \begin{equation}
 \mathbf{A}^{\text{input}}(i) = \frac{1}{T} \sum_{\tau=t-T}^{t} f_i^{\text{input}}(\tau),
+\label{eq:inputActivityMatrix}
 \end{equation}
 where \( f_i^{\text{input}}(\tau) \in \{0,1\} \) indicates whether neuron \( i \) generated a spike at time \(\tau\). Each entry \(\mathbf{A}^{\text{input}}(i)\) is the time-averaged firing rate of neuron \( i \) over the window (T). For example, the fraction of time steps in that window when neuron \( i \) fired; the matrix collects these per-neuron values.
 Specifically, 
@@ -705,7 +705,7 @@ Similarly to Figure~\ref{fig:FiringActivityMatrix}, for the first hidden layer \
 The activity matrix shown in Figure~\ref{fig:FiringActivityMatrix} is calculated separately for each repository (one matrix for the payload detector and one for the agent detector based on their number of neurons). 
 
 
-To compute the attention map, the input activity matrix \(\mathbf{A}^{\text{input}} \) is compared with the positions represented in the first hidden layer using a Gaussian-weighted mapping. Each neuron is permanently assigned to one grid cell. Therefore, every neuron has an associated spatial coordinate that is defined by its index. For a first hidden-layer neuron indexed by \(q\), whose receptive-field center is located at \((x_q, y_q)\), and the input-layer indexed by \(k\), located at \((x_k, y_k)\), the squared Euclidean distance is given by:
+To compute the attention map, the input layer activity matrix \(\mathbf{A}^{\text{input}} \) is compared with the positions represented in the first hidden layer using a Gaussian-weighted mapping. Each neuron is permanently assigned to one grid cell. Therefore, every neuron has an associated spatial coordinate that is defined by its index. For a first hidden-layer neuron indexed by \(q\), whose receptive-field center is located at \((x_q, y_q)\), and the input-layer indexed by \(k\), located at \((x_k, y_k)\), the squared Euclidean distance is given by:
 
 \begin{equation}
 d_{kq}^2 = (x_k - x_q)^2 + (y_k - y_q)^2.
@@ -716,10 +716,9 @@ Here, \(x_k\) and \(y_k\) are not the physical positions estimated by the agents
 \begin{equation}
 \gamma_{kq} = \exp\left( -\frac{d_{kq}^2}{2 \sigma_A^2} \right),
 \end{equation}
-where \( \sigma_A=[0.05, 0.1] \) is a scale parameter controlling the sensitivity. 
+where \( \sigma_A=[0.05, 0.1] \) is a scale parameter controlling the sensitivity. The coefficient $\gamma_{kq}$ is a Gaussian spatial weighting term that quantifies how strongly the activity of input neuron $k$ influences hidden-layer neuron $q$ based on their relative positions in the fixed activity grids, enforcing spatial locality such that each hidden neuron primarily attends to nearby input layer activity while smoothly attenuating contributions from distant regions.
 
-
-The modulation signal \(r^{\text{H1}}(q)\), which serves as the reward for the first hidden layer neuron \(q\), is computed directly by comparing the attention-weighted input activity with the current hidden layer activity:
+The modulation signal \(r^{\text{H1}}(q)\), which serves as the reward for the first hidden layer neuron \(q\), is computed directly by comparing the attention-weighted input layer activity with the current hidden layer activity:
 
 \begin{equation}
      \mathcal{A}^{\text{Attention}}(q) = \frac{\sum_k \gamma_{kq} \cdot \mathbf{A}^{\text{input}}(k)}{\sum_{k=1}^{K}\gamma_{kq} + \epsilon},
@@ -730,7 +729,9 @@ r^{\text{H1}}(q) = \mathbf{A}^{\text{H1}}(q) \times \left(\mathcal{A}^{\text{Att
     \label{reward1HiddenLayer}
 \end{equation}
 
-This formulation emphasizes high-activity regions aligned with the \ac{alm} areas and directly provides the per-neuron learning signal. When the hidden layer activity \( \mathbf{A}^{\text{H1}} \) matches the attention-driven reward, the \(r^{\text{H1}}(q) \rightarrow 0\), stopping the weight updates for that neuron during the iteration.
+This formulation emphasizes high-activity regions aligned with the \ac{alm} areas and directly provides the per-neuron learning signal. When the hidden layer activity \( \mathbf{A}^{\text{H1}} \) matches the attention-driven signal, the \(r^{\text{H1}}(q) \rightarrow 0\), stopping the weight updates for that neuron during the iteration. The reward $r^{\text{H1}}(q)$ reinforces first hidden-layer neurons whose activity is consistent with the currently attended object, such that when the ALM is on the attention is concentrated on neighboring agent regions, and when the ALM is off the higher event density generated by the payload shifts attention toward payload-related regions, enabling dynamic, attention-driven specialization of spatial representations.
+
+
 
 
 \begin{figure}[H]
@@ -807,15 +808,6 @@ Figure \ref{fig:AgentsRewardPipeline} shows an example of the reward function pi
 This design enables the first hidden layer to adaptively learn distinct environmental configurations (the spatial positions of the payload and nearby agents), using event-based attention and ensures stable convergence in layered \ac{snn} learning.
 
 
-
-
-
-
-
-
-
-
-
 \paragraph{Numerical example (explicit Gaussian attention with $d_{kq}^2$ and $\gamma_{kq}$)}
 Use an $8\times 8$ input grid and a $4\times 4$ first-hidden-layer grid (same as Figure~\ref{fig:FiringActivityMatrix}). Coordinates follow the code:
 \[
@@ -824,7 +816,7 @@ x_k,y_k\in\{-1,\,-0.714,\,-0.429,\,-0.143,\,0.143,\,0.429,\,0.714,\,1\},
 x_q,y_q\in\{-1,\,-0.333,\,0.333,\,1\}.
 \]
 
-Set the attention scale to $\sigma_A=0.1$ and $\epsilon=0.001$. Let the time--averaged input activity (illustrated in Figure~\ref{fig:FiringActivityMatrix}) be
+Set the attention scale to $\sigma_A=0.1$ and $\epsilon=0.001$. Let the time--averaged input layer activity (illustrated in Figure~\ref{fig:FiringActivityMatrix}) be
 \[
 \mathbf{A}^{\text{input}}=
 \begin{bmatrix}
@@ -841,14 +833,14 @@ Set the attention scale to $\sigma_A=0.1$ and $\epsilon=0.001$. Let the time--av
 
 \begin{figure}[H]
     \centering
-    \subfigure[Input activity matrix $(\mathbf{A}^{\text{input}})$ for numerical example of Gaussian attention computation.]{
+    \subfigure[Input layer activity matrix $(\mathbf{A}^{\text{input}})$ for numerical example of Gaussian attention computation.]{
         \includegraphics[width=0.45\linewidth]{Figures/Input activity matrix (8x8).pdf}
     }
     \hfill
     \subfigure[Hidden-layer centers of attention (queries) for numerical example of Gaussian attention computation.]{
         \includegraphics[width=0.45\linewidth]{Figures/Hidden neuron grid (4x4).pdf}
     }
-    \caption{Numerical example setup for Gaussian attention computation in the first hidden layer. (a) shows the input activity matrix representing time-averaged firing rates from the input layer. (b) illustrates the spatial arrangement of hidden-layer neurons, each serving as a query point for attention calculation.}
+    \caption{Numerical example setup for Gaussian attention computation in the first hidden layer. (a) shows the input layer activity matrix representing time-averaged firing rates from the input layer \eqref{eq:inputActivityMatrix}. (b) illustrates the spatial arrangement of hidden-layer neurons, each serving as a query point ($q(2,2)$) for attention calculation.}
     \label{fig:AttentionExample}
 \end{figure}
 
@@ -860,14 +852,9 @@ g_x(k\,|\,x_q)=\exp\!\Big(-\frac{(x_k-x_q)^2}{2\sigma_A^2}\Big),\qquad
 2\sigma_A^2=0.02.
 \]
 Define the analogous 8-vector for the vertical axis, $g_y(r\,|\,y_q)$, which assigns a weight to each of the eight input rows centered at $y_q$. The full $8\times 8$ weight map for neuron $q$ is the outer product
-% \[
-% \gamma_{kq}=g_y(r\,|\,y_q)\,g_x(c\,|\,x_q),\qquad
-% \gamma_{kq}=\gamma_{kq} \ \ \text{with }k\leftrightarrow(r,c).
-% \]
+
 \[
 \gamma_{q}(r,c)=g_y(r\,|\,y_q)\,g_x(c\,|\,x_q),
-\qquad
-\gamma_{q}(r,c)\equiv \gamma_{kq}\ \text{with }k\leftrightarrow(r,c).
 \]
 
 The attention at $q$ is the normalized weighted average
@@ -877,11 +864,48 @@ The attention at $q$ is the normalized weighted average
 
 \emph{Example 1: hidden neuron $q=(2,2)$ at $(x_q,y_q)=(-0.333,-0.333)$.}
 Compute the axis weights:
+% Given: x_q=-0.333, sigma_A=0.1 => 2*sigma_A^2 = 0.02
 \[
-g_x(\cdot|-0.333)\approx [0.0000,\,0.0007,\,0.6308,\,0.1645,\,0.0000,\,0.0000,\,0.0000,\,0.0000],
+g_x(k\,|\,x_q)=\exp\!\left(-\frac{(x_k-x_q)^2}{0.02}\right).
+\]
+
+% k=2: x_k=-0.714
+\[
+x_k-x_q=-0.714-(-0.333)=-0.381,\quad (x_k-x_q)^2=0.145161,
 \]
 \[
-g_y(\cdot|-0.333)\approx [0.0000,\,0.0007,\,0.6308,\,0.1645,\,0.0000,\,0.0000,\,0.0000,\,0.0000].
+g_x(2\,|\,-0.333)=\exp\!\left(-\frac{0.145161}{0.02}\right)=\exp(-7.25805)= 7.0448\times 10^{-4}.
+\]
+
+% k=3: x_k=-0.429
+\[
+x_k-x_q=-0.429-(-0.333)=-0.096,\quad (x_k-x_q)^2=0.009216,
+\]
+\[
+g_x(3\,|\,-0.333)=\exp\!\left(-\frac{0.009216}{0.02}\right)=\exp(-0.4608)= 0.63078.
+\]
+
+% k=4: x_k=-0.143
+\[
+x_k-x_q=-0.143-(-0.333)=0.190,\quad (x_k-x_q)^2=0.0361,
+\]
+\[
+g_x(4\,|\,-0.333)=\exp\!\left(-\frac{0.0361}{0.02}\right)=\exp(-1.805)= 0.16447.
+\]
+
+% k=5: x_k=0.143  (example of a "rounded to zero" entry)
+\[
+x_k-x_q=0.143-(-0.333)=0.476,\quad (x_k-x_q)^2=0.226576,
+\]
+\[
+g_x(5\,|\,-0.333)=\exp\!\left(-\frac{0.226576}{0.02}\right)=\exp(-11.3288)= 1.2022\times 10^{-5}\approx 0.0000 \text{ (to 4 decimals)}.
+\]
+
+\[
+g_x(\cdot|-0.333)= [0.0000,\,0.0007,\,0.6308,\,0.1645,\,0.0000,\,0.0000,\,0.0000,\,0.0000],
+\]
+\[
+g_y(\cdot|-0.333)= [0.0000,\,0.0007,\,0.6308,\,0.1645,\,0.0000,\,0.0000,\,0.0000,\,0.0000].
 \]
 Form $\gamma_{q}=g_y\,g_x^\top$. Non-negligible entries are the $2\times 2$ block on rows $3{:}4$, columns $3{:}4$ (Figure~\ref{fig:AttentionExampleWeights}(a)):
 \[
@@ -898,17 +922,17 @@ Form $\gamma_{q}=g_y\,g_x^\top$. Non-negligible entries are the $2\times 2$ bloc
         \includegraphics[width=0.45\linewidth]{Figures/Gaussian weight map.pdf}
     }
     \hfill
-    \subfigure[Weighted input activity $(\gamma_{q} \odot \mathbf{A}^{\text{input}})$.]{
+    \subfigure[Weighted input layer activity $(\gamma_{q} \odot \mathbf{A}^{\text{input}})$.]{
         \includegraphics[width=0.45\linewidth]{Figures/Weighted activity.pdf}
     }
-    \caption{Attention weight computation for hidden neuron \( q = (2,2) \) at position \( (x_q, y_q) = (-0.333, -0.333) \). (a) shows the Gaussian weight map \( \gamma_{q} \) centered at the hidden neuron’s location. (b) illustrates the element-wise product of the weight map with the input activity matrix, highlighting the contributions to the attention calculation.}
+    \caption{Attention weight computation for hidden neuron \( q = (2,2) \) at position \( (x_q, y_q) = (-0.333, -0.333) \). (a) shows the Gaussian weight map \( \gamma_{q} \) centered at the hidden neuron’s location. (b) illustrates the element-wise product of the weight map with the input layer activity matrix, highlighting the contributions to the attention calculation.}
     \label{fig:AttentionExampleWeights}
 \end{figure}
 
 
 The denominator (with $\epsilon$) is
 \[
-S_q=\sum_{r,c}\gamma_{q}(r,c)+\epsilon\approx(0.398+0.104+0.104+0.027)+0.001=0.635.
+S_q=\sum_{r,c}\gamma_{q}(r,c)+\epsilon=(0.398+0.104+0.104+0.027)+0.001=0.635.
 \]
 The numerator uses the corresponding entries from $\mathbf{A}^{\text{input}}$:
 \[
@@ -922,10 +946,10 @@ Hence
 \emph{Example 2: hidden neuron $q=(2,1)$ at $(x_q,y_q)=(-1,-0.333)$.}
 Here
 \[
-g_x(\cdot|-1)\approx[1.000,\,0.017,\,0.000,\,0.000,\,0.000,\,0.000,\,0.000,\,0.000]
+g_x(\cdot|-1)=[1.000,\,0.017,\,0.000,\,0.000,\,0.000,\,0.000,\,0.000,\,0.000]
 \]
 \[
-g_y(\cdot|-0.333)\approx[0.000,\,0.001,\,0.636,\,0.163,\,0.000,\,0.000,\,0.000,\,0.000].
+g_y(\cdot|-0.333)=[0.000,\,0.001,\,0.636,\,0.163,\,0.000,\,0.000,\,0.000,\,0.000].
 \]
 Non-negligible weights sit on rows $3{:}4$ and columns $1{:}2$:
 \[
@@ -936,7 +960,7 @@ Non-negligible weights sit on rows $3{:}4$ and columns $1{:}2$:
 \gamma_{q}(4,1)=0.163\cdot 1.000=0.163,,\quad
 \gamma_{q}(4,2)=0.163\cdot 0.017=0.003.
 \]
-The denominator is $S_q\approx 0.636+0.011+0.163+0.003+0.001=0.814$.  
+The denominator is $S_q= 0.636+0.011+0.163+0.003+0.001=0.814$.  
 The numerator uses $\mathbf{A}^{\text{input}}(3,2)=0.7$ and $\mathbf{A}^{\text{input}}(4,2)=0.6$:
 \[
 N_q=0.011\cdot 0.7+0.003\cdot 0.6=0.009.
@@ -949,11 +973,11 @@ Thus
 \emph{Example 3: hidden neuron $q=(3,3)$ at $(x_q,y_q)=(0.333,0.333)$.}
 Axis weights are centered on columns $5{:}6$ and rows $5{:}6$:
 \[
-g_x(\cdot|0.333)\approx[0,0,0,0.163,0.636,0.000,0,0]
+g_x(\cdot|0.333)=[0,0,0,0.163,0.636,0.000,0,0]
 \quad\text{(nonzeros at col $5{:}6$ are $0.163,0.636$)},
 \]
 \[
-g_y(\cdot|0.333)\approx[0,0,0,0.163,0.636,0,0,0]
+g_y(\cdot|0.333)=[0,0,0,0.163,0.636,0,0,0]
 \quad\text{(nonzeros at row $5{:}6$ are $0.163,0.636$)}.
 \]
 The four main weights are
@@ -964,7 +988,7 @@ The four main weights are
 \gamma_{q}(6,5)=0.636\cdot 0.163=0.104,\;\;
 \gamma_{q}(6,6)=0.636\cdot 0.636=0.404.
 \]
-With $S_q\approx 0.404+0.104+0.104+0.027+0.001=0.640$ and
+With $S_q= 0.404+0.104+0.104+0.027+0.001=0.640$ and
 \[
 N_q=0.027\cdot 0.000+0.104\cdot 0.500+0.104\cdot 0.400+0.404\cdot 0.500=0.296,
 \]
@@ -981,7 +1005,7 @@ Now $g_x$ sits on columns $7{:}8$ with weights $(0.017,\,1.000)$ and $g_y$ on ro
 \[
 \gamma_{q}(6,7)=0.636\cdot 0.017=0.011,\ \ \gamma_{q}(6,8)=0.636\cdot 1.000=0.636,
 \]
-so $S_q\approx 0.814$. With
+so $S_q= 0.814$. With
 \[
 N_q=0.003\cdot 0.600+0.163\cdot 0.500+0.011\cdot 0.600+0.636\cdot 0.400=0.344,
 \]
@@ -1071,7 +1095,7 @@ r^{\text{H1}}
 \]
 
 
-Positive entries indicate that the attention-driven input estimate exceeds the neuron's present activity, leading to potentiation under the R-STDP rule. Negative values indicate that the neuron is currently overactive relative to the attended input and should undergo a reduction in synaptic efficacy. Since only one of the two repositories is active at any time because of lateral inhibition, only the corresponding reward matrix contributes to synaptic updates during each training iteration.
+Positive entries indicate that the attention-driven input estimate exceeds the neuron's present activity, leading to increase in synaptic weights under the R-STDP rule. Negative values indicate that the neuron is currently overactive relative to the attended input and should undergo a reduction in synaptic strength. Since only one of the two repositories is active at any time because of lateral inhibition, only the corresponding reward matrix contributes to synaptic updates during each training iteration.
 
 
 \subsubsection{Reward Function for the Second Hidden Layer}
@@ -1091,14 +1115,15 @@ To construct a binary activity-selection mask from the detection map, a Sigmoid 
 \begin{equation}
     \mathbf{B}(i,j) =
     \frac{1}{1 + \exp\!\left[-\beta\left(\mathbf{A}^{\text{H1}}_{\mathrm{det}}(i,j)-\Upsilon\right)\right]},
+    \label{eq:BinaryMask}
 \end{equation}
 here, $\Upsilon$ denotes a soft threshold, and $\beta \gg 1$ determines the steepness of the transition. This operation converts the detection map into a logical mask that distinguishes active from inactive grid cells. Grid locations with nonzero and sufficiently large values of $\mathbf{A}^{\text{H1}}_{\mathrm{det}}(i,j)$ approach $1$, whereas locations with zero or negligible activity remain near $0$. Consequently, the resulting mask identifies spatial regions with high neural activity and suppresses regions that do not contribute to the detection process.
 
 
-The \ac{dvs} produces events at the sensor resolution $N_e \times N_e$, corresponding to the native pixel grid of the event-based camera. In contrast, the activity maps generated by the entropy-based pooling input layer and the first hidden layer are defined on a coarser spatial grid of size $N_m \times N_m$, where each grid cell aggregates the activity of a fixed block of \ac{dvs} pixels according to the pooling rule described in Fig.~\ref{fig:FiringActivityMatrix}. Throughout this work, $N_e$ denotes the event (sensor) resolution, while $N_m$ refers to the pooled neural resolution. To apply the low-resolution activity-selection mask $\mathbf{B}$ to the original \ac{dvs} event image, the mask must be expanded from a size of $N_m \times N_m$ to the event resolution $N_e \times N_e$. Since the ratio $\kappa = N_e / N_m$ is an integer, this expansion is implemented using nearest-neighbor replication. Each entry of $\mathbf{B}$ is copied into a $\kappa \times \kappa$ block in the high-resolution grid, producing a mask that is spatially aligned with the original \ac{dvs} events. Formally, 
+The \ac{dvs} produces events at the sensor resolution $N_e \times N_e$, corresponding to the native pixel grid of the event-based camera. In contrast, the activity maps generated by the entropy-based pooling input layer and the first hidden layer are defined on a coarser spatial grid of size $N_m \times N_m$, where each grid cell aggregates the activity of a fixed block of \ac{dvs} pixels described in Fig.~\ref{fig:FiringActivityMatrix}. Throughout this work, $N_e$ denotes the event (sensor) resolution, while $N_m$ refers to the pooled neural resolution. To apply the low-resolution activity-selection mask $\mathbf{B}$ to the original \ac{dvs} event image, the mask must be expanded from a size of $N_m \times N_m$ to the event resolution $N_e \times N_e$. Since the ratio $\kappa = N_e / N_m$ is an integer, this expansion is implemented using nearest-neighbor replication. Each entry of $\mathbf{B}$ is copied into a $\kappa \times \kappa$ block in the high-resolution grid, producing a mask that is spatially aligned with the original \ac{dvs} events. Formally, 
 \begin{equation}
 \mathcal{E}(\mathbf{B})
-= B \otimes \mathbf{1}_{\kappa\times\kappa},
+= \mathbf{B} \otimes \mathbf{1}_{\kappa\times\kappa},
 \qquad
 (\mathcal{E}(\mathbf{B}))_{m,n}
 = B_{\lceil m/\kappa \rceil,\;\lceil n/\kappa \rceil}.
@@ -1118,26 +1143,54 @@ where $\odot$ denotes element-wise multiplication. The resulting event image con
     \label{fig:SecondLayerEventMasking}
 \end{figure}
 
-For the second hidden layer, the reward is designed to align synaptic updates with the spatial and temporal focus of the task. The temporal modulation is governed by the agent's \ac{alm} blinking period $T_{\text{ALM}}$, with oscillation frequency and angular frequency
+% For the second hidden layer, the reward is designed to align synaptic updates with the spatial and temporal focus of the task. The temporal modulation is governed by the agent's \ac{alm} blinking period $T_{\text{ALM}}$, with oscillation frequency and angular frequency
+% \begin{equation}
+% f_{\text{osc}} = \frac{1}{T_{\text{ALM}}}, \qquad \omega = 2\pi f_{\text{osc}}.
+% \end{equation}
+
+% Let $G^{(e)} \in \mathbb{R}_+^{N_e\times N_e}$ be the Gaussian kernel sampled at the DVS resolution $N_e$, centered at the payload, with standard deviation $\sigma_g$. The scalar value that detects the motion direction (whether the object is getting closer to the center of the Gaussian envelope or not) is computed as
+
+% \begin{equation}
+% \mathcal{H} = \frac{1}{Z} \sum_{m=1}^{N_e}\sum_{n=1}^{N_e} E_{\mathrm{det}}^{(e)}(m,n) \, G^{(e)}(m,n,t) \in \mathbb{R}.
+% \end{equation}
+
+% The time-varying width and amplitude are
+
+For the second hidden layer, the reward is designed to align synaptic updates with the spatial and temporal focus of the task. 
+The temporal modulation is governed by the agent's \ac{alm} blinking period $T_{\text{ALM}}$, with oscillation frequency and angular frequency
 \begin{equation}
-f_{\text{osc}} = \frac{1}{T_{\text{ALM}}}, \qquad \omega = 2\pi f_{\text{osc}}.
+f_{\text{osc}} = \frac{1}{T_{\text{ALM}}}, \qquad \omega = 2\pi f_{\text{osc}} .
 \end{equation}
 
-Let $G^{(e)} \in \mathbb{R}_+^{N_e\times N_e}$ be the Gaussian kernel sampled at the DVS resolution $N_e$, centered at the payload, with standard deviation $\sigma_g$. The scalar value that detects the motion direction (whether the object is getting closer to the center of the Gaussian envelope or not) is computed as
-
+The scalar quantity used to detect whether the observed object is moving toward or away from the current center of attention is computed as
 \begin{equation}
-\mathcal{H} = \frac{1}{Z} \sum_{m=1}^{N_e}\sum_{n=1}^{N_e} E_{\mathrm{det}}^{(e)}(m,n) \, G^{(e)}(m,n,t) \in \mathbb{R}.
+\mathcal{H} = \frac{1}{Z} \sum_{m=1}^{N_e}\sum_{n=1}^{N_e} 
+E^{\mathrm{det}}(m,n)\, \mathbf{G}^{(e)}(m,n,t),
 \end{equation}
+where $Z$ is a normalization constant.
 
-The time-varying width and amplitude are
+Here, $\mathbf{G}^{(e)}(m,n,t)$ denotes a two-dimensional Gaussian envelope sampled at the \ac{dvs} resolution $N_e \times N_e$. 
+The kernel $\mathbf{G}^{(e)}$ is defined as
+\begin{equation}
+\mathbf{G}^{(e)}(m,n,t) =
+\alpha(t)\exp\!\left(
+-\frac{(x_m-x_c(t))^2+(y_n-y_c(t))^2}{2\sigma(t)^2}
+\right),
+\label{eq:2DGaussianEnvelopeKernel}
+\end{equation}
+where $(x_m,y_n)$ are the spatial coordinates of pixel $(m,n)$. 
+During the rendezvous phase, the Gaussian center $(x_c(t),y_c(t))$ is fixed at the center of the onboard \ac{dvs}, while during the docking phase it is fixed at the center of the \ac{scs}. 
+The parameters $\sigma(t)$ and $\alpha(t)$ control the spatial spread and amplitude of the envelope and are modulated over time according to the ALM blinking frequency. Figure \ref{fig:OscillatoryBehavior} shows the change in the Gaussian function's amplitude during time (switching between -1 and +1), where the frequency of the change is defined based on the \ac{alm} blinking frequency.
 
-\begin{equation}
-\sigma(t) = \sigma_0 + 0.5\sigma_0 \,\sin(\omega t), \qquad \alpha(t) = \cos(\omega t),
-\end{equation}
-yielding the oscillatory Gaussian envelope
-\begin{equation}
-G(x, y, t) = \alpha(t) \,\exp\!\left(-\frac{x^2 + y^2}{2\sigma(t)^2}\right), \quad (x, y) \in [-1, 1]^2.
-\end{equation}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.85\linewidth]{Figures/Oscillation.pdf}
+    \caption{Oscillatory behavior of the Gaussian envelope used for computing the motion direction signal \(\mathcal{H}\) in the second hidden layer. The amplitude alternates between positive and negative values, shifting focus between the payload and agents based on the active \ac{alm}.}
+    \label{fig:OscillatoryBehavior}
+\end{figure}
+
+
+
 \begin{figure}[H]
     \centering
     \subfigure[Payload approaching the center results in positive \(\mathcal{H}\) value based on the 2D Gaussian function with higher standard deviation.]{
@@ -1181,14 +1234,7 @@ Figure~\ref{fig:Negative2DGaussianReward} demonstrates how the motion direction 
     \label{fig:SecondLayerGaussianEnvelope}
 \end{figure}
 
-Figure~\ref{fig:SecondLayerGaussianEnvelope} illustrates the oscillatory Gaussian envelope used to compute the motion direction signal $\mathcal{H}$ for reward modulation in the second hidden layer. The envelope alternates between focusing on the payload and the agents based on which \ac{alm} is active. According to figure \ref{fig:OscillatoryBehavior}, when the amplitude is positive, the envelope concentrates on the payload; when negative, it shifts focus to the agents. This dynamic modulation allows the network to adaptively learn from the relevant object based on the current task context. Getting close to the center of the Gaussian envelope can produce negative or positive $\mathcal{H}$ values depending on the phase of the oscillation, thereby influencing the reward signal accordingly.
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.85\linewidth]{Figures/Oscillation.pdf}
-    \caption{Oscillatory behavior of the Gaussian envelope used for computing the motion direction signal \(\mathcal{H}\) in the second hidden layer. The amplitude alternates between positive and negative values, shifting focus between the payload and agents based on the active \ac{alm}.}
-    \label{fig:OscillatoryBehavior}
-\end{figure}
+Figure~\ref{fig:SecondLayerGaussianEnvelope} illustrates the oscillatory Gaussian envelope used to compute the motion direction signal $\mathcal{H}$ for reward modulation in the second hidden layer. The envelope alternates between focusing on the payload and the agents based on which \ac{alm} is active. 
 
 Each agent is equipped with a planar inertial measurement unit (IMU) that measures the planar velocity
 \(\mathbf{V} = [V_x, V_y]^\top\).
@@ -1286,14 +1332,16 @@ r^{H2} =
 which is active only when the agent is in motion.
 According to Figure~\ref{fig:VelocityTemplates}, this signal drives the neural activity toward the velocity-consistent template \(\mathbf{M}\) under positive
 reward and toward the opposite template \(\widetilde{\mathbf{M}}\) under negative reward, while vanishing when
-\(\mathcal{H}=0\).
+\(\mathcal{H}=0\). If the direction of motion is correct based on getting closer to the payload, the reward will be positive, and the synaptic weights will be adjusted to reinforce this behavior. Conversely, if the motion is toward the neighboring agent, the reward will be negative, leading to synaptic adjustments that discourage this behavior.
 
 \paragraph{Numerical example for the second hidden layer reward computation.}
 We set $N_e=8$, $N_m=4$, hence the upsampling factor is $\kappa=N_e/N_m=2$.  
-At the current instant the oscillatory envelope has amplitude $\alpha(t)=1$ (as given).  
+Let's assume that at the current instant, the oscillatory envelope has amplitude $\alpha(t)=1$ (the agent's \ac{alm} is off, and the payload is detected).  
 Unless noted, all numbers are rounded to $3$ decimals.
 
 \emph{Inputs.}
+Let's assume that the \ac{dvs} data and the firing activity matrix of the payload and neighboring agent detector repositories in the first hidden layer (shown in figure \ref{fig:IdentityMatrices}) are
+
 \[
 E=
 \begin{bmatrix}
@@ -1318,7 +1366,7 @@ E=
 Thus $A_{\mathrm{det}}^{\text{H1}}=\mathbf{A}_{pay}^{\text{H1}}$.
 
 \emph{Binarization and upsampling.}
-With threshold $\Upsilon=0.3$ and steepness $\beta=10$,
+According to \eqref{eq:BinaryMask} with threshold $\Upsilon=0.3$ and steepness $\beta=10$, the binary mask $\mathbf{B}$ is computed as
 \[
 \mathbf{B}(i,j)=\frac{1}{1+\exp\!\big(-\beta(A_{\mathrm{det}}^{\text{H1}}(i,j)-\Upsilon)\big)}.
 \]
@@ -1364,10 +1412,10 @@ E_{\mathrm{det}}=E\odot \mathcal{E}(\mathbf{B})=
 \]
 
 \emph{Gaussian kernel and scalar reward.}
-We sample a centered Gaussian kernel $G^{(e)}$ on the $8\times 8$ grid with coordinates
-$\{-0.875,-0.625,-0.375,-0.125,0.125,0.375,0.625,0.875\}$ on each axis and width $\sigma_g=0.6$:
+We sample a centered Gaussian kernel $\mathbf{G}^{(e)}$ on the $8\times 8$ grid with coordinates
+$\{-0.875,-0.625,-0.375,-0.125,0.125,0.375,0.625,0.875\}$ on each axis and width $\sigma_g=0.6$ based on \eqref{eq:2DGaussianEnvelopeKernel} with $\alpha(t)=1$ and center at the origin:
 \[
-G^{(e)}(m,n)=\exp\!\Big(-\frac{x^2+y^2}{2\sigma_g^2}\Big).
+\mathbf{G}^{(e)}(m,n)=\exp\!\Big(-\frac{x^2+y^2}{2\sigma_g^2}\Big).
 \]
 This yields
 \[
@@ -1431,6 +1479,8 @@ With $\sigma_r=0.3$, $\sigma_\theta=0.6$,
 0.003&0.115&0.742
 \end{bmatrix}.
 \]
+As an example for the above calculation, the $1.000$ entry corresponds to the center cell. With the convention $\Theta_{2,2}=\varphi$ at the origin, the angular mismatch at the center cell is $\Delta\theta_{2,2}=0$, hence $\mu_\theta(2,2)=\exp(0)=1$.
+
 Normalize \(\mathbf{M}_{ij}=\mu_r(i,j)\mu_\theta(i,j)/\max_{a,b}\mu_r(a,b)\mu_\theta(a,b)\) and form the opposite-direction map \(\widetilde{\mathbf{M}}=\mathbf{M}(\varphi+\pi)\):
 \[
 \mathbf{M}=
@@ -1448,7 +1498,7 @@ Normalize \(\mathbf{M}_{ij}=\mu_r(i,j)\mu_\theta(i,j)/\max_{a,b}\mu_r(a,b)\mu_\t
 \]
 
 \emph{Per–neuron reward and signed credit.}
-Let the normalized second–layer activities be
+Let the normalized second–layer activities be (Figure \eqref{fig:FiringActivityMatrix})
 \[
 \mathbf{A}=
 \begin{bmatrix}
@@ -1635,7 +1685,7 @@ This exponential modulation suppresses downstream plasticity when the preceding 
     \label{fig:weight_update}
 \end{figure}
 
-As shown in Figure~\ref{fig:weight_update}, the network is partitioned into layers using indices \(\{\ell=1,\dots,L-1\}\). For each layer \(\ell\), let \(\mathcal{J}_\ell\) be the set of presynaptic indices and \(\mathcal{I}_{\ell+1}\) the set of postsynaptic indices ($h, i,$ and $j$ in Layer $l$). Denote by \(\mathbf{C}^{(\ell)}(t)\in\mathbb{R}^{|\mathcal{I}_{\ell+1}|\times|\mathcal{J}_\ell|}\) the eligibility (credit–assignment) matrix produced by the \ac{stdp} kernel from pre– and post–spike timings up to time \(t\). In continuous time an admissible form is
+As shown in Figure~\ref{fig:weight_update}, the network is partitioned into layers using indices \(\{\ell=1,\dots,L-1\}\). For each layer \(\ell\), let \(\mathcal{J}_\ell\) be the set of presynaptic indices (e.g., neurons $h$, $i$, and $j$ in Figure~\ref{fig:weight_update}) and \(\mathcal{I}_{\ell+1}\) the set of postsynaptic indices ($h, i,$ and $j$ in Layer $l$). Denote by \(\mathbf{C}^{(\ell)}(t)\in\mathbb{R}^{|\mathcal{I}_{\ell+1}|\times|\mathcal{J}_\ell|}\) the eligibility (credit–assignment) matrix produced by the \ac{stdp} kernel from pre– and post–spike timings up to time \(t\). In continuous time an admissible form is
 \begin{equation}
 \dot{\mathbf{C}^l}(t) = -\frac{1}{\tau_c}\mathbf{C}^l(t) + \mathbf{STDP}(\tau) \delta(t - \mathbf{T}^l)
 \end{equation}
@@ -1789,11 +1839,11 @@ where \(\circ\) denotes element–wise multiplication.
 
 % \emph{Compression by truncated DCT--II.}
 % For $M^{[\mathcal{X}]}=6$, the DCT scalings are
-% $\alpha_0^{[\mathcal{X}]}=1/\sqrt{6}\approx 0.408$ and
-% $\alpha_1^{[\mathcal{X}]}=\sqrt{2/6}\approx 0.577$.
+% $\alpha_0^{[\mathcal{X}]}=1/\sqrt{6}= 0.408$ and
+% $\alpha_1^{[\mathcal{X}]}=\sqrt{2/6}= 0.577$.
 % The first--harmonic cosines are
 % \[
-% \cos\!\Big(\tfrac{\pi}{6}(n+\tfrac12)\Big) \approx
+% \cos\!\Big(\tfrac{\pi}{6}(n+\tfrac12)\Big) =
 % \{\,0.965,\,0.707,\,0.258,\,-0.258,\,-0.707,\,-0.965\,\}_{n=0}^{5}.
 % \]
 % Hence, for $j\in\{1,2,3\}$,
@@ -1806,17 +1856,17 @@ where \(\circ\) denotes element–wise multiplication.
 % \]
 % A short calculation gives
 % \[
-% \boldsymbol{\mu}^{[\mathcal{X}]}_{\ell,1}\approx\begin{bmatrix}0.8165\\[2pt]1.4142\end{bmatrix},\quad
-% \boldsymbol{\mu}^{[\mathcal{X}]}_{\ell,2}\approx\begin{bmatrix}0.8165\\[2pt]-0.2989\end{bmatrix},\quad
-% \boldsymbol{\mu}^{[\mathcal{X}]}_{\ell,3}\approx\begin{bmatrix}0.4082\\[2pt]1.5230\end{bmatrix}.
+% \boldsymbol{\mu}^{[\mathcal{X}]}_{\ell,1}=\begin{bmatrix}0.8165\\[2pt]1.4142\end{bmatrix},\quad
+% \boldsymbol{\mu}^{[\mathcal{X}]}_{\ell,2}=\begin{bmatrix}0.8165\\[2pt]-0.2989\end{bmatrix},\quad
+% \boldsymbol{\mu}^{[\mathcal{X}]}_{\ell,3}=\begin{bmatrix}0.4082\\[2pt]1.5230\end{bmatrix}.
 % \]
 
 % For $M^{[\mathcal{Y}]}=7$, the DCT scalings are
-% $\alpha_0^{[\mathcal{Y}]}=1/\sqrt{7}\approx 0.377$ and
-% $\alpha_1^{[\mathcal{Y}]}=\sqrt{2/7}\approx 0.534$,
+% $\alpha_0^{[\mathcal{Y}]}=1/\sqrt{7}= 0.377$ and
+% $\alpha_1^{[\mathcal{Y}]}=\sqrt{2/7}= 0.534$,
 % with first--harmonic cosines
 % \[
-% \cos\!\Big(\tfrac{\pi}{7}(n+\tfrac12)\Big)\approx
+% \cos\!\Big(\tfrac{\pi}{7}(n+\tfrac12)\Big)=
 % \{\,0.974,\,0.781,\,0.433,\,0,\,-0.433,\,-0.781,\,-0.974\,\}_{n=0}^{6}.
 % \]
 % Thus the local latent at client $\mathcal{Y}$ for neuron $h{=}2$ is
@@ -1826,7 +1876,7 @@ where \(\circ\) denotes element–wise multiplication.
 % \alpha_0^{[\mathcal{Y}]}\sum_{n=0}^{6}\boldsymbol{\Delta W}^{[\mathcal{Y}]}_{\ell,2}(n)\\[2pt]
 % \alpha_1^{[\mathcal{Y}]}\sum_{n=0}^{6}\boldsymbol{\Delta W}^{[\mathcal{Y}]}_{\ell,2}(n)\,\cos\!\big(\tfrac{\pi}{7}(n+\tfrac12)\big)
 % \end{bmatrix}
-% \approx
+% =
 % \begin{bmatrix}0.3780\\[2pt]-0.1032\end{bmatrix}.
 % \]
 
@@ -1835,9 +1885,9 @@ where \(\circ\) denotes element–wise multiplication.
 % $\boldsymbol{\pi}^{[\mathcal{X}]}_{j}=(j-\tfrac12)/\mathcal{P}^{[\mathcal{X}]}$ for $j\in\{1,2,3\}$ and
 % $\boldsymbol{\pi}^{[\mathcal{Y}]}_{h}=(h-\tfrac12)/\mathcal{P}^{[\mathcal{Y}]}$, we obtain
 % \[
-% \boldsymbol{\pi}^{[\mathcal{X}]}_{1}=\frac{1/2}{3}=\frac{1}{6}\approx 0.166,\qquad
+% \boldsymbol{\pi}^{[\mathcal{X}]}_{1}=\frac{1/2}{3}=\frac{1}{6}= 0.166,\qquad
 % \boldsymbol{\pi}^{[\mathcal{X}]}_{2}=\frac{3/2}{3}=\frac{1}{2}=0.5,\qquad
-% \boldsymbol{\pi}^{[\mathcal{X}]}_{3}=\frac{5/2}{3}=\frac{5}{6}\approx 0.833,
+% \boldsymbol{\pi}^{[\mathcal{X}]}_{3}=\frac{5/2}{3}=\frac{5}{6}= 0.833,
 % \]
 % \[
 % \boldsymbol{\pi}^{[\mathcal{Y}]}_{2}=\frac{2-1/2}{5}=\frac{3/2}{5}=0.3.
@@ -1846,12 +1896,12 @@ where \(\circ\) denotes element–wise multiplication.
 % \[
 % (\boldsymbol{\pi}^{[\mathcal{Y}]}_{2}-\boldsymbol{\pi}^{[\mathcal{X}]}_{1})^2
 % =\Big(0.3-\frac{1}{6}\Big)^2=\Big(\frac{9}{30}-\frac{5}{30}\Big)^2=\Big(\frac{4}{30}\Big)^2
-% =\Big(\frac{2}{15}\Big)^2=\frac{4}{225}\approx 0.017\!.
+% =\Big(\frac{2}{15}\Big)^2=\frac{4}{225}= 0.017\!.
 % \]
 % The exponent is $-\frac{0.017}{0.08}=-0.222$, hence
 % \[
 % \mathcal{K}\!\big(\boldsymbol{\pi}^{[\mathcal{Y}]}_{2},\boldsymbol{\pi}^{[\mathcal{X}]}_{1}\big)
-% =\exp(-0.222)\approx 0.800 \;\approx\; 0.8007.
+% =\exp(-0.222)= 0.800 \;=\; 0.8007.
 % \]
 % For $j=2$ the squared distance is
 % \[
@@ -1860,18 +1910,18 @@ where \(\circ\) denotes element–wise multiplication.
 % the exponent is $-0.04/0.08=-0.5$, and therefore
 % \[
 % \mathcal{K}\!\big(\boldsymbol{\pi}^{[\mathcal{Y}]}_{2},\boldsymbol{\pi}^{[\mathcal{X}]}_{2}\big)
-% =\exp(-0.5)\approx 0.606 \;\approx\; 0.6065.
+% =\exp(-0.5)= 0.606 \;=\; 0.6065.
 % \]
 % For $j=3$ the squared distance is
 % \[
 % (\boldsymbol{\pi}^{[\mathcal{Y}]}_{2}-\boldsymbol{\pi}^{[\mathcal{X}]}_{3})^2
 % =\Big(0.3-\frac{5}{6}\Big)^2=\Big(\frac{9}{30}-\frac{25}{30}\Big)^2=\Big(-\frac{16}{30}\Big)^2
-% =\Big(\frac{8}{15}\Big)^2=\frac{64}{225}\approx 0.284\!,
+% =\Big(\frac{8}{15}\Big)^2=\frac{64}{225}= 0.284\!,
 % \]
 % the exponent is $-0.284/0.08=-3.555$, and hence
 % \[
 % \mathcal{K}\!\big(\boldsymbol{\pi}^{[\mathcal{Y}]}_{2},\boldsymbol{\pi}^{[\mathcal{X}]}_{3}\big)
-% =\exp(-3.555)\approx 0.028 \;\approx\; 0.0286.
+% =\exp(-3.555)= 0.028 \;=\; 0.0286.
 % \]
 % These three values are the \emph{unnormalized} similarity scores between the target neuron $h=2$ at client $\mathcal{Y}$ and the three neurons $j=1,2,3$ at client $\mathcal{X}$. Normalize the kernel similarities across $j$ to obtain the transport row
 % \[
@@ -1887,26 +1937,26 @@ where \(\circ\) denotes element–wise multiplication.
 % % eligibility norms $(\|\mathbf{e}^{[\mathcal{X}]}_{\ell,1}\|_2,\|\mathbf{e}^{[\mathcal{X}]}_{\ell,2}\|_2,\|\mathbf{e}^{[\mathcal{X}]}_{\ell,3}\|_2)=(1.0,0.5,0.2)$ (magnitude summary of the eligibility trace vector for all synapses feeding neuron $j$),
 % % and $\operatorname{sigm}(x)=(1+e^{-x})^{-1}$, one obtains
 % % \[
-% % \chi^{[\mathcal{X}]}_{1}=\operatorname{sigm}(1.8)\approx 0.858,\qquad
-% % \chi^{[\mathcal{X}]}_{2}=\operatorname{sigm}(0.7)\approx 0.668,\qquad
-% % \chi^{[\mathcal{X}]}_{3}=\operatorname{sigm}(0.7)\approx 0.668.
+% % \chi^{[\mathcal{X}]}_{1}=\operatorname{sigm}(1.8)= 0.858,\qquad
+% % \chi^{[\mathcal{X}]}_{2}=\operatorname{sigm}(0.7)= 0.668,\qquad
+% % \chi^{[\mathcal{X}]}_{3}=\operatorname{sigm}(0.7)= 0.668.
 % % \]
 % % Combine similarity and confidence as $w_j=\mathcal{K}\!\big(\boldsymbol{\pi}^{[\mathcal{Y}]}_{2},\boldsymbol{\pi}^{[\mathcal{X}]}_{j}\big)\,\chi^{[\mathcal{X}]}_{j}$:
 % % \[
-% % w_1=0.800\cdot 0.858\approx 0.687,\qquad
-% % w_2=0.606\cdot 0.668\approx 0.405,\qquad
-% % w_3=0.0285\cdot 0.668\approx 0.019,
+% % w_1=0.800\cdot 0.858= 0.687,\qquad
+% % w_2=0.606\cdot 0.668= 0.405,\qquad
+% % w_3=0.0285\cdot 0.668= 0.019,
 % % \]
-% % with normalization sum $S=w_1+w_2+w_3\approx 1.111$.
+% % with normalization sum $S=w_1+w_2+w_3= 1.111$.
 
 % \emph{Normalized transport row.}
 % The transport coefficients for the target neuron $h=2$ at client $\mathcal{Y}$ are
 % \[
-% \Pi^{(\mathcal{Y}\gets \mathcal{X})}_{2,1}\approx 0.558,\quad
-% \Pi^{(\mathcal{Y}\gets \mathcal{X})}_{2,2}\approx 0.422,\quad
-% \Pi^{(\mathcal{Y}\gets \mathcal{X})}_{2,3}\approx 0.020,
+% \Pi^{(\mathcal{Y}\gets \mathcal{X})}_{2,1}= 0.558,\quad
+% \Pi^{(\mathcal{Y}\gets \mathcal{X})}_{2,2}= 0.422,\quad
+% \Pi^{(\mathcal{Y}\gets \mathcal{X})}_{2,3}= 0.020,
 % \]
-% which verify the row--stochastic property $0.618+0.364+0.017\approx 1$.
+% which verify the row--stochastic property $0.618+0.364+0.017= 1$.
 
 % \emph{Cross--client latent aggregate.}
 % Recall the $d_{\mathrm{lat}}=2$ latents (from the truncated DCT--II compression)
@@ -1922,25 +1972,25 @@ where \(\circ\) denotes element–wise multiplication.
 % \[
 % \overline{\mu}^{[\mathcal{Y}]}_{\ell,2}(0)
 % =0.618\cdot 0.816+0.364\cdot 0.816+0.017\cdot 0.408
-% \approx 0.809,
+% = 0.809,
 % \]
 % \[
 % \overline{\mu}^{[\mathcal{Y}]}_{\ell,2}(1)
 % =0.618\cdot 1.414+0.364\cdot (-0.298)+0.017\cdot 1.523
-% \approx 0.791,
+% = 0.791,
 % \]
-% so $\overline{\boldsymbol{\mu}}^{[\mathcal{Y}]}_{\ell,2}\approx \begin{bmatrix}0.808\\ 0.693\end{bmatrix}$.
+% so $\overline{\boldsymbol{\mu}}^{[\mathcal{Y}]}_{\ell,2}= \begin{bmatrix}0.808\\ 0.693\end{bmatrix}$.
 
 % \emph{Contractive consensus update.}
 % With mixing $\varpi^{[\mathcal{Y}]}_{\ell,2}=0.5$, the latent is updated as
 % \[
 % \breve{\boldsymbol{\mu}}^{[\mathcal{Y}]}_{\ell,2}
-% \approx
+% =
 % \begin{bmatrix}0.593\\ 0.295\end{bmatrix}.
 % \]
 
 % \emph{Reconstruction to presynaptic width $M^{[\mathcal{Y}]}=7$.}
-% Let $\alpha_0^{[\mathcal{Y}]}=1/\sqrt{7}\approx 0.377$, $\alpha_1^{[\mathcal{Y}]}=\sqrt{2/7}\approx 0.534$.
+% Let $\alpha_0^{[\mathcal{Y}]}=1/\sqrt{7}= 0.377$, $\alpha_1^{[\mathcal{Y}]}=\sqrt{2/7}= 0.534$.
 % For $n\in\{0,\dots,6\}$, the inverse DCT with only $k=0,1$ retained reads
 % \[
 % \widehat{\boldsymbol{\Delta W}}^{[\mathcal{Y}]}_{\ell,2}(n)
@@ -1950,8 +2000,8 @@ where \(\circ\) denotes element–wise multiplication.
 % \]
 % Compute the two scalar factors
 % \[
-% \alpha_0^{[\mathcal{Y}]}\,\breve{\mu}^{[\mathcal{Y}]}_{\ell,2}(0)\approx 0.377\cdot 0.593=0.224,\qquad
-% \alpha_1^{[\mathcal{Y}]}\,\breve{\mu}^{[\mathcal{Y}]}_{\ell,2}(1)\approx 0.158,
+% \alpha_0^{[\mathcal{Y}]}\,\breve{\mu}^{[\mathcal{Y}]}_{\ell,2}(0)= 0.377\cdot 0.593=0.224,\qquad
+% \alpha_1^{[\mathcal{Y}]}\,\breve{\mu}^{[\mathcal{Y}]}_{\ell,2}(1)= 0.158,
 % \]
 % and the cosine table for $k=1$,
 % \[
@@ -1960,7 +2010,7 @@ where \(\circ\) denotes element–wise multiplication.
 % \]
 % Substituting term by term gives
 % \[
-% \widehat{\boldsymbol{\Delta W}}^{[\mathcal{Y}]}_{\ell,2}\approx
+% \widehat{\boldsymbol{\Delta W}}^{[\mathcal{Y}]}_{\ell,2}=
 % \begin{bmatrix}
 % 0.224+0.183\cdot 0.974\\[3pt]
 % 0.224+0.183\cdot 0.781\\[3pt]
@@ -2393,7 +2443,7 @@ During the final phase of the maneuver (see Figure~\ref{fig:EnvDVS_99_Docked} (c
 
 \section{Conclusion}
 
-This work presents a novel approach to multi-agent cooperative docking using the \ac{dvs} camera integrated with \ac{snn} enhanced with adaptive light modulation. By integrating an attention mechanism with inhibitory gating, the network effectively isolates and represents both payload and proximal agents that enables dynamic switching of focus based on task demands. The use of \ac{stdp} allows the network to learn robust representations for rendezvous and docking maneuvers. Simulation results demonstrate the efficacy of the proposed architecture in achieving precise docking without direct state measurement (distances and relative velocities) under challenging lighting conditions, which highlights its potential for real-world applications in autonomous space operations.
+This chapter presents a novel approach to multi-agent cooperative docking using the \ac{dvs} camera integrated with \ac{snn} enhanced with adaptive light modulation. By integrating an attention mechanism with inhibitory gating, the network effectively isolates and represents both payload and proximal agents that enables dynamic switching of focus based on task demands. The use of \ac{stdp} allows the network to learn robust representations for rendezvous and docking maneuvers. Simulation results demonstrate the efficacy of the proposed architecture in achieving precise docking without direct state measurement (distances and relative velocities) under challenging lighting conditions, which highlights its potential for real-world applications in autonomous space operations.
 
 The event-triggered mission phase switching in the second hidden layer repositories allows the agents to adaptively transition between rendezvous and docking behaviors. The multi-scale synaptic time constant design further enhances the network's ability to capture temporal dynamics relevant to each phase. The ability of the \ac{snn} to learn and execute complex cooperative behaviors through local synaptic plasticity mechanisms underscores the promise of neuromorphic approaches for distributed autonomous systems, especially in controlling complex actuators like space thrusters with \ac{mib} constraints.
 

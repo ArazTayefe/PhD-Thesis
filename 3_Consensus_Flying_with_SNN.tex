@@ -154,7 +154,7 @@ One of the challenges in robotic applications is ensuring smooth transitions in 
 \mathcal{q}_t = \gamma \cdot \mathcal{q}_{t-1} + (1-\gamma) \cdot \Upsilon_t
 \end{equation}
 
-In this equation, \(\mathcal{q}_{t}\) represents the random action at time \(t\), \(\gamma\) is a correlation coefficient that controls the influence of the previous action, and \(\Upsilon_{t}\) is a random number drawn from a standard distribution (e.g., Gaussian) at time \(t\). This recursive formulation ensures that the action at any given time \(t\) is a weighted blend of the previous action and a new random input, functioning as a first-order filter to produce colored noise.
+In this equation, \(\mathcal{q}_{t}\) represents the random action at time \(t\) (shown as random actions in X and Y-directions in Figure \ref{fig.Network Structure}), \(\gamma\) is a correlation coefficient that controls the influence of the previous action, and \(\Upsilon_{t}\) is a random number drawn from a standard distribution (e.g., Gaussian) at time \(t\). This recursive formulation ensures that the action at any given time \(t\) is a weighted blend of the previous action and a new random input, functioning as a first-order filter to produce colored noise.
 
 
 
@@ -373,7 +373,7 @@ This results in a higher decay rate for the set \(\mathcal{S}\) (while \(\alpha^
 
 \textbf{Case 3: When \(\Psi^{\mathcal{S}}\) increases from 7.75 to 15.5 (Reward Change)}
 
-Assuming a reward change causes \(\Psi^{\mathcal{S}}\) to increase to 15.5. The importance of an object in the output can be controlled by adjusting its reward coefficient. Increasing the importance of an object involves setting its reward coefficient to the maximum value (\(\mathcal{R}_{max}^{\mathcal{S}}=\mathcal{R}_{max}^{G}=1\)). Considering \(W_{max}^{\mathcal{S}}(t) = 7.8\), the decay rate \(\Theta^{\mathcal{S}}\) is recalculated as follows,
+Assuming a reward change causes \(\Psi^{\mathcal{S}}\) to increase to 15.5. The importance of an object in the output can be controlled by adjusting its reward coefficient. Increasing the importance of an object (e.g., neighboring agent or leader) involves setting its reward coefficient to the maximum value (\(\mathcal{R}_{max}^{\mathcal{S}}=\mathcal{R}_{max}^{G}=1\)). Considering \(W_{max}^{\mathcal{S}}(t) = 7.8\), the decay rate \(\Theta^{\mathcal{S}}\) is recalculated as follows,
 
 \begin{equation*}
     \beta = \frac{\ln{(2^{\lambda^2}-1)}}{\Psi^{\mathcal{S}}} = \frac{\ln(2^{5^2} - 1)}{15.5} = 1.118
@@ -555,7 +555,7 @@ Incorporating the proposed \ac{fl} method with the \ac{RCSE} algorithm, the modi
     & + \delta(t-T_{cs})I_{k}^{max}\left(\bm{\overline{W}}_{G}(t) - \bm{\overline{W}}_{k}(t)\right)
 \end{align}
 
-\noindent where \(\delta\) is the Dirac delta function. 
+\noindent where \(\delta\) is the Dirac delta function. When $t=T_{cs}$, the first term of the equation becomes zero, and the second term becomes active, allowing the agent to replace its local model with the global model from the central server.
 
 Equation~\eqref{Eq.AFL.6} describes the complete synaptic weight dynamics when the proposed \ac{RCSE} learning rule is integrated with the federated learning update mechanism. The equation consists of two distinct components that are activated at different time instants and serve different purposes in the learning process.
 
@@ -712,13 +712,13 @@ After 600 seconds, the leader is changed into an obstacle, and its reward coeffi
     \mathcal{R}_{Fi}^{L}(t) = -\mathcal{C}_{Fi}^{L}\left[r_{Fi}^{L}(t-1)-r_{Fi}^{L}(t)\right]
 \end{equation}
 
-The original encoding function (\eqref{Eq.NS.1}) for the input layer is recalled here for clarity:
-\begin{equation*} \label{Eq.NS.1_recall}
+The original encoding function \eqref{Eq.NS.1} for the input layer is recalled here for clarity:
+\begin{equation} \label{Eq.NS.1_recall}
     \mu_{I}(\phi_{i},r_{i}) =
     \left| \tanh(r - r_{i}) \right|
     \cdot
     \exp\!\left(-\frac{(\phi_{i}-\zeta)^2}{2\sigma^2}\right),
-\end{equation*}
+\end{equation}
 where the hyperbolic tangent term scales the angular membership by the magnitude of the distance error $(r-r_i)$, and the Gaussian term encodes the LOS angle.
 
 The $\tanh(\cdot)$ factor in \eqref{Eq.NS.1_recall} serves as an amplitude modulation that depends on the difference between the current distance and a commanded distance $r$. This term is meaningful only when a desired reference distance exists, as it maps the distance error into a bounded gain that increases with deviation from the command and vanishes when the error is zero.
@@ -761,7 +761,7 @@ The results of the reward change (change in environment) are shown in Figures \r
 
 Each agent in the swarm detects two neighboring agents and the leader, acquiring the Line-of-Sight angle and distance. Their neural network consists of three sub-layers in the input layer: two for neighboring followers (\(F_{1}\) and \(F_{2}\)) and one for the leader (\(L\)), with inputs encoded using Gaussian Receptive Fields and fuzzy membership functions. The network uses the difference between the current and commanded distances within the swarm ($r_{cmd}$) and between each follower and the leader ($R_{cmd}$) as input to stimulate the input neurons. Each input channel is divided into two regions: those with distances greater than the commanded value and those within the commanded value. Within each region, the LOS angle is encoded using fuzzy membership functions. Errors in distances are transformed into amplitude values using the \(tanh\) function, bounded between 0 and 1. Each agent's neural network includes 72 input neurons, with 24 neurons for each of the three objects that it detects. These objects are two neighboring agents and the leader. The output layer has 4 neurons representing positive and negative \(\Delta x\) and \(\Delta y\) movements.
 
-In order to better understand the effect of reward change (change in environment) on the \ac{snn}, the synaptic weights matrix before and after reward change has been illustrated in Figures \ref{fig_3_8} and \ref{fig_3_9}, the vertical axis shows the output neurons. The first output neuron is for negative displacement in the x-direction, while the second output neuron is dedicated to positive displacement in the x-direction. Similarly, the third output neuron corresponds to negative displacement in the y-direction and the fourth output neuron to positive displacement in the y-direction. The horizontal axis shows the input neurons. The neuron IDs from 1 to 24 are for the first sub-layer dedicated to the neighboring follower. The network has two sub-layers for the neighboring follower agents, but only one is shown since they are similar in the case of synaptic weight values. The neuron numbers from 25 to 48 are for the sub-layer dedicated to the leader. The \ac{RCSE} method aims to maintain the synaptic weight matrix gradient while adapting to changes in the reward signal.
+In order to better understand the effect of reward change (change in environment) on the \ac{snn}, the synaptic weights matrix before and after reward change has been illustrated in Figures \ref{fig_3_8} and \ref{fig_3_9}, the vertical axis shows the output neurons. The first output neuron is for negative displacement in the x-direction, while the second output neuron is dedicated to positive displacement in the x-direction. Similarly, the third output neuron corresponds to negative displacement in the y-direction and the fourth output neuron to positive displacement in the y-direction. The horizontal axis shows the input neurons. The neuron IDs from 1 to 24 are for the first sub-layer dedicated to the neighboring follower. The network has two sub-layers for the neighboring follower agents, but only one is shown since they are similar in the case of synaptic weight values. The neuron numbers from 25 to 48 are for the sub-layer dedicated to the leader. The \ac{RCSE} method aims to maintain the synaptic weight matrix gradient while adapting to changes in the reward signal (Figures \ref{fig_3_8} and \ref{fig_3_9}).
 
 Considering the numerical values presented in Table \ref{table:simulation-parameters} along with the reward coefficients \(\mathcal{C}_{Fi}^{Fj} = 0.02\) and \(\mathcal{C}_{L}^{Fj} = 0.07\), and \(r_{Fi}^{Fj} = 1\;m/s\) and \(r_{Fi}^{L} = 0.1\;m/s\), the maximum rewards at each weight update interval (\(\Delta T\)) for \(\mathcal{R}_{Fi}^{Fj}\) and \(\mathcal{R}_{Fi}^{L}\) are calculated using \eqref{Eq.TA.3} and \eqref{Eq.TA.4} as \(4\times 10^{-4}\) and \(7.7\times 10^{-4}\), respectively. Consequently, \(\mathcal{R}_{max}^{G} = \max(\mathcal{R}_{Fi}^{Fj},\mathcal{R}_{Fi}^{L}) = 7.7\times 10^{-4}\). The \(\Psi^{S}\) for the follower section in the network is \(\left[\frac{4\times10^{-4}}{7\times10^{-4}}\right]15.5=8.0519\), and for the leader section, it is \(\left[\frac{7\times10^{-4}}{7\times10^{-4}}\right]15.5=15.5\). The \(\eta\) and \(\beta\) for the follower section within the network are \(\frac{\mathcal{A}\mathcal{R}_{max}^{G} \ln{(2^{\lambda^2}-1)}}{\lambda\Psi^{\mathcal{S}} \log{(2)}} = 0.0011\) and \(\beta = \frac{\ln{(2^{\lambda^2}-1)}}{\Psi^{\mathcal{S}}} = 2.152\), respectively. For the leader section, these values are \(\frac{\mathcal{A}\mathcal{R}_{max}^{G} \ln{(2^{\lambda^2}-1)}}{\lambda\Psi^{\mathcal{S}} \log{(2)}} = 5.719\times 10^{-4}\) and \(\beta = \frac{\ln{(2^{\lambda^2}-1)}}{\Psi^{\mathcal{S}}} = 1.118\), respectively.
 
@@ -800,7 +800,7 @@ The visual patterns observed in the synaptic weights matrix in Figure \ref{fig_3
 
 Since the reward coefficients for followers and leaders are different, their maximum allowed synaptic weights are also different. The proposed method given by \eqref{Eq.WS.4} for controlling the unbounded growth of synaptic weights has successfully stabilized the network.
 
-Figures \ref{fig_3_8_1} and \ref{fig_3_9_1} show the performance of the Multiplicative Synaptic Normalization (MSN) method. According to the results, this method cannot control the weight growth because of the coexistence of the excitatory and inhibitory (positive and negative synaptic weights). This method adjusts the weights when the summation of the input synaptic weights to an output neuron exceeds the maximum synaptic weight. In this case, the condition is never satisfied because positive and negative synaptic weights cancel each other, which is why we see synaptic weight values around 30 or -50 that are not within the $I^{minimum}$ and $I^{maximum}$ range. According to Figure \ref{fig_3_9_1}, when the reward changes for the Leader, the MSN cannot adjust the weights because it does not have the reward-modulated decay rate mechanism.
+Figures \ref{fig_3_8_1} and \ref{fig_3_9_1} show the performance of the Multiplicative Synaptic Normalization (MSN) method. According to the results, this method cannot control the weight growth because of the coexistence of the excitatory and inhibitory (positive and negative synaptic weights). This method adjusts the weights when the summation of the input synaptic weights to an output neuron exceeds the maximum synaptic weight. In this case, the condition is never satisfied because positive and negative synaptic weights cancel each other, which is why we see synaptic weight values around 30 or -50 that are not within the $I^{min}$ and $I^{max}$ range, defined in \eqref{Eq.9} and \eqref{Eq.13}. According to Figure \ref{fig_3_9_1}, when the reward changes for the Leader, the MSN cannot adjust the weights because it does not have the reward-modulated decay rate mechanism.
 
 \begin{figure}[H]
     \centering
@@ -818,7 +818,7 @@ Figures \ref{fig_3_8_1} and \ref{fig_3_9_1} show the performance of the Multipli
 \end{figure}
 
 
-Figures \ref{fig_3_10} and \ref{fig_3_11} show the synaptic weights after the reward change (change in environment). In this case, since the reward coefficients are changed, the \(\eta\) and \(\beta\) values in \eqref{Eq.WS.3.1} are changed for the represented sub-layers, and the proposed method has helped the \ac{stdp} algorithm to adjust the weights based on the new situation in the environment.
+Figures \ref{fig_3_10} and \ref{fig_3_11} show the synaptic weights after the reward change (change in environment). In this case, since the reward coefficients are changed, the \(\eta\) and \(\beta\) values in \eqref{Eq.WS.3.1} are changed for the represented sub-layers, and the proposed method has enabled the \ac{stdp} algorithm to adjust the weights based on the new situation in the environment.
 
 \subsection{Simulation with Federated Learning and Reward-modulated Competitive Synaptic Equilibrium}
 
