@@ -383,8 +383,8 @@ The neural network implemented in this study consists of four layers: an entropy
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.95\linewidth]{Figures/Deep SNN.pdf}
-    \caption{Deep \ac{snn} Architecture with entropy-based adaptive pooling, multi-repository hidden layers, and biologically-inspired inhibitory and excitatory synapses. Purple, red, and blue arrows denote excitatory and yellow arrows denote inhibitory pathways.}
+    \includegraphics[width=\linewidth]{Figures/Deep SNN.pdf}
+    \caption{Deep \ac{snn} architecture with entropy-based adaptive pooling, multi-repository hidden layers, and biologically-inspired inhibitory and excitatory synapses. Purple, red, and blue arrows denote excitatory and yellow arrows denote inhibitory pathways.}
     \label{fig:deepSNN}
 \end{figure}
 
@@ -833,7 +833,7 @@ Set the attention scale to $\sigma_A=0.1$ and $\epsilon=0.001$. Let the time--av
 
 \begin{figure}[H]
     \centering
-    \subfigure[Input layer activity matrix $(\mathbf{A}^{\text{input}})$ for numerical example of Gaussian attention computation.]{
+    \subfigure[Input layer activity matrix $\mathbf{A}^{\text{input}}$ (shown above) for numerical example of Gaussian attention computation.]{
         \includegraphics[width=0.45\linewidth]{Figures/Input activity matrix (8x8).pdf}
     }
     \hfill
@@ -844,6 +844,11 @@ Set the attention scale to $\sigma_A=0.1$ and $\epsilon=0.001$. Let the time--av
     \label{fig:AttentionExample}
 \end{figure}
 
+In Figure \ref{fig:AttentionExample}, no physical positions are estimated and no coordinate transformation is performed. 
+Fixed, normalized coordinates are assigned to grid indices so that each hidden-layer neuron can compute Gaussian distances to input cells. 
+The $8\times8$ input grid and the $4\times4$ hidden grid share the same normalized $[-1,1]\times[-1,1]$ coordinate space but at different resolutions. 
+Each input pixel index is mapped to a fixed coordinate $(x_k,y_k)$, and each hidden neuron $q$ is mapped to the center of its corresponding coarse grid cell $(x_q,y_q)$. 
+Panel~(a) shows input activity on the fine grid, while panel~(b) shows a hidden neuron acting as a query that softly aggregates nearby input activity using a Gaussian kernel based purely on grid distance, not physical geometry.
 
 \emph{Separable Gaussian weights along axes.}
 For a $x_q$ in the first hidden layer, define the $8$-vector (one entry for each of the eight input columns)
@@ -1524,7 +1529,7 @@ r^{H2}=
 The shape of this reward (matrix form) follows the same rule as Figure~\ref{fig:FiringActivityMatrix}, and each array shows the reward value for each associated neuron. 
 
 \emph{Interpretation.}
-The masked events and Gaussian envelope yield a small \emph{negative} motion signal ($-0.011$), so learning pushes activity toward the \emph{opposite} velocity map \(\widetilde{\mathbf{M}}\): cells aligned with \(\varphi+\pi\) are encouraged (positive entries in \(\mathbf{L}\)), while currently overactive cells are suppressed by the negative entries of \(\dot{\mathbf{W}}\).
+The masked events and Gaussian envelope yield a small \emph{negative} motion signal ($-0.011$), so learning pushes activity toward the \emph{opposite} velocity map \(\widetilde{\mathbf{M}}\): cells aligned with \(\widetilde{\mathbf{M}}\) are encouraged, while currently overactive cells are suppressed by the negative entries of \(\dot{\mathbf{W}}\).
 
 \subsubsection{Output Layer Reward Computation Based on Directional Error}
 
@@ -1590,9 +1595,22 @@ r_{X^+} = -\Delta_c, \qquad
 r_{Y^-} = \Delta_s, \qquad
 r_{Y^+} = -\Delta_s.
 \end{equation}
-This reward structure reinforces neurons whose activity contributes to reducing the
-directional error between the commanded motion (decoded from the second hidden layer) and
-the executed action, while suppressing neurons that drive motion in the opposite direction.
+This reward structure reinforces neurons whose activity contributes to reducing the directional error between the commanded motion (decoded from the second hidden layer) and the executed action, while suppressing neurons that drive motion in the opposite direction.
+
+\begin{figure}
+    \centering
+    \subfigure[Second hidden layer: population vector decoding]{
+        \includegraphics[width=0.47\linewidth]{Figures/OutputLayerReward_I.pdf}
+    }
+    \hfill
+    \subfigure[Commanded vs executed direction (reward routing)]{
+        \includegraphics[width=0.47\linewidth]{Figures/OutputLayerReward_II.pdf}
+    }
+    \caption{Output layer reward computation based on directional error between commanded and executed motion.}
+    \label{fig:OutputLayerReward}
+\end{figure}
+
+Figure~\ref{fig:OutputLayerReward} illustrates the process of computing the output layer reward based on the directional error between the commanded motion from the second hidden layer and the executed action. Figure~\ref{fig:OutputLayerReward}a shows how the population activity is decoded into a commanded direction. Red arrows show the activity of each neuron in the second hidden layer. Figure~\ref{fig:OutputLayerReward}b depicts how the directional discrepancies are translated into per-neuron rewards for the output layer. In this example, the commanded direction is at \(60^\circ\), while the executed action by the output neurons is at \(18.4^\circ\). The executed angle ($\theta_{act}$) is measured using IMU ($a_{x}$ and $a_{y}$). The resulting rewards encourage increased activity in the \(r_{Y^-}\) neuron and reduce activity in the \(r_{X^-}\) neuron to correct the directional error. The reward also encourages the activity of the neurons that will help align the executed action with the commanded direction.
 
 % \subsubsection{Output Layer Reward Computation Based on Directional Error}
 
