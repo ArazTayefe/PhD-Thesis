@@ -101,7 +101,7 @@
 \contentsline {figure}{\numberline {4.29}{\ignorespaces Agent detector repository activity after learning convergence with \ac {alm} on. The proximal agent detector shows strong, localized activity, while the payload detector remains inactive.}}{142}{figure.4.29}%
 \contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Activity of the payload detector repository after learning convergence with the Agents' \ac {alm} turned on.}}}{142}{figure.4.29}%
 \contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Activity of the proximal agent detector repository after learning convergence with the Agents' \ac {alm} turned on.}}}{142}{figure.4.29}%
-\contentsline {figure}{\numberline {4.30}{\ignorespaces Second hidden layer activity for the rendezvous and docking phases for Agent 1: (a) FFM activity 135 degree that matches the LOS of the payload regarding the Agent 1 and (b) CDM activity shows 45 degree LOS toward the docking point.}}{143}{figure.4.30}%
+\contentsline {figure}{\numberline {4.30}{\ignorespaces Second hidden layer activity for the rendezvous and docking phases for Agent 1: (a) \ac {rpr} activity 135 degree that matches the LOS of the payload regarding the Agent 1 and (b) \ac {dpr} activity shows 45 degree LOS toward the docking point.}}{143}{figure.4.30}%
 \contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Initial iterations of the rendezvous phase.}}}{143}{figure.4.30}%
 \contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Initial iterations of the docking phase}}}{143}{figure.4.30}%
 \contentsline {figure}{\numberline {4.31}{\ignorespaces Hidden layer 2 and output layer activity during the rendezvous phase.}}{144}{figure.4.31}%
