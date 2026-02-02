@@ -2138,7 +2138,6 @@ In our \ac{snn} implementation, we configure four layers of Izhikevich neurons, 
 Table~\ref{tab:learning_params} details the learning–related parameters and schedules used by the network during training. Each layer employs STDP modulated by reward signals, with eligibility traces governing synaptic updates. The parameters are carefully chosen to balance learning speed and stability, ensuring effective adaptation to the docking task.
 
 \begin{table}[t]
-\caption{Layer-wise Learning Parameters}
 \label{tab:learning_params}
 \centering
 \renewcommand{\arraystretch}{1.2}
@@ -2153,6 +2152,7 @@ STDP time constant $\tau_{\text{STDP}}^{(\ell)}$ [ms] & 10 & 10 & 100\\
 Reward interval $T_r^{(\ell)}$ [ms] & 10 & 10 & 50\\
 \bottomrule
 \end{tabularx}
+\caption{Layer-wise Learning Parameters}
 \end{table}
 
 To generate a stable inhibitory control signal, each inhibitory repository (\ac{pai}, \ac{naai}, \ac{rpi}, and \ac{dpi}) is implemented as a small population of neurons rather than a single inhibitory unit. Each neuron in the repository emits inhibitory spikes, which are delivered to the target repository via inhibitory synapses. The effective inhibitory signal is the sum of the population's spiking activity, rather than the output of an individual neuron.
