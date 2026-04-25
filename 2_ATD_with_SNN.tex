@@ -6,7 +6,34 @@ This chapter looks at two main things: how well \ac{snn}s handle noise and how t
 
 The neural structure in \ac{snn}s helps us implement complex learning systems. One good example of a complex situation is a differential game like the Active Target Defense (ATD) problem \cite{Ch5_ATD4}.
 
-In the ATD, a defender tries to protect a target, while a superior invader with higher velocity than the defender and a moving target tries to reach the target and escape the defender at the same time. In the context of defense strategy, aircraft movement analysis is crucial in determining the most effective strategies. Law enforcement benefits from these games by minimizing escape possibilities. The ATD problems are a fundamental component of game theory, providing insights into strategic decision-making across disciplines like economics and biology. Additionally, these games find applications in Cybersecurity for modeling attacker-defender interactions \cite{Ch5_ATD4-5}.
+% In the ATD, a defender tries to protect a target, while a superior invader with higher velocity than the defender and a moving target tries to reach the target and escape the defender at the same time. In the context of defense strategy, aircraft movement analysis is crucial in determining the most effective strategies. Law enforcement benefits from these games by minimizing escape possibilities. The ATD problems are a fundamental component of game theory, providing insights into strategic decision-making across disciplines like economics and biology. Additionally, these games find applications in Cybersecurity for modeling attacker-defender interactions \cite{Ch5_ATD4-5}.
+
+
+The Target--Attacker--Defender (ATD) problem is formulated as a differential game involving three agents: the Target (T), the Attacker (A), and the Defender (D). Each agent's state is defined by its planar position \((x_i, y_i)\), with dynamics given by \cite{Ch5_ATD4-5}:
+\begin{equation}
+    \dot{x}_i = v_i \cos \theta_i, \quad \dot{y}_i = v_i \sin \theta_i, \quad i \in \{A, D, T\}
+\end{equation}
+
+\noindent where \(v_i \in [0, \bar{v}_i]\) is the speed and \(\theta_i\) is the heading angle of agent \(i\). Defining the speed ratios \(\alpha = \frac{\bar{v}_T}{\bar{v}_A}\) and \(\gamma = \frac{\bar{v}_D}{\bar{v}_A}\), the superior attacker case satisfies \(0 < \alpha < \gamma < 1\), where the Attacker is faster than both the Target and the Defender \cite{Ch5_ATD4-5}.
+
+The game evolves based on the distances
+\begin{equation}
+    d = \sqrt{(x_A - x_D)^2 + (y_A - y_D)^2}, \quad \delta = \sqrt{(x_A - x_T)^2 + (y_A - y_T)^2}
+\end{equation}
+
+\noindent and terminates under the capture conditions: the Attacker wins if \(\delta < \rho_A\), while the Defender succeeds if \(d < \rho\), where \(\rho_A > \rho > 0\) denote the capture radii \cite{Ch5_ATD4-5}.
+
+The reachable regions that define the interaction between agents are characterized using Cartesian ovals. In particular, for the Attacker--Defender interaction (Type-E), the boundary of the reachable set is given by \cite{Ch5_ATD4-5}
+\begin{equation}
+    x = x_A + r(\phi)\cos(\lambda + \phi + \pi), \quad
+    y = y_A + r(\phi)\sin(\lambda + \phi + \pi)
+\end{equation}
+
+\begin{equation}
+    r(\phi) = \frac{\gamma \rho + d\cos\phi \pm \sqrt{(\gamma \rho + d\cos\phi)^2 - (1-\gamma^2)(d^2 - \rho^2)}}{1 - \gamma^2}
+\end{equation}
+
+\noindent where \(\lambda\) is the line-of-sight angle from the Defender to the Attacker and \(\phi\) parameterizes the boundary. This Cartesian Oval (Type-E) separates the regions where the Defender can intercept the Attacker from those where the Attacker can evade, forming the basis for optimal strategy design.
 
 There are two distinct outcomes to the ATD game, characterized by two termination sets \cite{Ch5_ATD6}. The first outcome happens when the invader reaches the target while the defender is far from it. The second outcome happens when the defender reaches the target while the invader's distance from the target is larger than the defender's distance.
 
@@ -14,16 +41,17 @@ There are two distinct outcomes to the ATD game, characterized by two terminatio
 
 The ATD problem has various solving methods, such as Apollonius Circle and Cartesian Ovals (CO). This chapter opts for the CO method over the Apollonius Circle because it considers the capture radius and effectiveness against superior invaders \cite{Ch5_ATD6}. The optimal capture point is considered the minimum distance between the target’s position and reachable region if the target is inside the defender’s dominant region. The defender’s dominant region is a region where the defender can reach the target without letting the invader capture the target.
 
-In this chapter, the problem is solved using reinforcement learning. It is considered that each agent knows the relative velocity of other agents. Figure \ref{fig:my_label4} shows LOS angles used as the input for the \ac{snn}s \cite{Ch5_ATD7}.
+In this chapter, the problem is solved using reinforcement learning. It is considered that each agent knows the relative velocity of other agents. Figure \ref{fig:my_label4} shows LOS angles used as the input for the \ac{snn}s \cite{Ch5_ATD7}. 
+In this figure, the LOS angles are explicitly defined for each agent: \(\phi_I^T\) and \(\phi_I^D\) denote the angles from the Invader to the Target and Defender, respectively, while \(\phi_D^T\) and \(\phi_D^I\) denote the angles from the Defender to the Target and Invader. All angles are measured with respect to the global \(X\)-axis.
 
-\begin{figure}
+\begin{figure}[ht]
     \centering
     \includegraphics[scale=0.75]{Figures/1.pdf}
     \caption{Active target defense game with three agents (LOS angles are shown for both agents).}
     \label{fig:my_label4}
 \end{figure}
 
-The \ac{stdp} algorithm is used to train two separate \ac{snn}s simultaneously that control the invader and defender. The target in this chapter moves in the environment, and the \ac{snn}s receive the LOS angles (e.g., the defender receives the LOS angle to both the invader and the target) and calculate the steering angle for the agent (Figure \ref{fig:my_label2}). In this figure, the $\phi_{I}^{T}$ represents the LOS angle to the target relative to the invader.
+The \ac{stdp} algorithm is used to train two separate \ac{snn}s simultaneously that control the invader and defender. The target in this chapter moves in the environment, and the \ac{snn}s receive the LOS angles (e.g., the defender receives the LOS angle to both the invader and the target) and calculate the steering angle for the agent (Figure \ref{fig:my_label2}).
 
 \begin{figure}
     \centering
@@ -62,18 +90,21 @@ The \ac{stdp} algorithm is used to train two separate \ac{snn}s simultaneously t
 
 In the \ac{snn}, pre-synaptic neurons correspond to input neurons, while post-synaptic neurons correspond to output neurons. Synaptic plasticity is governed by an eligibility trace, denoted by $C^{i\rightarrow j}$, which accumulates spike-timing correlations and decays over time. The eligibility trace evolves according to~\cite{Ch_1_R22}
 
+
 \begin{equation} \label{Eq.14}
     \dot{C}^{i\rightarrow j}(t)
     =
     -\frac{C^{i\rightarrow j}(t)}{\tau_C}
     +
-    \sum_{t_{\text{pre}},\,t_{\text{post}}}
-    \text{STDP}^{i\rightarrow j}(t_{\text{post}} - t_{\text{pre}})
-    \,\delta(t - t_{\text{post}}),
+    \sum_{k}\sum_{\ell}
+    \text{STDP}^{i\rightarrow j}\!\left(t_{\text{post}}^{(\ell)} - t_{\text{pre}}^{(k)}\right)
+    \,\delta\!\left(t - t_{\text{post}}^{(\ell)}\right),
 \end{equation}
 
+
 \noindent
-where $C^{i\rightarrow j}(t)$ is the eligibility trace associated with the synapse from pre-synaptic neuron $i$ to post-synaptic neuron $j$, and $\tau_C$ is the eligibility decay time constant. The variables $t_{\text{pre}}$ and $t_{\text{post}}$ denote the firing times of the pre- and post-synaptic neurons, respectively. The Dirac delta function $\delta(t - t_{\text{post}})$ ensures that the eligibility trace is updated only at post-synaptic spike times, while the magnitude of the update depends on the relative spike timing $t_{\text{post}} - t_{\text{pre}}$ through the \ac{stdp} kernel.
+
+where \(t_{\text{pre}}^{(k)}\) and \(t_{\text{post}}^{(\ell)}\) denote the \(k\)-th pre-synaptic and \(\ell\)-th post-synaptic spike times, respectively. The summations are taken over all spike events of the corresponding neurons. The $C^{i\rightarrow j}(t)$ is the eligibility trace associated with the synapse from pre-synaptic neuron $i$ to post-synaptic neuron $j$, and $\tau_C$ is the eligibility decay time constant. The variables $t_{\text{pre}}$ and $t_{\text{post}}$ denote the firing times of the pre- and post-synaptic neurons, respectively. The Dirac delta function $\delta(t - t_{\text{post}})$ ensures that the eligibility trace is updated only at post-synaptic spike times, while the magnitude of the update depends on the relative spike timing $t_{\text{post}} - t_{\text{pre}}$ through the \ac{stdp} kernel.
 
 The spike-timing-dependent plasticity function is defined as
 
@@ -104,15 +135,15 @@ The \ac{stdp} time constant $\tau_s$ is selected in relation to the synaptic wei
 
 
 
-This chapter uses the Multiplicative Synaptic Normalization (MSN) method to keep runaway excitation under control. This method keeps pre-existing memories in the network by conserving the proportional difference between smaller and larger synaptic weights. According to (\ref{Eq.13}), we can calculate the maximum input for each post-synaptic neuron (output layer).
+This chapter uses the Multiplicative Synaptic Normalization (MSN) method to keep runaway excitation under control. Intuitively, MSN enforces a fixed total synaptic input budget for each post-synaptic neuron, such that an increase in one synaptic weight must be compensated by a proportional decrease in others. This preserves the relative structure of the learned weights while preventing unbounded growth. This method keeps pre-existing memories in the network by conserving the proportional difference between smaller and larger synaptic weights. According to (\ref{Eq.13}), we can calculate the maximum input for each post-synaptic neuron (output layer).
 
 The MSN normalizes the synaptic weights based on the cumulative input synaptic weights and the maximum input as follows \cite{Ch5_STDP2},
 
 \begin{equation} \label{Eq.17}
-    \overrightarrow{W}^n(t) = \overrightarrow{W}^n(t-1) \left(\frac{{I}^{max}}{\Sigma_{\iota=1}^{N} W^\iota(t)}\right)
+    \overrightarrow{W}^n(t) = \overrightarrow{W}^n(t-1) \left(\frac{{I}^{max}}{\sum_{\iota=1}^{N} W^\iota(t)}\right)
 \end{equation}
 
-\noindent where $\overrightarrow{W}^n(t)$ is the vector consisting of synaptic weights that send input current to the $n^{th}$ output neuron, and $N$, is the total number of input synapses for each output neuron. Therefore, when \ac{stdp} increases a single synaptic weight, the MSN proportionally decreases the other synaptic weights for the $n^{th}$ neuron.
+\noindent where $\overrightarrow{W}^n(t)$ is the vector consisting of synaptic weights that send input current to the $n^{th}$ output neuron, and $N$ is the total number of input synapses for each output neuron. The normalization factor rescales all incoming weights such that their sum equals $I^{max}$, ensuring that the total excitation received by neuron $n$ remains bounded. Therefore, when \ac{stdp} increases a single synaptic weight, the MSN proportionally decreases the other synaptic weights for the $n^{th}$ neuron.
 
 The reward for the invader and defender is defined based on the projection of the velocities along the LOS direction. Figure \ref{fig:my_label5} shows the projected velocities for the invader and defender, where both agents measure the relative velocities from each other. It means that the invader receives a negative reward when it moves toward the defender and receives a positive reward when it moves toward the target. The defender receives a positive reward when it moves toward the target and invader. Since the velocities are constant, the reward value depends only on the headings that cause the change in relative velocities. Therefore, the LOS toward the other agents determines the reward value.
 
@@ -190,7 +221,7 @@ There are $q$ input neurons, and a membership function is assigned to each neuro
     \label{fig:my_label9}
 \end{figure}
 
- The acquired fuzzy membership values are converted to the spiking inputs for the neurons using fuzzy-to-spiking (F2S) conversion. If $FMV=0\;(t_{isi}=\infty)$, then the input to the desired neuron in the input layer is $I^{min}$, and if $FMV=1\;(t_{isi}=\Delta t, \Delta t$ is the sampling time), then the input is $I^{max}$. Therefore, the input current for the input neurons can be calculated using the following equation,
+The acquired fuzzy membership values are converted to the spiking inputs for the neurons using fuzzy-to-spiking (F2S) conversion. If $FMV=0\;(t_{isi}=\infty)$, then the input to the desired neuron in the input layer is $I^{min}$, and if $FMV=1\;(t_{isi}=\Delta t, \Delta t$ is the sampling time), then the input is $I^{max}$. Therefore, the input current for the input neurons can be calculated using the following equation,
 
 \begin{equation*} \label{Eq.25}
     I_{\sigma} = \left(I^{max} - I^{min}\right)FMV_{\sigma} + I^{min}
@@ -201,6 +232,9 @@ There are $q$ input neurons, and a membership function is assigned to each neuro
 \begin{equation} \label{Eq.25-1}
     I_{\sigma} = \frac{\tau_{m}\left(V_{th} - V_{res}\right)}{\Delta t R_{m}}FMV_{\sigma}+\frac{V_{th} - E_{l}}{R_{m}}
 \end{equation}
+
+\noindent
+where \(I_{\sigma}\), \(I^{min}\), and \(I^{max}\) are currents measured in amperes (A). The membrane potential terms \(V_{th}\), \(V_{res}\), and \(E_l\) are expressed in volts (V), the membrane resistance \(R_m\) is in ohms (\(\Omega\)), and the time constants \(\tau_m\) and \(\Delta t\) are in seconds (s), ensuring dimensional consistency of the current expression.
 
 
 \noindent where $\sigma$ is the index of each neuron in the input layer and its corresponding fuzzy membership value in \ac{grf}.
@@ -338,7 +372,7 @@ After several simulations, the number of input neurons for invader and defender 
 
 The output of the activation of each membership function is the input to a neuron associated with that specific membership function. There are 10 input neurons for the 10 membership functions related to each input. Furthermore, no more than 2 membership functions fire for any given input. Therefore, at most, only two neurons are excited and generate an impulse sequence for a given input.
 
-The target's velocity is 0.15 $m/s$. The invader's velocity is 0.3 $m/s$. The $\gamma$ is 0.75, so the defender's velocity is 0.225 $m/s$. The defender's capture radius ($\rho$) is set to 0.025 $m$. The maximum simulation time for each epoch is 10 seconds. The $-\pi/4 < \theta_s < \pi/4$ for invader and defender, and the $\sigma$ is set to 1.25. The parameter values for \ac{stdp}, shown in Table \ref{Table4.2}, are set through several simulations.
+The target's velocity is 0.15 $m/s$. The invader's velocity is 0.3 $m/s$. The $\gamma$ is 0.75, so the defender's velocity is 0.225 $m/s$. The defender's capture radius ($\rho$) is set to 0.025 $m$. The maximum simulation time for each epoch is 10 seconds. The $-\pi/4 < \theta_s < \pi/4$ (Equation \eqref{Eq.25-1}) for invader and defender, and the $\sigma$ is set to 1.25. The parameter values for \ac{stdp}, shown in Table \ref{Table4.2}, are set through several simulations.
 
 The reward coefficients are set manually. The $\tau_{s}$ in Table \ref{Table4.2} defines the decaying rate of $C$ in (\ref{Eq.14}) that determines the \ac{stdp} sensitivity to prior firings. According to (\ref{Eq.15}), higher $\tau_{s}$ means that the \ac{stdp} takes into account the activity of the two neurons that have fired in the relatively larger time window. Different studies have considered different values for this parameter~\cite{feldman2020spike}.
 
@@ -382,7 +416,7 @@ with $\phi$ constrained to the interval $\phi \in [-\phi_l,\phi_l]$, where
 \end{equation}
 The capture location is determined by evaluating this parametric curve and selecting the point on the oval that satisfies the game termination condition, i.e., equal arrival time of the attacker and defender to the target. Since the oval is constructed directly from instantaneous position measurements, any perturbation in the measured states affects the shape and position of the oval, making the resulting capture point sensitive to measurement noise.
 
-The noise in this experiment is introduced as white Gaussian noise, characterized by a mean of zero and a variance of 0.01. Both \ac{snn} and CO receive position data that has been corrupted by this noise.
+The noise in this experiment is introduced as white Gaussian noise, characterized by a mean of zero and a variance of 0.01. Both \ac{snn} and CO receive position data that has been corrupted by this noise. To ensure statistical reliability of the results, the simulation under noisy conditions has been repeated ten times, and the trajectories shown in Figure \ref{fig:my_label12} correspond to the average performance over these runs.
 
 \begin{figure}[H]
     \centering

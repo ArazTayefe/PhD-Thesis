@@ -1,4 +1,4 @@
-\begin{thebibliography}{100}
+\begin{thebibliography}{10}
 
 \bibitem{Ch_1_R2}
 N.~Skatchkovsky, H.~Jang, and O.~Simeone, ``Federated neuromorphic learning of
@@ -39,17 +39,6 @@ E.~M. Izhikevich and R.~FitzHugh, ``Fitzhugh-nagumo model,'' {\em
 D.~O. Hebb, {\em The organization of behavior: A neuropsychological theory}.
 \newblock Psychology press, 2005.
 
-\bibitem{Ch_1_R25}
-A.~Triche, A.~S. Maida, and A.~Kumar, ``Exploration in neo-hebbian
-  reinforcement learning: Computational approaches to the
-  exploration--exploitation balance with bio-inspired neural networks,'' {\em
-  Neural Networks}, vol.~151, pp.~16--33, 2022.
-
-\bibitem{Ch_1_R17}
-W.~Gerstner, W.~M. Kistler, R.~Naud, and L.~Paninski, {\em Neuronal dynamics:
-  From single neurons to networks and models of cognition}.
-\newblock Cambridge University Press, 2014.
-
 \bibitem{Ch_1_R32}
 D.~L. Young and C.-S. Poon, ``Hebbian covariance learning: a nexus for
   respiratory variability, memory, and optimization?,'' {\em Advances in
@@ -64,10 +53,6 @@ T.~Toyoizumi, J.-P. Pfister, K.~Aihara, and W.~Gerstner, ``Generalized
   bienenstock--cooper--munro rule for spiking neurons that maximizes
   information transmission,'' {\em Proceedings of the National Academy of
   Sciences}, vol.~102, no.~14, pp.~5239--5244, 2005.
-
-\bibitem{Ch_1_R20}
-A.~Soltoggio and J.~J. Steil, ``Solving the distal reward problem with rare
-  correlations,'' {\em Neural computation}, vol.~25, no.~4, pp.~940--978, 2013.
 
 \bibitem{Ch_1_R21}
 H.~S. Seung, ``Learning in spiking neural networks by reinforcement of

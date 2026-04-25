@@ -1,6 +1,7 @@
 \chapter{Introduction}
 
-\ac{snn}s represent the third generation of neural models, operating with discrete spikes that carry both temporal and spatial information. Unlike conventional neural networks that rely on continuous activations, \ac{snn}s process asynchronous event streams, providing rich temporal dynamics and exceptionally low power consumption. These characteristics make \ac{snn}s highly suitable for edge intelligence, real-time robotics, and distributed autonomous systems, where energy efficiency and reaction speed are critical \cite{Ch_1_R2, Ch_1_R3}.
+\ac{snn}s represent the third generation of neural models, operating with discrete spikes that carry both temporal and spatial information. Unlike conventional neural networks that rely on continuous activations, \ac{snn}s process asynchronous event streams, providing rich temporal dynamics and exceptionally low power consumption. For instance, neuromorphic implementations have demonstrated energy consumption on the order of tens of picojoules per synaptic operation, compared to nanojoule-level energy costs in conventional GPU-based ANN inference, corresponding to improvements of up to two to three orders of magnitude depending on the workload and hardware platform. These characteristics make \ac{snn}s highly suitable for edge intelligence, real-time robotics, and distributed autonomous systems, where energy efficiency and reaction speed are critical \cite{Ch_1_R2, Ch_1_R3}.
+
 
 A major advantage of \ac{snn}s lies in their biologically grounded learning mechanisms. Local plasticity rules such as \ac{stdp} and reward-modulated STDP enable online adaptation without requiring global error signals. These mechanisms allow \ac{snn}s to learn from sparse, delayed, or noisy feedback—conditions commonly encountered in multiagent control. Recent progress in deep \ac{snn} architectures extends these ideas by stacking multiple spiking layers, enabling hierarchical feature extraction from high-dimensional sensory streams. However, training deep \ac{snn}s remains challenging due to non-differentiability of spikes, temporal credit assignment, and instability of multi-layer plasticity.
 
@@ -66,13 +67,14 @@ Several spike response functions have been proposed to emulate neuron activity. 
 
 
 \subsubsection{Leaky-Integrate and Fire model}
-The \ac{lif} model is a biological model that can be represented as a circuit with a resistor and capacitor and represents a first-order dynamic system \cite{Ch_1_R13},
+The \ac{lif} model is a biological model that can be represented as a circuit with a resistor and capacitor and represents a first-order dynamic system \cite{Ch_1_R13}.
 
 \begin{equation} \label{Eq.1}
-    R_{m}C_{m}\frac{dV_m\left(t\right)}{dt} = E_{l} - V_m\left(t\right) + R_{m}I\left(t\right)
+    R_{m}C_{m}\frac{dV\left(t\right)}{dt} = E_{L} - V\left(t\right) + R_{m}I\left(t\right)
 \end{equation}
 
-\noindent where $V_{m}(t)$ is the neuron's membrane potential shown as \(V_{1}\) and \(V_{2}\) in Table \ref{Table.SRF}, $R_{m}$ is the membrane resistance, $C_{m}$ is the membrane capacitance, $E_{l}$ is the resting potential, and $I(t)$ is the input current. The neuron spikes when its potential reaches the threshold potential ($V_{th}$). The potential of the neuron immediately reaches the reset potential ($V_{res}$) after it spikes.
+\noindent where $V(t)$ is the neuron's membrane potential shown as \(V_{1}\) and \(V_{2}\) in Table \ref{Table.SRF}, $R_{m}$ is the membrane resistance, $C_{m}$ is the membrane capacitance, $E_{L}$ is the resting potential, and $I(t)$ is the input current. The neuron spikes when its potential reaches the threshold potential ($V_{th}$). The potential of the neuron immediately reaches the reset potential ($V_{res}$) after it spikes.
+
 
 The spike rate is a parameter that determines how fast the neuron spikes \cite{Ch_1_R11}.
 
@@ -80,10 +82,42 @@ The spike rate is a parameter that determines how fast the neuron spikes \cite{C
     r_{[Hz]} = \frac{1}{t_{isi}\enspace [s]}
 \end{equation}
 
-\noindent where $t_{isi}$ is the inter-spike interval that can be calculated using the neuron model, when the potential of a neuron reaches the threshold potential, it fires. Therefore, based on the analytical solution of (\ref{Eq.1}), the inter-spike interval time can be written as,
+\noindent where $t_{isi}$ is the inter-spike interval that can be calculated using the neuron model. When the membrane potential reaches the threshold ($V_{th}$), the neuron emits a spike and is reset to $V_{res}$. Therefore, the inter-spike interval can be obtained from the analytical solution of (\ref{Eq.1}) under constant input current.
+
+Starting from (\ref{Eq.1}), the solution of the membrane potential is given by,
+
+\begin{equation}
+    V(t) = E_{L} + R_{m}I + \left(V_{res} - E_{L} - R_{m}I\right)e^{-t/\tau_{m}}
+\end{equation}
+
+\noindent where $\tau_{m}=R_{m}C_{m}$ is the membrane time constant. The inter-spike interval corresponds to the time required for the membrane potential to evolve from $V_{res}$ to $V_{th}$, i.e.,
+
+\begin{equation}
+    V_{th} = E_{L} + R_{m}I + \left(V_{res} - E_{L} - R_{m}I\right)e^{-t_{isi}/\tau_{m}}
+\end{equation}
+
+\noindent Rearranging the above equation gives,
+
+\begin{equation}
+    V_{th} - E_{L} - R_{m}I = \left(V_{res} - E_{L} - R_{m}I\right)e^{-t_{isi}/\tau_{m}}
+\end{equation}
+
+\noindent Dividing both sides by $\left(V_{res} - E_{L} - R_{m}I\right)$ yields,
+
+\begin{equation}
+    \frac{V_{th} - E_{L} - R_{m}I}{V_{res} - E_{L} - R_{m}I} = e^{-t_{isi}/\tau_{m}}
+\end{equation}
+
+\noindent Taking the natural logarithm of both sides results in,
+
+\begin{equation}
+    -\frac{t_{isi}}{\tau_{m}} = \ln\left(\frac{V_{th} - E_{L} - R_{m}I}{V_{res} - E_{L} - R_{m}I}\right)
+\end{equation}
+
+\noindent which leads to the inter-spike interval expression,
 
 \begin{equation} \label{Eq.7}
-    t_{isi} = \tau_{m}\ln\left(\frac{E_{l} + R_{m}I - V_{res}}{E_{l} + R_{m}I - V_{th}}\right)
+    t_{isi} = \tau_{m}\ln\left(\frac{E_{L} + R_{m}I - V_{res}}{E_{L} + R_{m}I - V_{th}}\right)
 \end{equation}
 
 \noindent where $\tau_{m}$ is the membrane time constant. 
@@ -91,13 +125,13 @@ The spike rate is a parameter that determines how fast the neuron spikes \cite{C
 According to (\ref{Eq.7}), the following condition should be satisfied to have a finite value for $t_{isi}$,
 
 \begin{equation} \label{Eq.8}
-    E_{l} + R_{m}I - V_{th} > 0
+    E_{L} + R_{m}I - V_{th} > 0
 \end{equation}
 
 \noindent or
 
 \begin{equation} \label{Eq.9}
-    I > \frac{V_{th} - E_{l}}{R_{m}}
+    I > \frac{V_{th} - E_{L}}{R_{m}}
 \end{equation}
 
 \noindent which means that the input current higher than the above value generates spikes. 
@@ -105,38 +139,110 @@ According to (\ref{Eq.7}), the following condition should be satisfied to have a
 After calculating the minimum input for neurons, we must find the maximum input based on the inter-spike interval. Equation (\ref{Eq.7}) can be written as,
 
 \begin{equation} \label{Eq.10}
-    t_{isi} = \tau_{m}\ln\left(1+\frac{V_{th} - V_{res}}{E_{l} + R_{m}I - V_{th}}\right)
+    t_{isi} = \tau_{m}\ln\left(1+\frac{V_{th} - V_{res}}{E_{L} + R_{m}I - V_{th}}\right)
 \end{equation}
 
 \noindent Equation (\ref{Eq.10}) can be approximated using the Maclaurin series for the natural logarithm function ($\ln(1+z)\approx z$) as follows,
 
 \begin{equation} \label{Eq.11}
-    t_{isi} = \frac{\tau_{m}\left(V_{th} - V_{res}\right)}{E_{l} + R_{m}I - V_{th}}
+    t_{isi} = \frac{\tau_{m}\left(V_{th} - V_{res}\right)}{E_{L} + R_{m}I - V_{th}}
 \end{equation}
 
 \noindent Solving for $I$, an input current as a function of the inter-spike interval can be obtained,
 
 \begin{equation} \label{Eq.12}
-    I = \frac{\tau_{m}\left(V_{th} - V_{res}\right)}{t_{isi}R_{m}} + \frac{V_{th} - E_{l}}{R_{m}}
+    I = \frac{\tau_{m}\left(V_{th} - V_{res}\right)}{t_{isi}R_{m}} + \frac{V_{th} - E_{L}}{R_{m}}
 \end{equation}
 
 The maximum value for the input current makes the neuron fire at each sample time ($\Delta t$). Therefore, the maximum input current is,
 
 \begin{equation} \label{Eq.13}
-    I^{max} = \frac{\tau_{m}\left(V_{th} - V_{res}\right)}{\Delta t R_{m}} + \frac{V_{th} - E_{l}}{R_{m}}
+    I^{max} = \frac{\tau_{m}\left(V_{th} - V_{res}\right)}{\Delta t R_{m}} + \frac{V_{th} - E_{L}}{R_{m}}
 \end{equation}
 
 In this section, we obtained the minimum and maximum values for input current using (\ref{Eq.9}) and (\ref{Eq.13}). These equations are used in the learning and encoding processes of the \ac{snn}.
 
+% The spike rate is a parameter that determines how fast the neuron spikes \cite{Ch_1_R11}.
+
+% \begin{equation} \label{Eq.4}
+%     r_{[Hz]} = \frac{1}{t_{isi}\enspace [s]}
+% \end{equation}
+
+% \noindent where $t_{isi}$ is the inter-spike interval that can be calculated using the neuron model, when the potential of a neuron reaches the threshold potential, it fires. Therefore, based on the analytical solution of (\ref{Eq.1}), the inter-spike interval time can be written as,
+
+% \begin{equation} \label{Eq.7}
+%     t_{isi} = \tau_{m}\ln\left(\frac{E_{l} + R_{m}I - V_{res}}{E_{l} + R_{m}I - V_{th}}\right)
+% \end{equation}
+
+% \noindent where $\tau_{m}$ is the membrane time constant. 
+
+% According to (\ref{Eq.7}), the following condition should be satisfied to have a finite value for $t_{isi}$,
+
+% \begin{equation} \label{Eq.8}
+%     E_{l} + R_{m}I - V_{th} > 0
+% \end{equation}
+
+% \noindent or
+
+% \begin{equation} \label{Eq.9}
+%     I > \frac{V_{th} - E_{l}}{R_{m}}
+% \end{equation}
+
+% \noindent which means that the input current higher than the above value generates spikes. 
+
+% After calculating the minimum input for neurons, we must find the maximum input based on the inter-spike interval. Equation (\ref{Eq.7}) can be written as,
+
+% \begin{equation} \label{Eq.10}
+%     t_{isi} = \tau_{m}\ln\left(1+\frac{V_{th} - V_{res}}{E_{l} + R_{m}I - V_{th}}\right)
+% \end{equation}
+
+% \noindent Equation (\ref{Eq.10}) can be approximated using the Maclaurin series for the natural logarithm function ($\ln(1+z)\approx z$) as follows,
+
+% \begin{equation} \label{Eq.11}
+%     t_{isi} = \frac{\tau_{m}\left(V_{th} - V_{res}\right)}{E_{l} + R_{m}I - V_{th}}
+% \end{equation}
+
+% \noindent Solving for $I$, an input current as a function of the inter-spike interval can be obtained,
+
+% \begin{equation} \label{Eq.12}
+%     I = \frac{\tau_{m}\left(V_{th} - V_{res}\right)}{t_{isi}R_{m}} + \frac{V_{th} - E_{l}}{R_{m}}
+% \end{equation}
+
+% The maximum value for the input current makes the neuron fire at each sample time ($\Delta t$). Therefore, the maximum input current is,
+
+% \begin{equation} \label{Eq.13}
+%     I^{max} = \frac{\tau_{m}\left(V_{th} - V_{res}\right)}{\Delta t R_{m}} + \frac{V_{th} - E_{l}}{R_{m}}
+% \end{equation}
+
+% In this section, we obtained the minimum and maximum values for input current using (\ref{Eq.9}) and (\ref{Eq.13}). These equations are used in the learning and encoding processes of the \ac{snn}.
+
 \subsection{Izhikevich model}
-The Izhikevich model is a widely used spiking neuron model that balances biological plausibility with computational efficiency. It captures a variety of neuronal firing patterns observed in real neurons while remaining relatively simple to implement. The model is defined by the following set of differential equations \cite{Ch_1_R14}:
+% The Izhikevich model is a widely used spiking neuron model that balances biological plausibility with computational efficiency. It captures a variety of neuronal firing patterns observed in real neurons while remaining relatively simple to implement. The model is defined by the following set of differential equations \cite{Ch_1_R14}:
+% \begin{equation}
+%     \frac{dV}{dt} = 0.04V^2 + 5V + 140 - U + I
+% \end{equation}
+% \begin{equation}
+%     \frac{dU}{dt} = a(bV - U)
+% \end{equation}
+% \noindent where \(V\) represents the membrane potential of the neuron, \(U\) is a recovery variable that accounts for the activation of potassium ionic currents and inactivation of sodium ionic currents, and \(I\) is the input current. The parameters \(a\), \(b\), \(c\), and \(d\) are dimensionless constants that can be adjusted to model different types of neurons. The model also includes a reset mechanism that occurs when the membrane potential \(V\) reaches a certain threshold (typically 30 mV):
+% \begin{equation}
+%     \text{if } V \geq 30 \text{ mV, then } 
+%     \begin{cases}
+%         V \leftarrow c \\
+%         U \leftarrow U + d
+%     \end{cases}
+% \end{equation}
+% The Izhikevich model is capable of reproducing a wide range of neuronal behaviors, including regular spiking, bistability spiking, bursting, and chattering, by appropriately tuning the parameters \(a\), \(b\), \(c\), and \(d\). This versatility makes it a popular choice for simulating large-scale neural networks while maintaining a reasonable level of biological realism.
+
+
+The Izhikevich model is a widely used spiking neuron model that balances biological plausibility with computational efficiency. It captures a variety of neuronal firing patterns observed in real neurons while remaining relatively simple to implement. The model is defined by the following set of differential equations, where the membrane potential \(V\) is expressed in \(\mathrm{mV}\), the recovery variable \(U\) is expressed in \(\mathrm{mV}\), the input current \(I\) is expressed in \(\mathrm{mV/ms}\), and time \(t\) is expressed in \(\mathrm{ms}\) \cite{Ch_1_R14}:
 \begin{equation}
     \frac{dV}{dt} = 0.04V^2 + 5V + 140 - U + I
 \end{equation}
 \begin{equation}
     \frac{dU}{dt} = a(bV - U)
 \end{equation}
-\noindent where \(V\) represents the membrane potential of the neuron, \(U\) is a recovery variable that accounts for the activation of potassium ionic currents and inactivation of sodium ionic currents, and \(I\) is the input current. The parameters \(a\), \(b\), \(c\), and \(d\) are dimensionless constants that can be adjusted to model different types of neurons. The model also includes a reset mechanism that occurs when the membrane potential \(V\) reaches a certain threshold (typically 30 mV):
+\noindent where \(V\) (\(\mathrm{mV}\)) represents the membrane potential of the neuron, \(U\) (\(\mathrm{mV}\)) is a recovery variable that accounts for the activation of potassium ionic currents and inactivation of sodium ionic currents, and \(I\) (\(\mathrm{mV/ms}\)) is the input current. The parameters \(a\), \(b\), \(c\), and \(d\) are dimensionless constants that can be adjusted to model different types of neurons. The model also includes a reset mechanism that occurs when the membrane potential \(V\) reaches a certain threshold of \(30~\mathrm{mV}\):
 \begin{equation}
     \text{if } V \geq 30 \text{ mV, then } 
     \begin{cases}
@@ -151,26 +257,33 @@ The Izhikevich model is capable of reproducing a wide range of neuronal behavior
 
 \subsection*{Hebbian Learning}
 
+Hebbian learning describes synaptic adaptation based on correlated activity between pre- and postsynaptic neurons, often summarized as ``neurons that fire together, wire together"~\cite{Ch_1_R16}. In \ac{snn}s, this principle governs local synaptic updates driven by spike interactions.
 
-Hebbian Learning is a fundamental neural learning principle summarized by the axiom ``neurons that fire together, wire together," describing how simultaneous activation of neurons leads to strengthened connections between them~\cite{Ch_1_R16}. Hebbian learning, particularly within the context of \ac{snn}, primarily revolves around the modulation of synaptic strengths based on the firing rates of pre- and postsynaptic neurons. The principles of locality and joint activity are fundamental, emphasizing that synaptic changes occur only when both neurons are active simultaneously.
+Several extensions, such as covariance-based updates, Oja's normalization rule, and BCM theory, refine Hebbian learning by introducing stability and activity-dependent thresholds~\cite{Ch_1_R32, Ch_1_R19, Ch_1_R31}.
 
-\textbf{Methods of Synaptic Modification:}
-\begin{itemize}
-    \item \textbf{Local Rules:} Synaptic changes are influenced directly by the activities of the connecting neurons without external influences.
-    \item \textbf{Bounded Growth:} To avoid uncontrolled increases in synaptic strength, models typically incorporate mechanisms such as hard and soft bounds. Hard bounds prevent any further increase once a maximum weight is achieved, while soft bounds slow down the rate of increase as the maximum is approached~\cite{Ch_1_R25}.
-    \item \textbf{Synaptic Decay:} Realistic models also consider mechanisms for reducing synaptic strengths, typically through a decay term that weakens connections in the absence of activity~\cite{Ch_1_R17}.
-\end{itemize}
 
-\textbf{Advanced Hebbian Models:}
-\begin{itemize}
-    \item \textbf{Covariance Rule:} This model refines the synaptic modification to depend on the deviation of firing rates from their means, enhancing the dynamic response of synapses to changes in neural activity~\cite{Ch_1_R32}.
-    \item \textbf{Oja's Rule:} A self-stabilizing rule that ensures synaptic weights do not grow indefinitely by normalizing the weight vector, thereby maintaining the overall stability of the network~\cite{Ch_1_R19}.
-    \item \textbf{BCM Rule:} The Bienenstock-Cooper-Munro rule introduces an adaptive threshold for synaptic modification, which evolves based on the historical activity of the neuron, allowing for more refined potentiation and depression based on relative activity levels.~\cite{Ch_1_R31}.
-    \item \textbf{RCHP:} Rarely Correlating Hebbian Plasticity focuses on synaptic changes driven by rare, significant coincidences in neuronal activity, aiming to strengthen connections that are crucial for neural function while avoiding over-strengthening due to common activity patterns~\cite{Ch_1_R20}.
-\end{itemize}
+In modern \ac{snn}s, Hebbian mechanisms are often combined with reward-modulated plasticity, enabling task-driven learning through global feedback signals.
 
-\textbf{Incorporation into Reinforcement Learning:}
-Modern adaptations in \ac{snn}s integrate the concept of rewards, adding a third dimension to synaptic adjustments. This integration uses scaling or gating mechanisms in response to global reward signals, further refining the learning capabilities of neural networks based on external feedback.
+
+% Hebbian Learning is a fundamental neural learning principle summarized by the axiom ``neurons that fire together, wire together," describing how simultaneous activation of neurons leads to strengthened connections between them~\cite{Ch_1_R16}. Hebbian learning, particularly within the context of \ac{snn}, primarily revolves around the modulation of synaptic strengths based on the firing rates of pre- and postsynaptic neurons. The principles of locality and joint activity are fundamental, emphasizing that synaptic changes occur only when both neurons are active simultaneously.
+
+% \textbf{Methods of Synaptic Modification:}
+% \begin{itemize}
+%     \item \textbf{Local Rules:} Synaptic changes are influenced directly by the activities of the connecting neurons without external influences.
+%     \item \textbf{Bounded Growth:} To avoid uncontrolled increases in synaptic strength, models typically incorporate mechanisms such as hard and soft bounds. Hard bounds prevent any further increase once a maximum weight is achieved, while soft bounds slow down the rate of increase as the maximum is approached~\cite{Ch_1_R25}.
+%     \item \textbf{Synaptic Decay:} Realistic models also consider mechanisms for reducing synaptic strengths, typically through a decay term that weakens connections in the absence of activity~\cite{Ch_1_R17}.
+% \end{itemize}
+
+% \textbf{Advanced Hebbian Models:}
+% \begin{itemize}
+%     \item \textbf{Covariance Rule:} This model refines the synaptic modification to depend on the deviation of firing rates from their means, enhancing the dynamic response of synapses to changes in neural activity~\cite{Ch_1_R32}.
+%     \item \textbf{Oja's Rule:} A self-stabilizing rule that ensures synaptic weights do not grow indefinitely by normalizing the weight vector, thereby maintaining the overall stability of the network~\cite{Ch_1_R19}.
+%     \item \textbf{BCM Rule:} The Bienenstock-Cooper-Munro rule introduces an adaptive threshold for synaptic modification, which evolves based on the historical activity of the neuron, allowing for more refined potentiation and depression based on relative activity levels.~\cite{Ch_1_R31}.
+%     \item \textbf{RCHP:} Rarely Correlating Hebbian Plasticity focuses on synaptic changes driven by rare, significant coincidences in neuronal activity, aiming to strengthen connections that are crucial for neural function while avoiding over-strengthening due to common activity patterns~\cite{Ch_1_R20}.
+% \end{itemize}
+
+% \textbf{Incorporation into Reinforcement Learning:}
+% Modern adaptations in \ac{snn}s integrate the concept of rewards, adding a third dimension to synaptic adjustments. This integration uses scaling or gating mechanisms in response to global reward signals, further refining the learning capabilities of neural networks based on external feedback.
 
 
 \subsection*{Neo-Hebbian Learning and Modulation Mechanisms}
@@ -207,6 +320,18 @@ Synaptic weight updates are then guided by the interaction between the eligibili
 \end{equation}
 
 \noindent where $dw_{ji}/dt$ symbolizes the rate of change in synaptic weight, contingent upon the compounded influence of the eligibility trace and the reward signal.
+
+In spiking neural systems, multiple encoding schemes can be employed to represent information, including rate coding, phase coding, and amplitude-based representations. In this work, rate coding is adopted due to its inherent robustness and simplicity in mapping stochastic spike trains to continuous variables. Unlike phase coding, which relies on precise spike timing relative to an oscillatory reference, or amplitude-based schemes that require stable analog representations of signal magnitude, rate coding aggregates neural activity over a temporal window and represents information through spike counts. This aggregation reduces sensitivity to noise, temporal jitter, and hardware variability. Furthermore, rate coding enables a direct and stable interface between neural activity and downstream processing units, since the resulting representation is inherently compatible with discrete-time decision processes and control signals. As a result, rate coding provides a practical compromise between biological plausibility, computational tractability, and robustness in real-world implementations.
+
+In spiking neural networks, synaptic influence can be modeled either through amplitude modulation using synaptic weights or through temporal modulation using synaptic delays. In the conventional formulation adopted in this work, synaptic weights scale the post-synaptic current, allowing the membrane potential to integrate incoming spikes in a stable and cumulative manner. In contrast, delay-based representations encode information by shifting the arrival time of spikes, thereby relying on precise temporal coordination across neurons. While delay-based mechanisms can, in principle, capture rich temporal relationships, they introduce a high sensitivity to timing variations and require fine-grained synchronization, which can lead to instability in both inference and learning. Small perturbations in spike timing may result in significant deviations in network behavior, especially in systems with stochastic inputs or discretized simulation time steps.
+
+By comparison, weight-based modulation provides a more robust and tractable framework. Since information is accumulated over time through weighted integration, the system becomes less sensitive to temporal jitter and discretization effects. This property is particularly important in practical implementations, where numerical integration, asynchronous updates, and hardware imperfections introduce unavoidable timing variability. Furthermore, learning rules such as spike-timing-dependent plasticity operate more consistently when synaptic efficacy is adjusted through weight updates rather than delay shifts, as the gradient of influence remains continuous with respect to synaptic strength. From a computational perspective, weight adaptation also enables smoother convergence and avoids the combinatorial complexity associated with optimizing temporal delays. Therefore, the use of synaptic weights in this framework provides a favorable balance between expressiveness, stability, and implementation simplicity, making it more suitable for scalable and reliable spiking neural systems.
+
+
+The average firing rate and total spike count of neurons are strongly influenced by the underlying neuron model and the temporal resolution of simulation. For the \ac{lif} model, which is typically simulated with a time step on the order of $1$ ms, the firing rate is constrained by the membrane time constant and refractory period, leading to relatively smooth and bounded spike activity. In contrast, the Izhikevich model, often simulated with finer temporal resolution (e.g., $0.1$ ms), is capable of producing richer dynamical behaviors, including bursting and rapid spiking transitions. As a result, the same physical time interval may contain a significantly larger number of spikes in the Izhikevich model compared to the \ac{lif} model. Therefore, when comparing firing rates or spike counts across models, it is essential to account for both the integration time step and the intrinsic neuron dynamics. The measured spike count over a fixed window $\Delta T$ can be expressed as $N = \sum_{t} f(t)$, where $f(t)$ denotes the spike occurrence, and the corresponding firing rate is given by $r = N / \Delta T$. This formulation highlights that both temporal discretization and neuron dynamics jointly determine the effective rate representation.
+
+
+One of the fundamental advantages of spiking neural networks lies in their potential for energy-efficient computation. Unlike conventional artificial neural networks, where all neurons are typically active at every computational step, spiking neurons communicate only through discrete events, resulting in sparse activity patterns. Energy consumption is therefore primarily associated with spike generation and transmission rather than continuous numerical operations. In event-driven regimes, where input stimuli are sparse or intermittent, the number of active neurons remains low, leading to significant reductions in computational load and power consumption. Additionally, the absence of high-precision floating-point operations further contributes to efficiency, particularly in hardware implementations. This event-driven paradigm enables scalable and low-power processing, making spiking systems well-suited for resource-constrained environments.
 
 
 \section{Literature Review}

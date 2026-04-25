@@ -2,8 +2,6 @@
 
 Autonomous docking of multiple agents in close-proximity missions, such as on-orbit servicing, satellite rendezvous, and swarm payload alignment, poses unique challenges in precision, robustness, and energy efficiency. In these missions, a team of robots must cooperate without centralized control, perceive relative pose information under stringent bandwidth and latency constraints, and execute coordinated maneuvers despite dynamic uncertainties and limited onboard resources. To address these challenges, this chapter introduces a fully decentralized, vision-based docking framework for swarm robots, combining \ac{dvs} event streams, \acp{alm}, and a Deep \ac{snn} trained with \ac{stdp}. The sparse, asynchronous output of DVS cameras and the event-driven nature of spiking neural networks contribute to low-latency and energy-efficient control, which supports the development of responsive and resource-aware systems for proximity docking \cite{9138762}.
 
-
-
 Prior approaches are often limited by their reliance on centralized coordination, dense frame-based vision pipelines (e.g., frame-based cameras), and rigid control architectures that struggle to scale to multi-agent docking under energy and bandwidth constraints. These limitations hinder their applicability to fully autonomous, decentralized swarm missions in dynamic proximity environments. Building on these insights and addressing the limitations of prior methods, this chapter contributes the following advancements for reliable, efficient, and scalable autonomous docking in multi-agent proximity missions. 
 
 This work presents a biologically interpretable and scalable neuromorphic architecture that achieves end-to-end spiking control for cooperative docking through event-based perception and distributed learning. The main novelties of the proposed system are summarized as follows:
@@ -33,20 +31,48 @@ The remainder of this chapter is organized as follows. The Preliminaries section
 \section{Preliminaries}
 \subsection{Problem definition: Docking Missions with Swarm Robots}
 
-Swarm robotics, inspired by the collective behaviors observed in natural systems such as ant colonies, bee swarms, and flocks of birds, represents a promising paradigm for creating intelligent robotic systems capable of performing complex, decentralized tasks. These systems are typically characterized by a number of relatively simple robots that collaborate and coordinate their actions without relying on centralized control. This decentralized approach offers several advantages, including robustness to individual robot failures, flexibility in adapting to changing environments, and scalability to large numbers of agents \cite{dias2021swarm}. 
+% Swarm robotics, inspired by the collective behaviors observed in natural systems such as ant colonies, bee swarms, and flocks of birds, represents a promising paradigm for creating intelligent robotic systems capable of performing complex, decentralized tasks. These systems are typically characterized by a number of relatively simple robots that collaborate and coordinate their actions without relying on centralized control. This decentralized approach offers several advantages, including robustness to individual robot failures, flexibility in adapting to changing environments, and scalability to large numbers of agents \cite{dias2021swarm}. 
 
-The desired collective behavior of the swarm emerges from the local interactions among the individual robots and between the robots and their environment. This paradigm contrasts with traditional robotic systems, which often rely on a central controller to dictate the actions of individual robots. The term ``docking missions," in the context of swarm robotics, encompasses a range of cooperative tasks in which multiple robots must achieve a state of connection or close proximity. This includes tasks such as rendezvous, where the objective is for multiple robots to converge at a common location or maintain a defined spatial relationship; assembly, where robots collaboratively work to form a desired structure or connect with other robots or objects to create a larger, functional entity.
+% The desired collective behavior of the swarm emerges from the local interactions among the individual robots and between the robots and their environment. This paradigm contrasts with traditional robotic systems, which often rely on a central controller to dictate the actions of individual robots. The term ``docking missions," in the context of swarm robotics, encompasses a range of cooperative tasks in which multiple robots must achieve a state of connection or close proximity. This includes tasks such as rendezvous, where the objective is for multiple robots to converge at a common location or maintain a defined spatial relationship; assembly, where robots collaboratively work to form a desired structure or connect with other robots or objects to create a larger, functional entity.
+
+% In the specific application of this study, the swarm agents are tasked with pushing a payload towards a \ac{scs} to achieve a precise docking alignment. Each agent is equipped with thrusters, allowing them to move in 2D space, and a \ac{dvs} mounted on board provides them with visual feedback about the environment and proximal agents. Additionally, a \ac{dvs} camera is mounted at the center of the \ac{scs}, providing a global event-based view of the payload and agents during docking.
+
+% \begin{figure}[ht]
+%     \centering
+%     \includegraphics[width=1\linewidth]{Figures/3D Environment.pdf}
+%     \caption{3D schematic of the multi-agent docking mission environment. Multiple agents work collaboratively to push a central payload towards a \ac{scs} for docking alignment.}
+%     \label{fig:DockingMissionSchematic}
+% \end{figure}
+
+% \begin{figure}[ht]
+%     \centering
+%     \includegraphics[width=0.9\linewidth]{Figures/Figure 1.pdf}
+%     \caption{2D representation of robots performing docking mission. Each agent pushes the payload towards the \ac{scs} to align them together. The \ac{scs} and agents are equipped with a \ac{dvs} that streams high-frequency data for the proximity mission.}
+%     \label{fig:DockingMissionfigure}
+% \end{figure}
+
+
+% The primary objective of this chapter is to develop a decentralized vision-based swarm docking system utilizing Deep \ac{snn}s trained with \ac{stdp}, which uses the asynchronous, sparse, and high-temporal-resolution output of \ac{dvs} cameras to guide the swarm behavior effectively. Each agent in the swarm runs its own local \ac{snn} onboard, processing sensory information independently and learning control policies in a distributed manner, which allows the swarm to remain scalable and robust to individual agent failures.
+
+% In this environment, \ac{alm}s are installed exclusively on the agents to enhance their visibility within the event-based vision system. Each agent only sees its neighboring agents via \ac{dvs} events and does not directly measure their positions. The payload has a considerably larger surface area; as such, it naturally generates sufficient brightness changes to trigger events in the \ac{dvs} sensor without the need for additional illumination. In contrast, the agents are compact and would otherwise produce sparse event activity; thus, their \acp{alm} are used to amplify their visual signatures and ensure reliable detection by the vision system. This configuration simplifies the temporal structure of the event stream while still enabling accurate agent identification and segmentation within the spatiotemporal data.
+
+% When the agents are doing rendezvous maneuver and have not made contact with the payload, they rely solely on their onboard \ac{dvs} for environment perception. This allows them to capture events corresponding to nearby agents and the payload. Once an agent makes physical contact with the payload, its onboard force contact sensor activates and the \ac{alm} signal is turned off. The agents' onboard \ac{dvs} data is then replaced by the \ac{scs} \ac{dvs}, providing a more comprehensive and centralized perspective of the payload and the surrounding agents.
+
+
+
+
+Swarm robotics enables decentralized coordination among multiple simple agents to achieve complex collective tasks such as rendezvous, assembly, and docking, without relying on centralized control \cite{dias2021swarm}. In docking missions, agents must achieve coordinated proximity and alignment through local interactions and sensing.
 
 In the specific application of this study, the swarm agents are tasked with pushing a payload towards a \ac{scs} to achieve a precise docking alignment. Each agent is equipped with thrusters, allowing them to move in 2D space, and a \ac{dvs} mounted on board provides them with visual feedback about the environment and proximal agents. Additionally, a \ac{dvs} camera is mounted at the center of the \ac{scs}, providing a global event-based view of the payload and agents during docking.
 
-\begin{figure}[H]
+\begin{figure}[ht]
     \centering
     \includegraphics[width=1\linewidth]{Figures/3D Environment.pdf}
     \caption{3D schematic of the multi-agent docking mission environment. Multiple agents work collaboratively to push a central payload towards a \ac{scs} for docking alignment.}
     \label{fig:DockingMissionSchematic}
 \end{figure}
 
-\begin{figure}[H]
+\begin{figure}[ht]
     \centering
     \includegraphics[width=0.9\linewidth]{Figures/Figure 1.pdf}
     \caption{2D representation of robots performing docking mission. Each agent pushes the payload towards the \ac{scs} to align them together. The \ac{scs} and agents are equipped with a \ac{dvs} that streams high-frequency data for the proximity mission.}
@@ -54,16 +80,18 @@ In the specific application of this study, the swarm agents are tasked with push
 \end{figure}
 
 
-The primary objective of this chapter is to develop a decentralized vision-based swarm docking system utilizing Deep \ac{snn}s trained with \ac{stdp}, which uses the asynchronous, sparse, and high-temporal-resolution output of \ac{dvs} cameras to guide the swarm behavior effectively. Each agent in the swarm runs its own local \ac{snn} onboard, processing sensory information independently and learning control policies in a distributed manner, which allows the swarm to remain scalable and robust to individual agent failures.
+The objective is to develop a decentralized vision-based swarm docking framework using Deep \ac{snn}s trained with \ac{stdp}, where each agent processes \ac{dvs} data locally to learn control policies in a distributed and scalable manner.
 
-In this environment, \ac{alm}s are installed exclusively on the agents to enhance their visibility within the event-based vision system. Each agent only sees its neighboring agents via \ac{dvs} events and does not directly measure their positions. The payload has a considerably larger surface area; as such, it naturally generates sufficient brightness changes to trigger events in the \ac{dvs} sensor without the need for additional illumination. In contrast, the agents are compact and would otherwise produce sparse event activity; thus, their \acp{alm} are used to amplify their visual signatures and ensure reliable detection by the vision system. This configuration simplifies the temporal structure of the event stream while still enabling accurate agent identification and segmentation within the spatiotemporal data.
+In this environment, \ac{alm}s are installed exclusively on the agents to enhance their visibility within the event-based vision system. Each agent only sees its neighboring agents via \ac{dvs} events and does not directly measure their positions. The payload has a considerably larger surface area; as such, it naturally generates sufficient brightness changes to trigger events in the \ac{dvs} sensor without the need for additional illumination. In contrast, the agents are compact and would otherwise produce sparse event activity; thus, their \acp{alm} are used to amplify their visual signatures and ensure reliable detection by the vision system. 
+This configuration improves event density and enables reliable agent detection in the spatiotemporal event stream.
 
-When the agents are doing rendezvous maneuver and have not made contact with the payload, they rely solely on their onboard \ac{dvs} for environment perception. This allows them to capture events corresponding to nearby agents and the payload. Once an agent makes physical contact with the payload, its onboard force contact sensor activates and the \ac{alm} signal is turned off. The agents' onboard \ac{dvs} data is then replaced by the \ac{scs} \ac{dvs}, providing a more comprehensive and centralized perspective of the payload and the surrounding agents.
+
+During rendezvous, agents rely on onboard \ac{dvs} sensing to detect neighboring agents and the payload. Upon contact with the payload, the onboard force sensor disables the \ac{alm}, and perception transitions to the \ac{scs}-mounted \ac{dvs}, providing a global view of the docking process.
 
 
 \subsection{Event-Based Camera Simulation}
 
-This section presents the simulation methodology for modeling brightness-based visual input and generating asynchronous events for \ac{snn}s using \ac{dvs}. Two distinct \ac{dvs} camera models are used in this study: one mounted on each agent and one placed at a fixed position on the \ac{scs}. Both cameras independently perceive the environment and produce separate event streams based on the change in perceived brightness over time.
+This section presents the simulation methodology for modeling brightness-based visual input and generating asynchronous events for \ac{snn}s using \ac{dvs}. Two distinct \ac{dvs} camera models are used in this study: one mounted on each agent and one placed at a fixed position on the \ac{scs}. Both cameras independently perceive the environment and produce separate event streams based on the change in perceived brightness over time. In this work, the rotational dynamics of the objects and the onboard DVS camera are not considered.
 
 The environment is populated by multiple agents and a payload object, each modeled as circular shapes with defined physical properties such as radius and centroid location. Each \ac{dvs} camera discretizes its field of view into a grid of $N_y \times N_x$ pixels, where each pixel corresponds to a fixed location in the simulated physical space. The spatial mapping between the continuous world coordinates and the discrete \ac{dvs} pixel grid is defined through a static transformation.
 
@@ -392,6 +420,8 @@ In this study, we design a deep \ac{snn} architecture tailored for swarm robotic
 
 The second stage is the first hidden layer, which is organized into multiple repositories of neurons to separate and process attention-related signals. Specifically, it includes repositories for both payload and neighboring-agent attention (\ac{par} and \ac{naar}), as well as \ac{pai} and \ac{naai} repositories that regulate the excitatory and inhibitory interactions between these attention pathways. This structure allows the network to perform selective attention and inhibition based on the relative activation of these neuron groups.
 
+Each repository corresponds to a structured group of neurons in the hidden layer that encodes a specific perceptual or behavioral feature (e.g., payload-related events or neighboring-agent activity), and its output is represented by the aggregate firing activity of that group.
+
 The third stage is the second hidden layer, which is divided into four functionally distinct repositories: the \ac{dpi}, \ac{rpi}, \ac{rpr}, and \ac{dpr}. These submodules are composed of bistable and Class 2 Izhikevich neurons that govern phase-gated transitions between rendezvous and docking behaviors, ensuring smooth and stable policy switching across mission stages.
 
 Finally, the output layer consists of four spiking neurons corresponding to the thrust directions \(x^{-}\), \(x^{+}\), \(y^{-}\), and \(y^{+}\). These neurons generate directional control commands based on the collective spiking activity, which is refined through \ac{stdp}. Each layer in the network employs layer-specific rewards to adapt its synaptic weights autonomously. This hierarchical organization enables the agents to perform phase-dependent policy switching, attention-driven visual perception, and decentralized coordination during both rendezvous and collaborative docking.
@@ -678,7 +708,7 @@ The reward function in the \ac{snn} provides a structured feedback mechanism tha
 \mathbf{A}^{\text{input}}(i) = \frac{1}{T} \sum_{\tau=t-T}^{t} f_i^{\text{input}}(\tau),
 \label{eq:inputActivityMatrix}
 \end{equation}
-where \( f_i^{\text{input}}(\tau) \in \{0,1\} \) indicates whether neuron \( i \) generated a spike at time \(\tau\). Each entry \(\mathbf{A}^{\text{input}}(i)\) is the time-averaged firing rate of neuron \( i \) over the window (T). For example, the fraction of time steps in that window when neuron \( i \) fired; the matrix collects these per-neuron values.
+where \( f_i^{\text{input}}(\tau) \in \{0,1\} \) indicates whether neuron \( i \) generated a spike at time \(\tau\). Each entry \(\mathbf{A}^{\text{input}}(i)\) is the time-averaged firing rate of neuron \( i \) over the window ($T$). For example, the fraction of time steps in that window when neuron \( i \) fired; the matrix collects these per-neuron values.
 Specifically, 
 \begin{equation}
 f_i(\tau) =
@@ -862,7 +892,7 @@ Define the analogous 8-vector for the vertical axis, $g_y(r\,|\,y_q)$, which ass
 \gamma_{q}(r,c)=g_y(r\,|\,y_q)\,g_x(c\,|\,x_q),
 \]
 
-The attention at $q$ is the normalized weighted average
+\noindent The attention at $q$ is the normalized weighted average
 \[
 \mathcal{A}^{\text{Attention}}(q)=\frac{\sum_{r,c} \gamma_{kq}\,\mathbf{A}^{\text{input}}(r,c)}{\sum_{r,c} \gamma_{kq}+\epsilon}.
 \]
@@ -1240,6 +1270,7 @@ Figure~\ref{fig:Negative2DGaussianReward} demonstrates how the motion direction 
 \end{figure}
 
 Figure~\ref{fig:SecondLayerGaussianEnvelope} illustrates the oscillatory Gaussian envelope used to compute the motion direction signal $\mathcal{H}$ for reward modulation in the second hidden layer. The envelope alternates between focusing on the payload and the agents based on which \ac{alm} is active. 
+Intuitively, the oscillatory Gaussian acts as a time-varying attention filter that periodically shifts focus between relevant stimuli (payload vs.\ agents), enabling the network to encode motion direction through alternating positive and negative reinforcement signals synchronized with the \ac{alm} blinking.
 
 Each agent is equipped with a planar inertial measurement unit (IMU) that measures the planar velocity
 \(\mathbf{V} = [V_x, V_y]^\top\).
@@ -1611,60 +1642,6 @@ This reward structure reinforces neurons whose activity contributes to reducing 
 \end{figure}
 
 Figure~\ref{fig:OutputLayerReward} illustrates the process of computing the output layer reward based on the directional error between the commanded motion from the second hidden layer and the executed action. Figure~\ref{fig:OutputLayerReward}a shows how the population activity is decoded into a commanded direction. Red arrows show the activity of each neuron in the second hidden layer. Figure~\ref{fig:OutputLayerReward}b depicts how the directional discrepancies are translated into per-neuron rewards for the output layer. In this example, the commanded direction is at \(60^\circ\), while the executed action by the output neurons is at \(18.4^\circ\). The executed angle ($\theta_{act}$) is measured using IMU ($a_{x}$ and $a_{y}$). The resulting rewards encourage increased activity in the \(r_{Y^-}\) neuron and reduce activity in the \(r_{X^-}\) neuron to correct the directional error. The reward also encourages the activity of the neurons that will help align the executed action with the commanded direction.
-
-% \subsubsection{Output Layer Reward Computation Based on Directional Error}
-
-% The final output layer of the network generates four motor control signals, corresponding to the application of force in the $\pm X$ and $\pm Y$ directions in a planar environment. The purpose of the reward function is to adjust the firing rates of these output neurons such that the resulting acceleration aligns with the commanded velocity direction produced by the second hidden layer. This second hidden layer outputs an $N_g \times N_g$ activity map $A_2^{hidden} \in [0,1]^{N_g\times N_g}$, representing a fuzzy encoding of the desired velocity direction.
-
-% The reward computation proceeds in four main steps. First, the reference velocity direction is decoded from the activity map. A Cartesian grid is defined over the range $[-1,1] \times [-1,1]$:
-% \begin{equation}
-% x_{ij},\, y_{ij} \in [-1,1], \quad i,j \in \{1,\dots,N_g\},
-% \end{equation}
-% and the radial distance is computed as
-% \begin{equation}
-% r_{ij} = \sqrt{x_{ij}^2 + y_{ij}^2} + \varepsilon,
-% \end{equation}
-% where $\varepsilon$ is a small constant to avoid division by zero. The local unit vectors at each grid cell are
-% \begin{equation}
-% e_x(i,j) = \frac{x_{ij}}{r_{ij}}, \qquad e_y(i,j) = \frac{y_{ij}}{r_{ij}}.
-% \end{equation}
-% Here, $e_x$ and $e_y$ define the unit vector field pointing radially outward from the origin.
-
-% The activity map $A_2^{hidden}$ is first normalized to form a weighting distribution:
-% \begin{equation}
-% \lambda(i,j) = \frac{\max\left(A_2^{hidden}(i,j),\, 0\right)}{\sum_{p=1}^{N_g}\sum_{q=1}^{N_g} \max\left(A_2^{hidden}(p,q),\, 0\right) + \varepsilon}.
-% \end{equation}
-% The reference velocity vector is then computed as the projection of the activity map onto the local unit vector field:
-% \begin{equation}
-% \mathbf{V}_{\mathrm{ref}} = 
-% \begin{bmatrix}
-% \sum_{i=1}^{N_g}\sum_{j=1}^{N_g} \lambda(i,j)\, e_x(i,j) \\[4pt]
-% \sum_{i=1}^{N_g}\sum_{j=1}^{N_g} \lambda(i,j)\, e_y(i,j)
-% \end{bmatrix}.
-% \end{equation}
-% This vector is normalized to unit length:
-% \begin{equation}
-% \hat{\mathbf{V}}_{\mathrm{ref}} = \frac{\mathbf{V}_{\mathrm{ref}}}{\|\mathbf{V}_{\mathrm{ref}}\| + \varepsilon}.
-% \end{equation}
-
-% In the second step, the measured velocity vector \(\mathbf{V}_{\mathrm{meas}}\) is obtained from the IMU by numerical integration of the measured accelerations. The measured velocity direction is then
-% \begin{equation}
-% \hat{\mathbf{V}}_{\mathrm{meas}} = \frac{\mathbf{V}_{\mathrm{meas}}}{\|\mathbf{V}_{\mathrm{meas}}\| + \varepsilon}.
-% \end{equation}
-
-% In the third step, the signed component-wise directional error is computed as
-% \begin{equation}
-% \mathbf{e} = \hat{\mathbf{V}}_{\mathrm{ref}} - \hat{\mathbf{V}}_{\mathrm{meas}}.
-% \end{equation}
-% This error is optionally compressed using the hyperbolic tangent \(\tanh(\mathbf{e})\) to avoid excessive updates, which preserves the sign while bounding the magnitude to approximately $\pm 1$.
-
-% In the final step, the two error components $e_x$ and $e_y$ are mapped to the four output-neuron rewards:
-% \begin{equation}
-% r_{X^+} = e_x, \quad r_{X^-} = -e_x, \quad r_{Y^+} = e_y, \quad r_{Y^-} = -e_y.
-% \end{equation}
-% Positive values of $r_{X^+}$ or $r_{Y^+}$ encourage increased firing of the corresponding neuron to push in the positive $X$ or $Y$ direction, whereas positive values of $r_{X^-}$ or $r_{Y^-}$ encourage firing in the opposite direction to reduce the error. All rewards are clipped to the range $[-1,1]$ to ensure numerical stability.
-
-% This formulation ensures that the output layer learns to generate low-level motor commands that minimize the difference between the commanded velocity direction from the second hidden layer and the actual velocity direction measured by the IMU.
 
 \subsubsection{Weight Update using \ac{stdp}}
 \label{subsubsec:stdp_weight_update}
@@ -2161,7 +2138,7 @@ Distributing inhibition across multiple neurons improves temporal reliability. S
 
 To achieve this, small random perturbations are applied to neurons’ initial membrane potentials and Izhikevich parameters within each inhibitory repository. This heterogeneity prevents synchronous firing. Without it, identically initialized neurons tend to spike simultaneously, producing short inhibitory bursts and long periods of inactivity. Random initialization causes neurons to spike at slightly different times, spreading inhibitory events, and maintaining stable inhibition throughout each phase.
 
-Figure~\ref{fig:light_sim} illustrates the effect of activating the \ac{alm} on the agents’ visual perception. When the \ac{alm} is turned off (Figure~\ref{fig:light_sim}a), the proximal agent produces relatively weak brightness variations compared to the payload, resulting in limited event generation in the \ac{dvs}. As a result, the visual perception layer struggles to distinguish the smaller agent from the background. In contrast, when the \ac{alm} is turned on (Figure~\ref{fig:light_sim}b), the proximal agent generates a higher concentration of brightness and corresponding \ac{dvs} events despite its smaller physical size relative to the payload. This increased event activity enhances the network's attention mechanism, allowing it to more clearly separate and detect proximal agents alongside the payload. 
+Figure~\ref{fig:light_sim} illustrates the effect of activating the \ac{alm} on the agents’ visual perception. When the \ac{alm} is turned off (Figure~\ref{fig:light_sim}a), the proximal agent produces relatively weak brightness variations compared to the payload, resulting in limited event generation in the \ac{dvs}. As a result, the visual perception layer struggles to distinguish the smaller agent from the background. In contrast, when the \ac{alm} is turned on (Figure~\ref{fig:light_sim}b), the proximal agent generates a higher concentration of brightness and corresponding \ac{dvs} events despite its smaller physical size relative to the payload. This increased event activity enhances the network's attention mechanism, allowing it to more clearly separate and detect proximal agents alongside the payload. In the present framework, learning is performed in the reinforcement learning manner, without access to explicit labels or predefined target outputs. Consequently, classical accuracy metrics are not directly applicable, as there is no fixed reference against which predictions can be compared. Instead, the system adapts its internal representations based on consistency, stability, and task-driven feedback signals. Detection performance, therefore, should be interpreted in terms of the coherence and separability of the learned representations rather than classification accuracy.
 
 % Light Simulator
 \begin{figure}[H]
@@ -2348,7 +2325,7 @@ Figures~\ref{fig:Distances} illustrates the distances during the rendezvous and 
     \subfigure[Payload's distance from the docking center]{
         \includegraphics[width=0.47\linewidth]{Figures/Distance from Docking Center - Docking.pdf}
     }
-    \caption{Distances during time.}
+    \caption{Distances versus time.}
     \label{fig:Distances}
 \end{figure}
 

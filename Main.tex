@@ -39,6 +39,23 @@
 \usepackage{bm}
 \usepackage{xcolor}
 \usepackage{mathtools}
+\usepackage{xcolor}
+\usepackage[normalem]{ulem}
+\usepackage[a-1b]{pdfx}
+
+\newif\ifshowchanges
+\showchangestrue   % show highlights
+% \showchangesfalse % hide highlights
+
+\ifshowchanges
+    \newcommand{\rev}[1]{{\color{blue}#1}}
+    \newcommand{\del}[1]{{\color{red}\sout{#1}}}
+    \newcommand{\note}[1]{{\color{magenta}[#1]}}
+\else
+    \newcommand{\rev}[1]{#1}
+    \newcommand{\del}[1]{}
+    \newcommand{\note}[1]{}
+\fi
 
 
 \newtheorem{theorem}{Theorem}[section]

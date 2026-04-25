@@ -124,7 +124,7 @@ The output layer has two sub-layers, and each sub-layer has two neurons. The fir
 
 \noindent where \(\Delta x\) and \(\Delta y\) are selected actions, and \(\Delta X_{max}\) and \(\Delta Y_{max}\) are maximum steps (displacements) in \(X\) and \(Y\) directions. Two random actions, one for \(\Delta x\) and one for \(\Delta y\), are generated for the training process.
 
-The decoding of the spiking output is determined by the difference in the firing rates of the output neurons within each sub-layer. Let us denote \(f(t)\) as the activity of the output neurons that control the movement in the x and y-directions:
+The decoding of the spiking output is determined by the difference in the firing rates of the output neurons within each sub-layer. Let us denote \(f(t)\) as the activity of the output neurons that control the movement in the $x$ and $y$-directions:
 
 \begin{align*}
     f(i) &= 
@@ -140,7 +140,7 @@ The equation for decoding this activity can be expressed as:
     \Delta x_{decoded} = \left[ \sum_{i=t-\Delta T}^{t} \left(f^{x+}(i)-f^{x-}(i)\right) \right]\Delta X_{max}
 \end{equation}
 
-\noindent where \(f^{x+}(i)\) and \(f^{x-}(i)\) are the activities of the two output neurons associated with the x-direction. A similar process is applied for decoding in the y-direction:
+\noindent where \(f^{x+}(i)\) and \(f^{x-}(i)\) are the activities of the two output neurons associated with the x-direction. A similar process is applied for decoding in the $y$-direction:
 
 \begin{equation} \label{Eq.NS.7}
     \Delta y_{decoded} = \left[ \sum_{i=t-\Delta T}^{t} \left(f^{y+}(i)-f^{y-}(i)\right) \right]\Delta Y_{max}
@@ -154,7 +154,7 @@ One of the challenges in robotic applications is ensuring smooth transitions in 
 \mathcal{q}_t = \gamma \cdot \mathcal{q}_{t-1} + (1-\gamma) \cdot \Upsilon_t
 \end{equation}
 
-In this equation, \(\mathcal{q}_{t}\) represents the random action at time \(t\) (shown as random actions in X and Y-directions in Figure \ref{fig.Network Structure}), \(\gamma\) is a correlation coefficient that controls the influence of the previous action, and \(\Upsilon_{t}\) is a random number drawn from a standard distribution (e.g., Gaussian) at time \(t\). This recursive formulation ensures that the action at any given time \(t\) is a weighted blend of the previous action and a new random input, functioning as a first-order filter to produce colored noise.
+In this equation, \(\mathcal{q}_{t}\) represents the random action at time \(t\) (shown as random actions in $X$ and $Y$-directions in Figure \ref{fig.Network Structure}), \(\gamma\) is a correlation coefficient that controls the influence of the previous action, and \(\Upsilon_{t}\) is a random number drawn from a standard distribution (e.g., Gaussian) at time \(t\). This recursive formulation ensures that the action at any given time \(t\) is a weighted blend of the previous action and a new random input, functioning as a first-order filter to produce colored noise.
 
 
 
@@ -263,19 +263,16 @@ Substituting $x=0$ into \eqref{Eq.WS.Deriv.1} yields
 =
 \frac{\eta}{\beta}\log(2).
 \end{equation}
-
-Combining \eqref{Eq.WS.Deriv.3} and \eqref{Eq.WS.Deriv.5} gives the first relationship,
+\noindent Combining \eqref{Eq.WS.Deriv.3} and \eqref{Eq.WS.Deriv.5} gives the first relationship,
 \begin{equation} \label{Eq.WS.Deriv.6}
 \frac{\eta}{\beta}\log(2)=\frac{\mathcal{A}}{\lambda}\,\mathcal{R}^{G}_{\max}.
 \end{equation}
-
 Next, substituting $x=\Psi^{\mathcal{S}}$ into \eqref{Eq.WS.Deriv.1} yields
 \begin{equation} \label{Eq.WS.Deriv.7}
 \Theta^{\mathcal{S}}(t)\Big|_{x=\Psi^{\mathcal{S}}}
 =
 \frac{\eta}{\beta}\log\!\left(1+\exp\!\left(\beta\Psi^{\mathcal{S}}\right)\right).
 \end{equation}
-
 Dividing \eqref{Eq.WS.Deriv.7} by \eqref{Eq.WS.Deriv.5} and using the imposed values in
 \eqref{Eq.WS.Deriv.3}--\eqref{Eq.WS.Deriv.4} gives
 \begin{equation} \label{Eq.WS.Deriv.8}
@@ -285,8 +282,7 @@ Dividing \eqref{Eq.WS.Deriv.7} by \eqref{Eq.WS.Deriv.5} and using the imposed va
 =
 \lambda^{2}.
 \end{equation}
-
-Therefore,
+\noindent Therefore,
 \begin{equation} \label{Eq.WS.Deriv.9}
 \log\!\left(1+\exp\!\left(\beta\Psi^{\mathcal{S}}\right)\right)=\lambda^{2}\log(2)=\log\!\left(2^{\lambda^{2}}\right),
 \end{equation}
@@ -296,12 +292,10 @@ which implies
 \quad \Rightarrow \quad
 \exp\!\left(\beta\Psi^{\mathcal{S}}\right)=2^{\lambda^{2}}-1.
 \end{equation}
-
-Taking the natural logarithm yields
+\noindent Taking the natural logarithm yields
 \begin{equation} \label{Eq.WS.Deriv.11}
 \beta=\frac{1}{\Psi^{\mathcal{S}}}\ln\!\left(2^{\lambda^{2}}-1\right).
 \end{equation}
-
 Finally, substituting \eqref{Eq.WS.Deriv.11} into \eqref{Eq.WS.Deriv.6} gives
 \begin{equation} \label{Eq.WS.Deriv.12}
 \eta
@@ -311,7 +305,6 @@ Finally, substituting \eqref{Eq.WS.Deriv.11} into \eqref{Eq.WS.Deriv.6} gives
 \frac{\mathcal{A}\mathcal{R}^{G}_{\max}}{\lambda\Psi^{\mathcal{S}}\log(2)}
 \ln\!\left(2^{\lambda^{2}}-1\right).
 \end{equation}
-
 Substituting \eqref{Eq.WS.Deriv.11}--\eqref{Eq.WS.Deriv.12} into \eqref{Eq.WS.Deriv.1} yields \eqref{Eq.WS.3.1},
 
 \begin{equation} \label{Eq.WS.3.1}
@@ -369,7 +362,7 @@ Let's assume that \(W_{max}^{\mathcal{S}}(t) = 10\), the decay and learning rate
     \boldsymbol{\alpha}^{\mathcal{S}}(t) = \frac{1}{1 + \exp{\left[\frac{1}{0.0001}\left(10 - 7.75\right)\right]}} \approx 0
 \end{equation*}
 
-This results in a higher decay rate for the set \(\mathcal{S}\) (while \(\alpha^{\mathcal{S}}=0\)), actively working to reduce synaptic strength towards the threshold \(\Psi^{\mathcal{S}}\), due to \(W_{max}^{\mathcal{S}}(t)\) exceeding \(\Psi^{\mathcal{S}}\).
+\noindent This results in a higher decay rate for the set \(\mathcal{S}\) (while \(\alpha^{\mathcal{S}}=0\)), actively working to reduce synaptic strength towards the threshold \(\Psi^{\mathcal{S}}\), due to \(W_{max}^{\mathcal{S}}(t)\) exceeding \(\Psi^{\mathcal{S}}\).
 
 \textbf{Case 3: When \(\Psi^{\mathcal{S}}\) increases from 7.75 to 15.5 (Reward Change)}
 
@@ -391,7 +384,7 @@ Assuming a reward change causes \(\Psi^{\mathcal{S}}\) to increase to 15.5. The 
     \boldsymbol{\alpha}^{\mathcal{S}}(t) = \frac{1}{1 + \exp{\left[\frac{1}{0.01}\left(7.8 - 15.5\right)\right]}} = 1
 \end{equation*}
 
-The decay rate allows for synaptic growth of set \(\mathcal{S}\) as the maximum weight is below the new threshold.
+\noindent The decay rate allows for synaptic growth of set \(\mathcal{S}\) as the maximum weight is below the new threshold.
 
 \textbf{Case 4: When \(\Psi^{\mathcal{S}}\) decreases from 15.5 to 7.75 (Reward Change)}
 
@@ -548,7 +541,7 @@ The central server follows a similar procedure as the agents, evaluating the dis
 \mathcal{D}_{G}(\bm{\overline{W}}_{G}(t), \bm{\overline{W}}_{G}(T_{cs})) = \frac{1}{2 \sqrt{mn}}\sqrt{\sum_{i=1}^{m}\sum_{j=1}^{n} (a_{ij} - b_{ij})^2}\;\;\;\; (t \geq T_{cs})
 \end{equation}
 
-Incorporating the proposed \ac{fl} method with the \ac{RCSE} algorithm, the modified \ac{stdp} equation can be represented as follows,
+\noindent Incorporating the proposed \ac{fl} method with the \ac{RCSE} algorithm, the modified \ac{stdp} equation can be represented as follows,
 
 \begin{align} \label{Eq.AFL.6}
     \dot{\bm{W}}_{k}(t) = & (1-\delta(t-T_{cs})) \left[ \bm{\alpha} \odot \textbf{STDP}(\tau) \odot \mathcal{R}(t) - \bm{\Theta} \odot \text{sgn}(\bm{W}_{k}(t)) \right] \nonumber \\
@@ -761,7 +754,7 @@ The results of the reward change (change in environment) are shown in Figures \r
 
 Each agent in the swarm detects two neighboring agents and the leader, acquiring the Line-of-Sight angle and distance. Their neural network consists of three sub-layers in the input layer: two for neighboring followers (\(F_{1}\) and \(F_{2}\)) and one for the leader (\(L\)), with inputs encoded using Gaussian Receptive Fields and fuzzy membership functions. The network uses the difference between the current and commanded distances within the swarm ($r_{cmd}$) and between each follower and the leader ($R_{cmd}$) as input to stimulate the input neurons. Each input channel is divided into two regions: those with distances greater than the commanded value and those within the commanded value. Within each region, the LOS angle is encoded using fuzzy membership functions. Errors in distances are transformed into amplitude values using the \(tanh\) function, bounded between 0 and 1. Each agent's neural network includes 72 input neurons, with 24 neurons for each of the three objects that it detects. These objects are two neighboring agents and the leader. The output layer has 4 neurons representing positive and negative \(\Delta x\) and \(\Delta y\) movements.
 
-In order to better understand the effect of reward change (change in environment) on the \ac{snn}, the synaptic weights matrix before and after reward change has been illustrated in Figures \ref{fig_3_8} and \ref{fig_3_9}, the vertical axis shows the output neurons. The first output neuron is for negative displacement in the x-direction, while the second output neuron is dedicated to positive displacement in the x-direction. Similarly, the third output neuron corresponds to negative displacement in the y-direction and the fourth output neuron to positive displacement in the y-direction. The horizontal axis shows the input neurons. The neuron IDs from 1 to 24 are for the first sub-layer dedicated to the neighboring follower. The network has two sub-layers for the neighboring follower agents, but only one is shown since they are similar in the case of synaptic weight values. The neuron numbers from 25 to 48 are for the sub-layer dedicated to the leader. The \ac{RCSE} method aims to maintain the synaptic weight matrix gradient while adapting to changes in the reward signal (Figures \ref{fig_3_8} and \ref{fig_3_9}).
+In order to better understand the effect of reward change (change in environment) on the \ac{snn}, the synaptic weights matrix before and after reward change has been illustrated in Figures \ref{fig_3_8} and \ref{fig_3_9}, the vertical axis shows the output neurons. The first output neuron is for negative displacement in the $x$-direction, while the second output neuron is dedicated to positive displacement in the $x$-direction. Similarly, the third output neuron corresponds to negative displacement in the $y$-direction and the fourth output neuron to positive displacement in the $y$-direction. The horizontal axis shows the input neurons. The neuron IDs from 1 to 24 are for the first sub-layer dedicated to the neighboring follower. The network has two sub-layers for the neighboring follower agents, but only one is shown since they are similar in the case of synaptic weight values. The neuron numbers from 25 to 48 are for the sub-layer dedicated to the leader. The \ac{RCSE} method aims to maintain the synaptic weight matrix gradient while adapting to changes in the reward signal (Figures \ref{fig_3_8} and \ref{fig_3_9}).
 
 Considering the numerical values presented in Table \ref{table:simulation-parameters} along with the reward coefficients \(\mathcal{C}_{Fi}^{Fj} = 0.02\) and \(\mathcal{C}_{L}^{Fj} = 0.07\), and \(r_{Fi}^{Fj} = 1\;m/s\) and \(r_{Fi}^{L} = 0.1\;m/s\), the maximum rewards at each weight update interval (\(\Delta T\)) for \(\mathcal{R}_{Fi}^{Fj}\) and \(\mathcal{R}_{Fi}^{L}\) are calculated using \eqref{Eq.TA.3} and \eqref{Eq.TA.4} as \(4\times 10^{-4}\) and \(7.7\times 10^{-4}\), respectively. Consequently, \(\mathcal{R}_{max}^{G} = \max(\mathcal{R}_{Fi}^{Fj},\mathcal{R}_{Fi}^{L}) = 7.7\times 10^{-4}\). The \(\Psi^{S}\) for the follower section in the network is \(\left[\frac{4\times10^{-4}}{7\times10^{-4}}\right]15.5=8.0519\), and for the leader section, it is \(\left[\frac{7\times10^{-4}}{7\times10^{-4}}\right]15.5=15.5\). The \(\eta\) and \(\beta\) for the follower section within the network are \(\frac{\mathcal{A}\mathcal{R}_{max}^{G} \ln{(2^{\lambda^2}-1)}}{\lambda\Psi^{\mathcal{S}} \log{(2)}} = 0.0011\) and \(\beta = \frac{\ln{(2^{\lambda^2}-1)}}{\Psi^{\mathcal{S}}} = 2.152\), respectively. For the leader section, these values are \(\frac{\mathcal{A}\mathcal{R}_{max}^{G} \ln{(2^{\lambda^2}-1)}}{\lambda\Psi^{\mathcal{S}} \log{(2)}} = 5.719\times 10^{-4}\) and \(\beta = \frac{\ln{(2^{\lambda^2}-1)}}{\Psi^{\mathcal{S}}} = 1.118\), respectively.
 
